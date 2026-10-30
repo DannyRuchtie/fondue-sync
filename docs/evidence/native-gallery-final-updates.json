@@ -1,0 +1,556 @@
+{
+  "complete": true,
+  "families": 20,
+  "jobs": [
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "components/AssetInput"
+      ],
+      "sections": [
+        {
+          "key": "components/AssetInput",
+          "id": "10:2007",
+          "pageId": "5:8045",
+          "guideId": "51:2313",
+          "galleryId": "51:2312",
+          "previewIds": [
+            "51:2320",
+            "51:2338",
+            "129:4813"
+          ],
+          "width": 1520,
+          "height": 632
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 15,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 42
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "components/Card"
+      ],
+      "sections": [
+        {
+          "key": "components/Card",
+          "id": "10:2011",
+          "pageId": "5:8045",
+          "guideId": "51:2484",
+          "galleryId": "51:2483",
+          "previewIds": [
+            "51:2491",
+            "51:2502",
+            "51:2509",
+            "51:2516",
+            "51:2523",
+            "51:2528",
+            "51:2533",
+            "129:4828",
+            "129:4833"
+          ],
+          "width": 1520,
+          "height": 838
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 10,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 69
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionAccountSettingsDrawer"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionAccountSettingsDrawer",
+          "id": "129:5017",
+          "pageId": "5:20956",
+          "guideId": "129:5022",
+          "galleryId": "129:5021",
+          "previewIds": [
+            "129:5029"
+          ],
+          "width": 1520,
+          "height": 1311
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 135,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 139
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionAgenticHubContent"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionAgenticHubContent",
+          "id": "129:5152",
+          "pageId": "5:20956",
+          "guideId": "129:5157",
+          "galleryId": "129:5156",
+          "previewIds": [
+            "129:5164"
+          ],
+          "width": 2009,
+          "height": 1311
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 158,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 162
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionBrandCard"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionBrandCard",
+          "id": "40:2290",
+          "pageId": "5:20956",
+          "guideId": "54:3633",
+          "galleryId": "54:3632",
+          "previewIds": [
+            "54:3640"
+          ],
+          "width": 1520,
+          "height": 522
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionEssentialsPaletteList"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionEssentialsPaletteList",
+          "id": "129:5397",
+          "pageId": "5:20956",
+          "guideId": "129:5402",
+          "galleryId": "129:5401",
+          "previewIds": [
+            "129:5409"
+          ],
+          "width": 1961,
+          "height": 598
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 45,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 49
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionFontsEmpty"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionFontsEmpty",
+          "id": "129:5442",
+          "pageId": "5:20956",
+          "guideId": "129:5447",
+          "galleryId": "129:5446",
+          "previewIds": [
+            "129:5454"
+          ],
+          "width": 1961,
+          "height": 1131
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 37,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 41
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionGlobalSearch"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionGlobalSearch",
+          "id": "129:5506",
+          "pageId": "5:20956",
+          "guideId": "129:5511",
+          "galleryId": "129:5510",
+          "previewIds": [
+            "129:5518"
+          ],
+          "width": 1520,
+          "height": 488
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 21,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 25
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionGuidelineCard"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionGuidelineCard",
+          "id": "40:2291",
+          "pageId": "5:20956",
+          "guideId": "54:3662",
+          "galleryId": "54:3661",
+          "previewIds": [
+            "54:3669"
+          ],
+          "width": 1520,
+          "height": 507.1000061035156
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionGuidelinesEmpty"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionGuidelinesEmpty",
+          "id": "129:5535",
+          "pageId": "5:20956",
+          "guideId": "129:5540",
+          "galleryId": "129:5539",
+          "previewIds": [
+            "129:5547"
+          ],
+          "width": 1961,
+          "height": 1131
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 36,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 40
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionHelpDialog"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionHelpDialog",
+          "id": "129:5603",
+          "pageId": "5:20956",
+          "guideId": "129:5608",
+          "galleryId": "129:5607",
+          "previewIds": [
+            "129:5615"
+          ],
+          "width": 1520,
+          "height": 670
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 56,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 60
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionLibrariesEmptyState"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionLibrariesEmptyState",
+          "id": "40:2292",
+          "pageId": "5:20956",
+          "guideId": "54:3690",
+          "galleryId": "54:3689",
+          "previewIds": [
+            "54:3697"
+          ],
+          "width": 2153,
+          "height": 1112
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionLibraryCard"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionLibraryCard",
+          "id": "40:2293",
+          "pageId": "5:20956",
+          "guideId": "54:3726",
+          "galleryId": "54:3725",
+          "previewIds": [
+            "54:3733"
+          ],
+          "width": 1520,
+          "height": 524
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionMobileBrandBar"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionMobileBrandBar",
+          "id": "40:2294",
+          "pageId": "5:20956",
+          "guideId": "54:3755",
+          "galleryId": "54:3754",
+          "previewIds": [
+            "54:3762"
+          ],
+          "width": 1520,
+          "height": 488
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionNavigationRail"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionNavigationRail",
+          "id": "40:2295",
+          "pageId": "5:20956",
+          "guideId": "54:3795",
+          "galleryId": "54:3794",
+          "previewIds": [
+            "54:3802"
+          ],
+          "width": 1520,
+          "height": 1256
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionNotificationsDrawer"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionNotificationsDrawer",
+          "id": "129:5977",
+          "pageId": "5:20956",
+          "guideId": "129:5982",
+          "galleryId": "129:5981",
+          "previewIds": [
+            "129:5989"
+          ],
+          "width": 1520,
+          "height": 1311
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 195,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 199
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionObservedLibraryCard"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionObservedLibraryCard",
+          "id": "129:6180",
+          "pageId": "5:20956",
+          "guideId": "129:6185",
+          "galleryId": "129:6184",
+          "previewIds": [
+            "129:6192"
+          ],
+          "width": 1520,
+          "height": 513.9000244140625
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 26,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 30
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionPageHeader"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionPageHeader",
+          "id": "40:2296",
+          "pageId": "5:20956",
+          "guideId": "54:3871",
+          "galleryId": "54:3870",
+          "previewIds": [
+            "54:3878"
+          ],
+          "width": 2201,
+          "height": 570
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionSearchToolbar"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionSearchToolbar",
+          "id": "40:2297",
+          "pageId": "5:20956",
+          "guideId": "54:3896",
+          "galleryId": "54:3895",
+          "previewIds": [
+            "54:3903"
+          ],
+          "width": 2201,
+          "height": 536
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 0,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 19
+    },
+    {
+      "complete": true,
+      "kind": "gallery",
+      "groupKeys": [
+        "patterns/ProductionUserMenu"
+      ],
+      "sections": [
+        {
+          "key": "patterns/ProductionUserMenu",
+          "id": "129:6411",
+          "pageId": "5:20956",
+          "guideId": "129:6416",
+          "galleryId": "129:6415",
+          "previewIds": [
+            "129:6423"
+          ],
+          "width": 1520,
+          "height": 908
+        }
+      ],
+      "auditedMoves": 0,
+      "moveAudit": [],
+      "createdCount": 159,
+      "changedGuides": [],
+      "warnings": [],
+      "affectedIdCount": 163
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "status": "native-complete",
+  "sourceCommit": "1e7087bf90d87848d9e1060271ba0528587bbe2b",
+  "sourceFingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8",
+  "rendererRevision": "74f68164bcd63b1a4da1e4d7f74bb1b3047c203a504a0a192d9007345a6cf7cc",
+  "fileUrl": "https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs",
+  "counts": {
+    "managedAssets": 1385,
+    "tokens": 444,
+    "releasedTokens": 384,
+    "sourceDerivedNativeConstants": 60,
+    "styles": 51,
+    "iconFamilies": 420,
+    "opticalIconDrawings": 2099,
+    "recipeSets": 218,
+    "variants": 2074,
+    "sourceGuides": 218,
+    "exampleScreens": 34,
+    "newScreensVisuallyAccepted": 22,
+    "approvedImageAssets": 6,
+    "authoredImageReferences": 112,
+    "managedBrowseGalleryFamilies": 71
+  },
+  "validation": {
+    "tests": 170,
+    "ciUrl": "https://github.com/DannyRuchtie/fondue-sync/actions/runs/41091996979",
+    "sourceDefinitionRepeatUpdates": 0,
+    "sourceDefinitionMismatches": 0,
+    "savedSnapshotsPreservedDuringMetadataStamps": true,
+    "freshFullIconAudit": false,
+    "temporaryLogicalRecordsRemoved": 47,
+    "persistentIndexAnd16ShardsByteIdenticalAfterCleanup": true
+  },
+  "limits": [
+    "Static observed viewport/state compositions with fictional records and approved real photos.",
+    "Agentic heading family/sizes evidenced; weight400 not confirmed by computed-style evidence.",
+    "Equal-value inferred geometry bindings do not prove original upstream token semantics; unmatched values use explicit source-derived constants.",
+    "Unmanaged cover retained; two text layers without shared style IDs excluded from generated text claims.",
+    "No library publication, cross-file consumer acceptance or live application/API behavior claimed."
+  ]
+}

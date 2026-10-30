@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "fingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8",
+  "rendererRevision": "74f68164bcd63b1a4da1e4d7f74bb1b3047c203a504a0a192d9007345a6cf7cc",
+  "verified": 1385,
+  "written": 459,
+  "savedSnapshotsPreserved": true,
+  "freshFullIconAudit": false,
+  "note": "Source definitions and managed identities/types verified; no saved snapshot refreshed. Prior actual proofs cover source-changing repairs. Future inspect retains original local-drift detection.",
+  "affectedIds": [
+    "0:0"
+  ]
+}

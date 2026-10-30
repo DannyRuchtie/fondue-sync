@@ -1,61 +1,41 @@
 # Native runtime evidence — 2026-10-30
 
-This record supersedes the original pre-runtime delivery checkpoint in verification-evidence.md. The opening figures describe the initial native acceptance milestone; later work is recorded separately below.
+The updated [Figma library](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs) contains 34 editable example screens: the twelve existing overviews plus 22 additional observed viewport/state profiles. Real photos appear inside the existing linked card covers and thumbnails. The [original file](https://www.figma.com/design/O5xq8vIIlxUCYXscYcNVww) is retained.
 
-- Source: Fondue 13.11.1, commit `ebcc9b8579a7f862f43a2732f5a5b9c3105e6796`.
-- Plugin: 0.1.1. Bundle fingerprint: `24f597b6dc70c9f3fc5ce7a928547486b27593eb3a42366ab60a7cc3b56270ed`.
-- Renderer revision: `73ff7a8ba9cebdf1260fcd5bced5a002b9099c8c6eef82f88e37e77835a365fd`.
-- Code checkpoint: `1e671c935c8e15f795a4f9709261d214d48e2915`. [CI passed](https://github.com/DannyRuchtie/fondue-sync/actions/runs/41060800439).
-- Local `npm run verify` passed: generation, TypeScript, all 149 tests and distribution build. Formatting and diff whitespace checks passed. The released-bundle API model imports all 1,310 managed assets and repeats with zero writes; this is model evidence, separate from native Figma execution below.
-- Original file retained: [PD Figma Sync](https://www.figma.com/design/O5xq8vIIlxUCYXscYcNVww).
-- User-authorized clean rebuild: [PD Figma Sync — clean rebuild](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs), in the same Frontify project.
+The plugin source is committed as `1e7087bf90d87848d9e1060271ba0528587bbe2b`. [CI passed all 170 tests, typecheck and build](https://github.com/DannyRuchtie/fondue-sync/actions/runs/41091996979); local formatting and diff checks also passed. The source remains pinned to Fondue 13.11.1, commit `ebcc9b8579a7f862f43a2732f5a5b9c3105e6796`.
 
-## Original rendering diagnosis and repair
+## Library and plugin contents
 
-Native Figma rejected two documentation links: `Documentation links API takes a list of size 0 or 1`. This happened before variant population and left blank sets. The engine now keeps one native link and preserves additional links in descriptions and guides. The strict regression reproduces the native limit.
+- 444 variables: 384 released tokens and 60 explicitly labelled source-derived native constants; 51 shared styles.
+- 420 icon families with 2,099 optical drawings; 218 component/pattern sets with 2,074 variants and 218 source guides.
+- Six approved offline photos with provenance and content hashes; 112 authored image references. The photos are native image fills, while controls, text, vectors, palettes and functional illustrations remain editable.
+- `Library / …` pages provide grouped browsing and concise adjacent guidance. `Source components / …` pages retain the actual editable masters. All thirteen managed page identities were preserved. [Native page-name repeat](evidence/native-page-role-repeat.json).
+- Colors are grouped by semantic use and primitive hue ramps, with numerical shade ordering and linked Light/Dark samples. [Consumer-gallery review](evidence/consumer-gallery-review/README.md).
 
-The first repair retained Text/color-default set `1:7747`, populated its twelve variants and made GuidelinesEmptyState `1:8134` visible. [Native screenshot](evidence/native-guidelines-repaired.png).
+The final source bundle fingerprint is `697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8`; renderer revision is `74f68164bcd63b1a4da1e4d7f74bb1b3047c203a504a0a192d9007345a6cf7cc`.
 
-Further native checks exposed empty variant labels and invalid vertical BASELINE alignment. Empty values now display `(empty)` while raw source properties remain in metadata. Vertical baseline layouts use MIN. Icon fallback scaling changes glyph geometry rather than only its wrapper.
+## Visual and native acceptance
 
-An update of the original file stopped on 54 conflicts. The user subsequently authorized a clean rebuild; the original file remains available.
+All 22 additional renders passed independent comparison with the supplied private references: viewport geometry, visible imagery, readability and clipping. The reviewed surfaces include Notifications, Settings, User menu, Help, Search, Agentic Hub, empty Guidelines, loaded Libraries, Colors and empty Fonts. Marketplace is excluded. [22-view acceptance matrix and PNGs](evidence/additional-examples/visual-review.json), [review notes](evidence/additional-examples/visual-review.md).
 
-## Token and typography representation
+The twelve existing examples passed source-state guards and an actual image audit: 33 approved image fills, 212 text layers, zero Inter and zero unstyled text. Representative final Brands, Libraries, Guidelines and empty-library renders passed independent review. Existing main, example and compatible child identities were preserved. [Native audit](evidence/native-existing-image-audit.json), [visual acceptance](evidence/production-examples/real-photo-review.md), [Brands 1440px photo render](evidence/production-examples/brands-desktop-real-photos.png).
 
-At the initial native checkpoint, the source bundle contained 422 variables: 384 released tokens and 38 explicitly labelled source-derived native constants. It included 46 styles, including four exact source-derived shadow/focus styles and nine additional exact text styles. It defined 420 icon families with 2,099 optical drawings, 205 recipe sets, 2,030 variants and twelve example screens.
+Native Figma decoded every exact repository JPEG; creating each image again from its bytes returned the same native hash. [Decoder/reuse evidence](evidence/native-real-image-decoder.json). The six original pattern migrations and twelve example updates completed through exact source approvals and saved-state guards. [Native update evidence](evidence/native-existing-image-updates.json). The approved removal migration rejects foreign children, journals interrupted changes, and restores source order using stable native identities.
 
-Reviewed Auto Layout padding and gaps, independent corner radii and visible border widths bind to exact-role variables. Explicit source bindings retain their identities. Otherwise, geometry inference currently matches equal values within the role; an equal value does not prove the original upstream token dependency. Future source token-scale changes require mapping review. Source values absent from the exported scale receive distinct named constants with provenance. Shadow color, blur, spread and both offsets bind through shared effect styles. SVG role bindings preserve source vector geometry. Fixed dimensions, paths and data artwork remain geometry; separately documented constants do not recompute arithmetic expressions.
+Visual review found a shared-property defect: different variants could inherit another variant's text or icon defaults. The source audit identified 37 affected recipes. The renderer now shares equal defaults, retains the first public property key, scopes differing defaults, and resolves explicit overrides through the active variant. All 37 native repairs passed normal source updates with IDs retained. The mobile menu's four helper texts and four icons subsequently passed visual review. [Source collision audit](evidence/property-default-collision-source-audit.json), [current property coverage](component-property-coverage.json).
 
-Required fonts are preflighted before mutation. CSS `Diatype` resolves to installed `ABC Diatype`; Cranny retains its family. Missing required faces block generation. Native testing established that assigning literal font fields after a shared-style link clears that link, so the renderer now applies the style as the typography authority.
+Twenty affected browse-gallery families were updated without conflicts. Packing moved section roots only. Thirty representative linked previews were checked; all twenty image fills matched their selected source mains, with no stale solid-paint pins.
 
-The initial clean-library typography migration verified 3,852 existing text layers with shared styles and no Inter. The new production patterns/examples subsequently verified 444 text layers: 429 ABC Diatype and 15 Cranny, all linked to shared styles. Existing numeric foundation specimens use canonical shared styles as well.
+## Variables and update behavior
 
-The user requested restoration of one ColorPicker.Input alignment. A strict check found exactly one changed field, restored SPACE_BETWEEN and verified the original saved snapshot again. [Exact restoration evidence](evidence/color-picker-alignment-restoration.json).
+Native before/during/after tests passed eight propagation roles: color, padding, gap, four corner radii, four border widths, shared effect blur, shared text size and shared line height. Original mode values and observed fields were restored exactly. [Propagation evidence](evidence/native-token-propagation.json).
 
-## Production examples and visual review
+Explicit source bindings retain their token identities. Other geometry mappings currently infer an equal value within the appropriate spacing, radius or border role; equality does not prove the original upstream dependency. Values absent from the exported scale use named source-derived constants. These mappings require review when upgrading the source scale. Fixed paths, viewport dimensions and image pixels retain their source geometry.
 
-A separate agent inspected the signed-in production Brands, Guidelines and populated/empty Libraries overviews. Source definitions remain pinned to the release; production inspection informed screen composition. Names, counts, avatars and artwork are synthetic. Private production screenshots and account content are excluded from the repository.
+Diatype resolves to the installed ABC Diatype family; Cranny retains its family. Missing required faces block import rather than silently introducing Inter. Shared styles are applied as typography authority. The user-requested released ColorPicker.Input alignment was restored through an exact saved-state proof. [Alignment evidence](evidence/color-picker-alignment-restoration.json).
 
-All twelve native screens were rebuilt with eight reusable patterns, connected native instances and separate Figma Sections. Thirteen obsolete example/pattern/guide assets were removed only after their exact saved snapshots matched. The new patterns and screens contain 786 native instances.
+## Final consistency scope
 
-An independent agent reviewed all twelve final native PNGs. Ten matched-reference views passed within the documented static composition/privacy scope. Empty library views at 768 and 390 passed containment/readability; production parity at those sizes remains unverified because matching private references were absent. A minor library-thumbnail tone difference remains. [Final visual review and twelve exports](evidence/production-examples/visual-review.md).
+All 1,385 source definitions, managed identities/types and current renderer stamps passed the final read-only comparison with zero source mismatches and zero remaining definition updates. [Final index receipt](evidence/native-final-index.json), [read-only repeat](evidence/native-final-definition-repeat.json). Exact cleanup removed 47 proven staging records; the persistent index and all sixteen asset shards remained byte-identical, and every page was preserved. [Cleanup evidence](evidence/native-final-cleanup.json). The bounded pass performed 870 actual asset snapshot checks. Renderer-only metadata adoption for source-identical entries preserves every saved snapshot string byte for byte; it neither accepts canvas drift nor replaces a baseline. Future inspection still compares actual state with those original snapshots. Any semantic source differences use an ordinary guarded update.
 
-The narrow toolbar overlap observed in production is deliberately retained and documented. These are static native compositions, not working authentication, searching, sorting, navigation or live data integrations. Synthetic artwork and the unverified states prevent a claim of 100% production parity.
-
-## Initial native acceptance
-
-All 107 strict native adoption jobs passed for all 1,310 source assets, with no unexpected snapshot or source differences. [Per-asset adoption evidence](evidence/native-source-adoption.json). A separate narrow source-propagation migration accepted exactly 36 inherited stroke-alias removals across twelve authored screens after proving that the source mains replaced rectangular borders with measured edge separators; no other differences were accepted. [Exact source-operation proof](evidence/production-source-propagation.json).
-
-All eight native propagation roles passed: color, padding, gap, all four corner radii, all four border widths, linked effect blur, shared text size and shared text line height. The actual consumer fields changed when the variable changed, and every original mode value and observed field was restored exactly in finally. [Before/during/after native evidence](evidence/native-token-propagation.json).
-
-The initial strict import acceptance above precedes subsequent usability, imagery and additional-screen work. It is historical evidence, not acceptance of the latest source bundle. Library publication and cross-file consumer acceptance have not been performed.
-
-## Subsequent usability and production-reference update
-
-Managed browse pages now use `Library / …`; true component masters use `Source components / …`. All thirteen page identities were retained. A native repeat produced zero page or guide writes. [Page role repeat evidence](evidence/native-page-role-repeat.json).
-
-Six approved real media fixtures are packaged offline with source provenance and content hashes. Native Figma decoded every exact repository JPEG; recreating each image from its bytes returned the same image hash. [Native decoder and reuse evidence](evidence/native-real-image-decoder.json). This verifies image resources, not yet their placement in every screen.
-
-Before the image migration, twelve existing examples contained added inherited paint overrides. The repair restored only source-generated instances with closed, root-only authored overrides, preserved every native child identity, and verified every complete example against its original saved snapshot. No baseline replacement was used. [Exact repair evidence](evidence/source-inheritance-repair.json).
-
-Twenty-two additional observed screen profiles, ten patterns and twenty-one real-image component variants are implemented in source. Their native import and screenshot comparison are in progress. The additional examples cover Notifications, Settings, Search, Help, Agentic Hub, empty Guidelines, loaded Libraries, Colors and empty Fonts; Marketplace is excluded. These remain editable static compositions. Synthetic entities and selected approved media do not establish complete production parity.
+Acceptance covers static observed viewport/state compositions with fictional records and approved media, rather than live application behavior or full pixel parity. Agentic heading family and sizes are evidenced; its authored weight 400 remains unverified by computed-style evidence. Empty-library 768px/390px views have containment/readability acceptance rather than matching production references. The retained unmanaged cover's two text layers lack shared-style IDs and are excluded from generated-text claims. Publication and cross-file consumer acceptance have not been performed. Private production captures remain outside the repository.

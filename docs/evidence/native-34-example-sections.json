@@ -1,0 +1,554 @@
+{
+  "complete": true,
+  "sourceCanvasChanges": "Presentationonly:sectionparents,positionsandadjacentcaptions; mainsandexampleIDsretained",
+  "sections": [
+    {
+      "key": "examples/production-account-settings-desktop",
+      "id": "123:5415",
+      "pageId": "9:10",
+      "assetIds": [
+        "119:3436"
+      ],
+      "guideIds": [
+        "123:5416"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-account-settings-mobile",
+      "id": "123:5417",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:3833"
+      ],
+      "guideIds": [
+        "123:5418"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-agentic-hub-tablet",
+      "id": "123:5419",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:5917"
+      ],
+      "guideIds": [
+        "123:5420"
+      ],
+      "width": 1898,
+      "height": 896
+    },
+    {
+      "key": "examples/production-agentic-hub-desktop",
+      "id": "123:5421",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:5602"
+      ],
+      "guideIds": [
+        "123:5422"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-agentic-hub-mobile",
+      "id": "123:5423",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:6232"
+      ],
+      "guideIds": [
+        "123:5424"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-brand-guidelines-empty-desktop",
+      "id": "123:5425",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:5268"
+      ],
+      "guideIds": [
+        "123:5426"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-brand-library-loaded-desktop",
+      "id": "123:5427",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:2864"
+      ],
+      "guideIds": [
+        "123:5428"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-brand-library-loaded-mobile",
+      "id": "123:5429",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:4636"
+      ],
+      "guideIds": [
+        "123:5430"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-brands-populated-desktop",
+      "id": "40:2266",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:944"
+      ],
+      "guideIds": [
+        "40:2267"
+      ],
+      "width": 2314,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-brands-populated-wide",
+      "id": "40:2268",
+      "pageId": "9:10",
+      "assetIds": [
+        "29:1187"
+      ],
+      "guideIds": [
+        "40:2269"
+      ],
+      "width": 2794,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-brands-populated-mobile",
+      "id": "40:2270",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1054"
+      ],
+      "guideIds": [
+        "40:2271"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-essentials-colors-collapsed-desktop",
+      "id": "123:5431",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:3032"
+      ],
+      "guideIds": [
+        "123:5432"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-essentials-colors-collapsed-mobile",
+      "id": "123:5433",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:4727"
+      ],
+      "guideIds": [
+        "123:5434"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-essentials-colors-expanded-desktop",
+      "id": "123:5435",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:3217"
+      ],
+      "guideIds": [
+        "123:5436"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-essentials-colors-expanded-mobile",
+      "id": "123:5437",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:4829"
+      ],
+      "guideIds": [
+        "123:5438"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-essentials-fonts-empty-desktop",
+      "id": "123:5439",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:5433"
+      ],
+      "guideIds": [
+        "123:5440"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-search-blank-desktop",
+      "id": "123:5441",
+      "pageId": "9:10",
+      "assetIds": [
+        "119:4067"
+      ],
+      "guideIds": [
+        "123:5442"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-search-blank-mobile",
+      "id": "123:5443",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:4534"
+      ],
+      "guideIds": [
+        "123:5444"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-search-results-desktop",
+      "id": "123:5445",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:5015"
+      ],
+      "guideIds": [
+        "123:5446"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-guidelines-populated-desktop",
+      "id": "40:2272",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1278"
+      ],
+      "guideIds": [
+        "40:2273"
+      ],
+      "width": 2314,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-guidelines-populated-wide",
+      "id": "40:2274",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1129"
+      ],
+      "guideIds": [
+        "40:2275"
+      ],
+      "width": 2794,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-guidelines-populated-mobile",
+      "id": "40:2276",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1427"
+      ],
+      "guideIds": [
+        "40:2277"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-help-desktop",
+      "id": "123:5447",
+      "pageId": "9:10",
+      "assetIds": [
+        "119:3917"
+      ],
+      "guideIds": [
+        "123:5448"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-help-mobile",
+      "id": "123:5449",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:4384"
+      ],
+      "guideIds": [
+        "123:5450"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-libraries-empty-wide",
+      "id": "40:2278",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1917"
+      ],
+      "guideIds": [
+        "40:2279"
+      ],
+      "width": 2794,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-libraries-empty-mobile",
+      "id": "40:2280",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:2247"
+      ],
+      "guideIds": [
+        "40:2281"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-libraries-empty-tablet",
+      "id": "40:2282",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:2082"
+      ],
+      "guideIds": [
+        "40:2283"
+      ],
+      "width": 1642,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-libraries-populated-desktop",
+      "id": "40:2284",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1667"
+      ],
+      "guideIds": [
+        "40:2285"
+      ],
+      "width": 2314,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-libraries-populated-wide",
+      "id": "40:2286",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1508"
+      ],
+      "guideIds": [
+        "40:2287"
+      ],
+      "width": 2794,
+      "height": 1088
+    },
+    {
+      "key": "examples/production-libraries-populated-mobile",
+      "id": "40:2288",
+      "pageId": "9:10",
+      "assetIds": [
+        "30:1826"
+      ],
+      "guideIds": [
+        "40:2289"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-notifications-desktop",
+      "id": "123:5451",
+      "pageId": "9:10",
+      "assetIds": [
+        "119:3089"
+      ],
+      "guideIds": [
+        "123:5452"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-notifications-mobile",
+      "id": "123:5453",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:3486"
+      ],
+      "guideIds": [
+        "123:5454"
+      ],
+      "width": 1264,
+      "height": 972
+    },
+    {
+      "key": "examples/production-user-menu-desktop",
+      "id": "123:5455",
+      "pageId": "9:10",
+      "assetIds": [
+        "119:3665"
+      ],
+      "guideIds": [
+        "123:5456"
+      ],
+      "width": 2602,
+      "height": 1125
+    },
+    {
+      "key": "examples/production-user-menu-mobile",
+      "id": "123:5457",
+      "pageId": "9:10",
+      "assetIds": [
+        "122:4096"
+      ],
+      "guideIds": [
+        "123:5458"
+      ],
+      "width": 1264,
+      "height": 972
+    }
+  ],
+  "warnings": [],
+  "affectedIds": [
+    "123:5415",
+    "119:3436",
+    "123:5416",
+    "123:5417",
+    "122:3833",
+    "123:5418",
+    "123:5419",
+    "122:5917",
+    "123:5420",
+    "123:5421",
+    "122:5602",
+    "123:5422",
+    "123:5423",
+    "122:6232",
+    "123:5424",
+    "123:5425",
+    "122:5268",
+    "123:5426",
+    "123:5427",
+    "122:2864",
+    "123:5428",
+    "123:5429",
+    "122:4636",
+    "123:5430",
+    "40:2266",
+    "30:944",
+    "40:2267",
+    "40:2268",
+    "29:1187",
+    "40:2269",
+    "40:2270",
+    "30:1054",
+    "40:2271",
+    "123:5431",
+    "122:3032",
+    "123:5432",
+    "123:5433",
+    "122:4727",
+    "123:5434",
+    "123:5435",
+    "122:3217",
+    "123:5436",
+    "123:5437",
+    "122:4829",
+    "123:5438",
+    "123:5439",
+    "122:5433",
+    "123:5440",
+    "123:5441",
+    "119:4067",
+    "123:5442",
+    "123:5443",
+    "122:4534",
+    "123:5444",
+    "123:5445",
+    "122:5015",
+    "123:5446",
+    "40:2272",
+    "30:1278",
+    "40:2273",
+    "40:2274",
+    "30:1129",
+    "40:2275",
+    "40:2276",
+    "30:1427",
+    "40:2277",
+    "123:5447",
+    "119:3917",
+    "123:5448",
+    "123:5449",
+    "122:4384",
+    "123:5450",
+    "40:2278",
+    "30:1917",
+    "40:2279",
+    "40:2280",
+    "30:2247",
+    "40:2281",
+    "40:2282",
+    "30:2082",
+    "40:2283",
+    "40:2284",
+    "30:1667",
+    "40:2285",
+    "40:2286",
+    "30:1508",
+    "40:2287",
+    "40:2288",
+    "30:1826",
+    "40:2289",
+    "123:5451",
+    "119:3089",
+    "123:5452",
+    "123:5453",
+    "122:3486",
+    "123:5454",
+    "123:5455",
+    "119:3665",
+    "123:5456",
+    "123:5457",
+    "122:4096",
+    "123:5458"
+  ],
+  "expectedExampleSections": 34
+}

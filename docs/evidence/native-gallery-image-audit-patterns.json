@@ -1,0 +1,150 @@
+{
+  "complete": true,
+  "report": [
+    {
+      "key": "patterns/ProductionAccountSettingsDrawer",
+      "id": "129:5029",
+      "mainId": "118:3210",
+      "expectedImages": 1,
+      "actualImages": 1,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionAgenticHubContent",
+      "id": "129:5164",
+      "mainId": "119:1177",
+      "expectedImages": 6,
+      "actualImages": 6,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionBrandCard",
+      "id": "54:3640",
+      "mainId": "29:935",
+      "expectedImages": 2,
+      "actualImages": 2,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionEssentialsPaletteList",
+      "id": "129:5409",
+      "mainId": "119:920",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionFontsEmpty",
+      "id": "129:5454",
+      "mainId": "119:871",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionGlobalSearch",
+      "id": "129:5518",
+      "mainId": "118:3538",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionGuidelineCard",
+      "id": "54:3669",
+      "mainId": "30:500",
+      "expectedImages": 1,
+      "actualImages": 1,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionGuidelinesEmpty",
+      "id": "129:5547",
+      "mainId": "119:826",
+      "expectedImages": 3,
+      "actualImages": 3,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionHelpDialog",
+      "id": "129:5615",
+      "mainId": "118:3453",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionLibrariesEmptyState",
+      "id": "54:3697",
+      "mainId": "30:595",
+      "expectedImages": 2,
+      "actualImages": 2,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionLibraryCard",
+      "id": "54:3733",
+      "mainId": "30:546",
+      "expectedImages": 1,
+      "actualImages": 1,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionMobileBrandBar",
+      "id": "54:3762",
+      "mainId": "29:464",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionNavigationRail",
+      "id": "54:3802",
+      "mainId": "29:112",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionNotificationsDrawer",
+      "id": "129:5989",
+      "mainId": "118:2543",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionObservedLibraryCard",
+      "id": "129:6192",
+      "mainId": "119:895",
+      "expectedImages": 1,
+      "actualImages": 1,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionPageHeader",
+      "id": "54:3878",
+      "mainId": "29:577",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionSearchToolbar",
+      "id": "54:3903",
+      "mainId": "29:698",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "patterns/ProductionUserMenu",
+      "id": "129:6423",
+      "mainId": "118:2906",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    }
+  ],
+  "affectedIds": []
+}

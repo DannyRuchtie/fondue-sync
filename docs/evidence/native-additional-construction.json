@@ -1,0 +1,575 @@
+{
+  "scope": "Native successful creation readback. Screenshot review and repeat acceptance are recorded separately.",
+  "imageComponentSets": 3,
+  "additionalPatternSets": 10,
+  "additionalScreens": 22,
+  "jobs": [
+    {
+      "complete": true,
+      "job": "023-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:components/Card.BannerImage",
+          "id": "118:2012",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 35
+    },
+    {
+      "complete": true,
+      "job": "024-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:components/Card.ThumbnailImage",
+          "id": "118:2045",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 5
+    },
+    {
+      "complete": true,
+      "job": "025-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:components/AssetInput/image-preview",
+          "id": "118:2048",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 51
+    },
+    {
+      "complete": true,
+      "job": "026-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionNotificationsDrawer",
+          "id": "118:2544",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [
+        "icon:arrow-out-external has no exact 14px optical source; using the released24px path scaled to requested size."
+      ],
+      "affectedIdCount": 365
+    },
+    {
+      "complete": true,
+      "job": "027-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionUserMenu",
+          "id": "118:2907",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [
+        "icon:person-anonymous has no exact 36px optical source; using the released24px path scaled to requested size."
+      ],
+      "affectedIdCount": 298
+    },
+    {
+      "complete": true,
+      "job": "028-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionAccountSettingsDrawer",
+          "id": "118:3211",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 245
+    },
+    {
+      "complete": true,
+      "job": "029-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionHelpDialog",
+          "id": "118:3454",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 87
+    },
+    {
+      "complete": true,
+      "job": "030-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionGlobalSearch",
+          "id": "118:3539",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 79
+    },
+    {
+      "complete": true,
+      "job": "031-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionGuidelinesEmpty",
+          "id": "119:827",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 47
+    },
+    {
+      "complete": true,
+      "job": "032-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionFontsEmpty",
+          "id": "119:872",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 26
+    },
+    {
+      "complete": true,
+      "job": "033-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionObservedLibraryCard",
+          "id": "119:896",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 27
+    },
+    {
+      "complete": true,
+      "job": "034-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionEssentialsPaletteList",
+          "id": "119:921",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 255
+    },
+    {
+      "complete": true,
+      "job": "035-recipes",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "recipe:patterns/ProductionAgenticHubContent",
+          "id": "119:1178",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [
+        "icon:lightning has no exact 8.00936768149883px optical source; using the released24px path scaled to requested size.",
+        "icon:sparks has no exact 8.00936768149883px optical source; using the released24px path scaled to requested size."
+      ],
+      "affectedIdCount": 443
+    },
+    {
+      "complete": true,
+      "job": "036-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-notifications-desktop",
+          "id": "119:3089",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 349
+    },
+    {
+      "complete": true,
+      "job": "037-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-account-settings-desktop",
+          "id": "119:3436",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 231
+    },
+    {
+      "complete": true,
+      "job": "038-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-user-menu-desktop",
+          "id": "119:3665",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 254
+    },
+    {
+      "complete": true,
+      "job": "039-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-help-desktop",
+          "id": "119:3917",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 152
+    },
+    {
+      "complete": true,
+      "job": "040-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-search-blank-desktop",
+          "id": "119:4067",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 179
+    },
+    {
+      "complete": true,
+      "job": "041-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-brand-library-loaded-desktop",
+          "id": "122:2864",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 166
+    },
+    {
+      "complete": true,
+      "job": "042-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-essentials-colors-collapsed-desktop",
+          "id": "122:3032",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 179
+    },
+    {
+      "complete": true,
+      "job": "043-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-essentials-colors-expanded-desktop",
+          "id": "122:3217",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 243
+    },
+    {
+      "complete": true,
+      "job": "044-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-notifications-mobile",
+          "id": "122:3486",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 276
+    },
+    {
+      "complete": true,
+      "job": "045-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-account-settings-mobile",
+          "id": "122:3833",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 215
+    },
+    {
+      "complete": true,
+      "job": "046-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-user-menu-mobile",
+          "id": "122:4096",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 243
+    },
+    {
+      "complete": true,
+      "job": "047-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-help-mobile",
+          "id": "122:4384",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 136
+    },
+    {
+      "complete": true,
+      "job": "048-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-search-blank-mobile",
+          "id": "122:4534",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 101
+    },
+    {
+      "complete": true,
+      "job": "049-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-brand-library-loaded-mobile",
+          "id": "122:4636",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 93
+    },
+    {
+      "complete": true,
+      "job": "050-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-essentials-colors-collapsed-mobile",
+          "id": "122:4727",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 96
+    },
+    {
+      "complete": true,
+      "job": "051-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-essentials-colors-expanded-mobile",
+          "id": "122:4829",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 160
+    },
+    {
+      "complete": true,
+      "job": "052-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-search-results-desktop",
+          "id": "122:5015",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 234
+    },
+    {
+      "complete": true,
+      "job": "053-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-brand-guidelines-empty-desktop",
+          "id": "122:5268",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 167
+    },
+    {
+      "complete": true,
+      "job": "054-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-essentials-fonts-empty-desktop",
+          "id": "122:5433",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 171
+    },
+    {
+      "complete": true,
+      "job": "055-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-agentic-hub-desktop",
+          "id": "122:5602",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 280
+    },
+    {
+      "complete": true,
+      "job": "056-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-agentic-hub-tablet",
+          "id": "122:5917",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 280
+    },
+    {
+      "complete": true,
+      "job": "057-examples",
+      "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "done": [
+        {
+          "key": "example:examples/production-agentic-hub-mobile",
+          "id": "122:6232",
+          "action": "create",
+          "sourceUnchanged": false
+        }
+      ],
+      "warnings": [],
+      "affectedIdCount": 181
+    }
+  ]
+}

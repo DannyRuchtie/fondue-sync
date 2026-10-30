@@ -1,0 +1,591 @@
+{
+  "checked": 12,
+  "sourceCanvasChanges": 0,
+  "rows": [
+    {
+      "key": "example:examples/production-brands-populated-mobile",
+      "id": "30:1054",
+      "width": 390,
+      "height": 844,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1072;29:972",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 342,
+          "height": 171,
+          "imageHash": "1def4e7b8b106ec60b49ecfa2db7acb964e0e38c",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1072;29:978",
+          "name": "brand-thumbnail",
+          "type": "FRAME",
+          "width": 40,
+          "height": 40,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1088;29:1017",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 342,
+          "height": 171,
+          "imageHash": "8af6bc6a023641fdf3311cc0ce8d8da0bcceae2c",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1088;29:1023",
+          "name": "brand-thumbnail",
+          "type": "FRAME",
+          "width": 40,
+          "height": 40,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 31,
+        "INSTANCE": 21,
+        "TEXT": 7,
+        "VECTOR": 9,
+        "RECTANGLE": 3
+      },
+      "fonts": {
+        "ABC Diatype": 7
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-libraries-empty-mobile",
+      "id": "30:2247",
+      "width": 390,
+      "height": 844,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:2292;30:674",
+          "name": "artwork",
+          "type": "FRAME",
+          "width": 100,
+          "height": 72,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:2292;30:680",
+          "name": "artwork",
+          "type": "FRAME",
+          "width": 100,
+          "height": 72,
+          "imageHash": "289f92fe19531b610dca7f466ff50f4d26b9009f",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:2315;29:550",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 28,
+          "height": 28,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 39,
+        "INSTANCE": 27,
+        "TEXT": 14,
+        "VECTOR": 12,
+        "RECTANGLE": 12
+      },
+      "fonts": {
+        "ABC Diatype": 13,
+        "Cranny": 1
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-brands-populated-desktop",
+      "id": "30:944",
+      "width": 1440,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1022;29:957",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 271.75,
+          "height": 135.875,
+          "imageHash": "1def4e7b8b106ec60b49ecfa2db7acb964e0e38c",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1022;29:963",
+          "name": "brand-thumbnail",
+          "type": "FRAME",
+          "width": 40,
+          "height": 40,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1038;29:1002",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 271.75,
+          "height": 135.875,
+          "imageHash": "8af6bc6a023641fdf3311cc0ce8d8da0bcceae2c",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1038;29:1008",
+          "name": "brand-thumbnail",
+          "type": "FRAME",
+          "width": 40,
+          "height": 40,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 41,
+        "INSTANCE": 33,
+        "VECTOR": 14,
+        "TEXT": 14,
+        "RECTANGLE": 5
+      },
+      "fonts": {
+        "ABC Diatype": 14
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-libraries-populated-desktop",
+      "id": "30:1667",
+      "width": 1440,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1668;29:273",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 36,
+          "height": 36,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1810;30:565",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 271.75,
+          "height": 135.875,
+          "imageHash": "289f92fe19531b610dca7f466ff50f4d26b9009f",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 61,
+        "INSTANCE": 51,
+        "TEXT": 24,
+        "VECTOR": 23,
+        "RECTANGLE": 7
+      },
+      "fonts": {
+        "ABC Diatype": 24
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-guidelines-populated-desktop",
+      "id": "30:1278",
+      "width": 1440,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1279;29:177",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 36,
+          "height": 36,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1412;30:518",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 271.75,
+          "height": 135.875,
+          "imageHash": "9127c2c127b1850dd745be03b957546c1b82cb0f",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 58,
+        "INSTANCE": 48,
+        "TEXT": 21,
+        "VECTOR": 23,
+        "RECTANGLE": 6
+      },
+      "fonts": {
+        "ABC Diatype": 21
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-libraries-populated-mobile",
+      "id": "30:1826",
+      "width": 390,
+      "height": 844,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1872;30:580",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 342,
+          "height": 171,
+          "imageHash": "289f92fe19531b610dca7f466ff50f4d26b9009f",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1888;29:522",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 28,
+          "height": 28,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 40,
+        "INSTANCE": 27,
+        "TEXT": 10,
+        "VECTOR": 13,
+        "RECTANGLE": 4
+      },
+      "fonts": {
+        "ABC Diatype": 10
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-guidelines-populated-mobile",
+      "id": "30:1427",
+      "width": 390,
+      "height": 844,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1464;30:532",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 342,
+          "height": 171,
+          "imageHash": "9127c2c127b1850dd745be03b957546c1b82cb0f",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1479;29:494",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 28,
+          "height": 28,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 36,
+        "INSTANCE": 24,
+        "TEXT": 7,
+        "VECTOR": 13,
+        "RECTANGLE": 4
+      },
+      "fonts": {
+        "ABC Diatype": 7
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-guidelines-populated-wide",
+      "id": "30:1129",
+      "width": 1920,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1130;29:177",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 36,
+          "height": 36,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1263;30:504",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 310.20001220703125,
+          "height": 155.10000610351562,
+          "imageHash": "9127c2c127b1850dd745be03b957546c1b82cb0f",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 58,
+        "INSTANCE": 48,
+        "TEXT": 21,
+        "VECTOR": 23,
+        "RECTANGLE": 6
+      },
+      "fonts": {
+        "ABC Diatype": 21
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-libraries-empty-tablet",
+      "id": "30:2082",
+      "width": 768,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:2083;29:369",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 36,
+          "height": 36,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:2224;30:652",
+          "name": "artwork",
+          "type": "FRAME",
+          "width": 100,
+          "height": 72,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:2224;30:658",
+          "name": "artwork",
+          "type": "FRAME",
+          "width": 100,
+          "height": 72,
+          "imageHash": "289f92fe19531b610dca7f466ff50f4d26b9009f",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 60,
+        "INSTANCE": 51,
+        "TEXT": 28,
+        "VECTOR": 22,
+        "RECTANGLE": 15
+      },
+      "fonts": {
+        "ABC Diatype": 27,
+        "Cranny": 1
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-brands-populated-wide",
+      "id": "29:1187",
+      "width": 1920,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I29:1265;29:942",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 310.20001220703125,
+          "height": 155.10000610351562,
+          "imageHash": "1def4e7b8b106ec60b49ecfa2db7acb964e0e38c",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I29:1265;29:948",
+          "name": "brand-thumbnail",
+          "type": "FRAME",
+          "width": 40,
+          "height": 40,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I29:1281;29:987",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 310.20001220703125,
+          "height": 155.10000610351562,
+          "imageHash": "8af6bc6a023641fdf3311cc0ce8d8da0bcceae2c",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I29:1281;29:993",
+          "name": "brand-thumbnail",
+          "type": "FRAME",
+          "width": 40,
+          "height": 40,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 41,
+        "INSTANCE": 33,
+        "VECTOR": 14,
+        "TEXT": 14,
+        "RECTANGLE": 5
+      },
+      "fonts": {
+        "ABC Diatype": 14
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-libraries-empty-wide",
+      "id": "30:1917",
+      "width": 1920,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1918;29:369",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 36,
+          "height": 36,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:2059;30:608",
+          "name": "artwork",
+          "type": "FRAME",
+          "width": 100,
+          "height": 72,
+          "imageHash": "823a186f1d9612a5760976ab3d321db374b01894",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:2059;30:614",
+          "name": "artwork",
+          "type": "FRAME",
+          "width": 100,
+          "height": 72,
+          "imageHash": "289f92fe19531b610dca7f466ff50f4d26b9009f",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 60,
+        "INSTANCE": 51,
+        "TEXT": 28,
+        "VECTOR": 22,
+        "RECTANGLE": 15
+      },
+      "fonts": {
+        "ABC Diatype": 27,
+        "Cranny": 1
+      },
+      "unstyledTexts": 0
+    },
+    {
+      "key": "example:examples/production-libraries-populated-wide",
+      "id": "30:1508",
+      "width": 1920,
+      "height": 960,
+      "guarded": true,
+      "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      "images": [
+        {
+          "id": "I30:1509;29:273",
+          "name": "brand-thumb",
+          "type": "FRAME",
+          "width": 36,
+          "height": 36,
+          "imageHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+          "approved": true,
+          "scaleMode": "FILL"
+        },
+        {
+          "id": "I30:1651;30:550",
+          "name": "banner",
+          "type": "FRAME",
+          "width": 310.20001220703125,
+          "height": 155.10000610351562,
+          "imageHash": "289f92fe19531b610dca7f466ff50f4d26b9009f",
+          "approved": true,
+          "scaleMode": "FILL"
+        }
+      ],
+      "types": {
+        "FRAME": 61,
+        "INSTANCE": 51,
+        "TEXT": 24,
+        "VECTOR": 23,
+        "RECTANGLE": 7
+      },
+      "fonts": {
+        "ABC Diatype": 24
+      },
+      "unstyledTexts": 0
+    }
+  ]
+}

@@ -1,0 +1,586 @@
+[
+  {
+    "id": "components/Grid",
+    "collisions": [
+      {
+        "path": "TEXT /root/row-1/cell-0/content",
+        "defaults": [
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5"
+        ]
+      },
+      {
+        "path": "TEXT /root/row-1/cell-1/content",
+        "defaults": [
+          "Item 4",
+          "Item 5",
+          "Item 6"
+        ]
+      },
+      {
+        "path": "TEXT /root/row-1/cell-2/content",
+        "defaults": [
+          "Item 6",
+          "Item 7"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Button/controls-005",
+    "collisions": [
+      {
+        "path": "ICON /button/icon",
+        "defaults": [
+          "icon:check-mark@16",
+          "icon:check-mark@24"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Button/controls-006",
+    "collisions": [
+      {
+        "path": "ICON /button/icon",
+        "defaults": [
+          "icon:check-mark@16",
+          "icon:check-mark@24"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Checkbox/controls-001",
+    "collisions": [
+      {
+        "path": "ICON /checkbox/indicator",
+        "defaults": [
+          "icon:check-mark@16",
+          "icon:minus@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Checkbox/controls-002",
+    "collisions": [
+      {
+        "path": "ICON /checkbox/indicator",
+        "defaults": [
+          "icon:check-mark@16",
+          "icon:minus@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Checkbox/controls-003",
+    "collisions": [
+      {
+        "path": "ICON /checkbox/indicator",
+        "defaults": [
+          "icon:check-mark@16",
+          "icon:minus@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Checkbox/controls-004",
+    "collisions": [
+      {
+        "path": "ICON /checkbox/indicator",
+        "defaults": [
+          "icon:check-mark@16",
+          "icon:minus@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/TextInput/controls-001",
+    "collisions": [
+      {
+        "path": "TEXT /field/value",
+        "defaults": [
+          "Text value",
+          "Enter text"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/TextInput/controls-003",
+    "collisions": [
+      {
+        "path": "ICON /field/status",
+        "defaults": [
+          "icon:check-mark-circle@16",
+          "icon:cross-circle@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Textarea/controls-001",
+    "collisions": [
+      {
+        "path": "TEXT /field/value",
+        "defaults": [
+          "A longer description\nwith editable content.",
+          "Enter text"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Tag/controls-001",
+    "collisions": [
+      {
+        "path": "TEXT /tag/main-content/label",
+        "defaults": [
+          "Design",
+          "Remove from list"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Tag/controls-002",
+    "collisions": [
+      {
+        "path": "TEXT /tag/main-content/label",
+        "defaults": [
+          "Design",
+          "Remove from list"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Notice/controls-001",
+    "collisions": [
+      {
+        "path": "ICON /notice/leading-icon",
+        "defaults": [
+          "icon:info@16",
+          "icon:info@20"
+        ]
+      },
+      {
+        "path": "ICON /notice/dismiss",
+        "defaults": [
+          "icon:cross@16",
+          "icon:cross@20"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Notice/controls-002",
+    "collisions": [
+      {
+        "path": "ICON /notice/leading-icon",
+        "defaults": [
+          "icon:info@20",
+          "icon:info@16"
+        ]
+      },
+      {
+        "path": "ICON /notice/dismiss",
+        "defaults": [
+          "icon:cross@20",
+          "icon:cross@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Accordion",
+    "collisions": [
+      {
+        "path": "ICON /accordion/item/header/caret",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Accordion.borderless",
+    "collisions": [
+      {
+        "path": "ICON /accordion/item/header/caret",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Accordion.pill",
+    "collisions": [
+      {
+        "path": "ICON /accordion/item/header/caret",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Accordion.sticky",
+    "collisions": [
+      {
+        "path": "ICON /accordion/item/header/caret",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Dropdown.Item",
+    "collisions": [
+      {
+        "path": "ICON /item/left-icon",
+        "defaults": [
+          "icon:pen@16",
+          "icon:trash-bin@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Select",
+    "collisions": [
+      {
+        "path": "TEXT /select/value",
+        "defaults": [
+          "Select a category",
+          "Brand assets"
+        ]
+      },
+      {
+        "path": "ICON /select/status",
+        "defaults": [
+          "icon:check-mark-circle@16",
+          "icon:exclamation-mark-circle@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Select.Multiple",
+    "collisions": [
+      {
+        "path": "ICON /select/status",
+        "defaults": [
+          "icon:check-mark-circle@16",
+          "icon:exclamation-mark-circle@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Select.Combobox",
+    "collisions": [
+      {
+        "path": "TEXT /select/value",
+        "defaults": [
+          "Search categories",
+          "Brand assets"
+        ]
+      },
+      {
+        "path": "ICON /select/status",
+        "defaults": [
+          "icon:check-mark-circle@16",
+          "icon:exclamation-mark-circle@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Select.Item",
+    "collisions": [
+      {
+        "path": "ICON /item/indicator",
+        "defaults": [
+          "icon:check-mark@16",
+          "icon:minus@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Table.HeaderCell",
+    "collisions": [
+      {
+        "path": "ICON /header-cell/contents/indicator",
+        "defaults": [
+          "icon:arrow-bidirectional@12",
+          "icon:arrow-spin-right@12",
+          "icon:arrow-up@12",
+          "icon:arrow-down@12"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Tabs",
+    "collisions": [
+      {
+        "path": "TEXT /tabs/content/content",
+        "defaults": [
+          "Collection overview",
+          "Approved assets"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Tree",
+    "collisions": [
+      {
+        "path": "ICON /tree/row/caret",
+        "defaults": [
+          "icon:caret-right@16",
+          "icon:caret-down@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Tree.Item",
+    "collisions": [
+      {
+        "path": "ICON /item/checkbox/indicator",
+        "defaults": [
+          "icon:check-mark@12",
+          "icon:minus@12"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/Tree.Folder",
+    "collisions": [
+      {
+        "path": "ICON /row/caret",
+        "defaults": [
+          "icon:caret-right@16",
+          "icon:caret-down@16"
+        ]
+      },
+      {
+        "path": "ICON /row/checkbox/indicator",
+        "defaults": [
+          "icon:check-mark@12",
+          "icon:minus@12"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/AssetInput",
+    "collisions": [
+      {
+        "path": "ICON /asset-input/preview/asset-icon",
+        "defaults": [
+          "icon:document@24",
+          "icon:document@32"
+        ]
+      },
+      {
+        "path": "ICON /asset-input/content/caret",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/DatePicker.Input",
+    "collisions": [
+      {
+        "path": "TEXT /date-input/date",
+        "defaults": [
+          "Select a date",
+          "Oct 30, 2026"
+        ]
+      },
+      {
+        "path": "ICON /date-input/caret",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/ColorPicker",
+    "collisions": [
+      {
+        "path": "TEXT /color-picker/values/format/value",
+        "defaults": [
+          "HEX",
+          "RGBA"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/ColorPicker.Values",
+    "collisions": [
+      {
+        "path": "TEXT /values/format/value",
+        "defaults": [
+          "HEX",
+          "RGBA"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/ColorPicker.Input",
+    "collisions": [
+      {
+        "path": "TEXT /color-input/color-name",
+        "defaults": [
+          "Select a color",
+          "RGBA(255, 0, 0, 1)"
+        ]
+      },
+      {
+        "path": "ICON /color-input/caret",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "components/AssetInput/image-preview",
+    "collisions": [
+      {
+        "path": "TEXT /asset-input-image/content/labels/title",
+        "defaults": [
+          "MacBook-Pro-03-Standard-Mockup-Remastered.jpg",
+          "BL01.jpg",
+          "DTS_Grand_Design_Daniel_Farò_Photos_ID4108 by Image Studio by Image Studio.png",
+          "DTS_The_Internet_Fanette_Guilloud_Photos_ID5236 (1) by Image Studio.png"
+        ]
+      },
+      {
+        "path": "ICON /asset-input-image/content/caret/caret-icon",
+        "defaults": [
+          "icon:caret-down@16",
+          "icon:caret-up@16"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "patterns/ProductionUserMenu",
+    "collisions": [
+      {
+        "path": "ICON /user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
+        "defaults": [
+          "icon:checkbox@20",
+          "icon:apps@20"
+        ]
+      },
+      {
+        "path": "TEXT /user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
+        "defaults": [
+          "Manage cookie usage",
+          "Connect your apps to Frontify"
+        ]
+      },
+      {
+        "path": "ICON /user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
+        "defaults": [
+          "icon:report@20",
+          "icon:check-mark@20"
+        ]
+      },
+      {
+        "path": "TEXT /user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
+        "defaults": [
+          "Access your reports",
+          "Approve or decline requests"
+        ]
+      },
+      {
+        "path": "ICON /user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
+        "defaults": [
+          "icon:people@20",
+          "icon:report@20"
+        ]
+      },
+      {
+        "path": "TEXT /user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
+        "defaults": [
+          "Manage tagged people",
+          "Access your reports"
+        ]
+      },
+      {
+        "path": "ICON /user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
+        "defaults": [
+          "icon:arrow-expand@20",
+          "icon:link-box@20"
+        ]
+      },
+      {
+        "path": "TEXT /user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper",
+        "defaults": [
+          "Configure your access request",
+          "Manage domains and paths"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "patterns/ProductionEssentialsPaletteList",
+    "collisions": [
+      {
+        "path": "ICON /palettes/palette-palette-accent/palette-header/label-group/toggle",
+        "defaults": [
+          "icon:caret-down@12",
+          "icon:caret-up@12"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "patterns/ProductionAgenticHubContent",
+    "collisions": [
+      {
+        "path": "ICON /agentic-content/body/hero/automation-hero/automation-pill/lightning",
+        "defaults": [
+          "icon:lightning@20",
+          "icon:lightning@24"
+        ]
+      },
+      {
+        "path": "ICON /agentic-content/body/hero/automation-hero/generate-controls/generate/spark",
+        "defaults": [
+          "icon:sparks@20",
+          "icon:sparks@24"
+        ]
+      }
+    ]
+  }
+]

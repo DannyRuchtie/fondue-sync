@@ -1,0 +1,242 @@
+{
+  "complete": true,
+  "recipes": 37,
+  "scope": "Normal source guards and updates through explicit component-property policy2. Managed component IDs retained; no blanket baseline acceptance.",
+  "fingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8",
+  "repairs": [
+    {
+      "recipeId": "patterns/ProductionUserMenu",
+      "nativeId": "118:2907",
+      "action": "update",
+      "warnings": [
+        "icon:person-anonymous has no exact 36px optical source; using the released24px path scaled to requested size."
+      ]
+    },
+    {
+      "recipeId": "components/Accordion",
+      "nativeId": "5:15455",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Accordion.borderless",
+      "nativeId": "5:15632",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Accordion.pill",
+      "nativeId": "5:15777",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Accordion.sticky",
+      "nativeId": "5:15943",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/AssetInput",
+      "nativeId": "5:19127",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/AssetInput/image-preview",
+      "nativeId": "118:2048",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Button/controls-005",
+      "nativeId": "5:10855",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Button/controls-006",
+      "nativeId": "5:10956",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Checkbox/controls-001",
+      "nativeId": "5:11429",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Checkbox/controls-002",
+      "nativeId": "5:11540",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Checkbox/controls-003",
+      "nativeId": "5:11651",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Checkbox/controls-004",
+      "nativeId": "5:11762",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/ColorPicker",
+      "nativeId": "5:19868",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/ColorPicker.Input",
+      "nativeId": "5:19938",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/ColorPicker.Values",
+      "nativeId": "5:19913",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/DatePicker.Input",
+      "nativeId": "5:19766",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Dropdown.Item",
+      "nativeId": "5:17037",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Grid",
+      "nativeId": "5:10372",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Notice/controls-001",
+      "nativeId": "5:14741",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Notice/controls-002",
+      "nativeId": "5:15098",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Select",
+      "nativeId": "5:17138",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Select.Combobox",
+      "nativeId": "5:17384",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Select.Item",
+      "nativeId": "5:17477",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Select.Multiple",
+      "nativeId": "5:17231",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Table.HeaderCell",
+      "nativeId": "5:17731",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Tabs",
+      "nativeId": "5:17931",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "nativeId": "5:12595",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Tag/controls-002",
+      "nativeId": "5:12836",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Textarea/controls-001",
+      "nativeId": "5:12340",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/TextInput/controls-001",
+      "nativeId": "5:12212",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/TextInput/controls-003",
+      "nativeId": "5:12277",
+      "action": "update",
+      "warnings": []
+    },
+    {
+      "recipeId": "components/Tree",
+      "nativeId": "5:18192",
+      "action": "update",
+      "warnings": [
+        "icon:folder has no exact 18px optical source; using the released24px path scaled to requested size.",
+        "icon:document has no exact 18px optical source; using the released24px path scaled to requested size."
+      ]
+    },
+    {
+      "recipeId": "components/Tree.Folder",
+      "nativeId": "5:18606",
+      "action": "update",
+      "warnings": [
+        "icon:folder has no exact 18px optical source; using the released24px path scaled to requested size."
+      ]
+    },
+    {
+      "recipeId": "components/Tree.Item",
+      "nativeId": "5:18435",
+      "action": "update",
+      "warnings": [
+        "icon:document has no exact 18px optical source; using the released24px path scaled to requested size."
+      ]
+    },
+    {
+      "recipeId": "patterns/ProductionAgenticHubContent",
+      "nativeId": "119:1178",
+      "action": "update",
+      "warnings": [
+        "icon:lightning has no exact 8.00936768149883px optical source; using the released24px path scaled to requested size.",
+        "icon:sparks has no exact 8.00936768149883px optical source; using the released24px path scaled to requested size."
+      ]
+    },
+    {
+      "recipeId": "patterns/ProductionEssentialsPaletteList",
+      "nativeId": "119:921",
+      "action": "update",
+      "warnings": []
+    }
+  ]
+}

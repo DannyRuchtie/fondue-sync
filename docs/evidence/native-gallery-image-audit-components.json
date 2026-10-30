@@ -1,0 +1,102 @@
+{
+  "complete": true,
+  "report": [
+    {
+      "key": "components/AssetInput",
+      "id": "51:2320",
+      "mainId": "5:19126",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/AssetInput",
+      "id": "51:2338",
+      "mainId": "5:19195",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/AssetInput",
+      "id": "129:4813",
+      "mainId": "118:2047",
+      "expectedImages": 1,
+      "actualImages": 1,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "51:2491",
+      "mainId": "5:16087",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "51:2502",
+      "mainId": "5:16148",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "51:2509",
+      "mainId": "5:16165",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "51:2516",
+      "mainId": "5:16182",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "51:2523",
+      "mainId": "5:16187",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "51:2528",
+      "mainId": "5:16190",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "51:2533",
+      "mainId": "5:16193",
+      "expectedImages": 0,
+      "actualImages": 0,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "129:4828",
+      "mainId": "118:2011",
+      "expectedImages": 1,
+      "actualImages": 1,
+      "mismatches": []
+    },
+    {
+      "key": "components/Card",
+      "id": "129:4833",
+      "mainId": "118:2044",
+      "expectedImages": 1,
+      "actualImages": 1,
+      "mismatches": []
+    }
+  ],
+  "affectedIds": []
+}

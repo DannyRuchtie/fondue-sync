@@ -14,7 +14,7 @@ The Fondue repository defines the source assets. A library maintainer imports a 
 
 A Fondue release supplies the tokens, icons, component source and available documentation. Fondue Sync packages that release together with reviewed Figma recipes. A recipe describes how a component becomes editable Figma layers, including its layout, variants and token connections.
 
-The plugin populates a dedicated library file. Designers then enable the published library, place linked instances, and compose their own screens. The example pages provide starting layouts based on production Brands, Libraries and Guidelines overviews, using synthetic content.
+The plugin populates a dedicated library file. Designers then enable the published library, place linked instances, and compose their own screens. The example recipes provide starting layouts for production Brands, Libraries, Guidelines, Notifications, Settings, Search, Help, Agentic Hub and Essentials views. They use fictional records and approved real media packaged with the plugin; the screens are editable static compositions.
 
 The file has two page groups. **Library / …** pages are for browsing components, icons, charts and examples, with readable previews and usage guidance. **Source components / …** pages hold the actual main components and variant sets maintained by the plugin. Browsing previews are linked instances of those source components; both groups belong to the same library.
 
@@ -169,6 +169,7 @@ Paths below are relative to the Fondue Sync repository unless labeled upstream.
 | `recipes/documentation.mjs`, `src/documentation.ts` | Metadata extraction, labeled editorial fallback, source links and concise family guides |
 | `recipes/index.mjs`, `recipes/foundations.mjs`, `recipes/controls.mjs`, `recipes/patterns.mjs` | Reviewed native component definitions, complex parts, charts, rich text and represented properties |
 | `recipes/examples.mjs`, `fixtures/demo.json` | Active product patterns, example screens and fictional content |
+| `fixtures/media/manifest.json` and its image files | Approved offline image fixtures and their source asset references |
 | `recipes/typography-bindings.mjs`, `recipes/paint-bindings.mjs`, `recipes/token-bindings.mjs` | Shared-style and variable mapping rules |
 | `scripts/prepare-source.mjs`, `scripts/build-bundle.mjs` | Pinned source preparation and release-bundle generation |
 | `src/` | Figma synchronization, rendering, metadata and plugin interface |
