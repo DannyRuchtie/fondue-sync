@@ -1,0 +1,1170 @@
+{
+  "release": "13.11.1",
+  "scope": "Complex source-derived native patterns and reusable compound parts",
+  "counts": {
+    "sets": 56,
+    "variants": 441
+  },
+  "entries": [
+    {
+      "id": "components/Accordion",
+      "source": [
+        "packages/components/src/components/Accordion/Accordion.tsx",
+        "packages/components/src/components/Accordion/styles/accordion.module.scss"
+      ],
+      "covered": [
+        "Root.variant default/pill",
+        "Root.padding none/small/medium/large",
+        "Root.value open/closed item",
+        "Root.disabled",
+        "Root.border true/false (pill ignores border per source)",
+        "Header title + rotating caret",
+        "Content native open/closed layout"
+      ],
+      "variantCount": 16,
+      "limitations": [
+        "Single-item composition; sticky positioning is provided as a separate source-context set. Header/Slot children are editable composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Accordion.borderless",
+      "source": [
+        "packages/components/src/components/Accordion/Accordion.tsx",
+        "packages/components/src/components/Accordion/styles/accordion.module.scss"
+      ],
+      "covered": [
+        "Root.variant default/pill",
+        "Root.padding none/small/medium/large",
+        "Root.value open/closed item",
+        "Root.disabled",
+        "Root.border true/false (pill ignores border per source)",
+        "Header title + rotating caret",
+        "Content native open/closed layout"
+      ],
+      "variantCount": 16,
+      "limitations": [
+        "Single-item composition; sticky positioning is provided as a separate source-context set. Header/Slot children are editable composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Accordion.pill",
+      "source": [
+        "packages/components/src/components/Accordion/Accordion.tsx",
+        "packages/components/src/components/Accordion/styles/accordion.module.scss"
+      ],
+      "covered": [
+        "Root.variant default/pill",
+        "Root.padding none/small/medium/large",
+        "Root.value open/closed item",
+        "Root.disabled",
+        "Root.border true/false (pill ignores border per source)",
+        "Header title + rotating caret",
+        "Content native open/closed layout"
+      ],
+      "variantCount": 16,
+      "limitations": [
+        "Single-item composition; sticky positioning is provided as a separate source-context set. Header/Slot children are editable composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Accordion.Content",
+      "source": [
+        "packages/components/src/components/Accordion/Accordion.tsx",
+        "packages/components/src/components/Accordion/styles/accordion.module.scss"
+      ],
+      "covered": [
+        "Content.padding all four values",
+        "Content.divider boolean"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "Content children are an editable text sample.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Accordion.sticky",
+      "source": [
+        "packages/components/src/components/Accordion/Accordion.tsx",
+        "packages/components/src/components/Accordion/styles/accordion.module.scss"
+      ],
+      "covered": [
+        "Root.sticky true source header background",
+        "Root.variant and padding inherited context",
+        "Root.value empty/open"
+      ],
+      "variantCount": 16,
+      "limitations": [
+        "Native static header visual is represented; CSS position:sticky and data-stuck shadow depend on a scrolling viewport.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Card",
+      "source": [
+        "packages/components/src/components/Card/Card.ts",
+        "packages/components/src/components/Card/CardRoot.tsx",
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/CardContent.tsx",
+        "packages/components/src/components/Card/styles/card.module.scss"
+      ],
+      "covered": [
+        "Root.selected boolean",
+        "Interactive CSS default/hover/active states",
+        "Banner small 3:1 ratio",
+        "Title and Description source typography",
+        "Selection indicator absolute inset 16 and 20px size"
+      ],
+      "variantCount": 6,
+      "limitations": [
+        "state is a CSS interaction state; public Root selection needs onSelect and href/onNavigate configuration.",
+        "Image fit, BannerDescription hover overlay, badges and action compositions are supplied as separate parts or not fully enumerated.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Card.Banner",
+      "source": [
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/styles/card.module.scss"
+      ],
+      "covered": [
+        "Banner.size small/large source ratios 3:1 and 9:6",
+        "Banner.tone dim/inverted",
+        "BannerIcon source size 40"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "Native icon content specimen; arbitrary images and multi-image arrangements remain content slots.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Card.BannerIcon",
+      "source": [
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/styles/card.module.scss"
+      ],
+      "covered": [
+        "BannerIcon semantic variants primary/warning/error/success"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "Inverted parent tone overrides icon colors; use Banner.inverted for that composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Card.ThumbnailIcon",
+      "source": [
+        "packages/components/src/components/Card/CardContent.tsx",
+        "packages/components/src/components/Card/styles/card.module.scss"
+      ],
+      "covered": [
+        "40px thumbnail geometry and current tokens"
+      ],
+      "variantCount": 1,
+      "limitations": [
+        "Arbitrary image content is not synthesized.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Card.Title",
+      "source": [
+        "packages/components/src/components/Card/CardContent.tsx",
+        "packages/components/src/components/Card/styles/card.module.scss"
+      ],
+      "covered": [
+        "Title typography, source padding and token fill"
+      ],
+      "variantCount": 1,
+      "limitations": [
+        "Truncation requires a consumer-defined available width.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Card.Description",
+      "source": [
+        "packages/components/src/components/Card/CardContent.tsx",
+        "packages/components/src/components/Card/styles/card.module.scss"
+      ],
+      "covered": [
+        "Description typography, source padding and token fill"
+      ],
+      "variantCount": 1,
+      "limitations": [
+        "Truncation requires a consumer-defined available width.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Card.ActionButton",
+      "source": [
+        "packages/components/src/components/Card/CardAction.tsx",
+        "packages/components/src/components/Card/styles/card.module.scss"
+      ],
+      "covered": [
+        "ActionButton24px source geometry",
+        "CSS hover/open semantic surface",
+        "Focus4px source outline"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "state is a CSS/focus visual state; arbitrary action behavior remains in React.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Dialog",
+      "source": [
+        "packages/components/src/components/Dialog/Dialog.tsx",
+        "packages/components/src/components/Dialog/styles/dialog.module.scss"
+      ],
+      "covered": [
+        "Content.padding all five values",
+        "Content.rounded boolean",
+        "Header, Body and Footer source relative spacing",
+        "Default fit sizing minWidth 400 source",
+        "Default shadow token"
+      ],
+      "variantCount": 10,
+      "limitations": [
+        "Fit content specimen; fullscreen and verticalAlign are viewport-relative and require a canvas/screen container.",
+        "SideContent and underlay are not included in this content-only set.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Dialog.Header",
+      "source": [
+        "packages/components/src/components/Dialog/Dialog.tsx",
+        "packages/components/src/components/Dialog/styles/dialog.module.scss"
+      ],
+      "covered": [
+        "Header padding all source spacing values",
+        "Header close button boolean",
+        "Header border boolean"
+      ],
+      "variantCount": 20,
+      "limitations": [
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Dialog.Body",
+      "source": [
+        "packages/components/src/components/Dialog/Dialog.tsx",
+        "packages/components/src/components/Dialog/styles/dialog.module.scss"
+      ],
+      "covered": [
+        "Body horizontal and vertical source padding",
+        "16px body child gap"
+      ],
+      "variantCount": 5,
+      "limitations": [
+        "Scrollable regions and arbitrary children are consumer content.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Dialog.Footer",
+      "source": [
+        "packages/components/src/components/Dialog/Dialog.tsx",
+        "packages/components/src/components/Dialog/styles/dialog.module.scss"
+      ],
+      "covered": [
+        "Footer padding all source spacing values",
+        "Actions right alignment and 8px gap"
+      ],
+      "variantCount": 10,
+      "limitations": [
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Flyout.Header",
+      "source": [
+        "packages/components/src/components/Flyout/Flyout.tsx",
+        "packages/components/src/components/Flyout/styles/flyout.module.scss"
+      ],
+      "covered": [
+        "Header padding all source spacing values",
+        "Header close button boolean",
+        "Header border boolean"
+      ],
+      "variantCount": 10,
+      "limitations": [
+        "showBorder is derived design visibility; Flyout source always paints the Header divider.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Flyout.Body",
+      "source": [
+        "packages/components/src/components/Flyout/Flyout.tsx",
+        "packages/components/src/components/Flyout/styles/flyout.module.scss"
+      ],
+      "covered": [
+        "Body horizontal and vertical source padding",
+        "16px body child gap"
+      ],
+      "variantCount": 5,
+      "limitations": [
+        "Scrollable regions and arbitrary children are consumer content.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Flyout.Footer",
+      "source": [
+        "packages/components/src/components/Flyout/Flyout.tsx",
+        "packages/components/src/components/Flyout/styles/flyout.module.scss"
+      ],
+      "covered": [
+        "Footer padding all source spacing values",
+        "Actions right alignment and 8px gap"
+      ],
+      "variantCount": 5,
+      "limitations": [
+        "showBorder is derived design visibility; Flyout source always paints the Footer divider.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Flyout",
+      "source": [
+        "packages/components/src/components/Flyout/Flyout.tsx",
+        "packages/components/src/components/Flyout/styles/flyout.module.scss"
+      ],
+      "covered": [
+        "Content.padding all values",
+        "Content.rounded none/medium/large",
+        "Default source shadow medium literal",
+        "Header/body/footer compound layout"
+      ],
+      "variantCount": 15,
+      "limitations": [
+        "Content-only specimen. side/align/triggerOffset, viewport collision and mobile modal adaptation need screen-context placement.",
+        "shadow none/medium are supplied in separate Surface set.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Flyout.Surface",
+      "source": [
+        "packages/components/src/components/Flyout/Flyout.tsx",
+        "packages/components/src/components/Flyout/styles/flyout.module.scss"
+      ],
+      "covered": [
+        "Content.shadow none/medium/large literal SCSS values",
+        "Content.rounded all values"
+      ],
+      "variantCount": 9,
+      "limitations": [
+        "The 16px child padding is arbitrary editable content, not a claimed Root padding value.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Dropdown",
+      "source": [
+        "packages/components/src/components/Dropdown/Dropdown.tsx",
+        "packages/components/src/components/Dropdown/styles/dropdown.module.scss"
+      ],
+      "covered": [
+        "Root.open boolean",
+        "Content 250px source minimum width",
+        "Group heading and separators",
+        "Item default/hover/danger source visuals"
+      ],
+      "variantCount": 2,
+      "limitations": [
+        "Trigger is sample composition; submenu placement/RTL/collision and all slot combinations remain screen-dependent.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Dropdown.Item",
+      "source": [
+        "packages/components/src/components/Dropdown/Dropdown.tsx",
+        "packages/components/src/components/Dropdown/styles/dropdown.module.scss"
+      ],
+      "covered": [
+        "Item.emphasis default/danger",
+        "Item.disabled boolean",
+        "CSS hover/active states",
+        "Left Slot and Shortcut primitives",
+        "Source 8px vertical, 12px horizontal padding"
+      ],
+      "variantCount": 12,
+      "limitations": [
+        "state is CSS interaction state; arbitrary Item children/asChild content remain editable composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Dropdown.SubTrigger",
+      "source": [
+        "packages/components/src/components/Dropdown/Dropdown.tsx",
+        "packages/components/src/components/Dropdown/styles/dropdown.module.scss"
+      ],
+      "covered": [
+        "SubTrigger caret, spacing and CSS open/hover states"
+      ],
+      "variantCount": 3,
+      "limitations": [
+        "SubContent uses the shared content layout; portal and RTL placement are runtime behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Select",
+      "source": [
+        "packages/components/src/components/Select/SelectSingle.tsx",
+        "packages/components/src/components/Select/SelectMultiple.tsx",
+        "packages/components/src/components/Select/ComboboxSingle.tsx",
+        "packages/components/src/components/Select/ComboboxMultiple.tsx",
+        "packages/components/src/components/Select/components/SelectItem.tsx",
+        "packages/components/src/components/Select/styles/select.module.scss"
+      ],
+      "covered": [
+        "disabled boolean",
+        "status default/success/error",
+        "value empty/brand-assets sample values",
+        "36px source field height and padding",
+        "Single selected value"
+      ],
+      "variantCount": 12,
+      "limitations": [
+        "value values are representative single selections; Multiple uses corresponding string-array values in React.",
+        "Open list, loading/filtering, all arbitrary child/slot combinations and overflow badges need further composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Select.Multiple",
+      "source": [
+        "packages/components/src/components/Select/SelectSingle.tsx",
+        "packages/components/src/components/Select/SelectMultiple.tsx",
+        "packages/components/src/components/Select/ComboboxSingle.tsx",
+        "packages/components/src/components/Select/ComboboxMultiple.tsx",
+        "packages/components/src/components/Select/components/SelectItem.tsx",
+        "packages/components/src/components/Select/styles/select.module.scss"
+      ],
+      "covered": [
+        "disabled boolean",
+        "status default/success/error",
+        "value empty/brand-assets sample values",
+        "36px source field height and padding",
+        "Multiple native badge and removal slot"
+      ],
+      "variantCount": 12,
+      "limitations": [
+        "value values are representative single selections; Multiple uses corresponding string-array values in React.",
+        "Open list, loading/filtering, all arbitrary child/slot combinations and overflow badges need further composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Select.Combobox",
+      "source": [
+        "packages/components/src/components/Select/SelectSingle.tsx",
+        "packages/components/src/components/Select/SelectMultiple.tsx",
+        "packages/components/src/components/Select/ComboboxSingle.tsx",
+        "packages/components/src/components/Select/ComboboxMultiple.tsx",
+        "packages/components/src/components/Select/components/SelectItem.tsx",
+        "packages/components/src/components/Select/styles/select.module.scss"
+      ],
+      "covered": [
+        "disabled boolean",
+        "status default/success/error",
+        "value empty/brand-assets sample values",
+        "36px source field height and padding",
+        "Combobox native editable query text"
+      ],
+      "variantCount": 12,
+      "limitations": [
+        "value values are representative single selections; Multiple uses corresponding string-array values in React.",
+        "Open list, loading/filtering, all arbitrary child/slot combinations and overflow badges need further composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Select.Item",
+      "source": [
+        "packages/components/src/components/Select/SelectSingle.tsx",
+        "packages/components/src/components/Select/SelectMultiple.tsx",
+        "packages/components/src/components/Select/ComboboxSingle.tsx",
+        "packages/components/src/components/Select/ComboboxMultiple.tsx",
+        "packages/components/src/components/Select/components/SelectItem.tsx",
+        "packages/components/src/components/Select/styles/select.module.scss"
+      ],
+      "covered": [
+        "CSS highlighted/active states",
+        "ARIA selected and indeterminate indicators",
+        "Shared native check/minus icon assets",
+        "Actual 8px/12px padding"
+      ],
+      "variantCount": 5,
+      "limitations": [
+        "state is derived from list selection; public Item props are value/label/children.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Select.Group",
+      "source": [
+        "packages/components/src/components/Select/SelectSingle.tsx",
+        "packages/components/src/components/Select/SelectMultiple.tsx",
+        "packages/components/src/components/Select/ComboboxSingle.tsx",
+        "packages/components/src/components/Select/ComboboxMultiple.tsx",
+        "packages/components/src/components/Select/components/SelectItem.tsx",
+        "packages/components/src/components/Select/styles/select.module.scss"
+      ],
+      "covered": [
+        "Group optional heading typography and source padding"
+      ],
+      "variantCount": 2,
+      "limitations": [
+        "Item text is editable composition; groupId and callback semantics remain runtime.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Table",
+      "source": [
+        "packages/components/src/components/Table/Table.tsx",
+        "packages/components/src/components/Table/styles/table.module.scss"
+      ],
+      "covered": [
+        "Root.fontSize small/medium",
+        "Root.noBorder boolean outer border suppression",
+        "Header source 13px text / 12px vertical padding",
+        "Row source 8px base padding and 16px line height"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "layout auto/fixed use fixed sample column widths. gutter, colSpan, sticky positions and responsive truncation require consumer width constraints.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Table.Row",
+      "source": [
+        "packages/components/src/components/Table/Table.tsx",
+        "packages/components/src/components/Table/styles/table.module.scss"
+      ],
+      "covered": [
+        "Row.selected highlight surface",
+        "Row.disabled source opacity .6",
+        "Root inherited fontSize small/medium"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "fontSize belongs to Root and is included here as inherited context. onClick/keyboard selection remain runtime.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Table.HeaderCell",
+      "source": [
+        "packages/components/src/components/Table/Table.tsx",
+        "packages/components/src/components/Table/styles/table.module.scss"
+      ],
+      "covered": [
+        "HeaderCell.sortDirection ascending/descending and undefined",
+        "HeaderCell.state idle/loading",
+        "HeaderCell.align all three values",
+        "12px sort icon source",
+        "13px source header typography"
+      ],
+      "variantCount": 18,
+      "limitations": [
+        "none represents undefined sortDirection. Loading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.",
+        "Sortable trigger semantics need onSortChange in React.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Table.RowCell",
+      "source": [
+        "packages/components/src/components/Table/Table.tsx",
+        "packages/components/src/components/Table/styles/table.module.scss"
+      ],
+      "covered": [
+        "Cell align left/center/right",
+        "Root inherited fontSize",
+        "Source row cell padding and bottom line"
+      ],
+      "variantCount": 6,
+      "limitations": [
+        "colSpan, widths, truncation and gutter are contextual layout constraints.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Tabs",
+      "source": [
+        "packages/components/src/components/Tabs/Tabs.tsx",
+        "packages/components/src/components/Tabs/styles/tabs.module.scss"
+      ],
+      "covered": [
+        "Root.variant default/pill",
+        "Root.size medium/large",
+        "Root.activeTab sample strings",
+        "Root.padding none/comfortable",
+        "Default 48/56px trigger list and 3px indicator",
+        "Pill source 13px typography, 4/8 padding"
+      ],
+      "variantCount": 16,
+      "limitations": [
+        "withDivider variants and tight/compact/spacious padding are supplied as separate Content parts or remain consumer composition.",
+        "Overflow trigger list scrolling and cross-fade transition are runtime behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Tabs.Trigger",
+      "source": [
+        "packages/components/src/components/Tabs/Tabs.tsx",
+        "packages/components/src/components/Tabs/styles/tabs.module.scss"
+      ],
+      "covered": [
+        "Root variant/size inherited context",
+        "Tab.disabled boolean",
+        "Active/inactive source styling"
+      ],
+      "variantCount": 16,
+      "limitations": [
+        "variant/size/activeTab belong to Root; this reusable set exposes inherited context for composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Tabs.Content",
+      "source": [
+        "packages/components/src/components/Tabs/Tabs.tsx",
+        "packages/components/src/components/Tabs/styles/tabs.module.scss"
+      ],
+      "covered": [
+        "Root padding all five source values"
+      ],
+      "variantCount": 5,
+      "limitations": [
+        "padding is inherited from Root; arbitrary content and withDivider flex overflow are contextual.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Tree",
+      "source": [
+        "packages/components/src/components/Tree/Tree.ts",
+        "packages/components/src/components/Tree/types.ts",
+        "packages/components/src/components/Tree/constants.ts",
+        "packages/components/src/components/Tree/components/TreeRoot.tsx",
+        "packages/components/src/components/Tree/components/TreeRow.tsx",
+        "packages/components/src/components/Tree/styles/tree.module.scss"
+      ],
+      "covered": [
+        "Root.multiSelect and reorderable booleans",
+        "Folder.isExpanded boolean",
+        "Native folder/item rows and selection checkboxes",
+        "32px item height,16px depth indent+4px base",
+        "Source selected surface-active and 13px label typography"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "isExpanded belongs to Folder; root sample preserves hierarchy.",
+        "Headless-tree event/state controller, dragline placement and async expansion are runtime behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Tree.Item",
+      "source": [
+        "packages/components/src/components/Tree/Tree.ts",
+        "packages/components/src/components/Tree/types.ts",
+        "packages/components/src/components/Tree/constants.ts",
+        "packages/components/src/components/Tree/components/TreeRoot.tsx",
+        "packages/components/src/components/Tree/components/TreeRow.tsx",
+        "packages/components/src/components/Tree/styles/tree.module.scss"
+      ],
+      "covered": [
+        "Item.isSelected false/true/indeterminate",
+        "Item.isDisabled boolean",
+        "Item.isRenaming boolean",
+        "Native checkbox and source 24px rename input scale"
+      ],
+      "variantCount": 12,
+      "limitations": [
+        "Rename sample uses editable text; confirmation and automatic focus remain runtime.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Tree.Folder",
+      "source": [
+        "packages/components/src/components/Tree/Tree.ts",
+        "packages/components/src/components/Tree/types.ts",
+        "packages/components/src/components/Tree/constants.ts",
+        "packages/components/src/components/Tree/components/TreeRoot.tsx",
+        "packages/components/src/components/Tree/components/TreeRow.tsx",
+        "packages/components/src/components/Tree/styles/tree.module.scss"
+      ],
+      "covered": [
+        "Folder.isExpanded",
+        "Folder.isSelected all states",
+        "Folder.isDisabled",
+        "Caret and folder slots"
+      ],
+      "variantCount": 12,
+      "limitations": [
+        "Selection cascade is represented visually; actual descendants derive state in React.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/OrderableList",
+      "source": [
+        "packages/components/src/components/OrderableList/OrderableList.tsx",
+        "packages/components/src/components/OrderableList/OrderableListItem.tsx",
+        "packages/components/src/components/OrderableList/OrderableListItemDragHandle.tsx",
+        "packages/components/src/components/OrderableList/styles/orderable-list.module.scss"
+      ],
+      "covered": [
+        "Root.spacing tight/compact/comfortable",
+        "Root.direction vertical/horizontal",
+        "Item native decorator,title,description,drag handle composition"
+      ],
+      "variantCount": 6,
+      "limitations": [
+        "Order array is a sample; drag/drop events and keyboard announcements remain React behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/OrderableList.Item",
+      "source": [
+        "packages/components/src/components/OrderableList/OrderableList.tsx",
+        "packages/components/src/components/OrderableList/OrderableListItem.tsx",
+        "packages/components/src/components/OrderableList/OrderableListItemDragHandle.tsx",
+        "packages/components/src/components/OrderableList/styles/orderable-list.module.scss"
+      ],
+      "covered": [
+        "Item.padding none/small",
+        "Item.selected boolean",
+        "Item.disabled source .5 content opacity",
+        "Native reusable drag handle slot"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "Hover, dropping, dragging shadows and arbitrary ItemAction combinations are not all enumerated.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/AssetInput",
+      "source": [
+        "packages/components/src/components/AssetInput/AssetInput.tsx",
+        "packages/components/src/components/AssetInput/AssetInputRoot.tsx",
+        "packages/components/src/components/AssetInput/AssetInputPlaceholder.tsx",
+        "packages/components/src/components/AssetInput/AssetInputPreview.tsx",
+        "packages/components/src/components/AssetInput/AssetInputMetadataItem.tsx",
+        "packages/components/src/components/AssetInput/styles/asset-input.module.scss"
+      ],
+      "covered": [
+        "Root.orientation horizontal/vertical",
+        "Root.isOpen boolean caret/border state",
+        "Source single preview 56px horizontal,128px vertical",
+        "Title+metadata source slots and separator dots"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "Preview uses native document icon slot; arbitrary image URLs, multiple-preview grids and PreviewLoading still need content-specific recipes.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/AssetInput.Placeholder",
+      "source": [
+        "packages/components/src/components/AssetInput/AssetInput.tsx",
+        "packages/components/src/components/AssetInput/AssetInputRoot.tsx",
+        "packages/components/src/components/AssetInput/AssetInputPlaceholder.tsx",
+        "packages/components/src/components/AssetInput/AssetInputPreview.tsx",
+        "packages/components/src/components/AssetInput/AssetInputMetadataItem.tsx",
+        "packages/components/src/components/AssetInput/styles/asset-input.module.scss"
+      ],
+      "covered": [
+        "Placeholder one/two child action composition",
+        "Upload precedes Browse per source order",
+        "Native action icons and separator"
+      ],
+      "variantCount": 3,
+      "limitations": [
+        "children labels are native composition choices, not React string values. Dashed border is approximated with solid native stroke until per-dash schema support exists.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/DatePicker",
+      "source": [
+        "packages/components/src/components/DatePicker/DatePicker.ts",
+        "packages/components/src/components/DatePicker/SingleDatePicker.tsx",
+        "packages/components/src/components/DatePicker/RangeDatePicker.tsx",
+        "packages/components/src/components/DatePicker/DatePickerCalendar.tsx",
+        "packages/components/src/components/DatePicker/DatePickerInput.tsx",
+        "packages/components/src/components/DatePicker/styles/datePickerCalendar.module.scss",
+        "packages/components/src/components/DatePicker/styles/datePickerInput.module.scss"
+      ],
+      "covered": [
+        "Root.selected empty/ISO date sample",
+        "Correct October 2026 weekday offset",
+        "Source 36px day and 32px content,8px radius",
+        "Source caption/month nav and weekday typography",
+        "Today marker and native selected semantic fill"
+      ],
+      "variantCount": 2,
+      "limitations": [
+        "Source calendar locale is ThemeProvider-dependent; this specimen uses English Sunday-first month.",
+        "Date arithmetic, minMonth/maxMonth navigation constraints, disabledDates and locale/RTL remain runtime or contextual variants.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/DatePicker.Range",
+      "source": [
+        "packages/components/src/components/DatePicker/DatePicker.ts",
+        "packages/components/src/components/DatePicker/SingleDatePicker.tsx",
+        "packages/components/src/components/DatePicker/RangeDatePicker.tsx",
+        "packages/components/src/components/DatePicker/DatePickerCalendar.tsx",
+        "packages/components/src/components/DatePicker/DatePickerInput.tsx",
+        "packages/components/src/components/DatePicker/styles/datePickerCalendar.module.scss",
+        "packages/components/src/components/DatePicker/styles/datePickerInput.module.scss"
+      ],
+      "covered": [
+        "Range selection sample with source highlight tokens",
+        "Separate native day parts enable editable date compositions"
+      ],
+      "variantCount": 2,
+      "limitations": [
+        "selected is serialized sample range notation for design only; runtime API takes a DatePickerDateRange.",
+        "Source joined middle/start/end per-corner radii are not fully reproduced by the current symmetric radius schema.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/DatePicker.Input",
+      "source": [
+        "packages/components/src/components/DatePicker/DatePicker.ts",
+        "packages/components/src/components/DatePicker/SingleDatePicker.tsx",
+        "packages/components/src/components/DatePicker/RangeDatePicker.tsx",
+        "packages/components/src/components/DatePicker/DatePickerCalendar.tsx",
+        "packages/components/src/components/DatePicker/DatePickerInput.tsx",
+        "packages/components/src/components/DatePicker/styles/datePickerCalendar.module.scss",
+        "packages/components/src/components/DatePicker/styles/datePickerInput.module.scss"
+      ],
+      "covered": [
+        "Input.disabled boolean",
+        "Input.isOpen boolean",
+        "Input.selected empty/ISO sample",
+        "36px source field height,12px inline padding and8px gap",
+        "Native calendar/clear/caret slots"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "Formatting is English sample; clear/change callbacks remain runtime.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/DatePicker.Day",
+      "source": [
+        "packages/components/src/components/DatePicker/DatePicker.ts",
+        "packages/components/src/components/DatePicker/SingleDatePicker.tsx",
+        "packages/components/src/components/DatePicker/RangeDatePicker.tsx",
+        "packages/components/src/components/DatePicker/DatePickerCalendar.tsx",
+        "packages/components/src/components/DatePicker/DatePickerInput.tsx",
+        "packages/components/src/components/DatePicker/styles/datePickerCalendar.module.scss",
+        "packages/components/src/components/DatePicker/styles/datePickerInput.module.scss"
+      ],
+      "covered": [
+        "Source native day default/selected/disabled/outside/today visual states"
+      ],
+      "variantCount": 5,
+      "limitations": [
+        "Reusable design primitive corresponds to internal calendar day renderer, not a separate public export.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/ColorPicker",
+      "source": [
+        "packages/components/src/components/ColorPicker/ColorPicker.tsx",
+        "packages/components/src/components/ColorPicker/ColorPickerInput.tsx",
+        "packages/components/src/components/ColorPicker/ColorValueInput.tsx",
+        "packages/components/src/components/ColorPicker/ColorGradientInput.tsx",
+        "packages/components/src/components/ColorPicker/types.ts",
+        "packages/components/src/components/ColorPicker/styles/customColorPicker.module.scss",
+        "packages/components/src/components/ColorPicker/styles/colorInput.module.scss"
+      ],
+      "covered": [
+        "Root.currentFormat exact HEX/RGBA union",
+        "Gradient plus Values compound composition",
+        "Source 16px root gap and8px input gaps",
+        "Native HEX/channel/alpha/format controls"
+      ],
+      "variantCount": 2,
+      "limitations": [
+        "react-colorful dependency default geometry is represented as a red-color specimen; dynamic color-coordinate conversion and checkerboard alpha remain partial.",
+        "Responsive value-input wrap below312px is not represented by these desktop compositions.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/ColorPicker.Values",
+      "source": [
+        "packages/components/src/components/ColorPicker/ColorPicker.tsx",
+        "packages/components/src/components/ColorPicker/ColorPickerInput.tsx",
+        "packages/components/src/components/ColorPicker/ColorValueInput.tsx",
+        "packages/components/src/components/ColorPicker/ColorGradientInput.tsx",
+        "packages/components/src/components/ColorPicker/types.ts",
+        "packages/components/src/components/ColorPicker/styles/customColorPicker.module.scss",
+        "packages/components/src/components/ColorPicker/styles/colorInput.module.scss"
+      ],
+      "covered": [
+        "Values.currentFormat exact source formats",
+        "HEX field and RGBA channel fields",
+        "100px format/alpha source desktop columns",
+        "Alpha percent decorators"
+      ],
+      "variantCount": 2,
+      "limitations": [
+        "Input validation, number limits and responsive wrapping remain runtime behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/ColorPicker.Input",
+      "source": [
+        "packages/components/src/components/ColorPicker/ColorPicker.tsx",
+        "packages/components/src/components/ColorPicker/ColorPickerInput.tsx",
+        "packages/components/src/components/ColorPicker/ColorValueInput.tsx",
+        "packages/components/src/components/ColorPicker/ColorGradientInput.tsx",
+        "packages/components/src/components/ColorPicker/types.ts",
+        "packages/components/src/components/ColorPicker/styles/customColorPicker.module.scss",
+        "packages/components/src/components/ColorPicker/styles/colorInput.module.scss"
+      ],
+      "covered": [
+        "Input.disabled and isOpen booleans",
+        "Input empty/populated visual state",
+        "16px source color indicator and36px field height",
+        "Clear/caret native slots"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "currentColor strings are design specimens of RgbaColor object values; arbitrary color value binding needs exporter mapping.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "components/Tooltip",
+      "source": [
+        "packages/components/src/components/Tooltip/Tooltip.tsx",
+        "packages/components/src/components/Tooltip/styles/tooltip.module.scss"
+      ],
+      "covered": [
+        "Content.padding compact/spacious actual vertical4/8 horizontal8/12",
+        "Content.side all four values with native triangle arrow",
+        "Source14px/20px tooltip utility typography",
+        "Semantic fill/text/border bindings"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "Content-only set; Root delay/open state and viewport collision do not affect intrinsic appearance.",
+        "Arrow drop-shadow outline and maxWidth/custom children wrapping need native visual QA.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "charts/Legend",
+      "source": [
+        "packages/charts/src/components/common/components/Legend.tsx",
+        "packages/charts/src/components/common/components/Legend.module.scss",
+        "packages/charts/src/index.scss",
+        "packages/charts/src/theme/consts.ts",
+        "packages/charts/src/components/common/helpers/accessors.ts",
+        "packages/charts/src/utilities/text.module.scss"
+      ],
+      "covered": [
+        "Internal reusable Legend.style line/rectangle/circle/square",
+        "Exact48px line/rectangle and12px circle/square source metrics",
+        "24px legend gap/8px color-label gap",
+        "Current chart-token aliases from index.scss"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "Legend is a shared internal design primitive; it is not an independent public /charts export.",
+        "Native single-row sample does not implement flex wrapping for arbitrary label strings.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts/ChartHeading",
+      "source": [
+        "packages/charts/src/components/ChartHeading/ChartHeading.tsx",
+        "packages/charts/src/components/ChartHeading/ChartHeading.module.scss",
+        "packages/charts/src/index.scss",
+        "packages/charts/src/theme/consts.ts",
+        "packages/charts/src/components/common/helpers/accessors.ts",
+        "packages/charts/src/utilities/text.module.scss"
+      ],
+      "covered": [
+        "Public title/description/icon composition",
+        "Source heading-large16px medium typography",
+        "Source margin-block8/20,icon gap6,description margin-top14"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "title/icon accept arbitrary ReactNode content; native specimen provides editable text and one icon-swap slot.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts/LinearGauge",
+      "source": [
+        "packages/charts/src/components/LinearGauge/LinearGauge.tsx",
+        "packages/charts/src/components/LinearGauge/LinearGauge.module.scss",
+        "packages/charts/src/components/LinearGauge/types.ts",
+        "packages/charts/src/components/LinearGauge/components/Section.tsx",
+        "packages/charts/src/components/common/components/Legend.tsx",
+        "packages/charts/src/components/common/components/Legend.module.scss",
+        "packages/charts/src/index.scss",
+        "packages/charts/src/theme/consts.ts",
+        "packages/charts/src/components/common/helpers/accessors.ts",
+        "packages/charts/src/utilities/text.module.scss"
+      ],
+      "covered": [
+        "Actual sections fixture50/30/20 percentages",
+        "Source12px bar height/6px clip radius",
+        "Source square legend and24px stack gap",
+        "Per-section source hover color",
+        "Public optional totalLabel affects tooltip, not intrinsic bar appearance"
+      ],
+      "variantCount": 8,
+      "limitations": [
+        "totalLabel value controls runtime tooltip only; totalValue companion is represented in the tooltip primitive rather than drawn beside the gauge.",
+        "The fixture sections use native editable rectangles; arbitrary percentages need regeneration.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts/Tooltip",
+      "source": [
+        "packages/charts/src/components/common/components/Tooltip/TooltipContent.module.scss",
+        "packages/charts/src/index.scss",
+        "packages/charts/src/theme/consts.ts",
+        "packages/charts/src/components/common/helpers/accessors.ts",
+        "packages/charts/src/utilities/text.module.scss"
+      ],
+      "covered": [
+        "Shared internal tooltip token fill/border12px padding",
+        "8px colored dots/13px item labels and bold values",
+        "Optional title/description blocks"
+      ],
+      "variantCount": 4,
+      "limitations": [
+        "Tooltip shared visual primitive is not a public chart export.",
+        "Image tooltip layout and valueFormatter callbacks are not enumerated.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts/BarChart",
+      "source": [
+        "packages/charts/src/components/BarChart/BarChart.tsx",
+        "packages/charts/src/components/BarChart/BarChart.module.scss",
+        "packages/charts/src/components/BarChart/types.ts",
+        "packages/charts/src/components/BarChart/components/Bars.tsx",
+        "packages/charts/src/components/common/components/Legend.tsx",
+        "packages/charts/src/components/common/components/Legend.module.scss",
+        "packages/charts/src/index.scss",
+        "packages/charts/src/theme/consts.ts",
+        "packages/charts/src/components/common/helpers/accessors.ts",
+        "packages/charts/src/utilities/text.module.scss"
+      ],
+      "covered": [
+        "Public horizontal boolean (replaces invented orientation)",
+        "displayStyle default/overlapped",
+        "hideLegend boolean and legendPosition top/bottom",
+        "Source rectangle legend/current chart color aliases"
+      ],
+      "variantCount": 16,
+      "limitations": [
+        "Grouped/overlapped geometries are fixed sample categories; exact BarGroup scale band padding, axes/ticks and responsive margins require d3/visx runtime.",
+        "Horizontal-axis label placement is a design fixture and requires visual parity review.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    }
+  ]
+}

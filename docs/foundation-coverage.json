@@ -1,0 +1,1580 @@
+{
+  "release": "13.11.1",
+  "reviewedSource": "ebcc9b8579a7f862f43a2732f5a5b9c3105e6796",
+  "scope": "Finite source visual axes; no blanket CSS/runtime equivalence.",
+  "recipes": 50,
+  "variants": 667,
+  "sets": [
+    {
+      "family": "Text",
+      "set": "Text/color-default",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "color": [
+          "default"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/color-weak",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "color": [
+          "weak"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/color-disabled",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "color": [
+          "disabled"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/color-negative",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "color": [
+          "negative"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/color-positive",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "color": [
+          "positive"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/color-warning",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "color": [
+          "warning"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/color-interactive",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "color": [
+          "interactive"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/boxColor-neutral",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "boxColor": [
+          "neutral"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/boxColor-selected",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "boxColor": [
+          "selected"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/boxColor-disabled",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "boxColor": [
+          "disabled"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/boxColor-positive",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "boxColor": [
+          "positive"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/boxColor-negative",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "boxColor": [
+          "negative"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Text",
+      "set": "Text/boxColor-warning",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ],
+        "weight": [
+          "default",
+          "strong",
+          "x-strong"
+        ],
+        "boxColor": [
+          "warning"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Text/styles/text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "as/HTML semantics, aria attributes and arbitrary children content; native text remains editable."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-default",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "default"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-weak",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "weak"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-disabled",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "disabled"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-negative",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "negative"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-positive",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "positive"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-warning",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "warning"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-interactive",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "interactive"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Heading",
+      "set": "Heading/color-x-weak",
+      "status": "partial",
+      "axes": {
+        "size": [
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "default",
+          "strong"
+        ],
+        "color": [
+          "x-weak"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Heading/styles/heading.module.scss"
+      ],
+      "runtimeExcluded": [
+        "HTML heading level and aria semantics; arbitrary children text."
+      ],
+      "limitations": [
+        "Public x-weak prop has no matching SCSS rule in this release; inherited parent color is context-dependent."
+      ]
+    },
+    {
+      "family": "Divider",
+      "set": "Divider/horizontal-solid",
+      "status": "supported",
+      "axes": {
+        "direction": [
+          "horizontal"
+        ],
+        "variant": [
+          "solid"
+        ],
+        "padding": [
+          "none",
+          "small",
+          "medium",
+          "large"
+        ],
+        "color": [
+          "weak",
+          "default",
+          "strong"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Divider/Divider.tsx",
+        "packages/components/src/components/Divider/styles/divider.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Length is container-driven; 280px is editable sample extent. as/decorative only affect DOM semantics."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Divider",
+      "set": "Divider/horizontal-dashed",
+      "status": "supported",
+      "axes": {
+        "direction": [
+          "horizontal"
+        ],
+        "variant": [
+          "dashed"
+        ],
+        "padding": [
+          "none",
+          "small",
+          "medium",
+          "large"
+        ],
+        "color": [
+          "weak",
+          "default",
+          "strong"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Divider/Divider.tsx",
+        "packages/components/src/components/Divider/styles/divider.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Length is container-driven; 280px is editable sample extent. as/decorative only affect DOM semantics."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Divider",
+      "set": "Divider/horizontal-noline",
+      "status": "supported",
+      "axes": {
+        "direction": [
+          "horizontal"
+        ],
+        "variant": [
+          "noline"
+        ],
+        "padding": [
+          "none",
+          "small",
+          "medium",
+          "large"
+        ],
+        "color": [
+          "weak",
+          "default",
+          "strong"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Divider/Divider.tsx",
+        "packages/components/src/components/Divider/styles/divider.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Length is container-driven; 280px is editable sample extent. as/decorative only affect DOM semantics."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Divider",
+      "set": "Divider/vertical-solid",
+      "status": "supported",
+      "axes": {
+        "direction": [
+          "vertical"
+        ],
+        "variant": [
+          "solid"
+        ],
+        "padding": [
+          "none",
+          "small",
+          "medium",
+          "large"
+        ],
+        "color": [
+          "weak",
+          "default",
+          "strong"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Divider/Divider.tsx",
+        "packages/components/src/components/Divider/styles/divider.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Length is container-driven; 280px is editable sample extent. as/decorative only affect DOM semantics."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Divider",
+      "set": "Divider/vertical-dashed",
+      "status": "supported",
+      "axes": {
+        "direction": [
+          "vertical"
+        ],
+        "variant": [
+          "dashed"
+        ],
+        "padding": [
+          "none",
+          "small",
+          "medium",
+          "large"
+        ],
+        "color": [
+          "weak",
+          "default",
+          "strong"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Divider/Divider.tsx",
+        "packages/components/src/components/Divider/styles/divider.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Length is container-driven; 280px is editable sample extent. as/decorative only affect DOM semantics."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "Divider",
+      "set": "Divider/vertical-noline",
+      "status": "supported",
+      "axes": {
+        "direction": [
+          "vertical"
+        ],
+        "variant": [
+          "noline"
+        ],
+        "padding": [
+          "none",
+          "small",
+          "medium",
+          "large"
+        ],
+        "color": [
+          "weak",
+          "default",
+          "strong"
+        ]
+      },
+      "variants": 12,
+      "source": [
+        "packages/components/src/components/Divider/Divider.tsx",
+        "packages/components/src/components/Divider/styles/divider.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Length is container-driven; 280px is editable sample extent. as/decorative only affect DOM semantics."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "LoadingCircle",
+      "set": "LoadingCircle/progress",
+      "status": "supported",
+      "axes": {
+        "variant": [
+          "progress"
+        ],
+        "size": [
+          "xx-small",
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "variants": 5,
+      "source": [
+        "packages/components/src/components/LoadingCircle/LoadingCircle.tsx",
+        "packages/components/src/components/LoadingCircle/styles/loadingCircleStyles.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Continuous 1s rotation is represented by a static native ring pose; no animation execution in library component."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "LoadingCircle",
+      "set": "LoadingCircle/success",
+      "status": "supported",
+      "axes": {
+        "variant": [
+          "success"
+        ],
+        "size": [
+          "xx-small",
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "variants": 5,
+      "source": [
+        "packages/components/src/components/LoadingCircle/LoadingCircle.tsx",
+        "packages/components/src/components/LoadingCircle/styles/loadingCircleStyles.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Continuous 1s rotation is represented by a static native ring pose; no animation execution in library component."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "LoadingCircle",
+      "set": "LoadingCircle/danger",
+      "status": "supported",
+      "axes": {
+        "variant": [
+          "danger"
+        ],
+        "size": [
+          "xx-small",
+          "x-small",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "variants": 5,
+      "source": [
+        "packages/components/src/components/LoadingCircle/LoadingCircle.tsx",
+        "packages/components/src/components/LoadingCircle/styles/loadingCircleStyles.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Continuous 1s rotation is represented by a static native ring pose; no animation execution in library component."
+      ],
+      "limitations": []
+    },
+    {
+      "family": "LoadingBar",
+      "set": "LoadingBar/default-square",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "default"
+        ],
+        "rounded": [
+          "false"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large",
+          "x-large"
+        ],
+        "value": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100",
+          "indeterminate"
+        ]
+      },
+      "variants": 24,
+      "source": [
+        "packages/components/src/components/LoadingBar/LoadingBar.tsx",
+        "packages/components/src/components/LoadingBar/styles/loadingBar.module.scss"
+      ],
+      "runtimeExcluded": [
+        "1s indeterminate animation, 150ms transition, getValueLabel and aria are runtime-only."
+      ],
+      "limitations": [
+        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+      ]
+    },
+    {
+      "family": "LoadingBar",
+      "set": "LoadingBar/default-rounded",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "default"
+        ],
+        "rounded": [
+          "true"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large",
+          "x-large"
+        ],
+        "value": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100",
+          "indeterminate"
+        ]
+      },
+      "variants": 24,
+      "source": [
+        "packages/components/src/components/LoadingBar/LoadingBar.tsx",
+        "packages/components/src/components/LoadingBar/styles/loadingBar.module.scss"
+      ],
+      "runtimeExcluded": [
+        "1s indeterminate animation, 150ms transition, getValueLabel and aria are runtime-only."
+      ],
+      "limitations": [
+        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+      ]
+    },
+    {
+      "family": "LoadingBar",
+      "set": "LoadingBar/positive-square",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "positive"
+        ],
+        "rounded": [
+          "false"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large",
+          "x-large"
+        ],
+        "value": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100",
+          "indeterminate"
+        ]
+      },
+      "variants": 24,
+      "source": [
+        "packages/components/src/components/LoadingBar/LoadingBar.tsx",
+        "packages/components/src/components/LoadingBar/styles/loadingBar.module.scss"
+      ],
+      "runtimeExcluded": [
+        "1s indeterminate animation, 150ms transition, getValueLabel and aria are runtime-only."
+      ],
+      "limitations": [
+        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+      ]
+    },
+    {
+      "family": "LoadingBar",
+      "set": "LoadingBar/positive-rounded",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "positive"
+        ],
+        "rounded": [
+          "true"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large",
+          "x-large"
+        ],
+        "value": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100",
+          "indeterminate"
+        ]
+      },
+      "variants": 24,
+      "source": [
+        "packages/components/src/components/LoadingBar/LoadingBar.tsx",
+        "packages/components/src/components/LoadingBar/styles/loadingBar.module.scss"
+      ],
+      "runtimeExcluded": [
+        "1s indeterminate animation, 150ms transition, getValueLabel and aria are runtime-only."
+      ],
+      "limitations": [
+        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+      ]
+    },
+    {
+      "family": "LoadingBar",
+      "set": "LoadingBar/negative-square",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "negative"
+        ],
+        "rounded": [
+          "false"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large",
+          "x-large"
+        ],
+        "value": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100",
+          "indeterminate"
+        ]
+      },
+      "variants": 24,
+      "source": [
+        "packages/components/src/components/LoadingBar/LoadingBar.tsx",
+        "packages/components/src/components/LoadingBar/styles/loadingBar.module.scss"
+      ],
+      "runtimeExcluded": [
+        "1s indeterminate animation, 150ms transition, getValueLabel and aria are runtime-only."
+      ],
+      "limitations": [
+        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+      ]
+    },
+    {
+      "family": "LoadingBar",
+      "set": "LoadingBar/negative-rounded",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "negative"
+        ],
+        "rounded": [
+          "true"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large",
+          "x-large"
+        ],
+        "value": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100",
+          "indeterminate"
+        ]
+      },
+      "variants": 24,
+      "source": [
+        "packages/components/src/components/LoadingBar/LoadingBar.tsx",
+        "packages/components/src/components/LoadingBar/styles/loadingBar.module.scss"
+      ],
+      "runtimeExcluded": [
+        "1s indeterminate animation, 150ms transition, getValueLabel and aria are runtime-only."
+      ],
+      "limitations": [
+        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+      ]
+    },
+    {
+      "family": "Label",
+      "set": "Label/default",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "default"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "checked",
+          "indeterminate",
+          "disabled"
+        ],
+        "required": [
+          "false",
+          "true"
+        ]
+      },
+      "variants": 10,
+      "source": [
+        "packages/components/src/components/Label/Label.tsx",
+        "packages/components/src/components/Label/styles/label.module.scss"
+      ],
+      "runtimeExcluded": [
+        "htmlFor/click target handling and hidden duplicate text are browser semantics."
+      ],
+      "limitations": [
+        "All finite prop and peer states are exposed; source invisible-medium label width reservation and -1px required-asterisk baseline offset still need native geometry support."
+      ]
+    },
+    {
+      "family": "Label",
+      "set": "Label/strong",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "strong"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "checked",
+          "indeterminate",
+          "disabled"
+        ],
+        "required": [
+          "false",
+          "true"
+        ]
+      },
+      "variants": 10,
+      "source": [
+        "packages/components/src/components/Label/Label.tsx",
+        "packages/components/src/components/Label/styles/label.module.scss"
+      ],
+      "runtimeExcluded": [
+        "htmlFor/click target handling and hidden duplicate text are browser semantics."
+      ],
+      "limitations": [
+        "All finite prop and peer states are exposed; source invisible-medium label width reservation and -1px required-asterisk baseline offset still need native geometry support."
+      ]
+    },
+    {
+      "family": "EditableText",
+      "set": "EditableText",
+      "status": "partial",
+      "axes": {
+        "state": [
+          "default",
+          "hover",
+          "editing",
+          "keyboard-focus"
+        ],
+        "hugWidth": [
+          "false",
+          "true"
+        ]
+      },
+      "variants": 8,
+      "source": [
+        "packages/components/src/components/EditableText/EditableText.tsx",
+        "packages/components/src/components/EditableText/styles/editable-text.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Plaintext selection, Enter/blur commit, callbacks and browser caret."
+      ],
+      "limitations": [
+        "Source box metrics and visible hover/editing borders covered. Keyboard focus requires two source rings (2px surface, 6px focus) and clipping/ellipsis remain unsupported. Inherited arbitrary asChild typography is not forced to a token."
+      ]
+    },
+    {
+      "family": "Box",
+      "set": "Box",
+      "status": "partial",
+      "axes": {
+        "display": [
+          "none",
+          "block",
+          "inline-block",
+          "inline"
+        ]
+      },
+      "variants": 4,
+      "source": [
+        "packages/components/src/components/Box/Box.tsx",
+        "packages/components/src/components/Box/styles/box.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Polymorphic HTML tag and aria attributes."
+      ],
+      "limitations": [
+        "No invented surface, border, radius or padding; source is unstyled layout wrapper. Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset. Inline formatting contexts are approximate."
+      ]
+    },
+    {
+      "family": "Section",
+      "set": "Section",
+      "status": "partial",
+      "axes": {
+        "display": [
+          "none",
+          "block",
+          "inline-block",
+          "inline"
+        ]
+      },
+      "variants": 4,
+      "source": [
+        "packages/components/src/components/Section/Section.tsx",
+        "packages/components/src/components/Section/styles/section.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Polymorphic HTML tag and aria attributes."
+      ],
+      "limitations": [
+        "No invented surface, border, radius or padding; source is unstyled layout wrapper. Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset. Inline formatting contexts are approximate."
+      ]
+    },
+    {
+      "family": "Flex",
+      "set": "Flex/row",
+      "status": "partial",
+      "axes": {
+        "direction": [
+          "row"
+        ],
+        "align": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "stretch",
+          "baseline"
+        ],
+        "justify": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "space-between",
+          "space-around",
+          "space-evenly"
+        ]
+      },
+      "variants": 30,
+      "source": [
+        "packages/components/src/components/Flex/Flex.tsx",
+        "packages/components/src/components/Flex/styles/flex.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Responsive CSS media-query evaluation and arbitrary children."
+      ],
+      "limitations": [
+        "Direction and explicit alignment/justification permutations exposed. CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
+      ]
+    },
+    {
+      "family": "Flex",
+      "set": "Flex/row-reverse",
+      "status": "partial",
+      "axes": {
+        "direction": [
+          "row-reverse"
+        ],
+        "align": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "stretch",
+          "baseline"
+        ],
+        "justify": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "space-between",
+          "space-around",
+          "space-evenly"
+        ]
+      },
+      "variants": 30,
+      "source": [
+        "packages/components/src/components/Flex/Flex.tsx",
+        "packages/components/src/components/Flex/styles/flex.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Responsive CSS media-query evaluation and arbitrary children."
+      ],
+      "limitations": [
+        "Direction and explicit alignment/justification permutations exposed. CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
+      ]
+    },
+    {
+      "family": "Flex",
+      "set": "Flex/column",
+      "status": "partial",
+      "axes": {
+        "direction": [
+          "column"
+        ],
+        "align": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "stretch",
+          "baseline"
+        ],
+        "justify": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "space-between",
+          "space-around",
+          "space-evenly"
+        ]
+      },
+      "variants": 30,
+      "source": [
+        "packages/components/src/components/Flex/Flex.tsx",
+        "packages/components/src/components/Flex/styles/flex.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Responsive CSS media-query evaluation and arbitrary children."
+      ],
+      "limitations": [
+        "Direction and explicit alignment/justification permutations exposed. CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
+      ]
+    },
+    {
+      "family": "Flex",
+      "set": "Flex/column-reverse",
+      "status": "partial",
+      "axes": {
+        "direction": [
+          "column-reverse"
+        ],
+        "align": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "stretch",
+          "baseline"
+        ],
+        "justify": [
+          "flex-start",
+          "center",
+          "flex-end",
+          "space-between",
+          "space-around",
+          "space-evenly"
+        ]
+      },
+      "variants": 30,
+      "source": [
+        "packages/components/src/components/Flex/Flex.tsx",
+        "packages/components/src/components/Flex/styles/flex.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Responsive CSS media-query evaluation and arbitrary children."
+      ],
+      "limitations": [
+        "Direction and explicit alignment/justification permutations exposed. CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
+      ]
+    },
+    {
+      "family": "Grid",
+      "set": "Grid",
+      "status": "partial",
+      "axes": {
+        "flow": [
+          "row",
+          "column",
+          "dense",
+          "row-dense",
+          "column-dense"
+        ],
+        "columns": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "variants": 20,
+      "source": [
+        "packages/components/src/components/Grid/Grid.tsx",
+        "packages/components/src/components/Grid/styles/grid.module.scss"
+      ],
+      "runtimeExcluded": [
+        "CSS grid runtime track computation and responsive media queries."
+      ],
+      "limitations": [
+        "Native Auto Layout specimen covers 1–4 columns; source accepts arbitrary CSS track strings, rows, auto flow/dense packing, alignment and responsive gaps. CSS grid algorithm cannot be represented by fixed nested rows."
+      ]
+    },
+    {
+      "family": "ScrollArea",
+      "set": "ScrollArea/auto",
+      "status": "partial",
+      "axes": {
+        "scrollbarGutter": [
+          "auto"
+        ],
+        "padding": [
+          "none",
+          "tight",
+          "compact",
+          "comfortable",
+          "spacious"
+        ],
+        "showShadow": [
+          "false",
+          "true"
+        ]
+      },
+      "variants": 10,
+      "source": [
+        "packages/components/src/components/ScrollArea/ScrollArea.tsx",
+        "packages/components/src/components/ScrollArea/styles/scrollArea.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Scroll offset, drag thumb, overflow sizing and theme direction."
+      ],
+      "limitations": [
+        "Source padding/gutter and 10px scrollbar/2px inset/6px thumb metrics represented. showShadow inner-shadow, horizontal scrollbar/corner, hover/scroll/type visibility and browser overflow behavior remain uncovered."
+      ]
+    },
+    {
+      "family": "ScrollArea",
+      "set": "ScrollArea/stable",
+      "status": "partial",
+      "axes": {
+        "scrollbarGutter": [
+          "stable"
+        ],
+        "padding": [
+          "none",
+          "tight",
+          "compact",
+          "comfortable",
+          "spacious"
+        ],
+        "showShadow": [
+          "false",
+          "true"
+        ]
+      },
+      "variants": 10,
+      "source": [
+        "packages/components/src/components/ScrollArea/ScrollArea.tsx",
+        "packages/components/src/components/ScrollArea/styles/scrollArea.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Scroll offset, drag thumb, overflow sizing and theme direction."
+      ],
+      "limitations": [
+        "Source padding/gutter and 10px scrollbar/2px inset/6px thumb metrics represented. showShadow inner-shadow, horizontal scrollbar/corner, hover/scroll/type visibility and browser overflow behavior remain uncovered."
+      ]
+    },
+    {
+      "family": "ScrollArea",
+      "set": "ScrollArea/stable-horizontal",
+      "status": "partial",
+      "axes": {
+        "scrollbarGutter": [
+          "stable-horizontal"
+        ],
+        "padding": [
+          "none",
+          "tight",
+          "compact",
+          "comfortable",
+          "spacious"
+        ],
+        "showShadow": [
+          "false",
+          "true"
+        ]
+      },
+      "variants": 10,
+      "source": [
+        "packages/components/src/components/ScrollArea/ScrollArea.tsx",
+        "packages/components/src/components/ScrollArea/styles/scrollArea.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Scroll offset, drag thumb, overflow sizing and theme direction."
+      ],
+      "limitations": [
+        "Source padding/gutter and 10px scrollbar/2px inset/6px thumb metrics represented. showShadow inner-shadow, horizontal scrollbar/corner, hover/scroll/type visibility and browser overflow behavior remain uncovered."
+      ]
+    },
+    {
+      "family": "ScrollArea",
+      "set": "ScrollArea/stable-vertical",
+      "status": "partial",
+      "axes": {
+        "scrollbarGutter": [
+          "stable-vertical"
+        ],
+        "padding": [
+          "none",
+          "tight",
+          "compact",
+          "comfortable",
+          "spacious"
+        ],
+        "showShadow": [
+          "false",
+          "true"
+        ]
+      },
+      "variants": 10,
+      "source": [
+        "packages/components/src/components/ScrollArea/ScrollArea.tsx",
+        "packages/components/src/components/ScrollArea/styles/scrollArea.module.scss"
+      ],
+      "runtimeExcluded": [
+        "Scroll offset, drag thumb, overflow sizing and theme direction."
+      ],
+      "limitations": [
+        "Source padding/gutter and 10px scrollbar/2px inset/6px thumb metrics represented. showShadow inner-shadow, horizontal scrollbar/corner, hover/scroll/type visibility and browser overflow behavior remain uncovered."
+      ]
+    }
+  ]
+}

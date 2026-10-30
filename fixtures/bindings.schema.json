@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fondue-sync.local/schemas/binding-v1.json",
+  "title": "Fondue Sync authored fixture binding",
+  "type": "object",
+  "required": ["schemaVersion", "dataset", "domain", "field", "type"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "dataset": { "const": "fondue-sync-demo-v1" },
+    "domain": {
+      "enum": [
+        "brands",
+        "libraries",
+        "assets",
+        "guidelines",
+        "agenticFeatures",
+        "learning",
+        "ui"
+      ]
+    },
+    "entityId": { "type": "string" },
+    "field": { "type": "string" },
+    "type": {
+      "enum": [
+        "string",
+        "number",
+        "boolean",
+        "collection",
+        "route",
+        "selection",
+        "search"
+      ]
+    },
+    "capability": { "type": "string" },
+    "status": { "enum": ["fixture", "future-connected"] }
+  }
+}

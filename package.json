@@ -1,0 +1,24 @@
+{
+  "name": "fondue-sync",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bundle": "node scripts/build-bundle.mjs",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "verify": "npm run bundle && npm run typecheck && npm test && npm run build",
+    "source": "node scripts/prepare-source.mjs",
+    "format": "prettier --write src scripts tests recipes fixtures .github package.json tsconfig.json",
+    "format:check": "prettier --check src scripts tests recipes fixtures .github package.json tsconfig.json"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.117.0",
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 24px;
+        font:
+          13px/1.5 Inter,
+          system-ui,
+          sans-serif;
+        background: var(--figma-color-bg, #fff);
+        color: var(--figma-color-text, #202020);
+      }
+      h1 {
+        font-size: 24px;
+        letter-spacing: -0.7px;
+        margin: 0;
+      }
+      p {
+        margin: 8px 0 16px;
+      }
+      .muted {
+        color: var(--figma-color-text-secondary, #666);
+      }
+      .pill {
+        display: inline-block;
+        border: 1px solid #bbb;
+        padding: 3px 8px;
+        border-radius: 20px;
+        font-size: 11px;
+      }
+      .card {
+        padding: 14px;
+        border: 1px solid var(--figma-color-border, #ddd);
+        border-radius: 8px;
+        margin: 16px 0;
+      }
+      button {
+        font: inherit;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        background: var(--figma-color-bg-secondary, #eee);
+        color: inherit;
+        padding: 9px 13px;
+        cursor: pointer;
+      }
+      button.primary {
+        background: #191919;
+        color: white;
+        border-color: #191919;
+        width: 100%;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: wait;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .row button {
+        flex: 1;
+      }
+      pre {
+        font:
+          11px/1.6 ui-monospace,
+          monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        max-height: 240px;
+        overflow: auto;
+      }
+      summary {
+        cursor: pointer;
+      }
+      #log {
+        font-size: 12px;
+      }
+      a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Fondue Sync</h1>
+    <p class="muted">A released Fondue library, native in Figma.</p>
+    <span class="pill" id="release">Loading release…</span>
+    <div class="card">
+      <strong>Library file</strong>
+      <p id="status" class="muted">
+        Open a dedicated Fondue library Design file.
+      </p>
+      <div id="counts"></div>
+    </div>
+    <button class="primary" data-action="import">Import Fondue</button>
+    <div class="row">
+      <button data-action="compare">Compare</button
+      ><button data-action="update">Update library</button
+      ><button data-action="validate">Validate</button>
+    </div>
+    <p id="progress" aria-live="polite" class="muted"></p>
+    <div id="log" aria-live="polite"></div>
+    <details>
+      <summary>Coverage and limitations</summary>
+      <pre id="gaps"></pre>
+    </details>
+    <p class="muted">
+      Publish this file through Figma’s library publishing flow. Designers
+      enable the published library in their own files and accept updates there.
+    </p>
+    <details>
+      <summary>Future: connected prototypes</summary>
+      <p>
+        Screen → real Fondue code and Frontify data is a later phase. This
+        plugin currently builds and updates library assets.
+      </p>
+    </details>
+    <script>
+      const send = (type) =>
+        parent.postMessage({ pluginMessage: { type } }, "*");
+      const el = (id) => document.getElementById(id);
+      function buttons(disabled) {
+        document
+          .querySelectorAll("button")
+          .forEach((b) => (b.disabled = disabled));
+      }
+      document.querySelectorAll("[data-action]").forEach(
+        (button) =>
+          (button.onclick = () => {
+            buttons(true);
+            el("progress").textContent = "Working…";
+            send(button.dataset.action);
+          }),
+      );
+      onmessage = (event) => {
+        const m = event.data.pluginMessage;
+        if (!m) return;
+        if (m.type === "idle") {
+          buttons(false);
+          return;
+        }
+        if (m.type === "status") {
+          el("release").textContent =
+            "Fondue " + m.release + " · " + m.fingerprint.slice(0, 8);
+          el("status").textContent = m.applied
+            ? (m.appliedFingerprint === m.fingerprint
+                ? "Managed bundle synchronized: "
+                : "Changes available; last managed sync: ") + m.applied
+            : m.hasManagedAssets
+              ? "Import started. Compare and Update library to resume."
+              : "Ready to import into this file.";
+          el("counts").textContent =
+            `${m.counts.tokens} variables · ${m.counts.styles} styles · ${m.counts.icons} icons · ${m.counts.recipes} component sets`;
+          el("gaps").textContent = JSON.stringify(m.gaps, null, 2);
+        }
+        if (m.type === "progress") el("progress").textContent = m.text;
+        if (m.type === "error") {
+          el("progress").textContent = "Action stopped";
+          el("log").textContent = m.message;
+        }
+        if (m.type === "report") {
+          const r = m.report;
+          el("progress").textContent = r.complete
+            ? "Managed assets match the bundled recipes. Review coverage before publishing."
+            : "Review required before publishing.";
+          el("log").replaceChildren();
+          const pre = document.createElement("pre");
+          pre.textContent = JSON.stringify(
+            {
+              counts: r.counts,
+              errors: r.errors,
+              warnings: r.warnings,
+              changes: r.actions.filter((a) => a.action !== "unchanged"),
+            },
+            null,
+            2,
+          );
+          el("log").appendChild(pre);
+          if (r.complete)
+            el("status").textContent =
+              "Synchronized source: " +
+              r.release +
+              " · publication status is managed by Figma.";
+        }
+      };
+      send("status");
+    </script>
+  </body>
+</html>

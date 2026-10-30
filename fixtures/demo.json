@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "fondue-sync-demo-v1",
+  "notice": "Synthetic fixtures authored for Fondue Sync. No account records, reference CDN images, notifications or usage data.",
+  "brands": [
+    {
+      "id": "brand-spruce",
+      "name": "Spruce Studio",
+      "description": "A fictional outdoor brand",
+      "color": "#CFE6D3"
+    },
+    {
+      "id": "brand-orbit",
+      "name": "Orbit Works",
+      "description": "A fictional design studio",
+      "color": "#DDD5F0"
+    },
+    {
+      "id": "brand-tide",
+      "name": "Tide Collective",
+      "description": "A fictional coastal brand",
+      "color": "#D5E5EF"
+    }
+  ],
+  "libraries": [
+    {
+      "id": "library-spruce",
+      "brandId": "brand-spruce",
+      "name": "Campaign assets"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-poster",
+      "libraryId": "library-spruce",
+      "name": "Spring poster",
+      "extension": "svg",
+      "color": "#CFE6D3",
+      "permissions": { "canView": true, "canDownload": true },
+      "customMetadata": { "campaign": "Spring" }
+    },
+    {
+      "id": "asset-mark",
+      "libraryId": "library-spruce",
+      "name": "Primary mark",
+      "extension": "svg",
+      "color": "#DDD5F0",
+      "permissions": { "canView": true, "canDownload": false },
+      "customMetadata": { "campaign": "Evergreen" }
+    },
+    {
+      "id": "asset-palette",
+      "libraryId": "library-spruce",
+      "name": "Color palette",
+      "extension": "svg",
+      "color": "#D5E5EF",
+      "permissions": { "canView": true, "canDownload": true },
+      "customMetadata": { "campaign": "Evergreen" }
+    }
+  ],
+  "guidelines": [],
+  "agenticFeatures": [
+    {
+      "id": "feature-workflow",
+      "name": "Workflow lab",
+      "description": "Try a sample asset workflow"
+    },
+    {
+      "id": "feature-search",
+      "name": "Brand search",
+      "description": "Explore a synthetic search collection"
+    },
+    {
+      "id": "feature-language",
+      "name": "Language tools",
+      "description": "Review a fictional translation task"
+    }
+  ],
+  "learning": [
+    { "id": "learn-intro", "title": "A sample introduction" },
+    { "id": "learn-workflow", "title": "Build a sample workflow" }
+  ]
+}

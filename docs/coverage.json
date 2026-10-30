@@ -1,0 +1,2422 @@
+{
+  "release": "13.11.1",
+  "fingerprint": "9b476d49d0d4a9192199f7b826d9c71dd50f886a5509f9ef5564d7d9ddd0d5e6",
+  "counts": {
+    "tokens": 384,
+    "compoundSourceSymbols": 102,
+    "stories": 420,
+    "styles": 33,
+    "icons": 420,
+    "opticalIconAssets": 2099,
+    "inventory": 54,
+    "recipes": 202,
+    "variants": 1992,
+    "examples": 3,
+    "productPatterns": 5,
+    "documentedSets": 202,
+    "metadataDocumentedSets": 177,
+    "supported": 10,
+    "partial": 42,
+    "unsupported": 0,
+    "codeOnly": 2
+  },
+  "inventory": [
+    {
+      "id": "components:Accordion",
+      "name": "Accordion",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Accordion",
+      "recipeId": "components/Accordion",
+      "recipeIds": [
+        "components/Accordion",
+        "components/Accordion.borderless",
+        "components/Accordion.pill",
+        "components/Accordion.Content",
+        "components/Accordion.sticky"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:AssetInput",
+      "name": "AssetInput",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/AssetInput",
+      "recipeId": "components/AssetInput",
+      "recipeIds": [
+        "components/AssetInput",
+        "components/AssetInput.Placeholder"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Badge",
+      "name": "Badge",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Badge",
+      "recipeId": "components/Badge/controls-001",
+      "recipeIds": [
+        "components/Badge/controls-001",
+        "components/Badge/controls-002"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Box",
+      "name": "Box",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Box",
+      "recipeId": "components/Box",
+      "recipeIds": [
+        "components/Box"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Button",
+      "name": "Button",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Button",
+      "recipeId": "components/Button/controls-001",
+      "recipeIds": [
+        "components/Button/controls-001",
+        "components/Button/controls-003",
+        "components/Button/controls-005",
+        "components/Button/controls-006",
+        "components/Button/controls-007",
+        "components/Button/controls-009",
+        "components/Button/controls-011",
+        "components/Button/controls-013",
+        "components/Button/controls-015",
+        "components/Button/controls-017",
+        "components/Button/controls-019",
+        "components/Button/controls-021",
+        "components/Button/controls-023",
+        "components/Button/controls-025",
+        "components/Button/controls-027",
+        "components/Button/controls-029"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Card",
+      "name": "Card",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Card",
+      "recipeId": "components/Card",
+      "recipeIds": [
+        "components/Card",
+        "components/Card.Banner",
+        "components/Card.BannerIcon",
+        "components/Card.ThumbnailIcon",
+        "components/Card.Title",
+        "components/Card.Description",
+        "components/Card.ActionButton"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Checkbox",
+      "name": "Checkbox",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Checkbox",
+      "recipeId": "components/Checkbox/controls-001",
+      "recipeIds": [
+        "components/Checkbox/controls-001",
+        "components/Checkbox/controls-002",
+        "components/Checkbox/controls-003",
+        "components/Checkbox/controls-004"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:ColorPicker",
+      "name": "ColorPicker",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/ColorPicker",
+      "recipeId": "components/ColorPicker",
+      "recipeIds": [
+        "components/ColorPicker",
+        "components/ColorPicker.Values",
+        "components/ColorPicker.Input"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Dialog",
+      "name": "Dialog",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Dialog",
+      "recipeId": "components/Dialog",
+      "recipeIds": [
+        "components/Dialog",
+        "components/Dialog.Header",
+        "components/Dialog.Body",
+        "components/Dialog.Footer"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Divider",
+      "name": "Divider",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Divider",
+      "recipeId": "components/Divider/horizontal-solid",
+      "recipeIds": [
+        "components/Divider/horizontal-solid",
+        "components/Divider/horizontal-dashed",
+        "components/Divider/horizontal-noline",
+        "components/Divider/vertical-solid",
+        "components/Divider/vertical-dashed",
+        "components/Divider/vertical-noline"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:Dropdown",
+      "name": "Dropdown",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Dropdown",
+      "recipeId": "components/Dropdown",
+      "recipeIds": [
+        "components/Dropdown",
+        "components/Dropdown.Item",
+        "components/Dropdown.SubTrigger"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:DatePicker",
+      "name": "DatePicker",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/DatePicker",
+      "recipeId": "components/DatePicker",
+      "recipeIds": [
+        "components/DatePicker",
+        "components/DatePicker.Range",
+        "components/DatePicker.Input",
+        "components/DatePicker.Day"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:EditableText",
+      "name": "EditableText",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/EditableText",
+      "recipeId": "components/EditableText",
+      "recipeIds": [
+        "components/EditableText"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Flex",
+      "name": "Flex",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Flex",
+      "recipeId": "components/Flex/row",
+      "recipeIds": [
+        "components/Flex/row",
+        "components/Flex/row-reverse",
+        "components/Flex/column",
+        "components/Flex/column-reverse"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Flyout",
+      "name": "Flyout",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Flyout",
+      "recipeId": "components/Flyout.Header",
+      "recipeIds": [
+        "components/Flyout.Header",
+        "components/Flyout.Body",
+        "components/Flyout.Footer",
+        "components/Flyout",
+        "components/Flyout.Surface"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Grid",
+      "name": "Grid",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Grid",
+      "recipeId": "components/Grid",
+      "recipeIds": [
+        "components/Grid"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Heading",
+      "name": "Heading",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Heading",
+      "recipeId": "components/Heading/color-default",
+      "recipeIds": [
+        "components/Heading/color-default",
+        "components/Heading/color-weak",
+        "components/Heading/color-disabled",
+        "components/Heading/color-negative",
+        "components/Heading/color-positive",
+        "components/Heading/color-warning",
+        "components/Heading/color-interactive",
+        "components/Heading/color-x-weak"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Label",
+      "name": "Label",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Label",
+      "recipeId": "components/Label/default",
+      "recipeIds": [
+        "components/Label/default",
+        "components/Label/strong"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Link",
+      "name": "Link",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Link",
+      "recipeId": "components/Link/controls-001",
+      "recipeIds": [
+        "components/Link/controls-001",
+        "components/Link/controls-002",
+        "components/Link/controls-003",
+        "components/Link/controls-004",
+        "components/Link/controls-005",
+        "components/Link/controls-006",
+        "components/Link/controls-007",
+        "components/Link/controls-008",
+        "components/Link/controls-009",
+        "components/Link/controls-013",
+        "components/Link/controls-021",
+        "components/Link/controls-029",
+        "components/Link/controls-030",
+        "components/Link/controls-038",
+        "components/Link/controls-046",
+        "components/Link/on-container-001",
+        "components/Link/on-container-002",
+        "components/Link/on-container-003",
+        "components/Link/on-container-004",
+        "components/Link/on-container-005",
+        "components/Link/on-container-006",
+        "components/Link/on-container-007",
+        "components/Link/on-container-008",
+        "components/Link/on-container-009",
+        "components/Link/on-container-013",
+        "components/Link/on-container-021",
+        "components/Link/on-container-029",
+        "components/Link/on-container-030",
+        "components/Link/on-container-038",
+        "components/Link/on-container-046"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:LoadingBar",
+      "name": "LoadingBar",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/LoadingBar",
+      "recipeId": "components/LoadingBar/default-square",
+      "recipeIds": [
+        "components/LoadingBar/default-square",
+        "components/LoadingBar/default-rounded",
+        "components/LoadingBar/positive-square",
+        "components/LoadingBar/positive-rounded",
+        "components/LoadingBar/negative-square",
+        "components/LoadingBar/negative-rounded"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:LoadingCircle",
+      "name": "LoadingCircle",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/LoadingCircle",
+      "recipeId": "components/LoadingCircle/progress",
+      "recipeIds": [
+        "components/LoadingCircle/progress",
+        "components/LoadingCircle/success",
+        "components/LoadingCircle/danger"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:Notice",
+      "name": "Notice",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Notice",
+      "recipeId": "components/Notice/controls-001",
+      "recipeIds": [
+        "components/Notice/controls-001",
+        "components/Notice/controls-002"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:OrderableList",
+      "name": "OrderableList",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/OrderableList",
+      "recipeId": "components/OrderableList",
+      "recipeIds": [
+        "components/OrderableList",
+        "components/OrderableList.Item"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:RadioList",
+      "name": "RadioList",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/RadioList",
+      "recipeId": "components/RadioList/controls-001",
+      "recipeIds": [
+        "components/RadioList/controls-001",
+        "components/RadioList/controls-002"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:RouterProvider",
+      "name": "RouterProvider",
+      "package": "components",
+      "kind": "nonvisual",
+      "source": "packages/components/src/components/RouterProvider",
+      "recipeId": null,
+      "recipeIds": [],
+      "status": "code-only"
+    },
+    {
+      "id": "components:ScrollArea",
+      "name": "ScrollArea",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/ScrollArea",
+      "recipeId": "components/ScrollArea/auto",
+      "recipeIds": [
+        "components/ScrollArea/auto",
+        "components/ScrollArea/stable",
+        "components/ScrollArea/stable-horizontal",
+        "components/ScrollArea/stable-vertical"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Section",
+      "name": "Section",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Section",
+      "recipeId": "components/Section",
+      "recipeIds": [
+        "components/Section"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:SegmentedControl",
+      "name": "SegmentedControl",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/SegmentedControl",
+      "recipeId": "components/SegmentedControl/controls-001",
+      "recipeIds": [
+        "components/SegmentedControl/controls-001",
+        "components/SegmentedControl/controls-002"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:Select",
+      "name": "Select",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Select",
+      "recipeId": "components/Select",
+      "recipeIds": [
+        "components/Select",
+        "components/Select.Multiple",
+        "components/Select.Combobox",
+        "components/Select.Item",
+        "components/Select.Group"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Slider",
+      "name": "Slider",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Slider",
+      "recipeId": "components/Slider/controls-001",
+      "recipeIds": [
+        "components/Slider/controls-001",
+        "components/Slider/controls-002"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:SplitButton",
+      "name": "SplitButton",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/SplitButton",
+      "recipeId": "components/SplitButton/controls-001",
+      "recipeIds": [
+        "components/SplitButton/controls-001",
+        "components/SplitButton/controls-002",
+        "components/SplitButton/controls-003"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:Switch",
+      "name": "Switch",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Switch",
+      "recipeId": "components/Switch/controls-001",
+      "recipeIds": [
+        "components/Switch/controls-001"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:Table",
+      "name": "Table",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Table",
+      "recipeId": "components/Table",
+      "recipeIds": [
+        "components/Table",
+        "components/Table.Row",
+        "components/Table.HeaderCell",
+        "components/Table.RowCell"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Tag",
+      "name": "Tag",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Tag",
+      "recipeId": "components/Tag/controls-001",
+      "recipeIds": [
+        "components/Tag/controls-001",
+        "components/Tag/controls-002"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Tabs",
+      "name": "Tabs",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Tabs",
+      "recipeId": "components/Tabs",
+      "recipeIds": [
+        "components/Tabs",
+        "components/Tabs.Trigger",
+        "components/Tabs.Content"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Text",
+      "name": "Text",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Text",
+      "recipeId": "components/Text/color-default",
+      "recipeIds": [
+        "components/Text/color-default",
+        "components/Text/color-weak",
+        "components/Text/color-disabled",
+        "components/Text/color-negative",
+        "components/Text/color-positive",
+        "components/Text/color-warning",
+        "components/Text/color-interactive",
+        "components/Text/boxColor-neutral",
+        "components/Text/boxColor-selected",
+        "components/Text/boxColor-disabled",
+        "components/Text/boxColor-positive",
+        "components/Text/boxColor-negative",
+        "components/Text/boxColor-warning"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "components:TextInput",
+      "name": "TextInput",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/TextInput",
+      "recipeId": "components/TextInput/controls-001",
+      "recipeIds": [
+        "components/TextInput/controls-001",
+        "components/TextInput/controls-002",
+        "components/TextInput/controls-003",
+        "components/TextInput/controls-004",
+        "components/TextInput/controls-005",
+        "components/TextInput/controls-006"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Textarea",
+      "name": "Textarea",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Textarea",
+      "recipeId": "components/Textarea/controls-001",
+      "recipeIds": [
+        "components/Textarea/controls-001",
+        "components/Textarea/controls-002",
+        "components/Textarea/controls-003",
+        "components/Textarea/controls-004",
+        "components/Textarea/controls-005",
+        "components/Textarea/controls-006",
+        "components/Textarea/controls-007",
+        "components/Textarea/controls-008",
+        "components/Textarea/controls-009",
+        "components/Textarea/controls-010",
+        "components/Textarea/controls-011"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:Tree",
+      "name": "Tree",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Tree",
+      "recipeId": "components/Tree",
+      "recipeIds": [
+        "components/Tree",
+        "components/Tree.Item",
+        "components/Tree.Folder"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "components:ThemeProvider",
+      "name": "ThemeProvider",
+      "package": "components",
+      "kind": "nonvisual",
+      "source": "packages/components/src/components/ThemeProvider",
+      "recipeId": null,
+      "recipeIds": [],
+      "status": "code-only"
+    },
+    {
+      "id": "components:Tooltip",
+      "name": "Tooltip",
+      "package": "components",
+      "kind": "visual",
+      "source": "packages/components/src/components/Tooltip",
+      "recipeId": "components/Tooltip",
+      "recipeIds": [
+        "components/Tooltip"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts:AreaStackChart",
+      "name": "AreaStackChart",
+      "package": "charts",
+      "kind": "visual",
+      "source": "packages/charts/src/components/AreaStackChart",
+      "recipeId": "charts/AreaStackChart",
+      "recipeIds": [
+        "charts/AreaStackChart"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts:BarChart",
+      "name": "BarChart",
+      "package": "charts",
+      "kind": "visual",
+      "source": "packages/charts/src/components/BarChart",
+      "recipeId": "charts/BarChart",
+      "recipeIds": [
+        "charts/BarChart"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts:ChartHeading",
+      "name": "ChartHeading",
+      "package": "charts",
+      "kind": "visual",
+      "source": "packages/charts/src/components/ChartHeading",
+      "recipeId": "charts/ChartHeading",
+      "recipeIds": [
+        "charts/ChartHeading"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts:LineChart",
+      "name": "LineChart",
+      "package": "charts",
+      "kind": "visual",
+      "source": "packages/charts/src/components/LineChart",
+      "recipeId": "charts/LineChart",
+      "recipeIds": [
+        "charts/LineChart"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts:LinearGauge",
+      "name": "LinearGauge",
+      "package": "charts",
+      "kind": "visual",
+      "source": "packages/charts/src/components/LinearGauge",
+      "recipeId": "charts/LinearGauge",
+      "recipeIds": [
+        "charts/LinearGauge"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts:PieChart",
+      "name": "PieChart",
+      "package": "charts",
+      "kind": "visual",
+      "source": "packages/charts/src/components/PieChart",
+      "recipeId": "charts/PieChart",
+      "recipeIds": [
+        "charts/PieChart"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts:Treemap",
+      "name": "Treemap",
+      "package": "charts",
+      "kind": "visual",
+      "source": "packages/charts/src/components/Treemap",
+      "recipeId": "charts/Treemap",
+      "recipeIds": [
+        "charts/Treemap"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "rte:RichTextEditor",
+      "name": "RichTextEditor",
+      "package": "rte",
+      "kind": "visual",
+      "source": "packages/rte/src/components/RichTextEditor/RichTextEditor.tsx",
+      "recipeId": "rte/RichTextEditor",
+      "recipeIds": [
+        "rte/RichTextEditor"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "rte/ToolbarButton",
+      "name": "ToolbarButton",
+      "package": "@frontify/fondue/rte",
+      "kind": "visual",
+      "source": [
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ButtonGroupWrapper.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/FloatingToolbar.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ToolbarButton.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ToolbarPositionWithButtons.ts",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ToolbarWrapper.ts",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/Tooltip.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/index.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/types.ts",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/utils.ts"
+      ],
+      "recipeId": "rte/ToolbarButton",
+      "recipeIds": [
+        "rte/ToolbarButton"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "rte/Toolbar",
+      "name": "Toolbar",
+      "package": "@frontify/fondue/rte",
+      "kind": "visual",
+      "source": [
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ButtonGroupWrapper.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/FloatingToolbar.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ToolbarButton.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ToolbarPositionWithButtons.ts",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/ToolbarWrapper.ts",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/Tooltip.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/index.tsx",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/types.ts",
+        "packages/rte/src/components/RichTextEditor/components/Toolbar/utils.ts"
+      ],
+      "recipeId": "rte/Toolbar",
+      "recipeIds": [
+        "rte/Toolbar"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "rte/FloatingModalWrapper",
+      "name": "FloatingModalWrapper",
+      "package": "@frontify/fondue/rte",
+      "kind": "visual",
+      "source": [
+        "packages/rte/src/components/RichTextEditor/components/FloatingModal/FloatingModal.tsx",
+        "packages/rte/src/components/RichTextEditor/components/FloatingModal/index.ts"
+      ],
+      "recipeId": "rte/FloatingModalWrapper",
+      "recipeIds": [
+        "rte/FloatingModalWrapper"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts/Legend",
+      "name": "Legend",
+      "package": "@frontify/fondue/charts",
+      "kind": "visual",
+      "source": [
+        "packages/charts/src/components/common/components/Legend.tsx",
+        "packages/charts/src/components/common/components/Legend.module.scss",
+        "packages/charts/src/index.scss",
+        "packages/charts/src/theme/consts.ts",
+        "packages/charts/src/components/common/helpers/accessors.ts",
+        "packages/charts/src/utilities/text.module.scss"
+      ],
+      "recipeId": "charts/Legend",
+      "recipeIds": [
+        "charts/Legend"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "charts/Tooltip",
+      "name": "Tooltip",
+      "package": "@frontify/fondue/charts",
+      "kind": "visual",
+      "source": [
+        "packages/charts/src/components/common/components/Tooltip/TooltipContent.module.scss",
+        "packages/charts/src/index.scss",
+        "packages/charts/src/theme/consts.ts",
+        "packages/charts/src/components/common/helpers/accessors.ts",
+        "packages/charts/src/utilities/text.module.scss"
+      ],
+      "recipeId": "charts/Tooltip",
+      "recipeIds": [
+        "charts/Tooltip"
+      ],
+      "status": "partial"
+    }
+  ],
+  "compounds": [
+    {
+      "id": "components:Accordion.Content",
+      "name": "Accordion.Content",
+      "source": "packages/components/src/components/Accordion/Accordion.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Accordion.Header",
+      "name": "Accordion.Header",
+      "source": "packages/components/src/components/Accordion/Accordion.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Accordion.Item",
+      "name": "Accordion.Item",
+      "source": "packages/components/src/components/Accordion/Accordion.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Accordion.Root",
+      "name": "Accordion.Root",
+      "source": "packages/components/src/components/Accordion/Accordion.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Accordion.Slot",
+      "name": "Accordion.Slot",
+      "source": "packages/components/src/components/Accordion/Accordion.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.BrowseInput",
+      "name": "AssetInput.BrowseInput",
+      "source": "packages/components/src/components/AssetInput/AssetInputBrowseInput.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.Metadata",
+      "name": "AssetInput.Metadata",
+      "source": "packages/components/src/components/AssetInput/AssetInputMetadata.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.MetadataItem",
+      "name": "AssetInput.MetadataItem",
+      "source": "packages/components/src/components/AssetInput/AssetInputMetadataItem.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.Placeholder",
+      "name": "AssetInput.Placeholder",
+      "source": "packages/components/src/components/AssetInput/AssetInputPlaceholder.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.Preview",
+      "name": "AssetInput.Preview",
+      "source": "packages/components/src/components/AssetInput/AssetInputPreview.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.PreviewIcon",
+      "name": "AssetInput.PreviewIcon",
+      "source": "packages/components/src/components/AssetInput/AssetInputPreviewIcon.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.PreviewImage",
+      "name": "AssetInput.PreviewImage",
+      "source": "packages/components/src/components/AssetInput/AssetInputPreviewImage.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.PreviewLoading",
+      "name": "AssetInput.PreviewLoading",
+      "source": "packages/components/src/components/AssetInput/AssetInputPreviewLoading.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.Root",
+      "name": "AssetInput.Root",
+      "source": "packages/components/src/components/AssetInput/AssetInputRoot.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.Title",
+      "name": "AssetInput.Title",
+      "source": "packages/components/src/components/AssetInput/AssetInputTitle.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:AssetInput.UploadInput",
+      "name": "AssetInput.UploadInput",
+      "source": "packages/components/src/components/AssetInput/AssetInputUploadInput.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.Action",
+      "name": "Card.Action",
+      "source": "packages/components/src/components/Card/CardAction.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.ActionButton",
+      "name": "Card.ActionButton",
+      "source": "packages/components/src/components/Card/CardAction.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.Badges",
+      "name": "Card.Badges",
+      "source": "packages/components/src/components/Card/CardContent.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.Banner",
+      "name": "Card.Banner",
+      "source": "packages/components/src/components/Card/CardBanner.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.BannerDescription",
+      "name": "Card.BannerDescription",
+      "source": "packages/components/src/components/Card/CardBanner.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.BannerIcon",
+      "name": "Card.BannerIcon",
+      "source": "packages/components/src/components/Card/CardBanner.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.BannerImage",
+      "name": "Card.BannerImage",
+      "source": "packages/components/src/components/Card/CardBanner.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.Description",
+      "name": "Card.Description",
+      "source": "packages/components/src/components/Card/CardContent.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.Root",
+      "name": "Card.Root",
+      "source": "packages/components/src/components/Card/CardRoot.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.ThumbnailIcon",
+      "name": "Card.ThumbnailIcon",
+      "source": "packages/components/src/components/Card/CardContent.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.ThumbnailImage",
+      "name": "Card.ThumbnailImage",
+      "source": "packages/components/src/components/Card/CardContent.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Card.Title",
+      "name": "Card.Title",
+      "source": "packages/components/src/components/Card/CardContent.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:ColorPicker.Gradient",
+      "name": "ColorPicker.Gradient",
+      "source": "packages/components/src/components/ColorPicker/ColorPicker.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:ColorPicker.Input",
+      "name": "ColorPicker.Input",
+      "source": "packages/components/src/components/ColorPicker/ColorPickerInput.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:ColorPicker.Root",
+      "name": "ColorPicker.Root",
+      "source": "packages/components/src/components/ColorPicker/ColorPicker.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:ColorPicker.Values",
+      "name": "ColorPicker.Values",
+      "source": "packages/components/src/components/ColorPicker/ColorValueInput.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:DatePicker.Input",
+      "name": "DatePicker.Input",
+      "source": "packages/components/src/components/DatePicker/DatePickerInput.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:DatePicker.Range",
+      "name": "DatePicker.Range",
+      "source": "packages/components/src/components/DatePicker/RangeDatePicker.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Body",
+      "name": "Dialog.Body",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Close",
+      "name": "Dialog.Close",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Content",
+      "name": "Dialog.Content",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Description",
+      "name": "Dialog.Description",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Footer",
+      "name": "Dialog.Footer",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Header",
+      "name": "Dialog.Header",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Root",
+      "name": "Dialog.Root",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.SideContent",
+      "name": "Dialog.SideContent",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Title",
+      "name": "Dialog.Title",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dialog.Trigger",
+      "name": "Dialog.Trigger",
+      "source": "packages/components/src/components/Dialog/Dialog.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.Content",
+      "name": "Dropdown.Content",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.Group",
+      "name": "Dropdown.Group",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.Item",
+      "name": "Dropdown.Item",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.Root",
+      "name": "Dropdown.Root",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.Shortcut",
+      "name": "Dropdown.Shortcut",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.Slot",
+      "name": "Dropdown.Slot",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.SubContent",
+      "name": "Dropdown.SubContent",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.SubMenu",
+      "name": "Dropdown.SubMenu",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.SubTrigger",
+      "name": "Dropdown.SubTrigger",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Dropdown.Trigger",
+      "name": "Dropdown.Trigger",
+      "source": "packages/components/src/components/Dropdown/Dropdown.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Flyout.Body",
+      "name": "Flyout.Body",
+      "source": "packages/components/src/components/Flyout/Flyout.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Flyout.Content",
+      "name": "Flyout.Content",
+      "source": "packages/components/src/components/Flyout/Flyout.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Flyout.Footer",
+      "name": "Flyout.Footer",
+      "source": "packages/components/src/components/Flyout/Flyout.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Flyout.Header",
+      "name": "Flyout.Header",
+      "source": "packages/components/src/components/Flyout/Flyout.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Flyout.Root",
+      "name": "Flyout.Root",
+      "source": "packages/components/src/components/Flyout/Flyout.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Flyout.Trigger",
+      "name": "Flyout.Trigger",
+      "source": "packages/components/src/components/Flyout/Flyout.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:RadioList.RadioButton",
+      "name": "RadioList.RadioButton",
+      "source": "packages/components/src/components/RadioList/RadioList.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:RadioList.Root",
+      "name": "RadioList.Root",
+      "source": "packages/components/src/components/RadioList/RadioList.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:SegmentedControl.Item",
+      "name": "SegmentedControl.Item",
+      "source": "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:SegmentedControl.Root",
+      "name": "SegmentedControl.Root",
+      "source": "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Select.Combobox",
+      "name": "Select.Combobox",
+      "source": "packages/components/src/components/Select/index.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Select.Combobox.Multiple",
+      "name": "Select.Combobox.Multiple",
+      "source": "packages/components/src/components/Select/index.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Select.Group",
+      "name": "Select.Group",
+      "source": "packages/components/src/components/Select/index.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Select.Item",
+      "name": "Select.Item",
+      "source": "packages/components/src/components/Select/index.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Select.Multiple",
+      "name": "Select.Multiple",
+      "source": "packages/components/src/components/Select/SelectMultiple.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Select.Slot",
+      "name": "Select.Slot",
+      "source": "packages/components/src/components/Select/index.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:SplitButton.Action",
+      "name": "SplitButton.Action",
+      "source": "packages/components/src/components/SplitButton/SplitButton.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:SplitButton.ActionButton",
+      "name": "SplitButton.ActionButton",
+      "source": "packages/components/src/components/SplitButton/SplitButton.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:SplitButton.Content",
+      "name": "SplitButton.Content",
+      "source": "packages/components/src/components/SplitButton/SplitButton.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:SplitButton.Root",
+      "name": "SplitButton.Root",
+      "source": "packages/components/src/components/SplitButton/SplitButton.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Table.Body",
+      "name": "Table.Body",
+      "source": "packages/components/src/components/Table/Table.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Table.Caption",
+      "name": "Table.Caption",
+      "source": "packages/components/src/components/Table/Table.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Table.Header",
+      "name": "Table.Header",
+      "source": "packages/components/src/components/Table/Table.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Table.HeaderCell",
+      "name": "Table.HeaderCell",
+      "source": "packages/components/src/components/Table/Table.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Table.Root",
+      "name": "Table.Root",
+      "source": "packages/components/src/components/Table/Table.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Table.Row",
+      "name": "Table.Row",
+      "source": "packages/components/src/components/Table/Table.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Table.RowCell",
+      "name": "Table.RowCell",
+      "source": "packages/components/src/components/Table/Table.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tabs.Content",
+      "name": "Tabs.Content",
+      "source": "packages/components/src/components/Tabs/Tabs.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tabs.Root",
+      "name": "Tabs.Root",
+      "source": "packages/components/src/components/Tabs/Tabs.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tabs.Tab",
+      "name": "Tabs.Tab",
+      "source": "packages/components/src/components/Tabs/Tabs.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tabs.Trigger",
+      "name": "Tabs.Trigger",
+      "source": "packages/components/src/components/Tabs/Tabs.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tag.HoverContent",
+      "name": "Tag.HoverContent",
+      "source": "packages/components/src/components/Tag/Tag.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tag.SecondaryContent",
+      "name": "Tag.SecondaryContent",
+      "source": "packages/components/src/components/Tag/Tag.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Textarea.Root",
+      "name": "Textarea.Root",
+      "source": "packages/components/src/components/Textarea/Textarea.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Textarea.Slot",
+      "name": "Textarea.Slot",
+      "source": "packages/components/src/components/Textarea/Textarea.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:TextField.Root",
+      "name": "TextField.Root",
+      "source": "packages/components/src/components/TextInput/TextInput.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:TextField.Slot",
+      "name": "TextField.Slot",
+      "source": "packages/components/src/components/TextInput/TextInput.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tooltip.Content",
+      "name": "Tooltip.Content",
+      "source": "packages/components/src/components/Tooltip/Tooltip.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tooltip.Root",
+      "name": "Tooltip.Root",
+      "source": "packages/components/src/components/Tooltip/Tooltip.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tooltip.Trigger",
+      "name": "Tooltip.Trigger",
+      "source": "packages/components/src/components/Tooltip/Tooltip.tsx",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.Action",
+      "name": "Tree.Action",
+      "source": "packages/components/src/components/Tree/components/TreeAction.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.Decorator",
+      "name": "Tree.Decorator",
+      "source": "packages/components/src/components/Tree/components/TreeDecorator.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.Folder",
+      "name": "Tree.Folder",
+      "source": "packages/components/src/components/Tree/components/TreeFolder.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.FolderHeader",
+      "name": "Tree.FolderHeader",
+      "source": "packages/components/src/components/Tree/components/TreeFolderHeader.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.Icon",
+      "name": "Tree.Icon",
+      "source": "packages/components/src/components/Tree/components/TreeIcon.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.Item",
+      "name": "Tree.Item",
+      "source": "packages/components/src/components/Tree/components/TreeItem.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.Label",
+      "name": "Tree.Label",
+      "source": "packages/components/src/components/Tree/components/TreeLabel.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    },
+    {
+      "id": "components:Tree.Loading",
+      "name": "Tree.Loading",
+      "source": "packages/components/src/components/Tree/components/TreeLoading.ts",
+      "status": "source-inventory",
+      "limitations": [
+        "Compound source symbol; parent recipe coverage does not guarantee independent property/variant coverage."
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "components:Accordion",
+      "status": "partial",
+      "limitations": [
+        "Single-item composition; sticky positioning is provided as a separate source-context set. Header/Slot children are editable composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Content children are an editable text sample.",
+        "Native static header visual is represented; CSS position:sticky and data-stuck shadow depend on a scrolling viewport."
+      ]
+    },
+    {
+      "id": "components:AssetInput",
+      "status": "partial",
+      "limitations": [
+        "Preview uses native document icon slot; arbitrary image URLs, multiple-preview grids and PreviewLoading still need content-specific recipes.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "children labels are native composition choices, not React string values. Dashed border is approximated with solid native stroke until per-dash schema support exists."
+      ]
+    },
+    {
+      "id": "components:Badge",
+      "status": "partial",
+      "limitations": [
+        "Status dot and dismiss are independently hideable native properties. Arbitrary custom status colors remain editable fill overrides. Forced-colors media rendering remains in CSS.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every variant/emphasis/state at default size; every variant/emphasis at small/default state."
+      ]
+    },
+    {
+      "id": "components:Box",
+      "status": "partial",
+      "limitations": [
+        "No invented surface, border, radius or padding; source is unstyled layout wrapper. Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset. Inline formatting contexts are approximate."
+      ]
+    },
+    {
+      "id": "components:Button",
+      "status": "partial",
+      "limitations": [
+        "Full-width behavior is native frame resizing; square aspect swaps text content for a native icon. CSS forced-colors media mode is represented by the browser, not this light/dark library.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Source-data gap: states referring to absent released color tokens are omitted. Browser verification proves their computed color inherits arbitrary consumer context. See docs/source-token-defects.md and control-coverage.json."
+      ]
+    },
+    {
+      "id": "components:Card",
+      "status": "partial",
+      "limitations": [
+        "state is a CSS interaction state; public Root selection needs onSelect and href/onNavigate configuration.",
+        "Image fit, BannerDescription hover overlay, badges and action compositions are supplied as separate parts or not fully enumerated.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Native icon content specimen; arbitrary images and multi-image arrangements remain content slots.",
+        "Inverted parent tone overrides icon colors; use Banner.inverted for that composition.",
+        "Arbitrary image content is not synthesized.",
+        "Truncation requires a consumer-defined available width.",
+        "state is a CSS/focus visual state; arbitrary action behavior remains in React."
+      ]
+    },
+    {
+      "id": "components:ColorPicker",
+      "status": "partial",
+      "limitations": [
+        "react-colorful dependency default geometry is represented as a red-color specimen; dynamic color-coordinate conversion and checkerboard alpha remain partial.",
+        "Responsive value-input wrap below312px is not represented by these desktop compositions.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Input validation, number limits and responsive wrapping remain runtime behavior.",
+        "currentColor strings are design specimens of RgbaColor object values; arbitrary color value binding needs exporter mapping."
+      ]
+    },
+    {
+      "id": "components:Dialog",
+      "status": "partial",
+      "limitations": [
+        "Fit content specimen; fullscreen and verticalAlign are viewport-relative and require a canvas/screen container.",
+        "SideContent and underlay are not included in this content-only set.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Scrollable regions and arbitrary children are consumer content."
+      ]
+    },
+    {
+      "id": "components:Dropdown",
+      "status": "partial",
+      "limitations": [
+        "Trigger is sample composition; submenu placement/RTL/collision and all slot combinations remain screen-dependent.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "state is CSS interaction state; arbitrary Item children/asChild content remain editable composition.",
+        "SubContent uses the shared content layout; portal and RTL placement are runtime behavior."
+      ]
+    },
+    {
+      "id": "components:DatePicker",
+      "status": "partial",
+      "limitations": [
+        "Source calendar locale is ThemeProvider-dependent; this specimen uses English Sunday-first month.",
+        "Date arithmetic, minMonth/maxMonth navigation constraints, disabledDates and locale/RTL remain runtime or contextual variants.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "selected is serialized sample range notation for design only; runtime API takes a DatePickerDateRange.",
+        "Source joined middle/start/end per-corner radii are not fully reproduced by the current symmetric radius schema.",
+        "Formatting is English sample; clear/change callbacks remain runtime.",
+        "Reusable design primitive corresponds to internal calendar day renderer, not a separate public export."
+      ]
+    },
+    {
+      "id": "components:EditableText",
+      "status": "partial",
+      "limitations": [
+        "Source box metrics and visible hover/editing borders covered. Keyboard focus requires two source rings (2px surface, 6px focus) and clipping/ellipsis remain unsupported. Inherited arbitrary asChild typography is not forced to a token."
+      ]
+    },
+    {
+      "id": "components:Flex",
+      "status": "partial",
+      "limitations": [
+        "Direction and explicit alignment/justification permutations exposed. CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
+      ]
+    },
+    {
+      "id": "components:Flyout",
+      "status": "partial",
+      "limitations": [
+        "showBorder is derived design visibility; Flyout source always paints the Header divider.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Scrollable regions and arbitrary children are consumer content.",
+        "showBorder is derived design visibility; Flyout source always paints the Footer divider.",
+        "Content-only specimen. side/align/triggerOffset, viewport collision and mobile modal adaptation need screen-context placement.",
+        "shadow none/medium are supplied in separate Surface set.",
+        "The 16px child padding is arbitrary editable content, not a claimed Root padding value."
+      ]
+    },
+    {
+      "id": "components:Grid",
+      "status": "partial",
+      "limitations": [
+        "Native Auto Layout specimen covers 1–4 columns; source accepts arbitrary CSS track strings, rows, auto flow/dense packing, alignment and responsive gaps. CSS grid algorithm cannot be represented by fixed nested rows."
+      ]
+    },
+    {
+      "id": "components:Heading",
+      "status": "partial",
+      "limitations": [
+        "Public x-weak prop has no matching SCSS rule in this release; inherited parent color is context-dependent."
+      ]
+    },
+    {
+      "id": "components:Label",
+      "status": "partial",
+      "limitations": [
+        "All finite prop and peer states are exposed; source invisible-medium label width reservation and -1px required-asterisk baseline offset still need native geometry support."
+      ]
+    },
+    {
+      "id": "components:Link",
+      "status": "partial",
+      "limitations": [
+        "Native text wrapping/truncation is controlled by frame and text resizing. onContainer alternate semantic colors are supplied in independent Link/On container sets.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Native text wrapping/truncation is controlled by frame and text resizing.",
+        "Source-data gap: states referring to absent released color tokens are omitted. Browser verification proves their computed color inherits arbitrary consumer context. See docs/source-token-defects.md and control-coverage.json."
+      ]
+    },
+    {
+      "id": "components:LoadingBar",
+      "status": "partial",
+      "limitations": [
+        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+      ]
+    },
+    {
+      "id": "components:OrderableList",
+      "status": "partial",
+      "limitations": [
+        "Order array is a sample; drag/drop events and keyboard announcements remain React behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Hover, dropping, dragging shadows and arbitrary ItemAction combinations are not all enumerated."
+      ]
+    },
+    {
+      "id": "components:RouterProvider",
+      "status": "code-only",
+      "limitations": [
+        "Runtime provider; represented as code mapping only."
+      ]
+    },
+    {
+      "id": "components:ScrollArea",
+      "status": "partial",
+      "limitations": [
+        "Source padding/gutter and 10px scrollbar/2px inset/6px thumb metrics represented. showShadow inner-shadow, horizontal scrollbar/corner, hover/scroll/type visibility and browser overflow behavior remain uncovered."
+      ]
+    },
+    {
+      "id": "components:Section",
+      "status": "partial",
+      "limitations": [
+        "No invented surface, border, radius or padding; source is unstyled layout wrapper. Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset. Inline formatting contexts are approximate."
+      ]
+    },
+    {
+      "id": "components:Select",
+      "status": "partial",
+      "limitations": [
+        "value values are representative single selections; Multiple uses corresponding string-array values in React.",
+        "Open list, loading/filtering, all arbitrary child/slot combinations and overflow badges need further composition.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "state is derived from list selection; public Item props are value/label/children.",
+        "Item text is editable composition; groupId and callback semantics remain runtime."
+      ]
+    },
+    {
+      "id": "components:Table",
+      "status": "partial",
+      "limitations": [
+        "layout auto/fixed use fixed sample column widths. gutter, colSpan, sticky positions and responsive truncation require consumer width constraints.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "fontSize belongs to Root and is included here as inherited context. onClick/keyboard selection remain runtime.",
+        "none represents undefined sortDirection. Loading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.",
+        "Sortable trigger semantics need onSortChange in React.",
+        "colSpan, widths, truncation and gutter are contextual layout constraints."
+      ]
+    },
+    {
+      "id": "components:Tag",
+      "status": "partial",
+      "limitations": [
+        "Main/secondary content text and add/dismiss visibility are native properties; mixed per-action hover is an editable fill override. Forced-colors media rendering remains in CSS.",
+        "Source-data gap: states referring to absent released color tokens are omitted. Browser verification proves their computed color inherits arbitrary consumer context. See docs/source-token-defects.md and control-coverage.json."
+      ]
+    },
+    {
+      "id": "components:Tabs",
+      "status": "partial",
+      "limitations": [
+        "withDivider variants and tight/compact/spacious padding are supplied as separate Content parts or remain consumer composition.",
+        "Overflow trigger list scrolling and cross-fade transition are runtime behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "variant/size/activeTab belong to Root; this reusable set exposes inherited context for composition.",
+        "padding is inherited from Root; arbitrary content and withDivider flex overflow are contextual."
+      ]
+    },
+    {
+      "id": "components:TextInput",
+      "status": "partial",
+      "limitations": [
+        "Hidden input types have no canvas asset. Email/number/password/search/tel/time/url differ in browser semantics and text content; edit the text property. Loading is a native icon snapshot rather than animation.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default."
+      ]
+    },
+    {
+      "id": "components:Textarea",
+      "status": "partial",
+      "limitations": [
+        "Native height can be resized to match minRows/maxRows; autosize is runtime text measurement. Extra actions/decorators are exposed native icon slots. Loading is a native icon snapshot rather than animation.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default."
+      ]
+    },
+    {
+      "id": "components:Tree",
+      "status": "partial",
+      "limitations": [
+        "isExpanded belongs to Folder; root sample preserves hierarchy.",
+        "Headless-tree event/state controller, dragline placement and async expansion are runtime behavior.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Rename sample uses editable text; confirmation and automatic focus remain runtime.",
+        "Selection cascade is represented visually; actual descendants derive state in React."
+      ]
+    },
+    {
+      "id": "components:ThemeProvider",
+      "status": "code-only",
+      "limitations": [
+        "Runtime provider; represented as code mapping only."
+      ]
+    },
+    {
+      "id": "components:Tooltip",
+      "status": "partial",
+      "limitations": [
+        "Content-only set; Root delay/open state and viewport collision do not affect intrinsic appearance.",
+        "Arrow drop-shadow outline and maxWidth/custom children wrapping need native visual QA.",
+        "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+      ]
+    },
+    {
+      "id": "charts:AreaStackChart",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Fixed sample data; vector coordinates, segment paint bindings, axes, stack interpolation and interactive tooltips remain uncovered."
+      ]
+    },
+    {
+      "id": "charts:BarChart",
+      "status": "partial",
+      "limitations": [
+        "Grouped/overlapped geometries are fixed sample categories; exact BarGroup scale band padding, axes/ticks and responsive margins require d3/visx runtime.",
+        "Horizontal-axis label placement is a design fixture and requires visual parity review.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts:ChartHeading",
+      "status": "partial",
+      "limitations": [
+        "title/icon accept arbitrary ReactNode content; native specimen provides editable text and one icon-swap slot.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts:LineChart",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Fixed sample data; vector coordinates, segment paint bindings, axes, stack interpolation and interactive tooltips remain uncovered."
+      ]
+    },
+    {
+      "id": "charts:LinearGauge",
+      "status": "partial",
+      "limitations": [
+        "totalLabel value controls runtime tooltip only; totalValue companion is represented in the tooltip primitive rather than drawn beside the gauge.",
+        "The fixture sections use native editable rectangles; arbitrary percentages need regeneration.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts:PieChart",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Editable SVG paths use released chart colors, but segment paint bindings, data layout, labels and tooltips remain uncovered."
+      ]
+    },
+    {
+      "id": "charts:Treemap",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Native rectangle sample only; algorithmic packing, hierarchy, labels and interaction remain uncovered."
+      ]
+    },
+    {
+      "id": "rte:RichTextEditor",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Published /rte only. Static editor and toolbar specimens; Plate plugins, selection menus, serialization, embedded blocks and all exported editor primitives remain uncovered.",
+        "Private version-zero rich-text-editor package and internal legacy UI catalogs are excluded.",
+        "Nested native icon instances support library swapping; state-dependent icon color inheritance still requires visual review and explicit child paint binding."
+      ]
+    },
+    {
+      "id": "rte/ToolbarButton",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Current tokens substitute internal legacy utility names; dropdown, disabled and tooltip combinations remain uncovered."
+      ]
+    },
+    {
+      "id": "rte/Toolbar",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Positions are a design property; adaptive grouping, editor selection and positioning are runtime behavior.",
+        "Nested native icon instances support library swapping; state-dependent icon color inheritance still requires visual review and explicit child paint binding."
+      ]
+    },
+    {
+      "id": "rte/FloatingModalWrapper",
+      "status": "partial",
+      "limitations": [
+        "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
+        "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
+        "Source wrapper accepts arbitrary padding/minWidth; these are two sample configurations. Shadow, overflow and placement remain uncovered."
+      ]
+    },
+    {
+      "id": "charts/Legend",
+      "status": "partial",
+      "limitations": [
+        "Legend is a shared internal design primitive; it is not an independent public /charts export.",
+        "Native single-row sample does not implement flex wrapping for arbitrary label strings.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "charts/Tooltip",
+      "status": "partial",
+      "limitations": [
+        "Tooltip shared visual primitive is not a public chart export.",
+        "Image tooltip layout and valueFormatter callbacks are not enumerated.",
+        "Static native chart fixtures preserve editable geometry; arbitrary data, d3/visx scale calculation, label measurement, viewport resizing and pointer tooltips remain runtime behavior.",
+        "Source styling and finite states require native Figma visual acceptance."
+      ]
+    },
+    {
+      "id": "text-body-large-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-large-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-large-x-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-medium-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-medium-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-medium-x-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-small-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-small-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-small-x-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-x-small-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-x-small-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-body-x-small-x-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-large-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-large-light-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-medium-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-medium-light-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-x-large-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-x-large-light-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-xx-large-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-display-xx-large-light-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-category-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-category-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-large-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-large-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-medium-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-medium-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-x-large-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-x-large-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-xx-large-default-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "text-heading-xx-large-strong-font-family",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: [object Object]; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "typography-font-family-display",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: Cranny,Geist,Arial,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "typography-font-family-monospace",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: Menlo, Courier, monospace; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    },
+    {
+      "id": "typography-font-family-primary",
+      "status": "font-requirement",
+      "limitations": [
+        "Font stack source: Diatype,Geist,Arial,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol; install the first family for faithful typography. Figma does not implement CSS fallback stacks."
+      ]
+    }
+  ]
+}

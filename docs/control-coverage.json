@@ -1,0 +1,1284 @@
+{
+  "release": "13.11.1",
+  "definition": "Reviewed finite static visual controls. Enum values are illustrated through explicit profiles, not the full cross product. Native validation required before publication. 27 unresolved source-data profiles omitted; no substituted colors.",
+  "counts": {
+    "sets": 83,
+    "variants": 861,
+    "omittedSourceProfiles": 27
+  },
+  "profilePolicy": {
+    "Button": "Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+    "Link": "Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+    "Badge": "Every variant/emphasis/state at default size; every variant/emphasis at small/default state.",
+    "TextInput": "Every status/mode at baseline text/no slots; every slot/content combination at neutral/default.",
+    "Textarea": "Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default."
+  },
+  "families": [
+    {
+      "name": "Button",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "default",
+          "positive",
+          "negative",
+          "danger",
+          "loud"
+        ],
+        "emphasis": [
+          "default",
+          "weak",
+          "strong"
+        ],
+        "rounding": [
+          "medium",
+          "full"
+        ],
+        "aspect": [
+          "default",
+          "square"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus",
+          "disabled"
+        ]
+      },
+      "variants": 127,
+      "nativeSets": 16,
+      "source": [
+        "packages/components/src/components/Button/Button.metadata.json",
+        "packages/components/src/components/Button/Button.tsx",
+        "packages/components/src/components/Button/styles/button.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Full-width behavior is native frame resizing; square aspect swaps text content for a native icon. CSS forced-colors media mode is represented by the browser, not this light/dark library.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis."
+      ],
+      "sourceMatrixVariants": 900,
+      "reviewedProfiles": "Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+      "supportsAllCombinations": false
+    },
+    {
+      "name": "Badge",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "default",
+          "positive",
+          "highlight",
+          "warning",
+          "negative"
+        ],
+        "emphasis": [
+          "strong",
+          "weak"
+        ],
+        "size": [
+          "default",
+          "small"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "disabled"
+        ]
+      },
+      "variants": 40,
+      "nativeSets": 2,
+      "source": [
+        "packages/components/src/components/Badge/Badge.metadata.json",
+        "packages/components/src/components/Badge/Badge.tsx",
+        "packages/components/src/components/Badge/BadgeStatus.tsx",
+        "packages/components/src/components/Badge/styles/badge.module.scss",
+        "packages/components/src/components/Badge/styles/badgestatus.module.scss",
+        "packages/components/src/components/Badge/types.ts",
+        "packages/components/src/components/Badge/utils.ts",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Status dot and dismiss are independently hideable native properties. Arbitrary custom status colors remain editable fill overrides. Forced-colors media rendering remains in CSS.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every variant/emphasis/state at default size; every variant/emphasis at small/default state.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every variant/emphasis/state at default size; every variant/emphasis at small/default state."
+      ],
+      "sourceMatrixVariants": 60,
+      "reviewedProfiles": "Every variant/emphasis/state at default size; every variant/emphasis at small/default state.",
+      "supportsAllCombinations": false
+    },
+    {
+      "name": "Checkbox",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "default",
+          "large"
+        ],
+        "emphasis": [
+          "default",
+          "weak"
+        ],
+        "value": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ],
+        "status": [
+          "default",
+          "error"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus",
+          "disabled"
+        ]
+      },
+      "variants": 120,
+      "nativeSets": 4,
+      "source": [
+        "packages/components/src/components/Checkbox/Checkbox.metadata.json",
+        "packages/components/src/components/Checkbox/Checkbox.tsx",
+        "packages/components/src/components/Checkbox/styles/checkbox.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Read-only shares default appearance and blocks interaction in code; error state keeps the source red border."
+      ],
+      "sourceMatrixVariants": 120,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": true
+    },
+    {
+      "name": "RadioList",
+      "status": "supported",
+      "axes": {
+        "emphasis": [
+          "default",
+          "highlight"
+        ],
+        "orientation": [
+          "vertical",
+          "horizontal"
+        ],
+        "selected": [
+          "first",
+          "second"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ]
+      },
+      "variants": 32,
+      "nativeSets": 2,
+      "source": [
+        "packages/components/src/components/RadioList/RadioList.metadata.json",
+        "packages/components/src/components/RadioList/RadioList.tsx",
+        "packages/components/src/components/RadioList/styles/radiolist.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "List item labels are editable; additional options are created by duplicating native option structure. Source 6px indicator with 6px outline is represented by concentric native ellipses."
+      ],
+      "sourceMatrixVariants": 32,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": true
+    },
+    {
+      "name": "Switch",
+      "status": "supported",
+      "axes": {
+        "size": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "value": [
+          false,
+          true
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ]
+      },
+      "variants": 24,
+      "nativeSets": 1,
+      "source": [
+        "packages/components/src/components/Switch/Switch.metadata.json",
+        "packages/components/src/components/Switch/Switch.tsx",
+        "packages/components/src/components/Switch/styles/switch.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [],
+      "sourceMatrixVariants": 24,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": true
+    },
+    {
+      "name": "TextInput",
+      "status": "partial",
+      "axes": {
+        "status": [
+          "neutral",
+          "success",
+          "error",
+          "loading"
+        ],
+        "mode": [
+          "default",
+          "hover",
+          "focus",
+          "disabled",
+          "read-only"
+        ],
+        "content": [
+          "value",
+          "placeholder"
+        ],
+        "slots": [
+          "none",
+          "left",
+          "right",
+          "both"
+        ]
+      },
+      "variants": 27,
+      "nativeSets": 6,
+      "source": [
+        "packages/components/src/components/TextInput/TextInput.metadata.json",
+        "packages/components/src/components/TextInput/TextInput.tsx",
+        "packages/components/src/components/TextInput/styles/text.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Hidden input types have no canvas asset. Email/number/password/search/tel/time/url differ in browser semantics and text content; edit the text property. Loading is a native icon snapshot rather than animation.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default."
+      ],
+      "sourceMatrixVariants": 160,
+      "reviewedProfiles": "Every status/mode at baseline text/no slots; every slot/content combination at neutral/default.",
+      "supportsAllCombinations": false
+    },
+    {
+      "name": "Textarea",
+      "status": "partial",
+      "axes": {
+        "status": [
+          "default",
+          "success",
+          "error",
+          "loading"
+        ],
+        "mode": [
+          "default",
+          "hover",
+          "focus",
+          "disabled",
+          "read-only"
+        ],
+        "content": [
+          "value",
+          "placeholder"
+        ],
+        "clearable": [
+          false,
+          true
+        ],
+        "slots": [
+          "none",
+          "left",
+          "right",
+          "both"
+        ]
+      },
+      "variants": 35,
+      "nativeSets": 11,
+      "source": [
+        "packages/components/src/components/Textarea/Textarea.metadata.json",
+        "packages/components/src/components/Textarea/Textarea.tsx",
+        "packages/components/src/components/Textarea/styles/textarea.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Native height can be resized to match minRows/maxRows; autosize is runtime text measurement. Extra actions/decorators are exposed native icon slots. Loading is a native icon snapshot rather than animation.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default."
+      ],
+      "sourceMatrixVariants": 320,
+      "reviewedProfiles": "Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.",
+      "supportsAllCombinations": false
+    },
+    {
+      "name": "Tag",
+      "status": "partial",
+      "axes": {
+        "variant": [
+          "default",
+          "highlight"
+        ],
+        "emphasis": [
+          "strong",
+          "weak"
+        ],
+        "size": [
+          "default",
+          "small"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "disabled"
+        ],
+        "content": [
+          "main",
+          "hover"
+        ]
+      },
+      "variants": 32,
+      "nativeSets": 2,
+      "source": [
+        "packages/components/src/components/Tag/Tag.metadata.json",
+        "packages/components/src/components/Tag/Tag.tsx",
+        "packages/components/src/components/Tag/index.ts",
+        "packages/components/src/components/Tag/styles/tag.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Main/secondary content text and add/dismiss visibility are native properties; mixed per-action hover is an editable fill override. Forced-colors media rendering remains in CSS."
+      ],
+      "sourceMatrixVariants": 48,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": false
+    },
+    {
+      "name": "Link",
+      "status": "partial",
+      "axes": {
+        "color": [
+          "primary",
+          "secondary",
+          "error",
+          "success",
+          "warning",
+          "highlight"
+        ],
+        "size": [
+          "xx-small",
+          "x-small",
+          "small",
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "regular",
+          "medium",
+          "bold"
+        ],
+        "underline": [
+          "auto",
+          "always",
+          "hover",
+          "none"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "disabled"
+        ]
+      },
+      "variants": 92,
+      "nativeSets": 30,
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Native text wrapping/truncation is controlled by frame and text resizing. onContainer alternate semantic colors are supplied in independent Link/On container sets.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile)."
+      ],
+      "sourceMatrixVariants": 1512,
+      "reviewedProfiles": "Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+      "supportsAllCombinations": false
+    },
+    {
+      "name": "Link",
+      "status": "partial",
+      "axes": {
+        "onContainer": [
+          "secondary",
+          "disabled",
+          "error",
+          "success",
+          "warning",
+          "highlight"
+        ],
+        "size": [
+          "xx-small",
+          "x-small",
+          "small",
+          "medium",
+          "large",
+          "x-large",
+          "xx-large"
+        ],
+        "weight": [
+          "regular",
+          "medium",
+          "bold"
+        ],
+        "underline": [
+          "auto",
+          "always",
+          "hover",
+          "none"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "disabled"
+        ]
+      },
+      "variants": 84,
+      "nativeSets": 30,
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Native text wrapping/truncation is controlled by frame and text resizing.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile)."
+      ],
+      "sourceMatrixVariants": 1512,
+      "reviewedProfiles": "Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+      "supportsAllCombinations": false
+    },
+    {
+      "name": "Slider",
+      "status": "supported",
+      "axes": {
+        "value": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100"
+        ],
+        "range": [
+          "single",
+          "range"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus",
+          "disabled"
+        ]
+      },
+      "variants": 50,
+      "nativeSets": 2,
+      "source": [
+        "packages/components/src/components/Slider/Slider.metadata.json",
+        "packages/components/src/components/Slider/Slider.tsx",
+        "packages/components/src/components/Slider/styles/slider.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Values are sample stops within the source continuous range. Drag thumb positions and resize filled track for arbitrary values; min/max/step remain runtime constraints. Active pointer thumb shadow outline requires native visual QA."
+      ],
+      "sourceMatrixVariants": 50,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": true
+    },
+    {
+      "name": "SegmentedControl",
+      "status": "supported",
+      "axes": {
+        "selected": [
+          "first",
+          "second"
+        ],
+        "disabled": [
+          false,
+          true
+        ],
+        "iconOnly": [
+          false,
+          true
+        ],
+        "hugWidth": [
+          false,
+          true
+        ],
+        "state": [
+          "default",
+          "hover",
+          "focus"
+        ]
+      },
+      "variants": 48,
+      "nativeSets": 2,
+      "source": [
+        "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+        "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
+        "packages/components/src/components/SegmentedControl/styles/segmentedControl.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Hug-width controls can resize natively; item count is arbitrary through duplication. Responsive label clamp is represented at the 16px maximum."
+      ],
+      "sourceMatrixVariants": 48,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": true
+    },
+    {
+      "name": "SplitButton",
+      "status": "supported",
+      "axes": {
+        "emphasis": [
+          "default",
+          "weak",
+          "strong"
+        ],
+        "size": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active",
+          "focus",
+          "disabled"
+        ],
+        "rotateIcon": [
+          false,
+          true
+        ]
+      },
+      "variants": 90,
+      "nativeSets": 3,
+      "source": [
+        "packages/components/src/components/SplitButton/SplitButton.metadata.json",
+        "packages/components/src/components/SplitButton/SplitButton.tsx",
+        "packages/components/src/components/SplitButton/styles/splitButton.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Content and menu trigger are separate native controls; dropdown menu composition is provided by Dropdown assets."
+      ],
+      "sourceMatrixVariants": 90,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": true
+    },
+    {
+      "name": "Notice",
+      "status": "supported",
+      "axes": {
+        "variant": [
+          "default",
+          "highlight",
+          "positive",
+          "danger",
+          "warning"
+        ],
+        "emphasis": [
+          "default",
+          "strong",
+          "weak"
+        ],
+        "size": [
+          "medium",
+          "large"
+        ],
+        "alignContent": [
+          "center",
+          "top"
+        ]
+      },
+      "variants": 60,
+      "nativeSets": 2,
+      "source": [
+        "packages/components/src/components/Notice/Notice.metadata.json",
+        "packages/components/src/components/Notice/Notice.tsx",
+        "packages/components/src/components/Notice/styles/notice.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "contentProperties": [
+        "All text layers expose editable TEXT properties.",
+        "All native icon instances expose INSTANCE_SWAP and BOOLEAN visibility properties."
+      ],
+      "omissions": [
+        "Message/action text and leading/dismiss icon visibility are native properties. Arbitrary custom React action content is composed with the other native control assets. Forced-colors media rendering remains in CSS."
+      ],
+      "sourceMatrixVariants": 60,
+      "reviewedProfiles": "All listed finite source combinations",
+      "supportsAllCombinations": true
+    }
+  ],
+  "sourceTokenDefects": [
+    {
+      "token": "color-primary-pressed",
+      "family": "Button",
+      "source": "packages/components/src/components/Button/styles/button.module.scss",
+      "lines": [
+        168,
+        178
+      ],
+      "state": "variant=default, emphasis=default|weak, state=active"
+    },
+    {
+      "token": "color-container-success-on-success-container-pressed",
+      "family": "Button",
+      "source": "packages/components/src/components/Button/styles/button.module.scss",
+      "lines": [
+        202
+      ],
+      "state": "variant=positive, emphasis=default, state=active"
+    },
+    {
+      "token": "color-container-disabled-on-disabled",
+      "family": "Tag",
+      "source": "packages/components/src/components/Tag/styles/tag.module.scss",
+      "lines": [
+        74,
+        79
+      ],
+      "state": "state=disabled"
+    },
+    {
+      "token": "color-container-disabled-on-disabled",
+      "family": "Link",
+      "source": "packages/components/src/components/Link/styles/link.module.scss",
+      "lines": [
+        101
+      ],
+      "state": "onContainer=disabled, state=default|hover"
+    }
+  ],
+  "omittedSourceStates": [
+    {
+      "recipeId": "components/Button/controls-001",
+      "variantId": "variant=default;emphasis=default;rounding=medium;aspect=default;size=medium;state=active",
+      "props": {
+        "variant": "default",
+        "emphasis": "default",
+        "rounding": "medium",
+        "aspect": "default",
+        "size": "medium",
+        "state": "active"
+      },
+      "tokens": [
+        "color-primary-pressed"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Button/controls-003",
+      "variantId": "variant=default;emphasis=weak;rounding=medium;aspect=default;size=medium;state=active",
+      "props": {
+        "variant": "default",
+        "emphasis": "weak",
+        "rounding": "medium",
+        "aspect": "default",
+        "size": "medium",
+        "state": "active"
+      },
+      "tokens": [
+        "color-primary-pressed"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Button/controls-007",
+      "variantId": "variant=positive;emphasis=default;rounding=medium;aspect=default;size=medium;state=active",
+      "props": {
+        "variant": "positive",
+        "emphasis": "default",
+        "rounding": "medium",
+        "aspect": "default",
+        "size": "medium",
+        "state": "active"
+      },
+      "tokens": [
+        "color-container-success-on-success-container-pressed"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=strong;size=default;state=disabled;content=main",
+      "props": {
+        "variant": "default",
+        "emphasis": "strong",
+        "size": "default",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=strong;size=default;state=disabled;content=hover",
+      "props": {
+        "variant": "default",
+        "emphasis": "strong",
+        "size": "default",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=strong;size=small;state=disabled;content=main",
+      "props": {
+        "variant": "default",
+        "emphasis": "strong",
+        "size": "small",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=strong;size=small;state=disabled;content=hover",
+      "props": {
+        "variant": "default",
+        "emphasis": "strong",
+        "size": "small",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=weak;size=default;state=disabled;content=main",
+      "props": {
+        "variant": "default",
+        "emphasis": "weak",
+        "size": "default",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=weak;size=default;state=disabled;content=hover",
+      "props": {
+        "variant": "default",
+        "emphasis": "weak",
+        "size": "default",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=weak;size=small;state=disabled;content=main",
+      "props": {
+        "variant": "default",
+        "emphasis": "weak",
+        "size": "small",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=default;emphasis=weak;size=small;state=disabled;content=hover",
+      "props": {
+        "variant": "default",
+        "emphasis": "weak",
+        "size": "small",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=highlight;emphasis=strong;size=default;state=disabled;content=main",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "strong",
+        "size": "default",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-001",
+      "variantId": "variant=highlight;emphasis=strong;size=default;state=disabled;content=hover",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "strong",
+        "size": "default",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-002",
+      "variantId": "variant=highlight;emphasis=strong;size=small;state=disabled;content=main",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "strong",
+        "size": "small",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-002",
+      "variantId": "variant=highlight;emphasis=strong;size=small;state=disabled;content=hover",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "strong",
+        "size": "small",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-002",
+      "variantId": "variant=highlight;emphasis=weak;size=default;state=disabled;content=main",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "weak",
+        "size": "default",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-002",
+      "variantId": "variant=highlight;emphasis=weak;size=default;state=disabled;content=hover",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "weak",
+        "size": "default",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-002",
+      "variantId": "variant=highlight;emphasis=weak;size=small;state=disabled;content=main",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "weak",
+        "size": "small",
+        "state": "disabled",
+        "content": "main"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Tag/controls-002",
+      "variantId": "variant=highlight;emphasis=weak;size=small;state=disabled;content=hover",
+      "props": {
+        "variant": "highlight",
+        "emphasis": "weak",
+        "size": "small",
+        "state": "disabled",
+        "content": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=auto;state=default",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "auto",
+        "state": "default"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=auto;state=hover",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "auto",
+        "state": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=always;state=default",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "always",
+        "state": "default"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=always;state=hover",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "always",
+        "state": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=hover;state=default",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "hover",
+        "state": "default"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=hover;state=hover",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "hover",
+        "state": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=none;state=default",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "none",
+        "state": "default"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    },
+    {
+      "recipeId": "components/Link/on-container-013",
+      "variantId": "onContainer=disabled;size=medium;weight=regular;underline=none;state=hover",
+      "props": {
+        "onContainer": "disabled",
+        "size": "medium",
+        "weight": "regular",
+        "underline": "none",
+        "state": "hover"
+      },
+      "tokens": [
+        "color-container-disabled-on-disabled"
+      ],
+      "reason": "Released CSS computes inherited color from arbitrary consumer ancestor; no fixed repository-owned value exists. State is omitted rather than assigned a substitute color."
+    }
+  ]
+}

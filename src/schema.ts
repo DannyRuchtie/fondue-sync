@@ -1,0 +1,116 @@
+export type Token = {
+  id: string;
+  name: string;
+  type: "COLOR" | "FLOAT" | "STRING";
+  collection: "Primitives" | "Semantic";
+  values: Record<string, any>;
+  css: string;
+  scopes?: string[];
+};
+export type Layer = {
+  id: string;
+  kind:
+    | "frame"
+    | "text"
+    | "rectangle"
+    | "ellipse"
+    | "svg"
+    | "instance"
+    | "componentInstance";
+  name: string;
+  text?: string;
+  svg?: string;
+  iconId?: string;
+  componentName?: string;
+  recipeId?: string;
+  variantProps?: Record<string, string>;
+  textOverrides?: Record<string, string>;
+  dataBinding?: Record<string, unknown>;
+  textStyle?: string;
+  effectStyle?: string;
+  rotation?: number;
+  focusRing?: {
+    inner: string;
+    outer: string;
+    innerSpread?: number;
+    outerSpread?: number;
+  };
+  effects?: Effect[];
+  clipContent?: boolean;
+  iconColor?: string;
+  lineHeight?: number;
+  fontFamily?: string;
+  strokeWeight?: number;
+  strokeWidth?: number;
+  opacity?: number;
+  visible?: boolean;
+  textDecoration?: "NONE" | "UNDERLINE" | "STRIKETHROUGH";
+  layoutPositioning?: "AUTO" | "ABSOLUTE";
+  primaryAlign?: "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN";
+  counterAlign?: "MIN" | "MAX" | "CENTER" | "BASELINE";
+  primaryAxisAlignItems?: "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN";
+  counterAxisAlignItems?: "MIN" | "MAX" | "CENTER" | "BASELINE";
+  arcData?: { startingAngle: number; endingAngle: number; innerRadius: number };
+  width?: number;
+  height?: number;
+  layout?: "HORIZONTAL" | "VERTICAL";
+  gap?: number;
+  padding?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
+  x?: number;
+  y?: number;
+  radius?: number;
+  fill?: string;
+  stroke?: string;
+  fontSize?: number;
+  fontWeight?: number;
+  bindings?: Record<string, string>;
+  children?: Layer[];
+};
+export type Recipe = {
+  id: string;
+  name: string;
+  package: string;
+  source: string[];
+  status: "supported" | "partial";
+  limitations: string[];
+  documentation?: {
+    purpose: string;
+    usage: string;
+    properties: string;
+    description: string;
+    origin: string;
+    metadataSource: string | null;
+    links: { uri: string }[];
+  };
+  variants: { id: string; props: Record<string, string>; root: Layer }[];
+};
+export type Bundle = {
+  schemaVersion: 1;
+  release: string;
+  provenance: Record<string, any>;
+  tokens: Token[];
+  styles: any[];
+  icons: {
+    id: string;
+    name: string;
+    svg: string;
+    source: string;
+    sizes?: { size: number; svg: string; source: string }[];
+  }[];
+  recipes: Recipe[];
+  examples?: {
+    id: string;
+    name: string;
+    root: Layer;
+    bindings?: any;
+    documentation?: any;
+  }[];
+  fixtures?: Record<string, any>;
+  inventory: any[];
+  gaps: any[];
+  fingerprint: string;
+};

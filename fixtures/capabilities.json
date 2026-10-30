@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "mode": "fixture-only",
+  "execution": "No network calls or credentials in the classic library plugin. Future prototype connector requests must be independently approved and scoped.",
+  "context": {
+    "requestId": "string",
+    "preferredLocale": "BCP47 string",
+    "approved": false,
+    "scopes": [],
+    "route": {
+      "domain": "brands|libraries|assets|guidelines",
+      "id": "string|null"
+    },
+    "selection": [],
+    "search": ""
+  },
+  "response": {
+    "items": [],
+    "page": {
+      "cursor": null,
+      "hasNextPage": false,
+      "sort": "must remain stable across pages"
+    },
+    "state": "loading|ready|empty|error|permission-required|unavailable",
+    "error": null
+  },
+  "capabilities": [
+    {
+      "id": "brands.list",
+      "domain": "brands",
+      "status": "future-connected",
+      "fixtureDomain": "brands"
+    },
+    {
+      "id": "libraries.browse",
+      "domain": "libraries",
+      "status": "future-connected",
+      "fixtureDomain": "libraries",
+      "notes": "Future adapter may browse folders/assets/collections; validate actual authorized API before implementation."
+    },
+    {
+      "id": "assets.search",
+      "domain": "assets",
+      "status": "future-connected",
+      "fixtureDomain": "assets",
+      "requestFields": ["query", "filter", "sort", "cursor", "preferredLocale"],
+      "notes": "Keep query/filter/sort stable while paging; account for search indexing delay up to ten minutes. Enforce returned view/download permissions and customMetadata contracts."
+    },
+    {
+      "id": "guidelines.navigation",
+      "domain": "guidelines",
+      "status": "future-connected",
+      "fixtureDomain": "guidelines"
+    },
+    {
+      "id": "guidelines.contentSearch",
+      "domain": "guidelines",
+      "status": "future-connected",
+      "fixtureDomain": "guidelines",
+      "notes": "Beta API; validate availability and preferred locale at connection time."
+    }
+  ],
+  "excludedPublicParityClaims": [
+    "recents",
+    "favorites",
+    "notifications",
+    "usage",
+    "agentic execution"
+  ]
+}

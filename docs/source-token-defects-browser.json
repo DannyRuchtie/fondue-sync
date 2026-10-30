@@ -1,0 +1,86 @@
+{
+  "browser": "Installed Google Chrome, Playwright headless",
+  "source": "Compiled unmodified pinned release SCSS with Sass; committed token base.css; Chrome DevTools CSS.forcePseudoState sets active+hover; only transitions disabled for deterministic measurement",
+  "results": [
+    {
+      "family": "Button",
+      "state": "default/default :active",
+      "forcedActive": true,
+      "computed": "rgb(11, 22, 33)",
+      "active": false,
+      "parent": "rgb(11, 22, 33)"
+    },
+    {
+      "family": "Button",
+      "state": "default/default :active",
+      "forcedActive": true,
+      "computed": "rgb(44, 55, 66)",
+      "active": false,
+      "parent": "rgb(44, 55, 66)"
+    },
+    {
+      "family": "Button",
+      "state": "default/weak :active",
+      "forcedActive": true,
+      "computed": "rgb(11, 22, 33)",
+      "active": false,
+      "parent": "rgb(11, 22, 33)"
+    },
+    {
+      "family": "Button",
+      "state": "default/weak :active",
+      "forcedActive": true,
+      "computed": "rgb(44, 55, 66)",
+      "active": false,
+      "parent": "rgb(44, 55, 66)"
+    },
+    {
+      "family": "Button",
+      "state": "positive/default :active",
+      "forcedActive": true,
+      "computed": "rgb(11, 22, 33)",
+      "active": false,
+      "parent": "rgb(11, 22, 33)"
+    },
+    {
+      "family": "Button",
+      "state": "positive/default :active",
+      "forcedActive": true,
+      "computed": "rgb(44, 55, 66)",
+      "active": false,
+      "parent": "rgb(44, 55, 66)"
+    },
+    {
+      "family": "Tag",
+      "state": "disabled",
+      "forcedActive": false,
+      "computed": "rgb(11, 22, 33)",
+      "active": false,
+      "parent": "rgb(11, 22, 33)"
+    },
+    {
+      "family": "Tag",
+      "state": "disabled",
+      "forcedActive": false,
+      "computed": "rgb(44, 55, 66)",
+      "active": false,
+      "parent": "rgb(44, 55, 66)"
+    },
+    {
+      "family": "Link",
+      "state": "onContainer=disabled, disabled=false",
+      "forcedActive": false,
+      "computed": "rgb(11, 22, 33)",
+      "active": false,
+      "parent": "rgb(11, 22, 33)"
+    },
+    {
+      "family": "Link",
+      "state": "onContainer=disabled, disabled=false",
+      "forcedActive": false,
+      "computed": "rgb(44, 55, 66)",
+      "active": false,
+      "parent": "rgb(44, 55, 66)"
+    }
+  ]
+}
