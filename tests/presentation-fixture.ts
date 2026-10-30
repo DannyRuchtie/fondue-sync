@@ -131,7 +131,18 @@ export function presentationFixture() {
       },
       resizeWithoutConstraints(w: number, h: number) {
         assert.ok(w > 0 && h > 0);
-        this._w = w;
+        // Observed native behavior: a HUG horizontal frame resists a requested
+        // resize and keeps the full content width until its axis is FIXED.
+        if (
+          this.layoutMode === "HORIZONTAL" &&
+          this.primaryAxisSizingMode === "AUTO"
+        ) {
+          this._w =
+            this.children.reduce((sum: number, c: any) => sum + c.width, 0) +
+            Math.max(0, this.children.length - 1) * value("itemSpacing") +
+            value("paddingLeft") +
+            value("paddingRight");
+        } else this._w = w;
         this._h = h;
       },
       setExplicitVariableModeForCollection(c: any, mode: string) {

@@ -190,6 +190,9 @@ export class Presentation {
     node.layoutWrap = "WRAP";
     this.bind(node, "counterAxisSpacing", gap);
     node.counterAxisAlignContent = "AUTO";
+    // Native Figma keeps a HUG primary axis at its content width during resize.
+    // Fix the horizontal axis first so wrapping receives the requested width.
+    node.primaryAxisSizingMode = "FIXED";
     node.resizeWithoutConstraints(width, Math.max(1, node.height));
     node.primaryAxisSizingMode = "FIXED";
     node.counterAxisSizingMode = "AUTO";

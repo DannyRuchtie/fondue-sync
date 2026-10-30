@@ -1516,6 +1516,7 @@
       node.layoutWrap = "WRAP";
       this.bind(node, "counterAxisSpacing", gap);
       node.counterAxisAlignContent = "AUTO";
+      node.primaryAxisSizingMode = "FIXED";
       node.resizeWithoutConstraints(width2, Math.max(1, node.height));
       node.primaryAxisSizingMode = "FIXED";
       node.counterAxisSizingMode = "AUTO";
@@ -3956,7 +3957,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "566dcd7035dc5155b378feaf57c510327883c186d24e34cb4e48afec5f3acaa4",
+      rendererRevision: "dcf46b6f99ef0825793f66745379f52494e4cf23d4c594bf58afacb79ce692ea",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -271507,7 +271508,7 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "a7ab09ab98ceee99a37dc1a3f7490dddaaa0baf2df9d5cf8cc6cc3e264a05d94"
+    fingerprint: "f1fb3db85a4c70e35b1b7fe20992d49a79d95a1bb182409d4ac590b41602d4c9"
   };
 
   // src/plugin.ts

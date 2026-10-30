@@ -255,3 +255,21 @@ test("fresh imports allocate sections through the ledger and park legacy indexed
   const section = f.nodes.get(f.index.sections!["components/Link"]);
   assert.equal(section.type, "SECTION");
 });
+
+test("native HUG resize behavior still wraps thirty Link profiles into a compact gallery", async () => {
+  const f = setup(30);
+  await syncCuratedGalleries(f.api, f.bundle, f.index, f.save);
+  const grid = f.nodes.get(
+    f.index.presentationNodes!["gallery/components/Link/grid"],
+  );
+  assert.equal(grid.primaryAxisSizingMode, "FIXED");
+  assert.ok(
+    grid.width <= 1200,
+    "grid must not retain the full thirty-card HUG width",
+  );
+  assert.ok(
+    new Set(grid.children.map((c: any) => c.y)).size > 1,
+    "native previews occupy multiple rows",
+  );
+  assert.equal(Object.keys(f.index.presentationInstances!).length, 30);
+});
