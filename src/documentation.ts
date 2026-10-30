@@ -147,6 +147,8 @@ export function profileCaption(recipe: Recipe): string {
   const props = recipe.variants[0]?.props ?? {};
   const values = [
     "color",
+    "onContainer",
+    "boxColor",
     "variant",
     "emphasis",
     "size",
@@ -155,7 +157,13 @@ export function profileCaption(recipe: Recipe): string {
     "disabled",
   ]
     .filter((key) => props[key] !== undefined)
-    .map((key) => friendlyProperty(props[key]));
+    .map((key) =>
+      key === "onContainer"
+        ? "On " + friendlyProperty(props[key])
+        : key === "boxColor"
+          ? "Box " + friendlyProperty(props[key])
+          : friendlyProperty(props[key]),
+    );
   const suffix = recipe.name
     .split("/")
     .slice(1)

@@ -2079,13 +2079,17 @@
     const props = (_b = (_a = recipe.variants[0]) == null ? void 0 : _a.props) != null ? _b : {};
     const values = [
       "color",
+      "onContainer",
+      "boxColor",
       "variant",
       "emphasis",
       "size",
       "weight",
       "state",
       "disabled"
-    ].filter((key) => props[key] !== void 0).map((key) => friendlyProperty(props[key]));
+    ].filter((key) => props[key] !== void 0).map(
+      (key) => key === "onContainer" ? "On " + friendlyProperty(props[key]) : key === "boxColor" ? "Box " + friendlyProperty(props[key]) : friendlyProperty(props[key])
+    );
     const suffix = recipe.name.split("/").slice(1).map(friendlyProperty).join(" / ");
     return brief(
       [...new Set(values)].slice(0, 3).join(" / ") || suffix || friendlyProperty(recipe.name),
@@ -3952,7 +3956,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "c7b2c46c7d97a3dd3e946577ae665172a8e836b7dc6b49f54f527e21ed2f40c2",
+      rendererRevision: "566dcd7035dc5155b378feaf57c510327883c186d24e34cb4e48afec5f3acaa4",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -271503,7 +271507,7 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "bf7aba474566d72c6f7e69b45a78d2e048fd61d76884879bca278e8e6c7f72ac"
+    fingerprint: "a7ab09ab98ceee99a37dc1a3f7490dddaaa0baf2df9d5cf8cc6cc3e264a05d94"
   };
 
   // src/plugin.ts

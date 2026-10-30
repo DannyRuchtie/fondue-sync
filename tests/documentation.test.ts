@@ -60,3 +60,38 @@ test("one concise family guide unions controls but does not repeat the whole cov
   assert.ok(doc.notes.join(" ").length < 300);
   assert.equal(profileCaption(recipes[0]), "Primary / 0 / Medium");
 });
+
+test("released Link and Text captions distinguish container roles", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const bundle = JSON.parse(
+    await readFile(
+      new URL("../bundles/fondue-13.11.1.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  for (const role of ["error", "success", "warning"]) {
+    const recipe = bundle.recipes.find(
+      (r: any) =>
+        r.id.startsWith("components/Link/") &&
+        r.variants[0]?.props.onContainer === role,
+    );
+    assert.ok(recipe, "released Link onContainer " + role);
+    assert.ok(
+      profileCaption(recipe).startsWith(
+        "On " + role[0].toUpperCase() + role.slice(1) + " / ",
+      ),
+    );
+    assert.ok(profileCaption(recipe).split(" / ").length <= 3);
+  }
+  for (const role of ["neutral", "selected", "positive"]) {
+    const recipe = bundle.recipes.find(
+      (r: any) => r.id === "components/Text/boxColor-" + role,
+    );
+    assert.ok(recipe);
+    assert.ok(
+      profileCaption(recipe).startsWith(
+        "Box " + role[0].toUpperCase() + role.slice(1) + " / ",
+      ),
+    );
+  }
+});
