@@ -1,0 +1,24 @@
+{
+  "userDecision": "Restore released alignment",
+  "before": {
+    "id": "5:19938",
+    "differences": [
+      {
+        "path": "/children/0/primaryAxisAlignItems",
+        "before": "SPACE_BETWEEN",
+        "after": "MIN"
+      }
+    ],
+    "total": 1
+  },
+  "restoration": {
+    "mutatedNodeIds": [
+      "5:19937"
+    ],
+    "setId": "5:19938",
+    "field": "primaryAxisAlignItems",
+    "before": "MIN",
+    "after": "SPACE_BETWEEN",
+    "baselineMatchesAfter": true
+  }
+}

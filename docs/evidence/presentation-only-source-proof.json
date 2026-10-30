@@ -1,0 +1,11 @@
+{
+  "beforeFingerprint": "24f597b6dc70c9f3fc5ce7a928547486b27593eb3a42366ab60a7cc3b56270ed",
+  "afterFingerprint": "0467fcb845181146b49d8265113674340f04782f1f094f29c0450be07ae91640",
+  "beforeRendererRevision": "73ff7a8ba9cebdf1260fcd5bced5a002b9099c8c6eef82f88e37e77835a365fd",
+  "afterRendererRevision": "41adad13e46e96cfa1c7e4dee20ab750749cc7b580fb2fb0840aac6e8f0c0c7e",
+  "sourceDefinitionsSha256": "c0a0b5bd386d7cbb7c6628a18fd986dfdba00942a6b104f85c4276247fd496aa",
+  "checked": 1310,
+  "sourceDefinitionsUnchanged": true,
+  "reason": "Native QA: wrapping fixes HUG-before-resize behavior; exact resolved RGBA seeds prevent repeat-update black fallback in presentation and generic layer paints; readable color modes/density and distinct container captions. No token, style, icon, recipe, guide or example definitions changed.",
+  "proofSha256": "fcfc11337c031e0b569f19d8f4869e277cdfa59298ee9341b5f7868a8abe0aa0"
+}

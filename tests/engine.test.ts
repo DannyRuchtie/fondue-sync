@@ -1,3 +1,10 @@
+import {
+  applyApprovedImageMigration,
+  imageMigrationProblems,
+  imageMigrationSourceHash,
+} from "../src/image-migrations";
+import { migrationProblems } from "../src/preflight";
+import { imageSha256 } from "../src/images";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -152,6 +159,16 @@ function mockApi() {
       setBoundVariable(k: string, v: any) {
         if (v === null) delete this.boundVariables[k];
         else this.boundVariables[k] = { type: "VARIABLE_ALIAS", id: v.id };
+      },
+      remove() {
+        if (this.parent?.children)
+          this.parent.children.splice(this.parent.children.indexOf(this), 1);
+        const erase = (node: any) => {
+          for (const child of node.children ?? []) erase(child);
+          nodes.delete(node.id);
+          node.removed = true;
+        };
+        erase(this);
       },
       resize(w: number, h: number) {
         this.width = w;
@@ -551,6 +568,7 @@ function mockApi() {
       }),
     },
   };
+  installImageApi(api as PluginAPI);
   return { api: api as PluginAPI, nodes, collections, metadataStats };
 }
 test("engine creates native modes aliases variants bindings and text properties; repeat sync is idempotent", async () => {
@@ -1680,4 +1698,429 @@ test("ellipse recipe radius does not assign unsupported native cornerRadius", as
   assert.throws(() => {
     ellipse.cornerRadius = 8;
   }, /no cornerRadius/);
+});
+
+const imagePngBase64 =
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jwGQAAAAASUVORK5CYII=";
+function imageFixture() {
+  const bundle = fixture();
+  const bytes = Buffer.from(imagePngBase64, "base64");
+  bundle.imageAssets = [
+    {
+      id: "photo",
+      sha256: imageSha256(bytes),
+      base64: imagePngBase64,
+      mimeType: "image/png",
+      width: 1,
+      height: 1,
+    },
+  ];
+  for (const variant of bundle.recipes[0].variants)
+    Object.assign(variant.root, {
+      imageAssetId: "photo",
+      imageAssetSha256: bundle.imageAssets[0].sha256,
+      imageScaleMode: "CROP",
+      imageTransform: [
+        [0.8, 0, 0.1],
+        [0, 0.8, 0.1],
+      ],
+      bindings: {},
+      width: 120,
+      height: 80,
+    });
+  return bundle;
+}
+function installImageApi(api: PluginAPI) {
+  const images = new Map<string, any>();
+  let created = 0;
+  api.createImage = (bytes: Uint8Array) => {
+    assert(bytes instanceof Uint8Array);
+    const hash = "native-image-" + imageSha256(bytes);
+    const image = { hash };
+    images.set(hash, image);
+    created++;
+    return image as Image;
+  };
+  api.getImageByHash = (hash: string) => images.get(hash) ?? null;
+  return {
+    images,
+    get created() {
+      return created;
+    },
+  };
+}
+test("native offline image fill is editable, cropped, cached across importer reopen, and repeat creates no image/nodes", async () => {
+  const { api, nodes } = mockApi(),
+    native = installImageApi(api),
+    bundle = imageFixture();
+  const engine = new SyncEngine(api, bundle);
+  const first = await engine.sync();
+  assert.deepEqual(first.errors, []);
+  const set = nodes.get(engine.index.assets["recipe:components:Test"].id),
+    variant = set.children[0];
+  assert.equal(native.created, 1);
+  assert.equal(variant.fills[0].type, "IMAGE");
+  assert.equal(variant.fills[0].scaleMode, "CROP");
+  assert.deepEqual(variant.fills[0].imageTransform, [
+    [0.8, 0, 0.1],
+    [0, 0.8, 0.1],
+  ]);
+  assert.equal(variant.width, 120);
+  const ids = [set.id, variant.id, variant.children[0].id],
+    count = nodes.size;
+  const repeated = await new SyncEngine(api, bundle).sync();
+  assert.deepEqual(repeated.errors, []);
+  assert.equal(native.created, 1);
+  assert.equal(nodes.size, count);
+  assert.deepEqual([set.id, variant.id, variant.children[0].id], ids);
+  const updated = structuredClone(bundle);
+  for (const v of updated.recipes[0].variants)
+    v.root.imageTransform = [
+      [0.6, 0, 0.2],
+      [0, 0.6, 0.2],
+    ];
+  assert.deepEqual((await new SyncEngine(api, updated).sync()).errors, []);
+  assert.equal(native.created, 1);
+  assert.deepEqual(variant.fills[0].imageTransform, [
+    [0.6, 0, 0.2],
+    [0, 0.6, 0.2],
+  ]);
+  assert.deepEqual([set.id, variant.id, variant.children[0].id], ids);
+  const changed = structuredClone(updated),
+    gif = "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+  Object.assign(changed.imageAssets![0], {
+    base64: gif,
+    mimeType: "image/gif",
+    sha256: imageSha256(Buffer.from(gif, "base64")),
+  });
+  for (const v of changed.recipes[0].variants)
+    v.root.imageAssetSha256 = changed.imageAssets![0].sha256;
+  assert.deepEqual((await new SyncEngine(api, changed).sync()).errors, []);
+  assert.equal(native.created, 2);
+  assert.equal(
+    variant.fills[0].imageHash,
+    "native-image-" + changed.imageAssets![0].sha256,
+  );
+  assert.deepEqual([set.id, variant.id, variant.children[0].id], ids);
+});
+test("missing/corrupt image rejects before resource or canvas allocation; decode failure is retryable", async () => {
+  for (const corrupt of [false, true]) {
+    const { api, nodes } = mockApi(),
+      native = installImageApi(api),
+      bundle = imageFixture();
+    if (corrupt) bundle.imageAssets![0].sha256 = "0".repeat(64);
+    else bundle.imageAssets = [];
+    const count = nodes.size;
+    const result = await new SyncEngine(api, bundle).sync();
+    assert(result.errors.length);
+    assert.equal(nodes.size, count);
+    assert.equal(native.created, 0);
+  }
+  const { api, nodes } = mockApi(),
+    bundle = imageFixture();
+  installImageApi(api);
+  const normal = api.createImage;
+  let fail = true;
+  api.createImage = (bytes) => {
+    if (fail) {
+      fail = false;
+      throw Error("native decode failed");
+    }
+    return normal(bytes);
+  };
+  const count = nodes.size;
+  const engine = new SyncEngine(api, bundle),
+    first = await engine.sync();
+  assert(first.errors.some((e) => e.includes("native decode failed")));
+  assert.equal(nodes.size, count);
+  assert.deepEqual((await engine.sync()).errors, []);
+});
+
+test("fresh component instances retain inherited main binding/style data rather than interpreting it as removed authored overrides", async () => {
+  const { api, nodes } = mockApi(),
+    bundle = fixture(),
+    engine = new SyncEngine(api, bundle);
+  assert.deepEqual((await engine.sync()).errors, []);
+  const set = nodes.get(engine.index.assets["recipe:components:Test"].id),
+    main = set.children[0];
+  writeMetadata(
+    main,
+    "layer-definition",
+    JSON.stringify({
+      id: "root",
+      kind: "frame",
+      bindings: {
+        paddingLeft: "upstream-padding",
+        itemSpacing: "upstream-gap",
+      },
+      effectStyle: "upstream-shadow",
+      textStyle: "upstream-typography",
+    }),
+  );
+  const create = main.createInstance;
+  let clears: string[] = [];
+  main.createInstance = () => {
+    const n = create();
+    n.boundVariables = {
+      paddingLeft: { type: "VARIABLE_ALIAS", id: "padding-native" },
+      itemSpacing: { type: "VARIABLE_ALIAS", id: "gap-native" },
+    };
+    n.effectStyleId = "shadow-native";
+    const setBound = n.setBoundVariable.bind(n);
+    n.setBoundVariable = (field: string, value: any) => {
+      if (value === null) clears.push(field);
+      setBound(field, value);
+    };
+    const setEffect = n.setEffectStyleIdAsync.bind(n);
+    n.setEffectStyleIdAsync = async (id: string) => {
+      if (!id) clears.push("effectStyle");
+      return setEffect(id);
+    };
+    return n;
+  };
+  const instance = await engine.layer(
+    {
+      id: "part",
+      name: "Part",
+      kind: "componentInstance",
+      recipeId: bundle.recipes[0].id,
+    },
+    api.createFrame(),
+  );
+  assert.deepEqual(clears, []);
+  assert.equal(instance.boundVariables.paddingLeft.id, "padding-native");
+  assert.equal(instance.boundVariables.itemSpacing.id, "gap-native");
+  assert.equal(instance.effectStyleId, "shadow-native");
+  // A later existing-instance authored definition still clears explicitly removed own bindings.
+  writeMetadata(
+    instance,
+    "layer-definition",
+    JSON.stringify({
+      id: "part",
+      kind: "componentInstance",
+      bindings: { paddingLeft: "own-padding" },
+      effectStyle: "own-shadow",
+    }),
+  );
+  await engine.layer(
+    {
+      id: "part",
+      name: "Part",
+      kind: "componentInstance",
+      recipeId: bundle.recipes[0].id,
+    },
+    instance.parent,
+    instance,
+  );
+  assert.deepEqual(clears, ["paddingLeft", "effectStyle"]);
+  assert.equal(instance.boundVariables.itemSpacing.id, "gap-native");
+});
+
+test("explicit image migration removes only reviewed owned descendants, preserves outer IDs and resumes from its exact checkpoint", async () => {
+  const { api } = mockApi();
+  const previous: any = {
+    id: "patterns/ReviewedPhoto",
+    name: "Photo",
+    package: "fondue-sync/patterns",
+    source: ["source.tsx"],
+    status: "partial",
+    limitations: [],
+    variants: [
+      {
+        id: "default",
+        props: { State: "Default" },
+        root: {
+          id: "root",
+          name: "Root",
+          kind: "frame",
+          children: [
+            {
+              id: "image",
+              name: "Image",
+              kind: "frame",
+              children: [{ id: "art", name: "Art", kind: "rectangle" }],
+            },
+          ],
+        },
+      },
+    ],
+  };
+  const next = structuredClone(previous);
+  next.variants[0].root.children[0] = {
+    id: "image",
+    name: "Image",
+    kind: "frame",
+    imageAssetId: "approved-photo",
+    imageAssetSha256: "a".repeat(64),
+  };
+  const approval = {
+    id: previous.id,
+    beforeSha256: imageMigrationSourceHash(previous),
+    afterSha256: imageMigrationSourceHash(next),
+    removals: [
+      {
+        variantId: "default",
+        path: "/root/image/art",
+        kind: "rectangle",
+        imageRootPath: "/root/image",
+      },
+    ],
+  };
+  const variant = api.createComponent(),
+    image = api.createFrame(),
+    art = api.createRectangle();
+  variant.appendChild(image);
+  image.appendChild(art);
+  const set = api.combineAsVariants([variant], api.currentPage);
+  writeMetadata(variant, "identity", "root");
+  writeMetadata(variant, "variant", "default");
+  writeMetadata(image, "identity", "image");
+  writeMetadata(art, "identity", "art");
+  const save = async (def: any) =>
+    writeMetadata(
+      set,
+      "applied",
+      JSON.stringify({
+        nodeId: set.id,
+        definition: JSON.stringify(def),
+        snapshot: await snapshot(set),
+      }),
+    );
+  await save(previous);
+  const ids = [set.id, variant.id, image.id];
+  const problems = migrationProblems("recipe", previous, next);
+  assert(problems.length);
+  assert.deepEqual(
+    imageMigrationProblems(previous, next, problems, [approval]),
+    [],
+  );
+  const removed = await applyApprovedImageMigration(api, set, next, save, [
+    approval,
+  ]);
+  assert.deepEqual(removed, [art.id]);
+  assert.equal(image.children.length, 0);
+  assert.deepEqual([set.id, variant.id, image.id], ids);
+  assert.deepEqual(
+    await applyApprovedImageMigration(api, set, next, save, [approval]),
+    [],
+  );
+  assert.deepEqual([set.id, variant.id, image.id], ids);
+  const unexpected = structuredClone(next);
+  unexpected.variants[0].root.children = [];
+  assert(
+    imageMigrationProblems(
+      previous,
+      unexpected,
+      migrationProblems("recipe", previous, unexpected),
+      [approval],
+    ).length,
+  );
+  const stale = structuredClone(previous);
+  stale.name = "Different reviewed source";
+  assert(
+    imageMigrationProblems(
+      stale,
+      next,
+      migrationProblems("recipe", stale, next),
+      [approval],
+    ).length,
+  );
+});
+test("approved image migration protects foreign geometry even if its presence was recorded in a saved snapshot", async () => {
+  const { api } = mockApi();
+  const previous: any = {
+      id: "patterns/Photo",
+      variants: [
+        {
+          id: "default",
+          root: {
+            id: "root",
+            kind: "frame",
+            children: [
+              {
+                id: "image",
+                kind: "frame",
+                children: [
+                  {
+                    id: "art",
+                    kind: "frame",
+                    children: [{ id: "shape", kind: "rectangle" }],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    },
+    next = structuredClone(previous);
+  next.variants[0].root.children[0] = {
+    id: "image",
+    kind: "frame",
+    imageAssetId: "photo",
+  };
+  const approval = {
+    id: previous.id,
+    beforeSha256: imageMigrationSourceHash(previous),
+    afterSha256: imageMigrationSourceHash(next),
+    removals: [
+      {
+        variantId: "default",
+        path: "/root/image/art",
+        kind: "frame",
+        imageRootPath: "/root/image",
+      },
+      {
+        variantId: "default",
+        path: "/root/image/art/shape",
+        kind: "rectangle",
+        imageRootPath: "/root/image",
+      },
+    ],
+  };
+  const variant = api.createComponent(),
+    image = api.createFrame(),
+    art = api.createFrame(),
+    shape = api.createRectangle(),
+    foreign = api.createRectangle();
+  variant.appendChild(image);
+  image.appendChild(art);
+  art.appendChild(shape);
+  art.appendChild(foreign);
+  const set = api.combineAsVariants([variant], api.currentPage);
+  for (const [node, id] of [
+    [variant, "root"],
+    [image, "image"],
+    [art, "art"],
+    [shape, "shape"],
+    [foreign, "user-shape"],
+  ] as const)
+    writeMetadata(node, "identity", id);
+  writeMetadata(variant, "variant", "default");
+  writeMetadata(
+    set,
+    "applied",
+    JSON.stringify({
+      nodeId: set.id,
+      definition: JSON.stringify(previous),
+      snapshot: await snapshot(set),
+    }),
+  );
+  let checkpoints = 0;
+  await assert.rejects(
+    applyApprovedImageMigration(
+      api,
+      set,
+      next,
+      async () => {
+        checkpoints++;
+      },
+      [approval],
+    ),
+    /Foreign or missing child/,
+  );
+  assert.equal(image.children[0].id, art.id);
+  assert.equal(art.children.length, 2);
+  assert.equal(checkpoints, 0);
+  assert.equal(readMetadata(set, "image-migration-state"), "");
 });

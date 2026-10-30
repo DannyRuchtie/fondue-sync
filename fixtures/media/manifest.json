@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "status": "ready",
+  "sourceLibraryUrl": "https://weare.frontify.com/brands/1/media-libraries/2871",
+  "acquiredDate": "2026-10-30",
+  "assets": [
+    {
+      "id": "frontify-stock-collaboration",
+      "file": "frontify-stock-collaboration.jpg",
+      "sha256": "e595dffec93a48dfbf57d54391aacd0676d1121f9378853e7dcb0e9f91af45a2",
+      "mimeType": "image/jpeg",
+      "width": 2274,
+      "height": 1510,
+      "source": {
+        "assetId": "283315",
+        "url": "https://weare.frontify.com/brands/1/media-libraries/2871/assets/283315",
+        "libraryUrl": "https://weare.frontify.com/brands/1/media-libraries/2871",
+        "name": "stock.png",
+        "folder": "Guidelines / Visual world",
+        "description": "Two people collaborating with a phone",
+        "cropGuidance": "Landscape card cover or asset thumbnail; center crop retains hands and phone.",
+        "originalRenditionSha256": "7f07e0f14e94deef0c39f1c23eb58387202849c4f3f4a10f02dfc40d06af32a7",
+        "originalRenditionMimeType": "image/webp",
+        "nativeConversion": "JPEG quality95 via macOS sips; original dimensions retained; no content edits.",
+        "rights": "User-requested internal example use. No independent redistribution license claim; original asset/source naming retained."
+      }
+    },
+    {
+      "id": "frontify-laptop-campaign",
+      "file": "frontify-laptop-campaign.jpg",
+      "sha256": "11480695dd415889f84ffd212afb09f7f74b3026b021eff378a358e99d0734a8",
+      "mimeType": "image/jpeg",
+      "width": 2000,
+      "height": 1375,
+      "source": {
+        "assetId": "283324",
+        "url": "https://weare.frontify.com/brands/1/media-libraries/2871/assets/283324",
+        "libraryUrl": "https://weare.frontify.com/brands/1/media-libraries/2871",
+        "name": "MacBook-Pro-03-Standard-Mockup-Remastered.jpg",
+        "folder": "Guidelines / Visual world / Mockups",
+        "description": "Laptop showing Frontify brand assets on a dark plinth",
+        "cropGuidance": "Landscape library or guideline cover; keep full laptop screen and surrounding negative space.",
+        "originalRenditionSha256": "0ee727a3cd7ee7d0c8cb7fe4c993230cbcc7a4fa391e0e1b59b56759fa1bc74e",
+        "originalRenditionMimeType": "image/webp",
+        "nativeConversion": "JPEG quality95 via macOS sips; original dimensions retained; no content edits.",
+        "rights": "User-requested internal example use. No independent redistribution license claim; original asset/source naming retained."
+      }
+    },
+    {
+      "id": "frontify-tablet-campaign",
+      "file": "frontify-tablet-campaign.jpg",
+      "sha256": "dfc0058e0ab16c674593d39f77d97d1a5b039fb50357544626b9288d5c8fe29e",
+      "mimeType": "image/jpeg",
+      "width": 2000,
+      "height": 1333,
+      "source": {
+        "assetId": "283322",
+        "url": "https://weare.frontify.com/brands/1/media-libraries/2871/assets/283322",
+        "libraryUrl": "https://weare.frontify.com/brands/1/media-libraries/2871",
+        "name": "BL01.jpg",
+        "folder": "Guidelines / Visual world / Mockups",
+        "description": "Person holding a tablet showing brand content",
+        "cropGuidance": "Landscape card cover; keep tablet left of center and silhouette at right.",
+        "originalRenditionSha256": "7a3898af8d58714cd8423e785e1d7b7e73f3cef212172f0f30ce2e492957d47f",
+        "originalRenditionMimeType": "image/webp",
+        "nativeConversion": "JPEG quality95 via macOS sips; original dimensions retained; no content edits.",
+        "rights": "User-requested internal example use. No independent redistribution license claim; original asset/source naming retained."
+      }
+    },
+    {
+      "id": "frontify-creative-materials",
+      "file": "frontify-creative-materials.jpg",
+      "sha256": "4b66f85104b3ce524e3c18b9efdbb7829e9dd89c859e852274629493d67c47f3",
+      "mimeType": "image/jpeg",
+      "width": 1080,
+      "height": 900,
+      "source": {
+        "assetId": "283366",
+        "url": "https://weare.frontify.com/brands/1/media-libraries/2871/assets/283366",
+        "libraryUrl": "https://weare.frontify.com/brands/1/media-libraries/2871",
+        "name": "DTS_Grand_Design_Daniel_Farò_Photos_ID4108 by Image Studio by Image Studio.png",
+        "folder": "Identity / Culture",
+        "description": "Hands arranging colorful creative paper materials on a table",
+        "cropGuidance": "Square or landscape campaign-card cover; center crop keeps materials and hands.",
+        "originalRenditionSha256": "bc359fc5944151928befc3fa6b69537c14a2634976aa862090c162d85d876e79",
+        "originalRenditionMimeType": "image/webp",
+        "nativeConversion": "JPEG quality95 via macOS sips; original dimensions retained; no content edits.",
+        "rights": "User-requested internal example use. No independent redistribution license claim; original asset/source naming retained."
+      }
+    },
+    {
+      "id": "frontify-digital-touch",
+      "file": "frontify-digital-touch.jpg",
+      "sha256": "5324f0b286e4f515653748072bef4ecf2ceea74067df76f17a328ef0637f94df",
+      "mimeType": "image/jpeg",
+      "width": 1280,
+      "height": 1400,
+      "source": {
+        "assetId": "283367",
+        "url": "https://weare.frontify.com/brands/1/media-libraries/2871/assets/283367",
+        "libraryUrl": "https://weare.frontify.com/brands/1/media-libraries/2871",
+        "name": "DTS_The_Internet_Fanette_Guilloud_Photos_ID5236 (1) by Image Studio.png",
+        "folder": "Identity / Culture",
+        "description": "Warm close-up of fingertips against a blue and orange background",
+        "cropGuidance": "Portrait or square brand thumbnail; center crop preserves fingertips.",
+        "originalRenditionSha256": "b4acefca179f65eb717c68cbbbc312a011e217261965495d6c049fd5bf42968f",
+        "originalRenditionMimeType": "image/webp",
+        "nativeConversion": "JPEG quality95 via macOS sips; original dimensions retained; no content edits.",
+        "rights": "User-requested internal example use. No independent redistribution license claim; original asset/source naming retained."
+      }
+    },
+    {
+      "id": "frontify-notebook-work",
+      "file": "frontify-notebook-work.jpg",
+      "sha256": "026e6aad37548d6d9127f18784386452e29cb6eeff2b06774b5a38f0c2ad5799",
+      "mimeType": "image/jpeg",
+      "width": 2400,
+      "height": 1599,
+      "source": {
+        "assetId": "283374",
+        "url": "https://weare.frontify.com/brands/1/media-libraries/2871/assets/283374",
+        "libraryUrl": "https://weare.frontify.com/brands/1/media-libraries/2871",
+        "name": "DTS_Grand_Design_Daniel_Farò_Photos_ID4090 1.png",
+        "folder": "Identity / Culture",
+        "description": "Person writing in a notebook at a desk",
+        "cropGuidance": "Landscape library/asset card; center crop preserves writing hand and notebook.",
+        "originalRenditionSha256": "a7449c9f30b062bbc10b9149fb6fd7ec964fe1d825899d47af9cec6c665d3e5b",
+        "originalRenditionMimeType": "image/webp",
+        "nativeConversion": "JPEG quality95 via macOS sips; original dimensions retained; no content edits.",
+        "rights": "User-requested internal example use. No independent redistribution license claim; original asset/source naming retained."
+      }
+    }
+  ],
+  "notes": [
+    "User-authorized internal example fixtures in the private repository and Figma library; no external sharing authorization.",
+    "Selected real media with fictional example text and metadata. Canonical source links retained; no signed URLs or credentials.",
+    "WebP server renditions normalized once to Figma-supported JPEG; committed file bytes and SHA256 drive deterministic offline fills.",
+    "Preserve functional icons, token swatches, chart data and empty/error/loading states."
+  ]
+}

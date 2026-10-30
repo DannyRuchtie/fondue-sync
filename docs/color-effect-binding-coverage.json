@@ -149,147 +149,195 @@
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/brand-switcher/brand-thumb",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-core/swatches/swatch-0",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#0C284F"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionNavigationRail/page=libraries/rail/brand-switcher/brand-thumb",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-core/swatches/swatch-1",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#E3EBF6"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/brand-switcher/brand-thumb",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-core/swatches/swatch-2",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#4F5969"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionMobileBrandBar/page=guidelines/bottom-brand-bar/workspace/brand-thumb",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-core/swatches/swatch-3",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#FFFFFF"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionMobileBrandBar/page=libraries/bottom-brand-bar/workspace/brand-thumb",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-core/swatches/swatch-4",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#005EFF"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionMobileBrandBar/page=empty-libraries/bottom-brand-bar/workspace/brand-thumb",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-accent/swatches/swatch-0",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#B86769"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=wide/brand-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-accent/swatches/swatch-1",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#FFF56D"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=wide/brand-card/footer/brand-thumbnail",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes/palette-palette-accent/swatches/swatch-2",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#CE9484"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=desktop/brand-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-core/swatches/swatch-0",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#0C284F"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=desktop/brand-card/footer/brand-thumbnail",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-core/swatches/swatch-1",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#E3EBF6"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=mobile/brand-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-core/swatches/swatch-2",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#4F5969"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=mobile/brand-card/footer/brand-thumbnail",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-core/swatches/swatch-3",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#FFFFFF"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=wide/brand-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-core/swatches/swatch-4",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#005EFF"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=wide/brand-card/footer/brand-thumbnail",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-accent/color-table/color-0/preview-cell/preview",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#B86769"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=desktop/brand-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-accent/color-table/color-1/preview-cell/preview",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#FFF56D"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=desktop/brand-card/footer/brand-thumbnail",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=expanded/palettes/palette-palette-accent/color-table/color-2/preview-cell/preview",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#CE9484"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=mobile/brand-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-core/swatches/swatch-0",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#0C284F"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=mobile/brand-card/footer/brand-thumbnail",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-core/swatches/swatch-1",
       "field": "fill",
-      "value": "#DDD5F0"
+      "value": "#E3EBF6"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionGuidelineCard/viewport=wide/guideline-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-core/swatches/swatch-2",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#4F5969"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionGuidelineCard/viewport=desktop/guideline-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-core/swatches/swatch-3",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#FFFFFF"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionGuidelineCard/viewport=mobile/guideline-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-core/swatches/swatch-4",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#005EFF"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionLibraryCard/viewport=wide/library-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-accent/swatches/swatch-0",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#B86769"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionLibraryCard/viewport=desktop/library-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-accent/swatches/swatch-1",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#FFF56D"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/ProductionLibraryCard/viewport=mobile/library-card/banner",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=collapsed/palettes/palette-palette-accent/swatches/swatch-2",
       "field": "fill",
-      "value": "#CFE6D3"
+      "value": "#CE9484"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-core/swatches/swatch-0",
+      "field": "fill",
+      "value": "#0C284F"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-core/swatches/swatch-1",
+      "field": "fill",
+      "value": "#E3EBF6"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-core/swatches/swatch-2",
+      "field": "fill",
+      "value": "#4F5969"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-core/swatches/swatch-3",
+      "field": "fill",
+      "value": "#FFFFFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-core/swatches/swatch-4",
+      "field": "fill",
+      "value": "#005EFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-accent/color-table/color-0/preview-cell/preview",
+      "field": "fill",
+      "value": "#B86769"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-accent/color-table/color-1/preview-cell/preview",
+      "field": "fill",
+      "value": "#FFF56D"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionEssentialsPaletteList/viewport=mobile;state=expanded/palettes/palette-palette-accent/color-table/color-2/preview-cell/preview",
+      "field": "fill",
+      "value": "#CE9484"
     }
   ],
   "svgRules": [

@@ -1,0 +1,73 @@
+{
+  "renamedPageIds": [],
+  "updatedGuideIds": [],
+  "pages": [
+    {
+      "key": "Foundations",
+      "id": "4:2",
+      "name": "Library / Foundations"
+    },
+    {
+      "key": "Icons",
+      "id": "5:2",
+      "name": "Library / Icons"
+    },
+    {
+      "key": "Components",
+      "id": "5:8045",
+      "name": "Library / Components"
+    },
+    {
+      "key": "Charts",
+      "id": "5:20047",
+      "name": "Library / Charts"
+    },
+    {
+      "key": "Rich text",
+      "id": "5:20882",
+      "name": "Library / Rich text"
+    },
+    {
+      "key": "Product patterns",
+      "id": "5:20956",
+      "name": "Library / Product patterns"
+    },
+    {
+      "key": "Examples",
+      "id": "9:10",
+      "name": "Library / Examples"
+    },
+    {
+      "key": "Colors",
+      "id": "50:10",
+      "name": "Library / Colors"
+    },
+    {
+      "key": "Library masters - Charts",
+      "id": "51:14",
+      "name": "Source components / Charts"
+    },
+    {
+      "key": "Library masters - Components",
+      "id": "51:2251",
+      "name": "Source components / Components"
+    },
+    {
+      "key": "Library masters - Product patterns",
+      "id": "54:3628",
+      "name": "Source components / Product patterns"
+    },
+    {
+      "key": "Library masters - Rich text",
+      "id": "54:3921",
+      "name": "Source components / Rich text"
+    },
+    {
+      "key": "Library masters - Icons",
+      "id": "54:4008",
+      "name": "Source components / Icons"
+    }
+  ],
+  "warnings": [],
+  "affectedIds": []
+}

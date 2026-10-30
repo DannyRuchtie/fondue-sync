@@ -1,0 +1,50 @@
+{
+  "complete": true,
+  "checked": [
+    {
+      "id": "frontify-stock-collaboration",
+      "sha256": "e595dffec93a48dfbf57d54391aacd0676d1121f9378853e7dcb0e9f91af45a2",
+      "nativeHash": "823a186f1d9612a5760976ab3d321db374b01894",
+      "bytes": 490610,
+      "recreatedSameHash": true
+    },
+    {
+      "id": "frontify-laptop-campaign",
+      "sha256": "11480695dd415889f84ffd212afb09f7f74b3026b021eff378a358e99d0734a8",
+      "nativeHash": "289f92fe19531b610dca7f466ff50f4d26b9009f",
+      "bytes": 264562,
+      "recreatedSameHash": true
+    },
+    {
+      "id": "frontify-tablet-campaign",
+      "sha256": "dfc0058e0ab16c674593d39f77d97d1a5b039fb50357544626b9288d5c8fe29e",
+      "nativeHash": "9127c2c127b1850dd745be03b957546c1b82cb0f",
+      "bytes": 144699,
+      "recreatedSameHash": true
+    },
+    {
+      "id": "frontify-creative-materials",
+      "sha256": "4b66f85104b3ce524e3c18b9efdbb7829e9dd89c859e852274629493d67c47f3",
+      "nativeHash": "1def4e7b8b106ec60b49ecfa2db7acb964e0e38c",
+      "bytes": 175085,
+      "recreatedSameHash": true
+    },
+    {
+      "id": "frontify-digital-touch",
+      "sha256": "5324f0b286e4f515653748072bef4ecf2ceea74067df76f17a328ef0637f94df",
+      "nativeHash": "e9fbcf0d77a0719c40cd03b604e6c7010595b1b4",
+      "bytes": 488938,
+      "recreatedSameHash": true
+    },
+    {
+      "id": "frontify-notebook-work",
+      "sha256": "026e6aad37548d6d9127f18784386452e29cb6eeff2b06774b5a38f0c2ad5799",
+      "nativeHash": "8af6bc6a023641fdf3311cc0ce8d8da0bcceae2c",
+      "bytes": 497077,
+      "recreatedSameHash": true
+    }
+  ],
+  "affectedIds": [
+    "0:0"
+  ]
+}

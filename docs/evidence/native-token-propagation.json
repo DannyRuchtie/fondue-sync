@@ -1,0 +1,349 @@
+{
+  "fingerprint": "24f597b6dc70c9f3fc5ce7a928547486b27593eb3a42366ab60a7cc3b56270ed",
+  "scope": "Temporary variable values only; all modes restored. No canvas or ledger writes. affectedIds lists direct mutations and observed native consumers, not every indirectly propagated consumer.",
+  "method": "Temporary variable value changes observed through actual native consumer fields and linked styles; exact original values restored in finally.",
+  "notes": [
+    "Initial aggregate cornerRadius/strokeWeight candidate lookup did not find Figma's independent corner/edge bindings. A second targeted call verified all four corners and all four border edges."
+  ],
+  "results": [
+    {
+      "role": "fontSize",
+      "source": {
+        "recipe": "components/Text/color-default",
+        "variant": "size=x-small;weight=default;color=default",
+        "path": [
+          "root",
+          "content"
+        ],
+        "field": "fontSize",
+        "style": "text-body-x-small-default",
+        "token": "text-body-x-small-default-font-size"
+      },
+      "variableId": "VariableID:4:266",
+      "nodeId": "5:8059",
+      "styleId": "S:473aee1a3f518678a0b2507d4a256aa6625bbce2,",
+      "before": {
+        "value": 12,
+        "styleValue": 12
+      },
+      "during": {
+        "value": 14,
+        "styleValue": 14
+      },
+      "after": {
+        "value": 12,
+        "styleValue": 12
+      },
+      "changedResolvedValue": 14,
+      "observedPropagation": true,
+      "restored": true
+    },
+    {
+      "role": "lineHeight",
+      "source": {
+        "recipe": "components/Text/color-default",
+        "variant": "size=x-small;weight=default;color=default",
+        "path": [
+          "root",
+          "content"
+        ],
+        "field": "lineHeight",
+        "style": "text-body-x-small-default",
+        "token": "text-body-x-small-default-line-height"
+      },
+      "variableId": "VariableID:4:270",
+      "nodeId": "5:8059",
+      "styleId": "S:473aee1a3f518678a0b2507d4a256aa6625bbce2,",
+      "before": {
+        "value": {
+          "unit": "PIXELS",
+          "value": 16
+        },
+        "styleValue": {
+          "unit": "PIXELS",
+          "value": 16
+        }
+      },
+      "during": {
+        "value": {
+          "unit": "PIXELS",
+          "value": 18
+        },
+        "styleValue": {
+          "unit": "PIXELS",
+          "value": 18
+        }
+      },
+      "after": {
+        "value": {
+          "unit": "PIXELS",
+          "value": 16
+        },
+        "styleValue": {
+          "unit": "PIXELS",
+          "value": 16
+        }
+      },
+      "changedResolvedValue": 18,
+      "observedPropagation": true,
+      "restored": true
+    },
+    {
+      "role": "color",
+      "source": {
+        "recipe": "components/Divider/horizontal-solid",
+        "variant": "direction=horizontal;variant=solid;padding=none;color=weak",
+        "path": [
+          "root",
+          "line"
+        ],
+        "field": "fills",
+        "token": "color-line-subtle"
+      },
+      "variableId": "VariableID:4:84",
+      "nodeId": "5:8520",
+      "before": {
+        "value": {
+          "r": 0.529411792755127,
+          "g": 0.529411792755127,
+          "b": 0.5058823823928833,
+          "a": 0.20000000298023224
+        }
+      },
+      "during": {
+        "value": {
+          "r": 0.12300000339746475,
+          "g": 0.3449999988079071,
+          "b": 0.5669999718666077,
+          "a": 0.20000000298023224
+        }
+      },
+      "after": {
+        "value": {
+          "r": 0.529411792755127,
+          "g": 0.529411792755127,
+          "b": 0.5058823823928833,
+          "a": 0.20000000298023224
+        }
+      },
+      "changedResolvedValue": {
+        "r": 0.123,
+        "g": 0.345,
+        "b": 0.567,
+        "a": 0.20000000298023224
+      },
+      "observedPropagation": true,
+      "restored": true
+    },
+    {
+      "role": "itemSpacing",
+      "source": {
+        "recipe": "components/Divider/horizontal-dashed",
+        "variant": "direction=horizontal;variant=dashed;padding=none;color=weak",
+        "path": [
+          "root",
+          "line"
+        ],
+        "field": "itemSpacing",
+        "token": "component-constant-spacing-3"
+      },
+      "variableId": "VariableID:4:186",
+      "nodeId": "5:8545",
+      "before": {
+        "value": 3
+      },
+      "during": {
+        "value": 5
+      },
+      "after": {
+        "value": 3
+      },
+      "changedResolvedValue": 5,
+      "observedPropagation": true,
+      "restored": true
+    },
+    {
+      "role": "paddingLeft",
+      "source": {
+        "recipe": "components/Divider/vertical-solid",
+        "variant": "direction=vertical;variant=solid;padding=small;color=weak",
+        "path": [
+          "root"
+        ],
+        "field": "paddingLeft",
+        "token": "spacing-medium"
+      },
+      "variableId": "VariableID:4:205",
+      "nodeId": "5:9054",
+      "before": {
+        "value": 16
+      },
+      "during": {
+        "value": 18
+      },
+      "after": {
+        "value": 16
+      },
+      "changedResolvedValue": 18,
+      "observedPropagation": true,
+      "restored": true
+    },
+    {
+      "role": "shadow",
+      "source": {
+        "recipe": "components/Button/controls-001",
+        "variant": "variant=default;emphasis=default;rounding=medium;aspect=default;size=medium;state=focus",
+        "path": [
+          "button"
+        ],
+        "field": "effects",
+        "style": "source-focus-outline",
+        "token": "source-shadow-radius-0"
+      },
+      "variableId": "VariableID:4:196",
+      "nodeId": "5:10839",
+      "styleId": "S:f1ea73ecd21c3a55a5b9f58bf02ef8e29edb1300,",
+      "before": {
+        "value": 0,
+        "styleValue": 0
+      },
+      "during": {
+        "value": 2,
+        "styleValue": 2
+      },
+      "after": {
+        "value": 0,
+        "styleValue": 0
+      },
+      "changedResolvedValue": 2,
+      "observedPropagation": true,
+      "restored": true
+    },
+    {
+      "role": "cornerRadius",
+      "source": {
+        "recipe": "components/LoadingBar/default-rounded",
+        "variant": "variant=default;rounded=true;size=small;value=0",
+        "path": [
+          "root"
+        ],
+        "field": "cornerRadius",
+        "token": "border-radius-medium",
+        "nativeFields": [
+          "topLeftRadius",
+          "topRightRadius",
+          "bottomLeftRadius",
+          "bottomRightRadius"
+        ]
+      },
+      "variableId": "VariableID:4:5",
+      "nodeId": "5:9675",
+      "before": {
+        "value": {
+          "topLeftRadius": 4,
+          "topRightRadius": 4,
+          "bottomLeftRadius": 4,
+          "bottomRightRadius": 4
+        }
+      },
+      "during": {
+        "value": {
+          "topLeftRadius": 6,
+          "topRightRadius": 6,
+          "bottomLeftRadius": 6,
+          "bottomRightRadius": 6
+        }
+      },
+      "after": {
+        "value": {
+          "topLeftRadius": 4,
+          "topRightRadius": 4,
+          "bottomLeftRadius": 4,
+          "bottomRightRadius": 4
+        }
+      },
+      "changedResolvedValue": 6,
+      "observedPropagation": true,
+      "restored": true
+    },
+    {
+      "role": "strokeWeight",
+      "source": {
+        "recipe": "components/EditableText",
+        "variant": "state=hover;hugWidth=false",
+        "path": [
+          "root"
+        ],
+        "field": "strokeWeight",
+        "token": "border-width-default",
+        "nativeFields": [
+          "strokeTopWeight",
+          "strokeRightWeight",
+          "strokeBottomWeight",
+          "strokeLeftWeight"
+        ]
+      },
+      "variableId": "VariableID:4:9",
+      "nodeId": "5:9975",
+      "before": {
+        "value": {
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1
+        }
+      },
+      "during": {
+        "value": {
+          "strokeTopWeight": 3,
+          "strokeRightWeight": 3,
+          "strokeBottomWeight": 3,
+          "strokeLeftWeight": 3
+        }
+      },
+      "after": {
+        "value": {
+          "strokeTopWeight": 1,
+          "strokeRightWeight": 1,
+          "strokeBottomWeight": 1,
+          "strokeLeftWeight": 1
+        }
+      },
+      "changedResolvedValue": 3,
+      "observedPropagation": true,
+      "restored": true
+    }
+  ],
+  "affectedIds": [
+    "0:0",
+    "5:8045",
+    "5:8059",
+    "5:8046",
+    "5:8047",
+    "VariableID:4:266",
+    "S:473aee1a3f518678a0b2507d4a256aa6625bbce2,",
+    "VariableID:4:270",
+    "5:8520",
+    "5:8507",
+    "5:8508",
+    "VariableID:4:84",
+    "5:8545",
+    "5:8532",
+    "5:8533",
+    "VariableID:4:186",
+    "5:9054",
+    "5:9051",
+    "VariableID:4:205",
+    "5:10839",
+    "5:10837",
+    "VariableID:4:196",
+    "S:f1ea73ecd21c3a55a5b9f58bf02ef8e29edb1300,",
+    "5:9675",
+    "5:9676",
+    "VariableID:4:5",
+    "5:9975",
+    "5:9973",
+    "VariableID:4:9"
+  ],
+  "passed": true
+}

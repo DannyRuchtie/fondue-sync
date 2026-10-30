@@ -1,0 +1,408 @@
+{
+  "version": 1,
+  "release": "13.11.1",
+  "purpose": "Explicit user-authorized synthetic image-content replacement with approved offline Frontify imagery. Outer component, variant and image-root IDs remain stable.",
+  "approvals": [
+    {
+      "id": "patterns/ProductionNavigationRail",
+      "beforeSha256": "1096ab168b9bd7f1e01117832e023e2117f396cb87645ea0b505b338b2da5551",
+      "afterSha256": "61a1fa5fb4327de9fb5b0f440f72449067a34e3ad81243e1bc1dc29eb6f60c3b",
+      "removals": [
+        {
+          "variantId": "page=guidelines",
+          "path": "/rail/brand-switcher/brand-thumb/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/rail/brand-switcher/brand-thumb"
+        },
+        {
+          "variantId": "page=libraries",
+          "path": "/rail/brand-switcher/brand-thumb/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/rail/brand-switcher/brand-thumb"
+        },
+        {
+          "variantId": "page=empty-libraries",
+          "path": "/rail/brand-switcher/brand-thumb/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/rail/brand-switcher/brand-thumb"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionMobileBrandBar",
+      "beforeSha256": "0ec586140b9f45a7e36ec63e76b1ed1a0dc81579ba5d61d705f69da74379aa6a",
+      "afterSha256": "e4a204e1688ad524a32d9250ce05ce26893ba95d5871a6034032019f46fa2484",
+      "removals": [
+        {
+          "variantId": "page=guidelines",
+          "path": "/bottom-brand-bar/workspace/brand-thumb/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/bottom-brand-bar/workspace/brand-thumb"
+        },
+        {
+          "variantId": "page=libraries",
+          "path": "/bottom-brand-bar/workspace/brand-thumb/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/bottom-brand-bar/workspace/brand-thumb"
+        },
+        {
+          "variantId": "page=empty-libraries",
+          "path": "/bottom-brand-bar/workspace/brand-thumb/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/bottom-brand-bar/workspace/brand-thumb"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionBrandCard",
+      "beforeSha256": "a58bb7e8571deb3296fdb167fa72652206353afd2d2b9608ffbd94093b07949b",
+      "afterSha256": "d2c1b8526908bd6a6cec6d15a509528624f763e9da0d8f988a57b20297616342",
+      "removals": [
+        {
+          "variantId": "brand=brand-spruce;viewport=wide",
+          "path": "/brand-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=wide",
+          "path": "/brand-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=wide",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=wide",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=wide",
+          "path": "/brand-card/footer/brand-thumbnail/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/brand-card/footer/brand-thumbnail"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=desktop",
+          "path": "/brand-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=desktop",
+          "path": "/brand-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=desktop",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=desktop",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=desktop",
+          "path": "/brand-card/footer/brand-thumbnail/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/brand-card/footer/brand-thumbnail"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=mobile",
+          "path": "/brand-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=mobile",
+          "path": "/brand-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=mobile",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=mobile",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-spruce;viewport=mobile",
+          "path": "/brand-card/footer/brand-thumbnail/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/brand-card/footer/brand-thumbnail"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=wide",
+          "path": "/brand-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=wide",
+          "path": "/brand-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=wide",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=wide",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=wide",
+          "path": "/brand-card/footer/brand-thumbnail/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/brand-card/footer/brand-thumbnail"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=desktop",
+          "path": "/brand-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=desktop",
+          "path": "/brand-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=desktop",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=desktop",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=desktop",
+          "path": "/brand-card/footer/brand-thumbnail/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/brand-card/footer/brand-thumbnail"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=mobile",
+          "path": "/brand-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=mobile",
+          "path": "/brand-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=mobile",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=mobile",
+          "path": "/brand-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/brand-card/banner"
+        },
+        {
+          "variantId": "brand=brand-orbit;viewport=mobile",
+          "path": "/brand-card/footer/brand-thumbnail/initial",
+          "kind": "componentInstance",
+          "imageRootPath": "/brand-card/footer/brand-thumbnail"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionGuidelineCard",
+      "beforeSha256": "7dadbaef9ea00f409c81484be1ffed800991af9e01aa947a3c3e82ed8486dc9b",
+      "afterSha256": "5b23227343e3e7334d9304abcdc565ed3a287250201575aa5079e725e6db6946",
+      "removals": [
+        {
+          "variantId": "viewport=wide",
+          "path": "/guideline-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=wide",
+          "path": "/guideline-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=wide",
+          "path": "/guideline-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=wide",
+          "path": "/guideline-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/guideline-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/guideline-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/guideline-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/guideline-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/guideline-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/guideline-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/guideline-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/guideline-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/guideline-card/banner"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionLibraryCard",
+      "beforeSha256": "cd1ff04ad9bc99c33b24269d965fe61dccb61151adc490fccb7e345f1f5768d1",
+      "afterSha256": "05a53dc770a0e648758d41394bbf1338521e733ca63a3641d5adb52dd3385dea",
+      "removals": [
+        {
+          "variantId": "viewport=wide",
+          "path": "/library-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=wide",
+          "path": "/library-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=wide",
+          "path": "/library-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=wide",
+          "path": "/library-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/library-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/library-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/library-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=desktop",
+          "path": "/library-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/library-card/banner/artwork-band",
+          "kind": "rectangle",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/library-card/banner/artwork-motif",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/library-card/banner/artwork-motif/artwork-circle",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        },
+        {
+          "variantId": "viewport=mobile",
+          "path": "/library-card/banner/artwork-motif/artwork-circle-secondary",
+          "kind": "frame",
+          "imageRootPath": "/library-card/banner"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionLibrariesEmptyState",
+      "beforeSha256": "04990e8abb0dacb1162d0be78fec0d192a64ba315a3989a1de53cd84e8c7bc18",
+      "afterSha256": "1485ab47d486b37c70594c39401bda85cba9bbba3df50c2ff65cac5afa105212",
+      "removals": []
+    }
+  ]
+}

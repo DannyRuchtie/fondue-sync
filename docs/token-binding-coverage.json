@@ -6,37 +6,55 @@
     "derivedVariables": [
       "component-constant-radius-0",
       "component-constant-radius-1",
+      "component-constant-radius-1-point-6018735362997658",
       "component-constant-radius-10",
+      "component-constant-radius-10-point-812646370023419",
+      "component-constant-radius-24-point-028103044496486",
+      "component-constant-radius-27",
+      "component-constant-radius-28-point-0327868852459",
       "component-constant-radius-3",
       "component-constant-radius-6",
+      "component-constant-radius-6-point-407494145199063",
+      "component-constant-radius-60",
+      "component-constant-radius-70",
       "component-constant-radius-9999",
       "component-constant-spacing-0",
       "component-constant-spacing-1",
       "component-constant-spacing-10",
+      "component-constant-spacing-128",
       "component-constant-spacing-14",
+      "component-constant-spacing-18",
       "component-constant-spacing-2",
       "component-constant-spacing-20",
+      "component-constant-spacing-254",
       "component-constant-spacing-28",
       "component-constant-spacing-3",
-      "component-constant-spacing-33-point-96875",
-      "component-constant-spacing-38-point-775",
-      "component-constant-spacing-42-point-75",
+      "component-constant-spacing-34",
+      "component-constant-spacing-36",
+      "component-constant-spacing-4-point-805620608899297",
       "component-constant-spacing-48",
       "component-constant-spacing-6",
-      "component-constant-spacing-76"
+      "component-constant-spacing-64",
+      "component-constant-spacing-7",
+      "component-constant-spacing-7-point-208430913348947",
+      "component-constant-spacing-72",
+      "component-constant-spacing-76",
+      "component-constant-spacing-8-point-00936768149883",
+      "component-constant-spacing-80",
+      "component-constant-spacing-96"
     ],
     "constantOrigin": "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
   },
   "counts": {
-    "layers": 11093,
-    "existingBindings": 1185,
-    "addedReleasedBindings": 6084,
-    "addedConstantBindings": 25008,
-    "framePaddingBindings": 19688,
-    "gapBindings": 4888,
-    "radiusBindings": 5784,
-    "borderWidthBindings": 732,
-    "derivedVariables": 20,
+    "layers": 13770,
+    "existingBindings": 1326,
+    "addedReleasedBindings": 7783,
+    "addedConstantBindings": 30818,
+    "framePaddingBindings": 24524,
+    "gapBindings": 6122,
+    "radiusBindings": 7156,
+    "borderWidthBindings": 799,
+    "derivedVariables": 38,
     "exceptions": 0,
     "notApplicable": 205
   },
@@ -166,6 +184,7 @@
           "packages/components/src/components/AssetInput/AssetInputMetadataItem.tsx",
           "packages/components/src/components/AssetInput/AssetInputPlaceholder.tsx",
           "packages/components/src/components/AssetInput/AssetInputPreview.tsx",
+          "packages/components/src/components/AssetInput/AssetInputPreviewImage.tsx",
           "packages/components/src/components/AssetInput/AssetInputRoot.tsx",
           "packages/components/src/components/AssetInput/styles/asset-input.module.scss",
           "packages/components/src/components/Box/Box.tsx",
@@ -586,7 +605,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 4949
+        "occurrences": 5972
       }
     },
     {
@@ -633,6 +652,46 @@
       }
     },
     {
+      "id": "component-constant-radius-1-point-6018735362997658",
+      "value": 1.6018735362997658,
+      "css": "1.6018735362997658px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 1.6018735362997658,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/photo-card-1",
+            "value": 1.6018735362997658,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/photo-card-2",
+            "value": 1.6018735362997658,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/photo-card-3",
+            "value": 1.6018735362997658,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 4
+      }
+    },
+    {
       "id": "component-constant-radius-10",
       "value": 10,
       "css": "10px",
@@ -672,6 +731,146 @@
       }
     },
     {
+      "id": "component-constant-radius-10-point-812646370023419",
+      "value": 10.812646370023419,
+      "css": "10.812646370023419px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 10.812646370023419,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/automation-pill",
+            "value": 10.812646370023419,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/generate",
+            "value": 10.812646370023419,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
+            "value": 10.812646370023419,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 5
+      }
+    },
+    {
+      "id": "component-constant-radius-24-point-028103044496486",
+      "value": 24.028103044496486,
+      "css": "24.028103044496486px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 24.028103044496486,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-path",
+            "value": 24.028103044496486,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 1
+      }
+    },
+    {
+      "id": "component-constant-radius-27",
+      "value": 27,
+      "css": "27px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 27,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/hero/automation-hero/automation-pill",
+            "value": 27,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/hero/automation-hero/generate-controls/generate",
+            "value": 27,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/hero/automation-hero/generate-controls/property-0",
+            "value": 27,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 10
+      }
+    },
+    {
+      "id": "component-constant-radius-28-point-0327868852459",
+      "value": 28.0327868852459,
+      "css": "28.0327868852459px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 28.0327868852459,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/automation-path",
+            "value": 28.0327868852459,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 1
+      }
+    },
+    {
       "id": "component-constant-radius-3",
       "value": 3,
       "css": "3px",
@@ -683,9 +882,16 @@
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
         "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
           "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
           "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
           "packages/components/src/components/SegmentedControl/styles/segmentedControl.module.scss",
+          "packages/components/src/components/Text/Text.tsx",
           "packages/components/src/utilities/focusStyle.module.scss"
         ],
         "examples": [
@@ -705,7 +911,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 96
+        "occurrences": 99
       }
     },
     {
@@ -753,6 +959,106 @@
           }
         ],
         "occurrences": 16
+      }
+    },
+    {
+      "id": "component-constant-radius-6-point-407494145199063",
+      "value": 6.407494145199063,
+      "css": "6.407494145199063px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 6.407494145199063,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/asset-card-outline",
+            "value": 6.407494145199063,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 1
+      }
+    },
+    {
+      "id": "component-constant-radius-60",
+      "value": 60,
+      "css": "60px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 60,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/hero/automation-hero/generate-path",
+            "value": 60,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/hero/automation-hero/generate-path",
+            "value": 60,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 2
+      }
+    },
+    {
+      "id": "component-constant-radius-70",
+      "value": 70,
+      "css": "70px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "radius",
+        "value": 70,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/hero/automation-hero/automation-path",
+            "value": 70,
+            "role": "radius"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/hero/automation-hero/automation-path",
+            "value": 70,
+            "role": "radius"
+          }
+        ],
+        "occurrences": 2
       }
     },
     {
@@ -815,7 +1121,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 119
+        "occurrences": 97
       }
     },
     {
@@ -943,6 +1249,7 @@
           "packages/components/src/components/AssetInput/AssetInputMetadataItem.tsx",
           "packages/components/src/components/AssetInput/AssetInputPlaceholder.tsx",
           "packages/components/src/components/AssetInput/AssetInputPreview.tsx",
+          "packages/components/src/components/AssetInput/AssetInputPreviewImage.tsx",
           "packages/components/src/components/AssetInput/AssetInputRoot.tsx",
           "packages/components/src/components/AssetInput/styles/asset-input.module.scss",
           "packages/components/src/components/Box/Box.tsx",
@@ -1383,7 +1690,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 18819
+        "occurrences": 23477
       }
     },
     {
@@ -1435,8 +1742,15 @@
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
         "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
           "packages/components/src/components/ScrollArea/ScrollArea.tsx",
-          "packages/components/src/components/ScrollArea/styles/scrollArea.module.scss"
+          "packages/components/src/components/ScrollArea/styles/scrollArea.module.scss",
+          "packages/components/src/components/Text/Text.tsx"
         ],
         "examples": [
           {
@@ -1455,7 +1769,41 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 40
+        "occurrences": 41
+      }
+    },
+    {
+      "id": "component-constant-spacing-128",
+      "value": 128,
+      "css": "128px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 128,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "recipes/examples.mjs"
+        ],
+        "examples": [
+          {
+            "path": "example:examples/production-search-blank-desktop/screen/main/page-header/tabs",
+            "value": 128,
+            "role": "spacing"
+          },
+          {
+            "path": "example:examples/production-essentials-colors-collapsed-desktop/screen/main/page-header/tabs",
+            "value": 128,
+            "role": "spacing"
+          },
+          {
+            "path": "example:examples/production-essentials-colors-expanded-desktop/screen/main/page-header/tabs",
+            "value": 128,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 5
       }
     },
     {
@@ -1475,7 +1823,14 @@
           "packages/charts/src/components/common/helpers/accessors.ts",
           "packages/charts/src/index.scss",
           "packages/charts/src/theme/consts.ts",
-          "packages/charts/src/utilities/text.module.scss"
+          "packages/charts/src/utilities/text.module.scss",
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
         ],
         "examples": [
           {
@@ -1486,6 +1841,46 @@
           {
             "path": "charts/ChartHeading/description=Usage during the last quarter;icon=information/heading/description-wrapper",
             "value": 14,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionEssentialsPaletteList/viewport=desktop;state=collapsed/palettes",
+            "value": 14,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 4
+      }
+    },
+    {
+      "id": "component-constant-spacing-18",
+      "value": 18,
+      "css": "18px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 18,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/hero/automation-hero/generate-controls/generate",
+            "value": 18,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/hero/automation-hero/generate-controls/generate",
+            "value": 18,
             "role": "spacing"
           }
         ],
@@ -1521,12 +1916,19 @@
           "packages/components/src/components/Badge/styles/badgestatus.module.scss",
           "packages/components/src/components/Badge/types.ts",
           "packages/components/src/components/Badge/utils.ts",
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
           "packages/components/src/components/ScrollArea/ScrollArea.tsx",
           "packages/components/src/components/ScrollArea/styles/scrollArea.module.scss",
           "packages/components/src/components/Tag/Tag.metadata.json",
           "packages/components/src/components/Tag/Tag.tsx",
           "packages/components/src/components/Tag/index.ts",
           "packages/components/src/components/Tag/styles/tag.module.scss",
+          "packages/components/src/components/Text/Text.tsx",
           "packages/components/src/components/Tree/Tree.ts",
           "packages/components/src/components/Tree/components/TreeRoot.tsx",
           "packages/components/src/components/Tree/components/TreeRow.tsx",
@@ -1552,7 +1954,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 284
+        "occurrences": 324
       }
     },
     {
@@ -1585,7 +1987,8 @@
           "packages/components/src/components/Select/SelectSingle.tsx",
           "packages/components/src/components/Select/components/SelectItem.tsx",
           "packages/components/src/components/Select/styles/select.module.scss",
-          "packages/components/src/components/Text/Text.tsx"
+          "packages/components/src/components/Text/Text.tsx",
+          "recipes/examples.mjs"
         ],
         "examples": [
           {
@@ -1604,7 +2007,36 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 24
+        "occurrences": 61
+      }
+    },
+    {
+      "id": "component-constant-spacing-254",
+      "value": 254,
+      "css": "254px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 254,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "recipes/examples.mjs"
+        ],
+        "examples": [
+          {
+            "path": "example:examples/production-essentials-colors-collapsed-mobile/screen/main/page-header/tabs",
+            "value": 254,
+            "role": "spacing"
+          },
+          {
+            "path": "example:examples/production-essentials-colors-expanded-mobile/screen/main/page-header/tabs",
+            "value": 254,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 2
       }
     },
     {
@@ -1678,13 +2110,13 @@
       }
     },
     {
-      "id": "component-constant-spacing-33-point-96875",
-      "value": 33.96875,
-      "css": "33.96875px",
+      "id": "component-constant-spacing-34",
+      "value": 34,
+      "css": "34px",
       "provenance": {
         "origin": "reviewed-native-recipe-constant",
         "role": "spacing",
-        "value": 33.96875,
+        "value": 34,
         "unit": "px",
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
@@ -1699,32 +2131,22 @@
         ],
         "examples": [
           {
-            "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=desktop/brand-card/banner/artwork-motif",
-            "value": 33.96875,
-            "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=desktop/brand-card/banner/artwork-motif",
-            "value": 33.96875,
-            "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionGuidelineCard/viewport=desktop/guideline-card/banner/artwork-motif",
-            "value": 33.96875,
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body",
+            "value": 34,
             "role": "spacing"
           }
         ],
-        "occurrences": 4
+        "occurrences": 1
       }
     },
     {
-      "id": "component-constant-spacing-38-point-775",
-      "value": 38.775,
-      "css": "38.775px",
+      "id": "component-constant-spacing-36",
+      "value": 36,
+      "css": "36px",
       "provenance": {
         "origin": "reviewed-native-recipe-constant",
         "role": "spacing",
-        "value": 38.775,
+        "value": 36,
         "unit": "px",
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
@@ -1739,32 +2161,27 @@
         ],
         "examples": [
           {
-            "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=wide/brand-card/banner/artwork-motif",
-            "value": 38.775,
+            "path": "patterns/ProductionHelpDialog/viewport=desktop/help-dialog/header",
+            "value": 36,
             "role": "spacing"
           },
           {
-            "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=wide/brand-card/banner/artwork-motif",
-            "value": 38.775,
-            "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionGuidelineCard/viewport=wide/guideline-card/banner/artwork-motif",
-            "value": 38.775,
+            "path": "patterns/ProductionHelpDialog/viewport=mobile/help-dialog/header",
+            "value": 36,
             "role": "spacing"
           }
         ],
-        "occurrences": 4
+        "occurrences": 2
       }
     },
     {
-      "id": "component-constant-spacing-42-point-75",
-      "value": 42.75,
-      "css": "42.75px",
+      "id": "component-constant-spacing-4-point-805620608899297",
+      "value": 4.805620608899297,
+      "css": "4.805620608899297px",
       "provenance": {
         "origin": "reviewed-native-recipe-constant",
         "role": "spacing",
-        "value": 42.75,
+        "value": 4.805620608899297,
         "unit": "px",
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
@@ -1779,22 +2196,22 @@
         ],
         "examples": [
           {
-            "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=mobile/brand-card/banner/artwork-motif",
-            "value": 42.75,
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/automation-pill",
+            "value": 4.805620608899297,
             "role": "spacing"
           },
           {
-            "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=mobile/brand-card/banner/artwork-motif",
-            "value": 42.75,
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/generate",
+            "value": 4.805620608899297,
             "role": "spacing"
           },
           {
-            "path": "patterns/ProductionGuidelineCard/viewport=mobile/guideline-card/banner/artwork-motif",
-            "value": 42.75,
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
+            "value": 4.805620608899297,
             "role": "spacing"
           }
         ],
-        "occurrences": 4
+        "occurrences": 8
       }
     },
     {
@@ -1809,8 +2226,15 @@
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
         "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
           "packages/components/src/components/Divider/Divider.tsx",
-          "packages/components/src/components/Divider/styles/divider.module.scss"
+          "packages/components/src/components/Divider/styles/divider.module.scss",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
         ],
         "examples": [
           {
@@ -1829,7 +2253,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 36
+        "occurrences": 42
       }
     },
     {
@@ -1853,8 +2277,13 @@
           "packages/components/src/components/Button/Button.metadata.json",
           "packages/components/src/components/Button/Button.tsx",
           "packages/components/src/components/Button/styles/button.module.scss",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
           "packages/components/src/components/EditableText/EditableText.tsx",
           "packages/components/src/components/EditableText/styles/editable-text.module.scss",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
           "packages/components/src/components/SplitButton/SplitButton.metadata.json",
           "packages/components/src/components/SplitButton/SplitButton.tsx",
           "packages/components/src/components/SplitButton/styles/splitButton.module.scss",
@@ -1862,6 +2291,7 @@
           "packages/components/src/components/Tag/Tag.tsx",
           "packages/components/src/components/Tag/index.ts",
           "packages/components/src/components/Tag/styles/tag.module.scss",
+          "packages/components/src/components/Text/Text.tsx",
           "packages/components/src/components/TextInput/TextInput.metadata.json",
           "packages/components/src/components/TextInput/TextInput.tsx",
           "packages/components/src/components/TextInput/styles/text.module.scss",
@@ -1889,7 +2319,147 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 283
+        "occurrences": 293
+      }
+    },
+    {
+      "id": "component-constant-spacing-64",
+      "value": 64,
+      "css": "64px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 64,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/agentic-heading",
+            "value": 64,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 1
+      }
+    },
+    {
+      "id": "component-constant-spacing-7",
+      "value": 7,
+      "css": "7px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 7,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-header/tabs/unread/count",
+            "value": 7,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-header/tabs/unread/count",
+            "value": 7,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionNotificationsDrawer/viewport=mobile/notification-drawer/notification-header/tabs/unread/count",
+            "value": 7,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 4
+      }
+    },
+    {
+      "id": "component-constant-spacing-7-point-208430913348947",
+      "value": 7.208430913348947,
+      "css": "7.208430913348947px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 7.208430913348947,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/generate",
+            "value": 7.208430913348947,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 1
+      }
+    },
+    {
+      "id": "component-constant-spacing-72",
+      "value": 72,
+      "css": "72px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 72,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/agentic-heading",
+            "value": 72,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/agentic-heading",
+            "value": 72,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/agentic-heading",
+            "value": 72,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 3
       }
     },
     {
@@ -1910,16 +2480,122 @@
           "packages/components/src/components/Card/CardRoot.tsx",
           "packages/components/src/components/Heading/Heading.tsx",
           "packages/components/src/components/Link/Link.tsx",
-          "packages/components/src/components/Text/Text.tsx"
+          "packages/components/src/components/Text/Text.tsx",
+          "recipes/examples.mjs"
         ],
         "examples": [
           {
             "path": "patterns/ProductionPageHeader/page=libraries;viewport=mobile/page-header/tabs-row",
             "value": 76,
             "role": "spacing"
+          },
+          {
+            "path": "example:examples/production-account-settings-mobile/screen/main/page-header/tabs-row",
+            "value": 76,
+            "role": "spacing"
+          },
+          {
+            "path": "example:examples/production-user-menu-mobile/screen/main/page-header/tabs-row",
+            "value": 76,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 6
+      }
+    },
+    {
+      "id": "component-constant-spacing-8-point-00936768149883",
+      "value": 8.00936768149883,
+      "css": "8.00936768149883px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 8.00936768149883,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/automation-pill",
+            "value": 8.00936768149883,
+            "role": "spacing"
           }
         ],
         "occurrences": 1
+      }
+    },
+    {
+      "id": "component-constant-spacing-80",
+      "value": 80,
+      "css": "80px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 80,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body",
+            "value": 80,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 1
+      }
+    },
+    {
+      "id": "component-constant-spacing-96",
+      "value": 96,
+      "css": "96px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "spacing",
+        "value": 96,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body",
+            "value": 96,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
+            "value": 96,
+            "role": "spacing"
+          }
+        ],
+        "occurrences": 2
       }
     }
   ],

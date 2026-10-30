@@ -1,3 +1,4 @@
+import { loadImageAssets, enrichImageReferences } from "./image-assets.mjs";
 import { augmentTypographyBindings } from "../recipes/typography-bindings.mjs";
 import fs from "node:fs";
 import { augmentTokenBindings } from "../recipes/token-bindings.mjs";
@@ -359,14 +360,28 @@ export async function build(source = path.join(root, ".cache/release")) {
   const families = new Set(
     overrides.map((r) => normalize(r.package) + ":" + r.name.split("/")[0]),
   );
-  const { patterns: examplePatterns, screens: examples } = await import(
+  const authoredExamples = await import(
     path.join(root, "recipes/examples.mjs")
   );
+  const additionalFile = path.join(root, "recipes/additional-examples.mjs");
+  const examplePatterns = [
+    ...authoredExamples.patterns,
+    ...(authoredExamples.additionalPatterns ?? []),
+  ];
+  const examples = [
+    ...authoredExamples.screens,
+    ...(authoredExamples.additionalScreens ?? []),
+  ];
+  const mediaFile = path.join(root, "recipes/media-components.mjs");
+  const mediaRecipes = fs.existsSync(mediaFile)
+    ? (await import(mediaFile)).default
+    : [];
   const recipes = [
     ...baseRecipes.filter(
       (r) => !families.has(normalize(r.package) + ":" + r.name.split("/")[0]),
     ),
     ...overrides,
+    ...mediaRecipes,
     ...examplePatterns,
   ];
   for (const r of recipes) {
@@ -520,6 +535,9 @@ export async function build(source = path.join(root, ".cache/release")) {
           "colors.ts",
           "galleries.ts",
           "documentation.ts",
+          "images.ts",
+          "image-migrations.ts",
+          "image-migration-approvals.json",
         ]
           .map((f) => fs.readFileSync(path.join(root, "src", f), "utf8"))
           .join("\n"),
@@ -534,6 +552,9 @@ export async function build(source = path.join(root, ".cache/release")) {
           ]),
         ),
         builder: sha(fs.readFileSync(fileURLToPath(import.meta.url))),
+        imageBuilder: sha(
+          fs.readFileSync(path.join(root, "scripts/image-assets.mjs")),
+        ),
         recipes: Object.fromEntries(
           [
             "index",
@@ -545,10 +566,15 @@ export async function build(source = path.join(root, ".cache/release")) {
             "token-bindings",
             "paint-bindings",
             "typography-bindings",
-          ].map((name) => {
-            const f = path.join(root, "recipes", name + ".mjs");
-            return [path.relative(root, f), sha(fs.readFileSync(f))];
-          }),
+          ]
+            .concat(
+              fs.existsSync(additionalFile) ? ["additional-examples"] : [],
+              fs.existsSync(mediaFile) ? ["media-components"] : [],
+            )
+            .map((name) => {
+              const f = path.join(root, "recipes", name + ".mjs");
+              return [path.relative(root, f), sha(fs.readFileSync(f))];
+            }),
         ),
       },
       inputs: Object.fromEntries(
@@ -561,16 +587,26 @@ export async function build(source = path.join(root, ".cache/release")) {
     recipes,
     examples,
     fixtures: Object.fromEntries(
-      files(path.join(root, "fixtures")).map((f) => [
-        path.basename(f, ".json"),
-        JSON.parse(fs.readFileSync(f, "utf8")),
-      ]),
+      files(path.join(root, "fixtures"))
+        .filter(
+          (f) =>
+            path.extname(f) === ".json" &&
+            !f.startsWith(path.join(root, "fixtures/media") + path.sep),
+        )
+        .map((f) => [
+          path.basename(f, ".json"),
+          JSON.parse(fs.readFileSync(f, "utf8")),
+        ]),
     ),
     inventory,
     compounds,
     stories,
     gaps,
   };
+  const imageCoverage = enrichImageReferences(
+    bundle,
+    loadImageAssets(path.join(root, "fixtures/media/manifest.json")),
+  );
   const tokenBindingCoverage = augmentTokenBindings(bundle);
   const paintBindingCoverage = augmentPaintBindings(bundle, {
     sourceRoot: source,
@@ -612,6 +648,13 @@ export async function build(source = path.join(root, ".cache/release")) {
       recipes: recipes.length,
       variants: recipes.reduce((n, r) => n + r.variants.length, 0),
       examples: examples.length,
+      ...(imageCoverage.assets
+        ? {
+            imageAssets: imageCoverage.assets,
+            imageReferences: imageCoverage.references,
+            imageEncodedBytes: imageCoverage.encodedBytes,
+          }
+        : {}),
       productPatterns: examplePatterns.length,
       documentedSets: recipes.filter((r) => r.documentation?.description)
         .length,

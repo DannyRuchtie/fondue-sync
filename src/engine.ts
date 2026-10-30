@@ -1,3 +1,9 @@
+import {
+  applyApprovedImageMigration,
+  imageMigrationProblems,
+  validateImageMigrationOwnership,
+} from "./image-migrations";
+import { validatedImageBytes } from "./images";
 import type { Bundle, Layer, Recipe, Token } from "./schema";
 import {
   canonical,
@@ -23,6 +29,7 @@ type Index = {
   lastErrors?: string[];
   release?: string;
   fingerprint?: string;
+  imageHashes?: Record<string, string>;
   assets: Record<string, { id: string; kind: Entry["kind"] }>;
   collections: Record<string, string>;
   pages: Record<string, string>;
@@ -58,6 +65,7 @@ export class SyncEngine {
   fonts = new Map<string, Promise<FontName>>();
   availableFonts?: Promise<Font[]>;
   tokenCache = new Map<string, Variable>();
+  imageCache = new Map<string, string>();
   appliedPropertyDefaults = new Set<string>();
   lastSavedIndex: string | undefined;
   shardPayloads = new Map<number, string>();
@@ -620,6 +628,24 @@ export class SyncEngine {
       if (def.textCase) node.textCase = def.textCase;
     }
   }
+  /** Native image resources are reused by content SHA; source definitions contain no native hashes. */
+  imageHash(id: string, digest: string | undefined): string {
+    const asset = this.bundle.imageAssets?.find((image) => image.id === id);
+    if (!asset || !digest || digest !== asset.sha256)
+      throw Error("Missing or mismatched offline image: " + id);
+    const cached =
+      this.imageCache.get(digest) ?? this.index.imageHashes?.[digest];
+    if (cached && this.api.getImageByHash(cached)) {
+      this.imageCache.set(digest, cached);
+      return cached;
+    }
+    const bytes = validatedImageBytes(asset);
+    const image = this.api.createImage(bytes);
+    if (!image?.hash) throw Error("Native image creation failed: " + id);
+    this.imageCache.set(digest, image.hash);
+    (this.index.imageHashes ??= {})[digest] = image.hash;
+    return image.hash;
+  }
   async layer(
     def: Layer,
     parent: any,
@@ -627,6 +653,21 @@ export class SyncEngine {
     owner?: any,
     path = "",
   ): Promise<any> {
+    // Validate/resolve before allocating or changing this layer; missing images never degrade to placeholders.
+    if (
+      def.imageAssetId &&
+      (!["frame", "rectangle"].includes(def.kind) ||
+        def.fill ||
+        def.bindings?.fills)
+    )
+      throw Error(
+        "Offline image requires an exclusive editable frame/rectangle fill: " +
+          def.id,
+      );
+    const imageHash = def.imageAssetId
+      ? this.imageHash(def.imageAssetId, def.imageAssetSha256)
+      : undefined;
+    const creatingLayer = !existing;
     let node = existing;
     const identityPath = path + "/" + def.id;
     if (def.kind === "componentInstance") {
@@ -750,7 +791,10 @@ export class SyncEngine {
                 : this.api.createFrame();
       parent.appendChild(node);
     }
-    const previousLayer = read(node, "layer-definition");
+    // Figma copies/inherits main-component shared data into fresh instances. It is
+    // not this instance's previous authored layer definition and must not clear
+    // the main's padding/gap/effect/style bindings as if they were removed overrides.
+    const previousLayer = creatingLayer ? "" : read(node, "layer-definition");
     const previous = previousLayer ? JSON.parse(previousLayer) : null;
     if (def.kind === "instance" && previous?.iconColor && !def.iconColor)
       node.resetOverrides();
@@ -916,7 +960,23 @@ export class SyncEngine {
       def.kind !== "instance" &&
       def.kind !== "componentInstance"
     ) {
-      node.fills = def.fill ? [this.paint(def.fill)] : [];
+      node.fills = imageHash
+        ? [
+            {
+              type: "IMAGE",
+              imageHash,
+              scaleMode: def.imageScaleMode ?? "FILL",
+              ...(def.imageTransform
+                ? { imageTransform: def.imageTransform }
+                : {}),
+              ...(def.imageScalingFactor !== undefined
+                ? { scalingFactor: def.imageScalingFactor }
+                : {}),
+            },
+          ]
+        : def.fill
+          ? [this.paint(def.fill)]
+          : [];
       node.strokes = def.stroke ? [this.paint(def.stroke)] : [];
       if (
         ["FRAME", "COMPONENT", "RECTANGLE"].includes(node.type) &&
@@ -1139,6 +1199,26 @@ export class SyncEngine {
     return adoption.map((item) => item.node.id);
   }
   async applyRecipe(recipe: Recipe, set: any) {
+    await applyApprovedImageMigration(
+      this.api,
+      set,
+      recipe,
+      async (pending) => {
+        await this.checkpoint(
+          {
+            id: "recipe:" + recipe.id,
+            kind: "recipe",
+            definition: canonical({
+              ...pending,
+              ...(this.bundle.provenance.rendererRevision
+                ? { rendererRevision: this.bundle.provenance.rendererRevision }
+                : {}),
+            }),
+          },
+          set,
+        );
+      },
+    );
     await this.recoverPendingRecipe(set, recipe);
     set.clipsContent = false;
     set.name = recipe.name;
@@ -1199,12 +1279,20 @@ export class SyncEngine {
       Math.max(...set.children.map((n: any) => n.x + n.width)) + 32,
       Math.max(...set.children.map((n: any) => n.y + n.height)) + 32,
     );
+    if (read(set, "image-migration-state"))
+      write(set, "image-migration-state", "");
   }
   checkMigration(asset: any, next: Recipe) {
     const raw = read(asset, "applied");
     if (!raw) return;
     const previous = JSON.parse(JSON.parse(raw).definition);
-    const problems = migrationProblems("recipe", previous, next);
+    const problems = imageMigrationProblems(
+      previous,
+      next,
+      migrationProblems("recipe", previous, next),
+    );
+    if (!problems.length)
+      validateImageMigrationOwnership(asset, previous, next);
     if (problems.length) throw Error(problems.map((p) => p.message).join(" "));
   }
   async checkpoint(entry: Entry, asset: any) {
@@ -1316,6 +1404,18 @@ export class SyncEngine {
       plan.errors.push(
         "Update stopped: resolve local drift or missing managed assets before applying this release.",
       );
+      return plan;
+    }
+    try {
+      // Ask native Figma to decode verified files before any variable/style/node allocation.
+      for (const image of this.bundle.imageAssets ?? [])
+        this.imageHash(image.id, image.sha256);
+    } catch (error) {
+      plan.errors.push(
+        "Offline image setup stopped before canvas allocation: " +
+          String(error),
+      );
+      plan.complete = false;
       return plan;
     }
     this.save(); // Initialize/migrate the empty ledger before allocating any canvas assets.

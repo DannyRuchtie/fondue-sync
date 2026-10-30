@@ -1,32 +1,39 @@
 {
   "schemaVersion": 1,
   "datasetId": "fondue-sync-demo-v1",
-  "notice": "Synthetic fixtures authored for Fondue Sync. No account records, reference CDN images, notifications or usage data.",
+  "notice": "Fictional fixture identities and records for Fondue Sync. Approved source media is registered separately; no private viewport screenshots or credentials.",
   "brands": [
     {
       "id": "brand-spruce",
       "name": "Spruce Studio",
       "description": "A fictional outdoor brand",
-      "color": "#CFE6D3"
+      "color": "#CFE6D3",
+      "imageAssetId": "frontify-creative-materials",
+      "thumbnailImageAssetId": "frontify-digital-touch"
     },
     {
       "id": "brand-orbit",
       "name": "Orbit Works",
       "description": "A fictional design studio",
-      "color": "#DDD5F0"
+      "color": "#DDD5F0",
+      "imageAssetId": "frontify-notebook-work",
+      "thumbnailImageAssetId": "frontify-stock-collaboration"
     },
     {
       "id": "brand-tide",
       "name": "Tide Collective",
       "description": "A fictional coastal brand",
-      "color": "#D5E5EF"
+      "color": "#D5E5EF",
+      "imageAssetId": "frontify-tablet-campaign",
+      "thumbnailImageAssetId": "frontify-tablet-campaign"
     }
   ],
   "libraries": [
     {
       "id": "library-spruce",
       "brandId": "brand-spruce",
-      "name": "Campaign assets"
+      "name": "Campaign assets",
+      "imageAssetId": "frontify-laptop-campaign"
     }
   ],
   "assets": [
@@ -78,7 +85,8 @@
       "id": "guideline-spruce",
       "brandId": "brand-spruce",
       "name": "Brand guidelines",
-      "pageCount": 8
+      "pageCount": 8,
+      "imageAssetId": "frontify-tablet-campaign"
     }
   ],
   "agenticFeatures": [
@@ -110,6 +118,215 @@
   ],
   "ui": {
     "workspaceLabel": "Demo workspace",
-    "userLabel": "Demo user"
-  }
+    "userLabel": "Demo user",
+    "notificationCount": 12
+  },
+  "notifications": [
+    {
+      "id": "notification-1",
+      "actor": "Morgan Lee",
+      "initials": "ML",
+      "time": "yesterday",
+      "available": true,
+      "message": "added a comment to Campaign poster"
+    },
+    {
+      "id": "notification-2",
+      "actor": "Alex River",
+      "initials": "AR",
+      "time": "yesterday",
+      "available": true,
+      "message": "added Spring campaign artwork to Campaign library"
+    },
+    {
+      "id": "notification-3",
+      "actor": "Casey Quinn",
+      "initials": "CQ",
+      "time": "11 days ago",
+      "available": false,
+      "message": "This notification is no longer actionable — the item it refers to has been deleted or is no longer available."
+    },
+    {
+      "id": "notification-4",
+      "actor": "Morgan Lee",
+      "initials": "ML",
+      "time": "11 days ago",
+      "available": false,
+      "message": "This notification is no longer actionable — the item it refers to has been deleted or is no longer available."
+    },
+    {
+      "id": "notification-5",
+      "actor": "Alex River",
+      "initials": "AR",
+      "time": "11 days ago",
+      "available": false,
+      "message": "This notification is no longer actionable — the item it refers to has been deleted or is no longer available."
+    },
+    {
+      "id": "notification-6",
+      "actor": "Casey Quinn",
+      "initials": "CQ",
+      "time": "11 days ago",
+      "available": false,
+      "message": "This notification is no longer actionable — the item it refers to has been deleted or is no longer available."
+    },
+    {
+      "id": "notification-7",
+      "actor": "Morgan Lee",
+      "initials": "ML",
+      "time": "11 days ago",
+      "available": false,
+      "message": "This notification is no longer actionable — the item it refers to has been deleted or is no longer available."
+    },
+    {
+      "id": "notification-8",
+      "actor": "Alex River",
+      "initials": "AR",
+      "time": "11 days ago",
+      "available": false,
+      "message": "This notification is no longer actionable — the item it refers to has been deleted or is no longer available."
+    },
+    {
+      "id": "notification-9",
+      "actor": "Casey Quinn",
+      "initials": "CQ",
+      "time": "11 days ago",
+      "available": false,
+      "message": "This notification is no longer actionable — the item it refers to has been deleted or is no longer available."
+    }
+  ],
+  "searchResults": [
+    {
+      "id": "search-1",
+      "name": "Co-brand landscape",
+      "metadata": "PNG · 1920 × 1080 · Added on June25,2026",
+      "context": "Campaign library › Brand assets"
+    },
+    {
+      "id": "search-2",
+      "name": "Co-brand presentation",
+      "metadata": "PNG · 1920 × 1080 · Added on June25,2026",
+      "context": "Campaign library › Brand assets"
+    },
+    {
+      "id": "search-3",
+      "name": "Co-brand lockup",
+      "metadata": "PNG · 1920 × 1080 · Added on June25,2026",
+      "context": "Campaign library › Brand assets"
+    }
+  ],
+  "observedLibrary": {
+    "id": "library-observed-sample",
+    "name": "Campaign library",
+    "assetCount": 340,
+    "countStatus": "Representative fixture matching the observed display count; not live account data."
+  },
+  "palettes": [
+    {
+      "id": "palette-core",
+      "name": "Core palette",
+      "shortName": "Core pal…",
+      "colors": [
+        {
+          "name": "Midnight",
+          "hex": "#0C284F",
+          "rgba": "12,40,79,1"
+        },
+        {
+          "name": "Mist",
+          "hex": "#E3EBF6",
+          "rgba": "227,235,246,1"
+        },
+        {
+          "name": "Slate",
+          "hex": "#4F5969",
+          "rgba": "79,89,105,1"
+        },
+        {
+          "name": "White",
+          "hex": "#FFFFFF",
+          "rgba": "255,255,255,1"
+        },
+        {
+          "name": "Blue",
+          "hex": "#005EFF",
+          "rgba": "0,94,255,1"
+        }
+      ]
+    },
+    {
+      "id": "palette-accent",
+      "name": "Brand accents",
+      "shortName": "Brand ac…",
+      "colors": [
+        {
+          "name": "Rose",
+          "hex": "#B86769",
+          "rgba": "184,103,105,1"
+        },
+        {
+          "name": "Signal yellow",
+          "hex": "#FFF56D",
+          "rgba": "255,245,109,1"
+        },
+        {
+          "name": "Clay",
+          "hex": "#CE9484",
+          "rgba": "206,148,132,1"
+        }
+      ]
+    }
+  ],
+  "agenticProductionFeatures": [
+    {
+      "id": "1",
+      "name": "MCP for AI tools",
+      "description": "Connect your brand to AI workflows"
+    },
+    {
+      "id": "2",
+      "name": "Brand Assistant",
+      "description": "Your AI brand expert"
+    },
+    {
+      "id": "3",
+      "name": "Automations",
+      "description": "Govern your library with AI"
+    },
+    {
+      "id": "4",
+      "name": "AI translation",
+      "description": "Localize guidelines in one click"
+    },
+    {
+      "id": "5",
+      "name": "AI-powered search",
+      "description": "Find the right asset, instantly"
+    },
+    {
+      "id": "6",
+      "name": "Auto-tagging",
+      "description": "Let AI handle your tagging"
+    },
+    {
+      "id": "7",
+      "name": "Image generation and editing",
+      "description": "Edit visuals inside your brand portal"
+    },
+    {
+      "id": "8",
+      "name": "Metadata intelligence",
+      "description": "Smarter metadata, powered by AI"
+    },
+    {
+      "id": "9",
+      "name": "Copilot integration",
+      "description": "Brand intelligence in Microsoft365"
+    },
+    {
+      "id": "10",
+      "name": "Frontify SDK",
+      "description": "Build with your brand platform"
+    }
+  ]
 }

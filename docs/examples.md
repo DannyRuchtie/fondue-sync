@@ -1,21 +1,21 @@
 # Production-grounded patterns and example screens
 
-Fondue Sync contains eight authored reusable patterns and twelve editable screen compositions based on read-only inspection of the current application's Brands, Guidelines and Libraries overviews. The [sanitized production layout reference](production-layout-reference.md) records observed structure and viewport measurements. Component, icon and token definitions still come exclusively from the pinned Fondue release.
+The original eight authored reusable patterns and twelve editable screen compositions cover the application’s Brands, Guidelines and Libraries overviews. They remain active alongside the additional product surfaces documented below. The [sanitized production layout reference](production-layout-reference.md) records observed structure and viewport measurements. Component, icon and token definitions still come exclusively from the pinned Fondue release.
 
-Patterns use nested instances of generated native Fondue assets. Screens compose those patterns inside editable frames. Their names, entity data, counts and artwork are synthetic; they do not contain account imagery, private records, copied screenshots or live service connections. Production inspection informs layout, not component ownership or runtime behavior.
+Patterns use nested instances of generated native Fondue assets. Screens compose those patterns inside editable frames. Their names, entity data and counts are fictional. Image-content slots use approved real media with source provenance; private viewport screenshots, private actor identities and live service connections are excluded. Production inspection informs layout, not component ownership or runtime behavior.
 
 ## Included patterns
 
-| Pattern | Profiles | Purpose |
-| --- | --- | --- |
-| ProductionNavigationRail | Brands, Guidelines, Libraries, library-empty context | Desktop account/brand navigation shell |
-| ProductionMobileBrandBar | Same four page contexts | Observed fixed bottom navigation at narrow width |
-| ProductionPageHeader | Three pages across four viewport profiles | Page title, creation action and library-level navigation |
-| ProductionSearchToolbar | Three pages across four viewport profiles | Observed search, sorting and card/list controls |
-| ProductionBrandCard | Two synthetic brands across three viewport profiles | Brand banner and thumbnail/title footer |
-| ProductionGuidelineCard | Three viewport profiles | Guideline banner, title and page-count footer |
-| ProductionLibraryCard | Three viewport profiles | Library banner, icon, title and fictional asset-count footer |
-| ProductionLibrariesEmptyState | Four viewport profiles | Empty panel with original editable artwork, display title, explanation and actions |
+| Pattern                       | Profiles                                             | Purpose                                                                            |
+| ----------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| ProductionNavigationRail      | Brands, Guidelines, Libraries, library-empty context | Desktop account/brand navigation shell                                             |
+| ProductionMobileBrandBar      | Same four page contexts                              | Observed fixed bottom navigation at narrow width                                   |
+| ProductionPageHeader          | Three pages across four viewport profiles            | Page title, creation action and library-level navigation                           |
+| ProductionSearchToolbar       | Three pages across four viewport profiles            | Observed search, sorting and card/list controls                                    |
+| ProductionBrandCard           | Two synthetic brands across three viewport profiles  | Brand banner and thumbnail/title footer                                            |
+| ProductionGuidelineCard       | Three viewport profiles                              | Guideline banner, title and page-count footer                                      |
+| ProductionLibraryCard         | Three viewport profiles                              | Library banner, icon, title and fictional asset-count footer                       |
+| ProductionLibrariesEmptyState | Four viewport profiles                               | Empty panel with original editable artwork, display title, explanation and actions |
 
 There are 48 authored pattern variants. These counts describe reusable composition recipes; they are not additional public Fondue component exports. The generated coverage report records the active bundle totals.
 
@@ -27,7 +27,7 @@ The desktop examples reproduce the observed navigation rail, page header, full-w
 
 Opening a brand from Brands overview led to its Guidelines overview. A separate brand-home screen was not established by that navigation. The earlier illustrative Agentic hub, hero/statistics layouts and asset-browser interpretation of library overview are not active production-grounded examples. Older illustrative compositions are archived source, not an assertion of current product parity.
 
-The empty-state display heading uses Cranny Light at the released 46 px/54 px role. Body and controls use the released Diatype roles with the available exact ABC Diatype face mapping. Original geometric artwork replaces production media; illustration similarity is a composition reference, not a claim of exact asset reproduction.
+The empty-state display heading uses Cranny Light at the released 46 px/54 px role. Body and controls use the released Diatype roles with the available exact ABC Diatype face mapping. Illustration geometry remains native and editable, with approved real photography in image-card regions. Those media substitutions are explicit and do not claim exact application illustration imagery.
 
 ## Observed responsive limitation
 
@@ -70,3 +70,11 @@ A managed layer may carry `dataBinding` metadata following `fixtures/bindings.sc
 Patterns use stable identities such as `patterns/ProductionNavigationRail`. Screens use separate identities such as `examples/production-brands-populated-desktop`. Fixture or composition changes are source changes to authored examples. Sync compares managed definitions and snapshots before applying compatible changes; arbitrary structural rewrites may require migration.
 
 Production observation, local bundle/sync tests, native Figma import, visual acceptance and cross-file library update acceptance are separate evidence levels. A production-grounded recipe does not prove pixel parity until its native output has been reviewed at the corresponding viewport. Refer to the native evidence record for completed canvas checks and remaining limitations.
+
+## Additional observed product surfaces and real image content
+
+The original eight pattern families and twelve screen IDs remain stable. Ten additional authored pattern families provide22 more observed profiles: Notifications, User menu, Account settings, Help, blank/results Global Search, Agentic hub, empty Guidelines, loaded Libraries, Essentials palette accordions/expanded table and Fonts-empty. Marketplace is excluded. See the [sanitized additional layout reference](additional-production-layout-reference.md) for the measured profiles, narrow overflow constraints, typography evidence and image-slot audit.
+
+The active image-content regions now use approved real Frontify media through the offline [image manifest](../fixtures/media/manifest.json). Native banner/thumb roots keep their identities; original invented banner artwork and initial children require an explicit guarded migration before removal. Empty illustrations and the automation diagram retain native editable geometry, with actual photography only in their image-card regions. Functional icons, document previews, font specimens, token swatches and chart data retain their source semantics. Fixture identities and text remain fictional; media source names and acquisition provenance remain in the registry.
+
+The additional source examples do not imply that new native imports, visual acceptance or interactions have already passed. Agentic font weight still requires the specifically recorded computed-style confirmation; missing source fonts must block instead of falling back to Inter.

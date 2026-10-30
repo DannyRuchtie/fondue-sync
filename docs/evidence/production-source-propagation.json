@@ -1,0 +1,680 @@
+{
+  "complete": true,
+  "kind": "exact-source-propagation",
+  "results": [
+    {
+      "key": "example:examples/production-brands-populated-mobile",
+      "id": "30:1054",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "c28abb0f",
+      "afterSnapshotDigest": "c61b3bc9",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1056",
+          "mainComponentId": "29:581",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/0/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1063",
+          "mainComponentId": "29:702",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1104",
+          "mainComponentId": "29:464",
+          "recipeId": "patterns/ProductionMobileBrandBar",
+          "setId": "29:465",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-libraries-empty-mobile",
+      "id": "30:2247",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "30c0fe7b",
+      "afterSnapshotDigest": "25d056c1",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2249",
+          "mainComponentId": "29:589",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/0/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2265",
+          "mainComponentId": "29:710",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2315",
+          "mainComponentId": "29:468",
+          "recipeId": "patterns/ProductionMobileBrandBar",
+          "setId": "29:465",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-brands-populated-desktop",
+      "id": "30:944",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "f7fd23a2",
+      "afterSnapshotDigest": "a408396a",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:945",
+          "mainComponentId": "29:112",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1006",
+          "mainComponentId": "29:579",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1013",
+          "mainComponentId": "29:700",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-libraries-populated-desktop",
+      "id": "30:1667",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "45cfa58c",
+      "afterSnapshotDigest": "6afaf0a2",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1668",
+          "mainComponentId": "29:115",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1766",
+          "mainComponentId": "29:587",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1782",
+          "mainComponentId": "29:708",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-guidelines-populated-desktop",
+      "id": "30:1278",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "62ed5918",
+      "afterSnapshotDigest": "85390e38",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1279",
+          "mainComponentId": "29:114",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1377",
+          "mainComponentId": "29:583",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1384",
+          "mainComponentId": "29:704",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-libraries-populated-mobile",
+      "id": "30:1826",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "b39f1c7",
+      "afterSnapshotDigest": "34fdc8ad",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1828",
+          "mainComponentId": "29:589",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/0/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1844",
+          "mainComponentId": "29:710",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1888",
+          "mainComponentId": "29:467",
+          "recipeId": "patterns/ProductionMobileBrandBar",
+          "setId": "29:465",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-guidelines-populated-mobile",
+      "id": "30:1427",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "b52a3357",
+      "afterSnapshotDigest": "8e25edd7",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1429",
+          "mainComponentId": "29:585",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/0/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1436",
+          "mainComponentId": "29:706",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1479",
+          "mainComponentId": "29:466",
+          "recipeId": "patterns/ProductionMobileBrandBar",
+          "setId": "29:465",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-guidelines-populated-wide",
+      "id": "30:1129",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "45a51f72",
+      "afterSnapshotDigest": "b14aa4b4",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1130",
+          "mainComponentId": "29:114",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1228",
+          "mainComponentId": "29:582",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1235",
+          "mainComponentId": "29:703",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-libraries-empty-tablet",
+      "id": "30:2082",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "7c00317",
+      "afterSnapshotDigest": "c30e490d",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2083",
+          "mainComponentId": "29:116",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2181",
+          "mainComponentId": "29:588",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2197",
+          "mainComponentId": "29:709",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-brands-populated-wide",
+      "id": "29:1187",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "d833c50f",
+      "afterSnapshotDigest": "ecff58a5",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "29:1188",
+          "mainComponentId": "29:112",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "29:1249",
+          "mainComponentId": "29:577",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "29:1256",
+          "mainComponentId": "29:698",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-libraries-empty-wide",
+      "id": "30:1917",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "5ed28c68",
+      "afterSnapshotDigest": "a1ce38cc",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1918",
+          "mainComponentId": "29:116",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2016",
+          "mainComponentId": "29:586",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:2032",
+          "mainComponentId": "29:707",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    },
+    {
+      "key": "example:examples/production-libraries-populated-wide",
+      "id": "30:1508",
+      "diffCount": 3,
+      "beforeSnapshotDigest": "b7e72b83",
+      "afterSnapshotDigest": "37fa59e3",
+      "sourceOperation": "Replace authored Production full-frame line strokes with measured edge separator children; all other fields remain exactly equal.",
+      "proof": [
+        {
+          "path": "/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1509",
+          "mainComponentId": "29:115",
+          "recipeId": "patterns/ProductionNavigationRail",
+          "setId": "29:113",
+          "edgeIdentity": "rail-divider"
+        },
+        {
+          "path": "/children/1/children/0/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1607",
+          "mainComponentId": "29:586",
+          "recipeId": "patterns/ProductionPageHeader",
+          "setId": "29:578",
+          "edgeIdentity": "edge-separator"
+        },
+        {
+          "path": "/children/1/children/1/overrides/0/fields/boundVariables/strokes",
+          "before": [
+            {
+              "id": "VariableID:4:84",
+              "type": "VARIABLE_ALIAS"
+            }
+          ],
+          "after": "absent",
+          "instanceId": "30:1623",
+          "mainComponentId": "29:707",
+          "recipeId": "patterns/ProductionSearchToolbar",
+          "setId": "29:699",
+          "edgeIdentity": "edge-separator"
+        }
+      ]
+    }
+  ],
+  "affectedIds": [
+    "30:1054",
+    "30:2247",
+    "30:944",
+    "30:1667",
+    "30:1278",
+    "30:1826",
+    "30:1427",
+    "30:1129",
+    "30:2082",
+    "29:1187",
+    "30:1917",
+    "30:1508"
+  ]
+}

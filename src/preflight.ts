@@ -1,3 +1,4 @@
+import { validatedImageBytes } from "./images";
 import type { Bundle, Layer, Recipe } from "./schema";
 import { canonical } from "./plan";
 export type MigrationProblem = { code: string; message: string };
@@ -111,6 +112,18 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
         `Duplicate ${kind} identity in release bundle.`,
       );
   }
+  const imageAssets = new Map(
+    (bundle.imageAssets ?? []).map((asset) => [asset.id, asset]),
+  );
+  if (imageAssets.size !== (bundle.imageAssets ?? []).length)
+    problem("duplicate-image", "Duplicate offline image identity.");
+  for (const asset of bundle.imageAssets ?? []) {
+    try {
+      validatedImageBytes(asset);
+    } catch (error) {
+      problem("invalid-image", String(error));
+    }
+  }
   const binding = (id: string, context: string) => {
     if (!tokens.has(id))
       problem("missing-binding", `Missing token ${id}: ${context}`);
@@ -181,6 +194,74 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
       }
   }
   const layer = (node: Layer, context: string) => {
+    if (node.imageAssetId) {
+      const asset = imageAssets.get(node.imageAssetId);
+      if (!asset)
+        problem(
+          "missing-image",
+          `Missing offline image ${node.imageAssetId}: ${context}/${node.id}`,
+        );
+      else if (node.imageAssetSha256 !== asset.sha256)
+        problem(
+          "image-digest",
+          `Image reference digest mismatch: ${context}/${node.id}`,
+        );
+      if (!["frame", "rectangle"].includes(node.kind))
+        problem(
+          "image-layer",
+          `Image paints require an editable frame/rectangle: ${context}/${node.id}`,
+        );
+      if (node.bindings?.fills || node.fill)
+        problem(
+          "image-fill-conflict",
+          `Image layer also declares a solid fill: ${context}/${node.id}`,
+        );
+      if (
+        node.imageScaleMode &&
+        !["FILL", "FIT", "CROP", "TILE"].includes(node.imageScaleMode)
+      )
+        problem(
+          "image-scale",
+          `Invalid image scale mode: ${context}/${node.id}`,
+        );
+      if (node.imageScaleMode === "CROP" && !node.imageTransform)
+        problem(
+          "image-crop",
+          `Explicit CROP image requires transform: ${context}/${node.id}`,
+        );
+      if (
+        node.imageTransform &&
+        (node.imageScaleMode !== "CROP" ||
+          node.imageTransform.length !== 2 ||
+          node.imageTransform.some(
+            (row) =>
+              row.length !== 3 || row.some((value) => !Number.isFinite(value)),
+          ))
+      )
+        problem(
+          "image-transform",
+          `Invalid image crop transform: ${context}/${node.id}`,
+        );
+      if (
+        node.imageScalingFactor !== undefined &&
+        (node.imageScaleMode !== "TILE" ||
+          !Number.isFinite(node.imageScalingFactor) ||
+          node.imageScalingFactor <= 0)
+      )
+        problem(
+          "image-tile",
+          `Invalid image tile scale: ${context}/${node.id}`,
+        );
+    } else if (
+      node.imageAssetSha256 ||
+      node.imageScaleMode ||
+      node.imageTransform ||
+      node.imageScalingFactor !== undefined
+    )
+      problem(
+        "missing-image",
+        `Image options lack asset identity: ${context}/${node.id}`,
+      );
     if ((bundle as any).typographyBindingCoverage && node.kind === "text") {
       const style = styles.get(node.textStyle ?? "");
       if (!style || style.type !== "TEXT")

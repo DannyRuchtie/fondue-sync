@@ -2,12 +2,12 @@
   "release": "13.11.1",
   "policy": "Exact effective font family, size, weight, line height, letter spacing and case. CSS font stacks remain unchanged; native family aliases resolve only through confirmed font availability.",
   "counts": {
-    "textLayers": 2521,
-    "releasedStyleMatches": 2446,
-    "existingExactStyles": 2005,
-    "derivedStyles": 9,
-    "derivedVariables": 3,
-    "layerBindings": 12597
+    "textLayers": 2679,
+    "releasedStyleMatches": 2560,
+    "existingExactStyles": 2013,
+    "derivedStyles": 14,
+    "derivedVariables": 7,
+    "layerBindings": 13387
   },
   "derivedStyles": [
     {
@@ -195,6 +195,111 @@
         "packages/components/src/components/Card/CardBanner.tsx",
         "packages/components/src/components/Card/CardContent.tsx"
       ]
+    },
+    {
+      "id": "source-text-diatype-10-400-12-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "lineHeight": 12,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Button/Button.tsx",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Card/CardRoot.tsx",
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/CardContent.tsx"
+      ]
+    },
+    {
+      "id": "source-text-cranny-36-400-54-0-original-none",
+      "metrics": {
+        "fontFamily": "Cranny",
+        "fontSize": 36,
+        "fontWeight": 400,
+        "lineHeight": 54,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Button/Button.tsx",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Card/CardRoot.tsx",
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/CardContent.tsx"
+      ]
+    },
+    {
+      "id": "source-text-diatype-20-400-28-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 20,
+        "fontWeight": 400,
+        "lineHeight": 28,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Button/Button.tsx",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Card/CardRoot.tsx",
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/CardContent.tsx"
+      ]
+    },
+    {
+      "id": "source-text-cranny-32-400-48-0-original-none",
+      "metrics": {
+        "fontFamily": "Cranny",
+        "fontSize": 32,
+        "fontWeight": 400,
+        "lineHeight": 48,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Button/Button.tsx",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Card/CardRoot.tsx",
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/CardContent.tsx"
+      ]
+    },
+    {
+      "id": "source-text-diatype-8.00936768149883-400-11point-21311475409836-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 8.00936768149883,
+        "fontWeight": 400,
+        "lineHeight": 11.21311475409836,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Button/Button.tsx",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Card/CardRoot.tsx",
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/CardContent.tsx"
+      ]
     }
   ],
   "derivedVariables": [
@@ -291,6 +396,118 @@
         ],
         "role": "fontSize",
         "value": 10,
+        "definitionInputs": "provenance.definitionInputs.recipes"
+      }
+    },
+    {
+      "id": "source-typography-lineheight-12",
+      "name": "source/typography/lineHeight/12",
+      "type": "FLOAT",
+      "collection": "Primitives",
+      "values": {
+        "Value": 12
+      },
+      "css": "12px",
+      "scopes": [
+        "LINE_HEIGHT"
+      ],
+      "provenance": {
+        "kind": "reviewed-source-typography-constant",
+        "source": [
+          "packages/components/src/components/Text/Text.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx"
+        ],
+        "role": "lineHeight",
+        "value": 12,
+        "definitionInputs": "provenance.definitionInputs.recipes"
+      }
+    },
+    {
+      "id": "source-typography-fontsize-32",
+      "name": "source/typography/fontSize/32",
+      "type": "FLOAT",
+      "collection": "Primitives",
+      "values": {
+        "Value": 32
+      },
+      "css": "32px",
+      "scopes": [
+        "FONT_SIZE"
+      ],
+      "provenance": {
+        "kind": "reviewed-source-typography-constant",
+        "source": [
+          "packages/components/src/components/Text/Text.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx"
+        ],
+        "role": "fontSize",
+        "value": 32,
+        "definitionInputs": "provenance.definitionInputs.recipes"
+      }
+    },
+    {
+      "id": "source-typography-fontsize-8point-00936768149883",
+      "name": "source/typography/fontSize/8point-00936768149883",
+      "type": "FLOAT",
+      "collection": "Primitives",
+      "values": {
+        "Value": 8.00936768149883
+      },
+      "css": "8.00936768149883px",
+      "scopes": [
+        "FONT_SIZE"
+      ],
+      "provenance": {
+        "kind": "reviewed-source-typography-constant",
+        "source": [
+          "packages/components/src/components/Text/Text.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx"
+        ],
+        "role": "fontSize",
+        "value": 8.00936768149883,
+        "definitionInputs": "provenance.definitionInputs.recipes"
+      }
+    },
+    {
+      "id": "source-typography-lineheight-11point-21311475409836",
+      "name": "source/typography/lineHeight/11point-21311475409836",
+      "type": "FLOAT",
+      "collection": "Primitives",
+      "values": {
+        "Value": 11.21311475409836
+      },
+      "css": "11.21311475409836px",
+      "scopes": [
+        "LINE_HEIGHT"
+      ],
+      "provenance": {
+        "kind": "reviewed-source-typography-constant",
+        "source": [
+          "packages/components/src/components/Text/Text.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx"
+        ],
+        "role": "lineHeight",
+        "value": 11.21311475409836,
         "definitionInputs": "provenance.definitionInputs.recipes"
       }
     }

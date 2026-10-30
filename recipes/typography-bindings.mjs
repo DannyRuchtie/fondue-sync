@@ -62,7 +62,7 @@ export function augmentTypographyBindings(bundle) {
     if (!token) {
       token = {
         id,
-        name: "source/typography/" + field + "/" + value,
+        name: "source/typography/" + field + "/" + key(value),
         type: "FLOAT",
         collection: "Primitives",
         values: { Value: value },

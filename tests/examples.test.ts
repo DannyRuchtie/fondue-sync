@@ -2,7 +2,14 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 // @ts-ignore authored dependency-free compositions
-import { patterns, screens } from "../recipes/examples.mjs";
+import * as examplesModule from "../recipes/examples.mjs";
+const {
+  patterns,
+  screens,
+  additionalPatterns,
+  additionalScreens,
+  additionalImageSlots,
+} = examplesModule;
 const demo = JSON.parse(
   fs.readFileSync(new URL("../fixtures/demo.json", import.meta.url), "utf8"),
 );
@@ -243,4 +250,146 @@ test("reviewed production affordances retain measured search, footer and empty-p
       .children.find((n: any) => n.id === "account-more").gap,
     4,
   );
+});
+
+test("additional observed product surfaces preserve the original twelve IDs and exclude a Marketplace screen", async () => {
+  assert.equal(additionalPatterns.length, 10);
+  assert.equal(additionalScreens.length, 22);
+  assert.ok(additionalPatterns.every((p: any) => p.variants.length <= 30));
+  assert.ok(!additionalScreens.some((s: any) => /marketplace/i.test(s.name)));
+  const all = [...screens, ...additionalScreens];
+  assert.equal(new Set(all.map((s: any) => s.id)).size, 34);
+  for (const screen of additionalScreens)
+    assert.ok([1728, 1024, 390].includes(screen.width));
+});
+
+test("observed drawer, overlay and palette constraints remain explicit native geometry", async () => {
+  const recipe = (name: string, props: any) =>
+    additionalPatterns
+      .find((r: any) => r.name === name)
+      .variants.find((v: any) =>
+        Object.entries(props).every(([k, value]) => v.props[k] === value),
+      ).root;
+  const drawer = recipe("ProductionNotificationsDrawer", {
+    viewport: "mobile",
+  });
+  assert.equal(drawer.width, 401);
+  assert.equal(drawer.height, 775);
+  const settings = additionalScreens.find(
+    (s: any) => s.id === "examples/production-account-settings-desktop",
+  );
+  assert.equal(
+    settings.root.children.find((n: any) => n.id === "drawer").x,
+    257,
+  );
+  const help = additionalScreens.find(
+    (s: any) => s.id === "examples/production-help-mobile",
+  );
+  const dialog = help.root.children.find((n: any) => n.id === "dialog");
+  assert.deepEqual([dialog.x, dialog.y], [16, 235]);
+  const search = recipe("ProductionGlobalSearch", {
+    viewport: "mobile",
+    state: "blank",
+  });
+  assert.equal(search.width, 358);
+  assert.equal(search.children.length, 1);
+  const palette = recipe("ProductionEssentialsPaletteList", {
+    viewport: "mobile",
+    state: "expanded",
+  });
+  let wideTable = false;
+  walk(palette, (n: any) => {
+    if (n.id === "columns" && n.width === 760) wideTable = true;
+  });
+  assert.ok(
+    wideTable,
+    "Mobile uses the observed dense table instead of an invented stacked-card transformation",
+  );
+});
+
+test("actual image slots reference committed media while functional icons, font samples and palette content stay native", async () => {
+  const manifest = JSON.parse(
+    fs.readFileSync(
+      new URL("../fixtures/media/manifest.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const ids = new Set(manifest.assets.map((a: any) => a.id));
+  let count = 0;
+  const usedImages = new Set<string>();
+  for (const root of [...patterns, ...additionalPatterns]
+    .flatMap((r: any) => r.variants.map((v: any) => v.root))
+    .concat([...screens, ...additionalScreens].map((s: any) => s.root)))
+    walk(root, (n: any) => {
+      assert.ok(!n.pendingSourceImage, n.id);
+      if (!n.imageAssetId) return;
+      count++;
+      usedImages.add(n.imageAssetId);
+      assert.ok(ids.has(n.imageAssetId));
+      assert.equal(n.fill, undefined);
+      assert.equal(n.bindings?.fills, undefined);
+      assert.equal(n.imageScaleMode, "FILL");
+    });
+  assert.ok(count >= 90);
+  assert.deepEqual([...usedImages].sort(), [...ids].sort());
+  assert.ok(
+    additionalImageSlots.every((slot: any) => slot.status === "available"),
+  );
+  const brand = patterns.find((r: any) => r.name === "ProductionBrandCard")
+    .variants[0].root.children[0];
+  assert.equal(
+    brand.children.length,
+    0,
+    "Old geometric banner art is removed only through the explicit native migration",
+  );
+  assert.ok(brand.imageAssetId);
+});
+
+test("reviewed Essentials navigation, palette columns and result previews preserve measured constraints", () => {
+  const colors = additionalScreens.find(
+    (s: any) =>
+      s.id === "examples/production-essentials-colors-collapsed-mobile",
+  );
+  const header = colors.root.children
+    .find((n: any) => n.id === "main")
+    .children.find((n: any) => n.id === "page-header");
+  assert.equal(header.height, 96);
+  assert.equal(
+    header.children.find((n: any) => n.id === "title-action").height,
+    60,
+  );
+  const tabs = header.children.find((n: any) => n.id === "tabs");
+  assert.equal(
+    tabs.children.find((n: any) => n.id === "tab-colors").bindings.fills,
+    "color-container-secondary-default",
+  );
+  assert.equal(
+    tabs.children.find((n: any) => n.id === "tab-fonts").bindings,
+    undefined,
+  );
+  const palette = additionalPatterns
+    .find((r: any) => r.name === "ProductionEssentialsPaletteList")
+    .variants.find(
+      (v: any) => v.props.viewport === "mobile" && v.props.state === "expanded",
+    ).root;
+  const table = palette.children[1].children.find(
+    (n: any) => n.id === "color-table",
+  );
+  for (const row of table.children)
+    assert.deepEqual(
+      row.children.map((n: any) => n.width),
+      [218, 104, 144, 246],
+    );
+  const search = additionalPatterns
+    .find((r: any) => r.name === "ProductionGlobalSearch")
+    .variants.find((v: any) => v.props.state === "results").root;
+  let previews = 0;
+  walk(search, (n: any) => {
+    if (n.id === "preview") {
+      previews++;
+      assert.equal(n.width, 60);
+      assert.equal(n.height, 60);
+    }
+  });
+  assert.equal(previews, 3);
 });

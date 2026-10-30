@@ -3,6 +3,10 @@
  * upstream Fondue component definitions. Private screenshots remain outside this repository.
  */
 import fs from "node:fs";
+import {
+  createAdditionalExamples,
+  approvedImageProps,
+} from "./additional-examples.mjs";
 const demo = JSON.parse(
   fs.readFileSync(new URL("../fixtures/demo.json", import.meta.url), "utf8"),
 );
@@ -153,7 +157,7 @@ function make(name, variants, purpose, limitations = []) {
     status: "partial",
     limitations: [
       "Production-grounded authored layout; not a newly exported Fondue component or interactive application.",
-      "Synthetic labels and original editable artwork replace all private account names and images.",
+      "Fictional labels and approved real image assets replace private account records; observed illustration geometry remains native and editable.",
       ...limitations,
     ],
     documentation: docs(purpose),
@@ -172,14 +176,13 @@ function make(name, variants, purpose, limitations = []) {
   return recipe;
 }
 const avatar = (id, size = 40, brand = demo.brands[0]) =>
-  frame(id, [title("initial", brand.name.slice(0, 1), "large")], {
+  frame(id, [], {
     width: size,
     height: size,
     radius: 4,
-    primaryAlign: "CENTER",
-    counterAlign: "CENTER",
-    fill: brand.color,
-    dataBinding: binding("brands", "color", "color", brand.id),
+    clipContent: true,
+    ...approvedImageProps(brand.thumbnailImageAssetId),
+    dataBinding: binding("brands", "thumbnailImageAssetId", "string", brand.id),
   });
 const utilityLabels = [
   "Agentic hub",
@@ -688,47 +691,14 @@ make(
   ],
 );
 function banner(id, width, brand) {
-  return frame(
-    id,
-    [
-      rect(
-        "artwork-band",
-        width - 32,
-        Math.max(8, width / 14),
-        "color-charts-secondary-default",
-      ),
-      row(
-        "artwork-motif",
-        [
-          frame("artwork-circle", [], {
-            width: width / 5,
-            height: width / 5,
-            radius: 9999,
-            bindings: { fills: "color-charts-primary-default" },
-          }),
-          frame("artwork-circle-secondary", [], {
-            width: width / 8,
-            height: width / 8,
-            radius: 9999,
-            bindings: { fills: "color-charts-tertiary-default" },
-          }),
-        ],
-        { gap: width / 8 },
-      ),
-    ],
-    {
-      width,
-      height: width / 2,
-      clipContent: true,
-      padding: 16,
-      gap: 16,
-      primaryAlign: "CENTER",
-      counterAlign: "CENTER",
-      radius: 8,
-      fill: brand.color,
-      dataBinding: binding("brands", "color", "color", brand.id),
-    },
-  );
+  return frame(id, [], {
+    width,
+    height: width / 2,
+    clipContent: true,
+    radius: 8,
+    ...approvedImageProps(brand.imageAssetId),
+    dataBinding: binding("brands", "imageAssetId", "string", brand.id),
+  });
 }
 const brandCard = (brand, profile) => {
   const p = profiles[profile];
@@ -882,7 +852,11 @@ function illustration(mobile) {
           width: 100,
           height: 72,
           radius: 4,
-          bindings: { fills: color },
+          ...approvedImageProps(
+            id === "video-card"
+              ? "frontify-stock-collaboration"
+              : "frontify-laptop-campaign",
+          ),
         }),
         rect("text-line-one", 90, 3, "color-line-subtle"),
         rect("text-line-two", 68, 3, "color-line-subtle"),
@@ -990,7 +964,7 @@ make(
   })),
   "Observed empty Libraries panel with actual source Cranny Light 46/54 display typography, exact generic UI copy and create/help actions.",
   [
-    "The 2 tilted asset cards and 4 pale tiles are original editable native artwork. Private jellyfish/logo imagery from the application is intentionally replaced, not copied or represented as an exact illustration match.",
+    "The 2 tilted asset cards and4 pale tiles remain native editable geometry. Their image-content areas use approved real Frontify photography; this is an explicit media substitution, not exact application illustration imagery.",
   ],
 );
 // Only the observed edge separators are physical; no decorative bounding rectangles.
@@ -1027,6 +1001,26 @@ for (const pattern of patterns) {
         y: variant.props.viewport === "mobile" ? 31 : 9,
         layoutPositioning: "ABSOLUTE",
       });
+  }
+}
+for (const recipe of patterns) {
+  if (
+    !["ProductionGuidelineCard", "ProductionLibraryCard"].includes(recipe.name)
+  )
+    continue;
+  for (const variant of recipe.variants) {
+    const bannerNode = variant.root.children.find((n) => n.id === "banner");
+    const entity =
+      recipe.name === "ProductionGuidelineCard"
+        ? demo.guidelines[0]
+        : demo.libraries[0];
+    Object.assign(bannerNode, approvedImageProps(entity.imageAssetId));
+    bannerNode.dataBinding = binding(
+      recipe.name === "ProductionGuidelineCard" ? "guidelines" : "libraries",
+      "imageAssetId",
+      "string",
+      entity.id,
+    );
   }
 }
 export { patterns };
@@ -1115,7 +1109,7 @@ const screen = (page, viewport, state = "populated") => {
     },
     limitations: [
       "Editable native component-instance composition; no live data, routing or executable actions.",
-      "Private production images and names are replaced by owned synthetic fixtures and original native artwork.",
+      "Fictional names and records use approved real Frontify media in editable native image fills; private viewport screenshots are never embedded.",
       ...(mobile && page !== "brands"
         ? [
             "Observed 390px toolbar/content overlap of 12px is preserved and labelled as a production narrow-layout limitation.",
@@ -1176,3 +1170,27 @@ export const screens = [
   ),
 ];
 export default patterns;
+
+const additional = createAdditionalExamples({
+  frame,
+  row,
+  inst,
+  part,
+  body,
+  title,
+  button,
+  icon,
+  rect,
+  S,
+  demo,
+  sources,
+  userAvatar,
+  header,
+  search,
+  rail,
+  bottom,
+  brandCard,
+});
+export const additionalPatterns = additional.patterns;
+export const additionalScreens = additional.screens;
+export const additionalImageSlots = additional.imageSlots;

@@ -1,24 +1,27 @@
 {
   "release": "13.11.1",
-  "fingerprint": "f9a0b4a19558da7dc1c459ab39e8d4d242bad521ee41abf2730bd90638c60941",
+  "fingerprint": "3c1a7b18a14f86ec20b82d4b17380d0ec5cb6e94ea5ddf615c93542ffef901b4",
   "counts": {
-    "tokens": 422,
+    "tokens": 444,
     "releasedTokens": 384,
-    "sourceDerivedNativeTokens": 38,
+    "sourceDerivedNativeTokens": 60,
     "compoundSourceSymbols": 102,
     "stories": 420,
-    "styles": 46,
+    "styles": 51,
     "sourceDerivedEffectStyles": 4,
-    "sourceDerivedTextStyles": 9,
+    "sourceDerivedTextStyles": 14,
     "icons": 420,
     "opticalIconAssets": 2099,
     "inventory": 54,
-    "recipes": 205,
-    "variants": 2030,
-    "examples": 12,
-    "productPatterns": 8,
-    "documentedSets": 205,
-    "metadataDocumentedSets": 177,
+    "recipes": 218,
+    "variants": 2074,
+    "examples": 34,
+    "imageAssets": 6,
+    "imageReferences": 112,
+    "imageEncodedBytes": 2060971,
+    "productPatterns": 18,
+    "documentedSets": 218,
+    "metadataDocumentedSets": 178,
     "supported": 10,
     "partial": 42,
     "unsupported": 0,
@@ -50,7 +53,8 @@
       "recipeId": "components/AssetInput",
       "recipeIds": [
         "components/AssetInput",
-        "components/AssetInput.Placeholder"
+        "components/AssetInput.Placeholder",
+        "components/AssetInput/image-preview"
       ],
       "status": "partial"
     },
@@ -120,7 +124,9 @@
         "components/Card.ThumbnailIcon",
         "components/Card.Title",
         "components/Card.Description",
-        "components/Card.ActionButton"
+        "components/Card.ActionButton",
+        "components/Card.BannerImage",
+        "components/Card.ThumbnailImage"
       ],
       "status": "partial"
     },
@@ -1792,7 +1798,14 @@
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "children labels are native composition choices, not React string values.",
-        "Dashed border is approximated with solid native stroke until per-dash schema support exists."
+        "Dashed border is approximated with solid native stroke until per-dash schema support exists.",
+        "This separate recipe composes the released AssetInput.Root+Preview+PreviewImage; existing PDF/icon AssetInput recipes are retained. orientation and isOpen are actual Root props.",
+        "Single-image preview uses object-fit:contain at 56px horizontal or 128px vertical.",
+        "Root width 360/280 is a documented sample container; vertical title/caret row 48px derives from the 16px caret and 16px padding.",
+        "Two-to-four-part image grids, loading states, missing-title/metadata layouts and text ellipsis are not enumerated here; arbitrary image URLs and onPress behavior stay in code.",
+        "Images are approved local example fixtures, not a screenshot of a component or page.",
+        "Replace the image fill for application content.",
+        "Native variants are static; source image loading, alternative-text accessibility, DOM sizing and browser events still require application/runtime verification."
       ]
     },
     {
@@ -1840,7 +1853,16 @@
         "Inverted parent tone overrides icon colors; use Banner.inverted for that composition.",
         "Arbitrary image content is not synthesized.",
         "Truncation requires a consumer-defined available width.",
-        "state is a CSS/focus visual state; arbitrary action behavior remains in React."
+        "state is a CSS/focus visual state; arbitrary action behavior remains in React.",
+        "fit and padding are Card.BannerImage props; size is the containing Card.Banner prop.",
+        "The source ratios are small 3:1 and large 9:6, shown at the Card root minimum width 240px.",
+        "Every fit/padding/size combination is represented; arbitrary parent widths, adjacent image separators, selection overlays and hover-description overlays remain composition/runtime concerns.",
+        "Images are approved local example fixtures, not a screenshot of a component or page.",
+        "Replace the image fill for application content.",
+        "Native variants are static; source image loading, alternative-text accessibility, DOM sizing and browser events still require application/runtime verification.",
+        "The public Card.ThumbnailImage is 40×40px with object-fit:contain and the medium radius.",
+        "Its Card grid placement and 12px margins are supplied by the containing Card composition, not baked into the standalone image part.",
+        "src and alt are open application content; the single native default uses one reviewed portrait fixture and does not invent an image-source enum."
       ]
     },
     {

@@ -1,3 +1,13 @@
+/** Exact offline encoded image bytes. Native imageHash is resolved at import, never serialized as source identity. */
+export type ImageAsset = {
+  id: string;
+  sha256: string;
+  base64: string;
+  mimeType: "image/png" | "image/jpeg" | "image/gif";
+  width: number;
+  height: number;
+  source?: Record<string, unknown>;
+};
 export type Token = {
   id: string;
   name: string;
@@ -21,6 +31,11 @@ export type Layer = {
     | "componentInstance";
   name: string;
   text?: string;
+  imageAssetId?: string;
+  imageAssetSha256?: string;
+  imageScaleMode?: "FILL" | "FIT" | "CROP" | "TILE";
+  imageTransform?: Transform;
+  imageScalingFactor?: number;
   svg?: string;
   svgFillNone?: boolean;
   clearSvgRootFills?: boolean;
@@ -116,6 +131,7 @@ export type Bundle = {
     defaultColorToken?: string;
   }[];
   recipes: Recipe[];
+  imageAssets?: ImageAsset[];
   examples?: {
     id: string;
     name: string;
