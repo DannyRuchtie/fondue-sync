@@ -52,7 +52,7 @@ export function augmentTokenBindings(bundle) {
     if (!token) {
       token = {
         id,
-        name: `component-constants/${role}/${String(value)}`,
+        name: `component-constants/${role}/${numberKey(value)}`,
         type: "FLOAT",
         collection: "Primitives",
         values: { Value: value },

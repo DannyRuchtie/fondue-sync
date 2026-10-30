@@ -61,7 +61,7 @@ function fixture() {
         get: () => text,
         set: (content: string) => {
           assert.ok(
-            loadedFonts.has("Inter/Regular"),
+            loadedFonts.has("Diatype/Regular"),
             "Font must load before writing native caption text",
           );
           text = content;

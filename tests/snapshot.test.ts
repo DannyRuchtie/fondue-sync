@@ -296,3 +296,19 @@ test("variant snapshots read property definitions only from the owning component
   assert.ok(result.componentPropertyDefinitions.State);
   assert.equal(result.children[0].componentPropertyDefinitions, undefined);
 });
+
+test("variable snapshots tolerate bridges that reject SceneNode-only type reads", async () => {
+  const variable: any = {
+    name: "spacing/small",
+    resolvedType: "FLOAT",
+    valuesByMode: { value: 12 },
+  };
+  Object.defineProperty(variable, "type", {
+    get() {
+      throw Error("variable.type: no such property");
+    },
+  });
+  const result = JSON.parse(await snapshot(variable));
+  assert.equal(result.resolvedType, "FLOAT");
+  assert.equal(result.valuesByMode.value, 12);
+});

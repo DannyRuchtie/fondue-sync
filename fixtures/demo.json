@@ -36,8 +36,13 @@
       "name": "Spring poster",
       "extension": "svg",
       "color": "#CFE6D3",
-      "permissions": { "canView": true, "canDownload": true },
-      "customMetadata": { "campaign": "Spring" }
+      "permissions": {
+        "canView": true,
+        "canDownload": true
+      },
+      "customMetadata": {
+        "campaign": "Spring"
+      }
     },
     {
       "id": "asset-mark",
@@ -45,8 +50,13 @@
       "name": "Primary mark",
       "extension": "svg",
       "color": "#DDD5F0",
-      "permissions": { "canView": true, "canDownload": false },
-      "customMetadata": { "campaign": "Evergreen" }
+      "permissions": {
+        "canView": true,
+        "canDownload": false
+      },
+      "customMetadata": {
+        "campaign": "Evergreen"
+      }
     },
     {
       "id": "asset-palette",
@@ -54,11 +64,23 @@
       "name": "Color palette",
       "extension": "svg",
       "color": "#D5E5EF",
-      "permissions": { "canView": true, "canDownload": true },
-      "customMetadata": { "campaign": "Evergreen" }
+      "permissions": {
+        "canView": true,
+        "canDownload": true
+      },
+      "customMetadata": {
+        "campaign": "Evergreen"
+      }
     }
   ],
-  "guidelines": [],
+  "guidelines": [
+    {
+      "id": "guideline-spruce",
+      "brandId": "brand-spruce",
+      "name": "Brand guidelines",
+      "pageCount": 8
+    }
+  ],
   "agenticFeatures": [
     {
       "id": "feature-workflow",
@@ -77,7 +99,17 @@
     }
   ],
   "learning": [
-    { "id": "learn-intro", "title": "A sample introduction" },
-    { "id": "learn-workflow", "title": "Build a sample workflow" }
-  ]
+    {
+      "id": "learn-intro",
+      "title": "A sample introduction"
+    },
+    {
+      "id": "learn-workflow",
+      "title": "Build a sample workflow"
+    }
+  ],
+  "ui": {
+    "workspaceLabel": "Demo workspace",
+    "userLabel": "Demo user"
+  }
 }

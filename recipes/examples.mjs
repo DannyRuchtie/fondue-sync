@@ -1,8 +1,30 @@
-/** Authored composition examples. Fondue definitions always come from the pinned released repository. */
+/** Production-grounded compositions: measured read-only Frontify UI, synthetic content.
+ * These are authored layouts composed from released native Fondue instances, not new
+ * upstream Fondue component definitions. Private screenshots remain outside this repository.
+ */
 import fs from "node:fs";
 const demo = JSON.parse(
   fs.readFileSync(new URL("../fixtures/demo.json", import.meta.url), "utf8"),
 );
+const profiles = {
+  wide: { width: 1920, height: 960, main: 1663, card: 310.2, mobile: false },
+  desktop: {
+    width: 1440,
+    height: 960,
+    main: 1183,
+    card: 271.75,
+    mobile: false,
+  },
+  tablet: { width: 768, height: 960, main: 511, card: 463, mobile: false },
+  mobile: { width: 390, height: 844, main: 390, card: 342, mobile: true },
+};
+const S = {
+  surface: "color-surface-default",
+  dim: "color-surface-dim",
+  text: "color-primary-default",
+  muted: "color-secondary-default",
+  line: "color-line-subtle",
+};
 const binding = (domain, field, type = "string", entityId) => ({
   schemaVersion: 1,
   dataset: demo.datasetId,
@@ -12,426 +34,1145 @@ const binding = (domain, field, type = "string", entityId) => ({
   ...(entityId ? { entityId } : {}),
   status: "fixture",
 });
-const frame = (id, children = [], options = {}) => ({
+const frame = (id, children = [], o = {}) => ({
   id,
   kind: "frame",
   name: id,
   layout: "VERTICAL",
-  gap: 16,
   padding: 0,
+  gap: 0,
+  counterAlign: "MIN",
+  primaryAlign: "MIN",
   children,
-  ...options,
+  ...o,
 });
-const inst = (id, componentName, text, variantProps = {}, options = {}) => ({
+const row = (id, children = [], o = {}) =>
+  frame(id, children, { layout: "HORIZONTAL", counterAlign: "CENTER", ...o });
+const inst = (id, componentName, text, variantProps = {}, o = {}) => ({
   id,
   kind: "componentInstance",
   name: id,
   componentName,
   variantProps,
-  ...(text ? { text } : {}),
-  ...options,
+  ...(text !== undefined ? { text } : {}),
+  ...o,
 });
-const patternInst = (id, recipeId, variantProps = {}, options = {}) => ({
+const part = (id, recipeId, variantProps = {}, o = {}) => ({
   id,
   kind: "componentInstance",
   name: id,
   recipeId,
   variantProps,
-  ...options,
+  ...o,
 });
-const heading = (id, value, size = "x-large") =>
-  inst(id, "Heading", value, { size, weight: "default", color: "default" });
-const text = (id, value, color = "default") =>
-  inst(id, "Text", value, { size: "medium", weight: "default", color });
-const button = (id, value, emphasis = "strong") =>
-  inst(id, "Button", value, {
-    size: "medium",
-    variant: "default",
-    emphasis,
-    rounding: "medium",
-    aspect: "default",
-    state: "default",
-  });
-const row = (id, children, o = {}) =>
-  frame(id, children, { layout: "HORIZONTAL", gap: 16, ...o });
-const authoredSource = [
-  "packages/components/src/components/Button/Button.tsx",
+const body = (
+  id,
+  value,
+  size = "medium",
+  color = "default",
+  weight = "default",
+  o = {},
+) => inst(id, "Text", value, { size, color, weight }, o);
+const title = (id, value, size = "medium", o = {}) =>
+  inst(id, "Heading", value, { size, weight: "default", color: "default" }, o);
+const button = (id, value, emphasis = "strong", o = {}) =>
+  inst(
+    id,
+    "Button",
+    value,
+    {
+      variant: "default",
+      emphasis,
+      size: "medium",
+      rounding: "medium",
+      aspect: "default",
+      state: "default",
+    },
+    o,
+  );
+const icon = (id, name, size = 16, color = S.text, o = {}) => ({
+  id,
+  kind: "instance",
+  name: id,
+  iconId: "icon:" + name,
+  width: size,
+  height: size,
+  iconColor: color,
+  ...o,
+});
+const rect = (id, w, h, color, radius = 0) => ({
+  id,
+  kind: "rectangle",
+  name: id,
+  width: w,
+  height: h,
+  radius,
+  bindings: { fills: color },
+});
+const sources = [
   "packages/components/src/components/Text/Text.tsx",
   "packages/components/src/components/Heading/Heading.tsx",
-  "packages/components/src/components/TextInput/TextInput.tsx",
-  "packages/components/src/components/Card/Card.ts",
+  "packages/components/src/components/Button/Button.tsx",
+  "packages/components/src/components/Link/Link.tsx",
+  "packages/components/src/components/Card/CardRoot.tsx",
+  "packages/components/src/components/Card/CardBanner.tsx",
+  "packages/components/src/components/Card/CardContent.tsx",
 ];
-const documentation = (purpose, usage) => ({
+const observation = {
+  method:
+    "Read-only signed-in UI inspection and browser layout measurements; no private entity names, images, account IDs, credentials or CDN resources copied.",
+  observedDate: "2026-10-30",
+  viewports: [1920, 1440, 768, 390],
+  routePatterns: [
+    "workspace brands overview",
+    "/brands/{brandId}/guidelines",
+    "/brands/{brandId}/libraries",
+  ],
+  content: "fixtures/demo.json; synthetic entities only",
+  reference: "docs/production-layout-reference.md",
+};
+const docs = (purpose) => ({
   purpose,
-  usage,
+  usage:
+    "Compose with the real nested Fondue instances; edit text, icon and exposed instance properties. Content is synthetic and actions do not execute.",
   properties:
-    "Nested library component instances expose their actual source properties. Fixture bindings identify synthetic content; they do not run queries.",
+    "Finite measured viewport profiles, not an invented universal responsive rule. Source-family typography and shared token bindings remain editable.",
   description: purpose,
   origin:
-    "Authored Fondue Sync example composition; component definitions from released repository only.",
+    "Authored production-grounded composition, measured UI structure; released Fondue definitions only.",
   metadataSource: "fixtures/demo.json",
   links: [],
 });
-const make = (name, variants, purpose) => ({
-  id: "patterns/" + name,
-  name,
-  package: "fondue-sync/patterns",
-  source: authoredSource,
-  status: "partial",
-  limitations: [
-    "Authored layout example, not a shipped Fondue component or live account replica.",
-    "Nested instance state availability follows source component recipe coverage. Browser navigation, queries and actions are inert fixture metadata.",
-  ],
-  documentation: documentation(
-    purpose,
-    "Insert the pattern from the published Fondue Sync patterns library; adjust real nested component properties and replace synthetic fixture data.",
-  ),
-  variants: variants.map(({ props, root }) => ({
-    id: Object.entries(props)
-      .map(([k, v]) => `${k}=${v}`)
-      .join(";"),
-    props,
-    root,
-  })),
-});
-const navigation = (section) =>
-  frame(
-    "navigation",
-    [
-      heading("workspace", "Spruce workspace", "medium"),
-      inst(
-        "search",
-        "TextInput",
-        "Find a page",
-        {
-          status: "neutral",
-          mode: "default",
-          content: "placeholder",
-          slots: "none",
-        },
-        { dataBinding: binding("ui", "navigation.search", "search") },
-      ),
-      ...["Overview", "Guidelines", "Libraries", "Projects", "Agentic hub"].map(
-        (label) =>
-          button(
-            "nav-" + label.toLowerCase().replaceAll(" ", "-"),
-            label,
-            label === section ? "default" : "weak",
-          ),
-      ),
-      text("fixture-label", "Synthetic workspace", "weak"),
+const patterns = [];
+function make(name, variants, purpose, limitations = []) {
+  const recipe = {
+    id: "patterns/Production" + name,
+    name: "Production" + name,
+    package: "fondue-sync/patterns",
+    source: sources,
+    status: "partial",
+    limitations: [
+      "Production-grounded authored layout; not a newly exported Fondue component or interactive application.",
+      "Synthetic labels and original editable artwork replace all private account names and images.",
+      ...limitations,
     ],
-    {
-      width: 256,
-      height: 840,
-      padding: 16,
-      bindings: {
-        fills: "color-surface-dim",
-        strokes: "color-line-subtle",
-        itemSpacing: "spacing-medium",
-      },
-    },
-  );
-const toolbar = (domain) =>
-  row(
-    "toolbar",
-    [
-      inst(
-        "search",
-        "TextInput",
-        domain === "brands"
-          ? "Search brands"
-          : domain === "guidelines"
-            ? "Search guidelines"
-            : "Search assets",
-        {
-          status: "neutral",
-          mode: "default",
-          content: "placeholder",
-          slots: "none",
-        },
-        { width: 520, dataBinding: binding(domain, "query", "search") },
+    documentation: docs(purpose),
+    productionReference: observation,
+    variants: variants.map(({ props, root }) => ({
+      id: Object.entries(props)
+        .map(([k, v]) => k + "=" + v)
+        .join(";"),
+      props: Object.fromEntries(
+        Object.entries(props).map(([k, v]) => [k, String(v)]),
       ),
-      button("filter", "Filters", "weak"),
-      button("sort", "Name", "weak"),
-    ],
-    { padding: 16, bindings: { strokes: "color-line-subtle" } },
-  );
-const artwork = (id, color) =>
+      root,
+    })),
+  };
+  patterns.push(recipe);
+  return recipe;
+}
+const avatar = (id, size = 40, brand = demo.brands[0]) =>
+  frame(id, [title("initial", brand.name.slice(0, 1), "large")], {
+    width: size,
+    height: size,
+    radius: 4,
+    primaryAlign: "CENTER",
+    counterAlign: "CENTER",
+    fill: brand.color,
+    dataBinding: binding("brands", "color", "color", brand.id),
+  });
+const utilityLabels = [
+  "Agentic hub",
+  "Usage",
+  "Marketplace",
+  "Access management",
+  "Analytics",
+  "Help",
+];
+const utilityIcons = [
+  "sparks",
+  "clock-list",
+  "market",
+  "people",
+  "chart-line",
+  "question-mark-circle",
+];
+const userAvatar = (id, size = 36) =>
   frame(
     id,
-    [
-      {
-        id: "shape-a",
-        kind: "ellipse",
-        name: "Synthetic circle",
-        width: 64,
-        height: 64,
-        fill: color,
-      },
-      {
-        id: "shape-b",
-        kind: "rectangle",
-        name: "Synthetic block",
-        width: 100,
-        height: 24,
-        fill: "#FFFFFF",
-        radius: 4,
-      },
-    ],
-    { width: 272, height: 140, padding: 24, gap: 8, fill: color },
-  );
-const tiles = (domain) => {
-  const records = demo[domain];
-  return row(
-    "tiles",
-    records.map((record) =>
-      frame(
-        record.id,
-        [
-          artwork("artwork", record.color ?? "#D5E5EF"),
-          inst(
-            "card",
-            "Card",
-            record.name,
-            { selected: "false", state: "default" },
-            {
-              width: 272,
-              dataBinding: binding(domain, "name", "string", record.id),
-            },
-          ),
-          ...(domain === "assets"
-            ? [
-                text(
-                  "permission",
-                  record.permissions.canDownload
-                    ? "Download available"
-                    : "View only",
-                  "weak",
-                ),
-              ]
-            : []),
-        ],
-        { width: 272, gap: 8 },
-      ),
-    ),
-    { gap: 16 },
-  );
-};
-const empty = () =>
-  frame(
-    "empty-state",
-    [
-      {
-        id: "guideline-symbol",
-        kind: "instance",
-        name: "Guideline symbol",
-        iconId: "icon:document-list",
-        width: 64,
-        height: 64,
-        iconColor: "color-secondary-default",
-      },
-      heading("title", "Start your guidelines", "xx-large"),
-      text(
-        "description",
-        "Create a sample guide for your fictional brand.",
-        "weak",
-      ),
-      button("create", "Create guideline"),
-      inst("learn", "Link", "Explore the sample setup", { state: "default" }),
-    ],
+    [icon("person", "person-anonymous", size - 4, "color-surface-default")],
     {
-      width: 920,
-      height: 500,
-      padding: 40,
-      gap: 16,
+      width: size,
+      height: size,
+      radius: 4,
+      primaryAlign: "CENTER",
       counterAlign: "CENTER",
-      bindings: {
-        fills: "color-surface-dim",
-        cornerRadius: "border-radius-x-large",
-      },
+      bindings: { fills: "color-container-secondary-default" },
     },
   );
-export const patterns = [
-  make(
-    "NavigationShell",
-    ["Overview", "Guidelines", "Agentic hub"].map((section) => ({
-      props: { section },
-      root: navigation(section),
-    })),
-    "A reusable workspace sidebar composed of real Fondue navigation controls.",
-  ),
-  make(
-    "SearchToolbar",
-    ["brands", "guidelines", "assets"].map((domain) => ({
-      props: { domain },
-      root: toolbar(domain),
-    })),
-    "A search/filter/sort toolbar with typed fixture search metadata.",
-  ),
-  make(
-    "AssetBrowser",
-    ["brands", "assets"].map((domain) => ({
-      props: { domain },
-      root: frame("browser", [toolbar(domain), tiles(domain)], {
-        width: 920,
-        padding: 16,
-        dataBinding: binding(domain, "items", "collection"),
-      }),
-    })),
-    "A reusable asset or brand browser; cards remain nested native Fondue instances.",
-  ),
-  make(
-    "GuidelinesEmptyState",
-    [{ props: { state: "empty" }, root: empty() }],
-    "An empty state inspired by the inspected Guidelines example, with synthetic content.",
-  ),
-  make(
-    "AgenticFeatureGrid",
+const rail = (page, height = 960) => {
+  const context = page === "brands" ? "brands" : "brand",
+    brand = page === "empty-libraries" ? demo.brands[1] : demo.brands[0],
+    active =
+      page === "empty-libraries"
+        ? "Libraries"
+        : page === "libraries"
+          ? "Libraries"
+          : page === "guidelines"
+            ? "Guidelines"
+            : "";
+  return frame(
+    "rail",
     [
-      {
-        props: { state: "ready" },
-        root: row(
-          "features",
-          demo.agenticFeatures.map((feature) =>
-            frame(
-              feature.id,
+      row(
+        "brand-switcher",
+        [
+          context === "brand"
+            ? avatar("brand-thumb", 36, brand)
+            : icon("menu", "lines", 20),
+          frame(
+            "workspace-copy",
+            [
+              title("workspace", context === "brand" ? brand.name : "Brands"),
+              ...(context === "brands"
+                ? [body("caption", "Demo workspace", "x-small", "weak")]
+                : []),
+            ],
+            { width: context === "brand" ? 158 : 140 },
+          ),
+          ...(context === "brand"
+            ? [
+                icon("brand-dropdown", "caret-down", 16, S.text, {
+                  x: 178,
+                  y: 22,
+                  layoutPositioning: "ABSOLUTE",
+                }),
+              ]
+            : []),
+          icon("collapse", "sidebar-left-hide", 20, S.text, {
+            opacity: context === "brands" ? 0 : 1,
+          }),
+        ],
+        {
+          height: 60,
+          width: 256,
+          paddingLeft: context === "brands" ? 20 : 12,
+          paddingRight: 12,
+          gap: context === "brands" ? 16 : 8,
+        },
+      ),
+      ...(context === "brand"
+        ? [
+            row(
+              "navigation-search",
               [
-                heading("name", feature.name, "medium"),
-                text("description", feature.description, "weak"),
-                button("open", "Explore", "weak"),
+                icon("search-icon", "magnifier", 20, S.muted),
+                body("search-label", "Search", "medium", "weak", "default", {
+                  width: 158,
+                }),
+                body("shortcut", "⌘K", "small", "weak"),
               ],
               {
-                width: 272,
-                padding: 16,
-                bindings: {
-                  strokes: "color-line-subtle",
-                  cornerRadius: "border-radius-medium",
-                },
+                width: 240,
+                height: 32,
+                paddingLeft: 12,
+                paddingRight: 12,
+                gap: 8,
+                x: 8,
+                y: 68,
+                layoutPositioning: "ABSOLUTE",
+                radius: 4,
+                bindings: { fills: S.surface, strokes: "color-line-mid" },
               },
             ),
+            frame(
+              "brand-navigation",
+              [
+                "Essentials",
+                "Guidelines",
+                "Libraries",
+                "Projects",
+                "Newsletters",
+              ].map((label) =>
+                row(
+                  "nav-" + label.toLowerCase(),
+                  [
+                    icon(
+                      "nav-icon",
+                      label === "Libraries"
+                        ? "image-stack"
+                        : label === "Guidelines"
+                          ? "document-list"
+                          : label === "Essentials"
+                            ? "color-fan"
+                            : label === "Projects"
+                              ? "folder"
+                              : "paperplane",
+                      20,
+                    ),
+                    body("nav-label", label),
+                  ],
+                  {
+                    width: 240,
+                    height: 32,
+                    paddingLeft: 12,
+                    gap: 8,
+                    radius: 4,
+                    ...(label === active
+                      ? { bindings: { fills: "color-surface-active" } }
+                      : {}),
+                  },
+                ),
+              ),
+              { x: 8, y: 116, layoutPositioning: "ABSOLUTE", gap: 4 },
+            ),
+          ]
+        : []),
+      frame(
+        "utility-navigation",
+        utilityLabels.map((label, i) =>
+          row(
+            "utility-" + i,
+            [
+              icon("utility-icon", utilityIcons[i], 20, S.muted),
+              body("utility-label", label, "medium", "weak"),
+            ],
+            { height: 36, gap: 8, paddingLeft: 12 },
           ),
-          { gap: 16 },
         ),
+        {
+          x: 8,
+          y: height - 274,
+          width: 240,
+          layoutPositioning: "ABSOLUTE",
+          gap: 0,
+        },
+      ),
+      row(
+        "account",
+        [
+          userAvatar("account-avatar", 24),
+          body("account-name", "Demo user", "small", "default", "default", {
+            width: 160,
+          }),
+          icon("notifications", "bell", 16, S.muted),
+        ],
+        {
+          x: 8,
+          y: height - 52,
+          width: 240,
+          height: 44,
+          paddingLeft: 8,
+          paddingRight: 8,
+          gap: 12,
+          layoutPositioning: "ABSOLUTE",
+        },
+      ),
+      {
+        ...rect("utility-divider", 240, 1, S.line),
+        x: 8,
+        y: height - 282,
+        layoutPositioning: "ABSOLUTE",
+      },
+      {
+        ...rect("account-divider", 240, 1, S.line),
+        x: 8,
+        y: height - 52,
+        layoutPositioning: "ABSOLUTE",
+      },
+      {
+        ...rect("rail-divider", 1, height, S.line),
+        x: 256,
+        y: 0,
+        layoutPositioning: "ABSOLUTE",
       },
     ],
-    "A feature grid for an authored Agentic hub example; actions are fixture-only.",
-  ),
-];
-const screen = (id, name, section, content) => ({
-  id: "examples/" + id,
-  name,
-  width: 1280,
-  height: 840,
-  fixture: demo.datasetId,
-  layoutReference: {
-    source: "explorer/SOURCE.md",
-    files: [
-      "explorer/src/ProductViews.tsx",
-      "explorer/src/ProductPages.tsx",
-      "explorer/src/product-views.css",
-    ],
-    role: "Composition reference only; never a Fondue definition or data source.",
-    observedLayoutDate: "2026-10-28",
-  },
-  limitations: [
-    "Editable frame composition using real generated Fondue and pattern instances. Not an interactive prototype export.",
-    "Synthetic fixtures and original native artwork replace all account-specific data and CDN reference imagery.",
-  ],
-  root: row(
-    "screen",
+    { width: 257, height, bindings: { fills: S.dim } },
+  );
+};
+make(
+  "NavigationRail",
+  ["brands", "guidelines", "libraries", "empty-libraries"].map((page) => ({
+    props: { page },
+    root: rail(page),
+  })),
+  "Measured 257px desktop rail including its 1px separator. Brand context adds the observed navigation search and five primary rows.",
+);
+const bottom = (page) => {
+  const global = page === "brands",
+    brand = page === "empty-libraries" ? demo.brands[1] : demo.brands[0];
+  return row(
+    "bottom-brand-bar",
     [
-      patternInst("navigation", "patterns/NavigationShell", { section }),
-      frame("main", content, {
-        width: 1024,
-        height: 840,
-        padding: 24,
-        gap: 24,
-        bindings: { fills: "color-surface-default" },
+      row(
+        "workspace",
+        [
+          global ? icon("menu", "lines", 20) : avatar("brand-thumb", 28, brand),
+          frame("workspace-copy", [
+            title("workspace", global ? "Brands" : brand.name),
+            ...(global
+              ? [body("workspace-caption", "Demo workspace", "x-small", "weak")]
+              : []),
+          ]),
+          ...(!global ? [icon("brand-dropdown", "caret-down", 12)] : []),
+        ],
+        { width: global ? 158 : 160, gap: global ? 16 : 8 },
+      ),
+      row(
+        "utilities",
+        [
+          ...(!global ? [icon("search", "magnifier")] : []),
+          icon("messages", "speech-bubble-dots"),
+          icon("notifications", "bell"),
+          row(
+            "account-more",
+            [
+              userAvatar("account", 36),
+              frame("more", [icon("more", "dots-vertical")], {
+                width: 36,
+                height: 36,
+                primaryAlign: "CENTER",
+                counterAlign: "CENTER",
+                radius: 4,
+                bindings: { fills: "color-container-secondary-default" },
+              }),
+            ],
+            { gap: 4 },
+          ),
+        ],
+        { gap: 12 },
+      ),
+    ],
+    {
+      width: 390,
+      height: 68,
+      paddingTop: 12,
+      paddingBottom: 12,
+      paddingLeft: global ? 20 : 16,
+      paddingRight: 20,
+      primaryAlign: "SPACE_BETWEEN",
+      bindings: { fills: S.dim, strokes: S.line },
+    },
+  );
+};
+make(
+  "MobileBrandBar",
+  ["brands", "guidelines", "libraries", "empty-libraries"].map((page) => ({
+    props: { page },
+    root: bottom(page),
+  })),
+  "Observed fixed 68px mobile brand bar, replacing the desktop left rail.",
+);
+const tabs = (profile) =>
+  row(
+    "library-tabs",
+    [
+      frame("selected-tab", [title("overview-label", "Overview")], {
+        height: 28,
+        paddingLeft: 8,
+        paddingRight: 8,
+        primaryAlign: "CENTER",
+        radius: 4,
+        bindings: { fills: "color-container-secondary-default" },
+      }),
+      title("remote-assets", "Remote assets"),
+      title("shared-folders", profile === "tablet" ? "…" : "Shared folders"),
+    ],
+    { height: profiles[profile].mobile ? 28 : 36, gap: 16 },
+  );
+function header(page, profile) {
+  const p = profiles[profile],
+    label =
+      page === "brands"
+        ? "Overview"
+        : page === "guidelines"
+          ? "Guidelines"
+          : "Libraries",
+    action =
+      page === "brands"
+        ? "New brand"
+        : page === "guidelines"
+          ? "New guideline"
+          : "New library";
+  return frame(
+    "page-header",
+    [
+      row(
+        "title-action",
+        [
+          row(
+            "title-tabs",
+            [
+              title("title", label),
+              ...(page === "libraries" && !p.mobile
+                ? [rect("separator", 1, 28, S.line), tabs(profile)]
+                : []),
+            ],
+            { gap: 20 },
+          ),
+          row(
+            "new-action-group",
+            [
+              icon("new-action-icon", "plus", 16, "color-primary-on-primary"),
+              button("new-action", action, "strong", {
+                bindings: { paddingLeft: "component-constant-spacing-0" },
+              }),
+            ],
+            {
+              height: 36,
+              paddingLeft: 12,
+              gap: 8,
+              radius: 4,
+              bindings: { fills: "color-primary-default" },
+            },
+          ),
+        ],
+        {
+          width: p.main,
+          height: p.mobile && page !== "libraries" ? 96 : 60,
+          paddingLeft: 24,
+          paddingRight: 24,
+          primaryAlign: "SPACE_BETWEEN",
+        },
+      ),
+      ...(page === "libraries" && p.mobile
+        ? [
+            row("tabs-row", [tabs(profile)], {
+              width: p.main,
+              height: 36,
+              paddingLeft: 76,
+              counterAlign: "MAX",
+            }),
+          ]
+        : []),
+    ],
+    {
+      width: p.main,
+      height: p.mobile ? 96 : 60,
+      bindings: { fills: S.surface, strokes: S.line },
+    },
+  );
+}
+make(
+  "PageHeader",
+  ["brands", "guidelines", "libraries"].flatMap((page) =>
+    ["wide", "desktop", "tablet", "mobile"].map((viewport) => ({
+      props: { page, viewport },
+      root: header(page, viewport),
+    })),
+  ),
+  "Measured page titles, primary actions, and Libraries navigation. Mobile Libraries tabs wrap to a second 36px row.",
+  [
+    "Primary actions compose a released plus-icon instance and native Button label; the label-side padding override preserves the observed 16px icon and 8px gap.",
+  ],
+);
+const viewControls = () =>
+  row(
+    "view-controls",
+    [
+      frame("grid-selected", [icon("grid", "grid-regular")], {
+        width: 36,
+        height: 36,
+        radius: 4,
+        primaryAlign: "CENTER",
+        counterAlign: "CENTER",
+        bindings: { fills: S.surface, strokes: "color-line-strong" },
+      }),
+      frame("list", [icon("list", "list-bullet")], {
+        width: 36,
+        height: 36,
+        primaryAlign: "CENTER",
+        counterAlign: "CENTER",
+        radius: 4,
+        bindings: { fills: S.dim, strokes: "color-line-mid" },
       }),
     ],
-    { width: 1280, height: 840, gap: 0 },
-  ),
-  documentation: documentation(
-    name,
-    "Duplicate this example frame into a design file and swap enabled library instances. Binding metadata describes fixture values only.",
-  ),
-});
-export const screens = [
-  screen("dashboard", "Example / Dashboard", "Overview", [
-    row(
-      "header",
-      [
-        heading("title", "Overview", "medium"),
-        button("new-brand", "New brand"),
-      ],
-      { width: 976, primaryAlign: "SPACE_BETWEEN" },
-    ),
-    patternInst(
-      "brands",
-      "patterns/AssetBrowser",
-      { domain: "brands" },
-      { dataBinding: binding("brands", "items", "collection") },
-    ),
-  ]),
-  screen("guidelines", "Example / Guidelines", "Guidelines", [
-    row(
-      "header",
-      [
-        heading("title", "Guidelines", "medium"),
-        button("new-guideline", "New guideline"),
-      ],
-      { width: 976, primaryAlign: "SPACE_BETWEEN" },
-    ),
-    patternInst("search", "patterns/SearchToolbar", { domain: "guidelines" }),
-    patternInst(
-      "empty",
-      "patterns/GuidelinesEmptyState",
-      { state: "empty" },
-      { dataBinding: binding("guidelines", "items", "collection") },
-    ),
-  ]),
-  screen("agentic", "Example / Agentic hub", "Agentic hub", [
-    heading("title", "Agentic hub", "xx-large"),
-    text(
-      "intro",
-      "Explore tools and workflows in a fictional workspace.",
-      "weak",
-    ),
-    row("automation-hero", [
-      artwork("workflow-art", "#DDD5F0"),
-      frame(
-        "automation-copy",
+    { gap: 0 },
+  );
+const sortControls = () =>
+  row(
+    "sort-view",
+    [
+      row(
+        "sort",
         [
-          heading("heading", "Workflow automations"),
-          text(
-            "description",
-            "Arrange a sample workflow with synthetic assets.",
-            "weak",
-          ),
-          button("explore", "Explore workflow", "weak"),
+          icon("sort-icon", "caret-up-down", 12, S.muted),
+          body("sort-label", "Date created", "small"),
+          icon("sort-caret", "caret-down"),
         ],
-        { width: 560 },
+        { gap: 8 },
       ),
-    ]),
-    heading("features-title", "Features"),
-    patternInst("features", "patterns/AgenticFeatureGrid", { state: "ready" }),
-    heading("learn-title", "Learn"),
-    row(
-      "learn",
-      demo.learning.map((item) =>
-        inst(
-          item.id,
-          "Card",
-          item.title,
-          { selected: "false", state: "default" },
-          {
-            width: 272,
-            dataBinding: binding("learning", "title", "string", item.id),
-          },
+      viewControls(),
+    ],
+    { gap: 16 },
+  );
+function search(page, profile) {
+  const p = profiles[profile],
+    isBrands = page === "brands",
+    label = isBrands
+      ? "Search"
+      : page === "guidelines"
+        ? "Search guidelines"
+        : "Search libraries";
+  const input = row(
+    "unboxed-search",
+    [
+      icon("search-icon", "magnifier", 16, S.muted),
+      body("search-label", label, "medium", "weak"),
+    ],
+    {
+      gap: 8,
+      height: 36,
+      dataBinding: binding(
+        page === "brands" ? "brands" : page,
+        "query",
+        "search",
+      ),
+    },
+  );
+  if (!p.mobile)
+    return row(
+      "search-toolbar",
+      [input, ...(!isBrands ? [sortControls()] : [])],
+      {
+        width: p.main,
+        height: 54,
+        paddingLeft: 24,
+        paddingRight: 24,
+        primaryAlign: "SPACE_BETWEEN",
+        bindings: { fills: S.surface, strokes: S.line },
+      },
+    );
+  return frame(
+    "search-toolbar",
+    [
+      {
+        ...input,
+        x: 24,
+        y: isBrands ? 9 : 31,
+        layoutPositioning: "ABSOLUTE",
+        width: isBrands ? 342 : 180,
+      },
+      ...(!isBrands
+        ? [
+            {
+              ...sortControls(),
+              x: 24,
+              y: 98,
+              layoutPositioning: "ABSOLUTE",
+              width: 342,
+              primaryAlign: "MAX",
+            },
+          ]
+        : []),
+    ],
+    {
+      width: 390,
+      height: isBrands ? 54 : 122,
+      bindings: { fills: S.surface, strokes: S.line },
+      clipContent: false,
+    },
+  );
+}
+make(
+  "SearchToolbar",
+  ["brands", "guidelines", "libraries"].flatMap((page) =>
+    ["wide", "desktop", "tablet", "mobile"].map((viewport) => ({
+      props: { page, viewport },
+      root: search(page, viewport),
+    })),
+  ),
+  "Unboxed full-width search region; sort and grid/list controls appear only on the two observed brand pages.",
+  [
+    "At 390px Guidelines/Libraries, the observed controls extend 12px below their layout region and overlap the start of content. This reproduction records that production limitation rather than inventing a polished breakpoint.",
+  ],
+);
+function banner(id, width, brand) {
+  return frame(
+    id,
+    [
+      rect(
+        "artwork-band",
+        width - 32,
+        Math.max(8, width / 14),
+        "color-charts-secondary-default",
+      ),
+      row(
+        "artwork-motif",
+        [
+          frame("artwork-circle", [], {
+            width: width / 5,
+            height: width / 5,
+            radius: 9999,
+            bindings: { fills: "color-charts-primary-default" },
+          }),
+          frame("artwork-circle-secondary", [], {
+            width: width / 8,
+            height: width / 8,
+            radius: 9999,
+            bindings: { fills: "color-charts-tertiary-default" },
+          }),
+        ],
+        { gap: width / 8 },
+      ),
+    ],
+    {
+      width,
+      height: width / 2,
+      clipContent: true,
+      padding: 16,
+      gap: 16,
+      primaryAlign: "CENTER",
+      counterAlign: "CENTER",
+      radius: 8,
+      fill: brand.color,
+      dataBinding: binding("brands", "color", "color", brand.id),
+    },
+  );
+}
+const brandCard = (brand, profile) => {
+  const p = profiles[profile];
+  return frame(
+    "brand-card",
+    [
+      banner("banner", p.card, brand),
+      row(
+        "footer",
+        [
+          avatar("brand-thumbnail", 40, brand),
+          row(
+            "title-menu",
+            [
+              title("brand-name", brand.name),
+              icon("more", "dots-vertical", 16, S.muted),
+            ],
+            { width: p.card - 81, primaryAlign: "SPACE_BETWEEN" },
+          ),
+        ],
+        {
+          width: p.card,
+          height: 64,
+          padding: 12,
+          gap: 12,
+          primaryAlign: "MIN",
+        },
+      ),
+    ],
+    {
+      width: p.card,
+      gap: 0,
+      dataBinding: binding("brands", "name", "string", brand.id),
+    },
+  );
+};
+make(
+  "BrandCard",
+  demo.brands.slice(0, 2).flatMap((brand) =>
+    ["wide", "desktop", "mobile"].map((viewport) => ({
+      props: { brand: brand.id, viewport },
+      root: brandCard(brand, viewport),
+    })),
+  ),
+  "Observed 2:1 brand artwork with a 64px footer, 40px thumbnail, title and overflow control; real Fondue text/icon instances remain nested.",
+);
+const guide = demo.guidelines[0];
+const guideCard = (profile) => {
+  const p = profiles[profile];
+  return frame(
+    "guideline-card",
+    [
+      banner("banner", p.card, demo.brands[0]),
+      row(
+        "footer",
+        [
+          frame(
+            "copy",
+            [
+              title("guideline-name", guide.name),
+              body("page-count", guide.pageCount + " pages", "small", "weak"),
+            ],
+            { gap: 4 },
+          ),
+          icon("more", "dots-vertical", 16, S.muted),
+        ],
+        {
+          width: p.card,
+          height: 56,
+          paddingLeft: 12,
+          paddingRight: 12,
+          paddingTop: 8,
+          paddingBottom: 8,
+          primaryAlign: "SPACE_BETWEEN",
+        },
+      ),
+    ],
+    {
+      width: p.card,
+      dataBinding: binding("guidelines", "name", "string", guide.id),
+    },
+  );
+};
+make(
+  "GuidelineCard",
+  ["wide", "desktop", "mobile"].map((viewport) => ({
+    props: { viewport },
+    root: guideCard(viewport),
+  })),
+  "One observed guideline tile: 2:1 artwork and 56px title/page-count footer. Synthetic guide name replaces private account content.",
+);
+const library = demo.libraries[0],
+  assetCount = demo.assets.filter(
+    (asset) => asset.libraryId === library.id,
+  ).length;
+const libraryCard = (profile) => {
+  const p = profiles[profile];
+  return frame(
+    "library-card",
+    [
+      banner("banner", p.card, demo.brands[0]),
+      row(
+        "footer",
+        [
+          frame(
+            "library-thumbnail",
+            [icon("library-icon", "image-stack", 20, "color-line-strong")],
+            {
+              width: 40,
+              height: 40,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              radius: 4,
+              bindings: { fills: S.dim },
+            },
+          ),
+          frame(
+            "copy",
+            [
+              title("library-name", library.name),
+              body("asset-count", assetCount + " assets", "small", "weak"),
+            ],
+            { gap: 4 },
+          ),
+        ],
+        { width: p.card, height: 64, padding: 12, gap: 12 },
+      ),
+    ],
+    {
+      width: p.card,
+      dataBinding: binding("libraries", "name", "string", library.id),
+    },
+  );
+};
+make(
+  "LibraryCard",
+  ["wide", "desktop", "mobile"].map((viewport) => ({
+    props: { viewport },
+    root: libraryCard(viewport),
+  })),
+  "Observed populated Libraries overview has one tile with a 64px thumbnail/title/asset-count footer and no visible overflow action. Asset count comes from the owned synthetic fixture.",
+);
+function illustration(mobile) {
+  const w = mobile ? 300 : 320;
+  const card = (id, rotation, x, y, label, color) =>
+    frame(
+      id,
+      [
+        body("kind-label", label, "x-small", "weak"),
+        frame("artwork", [], {
+          width: 100,
+          height: 72,
+          radius: 4,
+          bindings: { fills: color },
+        }),
+        rect("text-line-one", 90, 3, "color-line-subtle"),
+        rect("text-line-two", 68, 3, "color-line-subtle"),
+      ],
+      {
+        width: 124,
+        height: 164,
+        padding: 12,
+        gap: 8,
+        rotation,
+        x,
+        y,
+        layoutPositioning: "ABSOLUTE",
+        radius: 8,
+        effectStyle: "shadow-default",
+        bindings: { fills: S.surface },
+      },
+    );
+  return frame(
+    "original-library-illustration",
+    [
+      ...Array.from({ length: 4 }, (_, i) => ({
+        ...rect(
+          "pale-tile-" + i,
+          148,
+          90,
+          "color-container-secondary-default",
+          16,
         ),
-      ),
+        x: (i % 2) * 156,
+        y: 23 + Math.floor(i / 2) * 98,
+        layoutPositioning: "ABSOLUTE",
+      })),
+      card("video-card", 8, 24, 40, "VIDEOS", "color-charts-secondary-default"),
+      card("logo-card", -14, 150, 23, "LOGOS", "color-charts-primary-default"),
+    ],
+    { width: w, height: 220 },
+  );
+}
+const emptyDescription =
+  "Upload your assets to get started. Once your library is ready, add it to your guidelines so your team can find and download what they need.";
+function emptyState(profile) {
+  const p = profiles[profile],
+    width = p.mobile ? 342 : p.main - 48,
+    height = p.mobile ? 534 : 798;
+  return frame(
+    "empty-library-panel",
+    [
+      illustration(p.mobile),
+      {
+        id: "display-title",
+        name: "Libraries / source Cranny display",
+        kind: "text",
+        text: "Libraries",
+        fontFamily: "Cranny",
+        fontWeight: 300,
+        fontSize: 46,
+        lineHeight: 54,
+        textStyle: "text-display-xx-large-light",
+        bindings: { fills: S.text },
+      },
+      {
+        id: "description",
+        name: "Description",
+        kind: "text",
+        text: emptyDescription,
+        textAlignHorizontal: "CENTER",
+        width: p.mobile ? 330 : Math.min(470, width - 48),
+        fontFamily: "Diatype",
+        fontWeight: 400,
+        fontSize: 14,
+        lineHeight: 18,
+        bindings: { fills: S.muted },
+      },
+      button("create-library", "+ Create library"),
+      {
+        id: "get-started",
+        name: "Get started with libraries / underlined help",
+        kind: "text",
+        text: "Get started with libraries",
+        fontFamily: "Diatype",
+        fontWeight: 400,
+        fontSize: 12,
+        lineHeight: 16,
+        textDecoration: "UNDERLINE",
+        bindings: { fills: S.text },
+      },
+    ],
+    {
+      width,
+      height,
+      gap: 16,
+      primaryAlign: "CENTER",
+      counterAlign: "CENTER",
+      radius: 8,
+      bindings: { fills: S.dim, cornerRadius: "border-radius-large" },
+    },
+  );
+}
+make(
+  "LibrariesEmptyState",
+  ["wide", "desktop", "tablet", "mobile"].map((viewport) => ({
+    props: { viewport },
+    root: emptyState(viewport),
+  })),
+  "Observed empty Libraries panel with actual source Cranny Light 46/54 display typography, exact generic UI copy and create/help actions.",
+  [
+    "The 2 tilted asset cards and 4 pale tiles are original editable native artwork. Private jellyfish/logo imagery from the application is intentionally replaced, not copied or represented as an exact illustration match.",
+  ],
+);
+// Only the observed edge separators are physical; no decorative bounding rectangles.
+for (const pattern of patterns) {
+  if (
+    ![
+      "ProductionPageHeader",
+      "ProductionSearchToolbar",
+      "ProductionMobileBrandBar",
+    ].includes(pattern.name)
+  )
+    continue;
+  for (const variant of pattern.variants) {
+    const root = variant.root;
+    delete root.bindings.strokes;
+    root.children.push({
+      ...rect("edge-separator", root.width, 1, S.line),
+      x: 0,
+      y: pattern.name === "ProductionMobileBrandBar" ? 0 : root.height - 1,
+      layoutPositioning: "ABSOLUTE",
+    });
+    if (
+      pattern.name === "ProductionSearchToolbar" &&
+      variant.props.page !== "brands"
+    )
+      root.children.push({
+        ...rect(
+          "search-divider",
+          1,
+          variant.props.viewport === "mobile" ? 80 : 36,
+          S.line,
+        ),
+        x: 200,
+        y: variant.props.viewport === "mobile" ? 31 : 9,
+        layoutPositioning: "ABSOLUTE",
+      });
+  }
+}
+export { patterns };
+const screen = (page, viewport, state = "populated") => {
+  const p = profiles[viewport],
+    mobile = p.mobile,
+    id = "examples/production-" + page + "-" + state + "-" + viewport;
+  const cards =
+    page === "brands"
+      ? demo.brands.slice(0, 2).map((brand) =>
+          part("brand-" + brand.id, "patterns/ProductionBrandCard", {
+            brand: brand.id,
+            viewport,
+          }),
+        )
+      : page === "guidelines"
+        ? [part("guideline", "patterns/ProductionGuidelineCard", { viewport })]
+        : [part("library", "patterns/ProductionLibraryCard", { viewport })];
+  const content =
+    state === "empty"
+      ? [
+          part("empty-state", "patterns/ProductionLibrariesEmptyState", {
+            viewport,
+          }),
+        ]
+      : [
+          frame("card-grid", cards, {
+            layout: mobile ? "VERTICAL" : "HORIZONTAL",
+            gap: 16,
+            width: mobile ? 342 : p.main - 48,
+          }),
+        ];
+  const main = frame(
+    "main",
+    [
+      part("header", "patterns/ProductionPageHeader", { page, viewport }),
+      part("toolbar", "patterns/ProductionSearchToolbar", { page, viewport }),
+      frame("content", content, {
+        width: p.main,
+        height:
+          (mobile ? 776 : p.height) -
+          (mobile ? 96 : 60) -
+          (mobile ? (page === "brands" ? 54 : 122) : 54),
+        paddingTop: mobile && page !== "brands" ? 0 : 24,
+        paddingLeft: 24,
+        paddingRight: 24,
+        paddingBottom: 24,
+        gap: 16,
+      }),
+    ],
+    {
+      width: p.main,
+      height: mobile ? 776 : p.height,
+      bindings: { fills: S.surface },
+    },
+  );
+  return {
+    id,
+    name:
+      "Production / " +
+      (page === "brands"
+        ? "Brands overview"
+        : page === "guidelines"
+          ? "Guidelines overview"
+          : state === "empty"
+            ? "Libraries empty state"
+            : "Libraries overview") +
+      " / " +
+      p.width +
+      "px",
+    width: p.width,
+    height: p.height,
+    fixture: demo.datasetId,
+    productionReference: {
+      ...observation,
+      profile: viewport,
+      viewport: { width: p.width, height: p.height },
+      cardGrid: mobile
+        ? { columns: 1, cardWidth: 342, gap: 16 }
+        : viewport === "wide"
+          ? { columns: 5, cardWidth: 310.2, gap: 16 }
+          : viewport === "desktop"
+            ? { columns: 4, cardWidth: 271.75, gap: 16 }
+            : { sidebarRetained: true },
+      state,
+    },
+    limitations: [
+      "Editable native component-instance composition; no live data, routing or executable actions.",
+      "Private production images and names are replaced by owned synthetic fixtures and original native artwork.",
+      ...(mobile && page !== "brands"
+        ? [
+            "Observed 390px toolbar/content overlap of 12px is preserved and labelled as a production narrow-layout limitation.",
+          ]
+        : []),
+      ...(viewport === "tablet"
+        ? [
+            "768px sidebar retention/tab ellipsis are observed; 960px review height is a chosen viewport extent.",
+          ]
+        : []),
+    ],
+    documentation: docs(
+      "Measured production " +
+        page +
+        " " +
+        state +
+        " at " +
+        p.width +
+        "px; synthetic data only.",
     ),
-  ]),
+    root: frame(
+      "screen",
+      mobile
+        ? [
+            main,
+            {
+              ...part("mobile-bar", "patterns/ProductionMobileBrandBar", {
+                page: state === "empty" ? "empty-libraries" : page,
+              }),
+              x: 0,
+              y: 776,
+              layoutPositioning: "ABSOLUTE",
+            },
+          ]
+        : [
+            part("rail", "patterns/ProductionNavigationRail", {
+              page: state === "empty" ? "empty-libraries" : page,
+            }),
+            main,
+          ],
+      {
+        layout: "HORIZONTAL",
+        width: p.width,
+        height: p.height,
+        gap: 0,
+        clipContent: true,
+        bindings: { fills: S.surface },
+      },
+    ),
+  };
+};
+export const screens = [
+  ...["brands", "guidelines", "libraries"].flatMap((page) =>
+    ["wide", "desktop", "mobile"].map((viewport) => screen(page, viewport)),
+  ),
+  ...["wide", "tablet", "mobile"].map((viewport) =>
+    screen("libraries", viewport, "empty"),
+  ),
 ];
 export default patterns;

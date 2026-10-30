@@ -7,6 +7,7 @@ export type Token = {
   css: string;
   scopes?: string[];
   provenance?: Record<string, unknown>;
+  nativeFontFamily?: { sourceFamily: string; style: string };
 };
 export type Layer = {
   id: string;
@@ -54,6 +55,7 @@ export type Layer = {
   opacity?: number;
   visible?: boolean;
   textDecoration?: "NONE" | "UNDERLINE" | "STRIKETHROUGH";
+  textAlignHorizontal?: "LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED";
   layoutPositioning?: "AUTO" | "ABSOLUTE";
   primaryAlign?: "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN";
   counterAlign?: "MIN" | "MAX" | "CENTER" | "BASELINE";
@@ -76,6 +78,8 @@ export type Layer = {
   stroke?: string;
   fontSize?: number;
   fontWeight?: number;
+  letterSpacing?: number;
+  textCase?: TextCase;
   bindings?: Record<string, string>;
   children?: Layer[];
 };

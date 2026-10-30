@@ -1,22 +1,23 @@
 {
   "release": "13.11.1",
-  "fingerprint": "70d4058bb7aa4dad5a50d1a62643b347e5677102b13b36403692f19dc029391c",
+  "fingerprint": "24f597b6dc70c9f3fc5ce7a928547486b27593eb3a42366ab60a7cc3b56270ed",
   "counts": {
-    "tokens": 415,
+    "tokens": 422,
     "releasedTokens": 384,
-    "sourceDerivedNativeTokens": 31,
+    "sourceDerivedNativeTokens": 38,
     "compoundSourceSymbols": 102,
     "stories": 420,
-    "styles": 37,
+    "styles": 46,
     "sourceDerivedEffectStyles": 4,
+    "sourceDerivedTextStyles": 9,
     "icons": 420,
     "opticalIconAssets": 2099,
     "inventory": 54,
-    "recipes": 202,
-    "variants": 1992,
-    "examples": 3,
-    "productPatterns": 5,
-    "documentedSets": 202,
+    "recipes": 205,
+    "variants": 2030,
+    "examples": 12,
+    "productPatterns": 8,
+    "documentedSets": 205,
     "metadataDocumentedSets": 177,
     "supported": 10,
     "partial": 42,
@@ -1775,7 +1776,8 @@
       "id": "components:Accordion",
       "status": "partial",
       "limitations": [
-        "Single-item composition; sticky positioning is provided as a separate source-context set. Header/Slot children are editable composition.",
+        "Single-item composition; sticky positioning is provided as a separate source-context set.",
+        "Header/Slot children are editable composition.",
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "Content children are an editable text sample.",
@@ -1789,31 +1791,41 @@
         "Preview uses native document icon slot; arbitrary image URLs, multiple-preview grids and PreviewLoading still need content-specific recipes.",
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
-        "children labels are native composition choices, not React string values. Dashed border is approximated with solid native stroke until per-dash schema support exists."
+        "children labels are native composition choices, not React string values.",
+        "Dashed border is approximated with solid native stroke until per-dash schema support exists."
       ]
     },
     {
       "id": "components:Badge",
       "status": "partial",
       "limitations": [
-        "Status dot and dismiss are independently hideable native properties. Arbitrary custom status colors remain editable fill overrides. Forced-colors media rendering remains in CSS.",
-        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every variant/emphasis/state at default size; every variant/emphasis at small/default state."
+        "Status dot and dismiss are independently hideable native properties.",
+        "Arbitrary custom status colors remain editable fill overrides.",
+        "Forced-colors media rendering remains in CSS.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported.",
+        "Every variant/emphasis/state at default size; every variant/emphasis at small/default state."
       ]
     },
     {
       "id": "components:Box",
       "status": "partial",
       "limitations": [
-        "No invented surface, border, radius or padding; source is unstyled layout wrapper. Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset. Inline formatting contexts are approximate."
+        "No invented surface, border, radius or padding; source is unstyled layout wrapper.",
+        "Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset.",
+        "Inline formatting contexts are approximate."
       ]
     },
     {
       "id": "components:Button",
       "status": "partial",
       "limitations": [
-        "Full-width behavior is native frame resizing; square aspect swaps text content for a native icon. CSS forced-colors media mode is represented by the browser, not this light/dark library.",
-        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
-        "Source-data gap: states referring to absent released color tokens are omitted. Browser verification proves their computed color inherits arbitrary consumer context. See docs/source-token-defects.md and control-coverage.json."
+        "Full-width behavior is native frame resizing; square aspect swaps text content for a native icon.",
+        "CSS forced-colors media mode is represented by the browser, not this light/dark library.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported.",
+        "Every intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.",
+        "Source-data gap: states referring to absent released color tokens are omitted.",
+        "Browser verification proves their computed color inherits arbitrary consumer context.",
+        "See docs/source-token-defects.md and control-coverage.json."
       ]
     },
     {
@@ -1883,14 +1895,17 @@
       "id": "components:EditableText",
       "status": "partial",
       "limitations": [
-        "Source box metrics and visible hover/editing borders covered. Keyboard focus requires two source rings (2px surface, 6px focus) and clipping/ellipsis remain unsupported. Inherited arbitrary asChild typography is not forced to a token."
+        "Source box metrics and visible hover/editing borders covered.",
+        "Keyboard focus requires two source rings (2px surface, 6px focus) and clipping/ellipsis remain unsupported.",
+        "Inherited arbitrary asChild typography is not forced to a token."
       ]
     },
     {
       "id": "components:Flex",
       "status": "partial",
       "limitations": [
-        "Direction and explicit alignment/justification permutations exposed. CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
+        "Direction and explicit alignment/justification permutations exposed.",
+        "CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
       ]
     },
     {
@@ -1911,7 +1926,8 @@
       "id": "components:Grid",
       "status": "partial",
       "limitations": [
-        "Native Auto Layout specimen covers 1–4 columns; source accepts arbitrary CSS track strings, rows, auto flow/dense packing, alignment and responsive gaps. CSS grid algorithm cannot be represented by fixed nested rows."
+        "Native Auto Layout specimen covers 1–4 columns; source accepts arbitrary CSS track strings, rows, auto flow/dense packing, alignment and responsive gaps.",
+        "CSS grid algorithm cannot be represented by fixed nested rows."
       ]
     },
     {
@@ -1933,16 +1949,21 @@
       "status": "partial",
       "limitations": [
         "Native text wrapping/truncation is controlled by frame and text resizing. onContainer alternate semantic colors are supplied in independent Link/On container sets.",
-        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported.",
+        "Every color or on-container color × underline × state at medium/regular; every size × weight at primary/auto/default (and secondary container for on-container profile).",
         "Native text wrapping/truncation is controlled by frame and text resizing.",
-        "Source-data gap: states referring to absent released color tokens are omitted. Browser verification proves their computed color inherits arbitrary consumer context. See docs/source-token-defects.md and control-coverage.json."
+        "Source-data gap: states referring to absent released color tokens are omitted.",
+        "Browser verification proves their computed color inherits arbitrary consumer context.",
+        "See docs/source-token-defects.md and control-coverage.json."
       ]
     },
     {
       "id": "components:LoadingBar",
       "status": "partial",
       "limitations": [
-        "All finite size/intent/rounding axes covered. Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose. Resize indicator for other values."
+        "All finite size/intent/rounding axes covered.",
+        "Numeric value/max are continuous; native component offers 0/25/50/75/100 sample proportions and an indeterminate 40% animation pose.",
+        "Resize indicator for other values."
       ]
     },
     {
@@ -1973,7 +1994,9 @@
       "id": "components:Section",
       "status": "partial",
       "limitations": [
-        "No invented surface, border, radius or padding; source is unstyled layout wrapper. Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset. Inline formatting contexts are approximate."
+        "No invented surface, border, radius or padding; source is unstyled layout wrapper.",
+        "Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset.",
+        "Inline formatting contexts are approximate."
       ]
     },
     {
@@ -1996,7 +2019,8 @@
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "fontSize belongs to Root and is included here as inherited context. onClick/keyboard selection remain runtime.",
-        "none represents undefined sortDirection. Loading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.",
+        "none represents undefined sortDirection.",
+        "Loading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.",
         "Sortable trigger semantics need onSortChange in React.",
         "colSpan, widths, truncation and gutter are contextual layout constraints."
       ]
@@ -2005,8 +2029,11 @@
       "id": "components:Tag",
       "status": "partial",
       "limitations": [
-        "Main/secondary content text and add/dismiss visibility are native properties; mixed per-action hover is an editable fill override. Forced-colors media rendering remains in CSS.",
-        "Source-data gap: states referring to absent released color tokens are omitted. Browser verification proves their computed color inherits arbitrary consumer context. See docs/source-token-defects.md and control-coverage.json."
+        "Main/secondary content text and add/dismiss visibility are native properties; mixed per-action hover is an editable fill override.",
+        "Forced-colors media rendering remains in CSS.",
+        "Source-data gap: states referring to absent released color tokens are omitted.",
+        "Browser verification proves their computed color inherits arbitrary consumer context.",
+        "See docs/source-token-defects.md and control-coverage.json."
       ]
     },
     {
@@ -2025,16 +2052,22 @@
       "id": "components:TextInput",
       "status": "partial",
       "limitations": [
-        "Hidden input types have no canvas asset. Email/number/password/search/tel/time/url differ in browser semantics and text content; edit the text property. Loading is a native icon snapshot rather than animation.",
-        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots; every slot/content combination at neutral/default."
+        "Hidden input types have no canvas asset.",
+        "Email/number/password/search/tel/time/url differ in browser semantics and text content; edit the text property.",
+        "Loading is a native icon snapshot rather than animation.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported.",
+        "Every status/mode at baseline text/no slots; every slot/content combination at neutral/default."
       ]
     },
     {
       "id": "components:Textarea",
       "status": "partial",
       "limitations": [
-        "Native height can be resized to match minRows/maxRows; autosize is runtime text measurement. Extra actions/decorators are exposed native icon slots. Loading is a native icon snapshot rather than animation.",
-        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported. Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default."
+        "Native height can be resized to match minRows/maxRows; autosize is runtime text measurement.",
+        "Extra actions/decorators are exposed native icon slots.",
+        "Loading is a native icon snapshot rather than animation.",
+        "Reviewed profile contract: all enum values have native examples, but the full cross-product is not imported.",
+        "Every status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default."
       ]
     },
     {
@@ -2137,7 +2170,8 @@
       "limitations": [
         "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
         "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
-        "Published /rte only. Static editor and toolbar specimens; Plate plugins, selection menus, serialization, embedded blocks and all exported editor primitives remain uncovered.",
+        "Published /rte only.",
+        "Static editor and toolbar specimens; Plate plugins, selection menus, serialization, embedded blocks and all exported editor primitives remain uncovered.",
         "Private version-zero rich-text-editor package and internal legacy UI catalogs are excluded.",
         "Nested native icon instances support library swapping; state-dependent icon color inheritance still requires visual review and explicit child paint binding."
       ]
@@ -2167,7 +2201,8 @@
       "limitations": [
         "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
         "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
-        "Source wrapper accepts arbitrary padding/minWidth; these are two sample configurations. Shadow, overflow and placement remain uncovered."
+        "Source wrapper accepts arbitrary padding/minWidth; these are two sample configurations.",
+        "Shadow, overflow and placement remain uncovered."
       ]
     },
     {

@@ -1,0 +1,348 @@
+{
+  "release": "13.11.1",
+  "policy": "Exact effective font family, size, weight, line height, letter spacing and case. CSS font stacks remain unchanged; native family aliases resolve only through confirmed font availability.",
+  "counts": {
+    "textLayers": 2521,
+    "releasedStyleMatches": 2446,
+    "existingExactStyles": 2005,
+    "derivedStyles": 9,
+    "derivedVariables": 3,
+    "layerBindings": 12597
+  },
+  "derivedStyles": [
+    {
+      "id": "source-text-diatype-10-400-auto-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "lineHeight": "AUTO",
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/charts/src/components/LineChart/LineChart.module.scss",
+        "packages/charts/src/components/LineChart/LineChart.spec.tsx",
+        "packages/charts/src/components/LineChart/LineChart.stories.tsx",
+        "packages/charts/src/components/LineChart/LineChart.tsx",
+        "packages/charts/src/components/LineChart/components/Axes.tsx",
+        "packages/charts/src/components/LineChart/components/MarkLine.module.scss",
+        "packages/charts/src/components/LineChart/components/MarkLine.tsx",
+        "packages/charts/src/components/LineChart/components/Series/Series.tsx",
+        "packages/charts/src/components/LineChart/components/Series/components/Area.tsx",
+        "packages/charts/src/components/LineChart/components/Series/components/Line.tsx",
+        "packages/charts/src/components/LineChart/components/Series/components/SeriesClipPath.tsx",
+        "packages/charts/src/components/LineChart/components/Series/components/index.ts",
+        "packages/charts/src/components/LineChart/components/Series/index.ts",
+        "packages/charts/src/components/LineChart/components/helpers/getXTickValues.spec.ts",
+        "packages/charts/src/components/LineChart/components/helpers/getXTickValues.ts",
+        "packages/charts/src/components/LineChart/components/helpers/index.ts",
+        "packages/charts/src/components/LineChart/components/index.ts",
+        "packages/charts/src/components/LineChart/consts.ts",
+        "packages/charts/src/components/LineChart/helpers/accessors.spec.ts",
+        "packages/charts/src/components/LineChart/helpers/accessors.ts",
+        "packages/charts/src/components/LineChart/helpers/createBackFilledSeries.spec.ts",
+        "packages/charts/src/components/LineChart/helpers/createBackfilledSeries.ts",
+        "packages/charts/src/components/LineChart/helpers/getAreaFillColors.spec.ts",
+        "packages/charts/src/components/LineChart/helpers/getAreaFillColors.ts",
+        "packages/charts/src/components/LineChart/helpers/index.ts",
+        "packages/charts/src/components/LineChart/index.ts",
+        "packages/charts/src/components/LineChart/types.ts"
+      ]
+    },
+    {
+      "id": "source-text-diatype-11-400-16-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "lineHeight": 16,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ]
+    },
+    {
+      "id": "source-text-diatype-11-500-16-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 11,
+        "fontWeight": 500,
+        "lineHeight": 16,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ]
+    },
+    {
+      "id": "source-text-diatype-11-700-16-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 11,
+        "fontWeight": 700,
+        "lineHeight": 16,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ]
+    },
+    {
+      "id": "source-text-diatype-14-400-18-0-original-underline",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 14,
+        "fontWeight": 400,
+        "lineHeight": 18,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "UNDERLINE"
+      },
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ]
+    },
+    {
+      "id": "source-text-diatype-20-400-24-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 20,
+        "fontWeight": 400,
+        "lineHeight": 24,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ]
+    },
+    {
+      "id": "source-text-diatype-24-400-28-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 24,
+        "fontWeight": 400,
+        "lineHeight": 28,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Link/Link.metadata.json",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Link/styles/link.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ]
+    },
+    {
+      "id": "source-text-diatype-14-400-20-0-original-none",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 14,
+        "fontWeight": 400,
+        "lineHeight": 20,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "NONE"
+      },
+      "source": [
+        "packages/components/src/components/Tooltip/Tooltip.tsx",
+        "packages/components/src/components/Tooltip/styles/tooltip.module.scss"
+      ]
+    },
+    {
+      "id": "source-text-diatype-12-400-16-0-original-underline",
+      "metrics": {
+        "fontFamily": "Diatype",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "lineHeight": 16,
+        "letterSpacing": 0,
+        "textCase": "ORIGINAL",
+        "textDecoration": "UNDERLINE"
+      },
+      "source": [
+        "packages/components/src/components/Text/Text.tsx",
+        "packages/components/src/components/Heading/Heading.tsx",
+        "packages/components/src/components/Button/Button.tsx",
+        "packages/components/src/components/Link/Link.tsx",
+        "packages/components/src/components/Card/CardRoot.tsx",
+        "packages/components/src/components/Card/CardBanner.tsx",
+        "packages/components/src/components/Card/CardContent.tsx"
+      ]
+    }
+  ],
+  "derivedVariables": [
+    {
+      "id": "native-font-family-diatype",
+      "name": "native/font-family/Diatype",
+      "type": "STRING",
+      "collection": "Primitives",
+      "values": {
+        "Value": "Diatype"
+      },
+      "css": "Diatype",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "nativeFontFamily": {
+        "sourceFamily": "Diatype",
+        "style": "Regular"
+      },
+      "provenance": {
+        "kind": "native-font-family-alias",
+        "source": "packages/tokens/dist/css/base.css",
+        "role": "fontFamily",
+        "sourceFamily": "Diatype",
+        "definitionNote": "CSS family/stack is retained. Native value is resolved by confirmed exact family or reviewed installed-font alias at import."
+      }
+    },
+    {
+      "id": "native-font-family-cranny",
+      "name": "native/font-family/Cranny",
+      "type": "STRING",
+      "collection": "Primitives",
+      "values": {
+        "Value": "Cranny"
+      },
+      "css": "Cranny",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "nativeFontFamily": {
+        "sourceFamily": "Cranny",
+        "style": "Regular"
+      },
+      "provenance": {
+        "kind": "native-font-family-alias",
+        "source": "packages/tokens/dist/css/base.css",
+        "role": "fontFamily",
+        "sourceFamily": "Cranny",
+        "definitionNote": "CSS family/stack is retained. Native value is resolved by confirmed exact family or reviewed installed-font alias at import."
+      }
+    },
+    {
+      "id": "source-typography-fontsize-10",
+      "name": "source/typography/fontSize/10",
+      "type": "FLOAT",
+      "collection": "Primitives",
+      "values": {
+        "Value": 10
+      },
+      "css": "10px",
+      "scopes": [
+        "FONT_SIZE"
+      ],
+      "provenance": {
+        "kind": "reviewed-source-typography-constant",
+        "source": [
+          "packages/charts/src/components/LineChart/LineChart.module.scss",
+          "packages/charts/src/components/LineChart/LineChart.spec.tsx",
+          "packages/charts/src/components/LineChart/LineChart.stories.tsx",
+          "packages/charts/src/components/LineChart/LineChart.tsx",
+          "packages/charts/src/components/LineChart/components/Axes.tsx",
+          "packages/charts/src/components/LineChart/components/MarkLine.module.scss",
+          "packages/charts/src/components/LineChart/components/MarkLine.tsx",
+          "packages/charts/src/components/LineChart/components/Series/Series.tsx",
+          "packages/charts/src/components/LineChart/components/Series/components/Area.tsx",
+          "packages/charts/src/components/LineChart/components/Series/components/Line.tsx",
+          "packages/charts/src/components/LineChart/components/Series/components/SeriesClipPath.tsx",
+          "packages/charts/src/components/LineChart/components/Series/components/index.ts",
+          "packages/charts/src/components/LineChart/components/Series/index.ts",
+          "packages/charts/src/components/LineChart/components/helpers/getXTickValues.spec.ts",
+          "packages/charts/src/components/LineChart/components/helpers/getXTickValues.ts",
+          "packages/charts/src/components/LineChart/components/helpers/index.ts",
+          "packages/charts/src/components/LineChart/components/index.ts",
+          "packages/charts/src/components/LineChart/consts.ts",
+          "packages/charts/src/components/LineChart/helpers/accessors.spec.ts",
+          "packages/charts/src/components/LineChart/helpers/accessors.ts",
+          "packages/charts/src/components/LineChart/helpers/createBackFilledSeries.spec.ts",
+          "packages/charts/src/components/LineChart/helpers/createBackfilledSeries.ts",
+          "packages/charts/src/components/LineChart/helpers/getAreaFillColors.spec.ts",
+          "packages/charts/src/components/LineChart/helpers/getAreaFillColors.ts",
+          "packages/charts/src/components/LineChart/helpers/index.ts",
+          "packages/charts/src/components/LineChart/index.ts",
+          "packages/charts/src/components/LineChart/types.ts"
+        ],
+        "role": "fontSize",
+        "value": 10,
+        "definitionInputs": "provenance.definitionInputs.recipes"
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/LineChart/data=sample/chart/labels/tick-0/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    },
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/LineChart/data=sample/chart/labels/tick-1/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    },
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/LineChart/data=sample/chart/labels/tick-2/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    },
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/LineChart/data=sample/chart/labels/tick-3/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    },
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/AreaStackChart/data=sample/chart/labels/tick-0/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    },
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/AreaStackChart/data=sample/chart/labels/tick-1/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    },
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/AreaStackChart/data=sample/chart/labels/tick-2/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    },
+    {
+      "kind": "nonnumeric-auto-line-height",
+      "path": "charts/AreaStackChart/data=sample/chart/labels/tick-3/label",
+      "styleId": "source-text-diatype-10-400-auto-0-original-none",
+      "reason": "AUTO is not a numeric source value; native shared style retains AUTO rather than inventing a pixel value."
+    }
+  ]
+}

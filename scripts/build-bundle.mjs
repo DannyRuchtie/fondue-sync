@@ -1,9 +1,13 @@
+import { augmentTypographyBindings } from "../recipes/typography-bindings.mjs";
 import fs from "node:fs";
 import { augmentTokenBindings } from "../recipes/token-bindings.mjs";
 import { augmentPaintBindings } from "../recipes/paint-bindings.mjs";
 import path from "node:path";
 import crypto from "node:crypto";
-import { documentation } from "../recipes/documentation.mjs";
+import {
+  documentation,
+  normalizeRecipeDocumentation,
+} from "../recipes/documentation.mjs";
 import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const RELEASE = "13.11.1";
@@ -512,6 +516,10 @@ export async function build(source = path.join(root, ".cache/release")) {
           "recovery.ts",
           "schema.ts",
           "sections.ts",
+          "presentation.ts",
+          "colors.ts",
+          "galleries.ts",
+          "documentation.ts",
         ]
           .map((f) => fs.readFileSync(path.join(root, "src", f), "utf8"))
           .join("\n"),
@@ -536,6 +544,7 @@ export async function build(source = path.join(root, ".cache/release")) {
             "documentation",
             "token-bindings",
             "paint-bindings",
+            "typography-bindings",
           ].map((name) => {
             const f = path.join(root, "recipes", name + ".mjs");
             return [path.relative(root, f), sha(fs.readFileSync(f))];
@@ -567,6 +576,9 @@ export async function build(source = path.join(root, ".cache/release")) {
     sourceRoot: source,
   });
   bundle.paintBindingCoverage = paintBindingCoverage;
+  const typographyBindingCoverage = augmentTypographyBindings(bundle);
+  for (const recipe of bundle.recipes) normalizeRecipeDocumentation(recipe);
+  bundle.provenance.consumerPresentation = 1;
   bundle.fingerprint = sha(JSON.stringify(bundle));
   fs.mkdirSync(path.join(root, "bundles"), { recursive: true });
   fs.mkdirSync(path.join(root, "docs"), { recursive: true });
@@ -585,8 +597,12 @@ export async function build(source = path.join(root, ".cache/release")) {
       compoundSourceSymbols: compounds.length,
       stories: stories.reduce((n, s) => n + s.names.length, 0),
       styles: styles.length,
-      sourceDerivedEffectStyles: styles.filter((style) => style.provenance)
-        .length,
+      sourceDerivedEffectStyles: styles.filter(
+        (style) => style.type === "EFFECT" && style.provenance,
+      ).length,
+      sourceDerivedTextStyles: styles.filter(
+        (style) => style.type === "TEXT" && style.provenance,
+      ).length,
       icons: icons.length,
       opticalIconAssets: icons.reduce(
         (count, icon) => count + icon.sizes.length,
@@ -622,6 +638,10 @@ export async function build(source = path.join(root, ".cache/release")) {
   fs.writeFileSync(
     path.join(root, "docs/color-effect-binding-coverage.json"),
     JSON.stringify(paintBindingCoverage, null, 2) + "\n",
+  );
+  fs.writeFileSync(
+    path.join(root, "docs/typography-binding-coverage.json"),
+    JSON.stringify(typographyBindingCoverage, null, 2) + "\n",
   );
   console.log(JSON.stringify(coverage.counts));
   return bundle;

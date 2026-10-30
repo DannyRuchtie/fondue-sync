@@ -11,6 +11,9 @@ import { bundleProblems, migrationProblems } from "./preflight";
 import { read, write } from "./metadata";
 import { inspectPartialRecipe, partialRecipeProblems } from "./recovery";
 import { organizeSections } from "./sections";
+import { syncColorsPage } from "./colors";
+import { planCuratedGalleries, syncCuratedGalleries } from "./galleries";
+import { uniqueSentences } from "./documentation";
 type Index = {
   schema: 1 | 2;
   fontWarnings?: string[];
@@ -24,6 +27,17 @@ type Index = {
   pages: Record<string, string>;
   sections?: Record<string, string>;
   sectionGuides?: Record<string, string>;
+  presentationNodes?: Record<string, string>;
+  presentationInstances?: Record<string, string>;
+  galleryMoveAudits?: {
+    release: string;
+    moves: {
+      assetKey: string;
+      nodeId: string;
+      fromParentId: string | null;
+      toPageId: string;
+    }[];
+  }[];
 };
 export type Report = {
   release: string;
@@ -39,8 +53,9 @@ export class SyncEngine {
   bundle: Bundle;
   index: Index;
   warnings: string[] = [];
-  font: FontName = { family: "Inter", style: "Regular" };
+  font: FontName = { family: "Diatype", style: "Regular" };
   fonts = new Map<string, Promise<FontName>>();
+  availableFonts?: Promise<Font[]>;
   tokenCache = new Map<string, Variable>();
   appliedPropertyDefaults = new Set<string>();
   lastSavedIndex: string | undefined;
@@ -333,7 +348,15 @@ export class SyncEngine {
     if (variable.resolvedType !== token.type)
       throw Error("Variable type migration required for " + token.id);
     const collection = await this.collection(token.collection);
-    for (const [mode, value] of Object.entries(token.values)) {
+    for (const [mode, sourceValue] of Object.entries(token.values)) {
+      const value = token.nativeFontFamily
+        ? (
+            await this.fontFor(
+              token.nativeFontFamily.sourceFamily,
+              token.nativeFontFamily.style,
+            )
+          ).family
+        : sourceValue;
       const modeId = collection.modes.find((m) => m.name === mode)?.modeId;
       if (!modeId) throw Error("Missing mode " + mode);
       variable.setValueForMode(
@@ -374,23 +397,88 @@ export class SyncEngine {
     const requested = { family, style: normalized };
     try {
       await this.api.loadFontAsync(requested);
+      this.warnings = this.warnings.filter(
+        (warning) =>
+          !warning.startsWith(`Font ${family} ${style} unavailable;`),
+      );
       return requested;
     } catch {
-      const fallback = { family: "Inter", style: normalized };
-      try {
-        await this.api.loadFontAsync(fallback);
-      } catch {
-        fallback.style = "Regular";
-        await this.api.loadFontAsync(fallback);
+      // The released CSS family is Diatype; installed ABC font metadata exposes
+      // that same product as ABC Diatype. Resolve only this reviewed exact alias,
+      // and only when Figma confirms the requested style is actually available.
+      const knownAlias = family === "Diatype" ? "ABC Diatype" : undefined;
+      if (
+        knownAlias &&
+        typeof this.api.listAvailableFontsAsync === "function"
+      ) {
+        try {
+          this.availableFonts ??= this.api.listAvailableFontsAsync();
+          const available = await this.availableFonts;
+          const aliasFont = available.find(
+            ({ fontName }) =>
+              fontName.family === knownAlias && fontName.style === normalized,
+          )?.fontName;
+          if (aliasFont) {
+            await this.api.loadFontAsync(aliasFont);
+            this.warnings = this.warnings.filter(
+              (warning) =>
+                !warning.startsWith(`Font ${family} ${style} unavailable;`),
+            );
+            return aliasFont;
+          }
+        } catch {
+          // A failed lookup must not substitute an unrelated installed font.
+        }
       }
-      const warning = `Font ${family} ${style} unavailable; using ${fallback.family} ${fallback.style}.`;
-      if (!this.warnings.includes(warning)) this.warnings.push(warning);
-      return fallback;
+      throw Error(
+        `Required Fondue source font is unavailable: ${family} ${normalized}.` +
+          (knownAlias
+            ? ` Confirmed installed alias ${knownAlias} ${normalized} is also unavailable.`
+            : "") +
+          " Install the required source font before importing or updating the library. No substitute font is applied.",
+      );
     }
+  }
+  async preflightFonts(): Promise<string[]> {
+    const requirements = new Map<string, FontName>();
+    const add = (family: string, style: string) =>
+      requirements.set(family + ":" + style, { family, style });
+    for (const style of this.bundle.styles)
+      if (style.type === "TEXT")
+        add(style.fontFamily, style.fontStyle ?? "Regular");
+    const visit = (node: Layer) => {
+      if (node.kind === "text")
+        add(
+          node.fontFamily ?? "Diatype",
+          (
+            {
+              300: "Light",
+              400: "Regular",
+              500: "Medium",
+              600: "Semi Bold",
+              700: "Bold",
+            } as Record<number, string>
+          )[node.fontWeight ?? 400] ?? "Regular",
+        );
+      for (const child of node.children ?? []) visit(child);
+    };
+    for (const recipe of this.bundle.recipes)
+      for (const variant of recipe.variants) visit(variant.root);
+    for (const example of this.bundle.examples ?? []) visit(example.root);
+    // Generated documentation uses the released primary family as well.
+    if (this.bundle.recipes.length) add("Diatype", "Regular");
+    const errors: string[] = [];
+    for (const font of requirements.values())
+      try {
+        await this.fontFor(font.family, font.style);
+      } catch (error) {
+        errors.push(String(error));
+      }
+    return errors;
   }
   async applyStyle(def: any, style: any) {
     style.name = def.name;
-    style.description = `Fondue ${this.bundle.release}. Released ${def.type === "TEXT" ? "typography" : "composite shadow"} style ${def.id}. Source: ${def.source ?? "committed token CSS"}. Font fallbacks require visual review.`;
+    style.description = `Fondue ${this.bundle.release}. Released ${def.type === "TEXT" ? "typography" : "composite shadow"} style ${def.id}. Source: ${def.source ?? "committed token CSS"}. Required source fonts must resolve before library mutation.`;
     if (def.type === "TEXT") {
       style.fontName = await this.fontFor(
         def.fontFamily,
@@ -406,8 +494,9 @@ export class SyncEngine {
           ? { unit: "PIXELS", value: def.letterSpacing }
           : def.letterSpacing;
       if (def.textCase) style.textCase = def.textCase;
+      style.textDecoration = def.textDecoration ?? "NONE";
       for (const [key, id] of Object.entries(def.bindings ?? {}))
-        if (key !== "fontFamily" && key !== "fontStyle")
+        if (key !== "fontStyle")
           style.setBoundVariable(key, await this.token(id as string));
     } else {
       style.effects = await Promise.all(
@@ -491,6 +580,43 @@ export class SyncEngine {
       for (const childNode of child.children ?? []) visit(childNode);
     };
     visit(node);
+  }
+  async applyTextTypography(node: any, def: Layer) {
+    // Applying an exact shared style is authoritative. Do not overwrite its metrics
+    // afterward with recipe literals; the augmentation has reconciled those values.
+    if (def.textStyle) {
+      const ref = this.index.assets["style:" + def.textStyle];
+      if (!ref) throw Error("Missing text style " + def.textStyle);
+      const nativeStyle = (await this.api.getStyleByIdAsync(
+        ref.id,
+      )) as TextStyle | null;
+      if (!nativeStyle)
+        throw Error("Missing native text style " + def.textStyle);
+      await this.fontFor(
+        nativeStyle.fontName.family,
+        nativeStyle.fontName.style,
+      );
+      await node.setTextStyleIdAsync(ref.id);
+    } else {
+      node.fontName = await this.fontFor(
+        def.fontFamily ?? "Diatype",
+        (
+          {
+            300: "Light",
+            400: "Regular",
+            500: "Medium",
+            600: "Semi Bold",
+            700: "Bold",
+          } as Record<number, string>
+        )[def.fontWeight ?? 400] ?? "Regular",
+      );
+      node.fontSize = def.fontSize ?? 14;
+      if (def.lineHeight !== undefined)
+        node.lineHeight = { unit: "PIXELS", value: def.lineHeight };
+      if (def.letterSpacing !== undefined)
+        node.letterSpacing = { unit: "PIXELS", value: def.letterSpacing };
+      if (def.textCase) node.textCase = def.textCase;
+    }
   }
   async layer(
     def: Layer,
@@ -702,47 +828,12 @@ export class SyncEngine {
       );
     }
     if (def.kind === "text") {
-      // All text layers are exposed, with stable property keys that survive updates.
-      node.fontName = await this.fontFor(
-        def.fontFamily ?? "Diatype",
-        (
-          {
-            300: "Light",
-            400: "Regular",
-            500: "Medium",
-            600: "Semi Bold",
-            700: "Bold",
-          } as Record<number, string>
-        )[def.fontWeight ?? 400] ?? "Regular",
-      );
-      node.fontSize = def.fontSize ?? 14;
+      await this.applyTextTypography(node, def);
+      node.textAlignHorizontal = def.textAlignHorizontal ?? "LEFT";
       node.characters = def.text ?? "";
       node.textAutoResize = "WIDTH_AND_HEIGHT";
-      if (def.lineHeight !== undefined)
-        node.lineHeight = { unit: "PIXELS", value: def.lineHeight };
-      if (def.textDecoration || previous?.textDecoration)
+      if (!def.textStyle && (def.textDecoration || previous?.textDecoration))
         node.textDecoration = def.textDecoration ?? "NONE";
-      if (def.textStyle) {
-        const ref = this.index.assets["style:" + def.textStyle];
-        if (!ref) throw Error("Missing text style " + def.textStyle);
-        await node.setTextStyleIdAsync(ref.id);
-      }
-      if (def.fontSize !== undefined) node.fontSize = def.fontSize;
-      if (def.lineHeight !== undefined)
-        node.lineHeight = { unit: "PIXELS", value: def.lineHeight };
-      if (def.fontWeight !== undefined || def.fontFamily !== undefined)
-        node.fontName = await this.fontFor(
-          def.fontFamily ?? node.fontName.family,
-          (
-            {
-              300: "Light",
-              400: "Regular",
-              500: "Medium",
-              600: "Semi Bold",
-              700: "Bold",
-            } as Record<number, string>
-          )[def.fontWeight ?? 400] ?? "Regular",
-        );
       if (owner) {
         const label = "Text / " + identityPath;
         const definitions = owner.componentPropertyDefinitions;
@@ -865,6 +956,20 @@ export class SyncEngine {
       paint(node);
     }
     for (const [field, id] of Object.entries(def.bindings ?? {})) {
+      if (
+        def.kind === "text" &&
+        def.textStyle &&
+        [
+          "fontFamily",
+          "fontStyle",
+          "fontWeight",
+          "fontSize",
+          "lineHeight",
+          "letterSpacing",
+          "textCase",
+        ].includes(field)
+      )
+        continue;
       const variable = await this.token(id);
       if (field === "fills" || field === "strokes") {
         node[field] = [
@@ -1180,7 +1285,13 @@ export class SyncEngine {
   }
   async sync(progress?: (message: string) => void): Promise<Report> {
     this.appliedPropertyDefaults.clear();
+    const fontErrors = await this.preflightFonts();
     const plan = await this.inspect();
+    if (fontErrors.length) {
+      plan.errors.push(...fontErrors);
+      plan.complete = false;
+      return plan;
+    }
     const errors: string[] = [];
     const invalid = bundleProblems(this.bundle);
     if (invalid.length) {
@@ -1397,7 +1508,7 @@ export class SyncEngine {
             ["Purpose", docs?.purpose ?? "", 16],
             ["Usage", docs?.usage ?? "", 14],
             ["Properties", docs?.properties ?? "", 13],
-            ["Coverage", def.limitations.join("\n"), 12],
+            ["Coverage", uniqueSentences(def.limitations).join("\n"), 12],
             ["Source", docs?.links.map((l: any) => l.uri).join("\n") ?? "", 12],
           ];
           if (!asset) {
@@ -1429,18 +1540,37 @@ export class SyncEngine {
                 cornerRadius: "component-constant-radius-0",
               }).filter(([, id]) => this.index.assets["token:" + id]),
             ),
-            children: paragraphs.map(([name, text, size]) => ({
-              id: String(name),
-              name: String(name),
-              kind: "text",
-              width: 650,
-              fontSize: Number(size),
-              text: String(text),
-              fill: "#202020",
-              ...(this.index.assets["token:color-primary-default"]
-                ? { bindings: { fills: "color-primary-default" } }
-                : {}),
-            })),
+            children: paragraphs.map(([name, text, size]) => {
+              const ids: Record<string, string> = {
+                Title: "text-display-medium-default",
+                Purpose: "text-body-large-default",
+                Usage: "text-body-medium-default",
+                Properties: "text-body-small-default",
+                Coverage: "text-body-x-small-default",
+                Source: "text-body-x-small-default",
+              };
+              const styleId = ids[String(name)];
+              const style = this.bundle.styles.find(
+                (s) => s.id === styleId && s.type === "TEXT",
+              );
+              const linked = style && this.index.assets["style:" + styleId];
+              return {
+                id: String(name),
+                name: String(name),
+                kind: "text" as const,
+                width: 650,
+                text: String(text),
+                ...(linked
+                  ? { textStyle: styleId }
+                  : { fontSize: Number(size) }),
+                bindings: {
+                  ...(this.index.assets["token:color-primary-default"]
+                    ? { fills: "color-primary-default" }
+                    : {}),
+                  ...(linked ? style.bindings : {}),
+                },
+              };
+            }),
           };
           asset = await this.layer(guide, page, asset);
           const ordinal = Object.values(this.index.assets).filter(
@@ -1476,14 +1606,22 @@ export class SyncEngine {
         );
       }
     }
-    const organization = await organizeSections(
-      this.api,
-      this.bundle,
-      this.index,
-      () => this.save(),
-    );
-    for (const warning of organization.warnings) {
-      if (!this.warnings.includes(warning)) this.warnings.push(warning);
+    // Presentation runs only after successful asset construction. Failed or
+    // conflicted source assets must not be moved into a seemingly complete library.
+    if (errors.length === 0) {
+      try {
+        const organization =
+          this.bundle.provenance.consumerPresentation === 1
+            ? await this.organizeConsumerLibrary()
+            : await organizeSections(this.api, this.bundle, this.index, () =>
+                this.save(),
+              );
+        for (const warning of organization.warnings) {
+          if (!this.warnings.includes(warning)) this.warnings.push(warning);
+        }
+      } catch (error) {
+        errors.push(`Library presentation incomplete: ${String(error)}`);
+      }
     }
     this.index.lastErrors = [...errors];
     this.index.fontWarnings = this.warnings.filter((w) =>
@@ -1501,5 +1639,51 @@ export class SyncEngine {
       this.save();
     }
     return result;
+  }
+
+  async organizeConsumerLibrary() {
+    const audit = await planCuratedGalleries(this.api, this.bundle, this.index);
+    if (audit.conflicts.length || audit.warnings.length) {
+      throw Error(
+        [
+          ...audit.conflicts.map((item) => `${item.key}: ${item.reason}`),
+          ...audit.warnings,
+        ].join("\n"),
+      );
+    }
+    const colors = await syncColorsPage(this.api, this.bundle, this.index, () =>
+      this.save(),
+    );
+    const galleries = await syncCuratedGalleries(
+      this.api,
+      this.bundle,
+      this.index,
+      () => this.save(),
+    );
+    if (!galleries.complete) {
+      throw Error(
+        [
+          ...galleries.plan.conflicts.map(
+            (item) => `${item.key}: ${item.reason}`,
+          ),
+          ...galleries.warnings,
+        ].join("\n"),
+      );
+    }
+    // Example scenes keep full-size screen sections; the curated organizer owns
+    // reusable assets exclusively, so no sync reparents masters twice.
+    const examples = await organizeSections(
+      this.api,
+      { ...this.bundle, recipes: [], icons: [] },
+      this.index,
+      () => this.save(),
+    );
+    return {
+      warnings: [
+        ...colors.warnings,
+        ...galleries.warnings,
+        ...examples.warnings,
+      ],
+    };
   }
 }

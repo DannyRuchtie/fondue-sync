@@ -157,6 +157,18 @@ function mockApi() {
         this.width = w;
         this.height = h;
       },
+      resizeWithoutConstraints(w: number, h: number) {
+        this.width = w;
+        this.height = h;
+      },
+      setExplicitVariableModeForCollection(collection: any, modeId: string) {
+        if (typeof collection === "string")
+          throw Error("dynamic-page requires exact collection object");
+        if (!collection.modes.some((mode: any) => mode.modeId === modeId))
+          throw Error("Unknown native variable mode");
+        this.explicitVariableModes ??= {};
+        this.explicitVariableModes[collection.id] = modeId;
+      },
       rescale(factor: number) {
         if (!Number.isFinite(factor) || factor <= 0)
           throw Error("Invalid native rescale factor");
@@ -354,6 +366,11 @@ function mockApi() {
   const api: any = {
     root,
     currentPage: page,
+    setCurrentPageAsync: async (next: any) => {
+      if (!next || next.type !== "PAGE")
+        throw Error("Native current page must be PAGE");
+      api.currentPage = next;
+    },
     getNodeByIdAsync: async (id: string) => nodes.get(id) ?? null,
     getStyleByIdAsync: async (id: string) => nodes.get(id) ?? null,
     createPage: () => {
@@ -404,6 +421,24 @@ function mockApi() {
       });
       n.setTextStyleIdAsync = async (id: string) => {
         n.textStyleId = id;
+        if (id) {
+          const style = nodes.get(id);
+          if (!style || style.type !== "TEXT")
+            throw Error("Missing native text style " + id);
+          for (const field of [
+            "fontName",
+            "fontSize",
+            "lineHeight",
+            "letterSpacing",
+            "textCase",
+          ])
+            if (style[field] !== undefined)
+              n[field] = structuredClone(style[field]);
+          n.boundVariables = {
+            ...n.boundVariables,
+            ...structuredClone(style.boundVariables ?? {}),
+          };
+        }
       };
       n.setEffectStyleIdAsync = async (id: string) => {
         n.effectStyleId = id;

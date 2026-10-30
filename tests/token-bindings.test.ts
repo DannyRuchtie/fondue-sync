@@ -139,3 +139,10 @@ test("build augmentation leaves cached source recipe definitions untouched for d
   augmentTokenBindings(bundle);
   assert.equal(bundle.tokens.length, tokens);
 });
+
+test("fractional source geometry uses native-safe variable names", () => {
+  const bundle = structuredClone(release) as unknown as Bundle;
+  augmentTokenBindings(bundle);
+  for (const token of bundle.tokens)
+    assert.ok(!/[.{}]/.test(token.name), token.name);
+});

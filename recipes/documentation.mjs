@@ -1,7 +1,37 @@
 import fs from "node:fs";
 import path from "node:path";
+/** Collapse repeated extraction caveats without discarding distinct source gaps. */
+export function dedupeLimitations(values = []) {
+  const result = [],
+    seen = new Set();
+  for (const value of values)
+    for (const part of String(value ?? "").split(
+      /\n+|(?<=[.!?])\s+(?=[A-Z])/,
+    )) {
+      const text = part.replace(/\s+/g, " ").trim();
+      const key = text.toLowerCase().replace(/[.!?]+$/, "");
+      if (key && !seen.has(key)) {
+        seen.add(key);
+        result.push(text);
+      }
+    }
+  return result;
+}
+/** Call after all recipe transforms and before bundle hashing. */
+export function normalizeRecipeDocumentation(recipe) {
+  recipe.limitations = dedupeLimitations(recipe.limitations);
+  if (recipe.documentation) {
+    for (const field of ["purpose", "usage", "description"])
+      if (typeof recipe.documentation[field] === "string")
+        recipe.documentation[field] = dedupeLimitations([
+          recipe.documentation[field],
+        ]).join("\n\n");
+  }
+  return recipe;
+}
 /** Use released metadata verbatim. Editorial fallbacks identify their authorship. */
 export function documentation(recipe, source, commit) {
+  recipe.limitations = dedupeLimitations(recipe.limitations);
   const family = recipe.name.split("/")[0].split(".")[0];
   const folder = `packages/${recipe.package.replace("@frontify/fondue/", "")}/src/components/${family}`;
   const metadataPath = `${folder}/${family}.metadata.json`;
@@ -40,7 +70,7 @@ export function documentation(recipe, source, commit) {
       usage,
       `Exposed variant properties:\n${properties}`,
       "Text properties edit the exposed content. Icon properties swap the native icon; Show properties control its visibility.",
-      `Coverage: ${recipe.status}. ${recipe.limitations.join(" ")}`,
+      `Coverage: ${recipe.status}. ${dedupeLimitations(recipe.limitations).join(" ")}`,
       `Source: ${url}`,
     ].join("\n\n"),
   };

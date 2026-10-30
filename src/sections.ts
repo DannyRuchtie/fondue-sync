@@ -205,9 +205,42 @@ export async function organizeSections(
       if (node) captions.set(group.key, node as TextNode);
     }
   }
-  // Example captions use only the bundle's authored documentation; icons get no invented guide.
-  if ([...groups.values()].some((group) => group.example))
-    await api.loadFontAsync({ family: "Inter", style: "Regular" });
+  // Captions inherit the released body style; they must never introduce a substitute font.
+  let captionStyle: TextStyle | null = null;
+  let captionFont: FontName = { family: "Diatype", style: "Regular" };
+  if ([...groups.values()].some((group) => group.example)) {
+    const ref = index.assets["style:text-body-medium-default"];
+    if (ref) {
+      const style = await api.getStyleByIdAsync(ref.id);
+      if (!style || style.type !== "TEXT")
+        throw Error("Required body text style missing for example captions.");
+      captionStyle = style;
+      captionFont = style.fontName;
+      if (!["Diatype", "ABC Diatype"].includes(captionFont.family))
+        throw Error(
+          "Example captions require the resolved source Diatype body style.",
+        );
+    }
+    try {
+      await api.loadFontAsync(captionFont);
+    } catch (error) {
+      if (
+        captionFont.family !== "Diatype" ||
+        typeof api.listAvailableFontsAsync !== "function"
+      )
+        throw error;
+      const alias = (await api.listAvailableFontsAsync()).find(
+        (f) =>
+          f.fontName.family === "ABC Diatype" && f.fontName.style === "Regular",
+      );
+      if (!alias)
+        throw Error(
+          "Required source font missing: Diatype Regular (ABC Diatype).",
+        );
+      captionFont = alias.fontName;
+      await api.loadFontAsync(captionFont);
+    }
+  }
   // Resolve shared semantic colors before allocating any new sections/captions.
   // Binding keeps the presentation readable in the same Light/Dark mode as its assets.
   const paintFor = async (
@@ -289,10 +322,13 @@ export async function organizeSections(
         captions.set(group.key, caption);
         recognized.add(caption.id);
         save();
-        caption.fontName = { family: "Inter", style: "Regular" };
+        caption.fontName = captionFont;
+        if (captionStyle) await caption.setTextStyleIdAsync(captionStyle.id);
+        else {
+          caption.fontSize = 14;
+          caption.lineHeight = { unit: "PIXELS", value: 18 };
+        }
         if (captionPaint) caption.fills = [captionPaint];
-        caption.fontSize = 14;
-        caption.lineHeight = { unit: "PIXELS", value: 20 };
         caption.textAutoResize = "HEIGHT";
         caption.resize(650, 1);
         caption.characters = text;

@@ -149,129 +149,147 @@
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-spruce/artwork",
+      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/brand-switcher/brand-thumb",
       "field": "fill",
       "value": "#CFE6D3"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-spruce/artwork/shape-a",
+      "path": "patterns/ProductionNavigationRail/page=libraries/rail/brand-switcher/brand-thumb",
       "field": "fill",
       "value": "#CFE6D3"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-spruce/artwork/shape-b",
-      "field": "fill",
-      "value": "#FFFFFF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-orbit/artwork",
+      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/brand-switcher/brand-thumb",
       "field": "fill",
       "value": "#DDD5F0"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-orbit/artwork/shape-a",
-      "field": "fill",
-      "value": "#DDD5F0"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-orbit/artwork/shape-b",
-      "field": "fill",
-      "value": "#FFFFFF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-tide/artwork",
-      "field": "fill",
-      "value": "#D5E5EF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-tide/artwork/shape-a",
-      "field": "fill",
-      "value": "#D5E5EF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-tide/artwork/shape-b",
-      "field": "fill",
-      "value": "#FFFFFF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-poster/artwork",
+      "path": "patterns/ProductionMobileBrandBar/page=guidelines/bottom-brand-bar/workspace/brand-thumb",
       "field": "fill",
       "value": "#CFE6D3"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-poster/artwork/shape-a",
+      "path": "patterns/ProductionMobileBrandBar/page=libraries/bottom-brand-bar/workspace/brand-thumb",
       "field": "fill",
       "value": "#CFE6D3"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-poster/artwork/shape-b",
-      "field": "fill",
-      "value": "#FFFFFF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-mark/artwork",
+      "path": "patterns/ProductionMobileBrandBar/page=empty-libraries/bottom-brand-bar/workspace/brand-thumb",
       "field": "fill",
       "value": "#DDD5F0"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-mark/artwork/shape-a",
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=wide/brand-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=wide/brand-card/footer/brand-thumbnail",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=desktop/brand-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=desktop/brand-card/footer/brand-thumbnail",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=mobile/brand-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=mobile/brand-card/footer/brand-thumbnail",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=wide/brand-card/banner",
       "field": "fill",
       "value": "#DDD5F0"
     },
     {
       "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-mark/artwork/shape-b",
-      "field": "fill",
-      "value": "#FFFFFF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-palette/artwork",
-      "field": "fill",
-      "value": "#D5E5EF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-palette/artwork/shape-a",
-      "field": "fill",
-      "value": "#D5E5EF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-palette/artwork/shape-b",
-      "field": "fill",
-      "value": "#FFFFFF"
-    },
-    {
-      "kind": "fixture-artwork",
-      "path": "example:examples/agentic/screen/main/automation-hero/workflow-art",
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=wide/brand-card/footer/brand-thumbnail",
       "field": "fill",
       "value": "#DDD5F0"
     },
     {
       "kind": "fixture-artwork",
-      "path": "example:examples/agentic/screen/main/automation-hero/workflow-art/shape-a",
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=desktop/brand-card/banner",
       "field": "fill",
       "value": "#DDD5F0"
     },
     {
       "kind": "fixture-artwork",
-      "path": "example:examples/agentic/screen/main/automation-hero/workflow-art/shape-b",
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=desktop/brand-card/footer/brand-thumbnail",
       "field": "fill",
-      "value": "#FFFFFF"
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=mobile/brand-card/banner",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=mobile/brand-card/footer/brand-thumbnail",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionGuidelineCard/viewport=wide/guideline-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionGuidelineCard/viewport=desktop/guideline-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionGuidelineCard/viewport=mobile/guideline-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionLibraryCard/viewport=wide/library-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionLibraryCard/viewport=desktop/library-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/ProductionLibraryCard/viewport=mobile/library-card/banner",
+      "field": "fill",
+      "value": "#CFE6D3"
     }
   ],
   "svgRules": [

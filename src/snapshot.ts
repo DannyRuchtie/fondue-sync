@@ -66,6 +66,15 @@ const properties = [
   "layoutGrow",
   "layoutPositioning",
 ];
+// Variables and styles have no SceneNode type. Some native bridges throw for
+// unsupported property reads, so narrow before inspecting scene-only fields.
+function objectType(node: any): string | undefined {
+  try {
+    return node.type;
+  } catch {
+    return undefined;
+  }
+}
 function shared(node: any, key: string): string {
   if (typeof node.getSharedPluginData !== "function") return "";
   return read(node, key);
@@ -78,14 +87,14 @@ function metadata(node: any, main?: any) {
       "component-binding",
       "data-binding",
       "example-binding",
-      ...(node.type === "INSTANCE" ? [] : ["variant-props"]),
+      ...(objectType(node) === "INSTANCE" ? [] : ["variant-props"]),
     ]
       .map((key) => [key, shared(node, key)])
       .filter(([, value]) => value),
   );
   // Legacy failed clones inherit later main-component plugin data. That is not a local edit.
   if (
-    node.type === "INSTANCE" &&
+    objectType(node) === "INSTANCE" &&
     !result["instance-identity"] &&
     !result["component-binding"] &&
     result.identity &&
@@ -272,7 +281,7 @@ function value(node: any, key: string, asset: any) {
  */
 export async function snapshot(asset: any): Promise<string> {
   const visit = async (node: any): Promise<any> => {
-    if (node.type === "INSTANCE") {
+    if (objectType(node) === "INSTANCE") {
       const main =
         typeof node.getMainComponentAsync === "function"
           ? await node.getMainComponentAsync()
@@ -360,7 +369,7 @@ export async function snapshot(asset: any): Promise<string> {
       try {
         if (
           key === "componentPropertyDefinitions" &&
-          node.type === "COMPONENT" &&
+          objectType(node) === "COMPONENT" &&
           node.parent?.type === "COMPONENT_SET"
         )
           continue;
@@ -378,7 +387,7 @@ export async function snapshot(asset: any): Promise<string> {
       result.x = node.x;
       result.y = node.y;
     }
-    if (node.children)
+    if ("children" in node && node.children)
       result.children = await Promise.all(node.children.map(visit));
     return result;
   };

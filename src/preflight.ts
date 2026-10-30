@@ -159,6 +159,15 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
   for (const style of bundle.styles) {
     for (const id of Object.values(style.bindings ?? {}))
       binding(id as string, style.id);
+    if (style.type === "TEXT")
+      for (const [field, id] of Object.entries(style.bindings ?? {})) {
+        const type = field === "fontFamily" ? "STRING" : "FLOAT";
+        if (tokens.get(id as string)?.type !== type)
+          problem(
+            "typography-binding-type",
+            `Text style ${style.id}/${field} must use ${type} variable.`,
+          );
+      }
     if (style.colorToken) binding(style.colorToken, style.id);
     for (const [index, map] of (style.effectBindings ?? []).entries())
       for (const [field, id] of Object.entries(map)) {
@@ -172,8 +181,47 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
       }
   }
   const layer = (node: Layer, context: string) => {
+    if ((bundle as any).typographyBindingCoverage && node.kind === "text") {
+      const style = styles.get(node.textStyle ?? "");
+      if (!style || style.type !== "TEXT")
+        problem(
+          "missing-shared-typography",
+          `Text layer lacks shared source style: ${context}/${node.id}`,
+        );
+      for (const field of [
+        "fontFamily",
+        "fontSize",
+        "fontWeight",
+        "letterSpacing",
+        ...(typeof style?.lineHeight === "number" ? ["lineHeight"] : []),
+      ])
+        if (!node.bindings?.[field])
+          problem(
+            "missing-typography-binding",
+            `Text layer lacks ${field} binding: ${context}/${node.id}`,
+          );
+    }
+
     for (const id of Object.values(node.bindings ?? {}))
       binding(id, context + "/" + node.id);
+    if (node.kind === "text")
+      for (const field of [
+        "fontFamily",
+        "fontSize",
+        "fontWeight",
+        "lineHeight",
+        "letterSpacing",
+      ]) {
+        const id = node.bindings?.[field];
+        if (
+          id &&
+          tokens.get(id)?.type !== (field === "fontFamily" ? "STRING" : "FLOAT")
+        )
+          problem(
+            "typography-binding-type",
+            `Text layer ${context}/${node.id}/${field} has wrong variable type.`,
+          );
+      }
     if (node.iconColor) binding(node.iconColor, context + "/" + node.id);
     for (const rule of node.svgPaintBindings ?? []) {
       binding(rule.tokenId, context + "/" + node.id);

@@ -134,3 +134,96 @@ test("source icon default currentColor binding preserves gradient data paints an
   assert.deepEqual(vector.fills[1], gradient);
   assert.equal(vector.id, "optical-vector");
 });
+test("shared typography remains linked and inherits metrics and variables without duplicate literal or node font setters", async () => {
+  const { engine } = setup();
+  const style: any = {
+    id: "style-native",
+    fontName: { family: "ABC Diatype", style: "Medium" },
+    fontSize: 14,
+    lineHeight: { unit: "PIXELS", value: 16 },
+    letterSpacing: { unit: "PIXELS", value: 0 },
+    textCase: "ORIGINAL",
+    textDecoration: "NONE",
+    boundVariables: { fontWeight: { type: "VARIABLE_ALIAS", id: "weight" } },
+  };
+  (engine.api as any).getStyleByIdAsync = async () => style;
+  (engine.api as any).loadFontAsync = async () => {};
+  engine.index.assets["style:source14-16"] = { id: style.id, kind: "style" };
+  const data = new Map();
+  const metricCalls: string[] = [];
+  const node: any = {
+    id: "text",
+    type: "TEXT",
+    width: 100,
+    height: 16,
+    x: 0,
+    y: 0,
+    fills: [],
+    strokes: [],
+    getSharedPluginData: (ns: string, key: string) => data.get(ns + key) ?? "",
+    setSharedPluginData: (ns: string, key: string, value: string) =>
+      data.set(ns + key, value),
+    setTextStyleIdAsync: async (id: string) => {
+      node.textStyleId = id;
+    },
+    setBoundVariable: (field: string) => {
+      metricCalls.push(field);
+      if (
+        [
+          "fontSize",
+          "fontWeight",
+          "fontFamily",
+          "lineHeight",
+          "letterSpacing",
+        ].includes(field)
+      )
+        node.textStyleId = "";
+    },
+    resize: () => {},
+  };
+  for (const field of [
+    "fontName",
+    "fontSize",
+    "lineHeight",
+    "letterSpacing",
+    "textCase",
+    "textDecoration",
+  ])
+    Object.defineProperty(node, field, {
+      get: () => style[field],
+      set: () => {
+        metricCalls.push("literal:" + field);
+        node.textStyleId = "";
+      },
+    });
+  await engine.layer(
+    {
+      id: "text",
+      kind: "text",
+      name: "Title",
+      text: "Brand assets",
+      fontFamily: "Diatype",
+      fontSize: 14,
+      fontWeight: 500,
+      lineHeight: 16,
+      letterSpacing: 0,
+      textStyle: "source14-16",
+      textDecoration: "NONE",
+      bindings: {
+        fontFamily: "family",
+        fontSize: "size",
+        fontWeight: "weight",
+        lineHeight: "line",
+        letterSpacing: "spacing",
+        fills: "color",
+      },
+    },
+    {},
+    node,
+  );
+  assert.equal(node.textStyleId, "style-native");
+  assert.equal(node.fontSize, 14);
+  assert.equal(node.lineHeight.value, 16);
+  assert.deepEqual(metricCalls, []);
+  assert.equal(node.fills[0].boundVariables.color.id, "color");
+});

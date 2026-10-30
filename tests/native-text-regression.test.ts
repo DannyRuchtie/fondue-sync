@@ -2,92 +2,6 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { SyncEngine } from "../src/engine";
 import type { Bundle } from "../src/schema";
-/** Focused native text contract: fresh nodes begin empty, every font mutation requires a loaded font. */
-function textApi(unavailable = new Set(["Diatype"])) {
-  const loaded = new Set<string>(),
-    calls: string[] = [];
-  const data = () => {
-    const map = new Map<string, string>();
-    return {
-      getSharedPluginData: (ns: string, key: string) =>
-        map.get(ns + ":" + key) ?? "",
-      setSharedPluginData: (ns: string, key: string, value: string) => {
-        if (Buffer.byteLength(ns + key + value, "utf8") > 100000)
-          throw Error("capacity");
-        value ? map.set(ns + ":" + key, value) : map.delete(ns + ":" + key);
-      },
-      getSharedPluginDataKeys: (ns: string) =>
-        [...map.keys()]
-          .filter((k) => k.startsWith(ns + ":"))
-          .map((k) => k.slice(ns.length + 1)),
-    };
-  };
-  let seq = 0;
-  const parent: any = {
-    ...data(),
-    id: "parent",
-    children: [],
-    appendChild(n: any) {
-      this.children.push(n);
-      n.parent = this;
-    },
-  };
-  const api: any = {
-    root: { ...data() },
-    loadFontAsync: async (font: FontName) => {
-      calls.push(font.family + ":" + font.style);
-      if (unavailable.has(font.family))
-        throw Error("Font is not available: " + font.family);
-      loaded.add(font.family + ":" + font.style);
-    },
-    createText: () => {
-      let font = { family: "Inter", style: "Regular" },
-        characters = "",
-        fontSize = 12;
-      const requireFont = () => {
-        if (!loaded.has(font.family + ":" + font.style))
-          throw Error("Font must be loaded for native text mutation");
-      };
-      return {
-        ...data(),
-        id: String(++seq),
-        type: "TEXT",
-        name: "Text",
-        fills: [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }],
-        strokes: [],
-        width: 0,
-        height: 14,
-        resize(w: number, h: number) {
-          this.width = w;
-          this.height = h;
-        },
-        get fontName() {
-          return font;
-        },
-        set fontName(next: FontName) {
-          if (!loaded.has(next.family + ":" + next.style))
-            throw Error("New font not loaded");
-          font = next;
-        },
-        get characters() {
-          return characters;
-        },
-        set characters(value: string) {
-          requireFont();
-          characters = value;
-        },
-        get fontSize() {
-          return fontSize;
-        },
-        set fontSize(value: number) {
-          requireFont();
-          fontSize = value;
-        },
-      };
-    },
-  };
-  return { api: api as PluginAPI, parent, calls };
-}
 const empty: Bundle = {
   schemaVersion: 1,
   release: "native-contract",
@@ -100,42 +14,120 @@ const empty: Bundle = {
   inventory: [],
   gaps: [],
 };
-test("plain guide text survives unavailable source font through loaded Inter fallback", async () => {
-  const { api, parent, calls } = textApi();
-  const engine = new SyncEngine(api, empty);
-  const node = await engine.layer(
-    {
-      id: "title",
-      name: "Title",
-      kind: "text",
-      fontSize: 24,
-      text: "Fondue guide",
-      fill: "#202020",
+function apiFonts(available: FontName[], fail = new Set<string>()) {
+  const calls: string[] = [];
+  const store = new Map<string, string>();
+  let mutations = 0;
+  const api: any = {
+    root: {
+      getSharedPluginData: (ns: string, key: string) =>
+        store.get(ns + ":" + key) ?? "",
+      setSharedPluginData: () => {
+        mutations++;
+      },
     },
-    parent,
-  );
-  assert.equal(node.characters, "Fondue guide");
-  assert.deepEqual(node.fontName, { family: "Inter", style: "Regular" });
-  assert.deepEqual(calls, ["Diatype:Regular", "Inter:Regular"]);
-  assert.ok(engine.warnings.some((w) => w.includes("Diatype")));
-  assert.equal(node.fills[0].color.r, 32 / 255);
+    listAvailableFontsAsync: async () =>
+      available.map((fontName) => ({ fontName })),
+    loadFontAsync: async (font: FontName) => {
+      calls.push(font.family + ":" + font.style);
+      if (
+        fail.has(font.family) ||
+        !available.some(
+          (f) => f.family === font.family && f.style === font.style,
+        )
+      )
+        throw Error("Font not available");
+    },
+    variables: {
+      getVariableCollectionByIdAsync: async () => null,
+      createVariableCollection: () => {
+        mutations++;
+        throw Error("No mutation expected");
+      },
+    },
+    createPage: () => {
+      mutations++;
+      throw Error("No mutation expected");
+    },
+  };
+  return { api: api as PluginAPI, calls, mutations: () => mutations };
+}
+test("exact confirmed ABC Diatype alias resolves released family/style without a substitute warning", async () => {
+  const { api, calls } = apiFonts([{ family: "ABC Diatype", style: "Medium" }]);
+  const engine = new SyncEngine(api, empty);
+  engine.warnings = ["Font Diatype Medium unavailable; using Inter Medium."];
+  assert.deepEqual(await engine.fontFor("Diatype", "Medium"), {
+    family: "ABC Diatype",
+    style: "Medium",
+  });
+  assert.deepEqual(calls, ["Diatype:Medium", "ABC Diatype:Medium"]);
+  assert.deepEqual(engine.warnings, []);
 });
-test("a completely unavailable fallback reproduces an empty first child and surfaces a font error", async () => {
-  const { api, parent } = textApi(new Set(["Diatype", "Inter"]));
+test("available requested source font wins before alias discovery and Cranny loads exactly", async () => {
+  const { api } = apiFonts([
+    { family: "Diatype", style: "Regular" },
+    { family: "ABC Diatype", style: "Regular" },
+    { family: "Cranny", style: "Light" },
+  ]);
+  const engine = new SyncEngine(api, empty);
+  assert.deepEqual(await engine.fontFor("Diatype", "Regular"), {
+    family: "Diatype",
+    style: "Regular",
+  });
+  assert.deepEqual(await engine.fontFor("Cranny", "Light"), {
+    family: "Cranny",
+    style: "Light",
+  });
+});
+test("missing exact source style blocks explicitly even when Inter or a similar family is available", async () => {
+  const { api, calls } = apiFonts([
+    { family: "ABC Diatype", style: "Regular" },
+    { family: "Inter", style: "Bold" },
+    { family: "Diatype Pro", style: "Bold" },
+  ]);
   const engine = new SyncEngine(api, empty);
   await assert.rejects(
-    engine.layer(
-      {
-        id: "title",
-        name: "Title",
-        kind: "text",
-        fontSize: 24,
-        text: "Fondue guide",
-      },
-      parent,
-    ),
-    /Font is not available: Inter/,
+    engine.fontFor("Diatype", "Bold"),
+    /Required Fondue source font is unavailable: Diatype Bold/,
   );
-  assert.equal(parent.children.length, 1);
-  assert.equal(parent.children[0].characters, "");
+  assert.deepEqual(calls, ["Diatype:Bold"]);
+  assert.equal(engine.warnings.length, 0);
+});
+test("missing required source fonts are preflighted before any collection node or metadata allocation", async () => {
+  const { api, mutations } = apiFonts([{ family: "Inter", style: "Regular" }]);
+  const bundle: Bundle = {
+    ...empty,
+    tokens: [
+      {
+        id: "space",
+        name: "space",
+        type: "FLOAT",
+        collection: "Primitives",
+        values: { Value: 8 },
+        css: "8px",
+      },
+    ],
+    styles: [
+      {
+        id: "body",
+        type: "TEXT",
+        name: "Body",
+        fontFamily: "Diatype",
+        fontStyle: "Regular",
+        fontSize: 14,
+        lineHeight: 18,
+        letterSpacing: 0,
+      },
+    ],
+  };
+  const engine = new SyncEngine(api, bundle);
+  const result = await engine.sync();
+  assert.equal(result.complete, false);
+  assert.ok(
+    result.errors.some((error) =>
+      error.includes("Required Fondue source font"),
+    ),
+  );
+  assert.equal(mutations(), 0);
+  assert.equal(Object.keys(engine.index.assets).length, 0);
 });
