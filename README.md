@@ -177,3 +177,5 @@ Fondue source, tokens and icons remain owned by their upstream authors. This rep
 ## Delivery evidence
 
 See [verification evidence](docs/verification-evidence.md), the [independent review](docs/independent-review.md), [remaining gaps](docs/gaps.md), and [UTF-8 metadata-capacity measurements](docs/metadata-capacity.json). The coverage report separates native source profiles from unresolved source data and runtime acceptance. Run one maintainer sync per file at a time; the engine does not provide a distributed writer lock.
+
+Current manual test destination: [PD Figma Sync](https://www.figma.com/design/O5xq8vIIlxUCYXscYcNVww/PD-Figma-Sync?node-id=0-1). Use Figma desktop and import `dist/manifest.json`, then run **Fondue Sync → Import Fondue**. The connected MCP account could not open an edit session for this file; no automated import ran. This does not determine the desktop account’s permissions.

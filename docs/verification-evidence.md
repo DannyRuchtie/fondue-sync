@@ -30,7 +30,7 @@ Modeled first import:34921 metadata writes/51437270 cumulative entry bytes; repe
 
 ## Not executed
 
-- Native development-plugin execution: not yet performed. The user is installing/testing the current build manually in a fresh file; this route does not require the earlier automated test-file team choice. The connected account’s Full-seat choices are Starter teams, which do not establish publishing/consumer entitlements.
+- Native development-plugin execution: user-selected manual destination is [PD Figma Sync](https://www.figma.com/design/O5xq8vIIlxUCYXscYcNVww/PD-Figma-Sync?node-id=0-1). The current development manifest is ready; the earlier automated test-file team choice is no longer needed. A read-only MCP session attempt was rejected for lack of edit access for the connected account (druchtie@gmail.com); no automated generation ran. This does not establish the permissions of the user’s desktop Figma account. Manual runtime results have not yet been reported.
 - Native visual acceptance and actual override propagation: not run. API-model tests do not substitute for these.
 - Publication/consumer acceptance: not run. The intended eligible Frontify workspace and permissions/entitlements are unverified; a personal Starter test would not prove this loop.
 - Arbitrary hard-process interruption/global canvas transaction recovery: not proven. The engine preserves divergent/incomplete managed assets for review; metadata head atomicity does not span canvas allocations.
