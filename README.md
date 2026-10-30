@@ -10,6 +10,8 @@ The plugin has two tabs: **Sync** to create or update the library, and **Push ch
 
 ## Part 1: Set up the library
 
+![From the Fondue repository to design projects](docs/illustrations/repository-to-figma-roadmap.png)
+
 Ask a maintainer for the built plugin folder and the required ABC Diatype and Cranny fonts. You’ll need Figma desktop and permission to edit and publish the library.
 
 1. Open a dedicated Figma library file. Use a test file for your first import.
@@ -23,6 +25,8 @@ Keep component instances connected to receive future library updates.
 ## Part 2: Update the library and push PRs
 
 ### Get an updated library
+
+![Update the library and design projects](docs/illustrations/release-update-flow.png)
 
 Ask a maintainer for a plugin build containing the new Fondue release. Then:
 
