@@ -260,5 +260,64 @@ export async function applyApprovedImageMigration(
     }
     await checkpoint({ ...next, pending: true } as Recipe);
   }
+  // A completed earlier import may retain a different sibling order after an
+  // absolute child was appended later. Partial-prefix recovery is deliberately
+  // positional, so align only this exact approved migration's COMPLETE owned tree.
+  // Validate every identity/type/membership first; a missing/foreign child never
+  // turns into authorization to adopt, delete or reconstruct anything.
+  const permutations: { parent: any; children: any[] }[] = [];
+  const inspectOrder = (node: any, definition: any, root = false) => {
+    if (
+      !node ||
+      read(node, "identity") !== definition.id ||
+      node.type !== (root ? "COMPONENT" : nativeType[definition.kind])
+    )
+      throw Error(
+        "Approved image migration complete-tree identity/type differs",
+      );
+    if (node.type === "INSTANCE" || definition.kind === "svg") return;
+    const children = node.children ?? [],
+      expected = definition.children ?? [];
+    if (children.length !== expected.length)
+      throw Error(
+        "Approved image migration requires complete owned child membership",
+      );
+    const ordered = expected.map((child: any) => {
+      const matches = children.filter(
+        (actual: any) => read(actual, "identity") === child.id,
+      );
+      if (matches.length !== 1)
+        throw Error(
+          "Approved image migration child identity is missing/foreign/duplicated",
+        );
+      inspectOrder(matches[0], child);
+      return matches[0];
+    });
+    if (
+      ordered.some(
+        (child: any, index: number) => children[index].id !== child.id,
+      )
+    )
+      permutations.push({ parent: node, children: ordered });
+  };
+  if (set.children.length !== next.variants.length)
+    throw Error("Approved image migration variant membership differs");
+  for (const variant of next.variants) {
+    const matches = set.children.filter(
+      (node: any) => read(node, "variant") === variant.id,
+    );
+    if (matches.length !== 1)
+      throw Error("Approved image migration variant identity differs");
+    inspectOrder(matches[0], variant.root, true);
+  }
+  for (const permutation of permutations) {
+    for (const [index, child] of permutation.children.entries())
+      permutation.parent.insertChild(index, child);
+    affected.push(
+      permutation.parent.id,
+      ...permutation.children.map((child: any) => child.id),
+    );
+    await checkpoint({ ...next, pending: true } as Recipe);
+  }
   return affected;
 }

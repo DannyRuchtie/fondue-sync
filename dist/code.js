@@ -1733,6 +1733,54 @@
       }
       await checkpoint(__spreadProps(__spreadValues({}, next), { pending: true }));
     }
+    const permutations = [];
+    const inspectOrder = (node, definition, root = false) => {
+      var _a2, _b;
+      if (!node || read(node, "identity") !== definition.id || node.type !== (root ? "COMPONENT" : nativeType[definition.kind]))
+        throw Error(
+          "Approved image migration complete-tree identity/type differs"
+        );
+      if (node.type === "INSTANCE" || definition.kind === "svg") return;
+      const children = (_a2 = node.children) != null ? _a2 : [], expected = (_b = definition.children) != null ? _b : [];
+      if (children.length !== expected.length)
+        throw Error(
+          "Approved image migration requires complete owned child membership"
+        );
+      const ordered = expected.map((child) => {
+        const matches = children.filter(
+          (actual) => read(actual, "identity") === child.id
+        );
+        if (matches.length !== 1)
+          throw Error(
+            "Approved image migration child identity is missing/foreign/duplicated"
+          );
+        inspectOrder(matches[0], child);
+        return matches[0];
+      });
+      if (ordered.some(
+        (child, index) => children[index].id !== child.id
+      ))
+        permutations.push({ parent: node, children: ordered });
+    };
+    if (set.children.length !== next.variants.length)
+      throw Error("Approved image migration variant membership differs");
+    for (const variant of next.variants) {
+      const matches = set.children.filter(
+        (node) => read(node, "variant") === variant.id
+      );
+      if (matches.length !== 1)
+        throw Error("Approved image migration variant identity differs");
+      inspectOrder(matches[0], variant.root, true);
+    }
+    for (const permutation of permutations) {
+      for (const [index, child] of permutation.children.entries())
+        permutation.parent.insertChild(index, child);
+      affected.push(
+        permutation.parent.id,
+        ...permutation.children.map((child) => child.id)
+      );
+      await checkpoint(__spreadProps(__spreadValues({}, next), { pending: true }));
+    }
     return affected;
   }
 
@@ -4904,7 +4952,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "85e8caf4be3521f7e0f77415e79baad93f3a1cd2c0959f241a99013214fe58e8",
+      rendererRevision: "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -323431,7 +323479,7 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "3c1a7b18a14f86ec20b82d4b17380d0ec5cb6e94ea5ddf615c93542ffef901b4"
+    fingerprint: "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02"
   };
 
   // src/plugin.ts

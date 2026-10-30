@@ -1,6 +1,6 @@
 {
   "release": "13.11.1",
-  "bundleFingerprint": "3c1a7b18a14f86ec20b82d4b17380d0ec5cb6e94ea5ddf615c93542ffef901b4",
+  "bundleFingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02",
   "nativeLimitBytes": 100000,
   "measurement": "UTF-8 bytes of namespace + key + value per setSharedPluginData call; enforced by native API model.",
   "assets": 1385,
@@ -15,7 +15,7 @@
   },
   "import": {
     "writes": 126034,
-    "totalBytes": 807835784,
+    "totalBytes": 807835785,
     "maxWriteBytes": 24055,
     "maxWriteKey": "fondue_sync:layer-definition",
     "maxValueBytes": 24000,

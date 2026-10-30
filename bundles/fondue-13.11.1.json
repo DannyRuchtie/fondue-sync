@@ -12,7 +12,7 @@
       "integrity": "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
     },
     "sourceLockSha256": "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-    "rendererRevision": "85e8caf4be3521f7e0f77415e79baad93f3a1cd2c0959f241a99013214fe58e8",
+    "rendererRevision": "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
     "rootRemPx": 16,
     "packageVersions": {
       "@frontify/fondue-components": "36.0.0",
@@ -318539,5 +318539,5 @@
       }
     ]
   },
-  "fingerprint": "3c1a7b18a14f86ec20b82d4b17380d0ec5cb6e94ea5ddf615c93542ffef901b4"
+  "fingerprint": "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02"
 }

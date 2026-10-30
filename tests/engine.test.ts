@@ -2124,3 +2124,137 @@ test("approved image migration protects foreign geometry even if its presence wa
   assert.equal(checkpoints, 0);
   assert.equal(readMetadata(set, "image-migration-state"), "");
 });
+
+test("approved interrupted image migration aligns a complete owned sibling permutation by identity before positional recovery", async () => {
+  const { api } = mockApi();
+  const previous: any = {
+      id: "patterns/PhotoOrder",
+      name: "PhotoOrder",
+      package: "fondue-sync/patterns",
+      source: ["source.tsx"],
+      status: "partial",
+      limitations: [],
+      variants: [
+        {
+          id: "default",
+          props: { State: "Default" },
+          root: {
+            id: "root",
+            kind: "frame",
+            name: "Root",
+            children: [
+              {
+                id: "image",
+                kind: "frame",
+                name: "Image",
+                children: [
+                  { id: "initial", kind: "rectangle", name: "Initial" },
+                ],
+              },
+              { id: "dropdown", kind: "frame", name: "Dropdown" },
+              { id: "collapse", kind: "frame", name: "Collapse" },
+            ],
+          },
+        },
+      ],
+    },
+    next = structuredClone(previous);
+  next.variants[0].root.children[0] = {
+    id: "image",
+    kind: "frame",
+    name: "Image",
+    imageAssetId: "photo",
+  };
+  const approval = {
+    id: previous.id,
+    beforeSha256: imageMigrationSourceHash(previous),
+    afterSha256: imageMigrationSourceHash(next),
+    removals: [
+      {
+        variantId: "default",
+        path: "/root/image/initial",
+        kind: "rectangle",
+        imageRootPath: "/root/image",
+      },
+    ],
+  };
+  const variant = api.createComponent(),
+    image = api.createFrame(),
+    initial = api.createRectangle(),
+    dropdown = api.createFrame(),
+    collapse = api.createFrame();
+  variant.appendChild(image);
+  image.appendChild(initial);
+  variant.appendChild(collapse);
+  variant.appendChild(dropdown);
+  const set = api.combineAsVariants([variant], api.currentPage);
+  for (const [node, id] of [
+    [variant, "root"],
+    [image, "image"],
+    [initial, "initial"],
+    [dropdown, "dropdown"],
+    [collapse, "collapse"],
+  ] as const)
+    writeMetadata(node, "identity", id);
+  writeMetadata(variant, "variant", "default");
+  const save = async (def: any) =>
+    writeMetadata(
+      set,
+      "applied",
+      JSON.stringify({
+        nodeId: set.id,
+        definition: JSON.stringify(def),
+        snapshot: await snapshot(set),
+      }),
+    );
+  await save(previous);
+  const ids = [set.id, variant.id, image.id, dropdown.id, collapse.id];
+  let interrupted = false;
+  await assert.rejects(
+    applyApprovedImageMigration(
+      api,
+      set,
+      next,
+      async (def) => {
+        await save(def);
+        if (!interrupted) {
+          interrupted = true;
+          throw Error("Interrupted immediately after saved removal");
+        }
+      },
+      [approval],
+    ),
+    /Interrupted immediately/,
+  );
+  assert.equal(image.children.length, 0);
+  assert.deepEqual(
+    variant.children.map((n: any) => readMetadata(n, "identity")),
+    ["image", "collapse", "dropdown"],
+  );
+  const engine = new SyncEngine(api, fixture());
+  await assert.rejects(
+    engine.recoverPendingRecipe(set, next),
+    /identity differs/,
+  );
+  const oldName = collapse.name;
+  collapse.name = "Locally edited collapse";
+  await assert.rejects(
+    applyApprovedImageMigration(api, set, next, save, [approval]),
+    /baseline drift/,
+  );
+  assert.deepEqual(
+    variant.children.map((n: any) => readMetadata(n, "identity")),
+    ["image", "collapse", "dropdown"],
+  );
+  collapse.name = oldName;
+  await applyApprovedImageMigration(api, set, next, save, [approval]);
+  assert.deepEqual(
+    variant.children.map((n: any) => readMetadata(n, "identity")),
+    ["image", "dropdown", "collapse"],
+  );
+  assert.deepEqual(
+    [set.id, variant.id, image.id, dropdown.id, collapse.id],
+    ids,
+  );
+  await engine.recoverPendingRecipe(set, next);
+});
