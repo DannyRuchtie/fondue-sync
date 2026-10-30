@@ -464,11 +464,11 @@ export async function syncCuratedGalleries(
           doc.usage,
           doc.controls.join("\n"),
           doc.notes.join("\n"),
-          "Select a preview to adjust native variant properties. This is a representative source configuration, not a claim that it is the default. Complete definitions and profile notes remain on the Library masters page.",
+          "Select a preview to adjust native variant properties. This is a representative source configuration, not a claim that it is the default. Complete definitions and profile notes remain on the Source components page.",
         ]
       : [
           "Use native icon instances rather than detached vectors.",
-          "Each preview uses the exact 24px optical source. Other optical sizes remain available on the library master.",
+          "Each preview uses the exact 24px optical source. Other optical sizes remain available on the Source components page.",
           "Select an instance to change supported properties.",
         ];
     for (let i = 0; i < guideCopy.length; i++) {

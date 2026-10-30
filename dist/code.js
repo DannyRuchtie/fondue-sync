@@ -987,6 +987,287 @@
     return [...new Set(problems)];
   }
 
+  // src/presentation.ts
+  function managedPageName(key) {
+    const master = key.match(/^Library masters - (.+)$/);
+    return master ? `Source components / ${master[1]}` : `Library / ${key}`;
+  }
+  async function syncManagedPageNames(api, index) {
+    const categories = /* @__PURE__ */ new Set([
+      "Foundations",
+      "Colors",
+      "Components",
+      "Icons",
+      "Charts",
+      "Rich text",
+      "Product patterns",
+      "Examples",
+      "Documentation"
+    ]);
+    const mutatedNodeIds = [];
+    for (const [key, id] of Object.entries(index.pages)) {
+      if (!categories.has(key) && !key.startsWith("Library masters - ")) continue;
+      const page = await api.getNodeByIdAsync(id);
+      if (!page || page.type !== "PAGE")
+        throw Error("Managed page identity missing/changed: " + key);
+      const name = managedPageName(key);
+      if (page.name !== name) {
+        page.name = name;
+        mutatedNodeIds.push(page.id);
+      }
+    }
+    return { mutatedNodeIds };
+  }
+  var Presentation = class {
+    constructor(api, index, save) {
+      this.warnings = [];
+      this.variables = /* @__PURE__ */ new Map();
+      this.styles = /* @__PURE__ */ new Map();
+      this.nodes = /* @__PURE__ */ new Map();
+      this.mutated = /* @__PURE__ */ new Set();
+      this.created = /* @__PURE__ */ new Set();
+      this.api = api;
+      this.index = index;
+      this.save = save;
+    }
+    async variable(id, type) {
+      if (this.variables.has(id)) return this.variables.get(id);
+      const ref = this.index.assets["token:" + id];
+      if (!ref || ref.kind !== "token")
+        throw Error("Missing exact presentation token " + id);
+      const variable = await this.api.variables.getVariableByIdAsync(ref.id);
+      if (!variable || variable.resolvedType !== type)
+        throw Error("Wrong/missing presentation variable " + id);
+      this.variables.set(id, variable);
+      return variable;
+    }
+    async style(id) {
+      if (this.styles.has(id)) return this.styles.get(id);
+      const ref = this.index.assets["style:" + id];
+      if (!ref || ref.kind !== "style")
+        throw Error("Missing exact presentation style " + id);
+      const style = await this.api.getStyleByIdAsync(ref.id);
+      if (!style || style.type !== "TEXT")
+        throw Error("Wrong/missing native presentation style " + id);
+      if (!["Diatype", "ABC Diatype", "Cranny"].includes(style.fontName.family))
+        throw Error(
+          "Required presentation font is not ready: " + id + " / " + style.fontName.family
+        );
+      await this.api.loadFontAsync(style.fontName);
+      this.styles.set(id, style);
+      return style;
+    }
+    number(id) {
+      const variable = this.variables.get(id);
+      if (!variable) throw Error("Presentation number not preflighted " + id);
+      const value2 = Object.values(variable.valuesByMode).find(
+        (v) => typeof v === "number"
+      );
+      if (typeof value2 !== "number") throw Error("Expected source scalar " + id);
+      return value2;
+    }
+    async preflight() {
+      await Promise.all(
+        [
+          "color-surface-default",
+          "color-surface-dim",
+          "color-primary-default",
+          "color-secondary-default",
+          "color-line-subtle"
+        ].map((id) => this.variable(id, "COLOR"))
+      );
+      await Promise.all(
+        [
+          "spacing-xx-small",
+          "spacing-x-small",
+          "spacing-small",
+          "spacing-medium",
+          "spacing-large",
+          "spacing-x-large",
+          "spacing-xx-large",
+          "border-radius-medium",
+          "border-radius-large",
+          "border-width-default",
+          "border-width-large",
+          "component-constant-spacing-0"
+        ].map((id) => this.variable(id, "FLOAT"))
+      );
+      for (const id of [
+        "text-heading-xx-large-default",
+        "text-heading-x-large-default",
+        "text-body-medium-default",
+        "text-body-medium-strong",
+        "text-body-small-default",
+        "text-body-x-small-default",
+        "text-body-x-small-strong"
+      ])
+        await this.style(id);
+    }
+    async page(key) {
+      const ref = this.index.pages[key];
+      let page = ref ? await this.api.getNodeByIdAsync(ref) : null;
+      if (ref && (!page || page.type !== "PAGE"))
+        throw Error("Presentation page identity missing/changed " + key);
+      if (!page) {
+        page = this.api.createPage();
+        page.name = managedPageName(key);
+        this.index.pages[key] = page.id;
+        this.save();
+        this.created.add(page.id);
+        this.mutated.add(page.id);
+      }
+      if (page.name !== managedPageName(key)) page.name = managedPageName(key);
+      if ("loadAsync" in page) await page.loadAsync();
+      return page;
+    }
+    async node(key, type, parent) {
+      var _a, _b, _c;
+      (_b = (_a = this.index).presentationNodes) != null ? _b : _a.presentationNodes = {};
+      const ref = this.index.presentationNodes[key];
+      let node = ref ? await this.api.getNodeByIdAsync(ref) : null;
+      if (ref && (!node || node.type !== type))
+        throw Error(
+          "Presentation identity missing/changed " + key + " (" + ref + ")"
+        );
+      if (!node) {
+        node = type === "FRAME" ? this.api.createFrame() : type === "TEXT" ? this.api.createText() : this.api.createRectangle();
+        parent.appendChild(node);
+        this.index.presentationNodes[key] = node.id;
+        this.save();
+        this.created.add(node.id);
+        write(node, "presentation-key", key);
+        write(node, "presentation-type", type);
+      } else if (((_c = node.parent) == null ? void 0 : _c.id) !== parent.id)
+        parent.appendChild(node);
+      this.nodes.set(key, node);
+      this.mutated.add(node.id);
+      return node;
+    }
+    paint(node, field, id) {
+      const v = this.variables.get(id);
+      if (!v) throw Error("Paint not preflighted " + id);
+      const resolved = v.resolveForConsumer(node);
+      if (resolved.resolvedType !== "COLOR")
+        throw Error("Presentation paint did not resolve to COLOR " + id);
+      const color = resolved.value;
+      node[field] = [
+        this.api.variables.setBoundVariableForPaint(
+          {
+            type: "SOLID",
+            color: { r: color.r, g: color.g, b: color.b },
+            opacity: "a" in color ? color.a : 1
+          },
+          "color",
+          v
+        )
+      ];
+    }
+    bind(node, field, id) {
+      const v = this.variables.get(id);
+      if (!v) throw Error("Scalar not preflighted " + id);
+      node.setBoundVariable(field, v);
+    }
+    auto(node, direction, padding = "component-constant-spacing-0", gap = "spacing-medium") {
+      node.layoutMode = direction;
+      node.layoutWrap = "NO_WRAP";
+      node.primaryAxisSizingMode = "AUTO";
+      node.counterAxisSizingMode = "AUTO";
+      node.counterAxisAlignItems = "MIN";
+      node.primaryAxisAlignItems = "MIN";
+      for (const field of [
+        "paddingTop",
+        "paddingRight",
+        "paddingBottom",
+        "paddingLeft"
+      ])
+        this.bind(node, field, padding);
+      this.bind(node, "itemSpacing", gap);
+    }
+    wrap(node, width2, gap = "spacing-large") {
+      this.auto(node, "HORIZONTAL", "component-constant-spacing-0", gap);
+      node.layoutWrap = "WRAP";
+      this.bind(node, "counterAxisSpacing", gap);
+      node.counterAxisAlignContent = "AUTO";
+      node.primaryAxisSizingMode = "FIXED";
+      node.resizeWithoutConstraints(width2, Math.max(1, node.height));
+      node.primaryAxisSizingMode = "FIXED";
+      node.counterAxisSizingMode = "AUTO";
+    }
+    async frame(key, parent, name = "", theme = "none") {
+      const node = await this.node(key, "FRAME", parent);
+      node.name = name;
+      node.layoutMode = "NONE";
+      node.clipsContent = false;
+      node.fills = [];
+      node.strokes = [];
+      if (theme !== "none")
+        this.paint(
+          node,
+          "fills",
+          theme === "card" ? "color-surface-dim" : "color-surface-default"
+        );
+      if (theme === "card") {
+        this.paint(node, "strokes", "color-line-subtle");
+        this.bind(node, "strokeWeight", "border-width-default");
+        this.bind(node, "cornerRadius", "border-radius-large");
+      }
+      return node;
+    }
+    async text(key, parent, content, styleId, color = "color-primary-default", width2 = 400) {
+      const style = await this.style(styleId);
+      const node = await this.node(key, "TEXT", parent);
+      node.name = "";
+      const baseline = read(node, "presentation-text");
+      if (baseline && node.characters !== baseline) {
+        this.warnings.push("Preserved local presentation text " + key);
+      } else {
+        await node.setTextStyleIdAsync(style.id);
+        node.characters = content;
+        write(node, "presentation-text", content);
+      }
+      node.textAutoResize = "HEIGHT";
+      node.resize(width2, Math.max(1, node.height));
+      this.paint(node, "fills", color);
+      return node;
+    }
+    async instance(key, parent, main) {
+      var _a, _b, _c;
+      (_b = (_a = this.index).presentationInstances) != null ? _b : _a.presentationInstances = {};
+      const ref = this.index.presentationInstances[key];
+      let node = ref ? await this.api.getNodeByIdAsync(ref) : null;
+      if (ref && (!node || node.type !== "INSTANCE"))
+        throw Error("Presentation instance identity missing/changed " + key);
+      if (!node) {
+        node = main.createInstance();
+        parent.appendChild(node);
+        this.index.presentationInstances[key] = node.id;
+        this.save();
+        const collect = (child) => {
+          this.created.add(child.id);
+          if ("children" in child)
+            for (const nested of child.children) collect(nested);
+        };
+        collect(node);
+        write(node, "presentation-source-main", main.id);
+      } else if (((_c = node.parent) == null ? void 0 : _c.id) !== parent.id)
+        parent.appendChild(node);
+      node.name = "";
+      this.mutated.add(node.id);
+      return node;
+    }
+    position(node, x, y) {
+      node.x = x;
+      node.y = y;
+      this.mutated.add(node.id);
+    }
+    size(node, width2, height2) {
+      if ("resizeWithoutConstraints" in node)
+        node.resizeWithoutConstraints(width2, height2);
+      else if ("resize" in node) node.resize(width2, height2);
+      this.mutated.add(node.id);
+    }
+  };
+
   // src/sections.ts
   var INSET = 64;
   var PAIR_GAP = 96;
@@ -1210,11 +1491,13 @@
       let page = pages.get(key);
       if (!page) {
         page = api.createPage();
-        page.name = "Fondue / " + group.page;
+        page.name = managedPageName(group.page);
         index.pages[key] = page.id;
         pages.set(key, page);
         save();
       }
+      if (page.name !== managedPageName(group.page))
+        page.name = managedPageName(group.page);
       let section = sections.get(group.key);
       if (!section) {
         section = api.createSection();
@@ -1353,256 +1636,6 @@
     save();
     return report;
   }
-
-  // src/presentation.ts
-  var Presentation = class {
-    constructor(api, index, save) {
-      this.warnings = [];
-      this.variables = /* @__PURE__ */ new Map();
-      this.styles = /* @__PURE__ */ new Map();
-      this.nodes = /* @__PURE__ */ new Map();
-      this.mutated = /* @__PURE__ */ new Set();
-      this.created = /* @__PURE__ */ new Set();
-      this.api = api;
-      this.index = index;
-      this.save = save;
-    }
-    async variable(id, type) {
-      if (this.variables.has(id)) return this.variables.get(id);
-      const ref = this.index.assets["token:" + id];
-      if (!ref || ref.kind !== "token")
-        throw Error("Missing exact presentation token " + id);
-      const variable = await this.api.variables.getVariableByIdAsync(ref.id);
-      if (!variable || variable.resolvedType !== type)
-        throw Error("Wrong/missing presentation variable " + id);
-      this.variables.set(id, variable);
-      return variable;
-    }
-    async style(id) {
-      if (this.styles.has(id)) return this.styles.get(id);
-      const ref = this.index.assets["style:" + id];
-      if (!ref || ref.kind !== "style")
-        throw Error("Missing exact presentation style " + id);
-      const style = await this.api.getStyleByIdAsync(ref.id);
-      if (!style || style.type !== "TEXT")
-        throw Error("Wrong/missing native presentation style " + id);
-      if (!["Diatype", "ABC Diatype", "Cranny"].includes(style.fontName.family))
-        throw Error(
-          "Required presentation font is not ready: " + id + " / " + style.fontName.family
-        );
-      await this.api.loadFontAsync(style.fontName);
-      this.styles.set(id, style);
-      return style;
-    }
-    number(id) {
-      const variable = this.variables.get(id);
-      if (!variable) throw Error("Presentation number not preflighted " + id);
-      const value2 = Object.values(variable.valuesByMode).find(
-        (v) => typeof v === "number"
-      );
-      if (typeof value2 !== "number") throw Error("Expected source scalar " + id);
-      return value2;
-    }
-    async preflight() {
-      await Promise.all(
-        [
-          "color-surface-default",
-          "color-surface-dim",
-          "color-primary-default",
-          "color-secondary-default",
-          "color-line-subtle"
-        ].map((id) => this.variable(id, "COLOR"))
-      );
-      await Promise.all(
-        [
-          "spacing-xx-small",
-          "spacing-x-small",
-          "spacing-small",
-          "spacing-medium",
-          "spacing-large",
-          "spacing-x-large",
-          "spacing-xx-large",
-          "border-radius-medium",
-          "border-radius-large",
-          "border-width-default",
-          "border-width-large",
-          "component-constant-spacing-0"
-        ].map((id) => this.variable(id, "FLOAT"))
-      );
-      for (const id of [
-        "text-heading-xx-large-default",
-        "text-heading-x-large-default",
-        "text-body-medium-default",
-        "text-body-medium-strong",
-        "text-body-small-default",
-        "text-body-x-small-default",
-        "text-body-x-small-strong"
-      ])
-        await this.style(id);
-    }
-    async page(key) {
-      const ref = this.index.pages[key];
-      let page = ref ? await this.api.getNodeByIdAsync(ref) : null;
-      if (ref && (!page || page.type !== "PAGE"))
-        throw Error("Presentation page identity missing/changed " + key);
-      if (!page) {
-        page = this.api.createPage();
-        page.name = "Fondue / " + key;
-        this.index.pages[key] = page.id;
-        this.save();
-        this.created.add(page.id);
-        this.mutated.add(page.id);
-      }
-      if ("loadAsync" in page) await page.loadAsync();
-      return page;
-    }
-    async node(key, type, parent) {
-      var _a, _b, _c;
-      (_b = (_a = this.index).presentationNodes) != null ? _b : _a.presentationNodes = {};
-      const ref = this.index.presentationNodes[key];
-      let node = ref ? await this.api.getNodeByIdAsync(ref) : null;
-      if (ref && (!node || node.type !== type))
-        throw Error(
-          "Presentation identity missing/changed " + key + " (" + ref + ")"
-        );
-      if (!node) {
-        node = type === "FRAME" ? this.api.createFrame() : type === "TEXT" ? this.api.createText() : this.api.createRectangle();
-        parent.appendChild(node);
-        this.index.presentationNodes[key] = node.id;
-        this.save();
-        this.created.add(node.id);
-        write(node, "presentation-key", key);
-        write(node, "presentation-type", type);
-      } else if (((_c = node.parent) == null ? void 0 : _c.id) !== parent.id)
-        parent.appendChild(node);
-      this.nodes.set(key, node);
-      this.mutated.add(node.id);
-      return node;
-    }
-    paint(node, field, id) {
-      const v = this.variables.get(id);
-      if (!v) throw Error("Paint not preflighted " + id);
-      const resolved = v.resolveForConsumer(node);
-      if (resolved.resolvedType !== "COLOR")
-        throw Error("Presentation paint did not resolve to COLOR " + id);
-      const color = resolved.value;
-      node[field] = [
-        this.api.variables.setBoundVariableForPaint(
-          {
-            type: "SOLID",
-            color: { r: color.r, g: color.g, b: color.b },
-            opacity: "a" in color ? color.a : 1
-          },
-          "color",
-          v
-        )
-      ];
-    }
-    bind(node, field, id) {
-      const v = this.variables.get(id);
-      if (!v) throw Error("Scalar not preflighted " + id);
-      node.setBoundVariable(field, v);
-    }
-    auto(node, direction, padding = "component-constant-spacing-0", gap = "spacing-medium") {
-      node.layoutMode = direction;
-      node.layoutWrap = "NO_WRAP";
-      node.primaryAxisSizingMode = "AUTO";
-      node.counterAxisSizingMode = "AUTO";
-      node.counterAxisAlignItems = "MIN";
-      node.primaryAxisAlignItems = "MIN";
-      for (const field of [
-        "paddingTop",
-        "paddingRight",
-        "paddingBottom",
-        "paddingLeft"
-      ])
-        this.bind(node, field, padding);
-      this.bind(node, "itemSpacing", gap);
-    }
-    wrap(node, width2, gap = "spacing-large") {
-      this.auto(node, "HORIZONTAL", "component-constant-spacing-0", gap);
-      node.layoutWrap = "WRAP";
-      this.bind(node, "counterAxisSpacing", gap);
-      node.counterAxisAlignContent = "AUTO";
-      node.primaryAxisSizingMode = "FIXED";
-      node.resizeWithoutConstraints(width2, Math.max(1, node.height));
-      node.primaryAxisSizingMode = "FIXED";
-      node.counterAxisSizingMode = "AUTO";
-    }
-    async frame(key, parent, name = "", theme = "none") {
-      const node = await this.node(key, "FRAME", parent);
-      node.name = name;
-      node.layoutMode = "NONE";
-      node.clipsContent = false;
-      node.fills = [];
-      node.strokes = [];
-      if (theme !== "none")
-        this.paint(
-          node,
-          "fills",
-          theme === "card" ? "color-surface-dim" : "color-surface-default"
-        );
-      if (theme === "card") {
-        this.paint(node, "strokes", "color-line-subtle");
-        this.bind(node, "strokeWeight", "border-width-default");
-        this.bind(node, "cornerRadius", "border-radius-large");
-      }
-      return node;
-    }
-    async text(key, parent, content, styleId, color = "color-primary-default", width2 = 400) {
-      const style = await this.style(styleId);
-      const node = await this.node(key, "TEXT", parent);
-      node.name = "";
-      const baseline = read(node, "presentation-text");
-      if (baseline && node.characters !== baseline) {
-        this.warnings.push("Preserved local presentation text " + key);
-      } else {
-        await node.setTextStyleIdAsync(style.id);
-        node.characters = content;
-        write(node, "presentation-text", content);
-      }
-      node.textAutoResize = "HEIGHT";
-      node.resize(width2, Math.max(1, node.height));
-      this.paint(node, "fills", color);
-      return node;
-    }
-    async instance(key, parent, main) {
-      var _a, _b, _c;
-      (_b = (_a = this.index).presentationInstances) != null ? _b : _a.presentationInstances = {};
-      const ref = this.index.presentationInstances[key];
-      let node = ref ? await this.api.getNodeByIdAsync(ref) : null;
-      if (ref && (!node || node.type !== "INSTANCE"))
-        throw Error("Presentation instance identity missing/changed " + key);
-      if (!node) {
-        node = main.createInstance();
-        parent.appendChild(node);
-        this.index.presentationInstances[key] = node.id;
-        this.save();
-        const collect = (child) => {
-          this.created.add(child.id);
-          if ("children" in child)
-            for (const nested of child.children) collect(nested);
-        };
-        collect(node);
-        write(node, "presentation-source-main", main.id);
-      } else if (((_c = node.parent) == null ? void 0 : _c.id) !== parent.id)
-        parent.appendChild(node);
-      node.name = "";
-      this.mutated.add(node.id);
-      return node;
-    }
-    position(node, x, y) {
-      node.x = x;
-      node.y = y;
-      this.mutated.add(node.id);
-    }
-    size(node, width2, height2) {
-      if ("resizeWithoutConstraints" in node)
-        node.resizeWithoutConstraints(width2, height2);
-      else if ("resize" in node) node.resize(width2, height2);
-      this.mutated.add(node.id);
-    }
-  };
 
   // src/colors.ts
   var DEFINITIONS = [
@@ -2448,10 +2481,10 @@
         doc.usage,
         doc.controls.join("\n"),
         doc.notes.join("\n"),
-        "Select a preview to adjust native variant properties. This is a representative source configuration, not a claim that it is the default. Complete definitions and profile notes remain on the Library masters page."
+        "Select a preview to adjust native variant properties. This is a representative source configuration, not a claim that it is the default. Complete definitions and profile notes remain on the Source components page."
       ] : [
         "Use native icon instances rather than detached vectors.",
-        "Each preview uses the exact 24px optical source. Other optical sizes remain available on the library master.",
+        "Each preview uses the exact 24px optical source. Other optical sizes remain available on the Source components page.",
         "Select an instance to change supported properties."
       ];
       for (let i = 0; i < guideCopy.length; i++) {
@@ -2750,10 +2783,11 @@
         throw Error("Managed page identity changed");
       if (!page) {
         page = this.api.createPage();
-        page.name = "Fondue / " + key;
+        page.name = managedPageName(key);
         this.index.pages[key] = page.id;
         this.save();
       }
+      if (page.name !== managedPageName(key)) page.name = managedPageName(key);
       if ("loadAsync" in page) await page.loadAsync();
       return page;
     }
@@ -3908,6 +3942,7 @@ Sources: ${recipe.source.join(", ")}`;
       return result;
     }
     async organizeConsumerLibrary() {
+      await syncManagedPageNames(this.api, this.index);
       const audit = await planCuratedGalleries(this.api, this.bundle, this.index);
       if (audit.conflicts.length || audit.warnings.length) {
         throw Error(
@@ -3970,7 +4005,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "41adad13e46e96cfa1c7e4dee20ab750749cc7b580fb2fb0840aac6e8f0c0c7e",
+      rendererRevision: "6b00194dff17fe1835cbdef1eb3dbc82a91e0363f014e9d25afeb199b5c4b10e",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -271521,7 +271556,7 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "0467fcb845181146b49d8265113674340f04782f1f094f29c0450be07ae91640"
+    fingerprint: "f9a0b4a19558da7dc1c459ab39e8d4d242bad521ee41abf2730bd90638c60941"
   };
 
   // src/plugin.ts

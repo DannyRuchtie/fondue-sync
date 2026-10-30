@@ -138,7 +138,7 @@ export function conciseGuideParagraphs(
     ],
     [
       "Source",
-      "Select a preview to inspect its native properties. Complete source and profile notes are available on the library master.",
+      "Select a preview to inspect its native properties. Complete source and profile notes are available on the Source components page.",
       "text-body-x-small-default",
     ],
   ];

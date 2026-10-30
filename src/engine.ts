@@ -14,6 +14,7 @@ import { organizeSections } from "./sections";
 import { syncColorsPage } from "./colors";
 import { planCuratedGalleries, syncCuratedGalleries } from "./galleries";
 import { uniqueSentences } from "./documentation";
+import { managedPageName, syncManagedPageNames } from "./presentation";
 type Index = {
   schema: 1 | 2;
   fontWarnings?: string[];
@@ -268,10 +269,11 @@ export class SyncEngine {
       throw Error("Managed page identity changed");
     if (!page) {
       page = this.api.createPage();
-      page.name = "Fondue / " + key;
+      page.name = managedPageName(key);
       this.index.pages[key] = page.id;
       this.save();
     }
+    if (page.name !== managedPageName(key)) page.name = managedPageName(key);
     if ("loadAsync" in page) await (page as PageNode).loadAsync();
     return page as PageNode;
   }
@@ -1649,6 +1651,7 @@ export class SyncEngine {
   }
 
   async organizeConsumerLibrary() {
+    await syncManagedPageNames(this.api, this.index);
     const audit = await planCuratedGalleries(this.api, this.bundle, this.index);
     if (audit.conflicts.length || audit.warnings.length) {
       throw Error(

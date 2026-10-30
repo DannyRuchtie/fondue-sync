@@ -16,6 +16,8 @@ A Fondue release supplies the tokens, icons, component source and available docu
 
 The plugin populates a dedicated library file. Designers then enable the published library, place linked instances, and compose their own screens. The example pages provide starting layouts based on production Brands, Libraries and Guidelines overviews, using synthetic content.
 
+The file has two page groups. **Library / …** pages are for browsing components, icons, charts and examples, with readable previews and usage guidance. **Source components / …** pages hold the actual main components and variant sets maintained by the plugin. Browsing previews are linked instances of those source components; both groups belong to the same library.
+
 In the illustration, solid arrows show the current library workflow. Dashed paths show planned prototype export, live API data and proposed changes back to Fondue. Those future paths are not current plugin actions.
 
 The plugin runs when a maintainer opens it. It uses the release packaged in its build; it does not watch the repository or fetch the latest code automatically.

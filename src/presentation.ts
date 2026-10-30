@@ -1,4 +1,38 @@
 import { read, write } from "./metadata";
+/** Stable ledger keys stay compatible; visible labels explain each page's role. */
+export function managedPageName(key: string) {
+  const master = key.match(/^Library masters - (.+)$/);
+  return master ? `Source components / ${master[1]}` : `Library / ${key}`;
+}
+export async function syncManagedPageNames(
+  api: PluginAPI,
+  index: { pages: Record<string, string> },
+) {
+  const categories = new Set([
+    "Foundations",
+    "Colors",
+    "Components",
+    "Icons",
+    "Charts",
+    "Rich text",
+    "Product patterns",
+    "Examples",
+    "Documentation",
+  ]);
+  const mutatedNodeIds: string[] = [];
+  for (const [key, id] of Object.entries(index.pages)) {
+    if (!categories.has(key) && !key.startsWith("Library masters - ")) continue;
+    const page = await api.getNodeByIdAsync(id);
+    if (!page || page.type !== "PAGE")
+      throw Error("Managed page identity missing/changed: " + key);
+    const name = managedPageName(key);
+    if (page.name !== name) {
+      page.name = name;
+      mutatedNodeIds.push(page.id);
+    }
+  }
+  return { mutatedNodeIds };
+}
 export type PresentationIndex = {
   assets: Record<string, { id: string; kind: string }>;
   pages: Record<string, string>;
@@ -108,12 +142,13 @@ export class Presentation {
       throw Error("Presentation page identity missing/changed " + key);
     if (!page) {
       page = this.api.createPage();
-      page.name = "Fondue / " + key;
+      page.name = managedPageName(key);
       this.index.pages[key] = page.id;
       this.save();
       this.created.add(page.id);
       this.mutated.add(page.id);
     }
+    if (page.name !== managedPageName(key)) page.name = managedPageName(key);
     if ("loadAsync" in page) await page.loadAsync();
     return page as PageNode;
   }

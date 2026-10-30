@@ -3,6 +3,36 @@ import assert from "node:assert/strict";
 import { planCuratedGalleries, syncCuratedGalleries } from "../src/galleries";
 import { presentationFixture } from "./presentation-fixture";
 import type { Bundle } from "../src/schema";
+import { syncManagedPageNames } from "../src/presentation";
+test("page group labels distinguish browsing from sources and repeat without replacing pages", async () => {
+  const f = presentationFixture();
+  for (const key of [
+    "Components",
+    "Icons",
+    "Foundations",
+    "Examples",
+    "Library masters - Components",
+    "Library masters - Icons",
+    "Thumbnail",
+  ])
+    f.sourcePage(key).name =
+      key === "Thumbnail" ? "Thumbnail" : "Fondue / " + key;
+  const ids = { ...f.index.pages };
+  const first = await syncManagedPageNames(f.api, f.index);
+  assert.equal(first.mutatedNodeIds.length, 6);
+  assert.equal(f.nodes.get(ids.Components).name, "Library / Components");
+  assert.equal(f.nodes.get(ids.Examples).name, "Library / Examples");
+  assert.equal(
+    f.nodes.get(ids["Library masters - Icons"]).name,
+    "Source components / Icons",
+  );
+  assert.equal(f.nodes.get(ids.Thumbnail).name, "Thumbnail");
+  assert.deepEqual(f.index.pages, ids);
+  assert.deepEqual(
+    (await syncManagedPageNames(f.api, f.index)).mutatedNodeIds,
+    [],
+  );
+});
 function setup(profiles = 5) {
   const f = presentationFixture(),
     items = f.recipe("Link", profiles),

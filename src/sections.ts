@@ -1,5 +1,6 @@
 import type { Bundle, Recipe } from "./schema";
 import { read as readMetadata, write as writeMetadata } from "./metadata";
+import { managedPageName } from "./presentation";
 
 /** Presentation ledger. Asset IDs and applied snapshots remain owned by SyncEngine. */
 export type SectionIndex = {
@@ -293,11 +294,13 @@ export async function organizeSections(
     let page = pages.get(key);
     if (!page) {
       page = api.createPage();
-      page.name = "Fondue / " + group.page;
+      page.name = managedPageName(group.page);
       index.pages[key] = page.id;
       pages.set(key, page);
       save();
     }
+    if (page.name !== managedPageName(group.page))
+      page.name = managedPageName(group.page);
     let section = sections.get(group.key);
     if (!section) {
       section = api.createSection();

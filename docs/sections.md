@@ -1,10 +1,10 @@
 # Native sections and adjacent documentation
 
-Consumer pages group each component family in a native Figma Section. Components, Charts, Rich text and Product patterns keep their own pages. Each Section contains real native instance previews, friendly profile labels and one concise family guide. The guide explains purpose, usage and represented controls without repeating the same coverage paragraph for every profile.
+**Library / …** browsing pages group each component family in a native Figma Section. Components, Charts, Rich text and Product patterns keep their own pages. Each Section contains real native instance previews, friendly profile labels and one concise family guide. The guide explains purpose, usage and represented controls without repeating the same coverage paragraph for every profile.
 
 A preview starts with the exact first represented source configuration. This is explicitly labelled as representative; it does not assert that the configuration is the React default. Supported native properties remain editable. Icons use the exact 24px optical source. Source geometry and typography are not rescaled to fit a gallery tile.
 
-Detailed main sets and their full profile guides live on corresponding **Library masters** pages. Main component, variant, child and guide IDs are preserved. Figma descriptions and source links remain on the native definitions. Moving masters removes their editor outlines and long variant names from the consumer browsing pages without detaching previews.
+Detailed main sets and their full profile guides live on corresponding **Source components / …** pages. Main component, variant, child and guide IDs are preserved. Figma descriptions and source links remain on the native definitions. Moving masters removes their editor outlines and long variant names from the consumer browsing pages without detaching previews.
 
 The **Colors** page groups semantic roles by purpose, with usage guidance and exact Light/Dark mode previews. Primitive ramps are grouped by hue and ordered numerically, including shade 100 after 95. Effect implementation colors are separate. Every sample uses the source variable; presentation typography uses shared styles. Auto Layout padding, gaps, borders and radii bind to exact source variables or explicitly documented source-derived constants.
 
