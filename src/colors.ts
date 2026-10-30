@@ -326,7 +326,7 @@ export async function syncColorsPage(
       friendlyColorLabel(token.id),
       "text-body-medium-strong",
       "color-primary-default",
-      304,
+      296,
     );
     await ctx.text(
       key + "/css",
@@ -334,7 +334,7 @@ export async function syncColorsPage(
       "--" + token.id,
       "text-body-x-small-default",
       "color-secondary-default",
-      304,
+      296,
     );
     const pair = await ctx.frame(key + "/modes", card);
     ctx.auto(
@@ -352,15 +352,15 @@ export async function syncColorsPage(
         collection,
         label === "Light" ? mode.light : mode.dark,
       );
+      const foreground = token.id.includes("-on-");
       await ctx.text(
         key + "/" + label + "/name",
         panel,
         label,
         "text-body-x-small-strong",
-        "color-secondary-default",
-        124,
+        foreground ? token.id : "color-secondary-default",
+        120,
       );
-      const foreground = token.id.includes("-on-");
       const backgroundId = foreground
         ? token.id.split("-on-")[0] + "-default"
         : "color-surface-default";
@@ -373,7 +373,7 @@ export async function syncColorsPage(
           "Sample text",
           "text-body-medium-strong",
           token.id,
-          124,
+          120,
         );
       } else {
         const sample = await ctx.node(
@@ -382,7 +382,7 @@ export async function syncColorsPage(
           panel,
         );
         sample.name = "";
-        sample.resize(124, 48);
+        sample.resize(120, 48);
         ctx.bind(sample, "cornerRadius", "border-radius-medium");
         if (group.preview === "border") {
           ctx.paint(sample, "fills", "color-surface-default");

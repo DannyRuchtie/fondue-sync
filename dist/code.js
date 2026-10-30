@@ -1822,7 +1822,7 @@
         friendlyColorLabel(token.id),
         "text-body-medium-strong",
         "color-primary-default",
-        304
+        296
       );
       await ctx.text(
         key + "/css",
@@ -1830,7 +1830,7 @@
         "--" + token.id,
         "text-body-x-small-default",
         "color-secondary-default",
-        304
+        296
       );
       const pair = await ctx.frame(key + "/modes", card);
       ctx.auto(
@@ -1848,15 +1848,15 @@
           collection,
           label === "Light" ? mode.light : mode.dark
         );
+        const foreground = token.id.includes("-on-");
         await ctx.text(
           key + "/" + label + "/name",
           panel,
           label,
           "text-body-x-small-strong",
-          "color-secondary-default",
-          124
+          foreground ? token.id : "color-secondary-default",
+          120
         );
-        const foreground = token.id.includes("-on-");
         const backgroundId = foreground ? token.id.split("-on-")[0] + "-default" : "color-surface-default";
         if (group.preview === "text" || foreground) {
           if (foreground && ctx.variables.has(backgroundId))
@@ -1867,7 +1867,7 @@
             "Sample text",
             "text-body-medium-strong",
             token.id,
-            124
+            120
           );
         } else {
           const sample = await ctx.node(
@@ -1876,7 +1876,7 @@
             panel
           );
           sample.name = "";
-          sample.resize(124, 48);
+          sample.resize(120, 48);
           ctx.bind(sample, "cornerRadius", "border-radius-medium");
           if (group.preview === "border") {
             ctx.paint(sample, "fills", "color-surface-default");
@@ -3952,7 +3952,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "73ff7a8ba9cebdf1260fcd5bced5a002b9099c8c6eef82f88e37e77835a365fd",
+      rendererRevision: "c7b2c46c7d97a3dd3e946577ae665172a8e836b7dc6b49f54f527e21ed2f40c2",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -271503,7 +271503,7 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "24f597b6dc70c9f3fc5ce7a928547486b27593eb3a42366ab60a7cc3b56270ed"
+    fingerprint: "bf7aba474566d72c6f7e69b45a78d2e048fd61d76884879bca278e8e6c7f72ac"
   };
 
   // src/plugin.ts
