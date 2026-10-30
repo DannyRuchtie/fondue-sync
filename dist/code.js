@@ -662,6 +662,44 @@
     return errors;
   }
 
+  // src/component-properties.mjs
+  function componentPropertyGroups(recipe, iconDefault) {
+    const paths = /* @__PURE__ */ new Map();
+    const add = (prefix, type, path, value2, variantId) => {
+      const identity = JSON.stringify([prefix, path]);
+      let values = paths.get(identity);
+      if (!values) {
+        values = /* @__PURE__ */ new Map();
+        paths.set(identity, values);
+      }
+      const valueKey = JSON.stringify(value2);
+      let group = values.get(valueKey);
+      if (!group) {
+        group = { prefix, type, path, value: value2, variantIds: [] };
+        values.set(valueKey, group);
+      }
+      group.variantIds.push(variantId);
+    };
+    for (const variant of recipe.variants) {
+      const walk = (node, parent = "") => {
+        var _a, _b;
+        const path = parent + "/" + node.id;
+        if (node.kind === "text")
+          add("Text", "TEXT", path, (_a = node.text) != null ? _a : "", variant.id);
+        if (node.kind === "instance")
+          add("Icon", "INSTANCE_SWAP", path, iconDefault(node), variant.id);
+        for (const child of (_b = node.children) != null ? _b : []) walk(child, path);
+      };
+      walk(variant.root);
+    }
+    return [...paths.values()].flatMap(
+      (values) => [...values.values()].map((group, index) => __spreadProps(__spreadValues({}, group), {
+        collision: values.size > 1,
+        label: group.prefix + " / " + group.path + (index ? " / Variant " + group.variantIds[0].replaceAll("#", "-hash-") : "")
+      }))
+    );
+  }
+
   // src/image-migration-approvals.json
   var image_migration_approvals_default = {
     version: 1,
@@ -3489,6 +3527,8 @@
       this.fonts = /* @__PURE__ */ new Map();
       this.tokenCache = /* @__PURE__ */ new Map();
       this.imageCache = /* @__PURE__ */ new Map();
+      this.iconMains = /* @__PURE__ */ new Map();
+      this.componentPropertyLabels = /* @__PURE__ */ new Map();
       this.appliedPropertyDefaults = /* @__PURE__ */ new Set();
       this.shardPayloads = /* @__PURE__ */ new Map();
       var _a, _b;
@@ -3978,8 +4018,119 @@
       ((_e = (_d = this.index).imageHashes) != null ? _e : _d.imageHashes = {})[digest] = image.hash;
       return image.hash;
     }
+    async iconMain(def) {
+      var _a;
+      const cacheKey = JSON.stringify([def.iconId, (_a = def.width) != null ? _a : 24]);
+      let pending = this.iconMains.get(cacheKey);
+      if (!pending) {
+        pending = (async () => {
+          const ref = this.index.assets["icon:" + def.iconId];
+          const icon = ref ? await this.api.getNodeByIdAsync(ref.id) : null;
+          let main = icon;
+          if ((icon == null ? void 0 : icon.type) === "COMPONENT_SET") {
+            main = icon.children.find(
+              (c) => {
+                var _a2;
+                return read(c, "optical-size") === String((_a2 = def.width) != null ? _a2 : 24);
+              }
+            );
+            if (!main) {
+              main = icon.children.find((c) => read(c, "optical-size") === "24");
+              const warning = `${def.iconId} has no exact ${def.width}px optical source; using the released24px path scaled to requested size.`;
+              if (!this.warnings.includes(warning)) this.warnings.push(warning);
+            }
+          }
+          if (!main || main.type !== "COMPONENT")
+            throw Error("Missing native icon " + def.iconId);
+          return main;
+        })();
+        this.iconMains.set(cacheKey, pending);
+      }
+      return pending;
+    }
+    propertyLabel(owner, prefix, path, value2) {
+      var _a, _b;
+      return (_b = (_a = this.componentPropertyLabels.get(owner.id)) == null ? void 0 : _a.get(JSON.stringify([prefix, path, value2]))) != null ? _b : prefix + " / " + path;
+    }
+    async prepareComponentProperties(recipe, owner) {
+      const icons = /* @__PURE__ */ new Map();
+      const collect = async (layer) => {
+        var _a, _b;
+        if (layer.kind === "instance")
+          icons.set(
+            JSON.stringify([layer.iconId, (_a = layer.width) != null ? _a : 24]),
+            (await this.iconMain(layer)).id
+          );
+        for (const child of (_b = layer.children) != null ? _b : []) await collect(child);
+      };
+      for (const variant of recipe.variants) await collect(variant.root);
+      const groups = componentPropertyGroups(
+        recipe,
+        (layer) => {
+          var _a;
+          return icons.get(JSON.stringify([layer.iconId, (_a = layer.width) != null ? _a : 24]));
+        }
+      );
+      const labels = new Map(
+        groups.map((group) => [
+          JSON.stringify([group.prefix, group.path, group.value]),
+          group.label
+        ])
+      );
+      this.componentPropertyLabels.set(owner.id, labels);
+      const keys = new Map(
+        Object.keys(owner.componentPropertyDefinitions).map((key) => [
+          key.split("#")[0],
+          key
+        ])
+      );
+      for (const group of groups)
+        if (!keys.has(group.label))
+          keys.set(
+            group.label,
+            owner.addComponentProperty(group.label, group.type, group.value)
+          );
+      const bind = async (node, definition, parent = "") => {
+        var _a, _b, _c;
+        const path = parent + "/" + definition.id;
+        if (definition.kind === "text" && node.type === "TEXT") {
+          if (node.fontName && typeof node.fontName === "object")
+            await this.fontFor(node.fontName.family, node.fontName.style);
+          const key = keys.get(
+            this.propertyLabel(owner, "Text", path, (_a = definition.text) != null ? _a : "")
+          );
+          node.componentPropertyReferences = __spreadProps(__spreadValues({}, node.componentPropertyReferences), {
+            characters: key
+          });
+        } else if (definition.kind === "instance" && node.type === "INSTANCE") {
+          const key = keys.get(
+            this.propertyLabel(
+              owner,
+              "Icon",
+              path,
+              (await this.iconMain(definition)).id
+            )
+          );
+          node.componentPropertyReferences = __spreadProps(__spreadValues({}, node.componentPropertyReferences), {
+            mainComponent: key
+          });
+        }
+        for (const child of (_b = definition.children) != null ? _b : []) {
+          const existing = (_c = node.children) == null ? void 0 : _c.find(
+            (item) => read(item, "identity") === child.id
+          );
+          if (existing) await bind(existing, child, path);
+        }
+      };
+      for (const variant of recipe.variants) {
+        const native = owner.children.find(
+          (node) => read(node, "variant") === variant.id
+        );
+        if (native) await bind(native, variant.root);
+      }
+    }
     async layer(def, parent, existing, owner, path = "") {
-      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H, _I, _J, _K;
+      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H, _I, _J, _K, _L;
       if (def.imageAssetId && (!["frame", "rectangle"].includes(def.kind) || def.fill || ((_a = def.bindings) == null ? void 0 : _a.fills)))
         throw Error(
           "Offline image requires an exclusive editable frame/rectangle fill: " + def.id
@@ -4024,18 +4175,36 @@
           node.swapComponent(main);
         if (owner) node.isExposedInstance = true;
         const definitions = node.componentProperties;
-        const textKeys = Object.keys(definitions).filter(
-          (k) => definitions[k].type === "TEXT"
-        );
+        const activeText = [];
+        const collectText = (native, source, parent2 = "") => {
+          var _a2, _b2, _c2, _d2;
+          const path2 = parent2 + "/" + source.id;
+          const key = (_a2 = native.componentPropertyReferences) == null ? void 0 : _a2.characters;
+          if (source.kind === "text" && key && ((_b2 = definitions[key]) == null ? void 0 : _b2.type) === "TEXT")
+            activeText.push({ key, path: path2 });
+          for (const child of (_c2 = source.children) != null ? _c2 : []) {
+            const actual = (_d2 = native.children) == null ? void 0 : _d2.find(
+              (node2) => read(node2, "identity") === child.id
+            );
+            if (actual) collectText(actual, child, path2);
+          }
+        };
+        collectText(main, choice.variant.root);
+        const textKeys = [...new Set(activeText.map((item) => item.key))];
         if (def.text !== void 0) {
           if (!textKeys.length)
             throw Error("No exposed text property on " + choice.recipe.name);
           node.setProperties({ [textKeys[0]]: def.text });
         }
         for (const [key, value2] of Object.entries((_c = def.textOverrides) != null ? _c : {})) {
-          const property = textKeys.find(
-            (k) => k.split("#")[0].endsWith("/" + key) || k === key
-          );
+          const matches = [
+            ...new Set(
+              activeText.filter(
+                (item) => item.key === key || item.path === key || item.path.endsWith("/" + key)
+              ).map((item) => item.key)
+            )
+          ];
+          const property = matches.length === 1 ? matches[0] : void 0;
           if (!property)
             throw Error(
               "No stable text property " + key + " on " + choice.recipe.name
@@ -4053,24 +4222,7 @@
         );
       }
       if (def.kind === "instance") {
-        const ref = this.index.assets["icon:" + def.iconId];
-        const icon = ref ? await this.api.getNodeByIdAsync(ref.id) : null;
-        let main = icon;
-        if ((icon == null ? void 0 : icon.type) === "COMPONENT_SET") {
-          main = icon.children.find(
-            (c) => {
-              var _a2;
-              return read(c, "optical-size") === String((_a2 = def.width) != null ? _a2 : 24);
-            }
-          );
-          if (!main) {
-            main = icon.children.find((c) => read(c, "optical-size") === "24");
-            const warning = `${def.iconId} has no exact ${def.width}px optical source; using the released24px path scaled to requested size.`;
-            if (!this.warnings.includes(warning)) this.warnings.push(warning);
-          }
-        }
-        if (!main || main.type !== "COMPONENT")
-          throw Error("Missing native icon " + def.iconId);
+        const main = await this.iconMain(def);
         if (!node) {
           node = main.createInstance();
           parent.appendChild(node);
@@ -4165,7 +4317,12 @@
         if (!def.textStyle && (def.textDecoration || (previous == null ? void 0 : previous.textDecoration)))
           node.textDecoration = (_t = def.textDecoration) != null ? _t : "NONE";
         if (owner) {
-          const label = "Text / " + identityPath;
+          const label = this.propertyLabel(
+            owner,
+            "Text",
+            identityPath,
+            (_u = def.text) != null ? _u : ""
+          );
           const definitions = owner.componentPropertyDefinitions;
           let key = Object.keys(definitions).find(
             (k) => k.split("#")[0] === label
@@ -4175,7 +4332,7 @@
           if (!key) throw Error("Could not create native text property " + label);
           const propertyIdentity = owner.id + ":" + key;
           if (!this.appliedPropertyDefaults.has(propertyIdentity)) {
-            if (((_u = owner.componentPropertyDefinitions[key]) == null ? void 0 : _u.defaultValue) !== node.characters)
+            if (((_v = owner.componentPropertyDefinitions[key]) == null ? void 0 : _v.defaultValue) !== node.characters)
               owner.editComponentProperty(key, { defaultValue: node.characters });
             this.appliedPropertyDefaults.add(propertyIdentity);
           }
@@ -4187,14 +4344,26 @@
       if (def.kind === "instance" && owner) {
         const definitions = owner.componentPropertyDefinitions;
         const ensure = (name, type, value2) => {
-          var _a2;
-          return (_a2 = Object.keys(definitions).find((k) => k.split("#")[0] === name)) != null ? _a2 : owner.addComponentProperty(name, type, value2);
+          var _a2, _b2;
+          const key = (_a2 = Object.keys(definitions).find((k) => k.split("#")[0] === name)) != null ? _a2 : owner.addComponentProperty(name, type, value2);
+          const identity = owner.id + ":" + key;
+          if (!this.appliedPropertyDefaults.has(identity)) {
+            if (((_b2 = owner.componentPropertyDefinitions[key]) == null ? void 0 : _b2.defaultValue) !== value2)
+              owner.editComponentProperty(key, { defaultValue: value2 });
+            this.appliedPropertyDefaults.add(identity);
+          }
+          return key;
         };
         node.componentPropertyReferences = __spreadProps(__spreadValues({}, node.componentPropertyReferences), {
           mainComponent: ensure(
-            "Icon / " + identityPath,
+            this.propertyLabel(
+              owner,
+              "Icon",
+              identityPath,
+              (await this.iconMain(def)).id
+            ),
             "INSTANCE_SWAP",
-            (await node.getMainComponentAsync()).id
+            (await this.iconMain(def)).id
           ),
           visible: ensure("Show / " + identityPath, "BOOLEAN", true)
         });
@@ -4205,14 +4374,14 @@
         await node.setEffectStyleIdAsync(ref.id);
       }
       if (def.kind === "frame") {
-        node.layoutMode = (_v = def.layout) != null ? _v : "VERTICAL";
+        node.layoutMode = (_w = def.layout) != null ? _w : "VERTICAL";
         node.primaryAxisSizingMode = "AUTO";
         node.counterAxisSizingMode = "AUTO";
-        node.itemSpacing = (_w = def.gap) != null ? _w : 0;
-        const crossAlign = (_y = (_x = def.counterAlign) != null ? _x : def.counterAxisAlignItems) != null ? _y : "CENTER";
+        node.itemSpacing = (_x = def.gap) != null ? _x : 0;
+        const crossAlign = (_z = (_y = def.counterAlign) != null ? _y : def.counterAxisAlignItems) != null ? _z : "CENTER";
         node.counterAxisAlignItems = crossAlign === "BASELINE" && node.layoutMode === "VERTICAL" ? "MIN" : crossAlign;
-        node.primaryAxisAlignItems = (_A = (_z = def.primaryAlign) != null ? _z : def.primaryAxisAlignItems) != null ? _A : "MIN";
-        node.paddingTop = node.paddingBottom = node.paddingLeft = node.paddingRight = (_B = def.padding) != null ? _B : 0;
+        node.primaryAxisAlignItems = (_B = (_A = def.primaryAlign) != null ? _A : def.primaryAxisAlignItems) != null ? _B : "MIN";
+        node.paddingTop = node.paddingBottom = node.paddingLeft = node.paddingRight = (_C = def.padding) != null ? _C : 0;
         for (const key of [
           "paddingLeft",
           "paddingRight",
@@ -4220,24 +4389,24 @@
           "paddingBottom"
         ])
           if (def[key] !== void 0) node[key] = def[key];
-        node.clipsContent = (_C = def.clipContent) != null ? _C : false;
+        node.clipsContent = (_D = def.clipContent) != null ? _D : false;
       }
       if (def.kind !== "svg" && def.kind !== "instance" && def.kind !== "componentInstance") {
         node.fills = imageHash ? [
           __spreadValues(__spreadValues({
             type: "IMAGE",
             imageHash,
-            scaleMode: (_D = def.imageScaleMode) != null ? _D : "FILL"
+            scaleMode: (_E = def.imageScaleMode) != null ? _E : "FILL"
           }, def.imageTransform ? { imageTransform: def.imageTransform } : {}), def.imageScalingFactor !== void 0 ? { scalingFactor: def.imageScalingFactor } : {})
         ] : def.fill ? [this.paint(def.fill)] : [];
         node.strokes = def.stroke ? [this.paint(def.stroke)] : [];
         if (["FRAME", "COMPONENT", "RECTANGLE"].includes(node.type) && (def.radius !== void 0 || (previous == null ? void 0 : previous.radius) !== void 0))
-          node.cornerRadius = (_E = def.radius) != null ? _E : 0;
+          node.cornerRadius = (_F = def.radius) != null ? _F : 0;
       }
       if (def.width !== void 0 && def.kind === "text")
         node.textAutoResize = "HEIGHT";
       if (def.width !== void 0 || def.height !== void 0) {
-        node.resize((_F = def.width) != null ? _F : node.width, (_G = def.height) != null ? _G : node.height);
+        node.resize((_G = def.width) != null ? _G : node.width, (_H = def.height) != null ? _H : node.height);
         if (def.kind === "frame") {
           const horizontal = node.layoutMode === "HORIZONTAL";
           node.primaryAxisSizingMode = (horizontal ? def.width : def.height) !== void 0 ? "FIXED" : "AUTO";
@@ -4258,7 +4427,7 @@
         };
         paint(node);
       }
-      for (const [field, id] of Object.entries((_H = def.bindings) != null ? _H : {})) {
+      for (const [field, id] of Object.entries((_I = def.bindings) != null ? _I : {})) {
         if (def.kind === "text" && def.textStyle && [
           "fontFamily",
           "fontStyle",
@@ -4277,7 +4446,7 @@
               {
                 type: "SOLID",
                 color: { r: resolved.r, g: resolved.g, b: resolved.b },
-                opacity: (_I = resolved.a) != null ? _I : 1
+                opacity: (_J = resolved.a) != null ? _J : 1
               },
               "color",
               variable
@@ -4285,8 +4454,8 @@
           ];
         } else node.setBoundVariable(field, variable);
       }
-      for (const child of (_J = def.children) != null ? _J : []) {
-        const prior = (_K = node.children) == null ? void 0 : _K.find(
+      for (const child of (_K = def.children) != null ? _K : []) {
+        const prior = (_L = node.children) == null ? void 0 : _L.find(
           (n) => read(n, "identity") === child.id
         );
         await this.layer(child, node, prior, owner, identityPath);
@@ -4439,6 +4608,7 @@ Sources: ${recipe.source.join(", ")}`;
         component.name = nativeName(variant.props);
         write(component, "variant-props", JSON.stringify(variant.props));
       }
+      await this.prepareComponentProperties(recipe, set);
       for (let i = 0; i < recipe.variants.length; i++) {
         const variant = recipe.variants[i];
         let component = set.children.find(
@@ -4952,7 +5122,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "b9bf549500c6f5ac5256661cb453a429d42114c578e3d680e886b18cfd57541f",
+      rendererRevision: "74f68164bcd63b1a4da1e4d7f74bb1b3047c203a504a0a192d9007345a6cf7cc",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -4976,19 +5146,19 @@ Sources: ${recipe.source.join(", ")}`;
           "fixtures/media/manifest.json": "411200aa362d5eb49e73b3b1fef44e6d3701eb69507abe3be80e0f0f0a696587",
           "fixtures/media/README.md": "803289fbdf74742101f57845d9008b5869c255949b435a8b86537671ed246167"
         },
-        builder: "5ed25e91236d992399e4affaec8b4da7e58f05067b8c875ba2b1e7f05f4c49cc",
+        builder: "827e717165e72f99f3f9922a749de9bdfe90422d708e5d4bf47dc05dcd17e538",
         imageBuilder: "8d4d90adc650e12ef5dc84941c28b808bb7fdd77963d30478f41f4b08d3ab638",
         recipes: {
           "recipes/index.mjs": "1d39e16d9a457fb4ac1126f485a26b3aa904cd05dbed3888d9f22840060389cb",
           "recipes/foundations.mjs": "97827709af9c255dbe363a99e1e6a7194644dd0c3e3b430d7de5690bd37d9e5d",
           "recipes/controls.mjs": "a6b16516c9a786214b786012e81ee63b3f32565bbf9a89c3c2b02987782ae3bd",
           "recipes/patterns.mjs": "1283ab2c1da7cfc4c5a41dfc57eb94e5fdfe862146cd05690236c00718098f4e",
-          "recipes/examples.mjs": "f0a2b8306a7d2026cfb3b9f595b2c710b0d63131a9379812c932ceb643e23ff0",
+          "recipes/examples.mjs": "abcea32368db78bb8a4cdc70dd190556faa6231d1d5542aa48e099e40846249e",
           "recipes/documentation.mjs": "60a2270252d98e9e57c38261c17b48676391e25a2dd049a4b8e88b22b8a2bc89",
           "recipes/token-bindings.mjs": "92f67ecc1c8aa92cfbb9e9e8e1d8879d9af9abcec8ff00b140ce369de8cb40dc",
           "recipes/paint-bindings.mjs": "66e1181a58fb1fa6dfc66c96a026a01db13479c954499eadd362bba55116840a",
           "recipes/typography-bindings.mjs": "847aae15110242a60974ffc935a563f5342d18e442f57760da58dc61e72ff916",
-          "recipes/additional-examples.mjs": "5ea42310ddacbeeda3e6f25ebd502c3fa7de18d100b387dd0773318d3a89a76c",
+          "recipes/additional-examples.mjs": "7149a94d5daeb1b6525df23ea06a61f8a7e94f64fed89c47541cf60f82c5d0a9",
           "recipes/media-components.mjs": "f9e0606c0365919728e64e85eb3d6f7d4ee2f91e1804782224cd29e11e772e0f"
         }
       },
@@ -13129,7 +13299,7 @@ Sources: ${recipe.source.join(", ")}`;
               role: "spacing"
             }
           ],
-          occurrences: 23477
+          occurrences: 23483
         }
       },
       {
@@ -13739,12 +13909,7 @@ Sources: ${recipe.source.join(", ")}`;
           ],
           examples: [
             {
-              path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/automation-pill",
-              value: 4.805620608899297,
-              role: "spacing"
-            },
-            {
-              path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/generate",
+              path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
               value: 4.805620608899297,
               role: "spacing"
             },
@@ -13752,9 +13917,14 @@ Sources: ${recipe.source.join(", ")}`;
               path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
               value: 4.805620608899297,
               role: "spacing"
+            },
+            {
+              path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-1",
+              value: 4.805620608899297,
+              role: "spacing"
             }
           ],
-          occurrences: 8
+          occurrences: 6
         }
       },
       {
@@ -13804,7 +13974,7 @@ Sources: ${recipe.source.join(", ")}`;
               role: "spacing"
             }
           ],
-          occurrences: 42
+          occurrences: 41
         }
       },
       {
@@ -13914,9 +14084,19 @@ Sources: ${recipe.source.join(", ")}`;
               path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/agentic-heading",
               value: 64,
               role: "spacing"
+            },
+            {
+              path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
+              value: 64,
+              role: "spacing"
+            },
+            {
+              path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
+              value: 64,
+              role: "spacing"
             }
           ],
-          occurrences: 1
+          occurrences: 3
         }
       },
       {
@@ -14211,14 +14391,9 @@ Sources: ${recipe.source.join(", ")}`;
               path: "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body",
               value: 96,
               role: "spacing"
-            },
-            {
-              path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
-              value: 96,
-              role: "spacing"
             }
           ],
-          occurrences: 2
+          occurrences: 1
         }
       },
       {
@@ -84266,7 +84441,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A CSS Grid layout container for two-dimensional arrangements of children in rows and columns.\n\nUse when content needs to align across both axes.\n\nThe columns prop accepts CSS grid-template-columns values (e.g. 'repeat(3, 1fr)') or a number for equal-width columns.\n\nAll layout props support responsive breakpoint objects.\n\nUse Flex for single-axis (row or column) layouts.\n\nExposed variant properties:\n\nflow: row, column, dense, row-dense, column-dense\n\ncolumns: 1, 2, 3, 4\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nNative Auto Layout specimen covers 1\u20134 columns; source accepts arbitrary CSS track strings, rows, auto flow/dense packing, alignment and responsive gaps.\n\nCSS grid algorithm cannot be represented by fixed nested rows.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Grid/Grid.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/ScrollArea/auto",
@@ -90784,7 +90960,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A clickable action element for triggering user actions.\n\nUse for primary CTAs, form submissions, and any discrete user action.\n\nUse variant to set intent (default, positive, negative, danger, loud) and emphasis to set visual weight (strong=high contrast, default=low contrast, weak=no fill on default).\n\nUse aspect='square' with icon-only buttons and always provide a title or aria-label for accessibility.\n\nUse rounding='full' for circular icon buttons.\n\nUse SplitButton when a primary action needs a secondary dropdown menu.\n\nExposed variant properties:\n\nvariant: default\n\nemphasis: strong\n\nrounding: medium\n\naspect: default, square\n\nsize: small, medium, large\n\nstate: default, hover, active, focus, disabled\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nFull-width behavior is native frame resizing; square aspect swaps text content for a native icon.\n\nCSS forced-colors media mode is represented by the browser, not this light/dark library.\n\nReviewed profile contract: all enum values have native examples, but the full cross-product is not imported.\n\nEvery intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Button/Button.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Button/controls-006",
@@ -92345,7 +92522,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A clickable action element for triggering user actions.\n\nUse for primary CTAs, form submissions, and any discrete user action.\n\nUse variant to set intent (default, positive, negative, danger, loud) and emphasis to set visual weight (strong=high contrast, default=low contrast, weak=no fill on default).\n\nUse aspect='square' with icon-only buttons and always provide a title or aria-label for accessibility.\n\nUse rounding='full' for circular icon buttons.\n\nUse SplitButton when a primary action needs a secondary dropdown menu.\n\nExposed variant properties:\n\nvariant: default\n\nemphasis: strong\n\nrounding: full\n\naspect: default, square\n\nsize: small, medium, large\n\nstate: default, hover, active, focus, disabled\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nFull-width behavior is native frame resizing; square aspect swaps text content for a native icon.\n\nCSS forced-colors media mode is represented by the browser, not this light/dark library.\n\nReviewed profile contract: all enum values have native examples, but the full cross-product is not imported.\n\nEvery intent/emphasis/state at medium size and medium rounding; all size/rounding/aspect/state combinations for default intent and strong emphasis.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Button/Button.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Button/controls-007",
@@ -100596,7 +100774,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A binary form input for toggling a boolean value.\n\nSupports checked, unchecked, and indeterminate states.\n\nUse in forms where multiple independent options can be selected.\n\nAlways pair with a Label component for accessibility \u2014 connect them via matching id and htmlFor props, or use aria-labelledby. onChange receives the click event, not the new checked state (there is no onCheckedChange): to read or react to the state, control it with value plus your own state, e.g. const [checked, setChecked] = useState<boolean | 'indeterminate'>(false) and onChange={() => setChecked((previous) => previous !== true)}.\n\nUse defaultValue for uncontrolled usage when the state isn't needed.\n\nUse value='indeterminate' for partial selection states (e.g. select-all with mixed children).\n\nUse RadioList when only one option from a group can be selected.\n\nUse Switch for binary settings that take immediate effect rather than form submission.\n\nExposed variant properties:\n\nsize: default\n\nemphasis: default\n\nvalue: unchecked, checked, indeterminate\n\nstatus: default, error\n\nstate: default, hover, active, focus, disabled\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nRead-only shares default appearance and blocks interaction in code; error state keeps the source red border.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Checkbox/Checkbox.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Checkbox/controls-002",
@@ -101869,7 +102048,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A binary form input for toggling a boolean value.\n\nSupports checked, unchecked, and indeterminate states.\n\nUse in forms where multiple independent options can be selected.\n\nAlways pair with a Label component for accessibility \u2014 connect them via matching id and htmlFor props, or use aria-labelledby. onChange receives the click event, not the new checked state (there is no onCheckedChange): to read or react to the state, control it with value plus your own state, e.g. const [checked, setChecked] = useState<boolean | 'indeterminate'>(false) and onChange={() => setChecked((previous) => previous !== true)}.\n\nUse defaultValue for uncontrolled usage when the state isn't needed.\n\nUse value='indeterminate' for partial selection states (e.g. select-all with mixed children).\n\nUse RadioList when only one option from a group can be selected.\n\nUse Switch for binary settings that take immediate effect rather than form submission.\n\nExposed variant properties:\n\nsize: default\n\nemphasis: weak\n\nvalue: unchecked, checked, indeterminate\n\nstatus: default, error\n\nstate: default, hover, active, focus, disabled\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nRead-only shares default appearance and blocks interaction in code; error state keeps the source red border.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Checkbox/Checkbox.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Checkbox/controls-003",
@@ -103142,7 +103322,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A binary form input for toggling a boolean value.\n\nSupports checked, unchecked, and indeterminate states.\n\nUse in forms where multiple independent options can be selected.\n\nAlways pair with a Label component for accessibility \u2014 connect them via matching id and htmlFor props, or use aria-labelledby. onChange receives the click event, not the new checked state (there is no onCheckedChange): to read or react to the state, control it with value plus your own state, e.g. const [checked, setChecked] = useState<boolean | 'indeterminate'>(false) and onChange={() => setChecked((previous) => previous !== true)}.\n\nUse defaultValue for uncontrolled usage when the state isn't needed.\n\nUse value='indeterminate' for partial selection states (e.g. select-all with mixed children).\n\nUse RadioList when only one option from a group can be selected.\n\nUse Switch for binary settings that take immediate effect rather than form submission.\n\nExposed variant properties:\n\nsize: large\n\nemphasis: default\n\nvalue: unchecked, checked, indeterminate\n\nstatus: default, error\n\nstate: default, hover, active, focus, disabled\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nRead-only shares default appearance and blocks interaction in code; error state keeps the source red border.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Checkbox/Checkbox.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Checkbox/controls-004",
@@ -104415,7 +104596,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A binary form input for toggling a boolean value.\n\nSupports checked, unchecked, and indeterminate states.\n\nUse in forms where multiple independent options can be selected.\n\nAlways pair with a Label component for accessibility \u2014 connect them via matching id and htmlFor props, or use aria-labelledby. onChange receives the click event, not the new checked state (there is no onCheckedChange): to read or react to the state, control it with value plus your own state, e.g. const [checked, setChecked] = useState<boolean | 'indeterminate'>(false) and onChange={() => setChecked((previous) => previous !== true)}.\n\nUse defaultValue for uncontrolled usage when the state isn't needed.\n\nUse value='indeterminate' for partial selection states (e.g. select-all with mixed children).\n\nUse RadioList when only one option from a group can be selected.\n\nUse Switch for binary settings that take immediate effect rather than form submission.\n\nExposed variant properties:\n\nsize: large\n\nemphasis: weak\n\nvalue: unchecked, checked, indeterminate\n\nstatus: default, error\n\nstate: default, hover, active, focus, disabled\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nRead-only shares default appearance and blocks interaction in code; error state keeps the source red border.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Checkbox/Checkbox.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/RadioList/controls-001",
@@ -112539,7 +112721,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A single-line text input field for collecting short text values.\n\nUse for names, emails, URLs, search queries, and other single-line form inputs.\n\nUse the simple TextInput for basic inputs, or compose TextInput.Root > TextInput.Slot for inputs with icon or button decorators.\n\nTextInput.Slot accepts name='left' or 'right'.\n\nUse status prop ('success', 'error', 'loading') to communicate validation state.\n\nAlways pair with a Label for accessibility.\n\nUse Textarea for multi-line input.\n\nExposed variant properties:\n\nstatus: neutral\n\nmode: default, hover, focus, disabled\n\ncontent: value, placeholder\n\nslots: none, left, right, both\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nHidden input types have no canvas asset.\n\nEmail/number/password/search/tel/time/url differ in browser semantics and text content; edit the text property.\n\nLoading is a native icon snapshot rather than animation.\n\nReviewed profile contract: all enum values have native examples, but the full cross-product is not imported.\n\nEvery status/mode at baseline text/no slots; every slot/content combination at neutral/default.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/TextInput/TextInput.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/TextInput/controls-002",
@@ -113159,7 +113342,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A single-line text input field for collecting short text values.\n\nUse for names, emails, URLs, search queries, and other single-line form inputs.\n\nUse the simple TextInput for basic inputs, or compose TextInput.Root > TextInput.Slot for inputs with icon or button decorators.\n\nTextInput.Slot accepts name='left' or 'right'.\n\nUse status prop ('success', 'error', 'loading') to communicate validation state.\n\nAlways pair with a Label for accessibility.\n\nUse Textarea for multi-line input.\n\nExposed variant properties:\n\nstatus: success, error\n\nmode: disabled, read-only, default, hover\n\ncontent: value\n\nslots: none\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nHidden input types have no canvas asset.\n\nEmail/number/password/search/tel/time/url differ in browser semantics and text content; edit the text property.\n\nLoading is a native icon snapshot rather than animation.\n\nReviewed profile contract: all enum values have native examples, but the full cross-product is not imported.\n\nEvery status/mode at baseline text/no slots; every slot/content combination at neutral/default.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/TextInput/TextInput.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/TextInput/controls-004",
@@ -115639,7 +115823,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A multi-line text input for collecting longer text content such as descriptions, comments, or messages.\n\nUse autosize to automatically grow the height as the user types.\n\nUse minRows to set the minimum visible height.\n\nUse Textarea.Root > Textarea.Slot for adding icon or action decorators on the left or right.\n\nUse TextInput for single-line input.\n\nUse EditableText for inline editing without a visible input border.\n\nExposed variant properties:\n\nstatus: default\n\nmode: default, hover\n\ncontent: value, placeholder\n\nclearable: false, true\n\nslots: none, left, right, both\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nNative height can be resized to match minRows/maxRows; autosize is runtime text measurement.\n\nExtra actions/decorators are exposed native icon slots.\n\nLoading is a native icon snapshot rather than animation.\n\nReviewed profile contract: all enum values have native examples, but the full cross-product is not imported.\n\nEvery status/mode at baseline text/no slots/clearable=false; every slot/content/clearable combination at default/default.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Textarea/Textarea.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Textarea/controls-002",
@@ -120931,7 +121116,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "An interactive chip label for representing metadata, filters, or user-selected values.\n\nUse when labels need to be removable, addable, or carry secondary content.\n\nProvide onDismiss to show a dismiss (\xD7) button.\n\nProvide onAddClick to show an add (+) button.\n\nUse Tag.SecondaryContent for additional metadata displayed within the tag (can appear before or after main content).\n\nUse Tag.HoverContent to replace the tag's content with alternative content on hover.\n\nExposed variant properties:\n\nvariant: default, highlight\n\nemphasis: strong, weak\n\nsize: default, small\n\nstate: default, hover\n\ncontent: main, hover\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nMain/secondary content text and add/dismiss visibility are native properties; mixed per-action hover is an editable fill override.\n\nForced-colors media rendering remains in CSS.\n\nSource-data gap: states referring to absent released color tokens are omitted.\n\nBrowser verification proves their computed color inherits arbitrary consumer context.\n\nSee docs/source-token-defects.md and control-coverage.json.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Tag/Tag.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Tag/controls-002",
@@ -122869,7 +123055,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "An interactive chip label for representing metadata, filters, or user-selected values.\n\nUse when labels need to be removable, addable, or carry secondary content.\n\nProvide onDismiss to show a dismiss (\xD7) button.\n\nProvide onAddClick to show an add (+) button.\n\nUse Tag.SecondaryContent for additional metadata displayed within the tag (can appear before or after main content).\n\nUse Tag.HoverContent to replace the tag's content with alternative content on hover.\n\nExposed variant properties:\n\nvariant: highlight\n\nemphasis: strong, weak\n\nsize: small, default\n\nstate: default, hover\n\ncontent: main, hover\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nMain/secondary content text and add/dismiss visibility are native properties; mixed per-action hover is an editable fill override.\n\nForced-colors media rendering remains in CSS.\n\nSource-data gap: states referring to absent released color tokens are omitted.\n\nBrowser verification proves their computed color inherits arbitrary consumer context.\n\nSee docs/source-token-defects.md and control-coverage.json.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Tag/Tag.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Link/controls-001",
@@ -159670,7 +159857,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "An inline alert banner for displaying feedback messages such as errors, warnings, success confirmations, or informational notices.\n\nUse to keep users informed without interrupting their workflow by presenting clear, accessible feedback that stays visible until acknowledged.\n\nUse variant to set intent (default, highlight, positive, danger, warning).\n\nUse emphasis='strong' for high-visibility banners and 'weak' for subtle inline notices.\n\nProvide an icon ReactNode to add a leading icon.\n\nProvide an action ReactNode (typically a Button) for actionable notices.\n\nProvide onDismiss to show a dismiss button.\n\nSet role='alert' for errors that need immediate attention (e.g. a failed action the user just triggered); the default role='status' announces politely.\n\nChildren is the message content.\n\nExposed variant properties:\n\nvariant: default, highlight, positive\n\nemphasis: default, strong, weak\n\nsize: medium, large\n\nalignContent: center, top\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nMessage/action text and leading/dismiss icon visibility are native properties.\n\nArbitrary custom React action content is composed with the other native control assets.\n\nForced-colors media rendering remains in CSS.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Notice/Notice.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Notice/controls-002",
@@ -163159,7 +163347,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "An inline alert banner for displaying feedback messages such as errors, warnings, success confirmations, or informational notices.\n\nUse to keep users informed without interrupting their workflow by presenting clear, accessible feedback that stays visible until acknowledged.\n\nUse variant to set intent (default, highlight, positive, danger, warning).\n\nUse emphasis='strong' for high-visibility banners and 'weak' for subtle inline notices.\n\nProvide an icon ReactNode to add a leading icon.\n\nProvide an action ReactNode (typically a Button) for actionable notices.\n\nProvide onDismiss to show a dismiss button.\n\nSet role='alert' for errors that need immediate attention (e.g. a failed action the user just triggered); the default role='status' announces politely.\n\nChildren is the message content.\n\nExposed variant properties:\n\nvariant: positive, danger, warning\n\nemphasis: strong, weak, default\n\nsize: large, medium\n\nalignContent: center, top\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nMessage/action text and leading/dismiss icon visibility are native properties.\n\nArbitrary custom React action content is composed with the other native control assets.\n\nForced-colors media rendering remains in CSS.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Notice/Notice.metadata.json"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Accordion",
@@ -165645,7 +165834,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: 'A set of collapsible sections where each item can be independently expanded or collapsed.\n\nUse when you need to organize large amounts of information into digestible sections, conserving space and improve scannability.\n\nAlways compose as Accordion.Root > Accordion.Item > Accordion.Header + Accordion.Content.\n\nEach Accordion.Item requires a unique string value prop.\n\nUse Accordion.Slot with name="action" inside Accordion.Header to place action buttons (e.g. edit/delete) on the right side of the header.\n\nUse Accordion.Slot without a name for badge-style secondary content.\n\nAdd divider prop to Accordion.Content to show a separator between header and content if necessary based on the layout needs.\n\nExposed variant properties:\n\nvariant: default\n\nborder: true\n\npadding: none, small, medium, large\n\nvalue: , details\n\ndisabled: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nSingle-item composition; sticky positioning is provided as a separate source-context set.\n\nHeader/Slot children are editable composition.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Accordion/Accordion.tsx'
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Accordion.borderless",
@@ -167747,7 +167937,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: 'A set of collapsible sections where each item can be independently expanded or collapsed.\n\nUse when you need to organize large amounts of information into digestible sections, conserving space and improve scannability.\n\nAlways compose as Accordion.Root > Accordion.Item > Accordion.Header + Accordion.Content.\n\nEach Accordion.Item requires a unique string value prop.\n\nUse Accordion.Slot with name="action" inside Accordion.Header to place action buttons (e.g. edit/delete) on the right side of the header.\n\nUse Accordion.Slot without a name for badge-style secondary content.\n\nAdd divider prop to Accordion.Content to show a separator between header and content if necessary based on the layout needs.\n\nExposed variant properties:\n\nvariant: default\n\nborder: false\n\npadding: none, small, medium, large\n\nvalue: , details\n\ndisabled: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nSingle-item composition; sticky positioning is provided as a separate source-context set.\n\nHeader/Slot children are editable composition.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Accordion/Accordion.tsx'
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Accordion.pill",
@@ -169865,7 +170056,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: 'A set of collapsible sections where each item can be independently expanded or collapsed.\n\nUse when you need to organize large amounts of information into digestible sections, conserving space and improve scannability.\n\nAlways compose as Accordion.Root > Accordion.Item > Accordion.Header + Accordion.Content.\n\nEach Accordion.Item requires a unique string value prop.\n\nUse Accordion.Slot with name="action" inside Accordion.Header to place action buttons (e.g. edit/delete) on the right side of the header.\n\nUse Accordion.Slot without a name for badge-style secondary content.\n\nAdd divider prop to Accordion.Content to show a separator between header and content if necessary based on the layout needs.\n\nExposed variant properties:\n\nvariant: pill\n\nborder: false\n\npadding: none, small, medium, large\n\nvalue: , details\n\ndisabled: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nSingle-item composition; sticky positioning is provided as a separate source-context set.\n\nHeader/Slot children are editable composition.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Accordion/Accordion.tsx'
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Accordion.Content",
@@ -172491,7 +172683,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: 'A set of collapsible sections where each item can be independently expanded or collapsed.\n\nUse when you need to organize large amounts of information into digestible sections, conserving space and improve scannability.\n\nAlways compose as Accordion.Root > Accordion.Item > Accordion.Header + Accordion.Content.\n\nEach Accordion.Item requires a unique string value prop.\n\nUse Accordion.Slot with name="action" inside Accordion.Header to place action buttons (e.g. edit/delete) on the right side of the header.\n\nUse Accordion.Slot without a name for badge-style secondary content.\n\nAdd divider prop to Accordion.Content to show a separator between header and content if necessary based on the layout needs.\n\nExposed variant properties:\n\nvariant: default, pill\n\npadding: none, small, medium, large\n\nvalue: , details\n\nsticky: true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nNative static header visual is represented; CSS position:sticky and data-stuck shadow depend on a scrolling viewport.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Accordion/Accordion.tsx'
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Card",
@@ -191693,7 +191886,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A contextual action menu that opens relative to a trigger element.\n\nUse for lists of actions or navigation options that don't require value selection.\n\nCompose as Dropdown.Root > Dropdown.Trigger + Dropdown.Content > Dropdown.Item.\n\nUse Dropdown.Group to group related items \u2014 provide a heading prop for labeled groups.\n\nUse Dropdown.SubMenu > Dropdown.SubTrigger + Dropdown.SubContent for nested menus.\n\nUse Dropdown.Slot with name='left' or 'right' inside Dropdown.Item to add icon decorators.\n\nUse Dropdown.Shortcut inside Dropdown.Item to display the keyboard shortcut for actions that have one (e.g. 'K + E', '\u2318 + N') and set aria-keyshortcuts on the matching Dropdown.Item; register the actual key listener in the consuming app.\n\nUse emphasis='danger' on Dropdown.Item for destructive actions.\n\nUse Select instead when users need to pick a value from a list.\n\nExposed variant properties:\n\nemphasis: default, danger\n\ndisabled: false, true\n\nstate: default, hover, active\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. state is CSS interaction state; arbitrary Item children/asChild content remain editable composition.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Dropdown/Dropdown.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Dropdown.SubTrigger",
@@ -192825,7 +193019,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A dropdown for selecting a single value from a list of options.\n\nUse Select.Combobox for searchable/filterable selection, and Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nUse Select for simple single-value selection.\n\nUse Select.Combobox when users need to search or filter the options list.\n\nUse Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nPlace Select.Item (and Select.Group) inside <Select.Slot name='menu'>.\n\nItems may be passed as direct children only when no other Select.Slot is used; as soon as you add a decorator (Select.Slot name='left' or 'right') or a clear button (Select.Slot name='clear'), direct-child items are ignored, so always wrapping them in the menu slot is the safe default.\n\nGroup options with Select.Group. onSelect on Select and Select.Combobox receives the selected value, or null when the selection is cleared; on the Multiple variants it receives the array of selected values.\n\nUse Dropdown instead when items trigger actions rather than selecting a value.\n\nUse indeterminateValues on Select.Multiple or Select.Combobox.Multiple when editing several records at once and an option applies to some of them but not all.\n\nThose options render a dash instead of a checkmark and the trigger gains a '2 mixed' badge next to the selection badges.\n\nIndeterminate values are purely visual and are never reported by onSelect.\n\nToggling an indeterminate item: clicking it sets it to selected and it is reported in the array passed to onSelect.\n\nClicking it again removes the selected state and it is omitted from the array passed to onSelect.\n\nImportant: the consumer must remove the value from indeterminateValues themselves once it has been selected, otherwise it shows as indeterminate instead of unselected after being deselected.\n\nExposed variant properties:\n\ndisabled: false, true\n\nstatus: default, success, error\n\nvalue: , brand-assets\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. value values are representative single selections; Multiple uses corresponding string-array values in React.\n\nOpen list, loading/filtering, all arbitrary child/slot combinations and overflow badges need further composition.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Select/SelectSingle.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Select.Multiple",
@@ -194344,7 +194539,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A dropdown for selecting a single value from a list of options.\n\nUse Select.Combobox for searchable/filterable selection, and Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nUse Select for simple single-value selection.\n\nUse Select.Combobox when users need to search or filter the options list.\n\nUse Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nPlace Select.Item (and Select.Group) inside <Select.Slot name='menu'>.\n\nItems may be passed as direct children only when no other Select.Slot is used; as soon as you add a decorator (Select.Slot name='left' or 'right') or a clear button (Select.Slot name='clear'), direct-child items are ignored, so always wrapping them in the menu slot is the safe default.\n\nGroup options with Select.Group. onSelect on Select and Select.Combobox receives the selected value, or null when the selection is cleared; on the Multiple variants it receives the array of selected values.\n\nUse Dropdown instead when items trigger actions rather than selecting a value.\n\nUse indeterminateValues on Select.Multiple or Select.Combobox.Multiple when editing several records at once and an option applies to some of them but not all.\n\nThose options render a dash instead of a checkmark and the trigger gains a '2 mixed' badge next to the selection badges.\n\nIndeterminate values are purely visual and are never reported by onSelect.\n\nToggling an indeterminate item: clicking it sets it to selected and it is reported in the array passed to onSelect.\n\nClicking it again removes the selected state and it is omitted from the array passed to onSelect.\n\nImportant: the consumer must remove the value from indeterminateValues themselves once it has been selected, otherwise it shows as indeterminate instead of unselected after being deselected.\n\nExposed variant properties:\n\ndisabled: false, true\n\nstatus: default, success, error\n\nvalue: , brand-assets\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. value values are representative single selections; Multiple uses corresponding string-array values in React.\n\nOpen list, loading/filtering, all arbitrary child/slot combinations and overflow badges need further composition.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Select/SelectSingle.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Select.Combobox",
@@ -195251,7 +195447,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A dropdown for selecting a single value from a list of options.\n\nUse Select.Combobox for searchable/filterable selection, and Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nUse Select for simple single-value selection.\n\nUse Select.Combobox when users need to search or filter the options list.\n\nUse Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nPlace Select.Item (and Select.Group) inside <Select.Slot name='menu'>.\n\nItems may be passed as direct children only when no other Select.Slot is used; as soon as you add a decorator (Select.Slot name='left' or 'right') or a clear button (Select.Slot name='clear'), direct-child items are ignored, so always wrapping them in the menu slot is the safe default.\n\nGroup options with Select.Group. onSelect on Select and Select.Combobox receives the selected value, or null when the selection is cleared; on the Multiple variants it receives the array of selected values.\n\nUse Dropdown instead when items trigger actions rather than selecting a value.\n\nUse indeterminateValues on Select.Multiple or Select.Combobox.Multiple when editing several records at once and an option applies to some of them but not all.\n\nThose options render a dash instead of a checkmark and the trigger gains a '2 mixed' badge next to the selection badges.\n\nIndeterminate values are purely visual and are never reported by onSelect.\n\nToggling an indeterminate item: clicking it sets it to selected and it is reported in the array passed to onSelect.\n\nClicking it again removes the selected state and it is omitted from the array passed to onSelect.\n\nImportant: the consumer must remove the value from indeterminateValues themselves once it has been selected, otherwise it shows as indeterminate instead of unselected after being deselected.\n\nExposed variant properties:\n\ndisabled: false, true\n\nstatus: default, success, error\n\nvalue: , brand-assets\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. value values are representative single selections; Multiple uses corresponding string-array values in React.\n\nOpen list, loading/filtering, all arbitrary child/slot combinations and overflow badges need further composition.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Select/SelectSingle.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Select.Item",
@@ -195580,7 +195777,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A dropdown for selecting a single value from a list of options.\n\nUse Select.Combobox for searchable/filterable selection, and Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nUse Select for simple single-value selection.\n\nUse Select.Combobox when users need to search or filter the options list.\n\nUse Select.Multiple or Select.Combobox.Multiple for multi-value selection.\n\nPlace Select.Item (and Select.Group) inside <Select.Slot name='menu'>.\n\nItems may be passed as direct children only when no other Select.Slot is used; as soon as you add a decorator (Select.Slot name='left' or 'right') or a clear button (Select.Slot name='clear'), direct-child items are ignored, so always wrapping them in the menu slot is the safe default.\n\nGroup options with Select.Group. onSelect on Select and Select.Combobox receives the selected value, or null when the selection is cleared; on the Multiple variants it receives the array of selected values.\n\nUse Dropdown instead when items trigger actions rather than selecting a value.\n\nUse indeterminateValues on Select.Multiple or Select.Combobox.Multiple when editing several records at once and an option applies to some of them but not all.\n\nThose options render a dash instead of a checkmark and the trigger gains a '2 mixed' badge next to the selection badges.\n\nIndeterminate values are purely visual and are never reported by onSelect.\n\nToggling an indeterminate item: clicking it sets it to selected and it is reported in the array passed to onSelect.\n\nClicking it again removes the selected state and it is omitted from the array passed to onSelect.\n\nImportant: the consumer must remove the value from indeterminateValues themselves once it has been selected, otherwise it shows as indeterminate instead of unselected after being deselected.\n\nExposed variant properties:\n\nstate: default, highlighted, active, selected, indeterminate\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. state is derived from list selection; public Item props are value/label/children.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Select/SelectSingle.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Select.Group",
@@ -202678,7 +202876,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.\n\nCompose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.\n\nExposed variant properties:\n\nsortDirection: none, ascending, descending\n\nstate: idle, loading\n\nalign: left, center, right\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. none represents undefined sortDirection.\n\nLoading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.\n\nSortable trigger semantics need onSortChange in React.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Table.RowCell",
@@ -207190,7 +207389,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A tabbed navigation component that switches between associated content panels.\n\nUse when content is divided into distinct sections that users switch between without leaving the page.\n\nCompose as Tabs.Root > Tabs.Tab (one per tab).\n\nEach Tabs.Tab contains a Tabs.Trigger (the tab label) and a Tabs.Content (the panel).\n\nEach Tabs.Tab requires a unique value prop.\n\nUse defaultActiveTab for uncontrolled or activeTab + onActiveTabChange for controlled.\n\nUse variant='pill' with withDivider=true when placing tabs inside a Dialog or other contained surface.\n\nUse SegmentedControl for view-mode toggles that don't show a content panel below.\n\nExposed variant properties:\n\nvariant: default, pill\n\nsize: medium, large\n\nactiveTab: overview, assets\n\npadding: none, comfortable\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. withDivider variants and tight/compact/spacious padding are supplied as separate Content parts or remain consumer composition.\n\nOverflow trigger list scrolling and cross-fade transition are runtime behavior.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Tabs/Tabs.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Tabs.Trigger",
@@ -211043,7 +211243,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A hierarchical list of items and nested folders.\n\nSupports keyboard navigation, single-select with a highlighted row or multi-select with cascading folder checkboxes (folders without loaded children are checkable as their own entity), optional drag-and-drop reordering, inline renaming, and async loading rows.\n\nCompose with Tree.Root wrapping Tree.Item leaves and Tree.Folder nodes.\n\nEach row needs a stable `id` and declares its content via anatomy parts: <Tree.Label> (plain text, required) plus optional <Tree.Icon> (rows render no icon otherwise), <Tree.Decorator> for passive badges/status icons hugging the label text (clicks bubble to the row; hidden while renaming), and <Tree.Action> for trailing controls (overflow menu, edit/delete; clicks do not bubble to the row).\n\nFor items the parts are direct children; for folders they go inside <Tree.FolderHeader>, and every other folder child is a nested row.\n\nRender <Tree.Loading> as a child of a folder (or of Tree.Root for the top-level slot) to show a translated 'Loading\u2026' row while async content is fetched.\n\nPass `multiSelect` for cascading checkboxes and `reorderable` to enable drag-and-drop; gate drops with an `accepts` predicate on Tree.Root or Tree.Folder, and tag draggable rows via the `tags` prop so the predicate can match by category instead of identity.\n\nState is controlled: render from the latest `TreeChangeState` and persist it from `onChange`. `isSelected` is the unified selection prop \u2014 with `multiSelect` it checks the row's checkbox, without `multiSelect` it highlights the row, and either mode emits the updated flag via `onChange`.\n\nIn `multiSelect`, a folder with children derives its checkbox from its contents and ignores its own `isSelected`; a folder with no loaded children (empty, or collapsed while lazy-loading) is instead checkable as its own entity \u2014 `isSelected` is honored, `onSelectChange` fires on the folder, and it counts as one unit toward ancestor states.\n\nWhen the children of a checked folder load later, the consumer has to carry the selected state over to the new items by passing `isSelected` to all of them.\n\nInline renaming is controlled too: provide `onRename` and flip `isRenaming` (e.g. from a Tree.Action menu) to swap the label for a text input \u2014 Enter or blur commits (firing `onRename` and `onChange` with the new name), Escape cancels, and `onRenamingChange(false)` signals the consumer to clear its flag.\n\nPer-item `onSelectChange`, `onExpandChange`, and `onMove` callbacks are fanned out from the global `onChange` when individual rows need to react to their own state changing.\n\nExposed variant properties:\n\nmultiSelect: false, true\n\nreorderable: false, true\n\nisExpanded: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. isExpanded belongs to Folder; root sample preserves hierarchy.\n\nHeadless-tree event/state controller, dragline placement and async expansion are runtime behavior.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Tree/Tree.ts"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Tree.Item",
@@ -213037,7 +213238,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A hierarchical list of items and nested folders.\n\nSupports keyboard navigation, single-select with a highlighted row or multi-select with cascading folder checkboxes (folders without loaded children are checkable as their own entity), optional drag-and-drop reordering, inline renaming, and async loading rows.\n\nCompose with Tree.Root wrapping Tree.Item leaves and Tree.Folder nodes.\n\nEach row needs a stable `id` and declares its content via anatomy parts: <Tree.Label> (plain text, required) plus optional <Tree.Icon> (rows render no icon otherwise), <Tree.Decorator> for passive badges/status icons hugging the label text (clicks bubble to the row; hidden while renaming), and <Tree.Action> for trailing controls (overflow menu, edit/delete; clicks do not bubble to the row).\n\nFor items the parts are direct children; for folders they go inside <Tree.FolderHeader>, and every other folder child is a nested row.\n\nRender <Tree.Loading> as a child of a folder (or of Tree.Root for the top-level slot) to show a translated 'Loading\u2026' row while async content is fetched.\n\nPass `multiSelect` for cascading checkboxes and `reorderable` to enable drag-and-drop; gate drops with an `accepts` predicate on Tree.Root or Tree.Folder, and tag draggable rows via the `tags` prop so the predicate can match by category instead of identity.\n\nState is controlled: render from the latest `TreeChangeState` and persist it from `onChange`. `isSelected` is the unified selection prop \u2014 with `multiSelect` it checks the row's checkbox, without `multiSelect` it highlights the row, and either mode emits the updated flag via `onChange`.\n\nIn `multiSelect`, a folder with children derives its checkbox from its contents and ignores its own `isSelected`; a folder with no loaded children (empty, or collapsed while lazy-loading) is instead checkable as its own entity \u2014 `isSelected` is honored, `onSelectChange` fires on the folder, and it counts as one unit toward ancestor states.\n\nWhen the children of a checked folder load later, the consumer has to carry the selected state over to the new items by passing `isSelected` to all of them.\n\nInline renaming is controlled too: provide `onRename` and flip `isRenaming` (e.g. from a Tree.Action menu) to swap the label for a text input \u2014 Enter or blur commits (firing `onRename` and `onChange` with the new name), Escape cancels, and `onRenamingChange(false)` signals the consumer to clear its flag.\n\nPer-item `onSelectChange`, `onExpandChange`, and `onMove` callbacks are fanned out from the global `onChange` when individual rows need to react to their own state changing.\n\nExposed variant properties:\n\nisSelected: false, true, indeterminate\n\nisDisabled: false, true\n\nisRenaming: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nRename sample uses editable text; confirmation and automatic focus remain runtime.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Tree/Tree.ts"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Tree.Folder",
@@ -214719,7 +214921,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A hierarchical list of items and nested folders.\n\nSupports keyboard navigation, single-select with a highlighted row or multi-select with cascading folder checkboxes (folders without loaded children are checkable as their own entity), optional drag-and-drop reordering, inline renaming, and async loading rows.\n\nCompose with Tree.Root wrapping Tree.Item leaves and Tree.Folder nodes.\n\nEach row needs a stable `id` and declares its content via anatomy parts: <Tree.Label> (plain text, required) plus optional <Tree.Icon> (rows render no icon otherwise), <Tree.Decorator> for passive badges/status icons hugging the label text (clicks bubble to the row; hidden while renaming), and <Tree.Action> for trailing controls (overflow menu, edit/delete; clicks do not bubble to the row).\n\nFor items the parts are direct children; for folders they go inside <Tree.FolderHeader>, and every other folder child is a nested row.\n\nRender <Tree.Loading> as a child of a folder (or of Tree.Root for the top-level slot) to show a translated 'Loading\u2026' row while async content is fetched.\n\nPass `multiSelect` for cascading checkboxes and `reorderable` to enable drag-and-drop; gate drops with an `accepts` predicate on Tree.Root or Tree.Folder, and tag draggable rows via the `tags` prop so the predicate can match by category instead of identity.\n\nState is controlled: render from the latest `TreeChangeState` and persist it from `onChange`. `isSelected` is the unified selection prop \u2014 with `multiSelect` it checks the row's checkbox, without `multiSelect` it highlights the row, and either mode emits the updated flag via `onChange`.\n\nIn `multiSelect`, a folder with children derives its checkbox from its contents and ignores its own `isSelected`; a folder with no loaded children (empty, or collapsed while lazy-loading) is instead checkable as its own entity \u2014 `isSelected` is honored, `onSelectChange` fires on the folder, and it counts as one unit toward ancestor states.\n\nWhen the children of a checked folder load later, the consumer has to carry the selected state over to the new items by passing `isSelected` to all of them.\n\nInline renaming is controlled too: provide `onRename` and flip `isRenaming` (e.g. from a Tree.Action menu) to swap the label for a text input \u2014 Enter or blur commits (firing `onRename` and `onChange` with the new name), Escape cancels, and `onRenamingChange(false)` signals the consumer to clear its flag.\n\nPer-item `onSelectChange`, `onExpandChange`, and `onMove` callbacks are fanned out from the global `onChange` when individual rows need to react to their own state changing.\n\nExposed variant properties:\n\nisExpanded: false, true\n\nisSelected: false, true, indeterminate\n\nisDisabled: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nSelection cascade is represented visually; actual descendants derive state in React.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Tree/Tree.ts"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/OrderableList",
@@ -219896,7 +220099,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A compound input for selecting, uploading and displaying assets.\n\nUse AssetInput.Placeholder for the empty state, composing AssetInput.UploadInput and/or AssetInput.BrowseInput.\n\nUse AssetInput.Root for the filled state, composing AssetInput.Preview (with one or more AssetInput.PreviewImage/AssetInput.PreviewIcon/AssetInput.PreviewLoading), AssetInput.Title, and AssetInput.Metadata wrapping one or more AssetInput.MetadataItem entries.\n\nControl the open state with isOpen and onPress on AssetInput.Root, typically to toggle an attached Dropdown for asset operations.\n\nExposed variant properties:\n\norientation: horizontal, vertical\n\nisOpen: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nPreview uses native document icon slot; arbitrary image URLs, multiple-preview grids and PreviewLoading still need content-specific recipes.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/AssetInput/AssetInput.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/AssetInput.Placeholder",
@@ -232422,7 +232626,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A date or date range picker with a calendar panel.\n\nUse when the user needs to select a specific date or date range.\n\nDatePicker does not include its own trigger or popover \u2014 combine DatePicker.Input as the Flyout.Trigger and DatePicker (or DatePicker.Range) inside Flyout.Content for the standard pattern.\n\nDates are represented as plain objects { year, month, day } \u2014 not JS Date objects.\n\nUse DatePicker.Range for range selection.\n\nPass disabledDates to grey out individual days.\n\nPass minMonth and/or maxMonth to bound month navigation \u2014 the previous/next-month controls disable once the bound month is reached.\n\nExposed variant properties:\n\ndisabled: false, true\n\nisOpen: false, true\n\nselected: , 2026-10-30\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nFormatting is English sample; clear/change callbacks remain runtime.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/DatePicker/DatePicker.ts"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/DatePicker.Day",
@@ -233544,7 +233749,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A color selection panel with gradient canvas and hex/RGBA value inputs.\n\nUse when users need to pick or enter an exact color value.\n\nThe picker panel (ColorPicker.Root with ColorPicker.Gradient and/or ColorPicker.Values) does not include its own popover \u2014 wrap it in a Flyout for the standard trigger-and-panel pattern.\n\nUse ColorPicker.Input as the Flyout trigger to display the selected color.\n\nColors are represented as RgbaColor objects ({ red, green, blue, alpha, name? }).\n\nUse currentFormat and onFormatChange to control HEX vs RGBA display.\n\nExposed variant properties:\n\ncurrentFormat: HEX, RGBA\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. react-colorful dependency default geometry is represented as a red-color specimen; dynamic color-coordinate conversion and checkerboard alpha remain partial.\n\nResponsive value-input wrap below312px is not represented by these desktop compositions.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/ColorPicker/ColorPicker.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/ColorPicker.Values",
@@ -234045,7 +234251,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A color selection panel with gradient canvas and hex/RGBA value inputs.\n\nUse when users need to pick or enter an exact color value.\n\nThe picker panel (ColorPicker.Root with ColorPicker.Gradient and/or ColorPicker.Values) does not include its own popover \u2014 wrap it in a Flyout for the standard trigger-and-panel pattern.\n\nUse ColorPicker.Input as the Flyout trigger to display the selected color.\n\nColors are represented as RgbaColor objects ({ red, green, blue, alpha, name? }).\n\nUse currentFormat and onFormatChange to control HEX vs RGBA display.\n\nExposed variant properties:\n\ncurrentFormat: HEX, RGBA\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nInput validation, number limits and responsive wrapping remain runtime behavior.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/ColorPicker/ColorPicker.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/ColorPicker.Input",
@@ -234744,7 +234951,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A color selection panel with gradient canvas and hex/RGBA value inputs.\n\nUse when users need to pick or enter an exact color value.\n\nThe picker panel (ColorPicker.Root with ColorPicker.Gradient and/or ColorPicker.Values) does not include its own popover \u2014 wrap it in a Flyout for the standard trigger-and-panel pattern.\n\nUse ColorPicker.Input as the Flyout trigger to display the selected color.\n\nColors are represented as RgbaColor objects ({ red, green, blue, alpha, name? }).\n\nUse currentFormat and onFormatChange to control HEX vs RGBA display.\n\nExposed variant properties:\n\ndisabled: false, true\n\nisOpen: false, true\n\ncurrentColor: empty, red\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. currentColor strings are design specimens of RgbaColor object values; arbitrary color value binding needs exporter mapping.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/ColorPicker/ColorPicker.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "components/Tooltip",
@@ -251587,7 +251795,8 @@ Sources: ${recipe.source.join(", ")}`;
             }
           ],
           description: "A compound input for selecting, uploading and displaying assets.\n\nUse AssetInput.Placeholder for the empty state, composing AssetInput.UploadInput and/or AssetInput.BrowseInput.\n\nUse AssetInput.Root for the filled state, composing AssetInput.Preview (with one or more AssetInput.PreviewImage/AssetInput.PreviewIcon/AssetInput.PreviewLoading), AssetInput.Title, and AssetInput.Metadata wrapping one or more AssetInput.MetadataItem entries.\n\nControl the open state with isOpen and onPress on AssetInput.Root, typically to toggle an attached Dropdown for asset operations.\n\nExposed variant properties:\n\norientation: horizontal, vertical\n\nisOpen: false, true\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nThis separate recipe composes the released AssetInput.Root+Preview+PreviewImage; existing PDF/icon AssetInput recipes are retained. orientation and isOpen are actual Root props.\n\nSingle-image preview uses object-fit:contain at 56px horizontal or 128px vertical.\n\nRoot width 360/280 is a documented sample container; vertical title/caret row 48px derives from the 16px caret and 16px padding.\n\nTwo-to-four-part image grids, loading states, missing-title/metadata layouts and text ellipsis are not enumerated here; arbitrary image URLs and onPress behavior stay in code.\n\nImages are approved local example fixtures, not a screenshot of a component or page.\n\nReplace the image fill for application content.\n\nNative variants are static; source image loading, alternative-text accessibility, DOM sizing and browser events still require application/runtime verification.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/AssetInput/AssetInput.tsx"
-        }
+        },
+        componentPropertyPolicy: 2
       },
       {
         id: "patterns/ProductionNavigationRail",
@@ -272196,7 +272405,8 @@ Sources: ${recipe.source.join(", ")}`;
               }
             }
           }
-        ]
+        ],
+        componentPropertyPolicy: 2
       },
       {
         id: "patterns/ProductionAccountSettingsDrawer",
@@ -281401,7 +281611,8 @@ Sources: ${recipe.source.join(", ")}`;
               }
             }
           }
-        ]
+        ],
+        componentPropertyPolicy: 2
       },
       {
         id: "patterns/ProductionAgenticHubContent",
@@ -281785,10 +281996,10 @@ Sources: ${recipe.source.join(", ")}`;
                               id: "automation-pill",
                               kind: "frame",
                               name: "automation-pill",
-                              layout: "VERTICAL",
+                              layout: "HORIZONTAL",
                               padding: 0,
                               gap: 0,
-                              counterAlign: "MIN",
+                              counterAlign: "CENTER",
                               primaryAlign: "MIN",
                               children: [
                                 {
@@ -281826,11 +282037,10 @@ Sources: ${recipe.source.join(", ")}`;
                               width: 182,
                               height: 54,
                               paddingLeft: 20,
-                              paddingTop: 12,
                               radius: 27,
                               bindings: {
                                 fills: "color-highlight-default",
-                                paddingTop: "spacing-small",
+                                paddingTop: "component-constant-spacing-0",
                                 paddingRight: "component-constant-spacing-0",
                                 paddingBottom: "component-constant-spacing-0",
                                 paddingLeft: "component-constant-spacing-20",
@@ -281855,10 +282065,10 @@ Sources: ${recipe.source.join(", ")}`;
                                   id: "generate",
                                   kind: "frame",
                                   name: "generate",
-                                  layout: "VERTICAL",
+                                  layout: "HORIZONTAL",
                                   padding: 0,
                                   gap: 0,
-                                  counterAlign: "MIN",
+                                  counterAlign: "CENTER",
                                   primaryAlign: "MIN",
                                   children: [
                                     {
@@ -281896,12 +282106,11 @@ Sources: ${recipe.source.join(", ")}`;
                                   width: 164,
                                   height: 54,
                                   paddingLeft: 18,
-                                  paddingTop: 12,
                                   radius: 27,
                                   bindings: {
                                     fills: "color-surface-dim",
                                     strokes: "color-primary-default",
-                                    paddingTop: "spacing-small",
+                                    paddingTop: "component-constant-spacing-0",
                                     paddingRight: "component-constant-spacing-0",
                                     paddingBottom: "component-constant-spacing-0",
                                     paddingLeft: "component-constant-spacing-18",
@@ -283950,10 +284159,10 @@ Sources: ${recipe.source.join(", ")}`;
                               id: "automation-pill",
                               kind: "frame",
                               name: "automation-pill",
-                              layout: "VERTICAL",
+                              layout: "HORIZONTAL",
                               padding: 0,
                               gap: 0,
-                              counterAlign: "MIN",
+                              counterAlign: "CENTER",
                               primaryAlign: "MIN",
                               children: [
                                 {
@@ -283991,11 +284200,10 @@ Sources: ${recipe.source.join(", ")}`;
                               width: 182,
                               height: 54,
                               paddingLeft: 20,
-                              paddingTop: 12,
                               radius: 27,
                               bindings: {
                                 fills: "color-highlight-default",
-                                paddingTop: "spacing-small",
+                                paddingTop: "component-constant-spacing-0",
                                 paddingRight: "component-constant-spacing-0",
                                 paddingBottom: "component-constant-spacing-0",
                                 paddingLeft: "component-constant-spacing-20",
@@ -284020,10 +284228,10 @@ Sources: ${recipe.source.join(", ")}`;
                                   id: "generate",
                                   kind: "frame",
                                   name: "generate",
-                                  layout: "VERTICAL",
+                                  layout: "HORIZONTAL",
                                   padding: 0,
                                   gap: 0,
-                                  counterAlign: "MIN",
+                                  counterAlign: "CENTER",
                                   primaryAlign: "MIN",
                                   children: [
                                     {
@@ -284061,12 +284269,11 @@ Sources: ${recipe.source.join(", ")}`;
                                   width: 164,
                                   height: 54,
                                   paddingLeft: 18,
-                                  paddingTop: 12,
                                   radius: 27,
                                   bindings: {
                                     fills: "color-surface-dim",
                                     strokes: "color-primary-default",
-                                    paddingTop: "spacing-small",
+                                    paddingTop: "component-constant-spacing-0",
                                     paddingRight: "component-constant-spacing-0",
                                     paddingBottom: "component-constant-spacing-0",
                                     paddingLeft: "component-constant-spacing-18",
@@ -284270,7 +284477,7 @@ Sources: ${recipe.source.join(", ")}`;
                               name: "title",
                               kind: "text",
                               text: "Automations",
-                              width: 165,
+                              width: 181,
                               fontFamily: "Cranny",
                               fontSize: 32,
                               fontWeight: 400,
@@ -284292,7 +284499,7 @@ Sources: ${recipe.source.join(", ")}`;
                               name: "description",
                               kind: "text",
                               text: "Keep every asset organized, even as your library grows. Set a rule once \u2014 say, when a file is uploaded, use AI to generate a description, translate it, and apply tags \u2014 and automations handle the rest. Combine a large variety of actions with OpenAI-powered or custom triggers to connect other AI tools and extend your workflows even further. The upkeep runs in the background, and no one has to think about it.",
-                              width: 165,
+                              width: 181,
                               fontFamily: "Diatype",
                               fontSize: 14,
                               fontWeight: 400,
@@ -284325,7 +284532,7 @@ Sources: ${recipe.source.join(", ")}`;
                               text: "Learn more"
                             }
                           ],
-                          width: 165,
+                          width: 181,
                           paddingTop: 16,
                           bindings: {
                             paddingTop: "spacing-medium",
@@ -284337,7 +284544,7 @@ Sources: ${recipe.source.join(", ")}`;
                           }
                         }
                       ],
-                      width: 623,
+                      width: 639,
                       bindings: {
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
@@ -284362,7 +284569,7 @@ Sources: ${recipe.source.join(", ")}`;
                           name: "features",
                           kind: "text",
                           text: "Features",
-                          width: 623,
+                          width: 639,
                           fontFamily: "Cranny",
                           fontSize: 36,
                           fontWeight: 400,
@@ -284469,7 +284676,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Connect your brand to AI workflows",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -284487,7 +284694,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -284498,7 +284705,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -284579,7 +284786,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Your AI brand expert",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -284597,7 +284804,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -284608,7 +284815,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -284689,7 +284896,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Govern your library with AI",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -284707,7 +284914,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -284718,7 +284925,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -284819,7 +285026,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Localize guidelines in one click",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -284837,7 +285044,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -284848,7 +285055,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -284929,7 +285136,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Find the right asset, instantly",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -284947,7 +285154,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -284958,7 +285165,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -285039,7 +285246,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Let AI handle your tagging",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -285057,7 +285264,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -285068,7 +285275,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -285169,7 +285376,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Edit visuals inside your brand portal",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -285187,7 +285394,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -285198,7 +285405,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -285279,7 +285486,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Smarter metadata, powered by AI",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -285297,7 +285504,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -285308,7 +285515,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -285389,7 +285596,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Brand intelligence in Microsoft365",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -285407,7 +285614,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -285418,7 +285625,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -285519,7 +285726,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           name: "description",
                                           kind: "text",
                                           text: "Build with your brand platform",
-                                          width: 119.66666666666666,
+                                          width: 125,
                                           fontFamily: "Diatype",
                                           fontSize: 14,
                                           fontWeight: 400,
@@ -285537,7 +285744,7 @@ Sources: ${recipe.source.join(", ")}`;
                                           textCase: "ORIGINAL"
                                         }
                                       ],
-                                      width: 119.66666666666666,
+                                      width: 125,
                                       bindings: {
                                         paddingTop: "component-constant-spacing-0",
                                         paddingRight: "component-constant-spacing-0",
@@ -285548,7 +285755,7 @@ Sources: ${recipe.source.join(", ")}`;
                                       }
                                     }
                                   ],
-                                  width: 191.66666666666666,
+                                  width: 197,
                                   height: 72,
                                   bindings: {
                                     paddingTop: "component-constant-spacing-0",
@@ -285570,7 +285777,7 @@ Sources: ${recipe.source.join(", ")}`;
                               }
                             }
                           ],
-                          width: 623,
+                          width: 639,
                           bindings: {
                             paddingTop: "component-constant-spacing-0",
                             paddingRight: "component-constant-spacing-0",
@@ -285581,7 +285788,7 @@ Sources: ${recipe.source.join(", ")}`;
                           }
                         }
                       ],
-                      width: 623,
+                      width: 639,
                       bindings: {
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
@@ -285596,7 +285803,7 @@ Sources: ${recipe.source.join(", ")}`;
                       name: "learn-heading",
                       kind: "text",
                       text: "Learn",
-                      width: 623,
+                      width: 639,
                       fontFamily: "Cranny",
                       fontSize: 36,
                       fontWeight: 400,
@@ -285643,7 +285850,7 @@ Sources: ${recipe.source.join(", ")}`;
                               counterAlign: "MIN",
                               primaryAlign: "MIN",
                               children: [],
-                              width: 299.5,
+                              width: 307.5,
                               height: 180,
                               clipContent: true,
                               radius: 8,
@@ -285702,7 +285909,7 @@ Sources: ${recipe.source.join(", ")}`;
                               counterAlign: "MIN",
                               primaryAlign: "MIN",
                               children: [],
-                              width: 299.5,
+                              width: 307.5,
                               height: 180,
                               clipContent: true,
                               radius: 8,
@@ -285752,16 +285959,16 @@ Sources: ${recipe.source.join(", ")}`;
                       }
                     }
                   ],
-                  paddingLeft: 96,
-                  paddingRight: 48,
+                  paddingLeft: 64,
+                  paddingRight: 64,
                   paddingTop: 32,
                   paddingBottom: 48,
                   width: 767,
                   bindings: {
                     paddingTop: "spacing-x-large",
-                    paddingRight: "component-constant-spacing-48",
+                    paddingRight: "component-constant-spacing-64",
                     paddingBottom: "component-constant-spacing-48",
-                    paddingLeft: "component-constant-spacing-96",
+                    paddingLeft: "component-constant-spacing-64",
                     itemSpacing: "component-constant-spacing-48",
                     cornerRadius: "component-constant-radius-0"
                   }
@@ -286158,10 +286365,10 @@ Sources: ${recipe.source.join(", ")}`;
                               id: "automation-pill",
                               kind: "frame",
                               name: "automation-pill",
-                              layout: "VERTICAL",
+                              layout: "HORIZONTAL",
                               padding: 0,
                               gap: 0,
-                              counterAlign: "MIN",
+                              counterAlign: "CENTER",
                               primaryAlign: "MIN",
                               children: [
                                 {
@@ -286199,11 +286406,10 @@ Sources: ${recipe.source.join(", ")}`;
                               width: 72.88524590163935,
                               height: 21.625292740046838,
                               paddingLeft: 8.00936768149883,
-                              paddingTop: 4.805620608899297,
                               radius: 10.812646370023419,
                               bindings: {
                                 fills: "color-highlight-default",
-                                paddingTop: "component-constant-spacing-4-point-805620608899297",
+                                paddingTop: "component-constant-spacing-0",
                                 paddingRight: "component-constant-spacing-0",
                                 paddingBottom: "component-constant-spacing-0",
                                 paddingLeft: "component-constant-spacing-8-point-00936768149883",
@@ -286228,10 +286434,10 @@ Sources: ${recipe.source.join(", ")}`;
                                   id: "generate",
                                   kind: "frame",
                                   name: "generate",
-                                  layout: "VERTICAL",
+                                  layout: "HORIZONTAL",
                                   padding: 0,
                                   gap: 0,
-                                  counterAlign: "MIN",
+                                  counterAlign: "CENTER",
                                   primaryAlign: "MIN",
                                   children: [
                                     {
@@ -286269,12 +286475,11 @@ Sources: ${recipe.source.join(", ")}`;
                                   width: 65.6768149882904,
                                   height: 21.625292740046838,
                                   paddingLeft: 7.208430913348947,
-                                  paddingTop: 4.805620608899297,
                                   radius: 10.812646370023419,
                                   bindings: {
                                     fills: "color-surface-dim",
                                     strokes: "color-primary-default",
-                                    paddingTop: "component-constant-spacing-4-point-805620608899297",
+                                    paddingTop: "component-constant-spacing-0",
                                     paddingRight: "component-constant-spacing-0",
                                     paddingBottom: "component-constant-spacing-0",
                                     paddingLeft: "component-constant-spacing-7-point-208430913348947",
@@ -288108,7 +288313,8 @@ Sources: ${recipe.source.join(", ")}`;
               }
             }
           }
-        ]
+        ],
+        componentPropertyPolicy: 2
       }
     ],
     examples: [
@@ -295630,6 +295836,7 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
+                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -295675,7 +295882,6 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
-                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -298486,6 +298692,7 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
+                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -298531,7 +298738,6 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
-                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -299850,6 +300056,7 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
+                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -299895,7 +300102,6 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
-                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -307985,6 +308191,7 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
+                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -308030,7 +308237,6 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
-                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -310748,6 +310954,7 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
+                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -310793,7 +311000,6 @@ Sources: ${recipe.source.join(", ")}`;
                       paddingLeft: 12,
                       radius: 4,
                       bindings: {
-                        fills: "color-surface-active",
                         paddingTop: "component-constant-spacing-0",
                         paddingRight: "component-constant-spacing-0",
                         paddingBottom: "component-constant-spacing-0",
@@ -313357,7 +313563,7 @@ Sources: ${recipe.source.join(", ")}`;
                     }
                   ],
                   x: 8,
-                  y: 494,
+                  y: 724,
                   width: 240,
                   layoutPositioning: "ABSOLUTE",
                   bindings: {
@@ -313436,7 +313642,7 @@ Sources: ${recipe.source.join(", ")}`;
                     }
                   ],
                   x: 8,
-                  y: 716,
+                  y: 948,
                   width: 240,
                   height: 44,
                   paddingLeft: 8,
@@ -313463,7 +313669,7 @@ Sources: ${recipe.source.join(", ")}`;
                     cornerRadius: "component-constant-radius-0"
                   },
                   x: 8,
-                  y: 486,
+                  y: 716,
                   layoutPositioning: "ABSOLUTE"
                 },
                 {
@@ -313478,7 +313684,7 @@ Sources: ${recipe.source.join(", ")}`;
                     cornerRadius: "component-constant-radius-0"
                   },
                   x: 8,
-                  y: 716,
+                  y: 948,
                   layoutPositioning: "ABSOLUTE"
                 },
                 {
@@ -318097,8 +318303,8 @@ Sources: ${recipe.source.join(", ")}`;
       counts: {
         layers: 13770,
         existingBindings: 1326,
-        addedReleasedBindings: 7783,
-        addedConstantBindings: 30818,
+        addedReleasedBindings: 7779,
+        addedConstantBindings: 30822,
         framePaddingBindings: 24524,
         gapBindings: 6122,
         radiusBindings: 7156,
@@ -319739,7 +319945,7 @@ Sources: ${recipe.source.join(", ")}`;
                 role: "spacing"
               }
             ],
-            occurrences: 23477
+            occurrences: 23483
           }
         },
         {
@@ -320245,12 +320451,7 @@ Sources: ${recipe.source.join(", ")}`;
             ],
             examples: [
               {
-                path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/automation-pill",
-                value: 4.805620608899297,
-                role: "spacing"
-              },
-              {
-                path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/generate",
+                path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
                 value: 4.805620608899297,
                 role: "spacing"
               },
@@ -320258,9 +320459,14 @@ Sources: ${recipe.source.join(", ")}`;
                 path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
                 value: 4.805620608899297,
                 role: "spacing"
+              },
+              {
+                path: "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-1",
+                value: 4.805620608899297,
+                role: "spacing"
               }
             ],
-            occurrences: 8
+            occurrences: 6
           }
         },
         {
@@ -320302,7 +320508,7 @@ Sources: ${recipe.source.join(", ")}`;
                 role: "spacing"
               }
             ],
-            occurrences: 42
+            occurrences: 41
           }
         },
         {
@@ -320396,9 +320602,19 @@ Sources: ${recipe.source.join(", ")}`;
                 path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/agentic-heading",
                 value: 64,
                 role: "spacing"
+              },
+              {
+                path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
+                value: 64,
+                role: "spacing"
+              },
+              {
+                path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
+                value: 64,
+                role: "spacing"
               }
             ],
-            occurrences: 1
+            occurrences: 3
           }
         },
         {
@@ -320637,14 +320853,9 @@ Sources: ${recipe.source.join(", ")}`;
                 path: "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body",
                 value: 96,
                 role: "spacing"
-              },
-              {
-                path: "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
-                value: 96,
-                role: "spacing"
               }
             ],
-            occurrences: 2
+            occurrences: 1
           }
         }
       ],
@@ -323479,7 +323690,7 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "b7c255bce87589f0b4fdc6c340125a175f5d99e28b6b1d7bdde9d36387901b02"
+    fingerprint: "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8"
   };
 
   // src/plugin.ts

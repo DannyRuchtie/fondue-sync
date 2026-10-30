@@ -1,3 +1,4 @@
+import { augmentComponentPropertyPolicies } from "../src/component-properties.mjs";
 import { loadImageAssets, enrichImageReferences } from "./image-assets.mjs";
 import { augmentTypographyBindings } from "../recipes/typography-bindings.mjs";
 import fs from "node:fs";
@@ -538,6 +539,7 @@ export async function build(source = path.join(root, ".cache/release")) {
           "images.ts",
           "image-migrations.ts",
           "image-migration-approvals.json",
+          "component-properties.mjs",
         ]
           .map((f) => fs.readFileSync(path.join(root, "src", f), "utf8"))
           .join("\n"),
@@ -614,6 +616,11 @@ export async function build(source = path.join(root, ".cache/release")) {
   bundle.paintBindingCoverage = paintBindingCoverage;
   const typographyBindingCoverage = augmentTypographyBindings(bundle);
   for (const recipe of bundle.recipes) normalizeRecipeDocumentation(recipe);
+  const componentPropertyCoverage = augmentComponentPropertyPolicies(bundle);
+  fs.writeFileSync(
+    path.join(root, "docs/component-property-coverage.json"),
+    JSON.stringify(componentPropertyCoverage, null, 2) + "\n",
+  );
   bundle.provenance.consumerPresentation = 1;
   bundle.fingerprint = sha(JSON.stringify(bundle));
   fs.mkdirSync(path.join(root, "bundles"), { recursive: true });

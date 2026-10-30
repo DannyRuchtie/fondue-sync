@@ -597,7 +597,7 @@ test("engine creates native modes aliases variants bindings and text properties;
   assert.equal(set.children.length, 2);
   assert.equal(set.children[0].layoutMode, "HORIZONTAL");
   assert.equal(set.children[0].fills[0].boundVariables.color.id, s.id);
-  assert.equal(Object.keys(set.componentPropertyDefinitions).length, 1);
+  assert.equal(Object.keys(set.componentPropertyDefinitions).length, 2);
   assert.equal(set.children[0].children[0].characters, "Original");
   const ids = Object.values(engine.index.assets).map((v) => v.id);
   const count = nodes.size;
@@ -2257,4 +2257,169 @@ test("approved interrupted image migration aligns a complete owned sibling permu
     ids,
   );
   await engine.recoverPendingRecipe(set, next);
+});
+
+test("variant-specific text and optical icon defaults stay independent while equal defaults and existing public override keys remain shared", async () => {
+  const { api, nodes } = mockApi(),
+    bundle = fixture();
+  const svg = (size: number) =>
+    `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><path d="M0 0 L4 4"/></svg>`;
+  bundle.icons = [
+    {
+      id: "icon:a",
+      name: "A",
+      svg: svg(24),
+      source: "a24.svg",
+      sizes: [16, 24].map((size) => ({
+        size,
+        svg: svg(size),
+        source: `a${size}.svg`,
+      })),
+    },
+    {
+      id: "icon:b",
+      name: "B",
+      svg: svg(16),
+      source: "b16.svg",
+      sizes: [{ size: 16, svg: svg(16), source: "b16.svg" }],
+    },
+  ];
+  const defaults = [
+    {
+      viewport: "desktop",
+      label: "Cookie",
+      helper: "Manage cookie usage",
+      icon: "icon:a",
+      size: 16,
+    },
+    {
+      viewport: "mobile",
+      label: "Applications",
+      helper: "Manage applications",
+      icon: "icon:b",
+      size: 16,
+    },
+    {
+      viewport: "tablet",
+      label: "Cookie",
+      helper: "Manage cookie usage",
+      icon: "icon:a",
+      size: 16,
+    },
+    {
+      viewport: "wide",
+      label: "Cookie",
+      helper: "Manage cookie usage",
+      icon: "icon:a",
+      size: 24,
+    },
+  ];
+  bundle.recipes[0].variants = defaults.map((v) => ({
+    id: v.viewport,
+    props: { viewport: v.viewport },
+    root: {
+      id: "root",
+      kind: "frame",
+      name: "Menu",
+      children: [
+        { id: "label", kind: "text", name: "Label", text: v.label },
+        { id: "helper", kind: "text", name: "Helper", text: v.helper },
+        {
+          id: "glyph",
+          kind: "instance",
+          name: "Glyph",
+          iconId: v.icon,
+          width: v.size,
+          height: v.size,
+        },
+      ],
+    },
+  }));
+  const first = new SyncEngine(api, bundle);
+  assert.deepEqual((await first.sync()).errors, []);
+  const set = nodes.get(first.index.assets["recipe:components:Test"].id),
+    children = set.children,
+    desktop = children[0],
+    mobile = children[1],
+    tablet = children[2],
+    wide = children[3];
+  const key = (v: any, id: string, field: string) =>
+    v.children.find((n: any) => readMetadata(n, "identity") === id)
+      .componentPropertyReferences[field];
+  const desktopHelper = key(desktop, "helper", "characters"),
+    desktopGlyph = key(desktop, "glyph", "mainComponent");
+  const outside = desktop.createInstance();
+  outside.setProperties({ [desktopHelper]: "Custom cookie helper" });
+  const ids = children.map((v: any) => [
+    v.id,
+    ...v.children.map((n: any) => n.id),
+  ]);
+  // Model the observed native legacy defect: correct source metadata/characters,
+  // but mobile/large layers reference the first variant's shared default property.
+  for (const v of [mobile, wide]) {
+    v.children.find(
+      (n: any) => readMetadata(n, "identity") === "helper",
+    ).componentPropertyReferences.characters = desktopHelper;
+    v.children.find(
+      (n: any) => readMetadata(n, "identity") === "glyph",
+    ).componentPropertyReferences.mainComponent = desktopGlyph;
+  }
+  assert.equal(
+    set.componentPropertyDefinitions[key(mobile, "helper", "characters")]
+      .defaultValue,
+    "Manage cookie usage",
+  );
+  await first.checkpoint(
+    first.entries().find((x) => x.entry.kind === "recipe")!.entry,
+    set,
+  );
+  const updated = structuredClone(bundle);
+  updated.provenance.rendererRevision = "variant-default-fix";
+  updated.fingerprint = "variant-default-fix";
+  assert.deepEqual((await new SyncEngine(api, updated).sync()).errors, []);
+  assert.equal(key(desktop, "helper", "characters"), desktopHelper);
+  assert.equal(key(tablet, "helper", "characters"), desktopHelper);
+  assert.notEqual(key(mobile, "helper", "characters"), desktopHelper);
+  assert.equal(
+    set.componentPropertyDefinitions[key(mobile, "helper", "characters")]
+      .defaultValue,
+    "Manage applications",
+  );
+  assert.equal(key(tablet, "glyph", "mainComponent"), desktopGlyph);
+  assert.notEqual(key(mobile, "glyph", "mainComponent"), desktopGlyph);
+  assert.notEqual(key(wide, "glyph", "mainComponent"), desktopGlyph);
+  assert.equal(
+    set.componentPropertyDefinitions[key(wide, "glyph", "mainComponent")]
+      .defaultValue,
+    (
+      await wide.children
+        .find((n: any) => readMetadata(n, "identity") === "glyph")
+        .getMainComponentAsync()
+    ).id,
+  );
+  assert.deepEqual(
+    children.map((v: any) => [v.id, ...v.children.map((n: any) => n.id)]),
+    ids,
+  );
+  assert.equal(
+    outside.componentProperties[desktopHelper].value,
+    "Custom cookie helper",
+  );
+  const engine = new SyncEngine(api, updated),
+    instance = await engine.layer(
+      {
+        id: "mobile-slot",
+        name: "Mobile",
+        kind: "componentInstance",
+        recipeId: bundle.recipes[0].id,
+        variantProps: { viewport: "mobile" },
+        textOverrides: { helper: "Custom mobile helper" },
+      },
+      api.createFrame(),
+    );
+  assert.equal(instance.children[1].characters, "Custom mobile helper");
+  assert.equal(
+    instance.componentProperties[desktopHelper].value,
+    "Manage cookie usage",
+  );
 });

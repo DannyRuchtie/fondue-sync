@@ -99,6 +99,7 @@ export type Layer = {
   children?: Layer[];
 };
 export type Recipe = {
+  componentPropertyPolicy?: 2;
   id: string;
   name: string;
   package: string;

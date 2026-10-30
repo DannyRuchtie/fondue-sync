@@ -48,8 +48,8 @@
   "counts": {
     "layers": 13770,
     "existingBindings": 1326,
-    "addedReleasedBindings": 7783,
-    "addedConstantBindings": 30818,
+    "addedReleasedBindings": 7779,
+    "addedConstantBindings": 30822,
     "framePaddingBindings": 24524,
     "gapBindings": 6122,
     "radiusBindings": 7156,
@@ -1690,7 +1690,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 23477
+        "occurrences": 23483
       }
     },
     {
@@ -2196,12 +2196,7 @@
         ],
         "examples": [
           {
-            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/automation-pill",
-            "value": 4.805620608899297,
-            "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/generate",
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
             "value": 4.805620608899297,
             "role": "spacing"
           },
@@ -2209,9 +2204,14 @@
             "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-0",
             "value": 4.805620608899297,
             "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/hero/automation-hero/generate-controls/property-1",
+            "value": 4.805620608899297,
+            "role": "spacing"
           }
         ],
-        "occurrences": 8
+        "occurrences": 6
       }
     },
     {
@@ -2253,7 +2253,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 42
+        "occurrences": 41
       }
     },
     {
@@ -2347,9 +2347,19 @@
             "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/agentic-heading",
             "value": 64,
             "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
+            "value": 64,
+            "role": "spacing"
+          },
+          {
+            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
+            "value": 64,
+            "role": "spacing"
           }
         ],
-        "occurrences": 1
+        "occurrences": 3
       }
     },
     {
@@ -2588,14 +2598,9 @@
             "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body",
             "value": 96,
             "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body",
-            "value": 96,
-            "role": "spacing"
           }
         ],
-        "occurrences": 2
+        "occurrences": 1
       }
     }
   ],

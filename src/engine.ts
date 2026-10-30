@@ -1,3 +1,4 @@
+import { componentPropertyGroups } from "./component-properties.mjs";
 import {
   applyApprovedImageMigration,
   imageMigrationProblems,
@@ -66,6 +67,8 @@ export class SyncEngine {
   availableFonts?: Promise<Font[]>;
   tokenCache = new Map<string, Variable>();
   imageCache = new Map<string, string>();
+  iconMains = new Map<string, Promise<any>>();
+  componentPropertyLabels = new Map<string, Map<string, string>>();
   appliedPropertyDefaults = new Set<string>();
   lastSavedIndex: string | undefined;
   shardPayloads = new Map<number, string>();
@@ -646,6 +649,118 @@ export class SyncEngine {
     (this.index.imageHashes ??= {})[digest] = image.hash;
     return image.hash;
   }
+  async iconMain(def: Layer): Promise<any> {
+    const cacheKey = JSON.stringify([def.iconId, def.width ?? 24]);
+    let pending = this.iconMains.get(cacheKey);
+    if (!pending) {
+      pending = (async () => {
+        const ref = this.index.assets["icon:" + def.iconId];
+        const icon = ref ? await this.api.getNodeByIdAsync(ref.id) : null;
+        let main: any = icon;
+        if (icon?.type === "COMPONENT_SET") {
+          main = icon.children.find(
+            (c) => read(c, "optical-size") === String(def.width ?? 24),
+          );
+          if (!main) {
+            main = icon.children.find((c) => read(c, "optical-size") === "24");
+            const warning = `${def.iconId} has no exact ${def.width}px optical source; using the released24px path scaled to requested size.`;
+            if (!this.warnings.includes(warning)) this.warnings.push(warning);
+          }
+        }
+        if (!main || main.type !== "COMPONENT")
+          throw Error("Missing native icon " + def.iconId);
+        return main;
+      })();
+      this.iconMains.set(cacheKey, pending);
+    }
+    return pending;
+  }
+  propertyLabel(owner: any, prefix: string, path: string, value: string) {
+    return (
+      this.componentPropertyLabels
+        .get(owner.id)
+        ?.get(JSON.stringify([prefix, path, value])) ?? prefix + " / " + path
+    );
+  }
+  async prepareComponentProperties(recipe: Recipe, owner: any) {
+    const icons = new Map<string, string>();
+    const collect = async (layer: Layer): Promise<void> => {
+      if (layer.kind === "instance")
+        icons.set(
+          JSON.stringify([layer.iconId, layer.width ?? 24]),
+          (await this.iconMain(layer)).id,
+        );
+      for (const child of layer.children ?? []) await collect(child);
+    };
+    for (const variant of recipe.variants) await collect(variant.root);
+    const groups = componentPropertyGroups(recipe, (layer) =>
+      icons.get(JSON.stringify([layer.iconId, layer.width ?? 24]))!,
+    );
+    const labels = new Map(
+      groups.map((group) => [
+        JSON.stringify([group.prefix, group.path, group.value]),
+        group.label,
+      ]),
+    );
+    this.componentPropertyLabels.set(owner.id, labels);
+    const keys = new Map(
+      Object.keys(owner.componentPropertyDefinitions).map((key) => [
+        key.split("#")[0],
+        key,
+      ]),
+    );
+    for (const group of groups)
+      if (!keys.has(group.label))
+        keys.set(
+          group.label,
+          owner.addComponentProperty(group.label, group.type, group.value),
+        );
+    // Rebind ALL existing mains before editing any shared default. A prior shared
+    // default must not temporarily force another variant back to its old content.
+    const bind = async (
+      node: any,
+      definition: Layer,
+      parent = "",
+    ): Promise<void> => {
+      const path = parent + "/" + definition.id;
+      if (definition.kind === "text" && node.type === "TEXT") {
+        if (node.fontName && typeof node.fontName === "object")
+          await this.fontFor(node.fontName.family, node.fontName.style);
+        const key = keys.get(
+          this.propertyLabel(owner, "Text", path, definition.text ?? ""),
+        );
+        node.componentPropertyReferences = {
+          ...node.componentPropertyReferences,
+          characters: key,
+        };
+      } else if (definition.kind === "instance" && node.type === "INSTANCE") {
+        const key = keys.get(
+          this.propertyLabel(
+            owner,
+            "Icon",
+            path,
+            (await this.iconMain(definition)).id,
+          ),
+        );
+        node.componentPropertyReferences = {
+          ...node.componentPropertyReferences,
+          mainComponent: key,
+        };
+      }
+      for (const child of definition.children ?? []) {
+        const existing = node.children?.find(
+          (item: any) => read(item, "identity") === child.id,
+        );
+        if (existing) await bind(existing, child, path);
+      }
+    };
+    for (const variant of recipe.variants) {
+      const native = owner.children.find(
+        (node: any) => read(node, "variant") === variant.id,
+      );
+      if (native) await bind(native, variant.root);
+    }
+  }
   async layer(
     def: Layer,
     parent: any,
@@ -712,18 +827,40 @@ export class SyncEngine {
 
       if (owner) node.isExposedInstance = true;
       const definitions = node.componentProperties;
-      const textKeys = Object.keys(definitions).filter(
-        (k) => definitions[k].type === "TEXT",
-      );
+      const activeText: { key: string; path: string }[] = [];
+      const collectText = (native: any, source: Layer, parent = "") => {
+        const path = parent + "/" + source.id;
+        const key = native.componentPropertyReferences?.characters;
+        if (source.kind === "text" && key && definitions[key]?.type === "TEXT")
+          activeText.push({ key, path });
+        for (const child of source.children ?? []) {
+          const actual = native.children?.find(
+            (node: any) => read(node, "identity") === child.id,
+          );
+          if (actual) collectText(actual, child, path);
+        }
+      };
+      collectText(main, choice.variant.root);
+      const textKeys = [...new Set(activeText.map((item) => item.key))];
       if (def.text !== undefined) {
         if (!textKeys.length)
           throw Error("No exposed text property on " + choice.recipe.name);
         node.setProperties({ [textKeys[0]]: def.text });
       }
       for (const [key, value] of Object.entries(def.textOverrides ?? {})) {
-        const property = textKeys.find(
-          (k) => k.split("#")[0].endsWith("/" + key) || k === key,
-        );
+        const matches = [
+          ...new Set(
+            activeText
+              .filter(
+                (item) =>
+                  item.key === key ||
+                  item.path === key ||
+                  item.path.endsWith("/" + key),
+              )
+              .map((item) => item.key),
+          ),
+        ];
+        const property = matches.length === 1 ? matches[0] : undefined;
         if (!property)
           throw Error(
             "No stable text property " + key + " on " + choice.recipe.name,
@@ -741,21 +878,7 @@ export class SyncEngine {
       );
     }
     if (def.kind === "instance") {
-      const ref = this.index.assets["icon:" + def.iconId];
-      const icon = ref ? await this.api.getNodeByIdAsync(ref.id) : null;
-      let main: any = icon;
-      if (icon?.type === "COMPONENT_SET") {
-        main = icon.children.find(
-          (c) => read(c, "optical-size") === String(def.width ?? 24),
-        );
-        if (!main) {
-          main = icon.children.find((c) => read(c, "optical-size") === "24");
-          const warning = `${def.iconId} has no exact ${def.width}px optical source; using the released24px path scaled to requested size.`;
-          if (!this.warnings.includes(warning)) this.warnings.push(warning);
-        }
-      }
-      if (!main || main.type !== "COMPONENT")
-        throw Error("Missing native icon " + def.iconId);
+      const main = await this.iconMain(def);
       if (!node) {
         node = main.createInstance();
         parent.appendChild(node);
@@ -881,7 +1004,12 @@ export class SyncEngine {
       if (!def.textStyle && (def.textDecoration || previous?.textDecoration))
         node.textDecoration = def.textDecoration ?? "NONE";
       if (owner) {
-        const label = "Text / " + identityPath;
+        const label = this.propertyLabel(
+          owner,
+          "Text",
+          identityPath,
+          def.text ?? "",
+        );
         const definitions = owner.componentPropertyDefinitions;
         let key = Object.keys(definitions).find(
           (k) => k.split("#")[0] === label,
@@ -910,15 +1038,29 @@ export class SyncEngine {
         name: string,
         type: "INSTANCE_SWAP" | "BOOLEAN",
         value: string | boolean,
-      ) =>
-        Object.keys(definitions).find((k) => k.split("#")[0] === name) ??
-        owner.addComponentProperty(name, type, value);
+      ) => {
+        const key =
+          Object.keys(definitions).find((k) => k.split("#")[0] === name) ??
+          owner.addComponentProperty(name, type, value);
+        const identity = owner.id + ":" + key;
+        if (!this.appliedPropertyDefaults.has(identity)) {
+          if (owner.componentPropertyDefinitions[key]?.defaultValue !== value)
+            owner.editComponentProperty(key, { defaultValue: value });
+          this.appliedPropertyDefaults.add(identity);
+        }
+        return key;
+      };
       node.componentPropertyReferences = {
         ...node.componentPropertyReferences,
         mainComponent: ensure(
-          "Icon / " + identityPath,
+          this.propertyLabel(
+            owner,
+            "Icon",
+            identityPath,
+            (await this.iconMain(def)).id,
+          ),
           "INSTANCE_SWAP",
-          (await node.getMainComponentAsync()).id,
+          (await this.iconMain(def)).id,
         ),
         visible: ensure("Show / " + identityPath, "BOOLEAN", true),
       };
@@ -1250,6 +1392,7 @@ export class SyncEngine {
       component.name = nativeName(variant.props);
       write(component, "variant-props", JSON.stringify(variant.props));
     }
+    await this.prepareComponentProperties(recipe, set);
     for (let i = 0; i < recipe.variants.length; i++) {
       const variant = recipe.variants[i];
       let component = set.children.find(

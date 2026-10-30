@@ -409,7 +409,9 @@ export function createAdditionalExamples(c) {
             ? "brands"
             : page === "libraries"
               ? "libraries"
-              : "guidelines",
+              : page === "colors" || page === "fonts"
+                ? "essentials"
+                : "guidelines",
           p.height,
         ),
         id: "rail",
@@ -1633,6 +1635,15 @@ export function createAdditionalExamples(c) {
         "rail-divider",
       ].includes(n.id),
     );
+    // The observed tablet rail retains its taller navigation flow; utilities
+    // start below the feature list instead of pinning over it at 768px.
+    if (p.width === 1024)
+      for (const child of base.children) {
+        if (child.id === "utility-navigation") child.y = 724;
+        if (child.id === "utility-divider") child.y = 716;
+        if (child.id === "account" || child.id === "account-divider")
+          child.y = 948;
+      }
     const switcher = base.children[0];
     switcher.children.find((n) => n.id === "workspace-copy").children = [
       title("workspace", "Agentic hub"),
@@ -1751,7 +1762,8 @@ export function createAdditionalExamples(c) {
             width: scaled(182),
             height: scaled(54),
             paddingLeft: scaled(20),
-            paddingTop: scaled(12),
+            layout: "HORIZONTAL",
+            counterAlign: "CENTER",
             radius: scaled(27),
             bindings: { fills: "color-highlight-default" },
           },
@@ -1775,7 +1787,8 @@ export function createAdditionalExamples(c) {
                 width: scaled(164),
                 height: scaled(54),
                 paddingLeft: scaled(18),
-                paddingTop: scaled(12),
+                layout: "HORIZONTAL",
+                counterAlign: "CENTER",
                 radius: scaled(27),
                 bindings: { fills: S.dim, strokes: S.text },
               },
@@ -1820,7 +1833,7 @@ export function createAdditionalExamples(c) {
   }
   function agentic(p) {
     const w = p.main,
-      inner = p.mobile ? 342 : w - 144,
+      inner = p.mobile ? 342 : w - (p.width === 1024 ? 128 : 144),
       heroImage = p.mobile ? 342 : p.width === 1728 ? 854 : 426,
       copyWidth = p.mobile ? 342 : inner - heroImage - 32;
     const featureWidth = p.mobile ? 342 : (inner - 48) / 3;
@@ -2008,8 +2021,8 @@ export function createAdditionalExamples(c) {
             ),
           ],
           {
-            paddingLeft: p.mobile ? 24 : 96,
-            paddingRight: p.mobile ? 24 : 48,
+            paddingLeft: p.mobile ? 24 : p.width === 1024 ? 64 : 96,
+            paddingRight: p.mobile ? 24 : p.width === 1024 ? 64 : 48,
             paddingTop: p.mobile ? 24 : 32,
             paddingBottom: 48,
             gap: p.mobile ? 34 : p.width === 1728 ? 80 : 48,

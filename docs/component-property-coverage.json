@@ -1,0 +1,1886 @@
+{
+  "version": 2,
+  "affectedRecipes": 37,
+  "recipes": [
+    {
+      "id": "components/Grid",
+      "paths": [
+        "Text / /root/row-1/cell-0/content",
+        "Text / /root/row-1/cell-1/content",
+        "Text / /root/row-1/cell-2/content"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-0/content",
+          "variantIds": [
+            "flow=row;columns=1",
+            "flow=column;columns=1",
+            "flow=dense;columns=1",
+            "flow=row-dense;columns=1",
+            "flow=column-dense;columns=1"
+          ],
+          "label": "Text / /root/row-1/cell-0/content",
+          "defaultValue": "Item 2"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-0/content",
+          "variantIds": [
+            "flow=row;columns=2",
+            "flow=column;columns=2",
+            "flow=dense;columns=2",
+            "flow=row-dense;columns=2",
+            "flow=column-dense;columns=2"
+          ],
+          "label": "Text / /root/row-1/cell-0/content / Variant flow=row;columns=2",
+          "defaultValue": "Item 3"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-0/content",
+          "variantIds": [
+            "flow=row;columns=3",
+            "flow=column;columns=3",
+            "flow=dense;columns=3",
+            "flow=row-dense;columns=3",
+            "flow=column-dense;columns=3"
+          ],
+          "label": "Text / /root/row-1/cell-0/content / Variant flow=row;columns=3",
+          "defaultValue": "Item 4"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-0/content",
+          "variantIds": [
+            "flow=row;columns=4",
+            "flow=column;columns=4",
+            "flow=dense;columns=4",
+            "flow=row-dense;columns=4",
+            "flow=column-dense;columns=4"
+          ],
+          "label": "Text / /root/row-1/cell-0/content / Variant flow=row;columns=4",
+          "defaultValue": "Item 5"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-1/content",
+          "variantIds": [
+            "flow=row;columns=2",
+            "flow=column;columns=2",
+            "flow=dense;columns=2",
+            "flow=row-dense;columns=2",
+            "flow=column-dense;columns=2"
+          ],
+          "label": "Text / /root/row-1/cell-1/content",
+          "defaultValue": "Item 4"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-1/content",
+          "variantIds": [
+            "flow=row;columns=3",
+            "flow=column;columns=3",
+            "flow=dense;columns=3",
+            "flow=row-dense;columns=3",
+            "flow=column-dense;columns=3"
+          ],
+          "label": "Text / /root/row-1/cell-1/content / Variant flow=row;columns=3",
+          "defaultValue": "Item 5"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-1/content",
+          "variantIds": [
+            "flow=row;columns=4",
+            "flow=column;columns=4",
+            "flow=dense;columns=4",
+            "flow=row-dense;columns=4",
+            "flow=column-dense;columns=4"
+          ],
+          "label": "Text / /root/row-1/cell-1/content / Variant flow=row;columns=4",
+          "defaultValue": "Item 6"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-2/content",
+          "variantIds": [
+            "flow=row;columns=3",
+            "flow=column;columns=3",
+            "flow=dense;columns=3",
+            "flow=row-dense;columns=3",
+            "flow=column-dense;columns=3"
+          ],
+          "label": "Text / /root/row-1/cell-2/content",
+          "defaultValue": "Item 6"
+        },
+        {
+          "prefix": "Text",
+          "path": "/root/row-1/cell-2/content",
+          "variantIds": [
+            "flow=row;columns=4",
+            "flow=column;columns=4",
+            "flow=dense;columns=4",
+            "flow=row-dense;columns=4",
+            "flow=column-dense;columns=4"
+          ],
+          "label": "Text / /root/row-1/cell-2/content / Variant flow=row;columns=4",
+          "defaultValue": "Item 7"
+        }
+      ]
+    },
+    {
+      "id": "components/Button/controls-005",
+      "paths": [
+        "Icon / /button/icon"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/button/icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=small;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=small;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=small;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=small;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=small;state=disabled",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=medium;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=medium;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=medium;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=medium;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=medium;state=disabled"
+          ],
+          "label": "Icon / /button/icon",
+          "defaultValue": "icon:check-mark@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=large;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=large;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=large;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=large;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=square;size=large;state=disabled"
+          ],
+          "label": "Icon / /button/icon / Variant variant=default;emphasis=strong;rounding=medium;aspect=square;size=large;state=default",
+          "defaultValue": "icon:check-mark@24"
+        }
+      ]
+    },
+    {
+      "id": "components/Button/controls-006",
+      "paths": [
+        "Icon / /button/icon"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/button/icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=small;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=small;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=small;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=small;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=small;state=disabled",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=medium;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=medium;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=medium;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=medium;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=medium;state=disabled"
+          ],
+          "label": "Icon / /button/icon",
+          "defaultValue": "icon:check-mark@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=large;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=large;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=large;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=large;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=square;size=large;state=disabled"
+          ],
+          "label": "Icon / /button/icon / Variant variant=default;emphasis=strong;rounding=full;aspect=square;size=large;state=default",
+          "defaultValue": "icon:check-mark@24"
+        }
+      ]
+    },
+    {
+      "id": "components/Checkbox/controls-001",
+      "paths": [
+        "Icon / /checkbox/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=default;emphasis=default;value=checked;status=default;state=default",
+            "size=default;emphasis=default;value=checked;status=default;state=hover",
+            "size=default;emphasis=default;value=checked;status=default;state=active",
+            "size=default;emphasis=default;value=checked;status=default;state=focus",
+            "size=default;emphasis=default;value=checked;status=default;state=disabled",
+            "size=default;emphasis=default;value=checked;status=error;state=default",
+            "size=default;emphasis=default;value=checked;status=error;state=hover",
+            "size=default;emphasis=default;value=checked;status=error;state=active",
+            "size=default;emphasis=default;value=checked;status=error;state=focus",
+            "size=default;emphasis=default;value=checked;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator",
+          "defaultValue": "icon:check-mark@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=default;emphasis=default;value=indeterminate;status=default;state=default",
+            "size=default;emphasis=default;value=indeterminate;status=default;state=hover",
+            "size=default;emphasis=default;value=indeterminate;status=default;state=active",
+            "size=default;emphasis=default;value=indeterminate;status=default;state=focus",
+            "size=default;emphasis=default;value=indeterminate;status=default;state=disabled",
+            "size=default;emphasis=default;value=indeterminate;status=error;state=default",
+            "size=default;emphasis=default;value=indeterminate;status=error;state=hover",
+            "size=default;emphasis=default;value=indeterminate;status=error;state=active",
+            "size=default;emphasis=default;value=indeterminate;status=error;state=focus",
+            "size=default;emphasis=default;value=indeterminate;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator / Variant size=default;emphasis=default;value=indeterminate;status=default;state=default",
+          "defaultValue": "icon:minus@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Checkbox/controls-002",
+      "paths": [
+        "Icon / /checkbox/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=default;emphasis=weak;value=checked;status=default;state=default",
+            "size=default;emphasis=weak;value=checked;status=default;state=hover",
+            "size=default;emphasis=weak;value=checked;status=default;state=active",
+            "size=default;emphasis=weak;value=checked;status=default;state=focus",
+            "size=default;emphasis=weak;value=checked;status=default;state=disabled",
+            "size=default;emphasis=weak;value=checked;status=error;state=default",
+            "size=default;emphasis=weak;value=checked;status=error;state=hover",
+            "size=default;emphasis=weak;value=checked;status=error;state=active",
+            "size=default;emphasis=weak;value=checked;status=error;state=focus",
+            "size=default;emphasis=weak;value=checked;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator",
+          "defaultValue": "icon:check-mark@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=default;emphasis=weak;value=indeterminate;status=default;state=default",
+            "size=default;emphasis=weak;value=indeterminate;status=default;state=hover",
+            "size=default;emphasis=weak;value=indeterminate;status=default;state=active",
+            "size=default;emphasis=weak;value=indeterminate;status=default;state=focus",
+            "size=default;emphasis=weak;value=indeterminate;status=default;state=disabled",
+            "size=default;emphasis=weak;value=indeterminate;status=error;state=default",
+            "size=default;emphasis=weak;value=indeterminate;status=error;state=hover",
+            "size=default;emphasis=weak;value=indeterminate;status=error;state=active",
+            "size=default;emphasis=weak;value=indeterminate;status=error;state=focus",
+            "size=default;emphasis=weak;value=indeterminate;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator / Variant size=default;emphasis=weak;value=indeterminate;status=default;state=default",
+          "defaultValue": "icon:minus@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Checkbox/controls-003",
+      "paths": [
+        "Icon / /checkbox/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=large;emphasis=default;value=checked;status=default;state=default",
+            "size=large;emphasis=default;value=checked;status=default;state=hover",
+            "size=large;emphasis=default;value=checked;status=default;state=active",
+            "size=large;emphasis=default;value=checked;status=default;state=focus",
+            "size=large;emphasis=default;value=checked;status=default;state=disabled",
+            "size=large;emphasis=default;value=checked;status=error;state=default",
+            "size=large;emphasis=default;value=checked;status=error;state=hover",
+            "size=large;emphasis=default;value=checked;status=error;state=active",
+            "size=large;emphasis=default;value=checked;status=error;state=focus",
+            "size=large;emphasis=default;value=checked;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator",
+          "defaultValue": "icon:check-mark@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=large;emphasis=default;value=indeterminate;status=default;state=default",
+            "size=large;emphasis=default;value=indeterminate;status=default;state=hover",
+            "size=large;emphasis=default;value=indeterminate;status=default;state=active",
+            "size=large;emphasis=default;value=indeterminate;status=default;state=focus",
+            "size=large;emphasis=default;value=indeterminate;status=default;state=disabled",
+            "size=large;emphasis=default;value=indeterminate;status=error;state=default",
+            "size=large;emphasis=default;value=indeterminate;status=error;state=hover",
+            "size=large;emphasis=default;value=indeterminate;status=error;state=active",
+            "size=large;emphasis=default;value=indeterminate;status=error;state=focus",
+            "size=large;emphasis=default;value=indeterminate;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator / Variant size=large;emphasis=default;value=indeterminate;status=default;state=default",
+          "defaultValue": "icon:minus@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Checkbox/controls-004",
+      "paths": [
+        "Icon / /checkbox/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=large;emphasis=weak;value=checked;status=default;state=default",
+            "size=large;emphasis=weak;value=checked;status=default;state=hover",
+            "size=large;emphasis=weak;value=checked;status=default;state=active",
+            "size=large;emphasis=weak;value=checked;status=default;state=focus",
+            "size=large;emphasis=weak;value=checked;status=default;state=disabled",
+            "size=large;emphasis=weak;value=checked;status=error;state=default",
+            "size=large;emphasis=weak;value=checked;status=error;state=hover",
+            "size=large;emphasis=weak;value=checked;status=error;state=active",
+            "size=large;emphasis=weak;value=checked;status=error;state=focus",
+            "size=large;emphasis=weak;value=checked;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator",
+          "defaultValue": "icon:check-mark@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/checkbox/indicator",
+          "variantIds": [
+            "size=large;emphasis=weak;value=indeterminate;status=default;state=default",
+            "size=large;emphasis=weak;value=indeterminate;status=default;state=hover",
+            "size=large;emphasis=weak;value=indeterminate;status=default;state=active",
+            "size=large;emphasis=weak;value=indeterminate;status=default;state=focus",
+            "size=large;emphasis=weak;value=indeterminate;status=default;state=disabled",
+            "size=large;emphasis=weak;value=indeterminate;status=error;state=default",
+            "size=large;emphasis=weak;value=indeterminate;status=error;state=hover",
+            "size=large;emphasis=weak;value=indeterminate;status=error;state=active",
+            "size=large;emphasis=weak;value=indeterminate;status=error;state=focus",
+            "size=large;emphasis=weak;value=indeterminate;status=error;state=disabled"
+          ],
+          "label": "Icon / /checkbox/indicator / Variant size=large;emphasis=weak;value=indeterminate;status=default;state=default",
+          "defaultValue": "icon:minus@16"
+        }
+      ]
+    },
+    {
+      "id": "components/TextInput/controls-001",
+      "paths": [
+        "Text / /field/value"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/field/value",
+          "variantIds": [
+            "status=neutral;mode=default;content=value;slots=none",
+            "status=neutral;mode=default;content=value;slots=left",
+            "status=neutral;mode=default;content=value;slots=right",
+            "status=neutral;mode=default;content=value;slots=both",
+            "status=neutral;mode=hover;content=value;slots=none",
+            "status=neutral;mode=focus;content=value;slots=none",
+            "status=neutral;mode=disabled;content=value;slots=none"
+          ],
+          "label": "Text / /field/value",
+          "defaultValue": "Text value"
+        },
+        {
+          "prefix": "Text",
+          "path": "/field/value",
+          "variantIds": [
+            "status=neutral;mode=default;content=placeholder;slots=none",
+            "status=neutral;mode=default;content=placeholder;slots=left",
+            "status=neutral;mode=default;content=placeholder;slots=right",
+            "status=neutral;mode=default;content=placeholder;slots=both"
+          ],
+          "label": "Text / /field/value / Variant status=neutral;mode=default;content=placeholder;slots=none",
+          "defaultValue": "Enter text"
+        }
+      ]
+    },
+    {
+      "id": "components/TextInput/controls-003",
+      "paths": [
+        "Icon / /field/status"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/field/status",
+          "variantIds": [
+            "status=success;mode=disabled;content=value;slots=none",
+            "status=success;mode=read-only;content=value;slots=none"
+          ],
+          "label": "Icon / /field/status",
+          "defaultValue": "icon:check-mark-circle@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/field/status",
+          "variantIds": [
+            "status=error;mode=default;content=value;slots=none",
+            "status=error;mode=hover;content=value;slots=none"
+          ],
+          "label": "Icon / /field/status / Variant status=error;mode=default;content=value;slots=none",
+          "defaultValue": "icon:cross-circle@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Textarea/controls-001",
+      "paths": [
+        "Text / /field/value"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/field/value",
+          "variantIds": [
+            "status=default;mode=default;content=value;clearable=false;slots=none",
+            "status=default;mode=default;content=value;clearable=false;slots=left",
+            "status=default;mode=default;content=value;clearable=false;slots=right",
+            "status=default;mode=default;content=value;clearable=false;slots=both",
+            "status=default;mode=default;content=value;clearable=true;slots=none",
+            "status=default;mode=default;content=value;clearable=true;slots=left",
+            "status=default;mode=default;content=value;clearable=true;slots=right",
+            "status=default;mode=default;content=value;clearable=true;slots=both",
+            "status=default;mode=hover;content=value;clearable=false;slots=none"
+          ],
+          "label": "Text / /field/value",
+          "defaultValue": "A longer description\nwith editable content."
+        },
+        {
+          "prefix": "Text",
+          "path": "/field/value",
+          "variantIds": [
+            "status=default;mode=default;content=placeholder;clearable=false;slots=none",
+            "status=default;mode=default;content=placeholder;clearable=false;slots=left",
+            "status=default;mode=default;content=placeholder;clearable=false;slots=right",
+            "status=default;mode=default;content=placeholder;clearable=false;slots=both",
+            "status=default;mode=default;content=placeholder;clearable=true;slots=none",
+            "status=default;mode=default;content=placeholder;clearable=true;slots=left",
+            "status=default;mode=default;content=placeholder;clearable=true;slots=right",
+            "status=default;mode=default;content=placeholder;clearable=true;slots=both"
+          ],
+          "label": "Text / /field/value / Variant status=default;mode=default;content=placeholder;clearable=false;slots=none",
+          "defaultValue": "Enter text"
+        }
+      ]
+    },
+    {
+      "id": "components/Tag/controls-001",
+      "paths": [
+        "Text / /tag/main-content/label"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/tag/main-content/label",
+          "variantIds": [
+            "variant=default;emphasis=strong;size=default;state=default;content=main",
+            "variant=default;emphasis=strong;size=default;state=hover;content=main",
+            "variant=default;emphasis=strong;size=small;state=default;content=main",
+            "variant=default;emphasis=strong;size=small;state=hover;content=main",
+            "variant=default;emphasis=weak;size=default;state=default;content=main",
+            "variant=default;emphasis=weak;size=default;state=hover;content=main",
+            "variant=default;emphasis=weak;size=small;state=default;content=main",
+            "variant=default;emphasis=weak;size=small;state=hover;content=main",
+            "variant=highlight;emphasis=strong;size=default;state=default;content=main",
+            "variant=highlight;emphasis=strong;size=default;state=hover;content=main"
+          ],
+          "label": "Text / /tag/main-content/label",
+          "defaultValue": "Design"
+        },
+        {
+          "prefix": "Text",
+          "path": "/tag/main-content/label",
+          "variantIds": [
+            "variant=default;emphasis=strong;size=default;state=default;content=hover",
+            "variant=default;emphasis=strong;size=default;state=hover;content=hover",
+            "variant=default;emphasis=strong;size=small;state=default;content=hover",
+            "variant=default;emphasis=strong;size=small;state=hover;content=hover",
+            "variant=default;emphasis=weak;size=default;state=default;content=hover",
+            "variant=default;emphasis=weak;size=default;state=hover;content=hover",
+            "variant=default;emphasis=weak;size=small;state=default;content=hover",
+            "variant=default;emphasis=weak;size=small;state=hover;content=hover",
+            "variant=highlight;emphasis=strong;size=default;state=default;content=hover",
+            "variant=highlight;emphasis=strong;size=default;state=hover;content=hover"
+          ],
+          "label": "Text / /tag/main-content/label / Variant variant=default;emphasis=strong;size=default;state=default;content=hover",
+          "defaultValue": "Remove from list"
+        }
+      ]
+    },
+    {
+      "id": "components/Tag/controls-002",
+      "paths": [
+        "Text / /tag/main-content/label"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/tag/main-content/label",
+          "variantIds": [
+            "variant=highlight;emphasis=strong;size=small;state=default;content=main",
+            "variant=highlight;emphasis=strong;size=small;state=hover;content=main",
+            "variant=highlight;emphasis=weak;size=default;state=default;content=main",
+            "variant=highlight;emphasis=weak;size=default;state=hover;content=main",
+            "variant=highlight;emphasis=weak;size=small;state=default;content=main",
+            "variant=highlight;emphasis=weak;size=small;state=hover;content=main"
+          ],
+          "label": "Text / /tag/main-content/label",
+          "defaultValue": "Design"
+        },
+        {
+          "prefix": "Text",
+          "path": "/tag/main-content/label",
+          "variantIds": [
+            "variant=highlight;emphasis=strong;size=small;state=default;content=hover",
+            "variant=highlight;emphasis=strong;size=small;state=hover;content=hover",
+            "variant=highlight;emphasis=weak;size=default;state=default;content=hover",
+            "variant=highlight;emphasis=weak;size=default;state=hover;content=hover",
+            "variant=highlight;emphasis=weak;size=small;state=default;content=hover",
+            "variant=highlight;emphasis=weak;size=small;state=hover;content=hover"
+          ],
+          "label": "Text / /tag/main-content/label / Variant variant=highlight;emphasis=strong;size=small;state=default;content=hover",
+          "defaultValue": "Remove from list"
+        }
+      ]
+    },
+    {
+      "id": "components/Notice/controls-001",
+      "paths": [
+        "Icon / /notice/leading-icon",
+        "Icon / /notice/dismiss"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/notice/leading-icon",
+          "variantIds": [
+            "variant=default;emphasis=default;size=medium;alignContent=center",
+            "variant=default;emphasis=default;size=medium;alignContent=top",
+            "variant=default;emphasis=strong;size=medium;alignContent=center",
+            "variant=default;emphasis=strong;size=medium;alignContent=top",
+            "variant=default;emphasis=weak;size=medium;alignContent=center",
+            "variant=default;emphasis=weak;size=medium;alignContent=top",
+            "variant=highlight;emphasis=default;size=medium;alignContent=center",
+            "variant=highlight;emphasis=default;size=medium;alignContent=top",
+            "variant=highlight;emphasis=strong;size=medium;alignContent=center",
+            "variant=highlight;emphasis=strong;size=medium;alignContent=top",
+            "variant=highlight;emphasis=weak;size=medium;alignContent=center",
+            "variant=highlight;emphasis=weak;size=medium;alignContent=top",
+            "variant=positive;emphasis=default;size=medium;alignContent=center",
+            "variant=positive;emphasis=default;size=medium;alignContent=top",
+            "variant=positive;emphasis=strong;size=medium;alignContent=center",
+            "variant=positive;emphasis=strong;size=medium;alignContent=top"
+          ],
+          "label": "Icon / /notice/leading-icon",
+          "defaultValue": "icon:info@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/notice/leading-icon",
+          "variantIds": [
+            "variant=default;emphasis=default;size=large;alignContent=center",
+            "variant=default;emphasis=default;size=large;alignContent=top",
+            "variant=default;emphasis=strong;size=large;alignContent=center",
+            "variant=default;emphasis=strong;size=large;alignContent=top",
+            "variant=default;emphasis=weak;size=large;alignContent=center",
+            "variant=default;emphasis=weak;size=large;alignContent=top",
+            "variant=highlight;emphasis=default;size=large;alignContent=center",
+            "variant=highlight;emphasis=default;size=large;alignContent=top",
+            "variant=highlight;emphasis=strong;size=large;alignContent=center",
+            "variant=highlight;emphasis=strong;size=large;alignContent=top",
+            "variant=highlight;emphasis=weak;size=large;alignContent=center",
+            "variant=highlight;emphasis=weak;size=large;alignContent=top",
+            "variant=positive;emphasis=default;size=large;alignContent=center",
+            "variant=positive;emphasis=default;size=large;alignContent=top"
+          ],
+          "label": "Icon / /notice/leading-icon / Variant variant=default;emphasis=default;size=large;alignContent=center",
+          "defaultValue": "icon:info@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/notice/dismiss",
+          "variantIds": [
+            "variant=default;emphasis=default;size=medium;alignContent=center",
+            "variant=default;emphasis=default;size=medium;alignContent=top",
+            "variant=default;emphasis=strong;size=medium;alignContent=center",
+            "variant=default;emphasis=strong;size=medium;alignContent=top",
+            "variant=default;emphasis=weak;size=medium;alignContent=center",
+            "variant=default;emphasis=weak;size=medium;alignContent=top",
+            "variant=highlight;emphasis=default;size=medium;alignContent=center",
+            "variant=highlight;emphasis=default;size=medium;alignContent=top",
+            "variant=highlight;emphasis=strong;size=medium;alignContent=center",
+            "variant=highlight;emphasis=strong;size=medium;alignContent=top",
+            "variant=highlight;emphasis=weak;size=medium;alignContent=center",
+            "variant=highlight;emphasis=weak;size=medium;alignContent=top",
+            "variant=positive;emphasis=default;size=medium;alignContent=center",
+            "variant=positive;emphasis=default;size=medium;alignContent=top",
+            "variant=positive;emphasis=strong;size=medium;alignContent=center",
+            "variant=positive;emphasis=strong;size=medium;alignContent=top"
+          ],
+          "label": "Icon / /notice/dismiss",
+          "defaultValue": "icon:cross@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/notice/dismiss",
+          "variantIds": [
+            "variant=default;emphasis=default;size=large;alignContent=center",
+            "variant=default;emphasis=default;size=large;alignContent=top",
+            "variant=default;emphasis=strong;size=large;alignContent=center",
+            "variant=default;emphasis=strong;size=large;alignContent=top",
+            "variant=default;emphasis=weak;size=large;alignContent=center",
+            "variant=default;emphasis=weak;size=large;alignContent=top",
+            "variant=highlight;emphasis=default;size=large;alignContent=center",
+            "variant=highlight;emphasis=default;size=large;alignContent=top",
+            "variant=highlight;emphasis=strong;size=large;alignContent=center",
+            "variant=highlight;emphasis=strong;size=large;alignContent=top",
+            "variant=highlight;emphasis=weak;size=large;alignContent=center",
+            "variant=highlight;emphasis=weak;size=large;alignContent=top",
+            "variant=positive;emphasis=default;size=large;alignContent=center",
+            "variant=positive;emphasis=default;size=large;alignContent=top"
+          ],
+          "label": "Icon / /notice/dismiss / Variant variant=default;emphasis=default;size=large;alignContent=center",
+          "defaultValue": "icon:cross@20"
+        }
+      ]
+    },
+    {
+      "id": "components/Notice/controls-002",
+      "paths": [
+        "Icon / /notice/leading-icon",
+        "Icon / /notice/dismiss"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/notice/leading-icon",
+          "variantIds": [
+            "variant=positive;emphasis=strong;size=large;alignContent=center",
+            "variant=positive;emphasis=strong;size=large;alignContent=top",
+            "variant=positive;emphasis=weak;size=large;alignContent=center",
+            "variant=positive;emphasis=weak;size=large;alignContent=top",
+            "variant=danger;emphasis=default;size=large;alignContent=center",
+            "variant=danger;emphasis=default;size=large;alignContent=top",
+            "variant=danger;emphasis=strong;size=large;alignContent=center",
+            "variant=danger;emphasis=strong;size=large;alignContent=top",
+            "variant=danger;emphasis=weak;size=large;alignContent=center",
+            "variant=danger;emphasis=weak;size=large;alignContent=top",
+            "variant=warning;emphasis=default;size=large;alignContent=center",
+            "variant=warning;emphasis=default;size=large;alignContent=top",
+            "variant=warning;emphasis=strong;size=large;alignContent=center",
+            "variant=warning;emphasis=strong;size=large;alignContent=top",
+            "variant=warning;emphasis=weak;size=large;alignContent=center",
+            "variant=warning;emphasis=weak;size=large;alignContent=top"
+          ],
+          "label": "Icon / /notice/leading-icon",
+          "defaultValue": "icon:info@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/notice/leading-icon",
+          "variantIds": [
+            "variant=positive;emphasis=weak;size=medium;alignContent=center",
+            "variant=positive;emphasis=weak;size=medium;alignContent=top",
+            "variant=danger;emphasis=default;size=medium;alignContent=center",
+            "variant=danger;emphasis=default;size=medium;alignContent=top",
+            "variant=danger;emphasis=strong;size=medium;alignContent=center",
+            "variant=danger;emphasis=strong;size=medium;alignContent=top",
+            "variant=danger;emphasis=weak;size=medium;alignContent=center",
+            "variant=danger;emphasis=weak;size=medium;alignContent=top",
+            "variant=warning;emphasis=default;size=medium;alignContent=center",
+            "variant=warning;emphasis=default;size=medium;alignContent=top",
+            "variant=warning;emphasis=strong;size=medium;alignContent=center",
+            "variant=warning;emphasis=strong;size=medium;alignContent=top",
+            "variant=warning;emphasis=weak;size=medium;alignContent=center",
+            "variant=warning;emphasis=weak;size=medium;alignContent=top"
+          ],
+          "label": "Icon / /notice/leading-icon / Variant variant=positive;emphasis=weak;size=medium;alignContent=center",
+          "defaultValue": "icon:info@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/notice/dismiss",
+          "variantIds": [
+            "variant=positive;emphasis=strong;size=large;alignContent=center",
+            "variant=positive;emphasis=strong;size=large;alignContent=top",
+            "variant=positive;emphasis=weak;size=large;alignContent=center",
+            "variant=positive;emphasis=weak;size=large;alignContent=top",
+            "variant=danger;emphasis=default;size=large;alignContent=center",
+            "variant=danger;emphasis=default;size=large;alignContent=top",
+            "variant=danger;emphasis=strong;size=large;alignContent=center",
+            "variant=danger;emphasis=strong;size=large;alignContent=top",
+            "variant=danger;emphasis=weak;size=large;alignContent=center",
+            "variant=danger;emphasis=weak;size=large;alignContent=top",
+            "variant=warning;emphasis=default;size=large;alignContent=center",
+            "variant=warning;emphasis=default;size=large;alignContent=top",
+            "variant=warning;emphasis=strong;size=large;alignContent=center",
+            "variant=warning;emphasis=strong;size=large;alignContent=top",
+            "variant=warning;emphasis=weak;size=large;alignContent=center",
+            "variant=warning;emphasis=weak;size=large;alignContent=top"
+          ],
+          "label": "Icon / /notice/dismiss",
+          "defaultValue": "icon:cross@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/notice/dismiss",
+          "variantIds": [
+            "variant=positive;emphasis=weak;size=medium;alignContent=center",
+            "variant=positive;emphasis=weak;size=medium;alignContent=top",
+            "variant=danger;emphasis=default;size=medium;alignContent=center",
+            "variant=danger;emphasis=default;size=medium;alignContent=top",
+            "variant=danger;emphasis=strong;size=medium;alignContent=center",
+            "variant=danger;emphasis=strong;size=medium;alignContent=top",
+            "variant=danger;emphasis=weak;size=medium;alignContent=center",
+            "variant=danger;emphasis=weak;size=medium;alignContent=top",
+            "variant=warning;emphasis=default;size=medium;alignContent=center",
+            "variant=warning;emphasis=default;size=medium;alignContent=top",
+            "variant=warning;emphasis=strong;size=medium;alignContent=center",
+            "variant=warning;emphasis=strong;size=medium;alignContent=top",
+            "variant=warning;emphasis=weak;size=medium;alignContent=center",
+            "variant=warning;emphasis=weak;size=medium;alignContent=top"
+          ],
+          "label": "Icon / /notice/dismiss / Variant variant=positive;emphasis=weak;size=medium;alignContent=center",
+          "defaultValue": "icon:cross@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Accordion",
+      "paths": [
+        "Icon / /accordion/item/header/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=default;border=true;padding=none;value=;disabled=false",
+            "variant=default;border=true;padding=none;value=;disabled=true",
+            "variant=default;border=true;padding=small;value=;disabled=false",
+            "variant=default;border=true;padding=small;value=;disabled=true",
+            "variant=default;border=true;padding=medium;value=;disabled=false",
+            "variant=default;border=true;padding=medium;value=;disabled=true",
+            "variant=default;border=true;padding=large;value=;disabled=false",
+            "variant=default;border=true;padding=large;value=;disabled=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=default;border=true;padding=none;value=details;disabled=false",
+            "variant=default;border=true;padding=none;value=details;disabled=true",
+            "variant=default;border=true;padding=small;value=details;disabled=false",
+            "variant=default;border=true;padding=small;value=details;disabled=true",
+            "variant=default;border=true;padding=medium;value=details;disabled=false",
+            "variant=default;border=true;padding=medium;value=details;disabled=true",
+            "variant=default;border=true;padding=large;value=details;disabled=false",
+            "variant=default;border=true;padding=large;value=details;disabled=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret / Variant variant=default;border=true;padding=none;value=details;disabled=false",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Accordion.borderless",
+      "paths": [
+        "Icon / /accordion/item/header/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=default;border=false;padding=none;value=;disabled=false",
+            "variant=default;border=false;padding=none;value=;disabled=true",
+            "variant=default;border=false;padding=small;value=;disabled=false",
+            "variant=default;border=false;padding=small;value=;disabled=true",
+            "variant=default;border=false;padding=medium;value=;disabled=false",
+            "variant=default;border=false;padding=medium;value=;disabled=true",
+            "variant=default;border=false;padding=large;value=;disabled=false",
+            "variant=default;border=false;padding=large;value=;disabled=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=default;border=false;padding=none;value=details;disabled=false",
+            "variant=default;border=false;padding=none;value=details;disabled=true",
+            "variant=default;border=false;padding=small;value=details;disabled=false",
+            "variant=default;border=false;padding=small;value=details;disabled=true",
+            "variant=default;border=false;padding=medium;value=details;disabled=false",
+            "variant=default;border=false;padding=medium;value=details;disabled=true",
+            "variant=default;border=false;padding=large;value=details;disabled=false",
+            "variant=default;border=false;padding=large;value=details;disabled=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret / Variant variant=default;border=false;padding=none;value=details;disabled=false",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Accordion.pill",
+      "paths": [
+        "Icon / /accordion/item/header/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=pill;border=false;padding=none;value=;disabled=false",
+            "variant=pill;border=false;padding=none;value=;disabled=true",
+            "variant=pill;border=false;padding=small;value=;disabled=false",
+            "variant=pill;border=false;padding=small;value=;disabled=true",
+            "variant=pill;border=false;padding=medium;value=;disabled=false",
+            "variant=pill;border=false;padding=medium;value=;disabled=true",
+            "variant=pill;border=false;padding=large;value=;disabled=false",
+            "variant=pill;border=false;padding=large;value=;disabled=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=pill;border=false;padding=none;value=details;disabled=false",
+            "variant=pill;border=false;padding=none;value=details;disabled=true",
+            "variant=pill;border=false;padding=small;value=details;disabled=false",
+            "variant=pill;border=false;padding=small;value=details;disabled=true",
+            "variant=pill;border=false;padding=medium;value=details;disabled=false",
+            "variant=pill;border=false;padding=medium;value=details;disabled=true",
+            "variant=pill;border=false;padding=large;value=details;disabled=false",
+            "variant=pill;border=false;padding=large;value=details;disabled=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret / Variant variant=pill;border=false;padding=none;value=details;disabled=false",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Accordion.sticky",
+      "paths": [
+        "Icon / /accordion/item/header/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=default;padding=none;value=;sticky=true",
+            "variant=default;padding=small;value=;sticky=true",
+            "variant=default;padding=medium;value=;sticky=true",
+            "variant=default;padding=large;value=;sticky=true",
+            "variant=pill;padding=none;value=;sticky=true",
+            "variant=pill;padding=small;value=;sticky=true",
+            "variant=pill;padding=medium;value=;sticky=true",
+            "variant=pill;padding=large;value=;sticky=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/accordion/item/header/caret",
+          "variantIds": [
+            "variant=default;padding=none;value=details;sticky=true",
+            "variant=default;padding=small;value=details;sticky=true",
+            "variant=default;padding=medium;value=details;sticky=true",
+            "variant=default;padding=large;value=details;sticky=true",
+            "variant=pill;padding=none;value=details;sticky=true",
+            "variant=pill;padding=small;value=details;sticky=true",
+            "variant=pill;padding=medium;value=details;sticky=true",
+            "variant=pill;padding=large;value=details;sticky=true"
+          ],
+          "label": "Icon / /accordion/item/header/caret / Variant variant=default;padding=none;value=details;sticky=true",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Dropdown.Item",
+      "paths": [
+        "Icon / /item/left-icon"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/item/left-icon",
+          "variantIds": [
+            "emphasis=default;disabled=false;state=default",
+            "emphasis=default;disabled=false;state=hover",
+            "emphasis=default;disabled=false;state=active",
+            "emphasis=default;disabled=true;state=default",
+            "emphasis=default;disabled=true;state=hover",
+            "emphasis=default;disabled=true;state=active"
+          ],
+          "label": "Icon / /item/left-icon",
+          "defaultValue": "icon:pen@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/item/left-icon",
+          "variantIds": [
+            "emphasis=danger;disabled=false;state=default",
+            "emphasis=danger;disabled=false;state=hover",
+            "emphasis=danger;disabled=false;state=active",
+            "emphasis=danger;disabled=true;state=default",
+            "emphasis=danger;disabled=true;state=hover",
+            "emphasis=danger;disabled=true;state=active"
+          ],
+          "label": "Icon / /item/left-icon / Variant emphasis=danger;disabled=false;state=default",
+          "defaultValue": "icon:trash-bin@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Select",
+      "paths": [
+        "Text / /select/value",
+        "Icon / /select/status"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/select/value",
+          "variantIds": [
+            "disabled=false;status=default;value=",
+            "disabled=false;status=success;value=",
+            "disabled=false;status=error;value=",
+            "disabled=true;status=default;value=",
+            "disabled=true;status=success;value=",
+            "disabled=true;status=error;value="
+          ],
+          "label": "Text / /select/value",
+          "defaultValue": "Select a category"
+        },
+        {
+          "prefix": "Text",
+          "path": "/select/value",
+          "variantIds": [
+            "disabled=false;status=default;value=brand-assets",
+            "disabled=false;status=success;value=brand-assets",
+            "disabled=false;status=error;value=brand-assets",
+            "disabled=true;status=default;value=brand-assets",
+            "disabled=true;status=success;value=brand-assets",
+            "disabled=true;status=error;value=brand-assets"
+          ],
+          "label": "Text / /select/value / Variant disabled=false;status=default;value=brand-assets",
+          "defaultValue": "Brand assets"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/select/status",
+          "variantIds": [
+            "disabled=false;status=success;value=",
+            "disabled=false;status=success;value=brand-assets",
+            "disabled=true;status=success;value=",
+            "disabled=true;status=success;value=brand-assets"
+          ],
+          "label": "Icon / /select/status",
+          "defaultValue": "icon:check-mark-circle@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/select/status",
+          "variantIds": [
+            "disabled=false;status=error;value=",
+            "disabled=false;status=error;value=brand-assets",
+            "disabled=true;status=error;value=",
+            "disabled=true;status=error;value=brand-assets"
+          ],
+          "label": "Icon / /select/status / Variant disabled=false;status=error;value=",
+          "defaultValue": "icon:exclamation-mark-circle@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Select.Multiple",
+      "paths": [
+        "Icon / /select/status"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/select/status",
+          "variantIds": [
+            "disabled=false;status=success;value=",
+            "disabled=false;status=success;value=brand-assets",
+            "disabled=true;status=success;value=",
+            "disabled=true;status=success;value=brand-assets"
+          ],
+          "label": "Icon / /select/status",
+          "defaultValue": "icon:check-mark-circle@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/select/status",
+          "variantIds": [
+            "disabled=false;status=error;value=",
+            "disabled=false;status=error;value=brand-assets",
+            "disabled=true;status=error;value=",
+            "disabled=true;status=error;value=brand-assets"
+          ],
+          "label": "Icon / /select/status / Variant disabled=false;status=error;value=",
+          "defaultValue": "icon:exclamation-mark-circle@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Select.Combobox",
+      "paths": [
+        "Text / /select/value",
+        "Icon / /select/status"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/select/value",
+          "variantIds": [
+            "disabled=false;status=default;value=",
+            "disabled=false;status=success;value=",
+            "disabled=false;status=error;value=",
+            "disabled=true;status=default;value=",
+            "disabled=true;status=success;value=",
+            "disabled=true;status=error;value="
+          ],
+          "label": "Text / /select/value",
+          "defaultValue": "Search categories"
+        },
+        {
+          "prefix": "Text",
+          "path": "/select/value",
+          "variantIds": [
+            "disabled=false;status=default;value=brand-assets",
+            "disabled=false;status=success;value=brand-assets",
+            "disabled=false;status=error;value=brand-assets",
+            "disabled=true;status=default;value=brand-assets",
+            "disabled=true;status=success;value=brand-assets",
+            "disabled=true;status=error;value=brand-assets"
+          ],
+          "label": "Text / /select/value / Variant disabled=false;status=default;value=brand-assets",
+          "defaultValue": "Brand assets"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/select/status",
+          "variantIds": [
+            "disabled=false;status=success;value=",
+            "disabled=false;status=success;value=brand-assets",
+            "disabled=true;status=success;value=",
+            "disabled=true;status=success;value=brand-assets"
+          ],
+          "label": "Icon / /select/status",
+          "defaultValue": "icon:check-mark-circle@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/select/status",
+          "variantIds": [
+            "disabled=false;status=error;value=",
+            "disabled=false;status=error;value=brand-assets",
+            "disabled=true;status=error;value=",
+            "disabled=true;status=error;value=brand-assets"
+          ],
+          "label": "Icon / /select/status / Variant disabled=false;status=error;value=",
+          "defaultValue": "icon:exclamation-mark-circle@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Select.Item",
+      "paths": [
+        "Icon / /item/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/item/indicator",
+          "variantIds": [
+            "state=selected"
+          ],
+          "label": "Icon / /item/indicator",
+          "defaultValue": "icon:check-mark@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/item/indicator",
+          "variantIds": [
+            "state=indeterminate"
+          ],
+          "label": "Icon / /item/indicator / Variant state=indeterminate",
+          "defaultValue": "icon:minus@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Table.HeaderCell",
+      "paths": [
+        "Icon / /header-cell/contents/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/header-cell/contents/indicator",
+          "variantIds": [
+            "sortDirection=none;state=idle;align=left",
+            "sortDirection=none;state=idle;align=center",
+            "sortDirection=none;state=idle;align=right"
+          ],
+          "label": "Icon / /header-cell/contents/indicator",
+          "defaultValue": "icon:arrow-bidirectional@12"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/header-cell/contents/indicator",
+          "variantIds": [
+            "sortDirection=none;state=loading;align=left",
+            "sortDirection=none;state=loading;align=center",
+            "sortDirection=none;state=loading;align=right",
+            "sortDirection=ascending;state=loading;align=left",
+            "sortDirection=ascending;state=loading;align=center",
+            "sortDirection=ascending;state=loading;align=right",
+            "sortDirection=descending;state=loading;align=left",
+            "sortDirection=descending;state=loading;align=center",
+            "sortDirection=descending;state=loading;align=right"
+          ],
+          "label": "Icon / /header-cell/contents/indicator / Variant sortDirection=none;state=loading;align=left",
+          "defaultValue": "icon:arrow-spin-right@12"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/header-cell/contents/indicator",
+          "variantIds": [
+            "sortDirection=ascending;state=idle;align=left",
+            "sortDirection=ascending;state=idle;align=center",
+            "sortDirection=ascending;state=idle;align=right"
+          ],
+          "label": "Icon / /header-cell/contents/indicator / Variant sortDirection=ascending;state=idle;align=left",
+          "defaultValue": "icon:arrow-up@12"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/header-cell/contents/indicator",
+          "variantIds": [
+            "sortDirection=descending;state=idle;align=left",
+            "sortDirection=descending;state=idle;align=center",
+            "sortDirection=descending;state=idle;align=right"
+          ],
+          "label": "Icon / /header-cell/contents/indicator / Variant sortDirection=descending;state=idle;align=left",
+          "defaultValue": "icon:arrow-down@12"
+        }
+      ]
+    },
+    {
+      "id": "components/Tabs",
+      "paths": [
+        "Text / /tabs/content/content"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/tabs/content/content",
+          "variantIds": [
+            "variant=default;size=medium;activeTab=overview;padding=none",
+            "variant=default;size=medium;activeTab=overview;padding=comfortable",
+            "variant=default;size=large;activeTab=overview;padding=none",
+            "variant=default;size=large;activeTab=overview;padding=comfortable",
+            "variant=pill;size=medium;activeTab=overview;padding=none",
+            "variant=pill;size=medium;activeTab=overview;padding=comfortable",
+            "variant=pill;size=large;activeTab=overview;padding=none",
+            "variant=pill;size=large;activeTab=overview;padding=comfortable"
+          ],
+          "label": "Text / /tabs/content/content",
+          "defaultValue": "Collection overview"
+        },
+        {
+          "prefix": "Text",
+          "path": "/tabs/content/content",
+          "variantIds": [
+            "variant=default;size=medium;activeTab=assets;padding=none",
+            "variant=default;size=medium;activeTab=assets;padding=comfortable",
+            "variant=default;size=large;activeTab=assets;padding=none",
+            "variant=default;size=large;activeTab=assets;padding=comfortable",
+            "variant=pill;size=medium;activeTab=assets;padding=none",
+            "variant=pill;size=medium;activeTab=assets;padding=comfortable",
+            "variant=pill;size=large;activeTab=assets;padding=none",
+            "variant=pill;size=large;activeTab=assets;padding=comfortable"
+          ],
+          "label": "Text / /tabs/content/content / Variant variant=default;size=medium;activeTab=assets;padding=none",
+          "defaultValue": "Approved assets"
+        }
+      ]
+    },
+    {
+      "id": "components/Tree",
+      "paths": [
+        "Icon / /tree/row/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/tree/row/caret",
+          "variantIds": [
+            "multiSelect=false;reorderable=false;isExpanded=false",
+            "multiSelect=false;reorderable=true;isExpanded=false",
+            "multiSelect=true;reorderable=false;isExpanded=false",
+            "multiSelect=true;reorderable=true;isExpanded=false"
+          ],
+          "label": "Icon / /tree/row/caret",
+          "defaultValue": "icon:caret-right@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/tree/row/caret",
+          "variantIds": [
+            "multiSelect=false;reorderable=false;isExpanded=true",
+            "multiSelect=false;reorderable=true;isExpanded=true",
+            "multiSelect=true;reorderable=false;isExpanded=true",
+            "multiSelect=true;reorderable=true;isExpanded=true"
+          ],
+          "label": "Icon / /tree/row/caret / Variant multiSelect=false;reorderable=false;isExpanded=true",
+          "defaultValue": "icon:caret-down@16"
+        }
+      ]
+    },
+    {
+      "id": "components/Tree.Item",
+      "paths": [
+        "Icon / /item/checkbox/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/item/checkbox/indicator",
+          "variantIds": [
+            "isSelected=true;isDisabled=false;isRenaming=false",
+            "isSelected=true;isDisabled=false;isRenaming=true",
+            "isSelected=true;isDisabled=true;isRenaming=false",
+            "isSelected=true;isDisabled=true;isRenaming=true"
+          ],
+          "label": "Icon / /item/checkbox/indicator",
+          "defaultValue": "icon:check-mark@12"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/item/checkbox/indicator",
+          "variantIds": [
+            "isSelected=indeterminate;isDisabled=false;isRenaming=false",
+            "isSelected=indeterminate;isDisabled=false;isRenaming=true",
+            "isSelected=indeterminate;isDisabled=true;isRenaming=false",
+            "isSelected=indeterminate;isDisabled=true;isRenaming=true"
+          ],
+          "label": "Icon / /item/checkbox/indicator / Variant isSelected=indeterminate;isDisabled=false;isRenaming=false",
+          "defaultValue": "icon:minus@12"
+        }
+      ]
+    },
+    {
+      "id": "components/Tree.Folder",
+      "paths": [
+        "Icon / /row/caret",
+        "Icon / /row/checkbox/indicator"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/row/caret",
+          "variantIds": [
+            "isExpanded=false;isSelected=false;isDisabled=false",
+            "isExpanded=false;isSelected=false;isDisabled=true",
+            "isExpanded=false;isSelected=true;isDisabled=false",
+            "isExpanded=false;isSelected=true;isDisabled=true",
+            "isExpanded=false;isSelected=indeterminate;isDisabled=false",
+            "isExpanded=false;isSelected=indeterminate;isDisabled=true"
+          ],
+          "label": "Icon / /row/caret",
+          "defaultValue": "icon:caret-right@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/row/caret",
+          "variantIds": [
+            "isExpanded=true;isSelected=false;isDisabled=false",
+            "isExpanded=true;isSelected=false;isDisabled=true",
+            "isExpanded=true;isSelected=true;isDisabled=false",
+            "isExpanded=true;isSelected=true;isDisabled=true",
+            "isExpanded=true;isSelected=indeterminate;isDisabled=false",
+            "isExpanded=true;isSelected=indeterminate;isDisabled=true"
+          ],
+          "label": "Icon / /row/caret / Variant isExpanded=true;isSelected=false;isDisabled=false",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/row/checkbox/indicator",
+          "variantIds": [
+            "isExpanded=false;isSelected=true;isDisabled=false",
+            "isExpanded=false;isSelected=true;isDisabled=true",
+            "isExpanded=true;isSelected=true;isDisabled=false",
+            "isExpanded=true;isSelected=true;isDisabled=true"
+          ],
+          "label": "Icon / /row/checkbox/indicator",
+          "defaultValue": "icon:check-mark@12"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/row/checkbox/indicator",
+          "variantIds": [
+            "isExpanded=false;isSelected=indeterminate;isDisabled=false",
+            "isExpanded=false;isSelected=indeterminate;isDisabled=true",
+            "isExpanded=true;isSelected=indeterminate;isDisabled=false",
+            "isExpanded=true;isSelected=indeterminate;isDisabled=true"
+          ],
+          "label": "Icon / /row/checkbox/indicator / Variant isExpanded=false;isSelected=indeterminate;isDisabled=false",
+          "defaultValue": "icon:minus@12"
+        }
+      ]
+    },
+    {
+      "id": "components/AssetInput",
+      "paths": [
+        "Icon / /asset-input/preview/asset-icon",
+        "Icon / /asset-input/content/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/asset-input/preview/asset-icon",
+          "variantIds": [
+            "orientation=horizontal;isOpen=false",
+            "orientation=horizontal;isOpen=true"
+          ],
+          "label": "Icon / /asset-input/preview/asset-icon",
+          "defaultValue": "icon:document@24"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/asset-input/preview/asset-icon",
+          "variantIds": [
+            "orientation=vertical;isOpen=false",
+            "orientation=vertical;isOpen=true"
+          ],
+          "label": "Icon / /asset-input/preview/asset-icon / Variant orientation=vertical;isOpen=false",
+          "defaultValue": "icon:document@32"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/asset-input/content/caret",
+          "variantIds": [
+            "orientation=horizontal;isOpen=false",
+            "orientation=vertical;isOpen=false"
+          ],
+          "label": "Icon / /asset-input/content/caret",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/asset-input/content/caret",
+          "variantIds": [
+            "orientation=horizontal;isOpen=true",
+            "orientation=vertical;isOpen=true"
+          ],
+          "label": "Icon / /asset-input/content/caret / Variant orientation=horizontal;isOpen=true",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "components/DatePicker.Input",
+      "paths": [
+        "Text / /date-input/date",
+        "Icon / /date-input/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/date-input/date",
+          "variantIds": [
+            "disabled=false;isOpen=false;selected=",
+            "disabled=false;isOpen=true;selected=",
+            "disabled=true;isOpen=false;selected=",
+            "disabled=true;isOpen=true;selected="
+          ],
+          "label": "Text / /date-input/date",
+          "defaultValue": "Select a date"
+        },
+        {
+          "prefix": "Text",
+          "path": "/date-input/date",
+          "variantIds": [
+            "disabled=false;isOpen=false;selected=2026-10-30",
+            "disabled=false;isOpen=true;selected=2026-10-30",
+            "disabled=true;isOpen=false;selected=2026-10-30",
+            "disabled=true;isOpen=true;selected=2026-10-30"
+          ],
+          "label": "Text / /date-input/date / Variant disabled=false;isOpen=false;selected=2026-10-30",
+          "defaultValue": "Oct 30, 2026"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/date-input/caret",
+          "variantIds": [
+            "disabled=false;isOpen=false;selected=",
+            "disabled=false;isOpen=false;selected=2026-10-30",
+            "disabled=true;isOpen=false;selected=",
+            "disabled=true;isOpen=false;selected=2026-10-30"
+          ],
+          "label": "Icon / /date-input/caret",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/date-input/caret",
+          "variantIds": [
+            "disabled=false;isOpen=true;selected=",
+            "disabled=false;isOpen=true;selected=2026-10-30",
+            "disabled=true;isOpen=true;selected=",
+            "disabled=true;isOpen=true;selected=2026-10-30"
+          ],
+          "label": "Icon / /date-input/caret / Variant disabled=false;isOpen=true;selected=",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "components/ColorPicker",
+      "paths": [
+        "Text / /color-picker/values/format/value"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/color-picker/values/format/value",
+          "variantIds": [
+            "currentFormat=HEX"
+          ],
+          "label": "Text / /color-picker/values/format/value",
+          "defaultValue": "HEX"
+        },
+        {
+          "prefix": "Text",
+          "path": "/color-picker/values/format/value",
+          "variantIds": [
+            "currentFormat=RGBA"
+          ],
+          "label": "Text / /color-picker/values/format/value / Variant currentFormat=RGBA",
+          "defaultValue": "RGBA"
+        }
+      ]
+    },
+    {
+      "id": "components/ColorPicker.Values",
+      "paths": [
+        "Text / /values/format/value"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/values/format/value",
+          "variantIds": [
+            "currentFormat=HEX"
+          ],
+          "label": "Text / /values/format/value",
+          "defaultValue": "HEX"
+        },
+        {
+          "prefix": "Text",
+          "path": "/values/format/value",
+          "variantIds": [
+            "currentFormat=RGBA"
+          ],
+          "label": "Text / /values/format/value / Variant currentFormat=RGBA",
+          "defaultValue": "RGBA"
+        }
+      ]
+    },
+    {
+      "id": "components/ColorPicker.Input",
+      "paths": [
+        "Text / /color-input/color-name",
+        "Icon / /color-input/caret"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/color-input/color-name",
+          "variantIds": [
+            "disabled=false;isOpen=false;currentColor=empty",
+            "disabled=false;isOpen=true;currentColor=empty",
+            "disabled=true;isOpen=false;currentColor=empty",
+            "disabled=true;isOpen=true;currentColor=empty"
+          ],
+          "label": "Text / /color-input/color-name",
+          "defaultValue": "Select a color"
+        },
+        {
+          "prefix": "Text",
+          "path": "/color-input/color-name",
+          "variantIds": [
+            "disabled=false;isOpen=false;currentColor=red",
+            "disabled=false;isOpen=true;currentColor=red",
+            "disabled=true;isOpen=false;currentColor=red",
+            "disabled=true;isOpen=true;currentColor=red"
+          ],
+          "label": "Text / /color-input/color-name / Variant disabled=false;isOpen=false;currentColor=red",
+          "defaultValue": "RGBA(255, 0, 0, 1)"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/color-input/caret",
+          "variantIds": [
+            "disabled=false;isOpen=false;currentColor=empty",
+            "disabled=false;isOpen=false;currentColor=red",
+            "disabled=true;isOpen=false;currentColor=empty",
+            "disabled=true;isOpen=false;currentColor=red"
+          ],
+          "label": "Icon / /color-input/caret",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/color-input/caret",
+          "variantIds": [
+            "disabled=false;isOpen=true;currentColor=empty",
+            "disabled=false;isOpen=true;currentColor=red",
+            "disabled=true;isOpen=true;currentColor=empty",
+            "disabled=true;isOpen=true;currentColor=red"
+          ],
+          "label": "Icon / /color-input/caret / Variant disabled=false;isOpen=true;currentColor=empty",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "components/AssetInput/image-preview",
+      "paths": [
+        "Text / /asset-input-image/content/labels/title",
+        "Icon / /asset-input-image/content/caret/caret-icon"
+      ],
+      "groups": [
+        {
+          "prefix": "Text",
+          "path": "/asset-input-image/content/labels/title",
+          "variantIds": [
+            "orientation=horizontal;isOpen=false"
+          ],
+          "label": "Text / /asset-input-image/content/labels/title",
+          "defaultValue": "MacBook-Pro-03-Standard-Mockup-Remastered.jpg"
+        },
+        {
+          "prefix": "Text",
+          "path": "/asset-input-image/content/labels/title",
+          "variantIds": [
+            "orientation=horizontal;isOpen=true"
+          ],
+          "label": "Text / /asset-input-image/content/labels/title / Variant orientation=horizontal;isOpen=true",
+          "defaultValue": "BL01.jpg"
+        },
+        {
+          "prefix": "Text",
+          "path": "/asset-input-image/content/labels/title",
+          "variantIds": [
+            "orientation=vertical;isOpen=false"
+          ],
+          "label": "Text / /asset-input-image/content/labels/title / Variant orientation=vertical;isOpen=false",
+          "defaultValue": "DTS_Grand_Design_Daniel_Farò_Photos_ID4108 by Image Studio by Image Studio.png"
+        },
+        {
+          "prefix": "Text",
+          "path": "/asset-input-image/content/labels/title",
+          "variantIds": [
+            "orientation=vertical;isOpen=true"
+          ],
+          "label": "Text / /asset-input-image/content/labels/title / Variant orientation=vertical;isOpen=true",
+          "defaultValue": "DTS_The_Internet_Fanette_Guilloud_Photos_ID5236 (1) by Image Studio.png"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/asset-input-image/content/caret/caret-icon",
+          "variantIds": [
+            "orientation=horizontal;isOpen=false",
+            "orientation=vertical;isOpen=false"
+          ],
+          "label": "Icon / /asset-input-image/content/caret/caret-icon",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/asset-input-image/content/caret/caret-icon",
+          "variantIds": [
+            "orientation=horizontal;isOpen=true",
+            "orientation=vertical;isOpen=true"
+          ],
+          "label": "Icon / /asset-input-image/content/caret/caret-icon / Variant orientation=horizontal;isOpen=true",
+          "defaultValue": "icon:caret-up@16"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionUserMenu",
+      "paths": [
+        "Icon / /user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
+        "Text / /user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
+        "Icon / /user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
+        "Text / /user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
+        "Icon / /user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
+        "Text / /user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
+        "Icon / /user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
+        "Text / /user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Icon / /user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
+          "defaultValue": "icon:checkbox@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Icon / /user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon / Variant viewport=mobile",
+          "defaultValue": "icon:apps@20"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Text / /user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
+          "defaultValue": "Manage cookie usage"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Text / /user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper / Variant viewport=mobile",
+          "defaultValue": "Connect your apps to Frontify"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Icon / /user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
+          "defaultValue": "icon:report@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Icon / /user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon / Variant viewport=mobile",
+          "defaultValue": "icon:check-mark@20"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Text / /user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
+          "defaultValue": "Access your reports"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Text / /user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper / Variant viewport=mobile",
+          "defaultValue": "Approve or decline requests"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Icon / /user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
+          "defaultValue": "icon:people@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Icon / /user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon / Variant viewport=mobile",
+          "defaultValue": "icon:report@20"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Text / /user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
+          "defaultValue": "Manage tagged people"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Text / /user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper / Variant viewport=mobile",
+          "defaultValue": "Access your reports"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Icon / /user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
+          "defaultValue": "icon:arrow-expand@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Icon / /user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon / Variant viewport=mobile",
+          "defaultValue": "icon:link-box@20"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper",
+          "variantIds": [
+            "viewport=desktop"
+          ],
+          "label": "Text / /user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper",
+          "defaultValue": "Configure your access request"
+        },
+        {
+          "prefix": "Text",
+          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Text / /user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper / Variant viewport=mobile",
+          "defaultValue": "Manage domains and paths"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionEssentialsPaletteList",
+      "paths": [
+        "Icon / /palettes/palette-palette-accent/palette-header/label-group/toggle"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/palettes/palette-palette-accent/palette-header/label-group/toggle",
+          "variantIds": [
+            "viewport=desktop;state=collapsed",
+            "viewport=mobile;state=collapsed"
+          ],
+          "label": "Icon / /palettes/palette-palette-accent/palette-header/label-group/toggle",
+          "defaultValue": "icon:caret-down@12"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/palettes/palette-palette-accent/palette-header/label-group/toggle",
+          "variantIds": [
+            "viewport=desktop;state=expanded",
+            "viewport=mobile;state=expanded"
+          ],
+          "label": "Icon / /palettes/palette-palette-accent/palette-header/label-group/toggle / Variant viewport=desktop;state=expanded",
+          "defaultValue": "icon:caret-up@12"
+        }
+      ]
+    },
+    {
+      "id": "patterns/ProductionAgenticHubContent",
+      "paths": [
+        "Icon / /agentic-content/body/hero/automation-hero/automation-pill/lightning",
+        "Icon / /agentic-content/body/hero/automation-hero/generate-controls/generate/spark"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/agentic-content/body/hero/automation-hero/automation-pill/lightning",
+          "variantIds": [
+            "viewport=desktop",
+            "viewport=tablet"
+          ],
+          "label": "Icon / /agentic-content/body/hero/automation-hero/automation-pill/lightning",
+          "defaultValue": "icon:lightning@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/agentic-content/body/hero/automation-hero/automation-pill/lightning",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Icon / /agentic-content/body/hero/automation-hero/automation-pill/lightning / Variant viewport=mobile",
+          "defaultValue": "icon:lightning@24"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/agentic-content/body/hero/automation-hero/generate-controls/generate/spark",
+          "variantIds": [
+            "viewport=desktop",
+            "viewport=tablet"
+          ],
+          "label": "Icon / /agentic-content/body/hero/automation-hero/generate-controls/generate/spark",
+          "defaultValue": "icon:sparks@20"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/agentic-content/body/hero/automation-hero/generate-controls/generate/spark",
+          "variantIds": [
+            "viewport=mobile"
+          ],
+          "label": "Icon / /agentic-content/body/hero/automation-hero/generate-controls/generate/spark / Variant viewport=mobile",
+          "defaultValue": "icon:sparks@24"
+        }
+      ]
+    }
+  ]
+}

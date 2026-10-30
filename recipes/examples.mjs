@@ -223,7 +223,9 @@ const rail = (page, height = 960) => {
           ? "Libraries"
           : page === "guidelines"
             ? "Guidelines"
-            : "";
+            : page === "essentials"
+              ? "Essentials"
+              : "";
   return frame(
     "rail",
     [
