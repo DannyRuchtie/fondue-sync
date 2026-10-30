@@ -33,14 +33,15 @@ Use a **new dedicated Figma Design test file**. Do not use the upstream token-au
 2. Run Import Fondue. Record generated collection, variable, style, icon, component-set and variant counts, plus every warning or error.
 3. Inspect variable values and alias targets in both supported light/dark modes. Check spacing/radius values against their CSS units.
 4. Inspect text and effect styles, including actual loaded fonts. A fallback warning requires explicit typography review.
-5. Inspect icon vectors at their intended size. Verify that components are native assets rather than image captures.
-6. Visually compare each recipe family and its represented states with the released source/stories. Check text clipping, Auto Layout, fill/stroke bindings, contrast, property semantics and variant arrangement.
-7. Run Validate and inspect any gap/partial status. Resolve failures or record the exact accepted limitations.
-8. Run Import/Compare again without edits. Confirm no duplicate managed assets and no unexpected differences.
-9. Make a small local edit to a managed definition. Run Compare and Update. Confirm drift is reported and the local edit is preserved.
-10. In a disposable test bundle, change a supported definition while keeping stable identities. Apply an update and confirm in-place IDs and supported instance overrides survive.
-11. Remove a definition in the disposable bundle. Confirm it is retained and reported for migration.
-12. Close and reopen the plugin. Confirm the ledger can resume and compare the same file correctly.
+5. Confirm each component family has one native Section containing all of its profile sets and the matching usage guides beside them. Confirm example screens each have their own section and source-backed caption, and icons share an Icons section. Re-run organization and confirm the section, main-component, variant, guide, instance and child IDs are unchanged.
+6. Inspect icon vectors at their intended size. Verify that components are native assets rather than image captures.
+7. Visually compare each recipe family and its represented states with the released source/stories. Check text clipping, Auto Layout, fill/stroke bindings, contrast, property semantics and variant arrangement.
+8. Run Validate and inspect any gap/partial status. Resolve failures or record the exact accepted limitations.
+9. Run Import/Compare again without edits. Confirm no duplicate managed assets and no unexpected differences.
+10. Make a small local edit to a managed definition. Run Compare and Update. Confirm drift is reported and the local edit is preserved.
+11. In a disposable test bundle, change a supported definition while keeping stable identities. Apply an update and confirm in-place IDs and supported instance overrides survive.
+12. Remove a definition in the disposable bundle. Confirm it is retained and reported for migration.
+13. Close and reopen the plugin. Confirm the ledger can resume and compare the same file correctly.
 
 A preview screenshot is useful for appearance but cannot prove bindings, identity preservation or update correctness. Capture those structural results separately.
 

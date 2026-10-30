@@ -126,3 +126,35 @@ test("example structural removals and optical SVG changes require explicit migra
     "icon-optics",
   );
 });
+test("effect and SVG bindings validate referenced native variable roles before mutation", () => {
+  const b = structuredClone(releaseBundle) as unknown as Bundle;
+  const color = b.tokens.find((t) => t.type === "COLOR")!.id;
+  const number = b.tokens.find((t) => t.type === "FLOAT")!.id;
+  b.styles.push({
+    id: "review-effect",
+    type: "EFFECT",
+    name: "review effect",
+    effects: [],
+    effectBindings: [
+      { color: number, radius: color, offsetX: "missing-effect-variable" },
+    ],
+  });
+  b.recipes[0].variants[0].root.children ??= [];
+  b.recipes[0].variants[0].root.children.push({
+    id: "review-svg",
+    kind: "svg",
+    name: "review SVG",
+    svg: "<svg/>",
+    svgPaintBindings: [{ paint: "fill", color: "#ffffff", tokenId: number }],
+  });
+  const problems = bundleProblems(b);
+  assert.ok(problems.some((p) => p.code === "effect-binding-type"));
+  assert.ok(
+    problems.some(
+      (p) =>
+        p.code === "missing-binding" &&
+        p.message.includes("missing-effect-variable"),
+    ),
+  );
+  assert.ok(problems.some((p) => p.code === "svg-color-type"));
+});

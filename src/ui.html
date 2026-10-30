@@ -146,6 +146,9 @@
           return;
         }
         if (m.type === "status") {
+          if (m.lastErrors?.length)
+            el("log").textContent =
+              "Previous update errors:\n" + m.lastErrors.join("\n");
           el("release").textContent =
             "Fondue " + m.release + " · " + m.fingerprint.slice(0, 8);
           el("status").textContent = m.applied
@@ -182,6 +185,13 @@
             2,
           );
           el("log").appendChild(pre);
+          for (const action of r.actions.filter(
+            (a) => a.action === "conflict" || a.action === "missing",
+          )) {
+            const item = document.createElement("p");
+            item.textContent = action.id + ": " + action.reason;
+            el("log").appendChild(item);
+          }
           if (r.complete)
             el("status").textContent =
               "Synchronized source: " +

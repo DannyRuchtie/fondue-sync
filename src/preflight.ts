@@ -147,15 +147,47 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
         visitAlias(value.alias, [...stack, id]);
   };
   for (const token of bundle.tokens) visitAlias(token.id, []);
+  for (const icon of bundle.icons)
+    if (icon.defaultColorToken) {
+      binding(icon.defaultColorToken, icon.id);
+      if (tokens.get(icon.defaultColorToken)?.type !== "COLOR")
+        problem(
+          "icon-color-type",
+          `Icon default paint must target COLOR: ${icon.id}`,
+        );
+    }
   for (const style of bundle.styles) {
     for (const id of Object.values(style.bindings ?? {}))
       binding(id as string, style.id);
     if (style.colorToken) binding(style.colorToken, style.id);
+    for (const [index, map] of (style.effectBindings ?? []).entries())
+      for (const [field, id] of Object.entries(map)) {
+        binding(id as string, style.id + ":" + index + ":" + field);
+        const token = tokens.get(id as string);
+        if (token && token.type !== (field === "color" ? "COLOR" : "FLOAT"))
+          problem(
+            "effect-binding-type",
+            `Wrong effect binding type: ${style.id}/${field}`,
+          );
+      }
   }
   const layer = (node: Layer, context: string) => {
     for (const id of Object.values(node.bindings ?? {}))
       binding(id, context + "/" + node.id);
     if (node.iconColor) binding(node.iconColor, context + "/" + node.id);
+    for (const rule of node.svgPaintBindings ?? []) {
+      binding(rule.tokenId, context + "/" + node.id);
+      if (tokens.get(rule.tokenId)?.type !== "COLOR")
+        problem(
+          "svg-color-type",
+          `SVG paint binding must target a COLOR variable: ${context}/${node.id}`,
+        );
+      if (!/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(rule.color))
+        problem(
+          "svg-color-format",
+          `Invalid SVG source paint selector: ${context}/${node.id}`,
+        );
+    }
     if (node.focusRing) {
       binding(node.focusRing.inner, context + "/" + node.id);
       binding(node.focusRing.outer, context + "/" + node.id);

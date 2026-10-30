@@ -26,6 +26,7 @@ figma.ui.onmessage = async (message: { type: string }) => {
         appliedFingerprint: engine.index.fingerprint ?? null,
         hasManagedAssets: Object.keys(engine.index.assets).length > 0,
         fingerprint: bundle.fingerprint,
+        lastErrors: engine.index.lastErrors ?? [],
         counts: {
           tokens: bundle.tokens.length,
           styles: bundle.styles.length,

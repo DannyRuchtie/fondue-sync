@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { SyncEngine } from "../src/engine";
+import { snapshot } from "../src/snapshot";
 import { read as readMetadata, write as writeMetadata } from "../src/metadata";
 import type { Bundle } from "../src/schema";
 function fixture(): Bundle {
@@ -156,6 +157,26 @@ function mockApi() {
         this.width = w;
         this.height = h;
       },
+      rescale(factor: number) {
+        if (!Number.isFinite(factor) || factor <= 0)
+          throw Error("Invalid native rescale factor");
+        this.rescaleCalls ??= [];
+        this.rescaleCalls.push(factor);
+        if (this.type === "INSTANCE")
+          this.scaleFactor = (this.scaleFactor ?? 1) * factor;
+        const scale = (node: any, root = false) => {
+          node.width *= factor;
+          node.height *= factor;
+          if (!root) {
+            node.x *= factor;
+            node.y *= factor;
+          }
+          if (typeof node.strokeWeight === "number")
+            node.strokeWeight *= factor;
+          for (const child of node.children ?? []) scale(child);
+        };
+        scale(this, true);
+      },
     };
     if (
       [
@@ -178,6 +199,41 @@ function mockApi() {
           ];
         },
       });
+    if (type === "COMPONENT" || type === "COMPONENT_SET") {
+      let documentationLinks: { uri: string }[] = [];
+      Object.defineProperty(obj, "documentationLinks", {
+        configurable: true,
+        get: () => documentationLinks.map((link) => ({ ...link })),
+        set(links: { uri: string }[]) {
+          if (!Array.isArray(links) || links.length > 1)
+            throw Error("Native documentationLinks accepts at most one link");
+          for (const link of links)
+            if (typeof link.uri !== "string")
+              throw Error("documentationLinks requires uri");
+          documentationLinks = links.map((link) => ({ ...link }));
+        },
+      });
+    }
+    if (["FRAME", "COMPONENT"].includes(type)) {
+      let alignment = "MIN";
+      Object.defineProperty(obj, "counterAxisAlignItems", {
+        get: () => alignment,
+        set(value: string) {
+          if (obj.layoutMode === "VERTICAL" && value === "BASELINE")
+            throw Error(
+              "Native BASELINE counter-axis alignment is invalid for vertical Auto Layout",
+            );
+          alignment = value;
+        },
+      });
+    }
+    if (type === "ELLIPSE")
+      Object.defineProperty(obj, "cornerRadius", {
+        get: () => undefined,
+        set() {
+          throw Error("Native EllipseNode has no cornerRadius property");
+        },
+      });
     obj.setEffectStyleIdAsync = async (id: string) => {
       obj.effectStyleId = id;
     };
@@ -197,8 +253,19 @@ function mockApi() {
           },
         });
         let main = o;
+        n.scaleFactor = 1;
         const overrides: Record<string, any> = {};
         n.getMainComponentAsync = async () => main;
+        const ownShared = n.getSharedPluginData,
+          ownSharedKeys = n.getSharedPluginDataKeys;
+        n.getSharedPluginData = (ns: string, key: string) =>
+          ownShared(ns, key) || main.getSharedPluginData(ns, key);
+        n.getSharedPluginDataKeys = (ns: string) => [
+          ...new Set([
+            ...ownSharedKeys(ns),
+            ...main.getSharedPluginDataKeys(ns),
+          ]),
+        ];
         Object.defineProperty(n, "componentProperties", {
           get() {
             return Object.fromEntries(
@@ -250,7 +317,13 @@ function mockApi() {
         };
         const copyMain = () => {
           n.children = [];
-          for (const child of main.children) n.appendChild(clone(child));
+          n.width = main.width * n.scaleFactor;
+          n.height = main.height * n.scaleFactor;
+          for (const child of main.children) {
+            const copy = clone(child);
+            if (n.scaleFactor !== 1) copy.rescale(n.scaleFactor);
+            n.appendChild(copy);
+          }
         };
         n.swapComponent = (next: any) => {
           main = next;
@@ -289,6 +362,30 @@ function mockApi() {
       return n;
     },
     createFrame: () => container("FRAME"),
+    createSection: () => {
+      const n = container("SECTION");
+      n.sectionContentsHidden = false;
+      n.resizeWithoutConstraints = (width: number, height: number) => {
+        if (
+          !Number.isFinite(width) ||
+          !Number.isFinite(height) ||
+          width < 0.01 ||
+          height < 0.01
+        )
+          throw Error("Native section bounds must be finite and >= 0.01");
+        n.width = width;
+        n.height = height;
+      };
+      n.resize = n.resizeWithoutConstraints;
+      Object.defineProperty(n, "layoutMode", {
+        set() {
+          throw Error("Native sections do not support Auto Layout");
+        },
+      });
+      api.currentPage.appendChild(n);
+      return n;
+    },
+
     createRectangle: () => base("RECTANGLE"),
     createEllipse: () => base("ELLIPSE"),
     createText: () => {
@@ -313,18 +410,36 @@ function mockApi() {
       };
       return n;
     },
-    createNodeFromSvg: () => {
+    createNodeFromSvg: (svg: string) => {
       const n = container("FRAME"),
         vector = base("VECTOR");
       vector.fills = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }];
       vector.strokes = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }];
+      const width = Number(svg.match(/\bwidth=["']([\d.]+)/)?.[1] ?? 24),
+        height = Number(svg.match(/\bheight=["']([\d.]+)/)?.[1] ?? width);
+      n.width = vector.width = width;
+      n.height = vector.height = height;
       n.appendChild(vector);
       return n;
     },
     createComponent: () => container("COMPONENT"),
     combineAsVariants: (list: any[], parent: any) => {
       const n = container("COMPONENT_SET");
-      n.componentPropertyDefinitions = {};
+      const definitions: Record<string, any> = {};
+      n.nativePropertyDefinitionReads = [];
+      Object.defineProperty(n, "componentPropertyDefinitions", {
+        get() {
+          const names = n.children.map((child: any) => child.name);
+          n.nativePropertyDefinitionReads.push(names);
+          for (const name of names)
+            for (const part of name.split(",")) {
+              const index = part.indexOf("=");
+              if (index < 1 || !part.slice(index + 1).trim())
+                throw Error("Native invalid or empty variant value: " + name);
+            }
+          return definitions;
+        },
+      });
       n.editComponentProperty = (key: string, props: any) => {
         Object.assign(n.componentPropertyDefinitions[key], props);
         return key;
@@ -585,7 +700,7 @@ test("entire released bundle applies through native API model and repeats withou
     (r) => r.documentation?.origin === "released-metadata",
   )!;
   const set = nodes.get(engine.index.assets["recipe:" + recipe.id].id);
-  assert.equal(set.description, recipe.documentation.description);
+  assert.ok(set.description.includes(recipe.documentation.description));
   assert.ok(set.documentationLinks[0].uri.includes("ebcc9b85"));
   assert.equal(set.children[0].description, set.description);
   assert.ok(engine.index.assets["guide:" + recipe.id]);
@@ -610,7 +725,7 @@ test("native usage documentation changes update in place and local edits are pro
   next.recipes[0].documentation!.description = "Updated guidance";
   const result = await new SyncEngine(api, next).sync();
   assert.equal(result.complete, true);
-  assert.equal(nodes.get(setId).description, "Updated guidance");
+  assert.ok(nodes.get(setId).description.startsWith("Updated guidance"));
   assert.equal(engine.index.assets["guide:components:Test"].id, guideId);
   nodes.get(setId).description = "Local guidance";
   const blocked = await new SyncEngine(api, next).sync();
@@ -791,12 +906,12 @@ test("an interrupted initial SVG import resumes the same managed icon shell with
   ];
   const create = (api as any).createNodeFromSvg;
   let first = true;
-  (api as any).createNodeFromSvg = () => {
+  (api as any).createNodeFromSvg = (svg: string) => {
     if (first) {
       first = false;
       throw Error("Simulated SVG failure");
     }
-    return create();
+    return create(svg);
   };
   const initial = new SyncEngine(api, bundle);
   const failed = await initial.sync();
@@ -1144,4 +1259,376 @@ test("sharded indexes reopen without rewriting unchanged metadata and legacy fla
     () => new SyncEngine(api, bundle),
     /Missing managed index shard/,
   );
+});
+test("native one-link documentation limit cannot abort component generation before the first variant", async () => {
+  const { api, nodes } = mockApi();
+  const bundle = fixture();
+  bundle.recipes[0].documentation = {
+    purpose: "Choose an action",
+    usage: "Use actions",
+    properties: "State",
+    description: "Purpose and usage",
+    origin: "editorial",
+    metadataSource: null,
+    links: [
+      { uri: "https://example.com/docs" },
+      { uri: "https://example.com/source" },
+    ],
+  };
+  const engine = new SyncEngine(api, bundle);
+  const result = await engine.sync();
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.complete, true);
+  const set = nodes.get(engine.index.assets["recipe:components:Test"].id);
+  assert.equal(set.documentationLinks.length, 1);
+  assert.equal(set.children.length, 2);
+  assert.equal(set.children[0].children[0].characters, "Original");
+  assert.ok(
+    set.description.includes("https://example.com/source"),
+    "Additional source links must remain reviewable outside the single native link field.",
+  );
+});
+test("interruption at native documentation assignment retains the managed shell and resumes the same identities", async () => {
+  const { api, nodes } = mockApi();
+  const bundle = fixture();
+  bundle.recipes[0].documentation = {
+    purpose: "Choose an action",
+    usage: "Use actions",
+    properties: "State",
+    description: "Purpose and usage",
+    origin: "editorial",
+    metadataSource: null,
+    links: [{ uri: "https://example.com/docs" }],
+  };
+  const original = api.combineAsVariants;
+  let first = true;
+  (api as any).combineAsVariants = (...args: any[]) => {
+    const set = (original as any)(...args);
+    const property = Object.getOwnPropertyDescriptor(
+      set,
+      "documentationLinks",
+    )!;
+    Object.defineProperty(set, "documentationLinks", {
+      configurable: true,
+      get: property.get,
+      set(value) {
+        if (first) {
+          first = false;
+          throw Error("Simulated native documentation setter interruption");
+        }
+        property.set!.call(set, value);
+      },
+    });
+    return set;
+  };
+  const initial = new SyncEngine(api, bundle);
+  const failed = await initial.sync();
+  assert.equal(failed.complete, false);
+  assert.match(failed.errors[0], /documentation setter interruption/);
+  const setId = initial.index.assets["recipe:components:Test"].id;
+  const set = nodes.get(setId),
+    seedId = set.children[0].id;
+  assert.equal(set.children[0].children.length, 0);
+  const resumed = new SyncEngine(api, bundle);
+  const result = await resumed.sync();
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.complete, true);
+  assert.equal(resumed.index.assets["recipe:components:Test"].id, setId);
+  assert.equal(set.children[0].id, seedId);
+  assert.equal(set.children[0].children[0].characters, "Original");
+});
+
+test("caught legacy partial pattern adopts only its exact saved native instance slot without duplicating it", async () => {
+  const { api, nodes } = mockApi();
+  const bundle = fixture();
+  const pattern: Bundle["recipes"][number] = {
+    id: "patterns/repair",
+    name: "RepairPattern",
+    package: "fondue-sync/patterns",
+    source: ["fixture.tsx"],
+    status: "partial",
+    limitations: [],
+    variants: [
+      {
+        id: "default",
+        props: { State: "Default" },
+        root: {
+          id: "pattern",
+          name: "Pattern",
+          kind: "frame",
+          children: [
+            {
+              id: "control",
+              name: "Control",
+              kind: "componentInstance",
+              recipeId: "components:Test",
+              variantProps: { State: "Default" },
+              text: "Pattern label",
+            },
+          ],
+        },
+      },
+    ],
+  };
+  bundle.recipes.push(pattern);
+  const engine = new SyncEngine(api, bundle);
+  await engine.sync();
+  const set = nodes.get(engine.index.assets["recipe:patterns/repair"].id);
+  const variant = set.children[0],
+    instance = variant.children[0];
+  const ids = [set.id, variant.id, instance.id];
+  writeMetadata(instance, "identity", "");
+  writeMetadata(instance, "component-binding", "");
+  await engine.checkpoint(
+    {
+      id: "recipe:patterns/repair",
+      kind: "recipe",
+      definition: JSON.stringify({ ...pattern, pending: true }),
+    },
+    set,
+  );
+  const repaired = await new SyncEngine(api, bundle).sync();
+  assert.equal(repaired.complete, true);
+  assert.deepEqual([set.id, variant.id, variant.children[0].id], ids);
+  assert.equal(variant.children.length, 1);
+  assert.equal(managedData(instance, "identity"), "control");
+  writeMetadata(instance, "identity", "");
+  await engine.checkpoint(
+    {
+      id: "recipe:patterns/repair",
+      kind: "recipe",
+      definition: JSON.stringify({ ...pattern, pending: true }),
+    },
+    set,
+  );
+  writeMetadata(
+    instance,
+    "data-binding",
+    JSON.stringify({ userEdit: "preserve" }),
+  );
+  const blocked = await new SyncEngine(api, bundle).sync();
+  assert.equal(blocked.counts.conflict, 1);
+  assert.equal(managedData(instance, "identity"), "");
+  assert.equal(
+    JSON.parse(managedData(instance, "data-binding")).userEdit,
+    "preserve",
+  );
+});
+
+test("frame resize restores HUG for the unconstrained axis after native resize makes both axes fixed", async () => {
+  const { api } = mockApi();
+  const bundle = fixture();
+  const engine = new SyncEngine(api, bundle);
+  const parent = api.createFrame();
+  const child = api.createFrame();
+  parent.appendChild(child);
+  const nativeResize = child.resize.bind(child);
+  child.resize = (width: number, height: number) => {
+    nativeResize(width, height);
+    child.primaryAxisSizingMode = "FIXED";
+    child.counterAxisSizingMode = "FIXED";
+  };
+  await engine.layer(
+    {
+      id: "row",
+      kind: "frame",
+      name: "Row",
+      layout: "HORIZONTAL",
+      width: 300,
+      children: [],
+    },
+    parent,
+    child,
+  );
+  assert.equal(child.primaryAxisSizingMode, "FIXED");
+  assert.equal(child.counterAxisSizingMode, "AUTO");
+  await engine.layer(
+    {
+      id: "column",
+      kind: "frame",
+      name: "Column",
+      layout: "VERTICAL",
+      width: 300,
+      children: [],
+    },
+    parent,
+    child,
+  );
+  assert.equal(child.primaryAxisSizingMode, "AUTO");
+  assert.equal(child.counterAxisSizingMode, "FIXED");
+});
+test("empty raw variant values use a native-safe label while exact source props remain in shared metadata", async () => {
+  const { api, nodes } = mockApi();
+  const bundle = fixture();
+  bundle.recipes[0].variants[0].props = { description: "", state: "default" };
+  bundle.recipes[0].variants[1].props = {
+    description: "Details",
+    state: "disabled",
+  };
+  const engine = new SyncEngine(api, bundle);
+  const result = await engine.sync();
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.complete, true);
+  const set = nodes.get(engine.index.assets["recipe:components:Test"].id);
+  assert.ok(set.children[0].name.includes("description=(empty)"));
+  assert.equal(
+    JSON.parse(managedData(set.children[0], "variant-props")).description,
+    "",
+  );
+  assert.ok(
+    set.nativePropertyDefinitionReads
+      .filter((names: string[]) =>
+        names.some((name) => name.includes("description=")),
+      )
+      .every(
+        (names: string[]) =>
+          names.length === 2 &&
+          names.every((name) => name.includes("description=")),
+      ),
+    "Every source variant must be materialized and renamed before native property definitions are read.",
+  );
+});
+test("vertical baseline source alignment is gated before the native setter while horizontal baseline remains supported", async () => {
+  const { api, nodes } = mockApi();
+  const bundle = fixture();
+  for (const v of bundle.recipes[0].variants) {
+    v.root.layout = "VERTICAL";
+    v.root.counterAlign = "BASELINE";
+  }
+  const engine = new SyncEngine(api, bundle);
+  const result = await engine.sync();
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.complete, true);
+  const set = nodes.get(engine.index.assets["recipe:components:Test"].id);
+  assert.equal(set.children[0].counterAxisAlignItems, "MIN");
+  assert.throws(() => {
+    set.children[0].counterAxisAlignItems = "BASELINE";
+  }, /invalid for vertical/);
+});
+test("later inherited main-component identity does not turn an untouched native instance into local drift", async () => {
+  const { api } = mockApi();
+  const main = api.createComponent();
+  main.name = "Source";
+  const instance = main.createInstance();
+  const before = await snapshot(instance);
+  writeMetadata(main, "identity", "source-root");
+  assert.equal(
+    readMetadata(instance, "identity"),
+    "source-root",
+    "Native clone reads inherit main shared data.",
+  );
+  assert.equal(await snapshot(instance), before);
+  writeMetadata(instance, "instance-identity", "authored-slot");
+  assert.notEqual(
+    await snapshot(instance),
+    before,
+    "An authored native instance identity remains meaningful managed state.",
+  );
+});
+test("fallback optical icon scaling changes the glyph, remains idempotent and returns to exact source sizes in place", async () => {
+  const { api, nodes } = mockApi();
+  const bundle = fixture();
+  bundle.icons = [
+    {
+      id: "icon:scale",
+      name: "Scale",
+      svg: '<svg width="24" height="24"/>',
+      source: "24.svg",
+      sizes: [
+        { size: 16, svg: '<svg width="16" height="16"/>', source: "16.svg" },
+        { size: 24, svg: '<svg width="24" height="24"/>', source: "24.svg" },
+      ],
+    },
+  ];
+  bundle.recipes[0].variants[0].root.children!.push({
+    id: "glyph",
+    name: "Glyph",
+    kind: "instance",
+    iconId: "icon:scale",
+    width: 64,
+    height: 64,
+    iconColor: "semantic",
+  });
+  const first = new SyncEngine(api, bundle);
+  const report = await first.sync();
+  assert.deepEqual(report.errors, []);
+  const host = nodes.get(first.index.assets["recipe:components:Test"].id),
+    instance = host.children[0].children[1],
+    id = instance.id;
+  assert.equal((await instance.getMainComponentAsync()).name, "Size=24");
+  assert.equal(instance.scaleFactor, 64 / 24);
+  assert.equal(instance.width, 64);
+  assert.equal(instance.children[0].width, 64);
+  assert.equal(instance.children[0].children[0].width, 64);
+  assert.equal(
+    instance.children[0].children[0].fills[0].boundVariables.color.id,
+    first.index.assets["token:semantic"].id,
+  );
+  const repeat = await new SyncEngine(api, bundle).sync();
+  assert.equal(repeat.complete, true);
+  assert.equal(instance.children[0].width, 64);
+  assert.equal(instance.rescaleCalls.length, 1);
+  const exact = structuredClone(bundle);
+  Object.assign(exact.recipes[0].variants[0].root.children![1], {
+    width: 16,
+    height: 16,
+  });
+  const changed = await new SyncEngine(api, exact).sync();
+  assert.deepEqual(changed.errors, []);
+  assert.equal(instance.id, id);
+  assert.equal((await instance.getMainComponentAsync()).name, "Size=16");
+  assert.equal(instance.scaleFactor, 1);
+  assert.equal(instance.children[0].width, 16);
+});
+test("legacy wrapper-only resize is repaired without detaching or resetting instance overrides", async () => {
+  const { api } = mockApi();
+  const main = api.createComponent();
+  main.resize(24, 24);
+  const vector = api.createRectangle();
+  vector.resize(24, 24);
+  main.appendChild(vector);
+  const node: any = main.createInstance();
+  node.resize(64, 64);
+  node.resetOverrides = () => {
+    throw Error("Do not discard user overrides");
+  };
+  const engine = new SyncEngine(api, fixture());
+  engine.index.assets["icon:icon:legacy"] = { id: main.id, kind: "icon" };
+  const parent: any = api.createFrame();
+  parent.appendChild(node);
+  await engine.layer(
+    {
+      id: "glyph",
+      name: "Glyph",
+      kind: "instance",
+      iconId: "icon:legacy",
+      width: 64,
+      height: 64,
+    },
+    parent,
+    node,
+  );
+  assert.equal(node.width, 64);
+  assert.equal(node.children[0].width, 64);
+  assert.equal(node.scaleFactor, 64 / 24);
+});
+test("ellipse recipe radius does not assign unsupported native cornerRadius", async () => {
+  const { api } = mockApi();
+  const engine = new SyncEngine(api, fixture());
+  const parent = api.createFrame();
+  const ellipse = await engine.layer(
+    {
+      id: "dot",
+      name: "Dot",
+      kind: "ellipse",
+      width: 16,
+      height: 16,
+      radius: 8,
+    },
+    parent,
+  );
+  assert.equal(ellipse.type, "ELLIPSE");
+  assert.throws(() => {
+    ellipse.cornerRadius = 8;
+  }, /no cornerRadius/);
 });

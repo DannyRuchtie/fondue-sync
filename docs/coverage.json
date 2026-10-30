@@ -1,11 +1,14 @@
 {
   "release": "13.11.1",
-  "fingerprint": "9b476d49d0d4a9192199f7b826d9c71dd50f886a5509f9ef5564d7d9ddd0d5e6",
+  "fingerprint": "70d4058bb7aa4dad5a50d1a62643b347e5677102b13b36403692f19dc029391c",
   "counts": {
-    "tokens": 384,
+    "tokens": 415,
+    "releasedTokens": 384,
+    "sourceDerivedNativeTokens": 31,
     "compoundSourceSymbols": 102,
     "stories": 420,
-    "styles": 33,
+    "styles": 37,
+    "sourceDerivedEffectStyles": 4,
     "icons": 420,
     "opticalIconAssets": 2099,
     "inventory": 54,

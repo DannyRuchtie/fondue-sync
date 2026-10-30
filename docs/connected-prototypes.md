@@ -6,15 +6,15 @@ A future exporter should use real Fondue presentation components and attach data
 
 ```mermaid
 flowchart TB
-    F[Composed Figma screen] --> X[Future exporter\nStable component + property mappings]
-    X --> P[Pure Fondue presentation components]
-    X --> C[Connected containers\nNavigation / search / assets]
-    C --> D[Typed domain capabilities]
-    D --> M[Mock provider\nDeterministic fixtures]
-    D --> A[Frontify adapter\nReviewed query registry]
-    A --> B[BFF / server boundary\nConfidential credentials]
-    B --> G[Frontify GraphQL API]
-    Q[Agent discovery / content assistance] --> H[Frontify hosted MCP]
+    F["Composed Figma screen"] --> X["Future exporter<br/>Stable component + property mappings"]
+    X --> P["Pure Fondue presentation components"]
+    X --> C["Connected containers<br/>Navigation / search / assets"]
+    C --> D["Typed domain capabilities"]
+    D --> M["Mock provider<br/>Deterministic fixtures"]
+    D --> A["Frontify adapter<br/>Reviewed query registry"]
+    A --> B["BFF / server boundary<br/>Confidential credentials"]
+    B --> G["Frontify GraphQL API"]
+    Q["Agent discovery / content assistance"] --> H["Frontify hosted MCP"]
     Q -. Supports authoring decisions .-> X
 ```
 

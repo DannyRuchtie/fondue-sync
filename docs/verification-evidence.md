@@ -2,6 +2,8 @@
 
 Date: 2026-10-30 (Europe/Amsterdam).
 
+This is the original delivery checkpoint for `61b40a9`, before native repair. Current runtime and token-binding reconciliation evidence is recorded in [native-runtime-evidence.md](native-runtime-evidence.md). The earlier connected-account access limitation below was resolved by selecting the Frontify account.
+
 ## Released source and artifacts
 
 - Fondue13.11.1 tag, commit `ebcc9b8579a7f862f43a2732f5a5b9c3105e6796`.

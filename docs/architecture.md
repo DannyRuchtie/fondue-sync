@@ -7,32 +7,29 @@ A release bundle is the portable boundary between repository analysis and the Fi
 ```mermaid
 flowchart TB
     subgraph Released repository snapshot
-        C[Public component exports + component source]
-        T[Committed token CSS + themes + JSON + config]
-        I[Native SVG icon source]
-        S[Stories + metadata + package manifests]
+        C["Public component exports + component source"]
+        T["Committed token CSS + themes + JSON + config"]
+        I["Native SVG icon source"]
+        S["Stories + metadata + package manifests"]
     end
-    C --> B[Deterministic release-bundle builder]
+    C --> B["Deterministic release-bundle builder"]
     T --> B
     I --> B
     S --> B
-    R[Reviewed source-controlled native recipes] --> B
-    B --> P[Provenance and input hashes]
-    B --> V[Variables, styles and native SVG assets]
-    B --> N[Recipe layer trees + stable identities]
-    B --> G[Inventory + explicit gaps]
-    P --> J[Versioned bundle JSON]
+    R["Reviewed source-controlled native recipes"] --> B
+    B --> P["Provenance and input hashes"]
+    B --> V["Variables, styles and native SVG assets"]
+    B --> N["Recipe layer trees + stable identities"]
+    B --> G["Inventory + explicit gaps"]
+    P --> J["Versioned bundle JSON"]
     V --> J
     N --> J
     G --> J
-    J --> E[Classic Figma plugin sync engine]
-    E --> F[Native Figma library definitions]
-    F --> A1[Authored patterns
-Nested component instances]
-    A1 --> A2[Example screens
-Editable composed frames]
-    E --> A3[Documentation page
-Descriptions + source links]
+    J --> E["Classic Figma plugin sync engine"]
+    E --> F["Native Figma library definitions"]
+    F --> A1["Authored patterns<br/>Nested component instances"]
+    A1 --> A2["Example screens<br/>Editable composed frames"]
+    E --> A3["Native type sections<br/>Existing sets + adjacent usage guides"]
 ```
 
 There is no incoming arrow from live Figma tokens. Fondue may author tokens in Figma upstream; that upstream pipeline remains separate. The sync builder consumes the generated outputs included with the chosen release. It does not run `packages/tokens/src/buildTokens.ts`, fetch the upstream token file, or require its edit permissions.
@@ -75,13 +72,13 @@ A code-only provider is recorded as such. It must not become a fake component co
 
 ```mermaid
 flowchart LR
-    A[Last applied definition and fingerprint] --> D[Three-way comparison]
-    B[Target release bundle] --> D
-    C[Current managed Figma state] --> D
-    D --> E[Unchanged: keep identity]
-    D --> F[Compatible change: update in place]
-    D --> G[Local drift: report conflict]
-    D --> H[Removal: retain for migration]
+    A["Last applied definition and fingerprint"] --> D["Three-way comparison"]
+    B["Target release bundle"] --> D
+    C["Current managed Figma state"] --> D
+    D --> E["Unchanged: keep identity"]
+    D --> F["Compatible change: update in place"]
+    D --> G["Local drift: report conflict"]
+    D --> H["Removal: retain for migration"]
 ```
 
 Stable definition IDs are separate from Figma object IDs. A ledger maps the former to the latter and stores last-applied information. Managed metadata identifies generated assets without making the displayed name the sole ownership check. Shared metadata is useful to future mapping consumers, but it is not itself a completed Code Connect integration.
@@ -111,7 +108,7 @@ The proposed live Frontify connection layer is documented in [connected prototyp
 
 ## Native documentation and composition
 
-Every generated component set and variant receives a native description and documentation links. Released component metadata supplies purpose and usage when present; Fondue Sync labels editorial fallback guidance. Exposed native variant properties and coverage limitations appear alongside the guidance. A managed **Documentation** page renders the same information as readable native text, so designers can review the intended use beside the generated library catalog.
+Every generated component set and variant receives a native description and documentation links. Released component metadata supplies purpose and usage when present; Fondue Sync labels editorial fallback guidance. Exposed native variant properties and coverage limitations appear alongside the guidance. Managed native **Sections** group component sets by type, such as Button, Text and DatePicker. Existing usage-guide frames move beside each matching set, inside its family section. Designers can read intended use and exposed properties next to the exact covered profiles. Moving a set or guide preserves its native IDs; the prior Documentation page may remain empty. See [section organization and identity](sections.md).
 
 Source-derived complex component parts are distinct from the authored product patterns described in [examples](examples.md). A Dropdown.Item or Table.RowCell represents a released compound component. A NavigationShell pattern is a Fondue Sync composition that nests real native Fondue instances. An example screen is an ordinary editable frame composing patterns and controls. Publishing patterns makes them reusable library components; copying an example frame retains supported nested instance connections. Neither is a bitmap capture or evidence of a connected runtime application.
 

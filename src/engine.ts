@@ -6,19 +6,24 @@ import {
   type Entry,
   type RecordEntry,
 } from "./plan";
-import { snapshot } from "./snapshot";
+import { snapshot, normalizeSavedSnapshot } from "./snapshot";
 import { bundleProblems, migrationProblems } from "./preflight";
 import { read, write } from "./metadata";
+import { inspectPartialRecipe, partialRecipeProblems } from "./recovery";
+import { organizeSections } from "./sections";
 type Index = {
   schema: 1 | 2;
   fontWarnings?: string[];
   pendingCollections?: string[];
   warnings?: string[];
+  lastErrors?: string[];
   release?: string;
   fingerprint?: string;
   assets: Record<string, { id: string; kind: Entry["kind"] }>;
   collections: Record<string, string>;
   pages: Record<string, string>;
+  sections?: Record<string, string>;
+  sectionGuides?: Record<string, string>;
 };
 export type Report = {
   release: string;
@@ -140,7 +145,10 @@ export class SyncEngine {
       let baseline: RecordEntry | undefined;
       if (asset) {
         const raw = read(asset, "applied");
-        if (raw) baseline = JSON.parse(raw);
+        if (raw) {
+          baseline = JSON.parse(raw);
+          baseline!.snapshot = normalizeSavedSnapshot(baseline!.snapshot);
+        }
       }
       if (ref && !baseline)
         actions.push({
@@ -337,7 +345,10 @@ export class SyncEngine {
           : value,
       );
     }
-    variable.description = `Fondue ${this.bundle.release}. ${token.css}. ${token.collection}; modes: ${Object.keys(token.values).join(", ")}. Numeric CSS rem values use the release root size 16px.`;
+    const origin = token.provenance
+      ? `Source-derived native constant; ${token.provenance.kind ?? token.provenance.origin ?? "reviewed source literal"}. Source: ${JSON.stringify(token.provenance.source ?? token.provenance.sources ?? token.provenance.sourceFiles ?? "source-controlled recipe definitions")}. Role: ${token.provenance.role ?? "reviewed geometry"}. This is not an additional exported CSS token.`
+      : "Released committed token output.";
+    variable.description = `Fondue ${this.bundle.release}. ${origin} ${token.css}. ${token.collection}; modes: ${Object.keys(token.values).join(", ")}. Numeric CSS rem values use the release root size 16px.`;
     variable.name = token.name;
     variable.setVariableCodeSyntax("WEB", token.css);
     variable.scopes = (token.scopes ??
@@ -379,7 +390,7 @@ export class SyncEngine {
   }
   async applyStyle(def: any, style: any) {
     style.name = def.name;
-    style.description = `Fondue ${this.bundle.release}. Released ${def.type === "TEXT" ? "typography" : "composite shadow"} style ${def.id}. Source: committed token CSS. Font fallbacks require visual review.`;
+    style.description = `Fondue ${this.bundle.release}. Released ${def.type === "TEXT" ? "typography" : "composite shadow"} style ${def.id}. Source: ${def.source ?? "committed token CSS"}. Font fallbacks require visual review.`;
     if (def.type === "TEXT") {
       style.fontName = await this.fontFor(
         def.fontFamily,
@@ -399,17 +410,21 @@ export class SyncEngine {
         if (key !== "fontFamily" && key !== "fontStyle")
           style.setBoundVariable(key, await this.token(id as string));
     } else {
-      style.effects = def.colorToken
-        ? await Promise.all(
-            def.effects.map(async (effect: any) =>
-              this.api.variables.setBoundVariableForEffect(
-                effect,
-                "color",
-                await this.token(def.colorToken),
-              ),
-            ),
-          )
-        : def.effects;
+      style.effects = await Promise.all(
+        def.effects.map(async (effect: any, index: number) => {
+          let result = effect;
+          const fields =
+            def.effectBindings?.[index] ??
+            (def.colorToken ? { color: def.colorToken } : {});
+          for (const [field, id] of Object.entries(fields))
+            result = this.api.variables.setBoundVariableForEffect(
+              result,
+              field as VariableBindableEffectField,
+              await this.token(id as string),
+            );
+          return result;
+        }),
+      );
     }
   }
   paint(hex: string): SolidPaint {
@@ -424,6 +439,58 @@ export class SyncEngine {
         b: parseInt(clean.slice(4, 6), 16) / 255,
       },
     };
+  }
+  /** Bind native SVG paints in place, preserving source vectors and optical IDs. */
+  async applySvgPaints(
+    node: any,
+    def: Pick<Layer, "svgFillNone" | "svgPaintBindings" | "clearSvgRootFills">,
+    defaultColorToken?: string,
+  ) {
+    if ((def.clearSvgRootFills || defaultColorToken) && node.type === "FRAME")
+      node.fills = [];
+    const rules = await Promise.all(
+      (def.svgPaintBindings ?? []).map(async (rule) => ({
+        rule,
+        color: this.paint(
+          rule.color.length === 4
+            ? "#" + [...rule.color.slice(1)].map((c) => c + c).join("")
+            : rule.color,
+        ).color,
+        variable: await this.token(rule.tokenId),
+      })),
+    );
+    const defaultVariable = defaultColorToken
+      ? await this.token(defaultColorToken)
+      : null;
+    const visit = (child: any) => {
+      if (def.svgFillNone && "fills" in child && Array.isArray(child.fills))
+        child.fills = [];
+      for (const field of ["fills", "strokes"])
+        if (field in child && Array.isArray(child[field]))
+          child[field] = child[field].map((paint: Paint) => {
+            if (paint.type !== "SOLID") return paint;
+            const match = rules.find(
+              ({ rule, color }) =>
+                (rule.paint === "fill" ? "fills" : "strokes") === field &&
+                ["r", "g", "b"].every(
+                  (channel) =>
+                    Math.abs(
+                      (paint.color as any)[channel] - (color as any)[channel],
+                    ) < 0.000001,
+                ),
+            );
+            const variable = match?.variable ?? defaultVariable;
+            return variable
+              ? this.api.variables.setBoundVariableForPaint(
+                  paint,
+                  "color",
+                  variable,
+                )
+              : paint;
+          });
+      for (const childNode of child.children ?? []) visit(childNode);
+    };
+    visit(node);
   }
   async layer(
     def: Layer,
@@ -470,8 +537,10 @@ export class SyncEngine {
       if (!node) {
         node = main.createInstance();
         parent.appendChild(node);
+        write(node, "identity", def.id);
       } else if ((await node.getMainComponentAsync()).id !== main.id)
         node.swapComponent(main);
+
       if (owner) node.isExposedInstance = true;
       const definitions = node.componentProperties;
       const textKeys = Object.keys(definitions).filter(
@@ -521,8 +590,24 @@ export class SyncEngine {
       if (!node) {
         node = main.createInstance();
         parent.appendChild(node);
+        write(node, "identity", def.id);
       } else if ((await node.getMainComponentAsync()).id !== main.id)
         node.swapComponent(main);
+      // resize() changes only the instance bounds. For an optical fallback the
+      // glyph itself must scale, including strokes and nested vector geometry.
+      // Normalize using Figma's scaleFactor so repeated updates never compound
+      // the scale, and legacy wrapper-only resizes are repaired without resetOverrides().
+      const targetWidth = def.width ?? main.width;
+      const targetScale = targetWidth / main.width;
+      const currentScale = node.scaleFactor ?? 1;
+      if (
+        Number.isFinite(targetScale) &&
+        targetScale > 0 &&
+        Number.isFinite(currentScale) &&
+        currentScale > 0 &&
+        Math.abs(targetScale - currentScale) > 1e-8
+      )
+        node.rescale(targetScale / currentScale);
     }
     if (!node) {
       node =
@@ -542,7 +627,13 @@ export class SyncEngine {
     if (def.kind === "instance" && previous?.iconColor && !def.iconColor)
       node.resetOverrides();
     write(node, "identity", def.id);
-    node.name = def.name;
+    if (node.type === "INSTANCE")
+      write(
+        node,
+        "instance-identity",
+        JSON.stringify({ id: def.id, parentId: parent.id }),
+      );
+    if (node.type !== "COMPONENT") node.name = def.name;
     write(
       node,
       "data-binding",
@@ -705,8 +796,12 @@ export class SyncEngine {
       node.primaryAxisSizingMode = "AUTO";
       node.counterAxisSizingMode = "AUTO";
       node.itemSpacing = def.gap ?? 0;
-      node.counterAxisAlignItems =
+      const crossAlign =
         def.counterAlign ?? def.counterAxisAlignItems ?? "CENTER";
+      node.counterAxisAlignItems =
+        crossAlign === "BASELINE" && node.layoutMode === "VERTICAL"
+          ? "MIN"
+          : crossAlign;
       node.primaryAxisAlignItems =
         def.primaryAlign ?? def.primaryAxisAlignItems ?? "MIN";
       node.paddingTop =
@@ -730,7 +825,10 @@ export class SyncEngine {
     ) {
       node.fills = def.fill ? [this.paint(def.fill)] : [];
       node.strokes = def.stroke ? [this.paint(def.stroke)] : [];
-      if (def.radius !== undefined || previous?.radius !== undefined)
+      if (
+        ["FRAME", "COMPONENT", "RECTANGLE"].includes(node.type) &&
+        (def.radius !== undefined || previous?.radius !== undefined)
+      )
         node.cornerRadius = def.radius ?? 0;
     }
     if (def.width !== undefined && def.kind === "text")
@@ -738,16 +836,20 @@ export class SyncEngine {
     if (def.width !== undefined || def.height !== undefined) {
       node.resize(def.width ?? node.width, def.height ?? node.height);
       if (def.kind === "frame") {
-        if (def.layout === "HORIZONTAL") {
-          if (def.width) node.primaryAxisSizingMode = "FIXED";
-          if (def.height) node.counterAxisSizingMode = "FIXED";
-        } else {
-          if (def.height) node.primaryAxisSizingMode = "FIXED";
-          if (def.width) node.counterAxisSizingMode = "FIXED";
-        }
+        const horizontal = node.layoutMode === "HORIZONTAL";
+        node.primaryAxisSizingMode =
+          (horizontal ? def.width : def.height) !== undefined
+            ? "FIXED"
+            : "AUTO";
+        node.counterAxisSizingMode =
+          (horizontal ? def.height : def.width) !== undefined
+            ? "FIXED"
+            : "AUTO";
       }
     }
 
+    if (def.kind === "svg")
+      await this.applySvgPaints(node, { ...def, clearSvgRootFills: true });
     if (def.iconColor && (def.kind === "instance" || def.kind === "svg")) {
       const color = await this.token(def.iconColor);
       const paint = (child: any) => {
@@ -784,13 +886,176 @@ export class SyncEngine {
     // Never guess deletion of formerly managed children. A structural removal is a migration.
     return node;
   }
+  /** Adopt only an exact saved failed-import prefix. This migration never uses display names. */
+  async recoverPendingRecipe(set: any, recipe: Recipe) {
+    const raw = read(set, "applied");
+    if (!raw) return;
+    const saved = JSON.parse(raw),
+      previous = JSON.parse(saved.definition);
+    if (previous.pending !== true) return;
+    if (
+      saved.nodeId !== set.id ||
+      (await snapshot(set)) !== normalizeSavedSnapshot(saved.snapshot)
+    )
+      throw Error(
+        "Pending native asset changed since the saved failure; preserve it for review.",
+      );
+    if (
+      previous.id !== recipe.id ||
+      previous.package !== recipe.package ||
+      canonical(previous.source) !== canonical(recipe.source)
+    )
+      throw Error(
+        "Pending source identity changed; explicit recovery review required.",
+      );
+    if (previous.variants?.length) {
+      const problems = migrationProblems("recipe", previous, recipe);
+      if (problems.length)
+        throw Error(problems.map((p) => p.message).join(" "));
+    }
+    const adoption: Array<{ node: any; identity: string }> = [];
+    const visit = async (
+      node: any,
+      def: Layer,
+      root = false,
+    ): Promise<void> => {
+      let tag = read(node, "identity");
+      if (
+        node.type === "INSTANCE" &&
+        !read(node, "instance-identity") &&
+        !read(node, "component-binding")
+      ) {
+        const main = await node.getMainComponentAsync();
+        if (main && tag === read(main, "identity")) tag = "";
+      }
+      if (tag && tag !== def.id)
+        throw Error("Pending managed child identity differs: " + node.id);
+      const expected = root
+        ? "COMPONENT"
+        : (
+            {
+              frame: "FRAME",
+              text: "TEXT",
+              rectangle: "RECTANGLE",
+              ellipse: "ELLIPSE",
+              componentInstance: "INSTANCE",
+              instance: "INSTANCE",
+              svg: "FRAME",
+            } as const
+          )[def.kind];
+      if (node.type !== expected)
+        throw Error("Pending native child type differs: " + node.id);
+      if (!tag) {
+        if (root) {
+          adoption.push({ node, identity: def.id });
+        } else if (def.kind === "componentInstance") {
+          const selected = this.bundle.recipes
+            .filter((r) =>
+              def.recipeId
+                ? r.id === def.recipeId
+                : r.name.split("/")[0] === def.componentName,
+            )
+            .flatMap((r) => r.variants.map((v) => ({ r, v })))
+            .find(({ v }) =>
+              Object.entries(def.variantProps ?? {}).every(
+                ([k, value]) => v.props[k] === value,
+              ),
+            );
+          const ref = selected
+            ? this.index.assets["recipe:" + selected.r.id]
+            : null;
+          const sourceSet = ref
+            ? await this.api.getNodeByIdAsync(ref.id)
+            : null;
+          const main =
+            sourceSet?.type === "COMPONENT_SET"
+              ? sourceSet.children.find(
+                  (n) => read(n, "variant") === selected!.v.id,
+                )
+              : null;
+          if (!main || (await node.getMainComponentAsync())?.id !== main.id)
+            throw Error(
+              "Untagged failed-import instance does not match the exact saved source slot: " +
+                node.id,
+            );
+          adoption.push({ node, identity: def.id });
+        } else
+          throw Error(
+            "Unowned native child requires manual review: " + node.id,
+          );
+      }
+      if (
+        def.kind === "componentInstance" ||
+        def.kind === "instance" ||
+        def.kind === "svg"
+      )
+        return;
+      const children = def.children ?? [];
+      if ((node.children?.length ?? 0) > children.length)
+        throw Error(
+          "Unexpected extra native children in pending import: " + node.id,
+        );
+      for (let i = 0; i < (node.children?.length ?? 0); i++) {
+        const child = node.children[i],
+          source = children[i];
+        if (!source) throw Error("Pending source slot missing: " + child.id);
+        await visit(child, source);
+      }
+    };
+    for (const component of set.children) {
+      const variantId = read(component, "variant");
+      const variant = recipe.variants.find((v) => v.id === variantId);
+      if (!variant)
+        throw Error(
+          "Unowned or unknown pending native variant: " + component.id,
+        );
+      await visit(component, variant.root, true);
+    }
+    const projected = inspectPartialRecipe(set);
+    const ids = new Map(adoption.map((item) => [item.node.id, item.identity]));
+    const project = (layer: any) => {
+      if (ids.has(layer.nodeId)) layer.identity = ids.get(layer.nodeId);
+      layer.children.forEach(project);
+    };
+    projected.variants.forEach((variant) => project(variant.root));
+    const problems = partialRecipeProblems(projected, recipe);
+    if (problems.length) throw Error(problems.join(" "));
+    // Validation finishes before the first ownership-tag mutation.
+    for (const item of adoption) write(item.node, "identity", item.identity);
+    return adoption.map((item) => item.node.id);
+  }
   async applyRecipe(recipe: Recipe, set: any) {
+    await this.recoverPendingRecipe(set, recipe);
+    set.clipsContent = false;
     set.name = recipe.name;
     set.description =
       recipe.documentation?.description ??
       `Fondue ${this.bundle.release}. ${recipe.package}: ${recipe.name}. ${recipe.status}. ${recipe.limitations.join(" ")}\nSources: ${recipe.source.join(", ")}`;
-    if (recipe.documentation?.links)
-      set.documentationLinks = recipe.documentation.links;
+    if (recipe.documentation?.links) {
+      set.documentationLinks = recipe.documentation.links.slice(0, 1);
+      const additional = recipe.documentation.links
+        .slice(1)
+        .map((link) => link.uri);
+      if (additional.length)
+        set.description +=
+          "\n\nAdditional documentation: " + additional.join("\n");
+    }
+    const nativeName = (props: Record<string, string>) =>
+      Object.entries(props)
+        .map(([k, v]) => `${k}=${v.trim() === "" ? "(empty)" : v}`)
+        .join(", ") || "State=Default";
+    for (const variant of recipe.variants) {
+      let component = set.children.find(
+        (n: any) => read(n, "variant") === variant.id,
+      );
+      if (!component) {
+        component = this.api.createComponent();
+        set.appendChild(component);
+        write(component, "variant", variant.id);
+      }
+      component.name = nativeName(variant.props);
+      write(component, "variant-props", JSON.stringify(variant.props));
+    }
     for (let i = 0; i < recipe.variants.length; i++) {
       const variant = recipe.variants[i];
       let component = set.children.find(
@@ -801,18 +1066,12 @@ export class SyncEngine {
         set.appendChild(component);
         write(component, "variant", variant.id);
       }
-      component.name =
-        Object.entries(variant.props)
-          .map(([k, v]) => `${k}=${v}`)
-          .join(", ") || "State=Default";
+      component.name = nativeName(variant.props);
       await this.layer(variant.root, set, component, set);
-      component.name =
-        Object.entries(variant.props)
-          .map(([k, v]) => `${k}=${v}`)
-          .join(", ") || "State=Default";
+      component.name = nativeName(variant.props);
       component.description = set.description;
       if (recipe.documentation?.links)
-        component.documentationLinks = recipe.documentation.links;
+        component.documentationLinks = recipe.documentation.links.slice(0, 1);
       component.x = 0;
       component.y = 0;
     }
@@ -1050,6 +1309,12 @@ export class SyncEngine {
               vector.x = 0;
               vector.y = 0;
             }
+            for (const vectorRoot of component.children)
+              await this.applySvgPaints(
+                vectorRoot,
+                { clearSvgRootFills: true },
+                def.defaultColorToken,
+              );
             component.resize(optical.size, optical.size);
             component.description = `Fondue ${this.bundle.release}. ${def.name}; exact ${optical.size}px optical SVG from ${optical.source}.`;
             component.documentationLinks = [
@@ -1153,6 +1418,17 @@ export class SyncEngine {
             gap: 16,
             counterAlign: "MIN",
             fill: "#ffffff",
+            bindings: Object.fromEntries(
+              Object.entries({
+                fills: "color-surface-default",
+                paddingTop: "spacing-large",
+                paddingBottom: "spacing-large",
+                paddingLeft: "spacing-large",
+                paddingRight: "spacing-large",
+                itemSpacing: "spacing-medium",
+                cornerRadius: "component-constant-radius-0",
+              }).filter(([, id]) => this.index.assets["token:" + id]),
+            ),
             children: paragraphs.map(([name, text, size]) => ({
               id: String(name),
               name: String(name),
@@ -1161,6 +1437,9 @@ export class SyncEngine {
               fontSize: Number(size),
               text: String(text),
               fill: "#202020",
+              ...(this.index.assets["token:color-primary-default"]
+                ? { bindings: { fills: "color-primary-default" } }
+                : {}),
             })),
           };
           asset = await this.layer(guide, page, asset);
@@ -1190,9 +1469,23 @@ export class SyncEngine {
             asset,
           );
         errors.push(`${action.id}: ${String(error)}`);
+        console.error(
+          "Fondue Sync asset construction failed",
+          action.id,
+          error,
+        );
       }
     }
-    await this.arrangePages();
+    const organization = await organizeSections(
+      this.api,
+      this.bundle,
+      this.index,
+      () => this.save(),
+    );
+    for (const warning of organization.warnings) {
+      if (!this.warnings.includes(warning)) this.warnings.push(warning);
+    }
+    this.index.lastErrors = [...errors];
     this.index.fontWarnings = this.warnings.filter((w) =>
       w.startsWith("Font "),
     );

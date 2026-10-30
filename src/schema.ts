@@ -6,6 +6,7 @@ export type Token = {
   values: Record<string, any>;
   css: string;
   scopes?: string[];
+  provenance?: Record<string, unknown>;
 };
 export type Layer = {
   id: string;
@@ -20,6 +21,14 @@ export type Layer = {
   name: string;
   text?: string;
   svg?: string;
+  svgFillNone?: boolean;
+  clearSvgRootFills?: boolean;
+  svgPaintBindings?: {
+    paint: "fill" | "stroke";
+    color: string;
+    tokenId: string;
+  }[];
+  paintRole?: string;
   iconId?: string;
   componentName?: string;
   recipeId?: string;
@@ -100,6 +109,7 @@ export type Bundle = {
     svg: string;
     source: string;
     sizes?: { size: number; svg: string; source: string }[];
+    defaultColorToken?: string;
   }[];
   recipes: Recipe[];
   examples?: {

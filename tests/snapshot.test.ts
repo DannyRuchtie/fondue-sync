@@ -125,3 +125,174 @@ test("binding metadata changes are detected independently of inherited visual up
   binding = '{"domain":"brands"}';
   assert.notEqual(await snapshot(instance), before);
 });
+const variable = (id: string) => ({ type: "VARIABLE_ALIAS", id });
+function boundFixture() {
+  return {
+    type: "FRAME",
+    name: "Bound",
+    width: 100,
+    height: 40,
+    paddingLeft: 8,
+    itemSpacing: 4,
+    cornerRadius: 4,
+    strokeWeight: 1,
+    boundVariables: {
+      paddingLeft: variable("space"),
+      itemSpacing: variable("gap"),
+      topLeftRadius: variable("radius"),
+      topRightRadius: variable("radius"),
+      bottomLeftRadius: variable("radius"),
+      bottomRightRadius: variable("radius"),
+      strokeTopWeight: variable("border"),
+      strokeRightWeight: variable("border"),
+      strokeBottomWeight: variable("border"),
+      strokeLeftWeight: variable("border"),
+    },
+    fills: [
+      {
+        type: "SOLID",
+        color: { r: 1, g: 0, b: 0 },
+        opacity: 0.75,
+        boundVariables: { color: variable("surface") },
+      },
+    ],
+    effects: [
+      {
+        type: "DROP_SHADOW",
+        color: { r: 0, g: 0, b: 0, a: 0.2 },
+        radius: 4,
+        spread: 2,
+        offset: { x: 1, y: 2 },
+        visible: true,
+        boundVariables: {
+          color: variable("shadow"),
+          radius: variable("blur"),
+          spread: variable("spread"),
+          offsetX: variable("x"),
+          offsetY: variable("y"),
+        },
+      },
+    ],
+  };
+}
+test("resolved variable paints padding gap four corners/strokes and shadow fields do not become component drift", async () => {
+  const node: any = boundFixture(),
+    before = await snapshot(node);
+  node.paddingLeft = 16;
+  node.itemSpacing = 8;
+  node.cornerRadius = 8;
+  node.strokeWeight = 2;
+  node.fills[0].color = { r: 0, g: 1, b: 0 };
+  Object.assign(node.effects[0], {
+    color: { r: 1, g: 0, b: 0, a: 1 },
+    radius: 16,
+    spread: 4,
+    offset: { x: 5, y: 6 },
+  });
+  assert.equal(await snapshot(node), before);
+  node.boundVariables.paddingLeft = variable("another-space");
+  assert.notEqual(await snapshot(node), before);
+});
+test("unbinding a field or changing explicit paint opacity and unbound geometry remains protected", async () => {
+  const node: any = boundFixture(),
+    before = await snapshot(node);
+  delete node.boundVariables.paddingLeft;
+  assert.notEqual(await snapshot(node), before);
+  node.boundVariables.paddingLeft = variable("space");
+  node.fills[0].opacity = 0.5;
+  assert.notEqual(await snapshot(node), before);
+  node.fills[0].opacity = 0.75;
+  node.paddingRight = 3;
+  assert.notEqual(await snapshot(node), before);
+});
+test("bound font weight ignores resolved style but retains font family and other variable font axes", async () => {
+  const node: any = {
+    type: "TEXT",
+    fontName: {
+      family: "Inter",
+      style: "Regular",
+      variationSettings: { wght: 400, wdth: 100 },
+    },
+    fontSize: 14,
+    boundVariables: {
+      fontWeight: variable("weight"),
+      fontSize: variable("font-size"),
+    },
+  };
+  const before = await snapshot(node);
+  node.fontName.style = "Bold";
+  node.fontName.variationSettings.wght = 700;
+  node.fontSize = 20;
+  assert.equal(await snapshot(node), before);
+  node.fontName.family = "Other";
+  assert.notEqual(await snapshot(node), before);
+});
+test("direct instance override fields retain alias identity while resolved bound values can propagate", async () => {
+  const { instance, child } = fixture();
+  child.boundVariables = { paddingLeft: variable("space") };
+  child.paddingLeft = 8;
+  instance.overrides = [{ id: child.id, overriddenFields: ["paddingLeft"] }];
+  const before = await snapshot(instance);
+  child.paddingLeft = 16;
+  assert.equal(await snapshot(instance), before);
+  child.boundVariables.paddingLeft = variable("other");
+  assert.notEqual(await snapshot(instance), before);
+});
+import { normalizeSavedSnapshot } from "../src/snapshot";
+test("old persisted snapshots normalize with current alias comparison without altering variable values or metadata", async () => {
+  const old: any = boundFixture();
+  const current: any = boundFixture();
+  current.paddingLeft = 24;
+  current.fills[0].color = { r: 0, g: 0, b: 1 };
+  assert.equal(
+    normalizeSavedSnapshot(JSON.stringify(old)),
+    await snapshot(current),
+  );
+  old.managed = { identity: "managed-identity" };
+  const normalized = normalizeSavedSnapshot(JSON.stringify(old));
+  assert.ok(normalized.includes("managed-identity"));
+  assert.equal(normalizeSavedSnapshot(normalized), normalized);
+  const token = {
+    type: "VARIABLE",
+    valuesByMode: { Light: { r: 1, g: 0, b: 0 } },
+    resolvedType: "COLOR",
+  };
+  assert.notEqual(
+    normalizeSavedSnapshot(JSON.stringify(token)),
+    normalizeSavedSnapshot(
+      JSON.stringify({
+        ...token,
+        valuesByMode: { Light: { r: 0, g: 1, b: 0 } },
+      }),
+    ),
+  );
+  assert.throws(() => normalizeSavedSnapshot("invalid-json"));
+});
+
+test("variant snapshots read property definitions only from the owning component set", async () => {
+  let variantReads = 0;
+  const owner: any = {
+    type: "COMPONENT_SET",
+    componentPropertyDefinitions: {
+      State: { type: "VARIANT", defaultValue: "Default" },
+    },
+    children: [],
+  };
+  const variant: any = {
+    type: "COMPONENT",
+    parent: owner,
+    name: "State=Default",
+    children: [],
+  };
+  Object.defineProperty(variant, "componentPropertyDefinitions", {
+    get() {
+      variantReads++;
+      throw Error("Native variant property getter is unavailable");
+    },
+  });
+  owner.children.push(variant);
+  const result = JSON.parse(await snapshot(owner));
+  assert.equal(variantReads, 0);
+  assert.ok(result.componentPropertyDefinitions.State);
+  assert.equal(result.children[0].componentPropertyDefinitions, undefined);
+});

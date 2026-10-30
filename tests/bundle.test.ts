@@ -59,11 +59,11 @@ test("checked-in released bundle has complete references and traceable source in
   );
   const ids = new Set(b.tokens.map((t: any) => t.id));
   assert.equal(ids.size, b.tokens.length);
-  assert.equal(b.tokens.length, 384);
+  assert.equal(b.tokens.filter((t: any) => !t.provenance).length, 384);
   validateAliases(b.tokens);
   assert.equal(b.icons.length, 420);
   assert.equal(new Set(b.icons.map((i: any) => i.id)).size, b.icons.length);
-  assert.equal(b.styles.length, 33);
+  assert.equal(b.styles.filter((s: any) => !s.provenance).length, 33);
   assert.equal(b.provenance.commit, "ebcc9b8579a7f862f43a2732f5a5b9c3105e6796");
   assert.ok(Object.keys(b.provenance.inputs).length > 1000);
   assert.ok(b.inventory.some((i: any) => i.name === "Card" && i.recipeId));

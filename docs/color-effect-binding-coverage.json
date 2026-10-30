@@ -1,0 +1,758 @@
+{
+  "release": "13.11.1",
+  "policy": "Exact released semantic roles or exact source literals; no nearest-value substitution. Fixture artwork, picker gradients and arbitrary data colors remain explicit content exceptions.",
+  "counts": {
+    "literalPaintsBound": 2,
+    "svgPaintRules": 38,
+    "shadowLayersStyled": 186,
+    "effectFieldsBound": 40,
+    "derivedEffectVariables": 15,
+    "derivedEffectStyles": 4
+  },
+  "derived": [
+    {
+      "id": "source-shadow-radius-80",
+      "type": "FLOAT",
+      "value": 80,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "radius"
+    },
+    {
+      "id": "source-shadow-spread-0",
+      "type": "FLOAT",
+      "value": 0,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "spread"
+    },
+    {
+      "id": "source-shadow-offset-x-0",
+      "type": "FLOAT",
+      "value": 0,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "offset-x"
+    },
+    {
+      "id": "source-shadow-offset-y-25",
+      "type": "FLOAT",
+      "value": 25,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "offset-y"
+    },
+    {
+      "id": "source-shadow-radius-10",
+      "type": "FLOAT",
+      "value": 10,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "radius"
+    },
+    {
+      "id": "source-shadow-offset-y-3",
+      "type": "FLOAT",
+      "value": 3,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "offset-y"
+    },
+    {
+      "id": "source-shadow-radius-24",
+      "type": "FLOAT",
+      "value": 24,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "radius"
+    },
+    {
+      "id": "source-shadow-offset-y-4",
+      "type": "FLOAT",
+      "value": 4,
+      "source": "packages/tokens/dist/css/base.css",
+      "role": "offset-y"
+    },
+    {
+      "id": "source-shadow-md-color",
+      "type": "COLOR",
+      "value": {
+        "r": 0.03137254901960784,
+        "g": 0.03137254901960784,
+        "b": 0.03137254901960784,
+        "a": 0.15
+      },
+      "source": "packages/components/src/utilities/shadow.module.scss",
+      "role": "shadow-color"
+    },
+    {
+      "id": "source-shadow-lg-color",
+      "type": "COLOR",
+      "value": {
+        "r": 0.03137254901960784,
+        "g": 0.03137254901960784,
+        "b": 0.03137254901960784,
+        "a": 0.2
+      },
+      "source": "packages/components/src/utilities/shadow.module.scss",
+      "role": "shadow-color"
+    },
+    {
+      "id": "source-shadow-radius-0",
+      "type": "FLOAT",
+      "value": 0,
+      "source": "packages/components/src/utilities/focusStyle.module.scss",
+      "role": "radius"
+    },
+    {
+      "id": "source-shadow-spread-2",
+      "type": "FLOAT",
+      "value": 2,
+      "source": "packages/components/src/utilities/focusStyle.module.scss",
+      "role": "spread"
+    },
+    {
+      "id": "source-shadow-offset-y-0",
+      "type": "FLOAT",
+      "value": 0,
+      "source": "packages/components/src/utilities/focusStyle.module.scss",
+      "role": "offset-y"
+    },
+    {
+      "id": "source-shadow-spread-6",
+      "type": "FLOAT",
+      "value": 6,
+      "source": "packages/components/src/utilities/focusStyle.module.scss",
+      "role": "spread"
+    },
+    {
+      "id": "source-shadow-spread-4",
+      "type": "FLOAT",
+      "value": 4,
+      "source": "packages/components/src/components/Card/styles/card.module.scss",
+      "role": "spread"
+    }
+  ],
+  "exceptions": [
+    {
+      "kind": "picker-data-gradient",
+      "path": "components/ColorPicker/currentFormat=HEX/color-picker/gradient/saturation",
+      "reason": "Source picker gradients and selected color are data values, not design-system surface colors."
+    },
+    {
+      "kind": "picker-data-gradient",
+      "path": "components/ColorPicker/currentFormat=HEX/color-picker/gradient/hue",
+      "reason": "Source picker gradients and selected color are data values, not design-system surface colors."
+    },
+    {
+      "kind": "picker-data-gradient",
+      "path": "components/ColorPicker/currentFormat=RGBA/color-picker/gradient/saturation",
+      "reason": "Source picker gradients and selected color are data values, not design-system surface colors."
+    },
+    {
+      "kind": "picker-data-gradient",
+      "path": "components/ColorPicker/currentFormat=RGBA/color-picker/gradient/hue",
+      "reason": "Source picker gradients and selected color are data values, not design-system surface colors."
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-spruce/artwork",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-spruce/artwork/shape-a",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-spruce/artwork/shape-b",
+      "field": "fill",
+      "value": "#FFFFFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-orbit/artwork",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-orbit/artwork/shape-a",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-orbit/artwork/shape-b",
+      "field": "fill",
+      "value": "#FFFFFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-tide/artwork",
+      "field": "fill",
+      "value": "#D5E5EF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-tide/artwork/shape-a",
+      "field": "fill",
+      "value": "#D5E5EF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=brands/browser/tiles/brand-tide/artwork/shape-b",
+      "field": "fill",
+      "value": "#FFFFFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-poster/artwork",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-poster/artwork/shape-a",
+      "field": "fill",
+      "value": "#CFE6D3"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-poster/artwork/shape-b",
+      "field": "fill",
+      "value": "#FFFFFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-mark/artwork",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-mark/artwork/shape-a",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-mark/artwork/shape-b",
+      "field": "fill",
+      "value": "#FFFFFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-palette/artwork",
+      "field": "fill",
+      "value": "#D5E5EF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-palette/artwork/shape-a",
+      "field": "fill",
+      "value": "#D5E5EF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "patterns/AssetBrowser/domain=assets/browser/tiles/asset-palette/artwork/shape-b",
+      "field": "fill",
+      "value": "#FFFFFF"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "example:examples/agentic/screen/main/automation-hero/workflow-art",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "example:examples/agentic/screen/main/automation-hero/workflow-art/shape-a",
+      "field": "fill",
+      "value": "#DDD5F0"
+    },
+    {
+      "kind": "fixture-artwork",
+      "path": "example:examples/agentic/screen/main/automation-hero/workflow-art/shape-b",
+      "field": "fill",
+      "value": "#FFFFFF"
+    }
+  ],
+  "svgRules": [
+    {
+      "path": "charts/PieChart/data=sample/pie/segments",
+      "rules": [
+        {
+          "paint": "fill",
+          "color": "#6acb75",
+          "tokenId": "color-charts-primary-default"
+        },
+        {
+          "paint": "fill",
+          "color": "#d59bff",
+          "tokenId": "color-charts-secondary-default"
+        }
+      ]
+    },
+    {
+      "path": "charts/LineChart/data=sample/chart/plot",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#6acb75",
+          "tokenId": "color-charts-primary-default"
+        }
+      ]
+    },
+    {
+      "path": "charts/AreaStackChart/data=sample/chart/plot",
+      "rules": [
+        {
+          "paint": "fill",
+          "color": "#6acb75",
+          "tokenId": "color-charts-primary-default"
+        },
+        {
+          "paint": "fill",
+          "color": "#d59bff",
+          "tokenId": "color-charts-secondary-default"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=false;slots=left/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=false;slots=right/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=false;slots=both/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=true;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=true;slots=left/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=true;slots=right/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=value;clearable=true;slots=both/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=false;slots=left/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=false;slots=right/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=false;slots=both/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=true;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=true;slots=left/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=true;slots=right/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=default;content=placeholder;clearable=true;slots=both/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-001/status=default;mode=hover;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-002/status=default;mode=focus;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-003/status=default;mode=read-only;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-003/status=success;mode=default;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-004/status=success;mode=hover;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-004/status=success;mode=focus;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-005/status=success;mode=read-only;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-006/status=error;mode=default;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-006/status=error;mode=hover;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-007/status=error;mode=focus;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-008/status=error;mode=read-only;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-009/status=loading;mode=default;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-009/status=loading;mode=hover;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-010/status=loading;mode=focus;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/Textarea/controls-011/status=loading;mode=read-only;content=value;clearable=false;slots=none/field/resize-handle",
+      "source": "packages/components/src/components/Textarea/styles/textarea.module.scss",
+      "role": "source-resize-mask-color",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#808080",
+          "tokenId": "color-line-mid"
+        }
+      ]
+    },
+    {
+      "path": "components/ColorPicker/currentFormat=HEX/color-picker/gradient/saturation",
+      "role": "fixed-source-selection-outline",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#ffffff",
+          "tokenId": "color-error-00"
+        }
+      ]
+    },
+    {
+      "path": "components/ColorPicker/currentFormat=RGBA/color-picker/gradient/saturation",
+      "role": "fixed-source-selection-outline",
+      "rules": [
+        {
+          "paint": "stroke",
+          "color": "#ffffff",
+          "tokenId": "color-error-00"
+        }
+      ]
+    },
+    {
+      "path": "components/Tooltip/padding=compact;side=top/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip/padding=compact;side=right/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip/padding=compact;side=bottom/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip/padding=compact;side=left/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip/padding=spacious;side=top/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip/padding=spacious;side=right/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip/padding=spacious;side=bottom/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip/padding=spacious;side=left/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    }
+  ],
+  "iconDefaultRole": {
+    "tokenId": "color-primary-default",
+    "source": "packages/icons/src/createFondueIcon.ts",
+    "meaning": "Default currentColor resolves to primary text; consuming instance colors may override this binding."
+  }
+}

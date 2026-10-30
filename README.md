@@ -8,27 +8,24 @@ The definition input is the Fondue repository at a pinned release. The plugin do
 
 **Current coverage:** 10 catalog entries have supported finite definitions, **42 remain partial**, and two providers are code-only. The generated catalog covers all 39 current visual component families, seven chart families, published RTE entries and additional chart primitives. This is not full-library acceptance.
 
-**Native acceptance pending:** the current build is ready for manual installation in a fresh Figma desktop Design file. This does not require the earlier automated test-file team selection. Both connected Full-seat choices are personal Starter teams. A test file there could verify basic development-plugin execution; it would not establish shared-library publication and consumer acceptance in an eligible Frontify workspace. That workspace and its required permissions/entitlements remain unverified.
+**Native runtime validation:** repair and token-binding reconciliation are being verified in a user-authorized [clean rebuild](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs) in the Frontify project. See the native evidence record for completed checks. Publishing and cross-file consumer acceptance remain separate checks.
 
 ## The process
 
 ```mermaid
 flowchart LR
-    A[Released Fondue repository] --> B[Deterministic bundle builder]
-    B --> C[Versioned release bundle\nProvenance + hashes + recipes]
-    C --> D[Fondue Sync plugin]
-    D --> E[Dedicated Figma Design file\nNative library assets]
-    E --> P[Reusable patterns
-Nested native instances]
-    P --> X[Example screens
-Editable frames + pattern instances]
-    E --> U[Documentation page
-Purpose + use + properties + sources]
-    E -->|Maintainer reviews and publishes| F[Published Fondue library]
-    F -->|Designer enables library| G[Designer-owned Figma file]
-    G --> H[Native instances + composed screens]
-    H -. Future phase 2 .-> I[Prototype with real Fondue imports]
-    I -. Future phase 3 .-> J[Proposed code PR]
+    A["Released Fondue repository"] --> B["Deterministic bundle builder"]
+    B --> C["Versioned release bundle<br/>Provenance + hashes + recipes"]
+    C --> D["Fondue Sync plugin"]
+    D --> E["Dedicated Figma Design file<br/>Native library assets"]
+    E --> P["Reusable patterns<br/>Nested native instances"]
+    P --> X["Example screens<br/>Editable frames + pattern instances"]
+    E --> U["Type sections with adjacent guides<br/>Purpose + use + properties + sources"]
+    E -->|Maintainer reviews and publishes| F["Published Fondue library"]
+    F -->|Designer enables library| G["Designer-owned Figma file"]
+    G --> H["Native instances + composed screens"]
+    H -. Future phase 2 .-> I["Prototype with real Fondue imports"]
+    I -. Future phase 3 .-> J["Proposed code PR"]
 ```
 
 The plugin runs when a person opens it. It does not run in the background, publish the library, or accept updates in designers' files.
@@ -60,7 +57,7 @@ The maintainer owns the dedicated library file.
 1. Run **Import Fondue** for the initial generation.
 2. Review token collections, modes and aliases, text/effect styles, native icons, component properties and variant sets.
 3. Run **Validate**. Read the coverage report and recipe limitations; a successful structural validation is not proof of visual parity.
-4. Select a main component or variant to read its native description and documentation links: purpose, intended use, exposed properties, source links and coverage notes. The **Fondue / Documentation** page puts the same guidance beside the catalog. Released metadata is reused where available; editorial guidance is labeled.
+4. Select a main component or variant to read its native description and documentation links: purpose, intended use, exposed properties, source links and coverage notes. Each component type has its own native **Section**. Every profile set sits beside its existing usage guide inside that type section; all Button profiles, for example, share one Button section. The older Documentation page may remain empty after guides move into the catalog. See [native sections](docs/sections.md). Released metadata is reused where available; editorial guidance is labeled.
 5. Review the **Patterns** and **Examples** pages as composition references. Patterns contain connected component instances; example screens are editable frames that compose those patterns. See [patterns and example screens](docs/examples.md).
 6. Make any required recipe corrections in this repository, rebuild, and apply them through the plugin.
 7. Publish using Figma's normal library publishing flow. Include the Fondue release and known limitations in the publication notes.
@@ -155,7 +152,7 @@ Local verification and runtime verification answer different questions. The test
 ## Technical scope and limitations
 
 - **Tokens:** native primitive and semantic variables preserve supported aliases and light/dark values. Numeric units are converted from the source units for Figma. Composite typography and shadows use styles where representable; they are not mislabeled as native scalar variables. Value-only definitions and unrepresentable composites are reported.
-- **Components:** source-controlled recipes describe editable native layers, Auto Layout, variants and supported bindings. Compound parts are independently reusable where represented. Native descriptions, documentation links and the Documentation page explain purpose, use and exposed properties. Coverage does not mean every React prop, keyboard interaction, dynamic layout, chart data transformation or editor behavior is reproduced. Read recipe limitations before adopting the library for production design.
+- **Components:** source-controlled recipes describe editable native layers, Auto Layout, variants and supported bindings. Compound parts are independently reusable where represented. Native descriptions, documentation links and adjacent native usage guides explain purpose, use and exposed properties. Native Sections group each component type and keep its profiles together. Coverage does not mean every React prop, keyboard interaction, dynamic layout, chart data transformation or editor behavior is reproduced. Read recipe limitations before adopting the library for production design.
 - **Patterns/examples:** authored compositions use real nested native instances, backed by synthetic fixtures. Example screens are ordinary editable frames; they do not query Frontify, navigate a running app or detach controls into flat snapshots.
 - **Icons:** 420 public families include all 2,099 released optical drawings as native Size variants (12/16/20/24/32 where available). Slots choose an exact source size when present and report a source-size fallback otherwise; see [optical source coverage](docs/optical-icons.md). Repository SVGs become native editable icon assets. This is independent from whether every component recipe exposes an instance-swap property.
 - **Fonts:** font availability is a runtime concern. Any fallback must be reported; review typography with the expected font installed before publishing.
@@ -178,4 +175,4 @@ Fondue source, tokens and icons remain owned by their upstream authors. This rep
 
 See [verification evidence](docs/verification-evidence.md), the [independent review](docs/independent-review.md), [remaining gaps](docs/gaps.md), and [UTF-8 metadata-capacity measurements](docs/metadata-capacity.json). The coverage report separates native source profiles from unresolved source data and runtime acceptance. Run one maintainer sync per file at a time; the engine does not provide a distributed writer lock.
 
-Current manual test destination: [PD Figma Sync](https://www.figma.com/design/O5xq8vIIlxUCYXscYcNVww/PD-Figma-Sync?node-id=0-1). Use Figma desktop and import `dist/manifest.json`, then run **Fondue Sync → Import Fondue**. The connected MCP account could not open an edit session for this file; no automated import ran. This does not determine the desktop account’s permissions.
+Current test destination: [PD Figma Sync — clean rebuild](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs), accessed through the Frontify account. The initial blank component sets were caused by the native documentation-link limit; the importer now preserves the existing IDs while completing eligible partial imports. For installation, import `dist/manifest.json` in Figma desktop. See [native runtime evidence](docs/native-runtime-evidence.md) for the tested build and remaining boundaries.
