@@ -18,7 +18,7 @@ The plugin populates a dedicated library file. Designers then enable the publish
 
 The file has two page groups. **Library / …** pages are for browsing components, icons, charts and examples, with readable previews and usage guidance. **Source components / …** pages hold the actual main components and variant sets maintained by the plugin. Browsing previews are linked instances of those source components; both groups belong to the same library.
 
-In the illustration, solid arrows show the current library workflow. Dashed paths show planned prototype export, live API data and proposed changes back to Fondue. Those future paths are not current plugin actions.
+In the illustration, solid arrows show the library workflow. The dashed reverse path now has a development implementation in **Push changes**; prototype export and live API data remain planned.
 
 The plugin runs when a maintainer opens it. It uses the release packaged in its build; it does not watch the repository or fetch the latest code automatically.
 
@@ -30,7 +30,7 @@ flowchart LR
     P -->|Enable and place instances| D["Your design project"]
 ```
 
-## Install the plugin and create the library
+## Part 1: Install the plugin and create the library
 
 ### If you only want to design
 
@@ -58,7 +58,7 @@ The importer creates native editable assets. Missing required fonts stop the ope
 
 ## Make changes that reach Figma
 
-Make durable library changes in their owning source, then ask a maintainer to prepare and sync a new build. Editing a generated description or main component directly in Figma does not update the repository; it can be reported as a local conflict on the next sync.
+Make durable library changes in their owning source, or use **Push changes** to propose supported edits from a selected Figma component as a draft PR. Direct Figma edits remain local until the PR is reviewed, merged and released; they can be reported as conflicts on the next sync.
 
 | What you want to change | Where the change belongs | How it reaches Figma |
 | --- | --- | --- |
@@ -85,7 +85,7 @@ The code, stories and metadata describe the released component. The Figma recipe
 
 For example, changing a Button color token can flow through its existing variable binding. Adding a new Button variant also requires a native representation, property mapping and visual review.
 
-The plugin reads committed token outputs from the selected release. It does not pull live Figma token values, and it does not change the existing upstream token-authoring process.
+The Sync tab reads committed token outputs from the selected release. Push proposals for new or changed tokens introduce reviewed repository-owned definitions alongside the upstream Figma inputs; the local companion must build their generated outputs before creating the draft PR. See [token ownership and setup](docs/push-changes.md).
 
 Fondue’s upstream token builder currently loads the owning Figma variables and commits generated outputs with a release. Changes therefore follow that established ownership and approval process first. Fondue Sync consumes those approved outputs; do not edit its temporary source cache or run the upstream live token builder as part of a normal plugin rebuild.
 
@@ -111,7 +111,11 @@ Syncing the source file and publishing it are separate actions. The plugin does 
 
 Keep instances connected if you want library updates. Detached components no longer receive them. Your screen’s overall composition remains your own; nested library instances follow compatible updates.
 
-## Update the library to another release
+## Part 2: Update the library and push PRs
+
+The plugin has two tabs: **Sync** brings a reviewed Fondue release into Figma; **Push changes** proposes edits from the selected object back to the Fondue repository.
+
+### Update the library to another release
 
 ![Update the library and design projects](docs/illustrations/release-update-flow.png)
 
@@ -133,6 +137,35 @@ If Compare reports a locally changed or missing managed asset, resolve that conf
 
 A renderer change or release-specific documentation links can refresh many entries even when their geometry has not changed. Structural changes and existing overrides still need review; an update is not a guarantee that every screen requires no migration.
 
+### Push selected changes as a PR
+
+Use **Push changes** when you want to improve a Fondue component or token from Figma. Start by selecting the exact component, instance or layer you changed. The proposal includes that selection and its required token dependencies. Normal instance labels and exposed property choices stay local.
+
+This is currently a development workflow. A maintainer needs to prepare a local Fondue checkout, configure a server-side GitHub credential with contents and pull-request write permissions, and start the companion from the Fondue Sync repository:
+
+```sh
+npm run push:service
+```
+
+The companion uses `http://localhost:3848` and prints a temporary pairing secret. In **Push changes → Connect PR service**, enter that secret and choose **Connect**. Keep GitHub credentials in the service environment. See the [setup and configuration guide](docs/push-changes.md#run-the-development-workflow) for the checkout paths and credentials.
+
+1. Select the changed Fondue object on the canvas and open **Push changes**.
+2. Choose **Review selected object**, then select the detected changes to include.
+3. For a new value, choose an existing compatible token or give the proposed new token a CSS name. Its definition and component reference travel in the same PR. New or changed tokens also require `FIGMA_ACCESS_TOKEN` and installed Fondue build dependencies on the companion; an isolated token build must produce the generated exports before submission.
+4. Enter a conventional PR title, such as `fix(components): adjust badge radius`, and explain the improvement.
+5. Choose **Preview PR diff**. Review the source files, token changes, changeset, warnings and validation status. Resolve any ambiguous source targets or conflicts, then preview again.
+6. Acknowledge the shared component/token impact and choose **Create draft PR**. Open the returned GitHub link for review.
+
+For example, selecting a Badge instance and changing its radius proposes a change to the shared Badge implementation. If the radius needs a new token, the PR includes the authored token and generated exports. Changing an existing shared variable can affect other components too; review that wider impact before submitting.
+
+The workflow inventories all 200 upstream component recipes, but some properties and states still require source mapping review or an additional adapter. The 18 plugin-owned product patterns have separate ownership. Unsupported edits and source conflicts block submission. Accessibility, browser tests and visual review remain required before merge; creating a draft PR does not mark pending checks as passed.
+
+### Bring an approved PR back into Figma
+
+After maintainers review and merge the PR, release the affected Fondue packages and prepare a plugin build pinned to that release. Return to **Sync**, compare and update the library, validate it, then publish the Figma library. Designers can then accept the library update in their files.
+
+Creating a PR preserves the imported baseline. Local edits can still appear as conflicts until reconciled with the released change; resolve them explicitly rather than clearing sync records. If the selection, document or proposal changes during review, prepare a fresh diff before submitting.
+
 ## Technical setup and maintenance
 
 ### Build the development plugin
@@ -147,6 +180,8 @@ npm run build
 This packages the checked-in release bundle. Import `dist/manifest.json` in Figma desktop. The bundle is embedded in the plugin, so an import does not require a live Fondue server or Figma token credentials.
 
 ### Prepare a release and verify it
+
+Chart colors have a reviewed brand adaptation in `recipes/chart-colors.mjs`, applied after importing the pinned release tokens. It follows the [Frontify color guidelines](https://weare.frontify.com/document/2906#/design/color): Marker Purple highlights the primary series; Base neutrals represent supporting series, missing data and dim backgrounds. Light/Dark and hover/subtle roles use the same palette. These eleven adapted tokens carry explicit provenance; the upstream release and its token authoring files remain the baseline for all other roles.
 
 ```sh
 npm ci
@@ -208,11 +243,11 @@ Additional references: [native sections and browsing pages](docs/sections.md), [
 
 ## Planned extensions
 
-The current plugin builds and updates the library. Prototype export, live API data and reverse synchronization are later phases.
+The current plugin builds and updates the library, with a development workflow for proposing selected edits as draft PRs. Prototype export and live API data remain later phases.
 
 A future exporter can use the Figma composition and component mappings to recreate a screen with actual released Fondue code components. Mock and live data providers would share a typed contract. The [connected prototype architecture](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/connected-prototypes.md) documents this direction; live API integration remains research only.
 
-A future reverse workflow could propose supported library changes as a pull request against Fondue. Maintainers would review and merge them before a later release returns through the normal update flow.
+The development plugin now has a **Push changes** tab for proposing selected component and token edits as a draft PR against Fondue. It uses imported baselines, exact source mappings and an authenticated local companion. New token proposals require an isolated upstream token build; source ambiguities and unsupported edits need review. See the [push workflow, setup and coverage limits](docs/push-changes.md). Maintainers review and merge proposals before a later release returns through the normal update flow.
 
 ## Ownership and illustration credits
 

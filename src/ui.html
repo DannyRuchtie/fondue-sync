@@ -82,6 +82,55 @@
       #log {
         font-size: 12px;
       }
+      [hidden] {
+        display: none !important;
+      }
+      .tabs {
+        display: flex;
+        gap: 8px;
+        margin: 16px 0;
+      }
+      [role="tab"][aria-selected="true"] {
+        border-color: var(--figma-color-border-selected, #555);
+        font-weight: 600;
+      }
+      :focus-visible {
+        outline: 2px solid var(--figma-color-border-selected, #526dff);
+        outline-offset: 3px;
+      }
+      #push-panel label {
+        display: block;
+        margin: 12px 0 5px;
+      }
+      input:not([type="checkbox"]),
+      textarea,
+      select {
+        width: 100%;
+        box-sizing: border-box;
+        font: inherit;
+        padding: 8px;
+        color: inherit;
+        background: var(--figma-color-bg, white);
+        border: 1px solid var(--figma-color-border, #aaa);
+        border-radius: 4px;
+      }
+      fieldset {
+        margin: 16px 0;
+        border: 1px solid var(--figma-color-border, #aaa);
+      }
+      #push-panel h2 {
+        font-size: 15px;
+      }
+      #push-panel pre {
+        max-height: 320px;
+      }
+      #push-create {
+        margin-top: 16px;
+      }
+      .push-change {
+        padding: 8px 0;
+        overflow-wrap: anywhere;
+      }
       a {
         color: inherit;
       }
@@ -90,44 +139,139 @@
   <body>
     <h1>Fondue Sync</h1>
     <p class="muted">A released Fondue library, native in Figma.</p>
+    <div class="tabs" role="tablist" aria-label="Fondue actions">
+      <button
+        type="button"
+        role="tab"
+        id="sync-tab"
+        aria-controls="sync-panel"
+        aria-selected="true"
+        tabindex="0"
+      >
+        Sync
+      </button>
+      <button
+        type="button"
+        role="tab"
+        id="push-tab"
+        aria-controls="push-panel"
+        aria-selected="false"
+        tabindex="-1"
+      >
+        Push changes
+      </button>
+    </div>
     <span class="pill" id="release">Loading release…</span>
-    <div class="card">
-      <strong>Library file</strong>
-      <p id="status" class="muted">
-        Open a dedicated Fondue library Design file.
+    <section id="sync-panel" role="tabpanel" aria-labelledby="sync-tab">
+      <div class="card">
+        <strong>Library file</strong>
+        <p id="status" class="muted">
+          Open a dedicated Fondue library Design file.
+        </p>
+        <div id="counts"></div>
+      </div>
+      <button class="primary" data-action="import">Import Fondue</button>
+      <div class="row">
+        <button data-action="compare">Compare</button
+        ><button data-action="update">Update library</button
+        ><button data-action="validate">Validate</button>
+      </div>
+      <p id="progress" aria-live="polite" class="muted"></p>
+      <div id="log" aria-live="polite"></div>
+      <details>
+        <summary>Coverage and limitations</summary>
+        <pre id="gaps"></pre>
+      </details>
+      <p class="muted">
+        Publish this file through Figma’s library publishing flow. Designers
+        enable the published library in their own files and accept updates
+        there.
       </p>
-      <div id="counts"></div>
-    </div>
-    <button class="primary" data-action="import">Import Fondue</button>
-    <div class="row">
-      <button data-action="compare">Compare</button
-      ><button data-action="update">Update library</button
-      ><button data-action="validate">Validate</button>
-    </div>
-    <p id="progress" aria-live="polite" class="muted"></p>
-    <div id="log" aria-live="polite"></div>
-    <details>
-      <summary>Coverage and limitations</summary>
-      <pre id="gaps"></pre>
-    </details>
-    <p class="muted">
-      Publish this file through Figma’s library publishing flow. Designers
-      enable the published library in their own files and accept updates there.
-    </p>
-    <details>
-      <summary>Future: connected prototypes</summary>
+      <details>
+        <summary>Future: connected prototypes</summary>
+        <p>
+          Screen → real Fondue code and Frontify data is a later phase. This
+          plugin currently builds and updates library assets.
+        </p>
+      </details>
+    </section>
+    <section id="push-panel" role="tabpanel" aria-labelledby="push-tab" hidden>
       <p>
-        Screen → real Fondue code and Frontify data is a later phase. This
-        plugin currently builds and updates library assets.
+        Select a Fondue component or instance on the canvas to propose changes
+        to its source.
       </p>
-    </details>
+      <button type="button" id="push-scan">Review selected object</button>
+      <p id="push-progress" role="status" aria-live="polite"></p>
+      <div id="push-selection"></div>
+      <div id="push-issues" role="alert"></div>
+      <fieldset id="push-changes" hidden>
+        <legend>Changes to include</legend>
+        <div id="push-change-list"></div>
+      </fieldset>
+      <div id="push-tokens"></div>
+      <p id="push-scope" class="muted" hidden>
+        Instance changes propose an update to the shared Fondue component.
+        Shared tokens can affect other components.
+      </p>
+      <label for="push-title">PR title</label>
+      <input
+        id="push-title"
+        value="fix(components): update selected component styles"
+        maxlength="160"
+      />
+      <label for="push-description">Reason for this change</label>
+      <textarea
+        id="push-description"
+        rows="3"
+        placeholder="Describe the intended improvement"
+      ></textarea>
+      <details>
+        <summary>Connect PR service</summary>
+        <p class="muted">
+          Start the local Fondue PR service, then enter the pairing secret
+          printed in its terminal. GitHub credentials stay in the service.
+        </p>
+        <label for="push-secret">Pairing secret</label>
+        <input
+          id="push-secret"
+          type="password"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button type="button" id="push-connect">Connect</button>
+        <p id="push-connection" role="status">Service: http://localhost:3848</p>
+      </details>
+      <div class="row">
+        <button type="button" id="push-preview" disabled>
+          Preview PR diff
+        </button>
+      </div>
+      <div id="push-review" hidden>
+        <h2>Review source changes</h2>
+        <p id="push-base" class="muted"></p>
+        <pre
+          id="push-diff"
+          tabindex="0"
+          aria-label="Proposed source diff"
+        ></pre>
+        <div id="push-checks"></div>
+        <label
+          ><input type="checkbox" id="push-ack" /> I reviewed the diff and its
+          shared component/token impact.</label
+        >
+        <button type="button" id="push-create" class="primary" disabled>
+          Create draft PR
+        </button>
+      </div>
+      <p id="push-result" role="status"></p>
+    </section>
     <script>
       const send = (type) =>
         parent.postMessage({ pluginMessage: { type } }, "*");
       const el = (id) => document.getElementById(id);
       function buttons(disabled) {
         document
-          .querySelectorAll("button")
+          .querySelectorAll("#sync-panel button")
           .forEach((b) => (b.disabled = disabled));
       }
       document.querySelectorAll("[data-action]").forEach(
@@ -201,5 +345,6 @@
       };
       send("status");
     </script>
+    <!-- PUSH_SCRIPT -->
   </body>
 </html>

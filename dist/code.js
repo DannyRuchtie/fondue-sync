@@ -666,11 +666,11 @@
   function componentPropertyGroups(recipe, iconDefault) {
     const paths = /* @__PURE__ */ new Map();
     const add = (prefix, type, path, value2, variantId) => {
-      const identity = JSON.stringify([prefix, path]);
-      let values = paths.get(identity);
+      const identity2 = JSON.stringify([prefix, path]);
+      let values = paths.get(identity2);
       if (!values) {
         values = /* @__PURE__ */ new Map();
-        paths.set(identity, values);
+        paths.set(identity2, values);
       }
       const valueKey = JSON.stringify(value2);
       let group = values.get(valueKey);
@@ -681,16 +681,16 @@
       group.variantIds.push(variantId);
     };
     for (const variant of recipe.variants) {
-      const walk = (node, parent = "") => {
+      const walk2 = (node, parent = "") => {
         var _a, _b;
         const path = parent + "/" + node.id;
         if (node.kind === "text")
           add("Text", "TEXT", path, (_a = node.text) != null ? _a : "", variant.id);
         if (node.kind === "instance")
           add("Icon", "INSTANCE_SWAP", path, iconDefault(node), variant.id);
-        for (const child of (_b = node.children) != null ? _b : []) walk(child, path);
+        for (const child of (_b = node.children) != null ? _b : []) walk2(child, path);
       };
-      walk(variant.root);
+      walk2(variant.root);
     }
     return [...paths.values()].flatMap(
       (values) => [...values.values()].map((group, index) => __spreadProps(__spreadValues({}, group), {
@@ -1272,10 +1272,10 @@
       if (object.getSharedPluginDataKeys) {
         const prefix = key + "__fs_";
         const current = chunkPrefix(key, gen);
-        for (const stored of object.getSharedPluginDataKeys(METADATA_NAMESPACE)) {
-          const suffix = stored.slice(prefix.length);
-          if (stored.startsWith(prefix) && !stored.startsWith(current) && /^[a-z0-9_-]{1,80}_\d+$/.test(suffix))
-            setEntry(object, stored, "");
+        for (const stored2 of object.getSharedPluginDataKeys(METADATA_NAMESPACE)) {
+          const suffix = stored2.slice(prefix.length);
+          if (stored2.startsWith(prefix) && !stored2.startsWith(current) && /^[a-z0-9_-]{1,80}_\d+$/.test(suffix))
+            setEntry(object, stored2, "");
         }
       }
     } catch (e) {
@@ -1501,12 +1501,12 @@
       return void 0;
     const original = node[key];
     if (original === void 0 || typeof original === "symbol") return void 0;
-    const copy = JSON.parse(JSON.stringify(original));
+    const copy2 = JSON.parse(JSON.stringify(original));
     if (key === "relativeTransform" && (node === asset || autoPositioned(node))) {
-      copy[0][2] = 0;
-      copy[1][2] = 0;
+      copy2[0][2] = 0;
+      copy2[1][2] = 0;
     }
-    return copy;
+    return copy2;
   }
   async function snapshot(asset) {
     const visit = async (node) => {
@@ -2619,7 +2619,7 @@
     {
       id: "charts",
       name: "Charts",
-      usage: "Use the released series colors and their hover/subtle counterparts for data. Missing, dim and negative are explicit data roles.",
+      usage: "Use Marker Purple to highlight the primary series and Base neutrals for supporting data, following the Frontify color guidelines. Hover and subtle roles follow the same palette. Negative remains a semantic data role.",
       preview: "chart",
       matches: (id) => id.startsWith("color-charts-")
     },
@@ -3534,8 +3534,8 @@
       var _a, _b;
       this.api = api;
       this.bundle = bundle2;
-      const stored = read(api.root, "index");
-      this.index = stored ? JSON.parse(stored) : { schema: 2, assets: {}, collections: {}, pages: {} };
+      const stored2 = read(api.root, "index");
+      this.index = stored2 ? JSON.parse(stored2) : { schema: 2, assets: {}, collections: {}, pages: {} };
       if (this.index.assetShards === 16) {
         this.index.assets = {};
         for (let i = 0; i < 16; i++) {
@@ -3545,7 +3545,7 @@
           Object.assign(this.index.assets, JSON.parse(data));
         }
       }
-      if (stored) this.lastSavedIndex = JSON.stringify(this.index);
+      if (stored2) this.lastSavedIndex = JSON.stringify(this.index);
       this.warnings = [...(_b = (_a = this.index.warnings) != null ? _a : this.index.fontWarnings) != null ? _b : []];
       if (this.index.schema !== 1 && this.index.schema !== 2)
         throw Error("Unsupported sync ledger. Use a compatible plugin version.");
@@ -4346,11 +4346,11 @@
         const ensure = (name, type, value2) => {
           var _a2, _b2;
           const key = (_a2 = Object.keys(definitions).find((k) => k.split("#")[0] === name)) != null ? _a2 : owner.addComponentProperty(name, type, value2);
-          const identity = owner.id + ":" + key;
-          if (!this.appliedPropertyDefaults.has(identity)) {
+          const identity2 = owner.id + ":" + key;
+          if (!this.appliedPropertyDefaults.has(identity2)) {
             if (((_b2 = owner.componentPropertyDefinitions[key]) == null ? void 0 : _b2.defaultValue) !== value2)
               owner.editComponentProperty(key, { defaultValue: value2 });
-            this.appliedPropertyDefaults.add(identity);
+            this.appliedPropertyDefaults.add(identity2);
           }
           return key;
         };
@@ -5122,7 +5122,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "74f68164bcd63b1a4da1e4d7f74bb1b3047c203a504a0a192d9007345a6cf7cc",
+      rendererRevision: "ce47383d34e4e24ba5de63223d4cd7c7e29447a357eb5d61b73f0c87be8ecf66",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -5146,7 +5146,7 @@ Sources: ${recipe.source.join(", ")}`;
           "fixtures/media/manifest.json": "411200aa362d5eb49e73b3b1fef44e6d3701eb69507abe3be80e0f0f0a696587",
           "fixtures/media/README.md": "803289fbdf74742101f57845d9008b5869c255949b435a8b86537671ed246167"
         },
-        builder: "827e717165e72f99f3f9922a749de9bdfe90422d708e5d4bf47dc05dcd17e538",
+        builder: "44df3abc0d95ebf78b41b49e787bb84cf9ac4e6d2b61ec0654661dd4a5235078",
         imageBuilder: "8d4d90adc650e12ef5dc84941c28b808bb7fdd77963d30478f41f4b08d3ab638",
         recipes: {
           "recipes/index.mjs": "1d39e16d9a457fb4ac1126f485a26b3aa904cd05dbed3888d9f22840060389cb",
@@ -8632,16 +8632,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.9725490196078431,
-            g: 0.9725490196078431,
-            b: 0.9607843137254902,
-            a: 1
+            alias: "color-neutral-05"
           },
           Dark: {
-            r: 0.9725490196078431,
-            g: 0.9725490196078431,
-            b: 0.9607843137254902,
-            a: 1
+            alias: "color-neutral-90"
           }
         },
         css: "var(--color-charts-dim-default)",
@@ -8650,7 +8644,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-missing-default",
@@ -8659,16 +8657,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.8352941176470589,
-            g: 0.8392156862745098,
-            b: 0.8392156862745098,
-            a: 1
+            alias: "color-neutral-35"
           },
           Dark: {
-            r: 0.8352941176470589,
-            g: 0.8392156862745098,
-            b: 0.8392156862745098,
-            a: 1
+            alias: "color-neutral-70"
           }
         },
         css: "var(--color-charts-missing-default)",
@@ -8677,7 +8669,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-negative-default",
@@ -8767,16 +8763,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.41568627450980394,
-            g: 0.796078431372549,
-            b: 0.4588235294117647,
-            a: 1
+            alias: "color-marker-60"
           },
           Dark: {
-            r: 0.4627450980392157,
-            g: 0.8666666666666667,
-            b: 0.39215686274509803,
-            a: 1
+            alias: "color-marker-40"
           }
         },
         css: "var(--color-charts-primary-default)",
@@ -8785,7 +8775,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-primary-hover",
@@ -8794,16 +8788,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.5294117647058824,
-            g: 0.8588235294117647,
-            b: 0.5294117647058824,
-            a: 1
+            alias: "color-marker-70"
           },
           Dark: {
-            r: 0.6470588235294118,
-            g: 0.9215686274509803,
-            b: 0.6,
-            a: 1
+            alias: "color-marker-30"
           }
         },
         css: "var(--color-charts-primary-hover)",
@@ -8812,7 +8800,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-primary-subtle",
@@ -8821,15 +8813,15 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.41568627450980394,
-            g: 0.796078431372549,
-            b: 0.4588235294117647,
+            r: 0.7137254901960784,
+            g: 0.0392156862745098,
+            b: 0.8901960784313725,
             a: 0.1
           },
           Dark: {
-            r: 0.41568627450980394,
-            g: 0.796078431372549,
-            b: 0.4588235294117647,
+            r: 0.8784313725490196,
+            g: 0.4196078431372549,
+            b: 0.9921568627450981,
             a: 0.1
           }
         },
@@ -8839,7 +8831,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-secondary-default",
@@ -8848,16 +8844,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.8352941176470589,
-            g: 0.6078431372549019,
-            b: 1,
-            a: 1
+            alias: "color-neutral-80"
           },
           Dark: {
-            r: 0.8352941176470589,
-            g: 0.6078431372549019,
-            b: 1,
-            a: 1
+            alias: "color-neutral-35"
           }
         },
         css: "var(--color-charts-secondary-default)",
@@ -8866,7 +8856,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-secondary-hover",
@@ -8875,16 +8869,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.8980392156862745,
-            g: 0.7019607843137254,
-            b: 1,
-            a: 1
+            alias: "color-neutral-70"
           },
           Dark: {
-            r: 0.8980392156862745,
-            g: 0.7019607843137254,
-            b: 1,
-            a: 1
+            alias: "color-neutral-25"
           }
         },
         css: "var(--color-charts-secondary-hover)",
@@ -8893,7 +8881,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-secondary-subtle",
@@ -8902,15 +8894,15 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.8352941176470589,
-            g: 0.6078431372549019,
-            b: 1,
+            r: 0.27450980392156865,
+            g: 0.27450980392156865,
+            b: 0.2627450980392157,
             a: 0.1
           },
           Dark: {
-            r: 0.8352941176470589,
-            g: 0.6078431372549019,
-            b: 1,
+            r: 0.796078431372549,
+            g: 0.796078431372549,
+            b: 0.7725490196078432,
             a: 0.1
           }
         },
@@ -8920,7 +8912,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-tertiary-default",
@@ -8929,16 +8925,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.9019607843137255,
-            g: 0.6352941176470588,
-            b: 0.23529411764705882,
-            a: 1
+            alias: "color-neutral-60"
           },
           Dark: {
-            r: 0.9019607843137255,
-            g: 0.6352941176470588,
-            b: 0.23529411764705882,
-            a: 1
+            alias: "color-neutral-60"
           }
         },
         css: "var(--color-charts-tertiary-default)",
@@ -8947,7 +8937,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-tertiary-hover",
@@ -8956,16 +8950,10 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.9450980392156862,
-            g: 0.7372549019607844,
-            b: 0.3411764705882353,
-            a: 1
+            alias: "color-neutral-50"
           },
           Dark: {
-            r: 0.9450980392156862,
-            g: 0.7372549019607844,
-            b: 0.3411764705882353,
-            a: 1
+            alias: "color-neutral-50"
           }
         },
         css: "var(--color-charts-tertiary-hover)",
@@ -8974,7 +8962,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-charts-tertiary-subtle",
@@ -8983,15 +8975,15 @@ Sources: ${recipe.source.join(", ")}`;
         collection: "Semantic",
         values: {
           Light: {
-            r: 0.9019607843137255,
-            g: 0.6352941176470588,
-            b: 0.23529411764705882,
+            r: 0.5294117647058824,
+            g: 0.5294117647058824,
+            b: 0.5058823529411764,
             a: 0.1
           },
           Dark: {
-            r: 0.9019607843137255,
-            g: 0.6352941176470588,
-            b: 0.23529411764705882,
+            r: 0.5294117647058824,
+            g: 0.5294117647058824,
+            b: 0.5058823529411764,
             a: 0.1
           }
         },
@@ -9001,7 +8993,11 @@ Sources: ${recipe.source.join(", ")}`;
           "SHAPE_FILL",
           "TEXT_FILL",
           "STROKE_COLOR"
-        ]
+        ],
+        provenance: {
+          kind: "brand-adaptation",
+          source: "https://weare.frontify.com/document/2906#/design/color"
+        }
       },
       {
         id: "color-container-disabled-default",
@@ -323690,12 +323686,553 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8"
+    fingerprint: "81882828b3b2e2206ff25b84b28243871002550627b19c8dce8efa908e30ddb3"
   };
+
+  // src/push-selection.ts
+  var visual = /* @__PURE__ */ new Set([
+    "width",
+    "height",
+    "itemSpacing",
+    "paddingTop",
+    "paddingRight",
+    "paddingBottom",
+    "paddingLeft",
+    "cornerRadius",
+    "topLeftRadius",
+    "topRightRadius",
+    "bottomLeftRadius",
+    "bottomRightRadius",
+    "fills",
+    "strokes",
+    "strokeWeight",
+    "strokeTopWeight",
+    "strokeRightWeight",
+    "strokeBottomWeight",
+    "strokeLeftWeight",
+    "opacity",
+    "fontSize",
+    "lineHeight",
+    "letterSpacing",
+    "boundVariables"
+  ]);
+  var instanceConfiguration = /* @__PURE__ */ new Set([
+    "characters",
+    "componentProperties",
+    "componentPropertyReferences"
+  ]);
+  function instanceProposalSnapshot(value2) {
+    if (!value2 || typeof value2 !== "object") return value2;
+    const result = copy(value2);
+    if (Array.isArray(result.overrides))
+      result.overrides = result.overrides.map((entry) => {
+        var _a;
+        return __spreadProps(__spreadValues({}, entry), {
+          fields: Object.fromEntries(
+            Object.entries((_a = entry.fields) != null ? _a : {}).filter(
+              ([key]) => !instanceConfiguration.has(key)
+            )
+          )
+        });
+      }).filter(
+        (entry) => Object.keys(entry.fields).some((key) => key !== "managed") || entry.missing
+      );
+    return result;
+  }
+  var ignored = /* @__PURE__ */ new Set([
+    "children",
+    "managed",
+    "name",
+    "description",
+    "documentationLinks",
+    "relativeTransform",
+    "x",
+    "y"
+  ]);
+  var copy = (v) => v === void 0 ? null : JSON.parse(JSON.stringify(v));
+  function stored(n, k) {
+    return typeof (n == null ? void 0 : n.getSharedPluginData) === "function" ? read(n, k) : "";
+  }
+  function parsed(n, k) {
+    const raw = stored(n, k);
+    return raw ? JSON.parse(raw) : void 0;
+  }
+  function aliases(v) {
+    if (!v || typeof v !== "object") return [];
+    if (v.type === "VARIABLE_ALIAS" && typeof v.id === "string") return [v.id];
+    return [...new Set(Object.values(v).flatMap(aliases))];
+  }
+  function walk(n, visit, root = true) {
+    var _a;
+    visit(n);
+    if (!root && n.type === "INSTANCE") return;
+    for (const c of (_a = n.children) != null ? _a : []) walk(c, visit, false);
+  }
+  var identity = (n) => stored(n, "identity");
+  function atPath(root, path) {
+    var _a;
+    let n = root;
+    for (const id of path) {
+      const matches = ((_a = n.children) != null ? _a : []).filter(
+        (c) => {
+          var _a2;
+          return ((_a2 = c.managed) == null ? void 0 : _a2.identity) === id;
+        }
+      );
+      if (matches.length !== 1) return void 0;
+      n = matches[0];
+    }
+    return n;
+  }
+  async function inspectSelection(api, bundle2) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s;
+    const selected = [...(_b = (_a = api.currentPage) == null ? void 0 : _a.selection) != null ? _b : []];
+    const result = __spreadProps(__spreadValues({
+      schemaVersion: 1,
+      release: bundle2.release,
+      fingerprint: bundle2.fingerprint,
+      sourceCommit: (_d = (_c = bundle2.provenance.commit) != null ? _c : bundle2.provenance.sourceCommit) != null ? _d : ""
+    }, typeof api.fileKey === "string" && api.fileKey ? { figmaFileKey: api.fileKey } : {}), {
+      selectionIds: selected.map((n) => n.id),
+      components: [],
+      changes: [],
+      tokens: [],
+      issues: [],
+      warnings: []
+    });
+    const issue = (code, message, nodeId) => result.issues.push({ code, message, nodeId, blocking: true });
+    if (!selected.length) {
+      issue(
+        "empty-selection",
+        "Select a Fondue component or a layer inside one."
+      );
+      return result;
+    }
+    const tokens = /* @__PURE__ */ new Map(), visiting = /* @__PURE__ */ new Set();
+    const tokenFor = async (variableId) => {
+      var _a2, _b2, _c2;
+      if (visiting.has(variableId)) {
+        issue(
+          "token-alias-cycle",
+          "A selected token contains an alias cycle.",
+          variableId
+        );
+        return;
+      }
+      if (tokens.has(variableId)) return tokens.get(variableId);
+      visiting.add(variableId);
+      try {
+        const variable = await api.variables.getVariableByIdAsync(variableId);
+        if (!variable) {
+          issue(
+            "missing-token",
+            "A selected property references a missing variable.",
+            variableId
+          );
+          return;
+        }
+        const applied = parsed(variable, "applied"), def = applied ? JSON.parse(applied.definition) : void 0;
+        const collection = await api.variables.getVariableCollectionByIdAsync(
+          variable.variableCollectionId
+        );
+        if (!collection) {
+          issue(
+            "missing-token-collection",
+            "A selected variable has no available collection.",
+            variableId
+          );
+          return;
+        }
+        const values = {};
+        for (const [modeId, value2] of Object.entries(
+          (_a2 = variable.valuesByMode) != null ? _a2 : {}
+        )) {
+          const mode = collection.modes.find((m) => m.modeId === modeId);
+          if (!mode) {
+            issue(
+              "missing-token-mode",
+              "A selected variable refers to an unknown mode.",
+              variableId
+            );
+            continue;
+          }
+          const ids = aliases(value2);
+          if (ids.length) {
+            const target = await tokenFor(ids[0]);
+            if (target) values[mode.name] = { alias: target.id };
+          } else values[mode.name] = copy(value2);
+        }
+        const token = __spreadValues({
+          id: (_b2 = def == null ? void 0 : def.id) != null ? _b2 : `new:${variableId}`,
+          variableId,
+          name: (_c2 = def == null ? void 0 : def.name) != null ? _c2 : variable.name,
+          type: variable.resolvedType,
+          values,
+          existing: !!def
+        }, def ? { before: def.values, css: def.css, provenance: def.provenance } : {});
+        tokens.set(variableId, token);
+        if (def && applied) {
+          const before = JSON.parse(normalizeSavedSnapshot(applied.snapshot));
+          if (canonical(before.valuesByMode) !== canonical(variable.valuesByMode)) {
+            result.changes.push({
+              id: `token:${token.id}`,
+              selectionId: selected[0].id,
+              nodeId: variableId,
+              recipeId: "",
+              componentName: "Shared token",
+              variantId: "",
+              layerId: "",
+              property: "valuesByMode",
+              before: copy(def.values),
+              after: values,
+              tokenIds: [token.id],
+              scope: "shared-token"
+            });
+            result.warnings.push(
+              `Changing ${token.name} affects every consumer of this shared token.`
+            );
+          }
+        }
+        return token;
+      } catch (e) {
+        issue("invalid-token", String(e), variableId);
+        return;
+      } finally {
+        visiting.delete(variableId);
+      }
+    };
+    const canonicalAliases = async (v, includeDependencies = true) => {
+      var _a2;
+      if (Array.isArray(v))
+        return Promise.all(
+          v.map((value2) => canonicalAliases(value2, includeDependencies))
+        );
+      if (!v || typeof v !== "object") return copy(v);
+      if (v.type === "VARIABLE_ALIAS" && typeof v.id === "string") {
+        if (!includeDependencies) {
+          const variable = await api.variables.getVariableByIdAsync(v.id);
+          const applied = parsed(variable, "applied");
+          const id = applied ? JSON.parse(applied.definition).id : `new:${v.id}`;
+          return { type: "VARIABLE_ALIAS", id };
+        }
+        const t = await tokenFor(v.id);
+        return { type: "VARIABLE_ALIAS", id: (_a2 = t == null ? void 0 : t.id) != null ? _a2 : v.id };
+      }
+      return Object.fromEntries(
+        await Promise.all(
+          Object.entries(v).map(async ([k, x]) => [
+            k,
+            await canonicalAliases(x, includeDependencies)
+          ])
+        )
+      );
+    };
+    const emitted = /* @__PURE__ */ new Map();
+    const roots = selected.filter(
+      (n) => !selected.some((other) => {
+        if (n === other) return false;
+        for (let p = n.parent; p; p = p.parent) if (p === other) return true;
+        return false;
+      })
+    );
+    for (const selection of roots) {
+      try {
+        let component = selection;
+        while (component && !["COMPONENT", "COMPONENT_SET", "INSTANCE"].includes(component.type))
+          component = component.parent;
+        if (!component) {
+          issue(
+            "unmanaged-selection",
+            "The selected object is not inside a mapped Fondue component.",
+            selection.id
+          );
+          continue;
+        }
+        const isInstance = component.type === "INSTANCE", main = isInstance ? await component.getMainComponentAsync() : component;
+        if (!main) {
+          issue(
+            "missing-main",
+            "The selected instance has no accessible main component.",
+            selection.id
+          );
+          continue;
+        }
+        const owner = main.type === "COMPONENT_SET" ? main : main.parent, mapping = parsed(owner, "mapping"), applied = parsed(owner, "applied");
+        const recipe = bundle2.recipes.find(
+          (r) => `recipe:${r.id}` === (mapping == null ? void 0 : mapping.id)
+        );
+        if (!recipe || !applied) {
+          issue(
+            "missing-baseline",
+            "The selected component needs an imported Fondue source mapping and baseline.",
+            selection.id
+          );
+          continue;
+        }
+        if (mapping.release && mapping.release !== bundle2.release) {
+          issue(
+            "baseline-release",
+            "The selected component was imported from a different release; use the matching plugin bundle before proposing changes.",
+            selection.id
+          );
+          continue;
+        }
+        const oldDef = JSON.parse(applied.definition), saved = JSON.parse(normalizeSavedSnapshot(applied.snapshot));
+        if (oldDef.id !== recipe.id) {
+          issue(
+            "baseline-identity",
+            "The imported component baseline does not match its mapping.",
+            selection.id
+          );
+          continue;
+        }
+        if (recipe.package.includes("fondue-sync")) {
+          issue(
+            "plugin-owned-component",
+            "This selection is a Fondue Sync pattern; it has no upstream component implementation.",
+            selection.id
+          );
+          continue;
+        }
+        if (isInstance)
+          result.warnings.push(
+            `Pushing ${recipe.name} proposes a shared component change from this instance override.`
+          );
+        const mainVariant = main.type === "COMPONENT_SET" ? "" : stored(main, "variant");
+        result.components.push({
+          selectionId: selection.id,
+          nodeId: selection.id,
+          recipeId: recipe.id,
+          componentName: recipe.name,
+          variantId: mainVariant,
+          layerId: identity(selection),
+          isInstance
+        });
+        const nodes = [];
+        walk(selection, (n) => nodes.push(n));
+        const overrides = /* @__PURE__ */ new Map();
+        if (isInstance)
+          for (const o of (_e = component.overrides) != null ? _e : [])
+            overrides.set(o.id, new Set(o.overriddenFields));
+        for (const node of nodes) {
+          if (node.type === "COMPONENT_SET") continue;
+          let variant = mainVariant;
+          const path = [];
+          let current = node;
+          while (current && current !== owner && current !== component) {
+            path.unshift(identity(current));
+            current = current.parent;
+          }
+          if (isInstance) path.unshift(identity(main));
+          else if (component.type === "COMPONENT_SET") {
+            let v = node;
+            while (v && v.parent !== owner) v = v.parent;
+            variant = v ? stored(v, "variant") : "";
+          } else path.unshift(identity(component));
+          if (path.some((id) => !id)) {
+            issue(
+              "missing-layer-identity",
+              "A selected layer was added or lacks a stable source identity.",
+              node.id
+            );
+            continue;
+          }
+          const beforeNode = atPath(saved, path);
+          if (!beforeNode) {
+            issue(
+              "missing-layer-baseline",
+              "A selected layer cannot be located uniquely in the imported baseline.",
+              node.id
+            );
+            continue;
+          }
+          if (node.type === "INSTANCE" && node !== component) {
+            const nestedSnapshot = JSON.parse(await snapshot(node));
+            if (canonical(
+              isInstance ? instanceProposalSnapshot(nestedSnapshot) : nestedSnapshot
+            ) !== canonical(
+              isInstance ? instanceProposalSnapshot(beforeNode) : beforeNode
+            ))
+              issue(
+                "nested-instance-change",
+                "Select the changed nested instance directly to propose its owning component change.",
+                node.id
+              );
+            continue;
+          }
+          let afterNode;
+          if (node.type === "INSTANCE") {
+            afterNode = __spreadValues({}, beforeNode);
+            for (const prop of (_f = overrides.get(node.id)) != null ? _f : []) {
+              if (prop !== "pluginData") afterNode[prop] = copy(node[prop]);
+            }
+          } else afterNode = JSON.parse(await snapshot(node));
+          if (!isInstance && node.type !== "INSTANCE" && canonical(
+            ((_g = beforeNode.children) != null ? _g : []).map((n) => {
+              var _a2;
+              return (_a2 = n.managed) == null ? void 0 : _a2.identity;
+            })
+          ) !== canonical(
+            ((_h = afterNode.children) != null ? _h : []).map((n) => {
+              var _a2;
+              return (_a2 = n.managed) == null ? void 0 : _a2.identity;
+            })
+          ))
+            issue(
+              "structural-change",
+              "Selected layer children were removed, reordered or replaced; an explicit structural mapping is required.",
+              node.id
+            );
+          const keys = isInstance ? [...(_i = overrides.get(node.id)) != null ? _i : []] : [
+            .../* @__PURE__ */ new Set([
+              ...Object.keys(beforeNode),
+              ...Object.keys(afterNode)
+            ])
+          ];
+          for (const variableId of aliases(afterNode.boundVariables))
+            await tokenFor(variableId);
+          const fields = keys.flatMap(
+            (property) => {
+              var _a2, _b2;
+              return property === "boundVariables" ? [
+                .../* @__PURE__ */ new Set([
+                  ...Object.keys((_a2 = beforeNode.boundVariables) != null ? _a2 : {}),
+                  ...Object.keys((_b2 = afterNode.boundVariables) != null ? _b2 : {})
+                ])
+              ].map((field) => `boundVariables.${field}`) : [property];
+            }
+          );
+          for (const property of fields) {
+            if (ignored.has(property) || property === "pluginData") continue;
+            if (isInstance && instanceConfiguration.has(property)) continue;
+            if (isInstance && (((_j = beforeNode.componentPropertyReferences) == null ? void 0 : _j[property]) || ((_k = node.componentPropertyReferences) == null ? void 0 : _k[property])))
+              continue;
+            const boundField = property.startsWith("boundVariables.") ? property.slice(15) : void 0;
+            const corners = [
+              "topLeftRadius",
+              "topRightRadius",
+              "bottomLeftRadius",
+              "bottomRightRadius"
+            ];
+            const strokes = [
+              "strokeTopWeight",
+              "strokeRightWeight",
+              "strokeBottomWeight",
+              "strokeLeftWeight"
+            ];
+            if (corners.includes(property) && typeof afterNode.cornerRadius === "number")
+              continue;
+            if (strokes.includes(property) && typeof afterNode.strokeWeight === "number")
+              continue;
+            if (property === "cornerRadius" && typeof afterNode.cornerRadius !== "number" && corners.some((field) => afterNode[field] !== void 0))
+              continue;
+            if (property === "strokeWeight" && typeof afterNode.strokeWeight !== "number" && strokes.some((field) => afterNode[field] !== void 0))
+              continue;
+            if (boundField === "cornerRadius" && !((_l = afterNode.boundVariables) == null ? void 0 : _l.cornerRadius) && corners.some((field) => afterNode[field] !== void 0))
+              continue;
+            if (boundField === "strokeWeight" && !((_m = afterNode.boundVariables) == null ? void 0 : _m.strokeWeight) && strokes.some((field) => afterNode[field] !== void 0))
+              continue;
+            if (!boundField && (((_n = afterNode.boundVariables) == null ? void 0 : _n[property]) || /Radius$/.test(property) && ((_o = afterNode.boundVariables) == null ? void 0 : _o.cornerRadius)))
+              continue;
+            if (boundField && ((_p = afterNode.boundVariables) == null ? void 0 : _p[boundField]) === void 0 && afterNode[boundField] !== void 0)
+              continue;
+            const before = await canonicalAliases(
+              boundField ? (_q = beforeNode.boundVariables) == null ? void 0 : _q[boundField] : beforeNode[property],
+              false
+            ), after = await canonicalAliases(
+              boundField ? (_r = afterNode.boundVariables) == null ? void 0 : _r[boundField] : afterNode[property]
+            );
+            if (canonical(before) === canonical(after)) continue;
+            if (!visual.has(boundField != null ? boundField : property)) {
+              issue(
+                "unsupported-property",
+                `The selected ${property} change requires an explicit source mapping.`,
+                node.id
+              );
+              continue;
+            }
+            const id = `${recipe.id}:${variant}:${path.join("/")}:${property}`;
+            const signature = canonical({ before, after });
+            const previous = emitted.get(id);
+            if (previous !== void 0) {
+              if (previous !== signature)
+                issue(
+                  "conflicting-selection",
+                  `Selected instances propose different values for ${recipe.name} / ${property}. Select one proposal for this shared component property.`,
+                  node.id
+                );
+              continue;
+            }
+            emitted.set(id, signature);
+            const tokenIds = aliases(after);
+            if (!boundField && !tokenIds.length && typeof after === "number") {
+              const role = property === "opacity" ? "opacity" : /radius/i.test(property) ? "radius" : /stroke/i.test(property) ? "border-width" : /width|height/i.test(property) ? "size" : /font|lineHeight|letterSpacing/i.test(property) ? "typography" : "spacing", proposalId = `literal:${id}`;
+              tokens.set(proposalId, {
+                id: proposalId,
+                variableId: "",
+                name: "",
+                type: "FLOAT",
+                values: { Value: after },
+                existing: false,
+                requiresName: true,
+                provenance: {
+                  role,
+                  unit: property === "opacity" ? "number" : "px"
+                }
+              });
+              tokenIds.push(proposalId);
+            }
+            if (["fills", "strokes"].includes(property) && !tokenIds.length) {
+              if (Array.isArray(after) && after.length === 1 && after[0].type === "SOLID" && after[0].color) {
+                const proposalId = `literal:${id}`;
+                tokens.set(proposalId, {
+                  id: proposalId,
+                  variableId: "",
+                  name: "",
+                  type: "COLOR",
+                  values: {
+                    Value: __spreadProps(__spreadValues({}, after[0].color), { a: (_s = after[0].opacity) != null ? _s : 1 })
+                  },
+                  existing: false,
+                  requiresName: true,
+                  provenance: { role: "color" }
+                });
+                tokenIds.push(proposalId);
+              } else
+                issue(
+                  "unsupported-paint",
+                  "Only a single solid color can currently become a new color token.",
+                  node.id
+                );
+            }
+            result.changes.push({
+              id,
+              selectionId: selection.id,
+              nodeId: node.id,
+              recipeId: recipe.id,
+              componentName: recipe.name,
+              variantId: variant,
+              layerId: path[path.length - 1],
+              property,
+              before,
+              after,
+              tokenIds,
+              scope: "component"
+            });
+          }
+        }
+      } catch (e) {
+        issue("invalid-selection", String(e), selection.id);
+      }
+    }
+    result.tokens = [...tokens.values()];
+    result.warnings = [...new Set(result.warnings)];
+    return result;
+  }
 
   // src/plugin.ts
   var bundle = fondue_13_11_1_default;
-  figma.showUI('<!doctype html>\n<html>\n  <head>\n    <meta charset="utf-8" />\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n      body {\n        margin: 0;\n        padding: 24px;\n        font:\n          13px/1.5 Inter,\n          system-ui,\n          sans-serif;\n        background: var(--figma-color-bg, #fff);\n        color: var(--figma-color-text, #202020);\n      }\n      h1 {\n        font-size: 24px;\n        letter-spacing: -0.7px;\n        margin: 0;\n      }\n      p {\n        margin: 8px 0 16px;\n      }\n      .muted {\n        color: var(--figma-color-text-secondary, #666);\n      }\n      .pill {\n        display: inline-block;\n        border: 1px solid #bbb;\n        padding: 3px 8px;\n        border-radius: 20px;\n        font-size: 11px;\n      }\n      .card {\n        padding: 14px;\n        border: 1px solid var(--figma-color-border, #ddd);\n        border-radius: 8px;\n        margin: 16px 0;\n      }\n      button {\n        font: inherit;\n        border: 1px solid #aaa;\n        border-radius: 5px;\n        background: var(--figma-color-bg-secondary, #eee);\n        color: inherit;\n        padding: 9px 13px;\n        cursor: pointer;\n      }\n      button.primary {\n        background: #191919;\n        color: white;\n        border-color: #191919;\n        width: 100%;\n      }\n      button:disabled {\n        opacity: 0.45;\n        cursor: wait;\n      }\n      .row {\n        display: flex;\n        gap: 8px;\n        margin-top: 10px;\n      }\n      .row button {\n        flex: 1;\n      }\n      pre {\n        font:\n          11px/1.6 ui-monospace,\n          monospace;\n        white-space: pre-wrap;\n        overflow-wrap: anywhere;\n        max-height: 240px;\n        overflow: auto;\n      }\n      summary {\n        cursor: pointer;\n      }\n      #log {\n        font-size: 12px;\n      }\n      a {\n        color: inherit;\n      }\n    </style>\n  </head>\n  <body>\n    <h1>Fondue Sync</h1>\n    <p class="muted">A released Fondue library, native in Figma.</p>\n    <span class="pill" id="release">Loading release\u2026</span>\n    <div class="card">\n      <strong>Library file</strong>\n      <p id="status" class="muted">\n        Open a dedicated Fondue library Design file.\n      </p>\n      <div id="counts"></div>\n    </div>\n    <button class="primary" data-action="import">Import Fondue</button>\n    <div class="row">\n      <button data-action="compare">Compare</button\n      ><button data-action="update">Update library</button\n      ><button data-action="validate">Validate</button>\n    </div>\n    <p id="progress" aria-live="polite" class="muted"></p>\n    <div id="log" aria-live="polite"></div>\n    <details>\n      <summary>Coverage and limitations</summary>\n      <pre id="gaps"></pre>\n    </details>\n    <p class="muted">\n      Publish this file through Figma\u2019s library publishing flow. Designers\n      enable the published library in their own files and accept updates there.\n    </p>\n    <details>\n      <summary>Future: connected prototypes</summary>\n      <p>\n        Screen \u2192 real Fondue code and Frontify data is a later phase. This\n        plugin currently builds and updates library assets.\n      </p>\n    </details>\n    <script>\n      const send = (type) =>\n        parent.postMessage({ pluginMessage: { type } }, "*");\n      const el = (id) => document.getElementById(id);\n      function buttons(disabled) {\n        document\n          .querySelectorAll("button")\n          .forEach((b) => (b.disabled = disabled));\n      }\n      document.querySelectorAll("[data-action]").forEach(\n        (button) =>\n          (button.onclick = () => {\n            buttons(true);\n            el("progress").textContent = "Working\u2026";\n            send(button.dataset.action);\n          }),\n      );\n      onmessage = (event) => {\n        const m = event.data.pluginMessage;\n        if (!m) return;\n        if (m.type === "idle") {\n          buttons(false);\n          return;\n        }\n        if (m.type === "status") {\n          if (m.lastErrors?.length)\n            el("log").textContent =\n              "Previous update errors:\\n" + m.lastErrors.join("\\n");\n          el("release").textContent =\n            "Fondue " + m.release + " \xB7 " + m.fingerprint.slice(0, 8);\n          el("status").textContent = m.applied\n            ? (m.appliedFingerprint === m.fingerprint\n                ? "Managed bundle synchronized: "\n                : "Changes available; last managed sync: ") + m.applied\n            : m.hasManagedAssets\n              ? "Import started. Compare and Update library to resume."\n              : "Ready to import into this file.";\n          el("counts").textContent =\n            `${m.counts.tokens} variables \xB7 ${m.counts.styles} styles \xB7 ${m.counts.icons} icons \xB7 ${m.counts.recipes} component sets`;\n          el("gaps").textContent = JSON.stringify(m.gaps, null, 2);\n        }\n        if (m.type === "progress") el("progress").textContent = m.text;\n        if (m.type === "error") {\n          el("progress").textContent = "Action stopped";\n          el("log").textContent = m.message;\n        }\n        if (m.type === "report") {\n          const r = m.report;\n          el("progress").textContent = r.complete\n            ? "Managed assets match the bundled recipes. Review coverage before publishing."\n            : "Review required before publishing.";\n          el("log").replaceChildren();\n          const pre = document.createElement("pre");\n          pre.textContent = JSON.stringify(\n            {\n              counts: r.counts,\n              errors: r.errors,\n              warnings: r.warnings,\n              changes: r.actions.filter((a) => a.action !== "unchanged"),\n            },\n            null,\n            2,\n          );\n          el("log").appendChild(pre);\n          for (const action of r.actions.filter(\n            (a) => a.action === "conflict" || a.action === "missing",\n          )) {\n            const item = document.createElement("p");\n            item.textContent = action.id + ": " + action.reason;\n            el("log").appendChild(item);\n          }\n          if (r.complete)\n            el("status").textContent =\n              "Synchronized source: " +\n              r.release +\n              " \xB7 publication status is managed by Figma.";\n        }\n      };\n      send("status");\n    <\/script>\n  </body>\n</html>\n', { width: 440, height: 620, themeColors: true });
+  figma.showUI('<!doctype html>\n<html>\n  <head>\n    <meta charset="utf-8" />\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n      body {\n        margin: 0;\n        padding: 24px;\n        font:\n          13px/1.5 Inter,\n          system-ui,\n          sans-serif;\n        background: var(--figma-color-bg, #fff);\n        color: var(--figma-color-text, #202020);\n      }\n      h1 {\n        font-size: 24px;\n        letter-spacing: -0.7px;\n        margin: 0;\n      }\n      p {\n        margin: 8px 0 16px;\n      }\n      .muted {\n        color: var(--figma-color-text-secondary, #666);\n      }\n      .pill {\n        display: inline-block;\n        border: 1px solid #bbb;\n        padding: 3px 8px;\n        border-radius: 20px;\n        font-size: 11px;\n      }\n      .card {\n        padding: 14px;\n        border: 1px solid var(--figma-color-border, #ddd);\n        border-radius: 8px;\n        margin: 16px 0;\n      }\n      button {\n        font: inherit;\n        border: 1px solid #aaa;\n        border-radius: 5px;\n        background: var(--figma-color-bg-secondary, #eee);\n        color: inherit;\n        padding: 9px 13px;\n        cursor: pointer;\n      }\n      button.primary {\n        background: #191919;\n        color: white;\n        border-color: #191919;\n        width: 100%;\n      }\n      button:disabled {\n        opacity: 0.45;\n        cursor: wait;\n      }\n      .row {\n        display: flex;\n        gap: 8px;\n        margin-top: 10px;\n      }\n      .row button {\n        flex: 1;\n      }\n      pre {\n        font:\n          11px/1.6 ui-monospace,\n          monospace;\n        white-space: pre-wrap;\n        overflow-wrap: anywhere;\n        max-height: 240px;\n        overflow: auto;\n      }\n      summary {\n        cursor: pointer;\n      }\n      #log {\n        font-size: 12px;\n      }\n      [hidden] {\n        display: none !important;\n      }\n      .tabs {\n        display: flex;\n        gap: 8px;\n        margin: 16px 0;\n      }\n      [role="tab"][aria-selected="true"] {\n        border-color: var(--figma-color-border-selected, #555);\n        font-weight: 600;\n      }\n      :focus-visible {\n        outline: 2px solid var(--figma-color-border-selected, #526dff);\n        outline-offset: 3px;\n      }\n      #push-panel label {\n        display: block;\n        margin: 12px 0 5px;\n      }\n      input:not([type="checkbox"]),\n      textarea,\n      select {\n        width: 100%;\n        box-sizing: border-box;\n        font: inherit;\n        padding: 8px;\n        color: inherit;\n        background: var(--figma-color-bg, white);\n        border: 1px solid var(--figma-color-border, #aaa);\n        border-radius: 4px;\n      }\n      fieldset {\n        margin: 16px 0;\n        border: 1px solid var(--figma-color-border, #aaa);\n      }\n      #push-panel h2 {\n        font-size: 15px;\n      }\n      #push-panel pre {\n        max-height: 320px;\n      }\n      #push-create {\n        margin-top: 16px;\n      }\n      .push-change {\n        padding: 8px 0;\n        overflow-wrap: anywhere;\n      }\n      a {\n        color: inherit;\n      }\n    </style>\n  </head>\n  <body>\n    <h1>Fondue Sync</h1>\n    <p class="muted">A released Fondue library, native in Figma.</p>\n    <div class="tabs" role="tablist" aria-label="Fondue actions">\n      <button\n        type="button"\n        role="tab"\n        id="sync-tab"\n        aria-controls="sync-panel"\n        aria-selected="true"\n        tabindex="0"\n      >\n        Sync\n      </button>\n      <button\n        type="button"\n        role="tab"\n        id="push-tab"\n        aria-controls="push-panel"\n        aria-selected="false"\n        tabindex="-1"\n      >\n        Push changes\n      </button>\n    </div>\n    <span class="pill" id="release">Loading release\u2026</span>\n    <section id="sync-panel" role="tabpanel" aria-labelledby="sync-tab">\n      <div class="card">\n        <strong>Library file</strong>\n        <p id="status" class="muted">\n          Open a dedicated Fondue library Design file.\n        </p>\n        <div id="counts"></div>\n      </div>\n      <button class="primary" data-action="import">Import Fondue</button>\n      <div class="row">\n        <button data-action="compare">Compare</button\n        ><button data-action="update">Update library</button\n        ><button data-action="validate">Validate</button>\n      </div>\n      <p id="progress" aria-live="polite" class="muted"></p>\n      <div id="log" aria-live="polite"></div>\n      <details>\n        <summary>Coverage and limitations</summary>\n        <pre id="gaps"></pre>\n      </details>\n      <p class="muted">\n        Publish this file through Figma\u2019s library publishing flow. Designers\n        enable the published library in their own files and accept updates\n        there.\n      </p>\n      <details>\n        <summary>Future: connected prototypes</summary>\n        <p>\n          Screen \u2192 real Fondue code and Frontify data is a later phase. This\n          plugin currently builds and updates library assets.\n        </p>\n      </details>\n    </section>\n    <section id="push-panel" role="tabpanel" aria-labelledby="push-tab" hidden>\n      <p>\n        Select a Fondue component or instance on the canvas to propose changes\n        to its source.\n      </p>\n      <button type="button" id="push-scan">Review selected object</button>\n      <p id="push-progress" role="status" aria-live="polite"></p>\n      <div id="push-selection"></div>\n      <div id="push-issues" role="alert"></div>\n      <fieldset id="push-changes" hidden>\n        <legend>Changes to include</legend>\n        <div id="push-change-list"></div>\n      </fieldset>\n      <div id="push-tokens"></div>\n      <p id="push-scope" class="muted" hidden>\n        Instance changes propose an update to the shared Fondue component.\n        Shared tokens can affect other components.\n      </p>\n      <label for="push-title">PR title</label>\n      <input\n        id="push-title"\n        value="fix(components): update selected component styles"\n        maxlength="160"\n      />\n      <label for="push-description">Reason for this change</label>\n      <textarea\n        id="push-description"\n        rows="3"\n        placeholder="Describe the intended improvement"\n      ></textarea>\n      <details>\n        <summary>Connect PR service</summary>\n        <p class="muted">\n          Start the local Fondue PR service, then enter the pairing secret\n          printed in its terminal. GitHub credentials stay in the service.\n        </p>\n        <label for="push-secret">Pairing secret</label>\n        <input\n          id="push-secret"\n          type="password"\n          autocomplete="off"\n          spellcheck="false"\n        />\n        <button type="button" id="push-connect">Connect</button>\n        <p id="push-connection" role="status">Service: http://localhost:3848</p>\n      </details>\n      <div class="row">\n        <button type="button" id="push-preview" disabled>\n          Preview PR diff\n        </button>\n      </div>\n      <div id="push-review" hidden>\n        <h2>Review source changes</h2>\n        <p id="push-base" class="muted"></p>\n        <pre\n          id="push-diff"\n          tabindex="0"\n          aria-label="Proposed source diff"\n        ></pre>\n        <div id="push-checks"></div>\n        <label\n          ><input type="checkbox" id="push-ack" /> I reviewed the diff and its\n          shared component/token impact.</label\n        >\n        <button type="button" id="push-create" class="primary" disabled>\n          Create draft PR\n        </button>\n      </div>\n      <p id="push-result" role="status"></p>\n    </section>\n    <script>\n      const send = (type) =>\n        parent.postMessage({ pluginMessage: { type } }, "*");\n      const el = (id) => document.getElementById(id);\n      function buttons(disabled) {\n        document\n          .querySelectorAll("#sync-panel button")\n          .forEach((b) => (b.disabled = disabled));\n      }\n      document.querySelectorAll("[data-action]").forEach(\n        (button) =>\n          (button.onclick = () => {\n            buttons(true);\n            el("progress").textContent = "Working\u2026";\n            send(button.dataset.action);\n          }),\n      );\n      onmessage = (event) => {\n        const m = event.data.pluginMessage;\n        if (!m) return;\n        if (m.type === "idle") {\n          buttons(false);\n          return;\n        }\n        if (m.type === "status") {\n          if (m.lastErrors?.length)\n            el("log").textContent =\n              "Previous update errors:\\n" + m.lastErrors.join("\\n");\n          el("release").textContent =\n            "Fondue " + m.release + " \xB7 " + m.fingerprint.slice(0, 8);\n          el("status").textContent = m.applied\n            ? (m.appliedFingerprint === m.fingerprint\n                ? "Managed bundle synchronized: "\n                : "Changes available; last managed sync: ") + m.applied\n            : m.hasManagedAssets\n              ? "Import started. Compare and Update library to resume."\n              : "Ready to import into this file.";\n          el("counts").textContent =\n            `${m.counts.tokens} variables \xB7 ${m.counts.styles} styles \xB7 ${m.counts.icons} icons \xB7 ${m.counts.recipes} component sets`;\n          el("gaps").textContent = JSON.stringify(m.gaps, null, 2);\n        }\n        if (m.type === "progress") el("progress").textContent = m.text;\n        if (m.type === "error") {\n          el("progress").textContent = "Action stopped";\n          el("log").textContent = m.message;\n        }\n        if (m.type === "report") {\n          const r = m.report;\n          el("progress").textContent = r.complete\n            ? "Managed assets match the bundled recipes. Review coverage before publishing."\n            : "Review required before publishing.";\n          el("log").replaceChildren();\n          const pre = document.createElement("pre");\n          pre.textContent = JSON.stringify(\n            {\n              counts: r.counts,\n              errors: r.errors,\n              warnings: r.warnings,\n              changes: r.actions.filter((a) => a.action !== "unchanged"),\n            },\n            null,\n            2,\n          );\n          el("log").appendChild(pre);\n          for (const action of r.actions.filter(\n            (a) => a.action === "conflict" || a.action === "missing",\n          )) {\n            const item = document.createElement("p");\n            item.textContent = action.id + ": " + action.reason;\n            el("log").appendChild(item);\n          }\n          if (r.complete)\n            el("status").textContent =\n              "Synchronized source: " +\n              r.release +\n              " \xB7 publication status is managed by Figma.";\n        }\n      };\n      send("status");\n    <\/script>\n    <script>(() => {\n  const byId = (id) => document.getElementById(id);\n  const endpoint = "http://localhost:3848";\n  let report = null,\n    preview = null,\n    paired = false,\n    working = false,\n    generation = 0;\n  let tokenCatalog = [];\n  let sourceChoices = {};\n  const pending = new Map();\n  let sequence = 0;\n  const text = (id, value) => {\n    byId(id).textContent = value;\n  };\n  const selectedIds = () =>\n    [...document.querySelectorAll("[data-change-id]:checked")].map(\n      (el) => el.dataset.changeId,\n    );\n  const names = () =>\n    Object.fromEntries(\n      [...document.querySelectorAll("[data-token-id]")].map((el) => [\n        el.dataset.tokenId,\n        el.value.trim(),\n      ]),\n    );\n  const mappingChoices = () => ({\n    ...sourceChoices,\n    ...Object.fromEntries(\n      [...document.querySelectorAll("[data-mapping-id]")]\n        .filter((el) => el.value)\n        .map((el) => [el.dataset.mappingId, el.value]),\n    ),\n  });\n  function controls() {\n    byId("push-scan").disabled = working;\n    byId("push-connect").disabled = working;\n    byId("push-preview").disabled =\n      working || !paired || !report || !selectedIds().length;\n    byId("push-create").disabled =\n      working ||\n      !preview ||\n      (preview.blockers ?? []).length > 0 ||\n      !byId("push-ack").checked;\n  }\n  function invalidate(message) {\n    generation++;\n    preview = null;\n    byId("push-review").hidden = true;\n    byId("push-ack").checked = false;\n    text("push-result", "");\n    if (message) text("push-progress", message);\n    controls();\n  }\n  function ask(type) {\n    return new Promise((resolve, reject) => {\n      const requestId = "push-" + ++sequence;\n      const timeout = setTimeout(() => {\n        pending.delete(requestId);\n        reject(Error("Selection scan timed out. Try again."));\n      }, 60000);\n      pending.set(requestId, { resolve, reject, timeout });\n      parent.postMessage({ pluginMessage: { type, requestId } }, "*");\n    });\n  }\n  async function service(path, body) {\n    const response = await fetch(endpoint + path, {\n      method: body === undefined ? "GET" : "POST",\n      headers: {\n        Authorization: "Bearer " + byId("push-secret").value.trim(),\n        ...(body === undefined ? {} : { "Content-Type": "application/json" }),\n      },\n      ...(body === undefined ? {} : { body: JSON.stringify(body) }),\n    });\n    const result = await response.json();\n    if (!response.ok)\n      throw Error(\n        result.error ?? result.message ?? "PR service rejected the request.",\n      );\n    return result;\n  }\n  async function run(action) {\n    working = true;\n    controls();\n    try {\n      await action();\n    } catch (error) {\n      text("push-progress", error.message);\n    } finally {\n      working = false;\n      controls();\n    }\n  }\n  function listItem(parent, value) {\n    const p = document.createElement("p");\n    p.textContent = value;\n    parent.append(p);\n    return p;\n  }\n  function renderReport(next) {\n    report = next;\n    sourceChoices = {};\n    invalidate();\n    const components = next.components ?? [];\n    text(\n      "push-selection",\n      components.length\n        ? [...new Set(components.map((c) => c.componentName))].join(", ")\n        : "No mapped Fondue component selected.",\n    );\n    const issues = byId("push-issues");\n    issues.replaceChildren();\n    for (const issue of next.issues ?? []) listItem(issues, issue.message);\n    for (const warning of next.warnings ?? []) listItem(issues, warning);\n    const changes = byId("push-change-list");\n    changes.replaceChildren();\n    for (const change of next.changes ?? []) {\n      const label = document.createElement("label");\n      label.className = "push-change";\n      const input = document.createElement("input");\n      input.type = "checkbox";\n      input.checked = true;\n      input.dataset.changeId = change.id;\n      input.addEventListener("change", () => invalidate());\n      label.append(\n        input,\n        document.createTextNode(\n          " " + change.componentName + " \xB7 " + change.property,\n        ),\n      );\n      const detail = document.createElement("pre");\n      detail.textContent =\n        JSON.stringify(change.before) + " \u2192 " + JSON.stringify(change.after);\n      label.append(detail);\n      changes.append(label);\n    }\n    byId("push-changes").hidden = !(next.changes ?? []).length;\n    byId("push-scope").hidden = !components.length;\n    const tokens = byId("push-tokens");\n    tokens.replaceChildren();\n    for (const token of (next.tokens ?? []).filter((t) => !t.existing)) {\n      const label = document.createElement("label");\n      label.textContent =\n        "Token for " +\n        (token.name || token.provenance?.role || "changed value");\n      const choice = document.createElement("select");\n      choice.dataset.tokenChoiceId = token.id;\n      const newOption = document.createElement("option");\n      newOption.value = "";\n      newOption.textContent = "Create a new token";\n      choice.append(newOption);\n      for (const existing of tokenCatalog.filter(\n        (t) => t.type === token.type,\n      )) {\n        const option = document.createElement("option");\n        option.value = existing.id;\n        option.textContent = existing.id;\n        choice.append(option);\n      }\n      const input = document.createElement("input");\n      input.dataset.tokenId = token.id;\n      input.setAttribute("aria-label", "New CSS token name");\n      const role = token.provenance?.role;\n      const property =\n        next.changes.find((change) => change.tokenIds?.includes(token.id))\n          ?.property ?? "";\n      const prefix =\n        token.type === "COLOR"\n          ? "color"\n          : role === "radius"\n            ? "border-radius"\n            : role === "typography"\n              ? "typography-" +\n                ({ lineHeight: "line-height", letterSpacing: "letter-spacing" }[\n                  property\n                ] || "font-size")\n              : role || "size";\n      input.value = (token.name || prefix + "-custom")\n        .replace(/\\//g, "-")\n        .replace(/[^a-z0-9-]/g, "-")\n        .replace(/-+/g, "-")\n        .replace(/^-|-$/g, "");\n      choice.addEventListener("change", () => {\n        input.hidden = !!choice.value;\n        invalidate();\n      });\n      input.addEventListener("input", () => invalidate());\n      label.append(choice, input);\n      tokens.append(label);\n    }\n    text(\n      "push-progress",\n      next.changes?.length\n        ? next.changes.length + " changes found in the selection."\n        : "No changed properties found in the selection.",\n    );\n    controls();\n  }\n  function renderPreview(result) {\n    preview = result;\n    byId("push-review").hidden = false;\n    text(\n      "push-base",\n      "Target: Frontify/fondue \xB7 base " + (result.baseSha ?? "").slice(0, 12),\n    );\n    text(\n      "push-diff",\n      result.diff || "No source diff available yet. Resolve the items below.",\n    );\n    const checks = byId("push-checks");\n    checks.replaceChildren();\n    for (const blocker of result.blockers ?? []) {\n      listItem(checks, typeof blocker === "string" ? blocker : blocker.message);\n      if (blocker.candidates?.length && blocker.changeId) {\n        const label = document.createElement("label");\n        label.textContent = "Source declaration to change";\n        const select = document.createElement("select");\n        select.dataset.mappingId = blocker.changeId;\n        const empty = document.createElement("option");\n        empty.value = "";\n        empty.textContent = "Choose the matching source declaration";\n        select.append(empty);\n        for (const candidate of blocker.candidates) {\n          const option = document.createElement("option");\n          option.value = candidate.id ?? candidate.candidateId ?? "";\n          option.textContent =\n            candidate.path +\n            " \xB7 " +\n            candidate.selector +\n            " \xB7 " +\n            candidate.property +\n            ": " +\n            candidate.expectedValue;\n          select.append(option);\n        }\n        // Keep choices visible for the next preview while disabling creation.\n        select.addEventListener("change", () => {\n          if (select.value) sourceChoices[blocker.changeId] = select.value;\n          else delete sourceChoices[blocker.changeId];\n          generation++;\n          preview = null;\n          byId("push-ack").checked = false;\n          controls();\n        });\n        label.append(select);\n        checks.append(label);\n      }\n    }\n    for (const warning of result.warnings ?? []) listItem(checks, warning);\n    for (const check of result.checks ?? [])\n      listItem(\n        checks,\n        typeof check === "string"\n          ? check + ": pending"\n          : (check.name ?? check.id) + ": " + check.status,\n      );\n    listItem(\n      checks,\n      "Browser accessibility and visual review must pass before merge. Creating a draft PR does not certify those checks.",\n    );\n    controls();\n  }\n  byId("push-scan").onclick = () =>\n    run(async () => {\n      text("push-progress", "Reading the selected object\u2026");\n      renderReport(await ask("push-scan"));\n    });\n  byId("push-connect").onclick = () =>\n    run(async () => {\n      const status = await service("/status");\n      paired = true;\n      text(\n        "push-connection",\n        "Connected \xB7 " + (status.repository ?? "Frontify/fondue"),\n      );\n      text(\n        "push-progress",\n        "PR service connected. Review your selection to continue.",\n      );\n    });\n  byId("push-secret").addEventListener("input", () => {\n    paired = false;\n    invalidate();\n  });\n  for (const id of ["push-title", "push-description"])\n    byId(id).addEventListener("input", () => invalidate());\n  byId("push-ack").onchange = controls;\n  byId("push-preview").onclick = () =>\n    run(async () => {\n      const selectedChangeIds = selectedIds(),\n        tokenNames = names(),\n        choices = mappingChoices();\n      text(\n        "push-progress",\n        "Checking the selection and preparing the source diff\u2026",\n      );\n      const current = await ask("push-scan");\n      if (JSON.stringify(current) !== JSON.stringify(report)) {\n        renderReport(current);\n        throw Error(\n          "The selection changed. Review the refreshed changes and preview again.",\n        );\n      }\n      const revision = generation;\n      const replacements = new Map(\n        [...document.querySelectorAll("[data-token-choice-id]")]\n          .filter((el) => el.value)\n          .map((el) => [el.dataset.tokenChoiceId, el.value]),\n      );\n      const outgoing = {\n        ...current,\n        changes: current.changes.map((change) => {\n          const chosen =\n            change.tokenIds?.length === 1 &&\n            replacements.get(change.tokenIds[0]);\n          return chosen\n            ? { ...change, after: { tokenId: chosen }, tokenIds: [chosen] }\n            : change;\n        }),\n        tokens: [\n          ...current.tokens.filter((token) => !replacements.has(token.id)),\n          ...tokenCatalog\n            .filter((token) => [...replacements.values()].includes(token.id))\n            .map((token) => ({ ...token, existing: true })),\n        ],\n      };\n      const result = await service("/preview", {\n        report: outgoing,\n        selectedChangeIds,\n        title: byId("push-title").value.trim(),\n        description: byId("push-description").value.trim(),\n        tokenNames,\n        mappingChoices: choices,\n      });\n      if (revision !== generation)\n        throw Error(\n          "The selection or proposal changed while preparing the diff. Preview again.",\n        );\n      renderPreview(result);\n      text(\n        "push-progress",\n        result.blockers?.length\n          ? "Resolve the source mapping or token issues, then preview again."\n          : "Source diff ready for review.",\n      );\n    });\n  byId("push-create").onclick = () =>\n    run(async () => {\n      const reviewed = preview,\n        revision = generation;\n      if (!reviewed || !byId("push-ack").checked)\n        throw Error("Review the source diff first.");\n      const current = await ask("push-scan");\n      if (\n        revision !== generation ||\n        JSON.stringify(current) !== JSON.stringify(report)\n      ) {\n        renderReport(current);\n        throw Error(\n          "The selection changed. Preview the updated diff before creating a PR.",\n        );\n      }\n      text("push-progress", "Creating the reviewed draft PR\u2026");\n      const result = await service("/pull-request", {\n        previewId: reviewed.previewId,\n        fingerprint: reviewed.fingerprint,\n      });\n      const url = result.url ?? result.pullRequest?.html_url ?? result.html_url;\n      const target = byId("push-result");\n      target.replaceChildren();\n      if (\n        url &&\n        /^https:\\/\\/github\\.com\\/Frontify\\/fondue\\/pull\\/\\d+$/i.test(url)\n      ) {\n        const link = document.createElement("a");\n        link.href = url;\n        link.target = "_blank";\n        link.rel = "noopener noreferrer";\n        link.textContent = "Open draft PR";\n        target.append(link);\n      } else\n        target.textContent =\n          "Draft PR created. Check the PR service for its link.";\n      preview = null;\n      text(\n        "push-progress",\n        "Draft PR created. Your sync baseline is preserved.",\n      );\n    });\n  window.addEventListener("message", (event) => {\n    if (event.source !== parent) return;\n    const message = event.data?.pluginMessage;\n    if (!message) return;\n    if (message.type === "status") tokenCatalog = message.tokenChoices ?? [];\n    if (message.type === "push-invalidated") {\n      report = null;\n      invalidate(\n        "Selection or document changed. Review the selected object again.",\n      );\n    }\n    if (message.type === "push-report" || message.type === "push-error") {\n      const request = pending.get(message.requestId);\n      if (!request) return;\n      clearTimeout(request.timeout);\n      pending.delete(message.requestId);\n      if (message.type === "push-error") request.reject(Error(message.message));\n      else request.resolve(message.report);\n    }\n  });\n  const tabs = [byId("sync-tab"), byId("push-tab")];\n  function activate(tab) {\n    for (const item of tabs) {\n      const active = item === tab;\n      item.setAttribute("aria-selected", String(active));\n      item.tabIndex = active ? 0 : -1;\n      byId(item.getAttribute("aria-controls")).hidden = !active;\n    }\n  }\n  for (const tab of tabs) {\n    tab.onclick = () => activate(tab);\n    tab.onkeydown = (event) => {\n      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))\n        return;\n      event.preventDefault();\n      const target =\n        event.key === "Home"\n          ? tabs[0]\n          : event.key === "End"\n            ? tabs[1]\n            : tabs[1 - tabs.indexOf(tab)];\n      activate(target);\n      target.focus();\n    };\n  }\n  controls();\n})();\n<\/script>\n  </body>\n</html>\n', { width: 480, height: 720, themeColors: true });
   var busy = false;
   var post = (type, payload) => figma.ui.postMessage(__spreadValues({ type }, payload));
   function compact(report) {
@@ -323706,11 +324243,27 @@ Sources: ${recipe.source.join(", ")}`;
       })
     });
   }
+  figma.on("selectionchange", () => post("push-invalidated", {}));
+  figma.on("documentchange", () => post("push-invalidated", {}));
   figma.ui.onmessage = async (message) => {
     var _a, _b, _c;
-    if (busy) return;
+    if (busy) {
+      if (message.type === "push-scan")
+        post("push-error", {
+          requestId: message.requestId,
+          message: "Wait for the current operation to finish, then review the selection again."
+        });
+      return;
+    }
     busy = true;
     try {
+      if (message.type === "push-scan") {
+        post("push-report", {
+          requestId: message.requestId,
+          report: await inspectSelection(figma, bundle)
+        });
+        return;
+      }
       const engine = new SyncEngine(figma, bundle);
       if (message.type === "status")
         post("status", {
@@ -323727,6 +324280,9 @@ Sources: ${recipe.source.join(", ")}`;
             recipes: bundle.recipes.length
           },
           gaps: bundle.gaps,
+          tokenChoices: bundle.tokens.filter(
+            (token) => /^var\(--[a-z0-9-]+\)$/.test(token.css)
+          ),
           publication: "Publishing and consumer acceptance are managed in Figma."
         });
       else if (message.type === "compare" || message.type === "validate") {
@@ -323747,7 +324303,10 @@ Sources: ${recipe.source.join(", ")}`;
         post("report", { report: compact(report) });
       }
     } catch (error) {
-      post("error", { message: String(error) });
+      post(message.type === "push-scan" ? "push-error" : "error", {
+        requestId: message.requestId,
+        message: String(error)
+      });
     } finally {
       busy = false;
       post("idle", {});

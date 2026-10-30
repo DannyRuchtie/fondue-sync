@@ -12,7 +12,7 @@
       "integrity": "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
     },
     "sourceLockSha256": "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-    "rendererRevision": "74f68164bcd63b1a4da1e4d7f74bb1b3047c203a504a0a192d9007345a6cf7cc",
+    "rendererRevision": "ce47383d34e4e24ba5de63223d4cd7c7e29447a357eb5d61b73f0c87be8ecf66",
     "rootRemPx": 16,
     "packageVersions": {
       "@frontify/fondue-components": "36.0.0",
@@ -36,7 +36,7 @@
         "fixtures/media/manifest.json": "411200aa362d5eb49e73b3b1fef44e6d3701eb69507abe3be80e0f0f0a696587",
         "fixtures/media/README.md": "803289fbdf74742101f57845d9008b5869c255949b435a8b86537671ed246167"
       },
-      "builder": "827e717165e72f99f3f9922a749de9bdfe90422d708e5d4bf47dc05dcd17e538",
+      "builder": "44df3abc0d95ebf78b41b49e787bb84cf9ac4e6d2b61ec0654661dd4a5235078",
       "imageBuilder": "8d4d90adc650e12ef5dc84941c28b808bb7fdd77963d30478f41f4b08d3ab638",
       "recipes": {
         "recipes/index.mjs": "1d39e16d9a457fb4ac1126f485a26b3aa904cd05dbed3888d9f22840060389cb",
@@ -3522,16 +3522,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.9725490196078431,
-          "g": 0.9725490196078431,
-          "b": 0.9607843137254902,
-          "a": 1
+          "alias": "color-neutral-05"
         },
         "Dark": {
-          "r": 0.9725490196078431,
-          "g": 0.9725490196078431,
-          "b": 0.9607843137254902,
-          "a": 1
+          "alias": "color-neutral-90"
         }
       },
       "css": "var(--color-charts-dim-default)",
@@ -3540,7 +3534,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-missing-default",
@@ -3549,16 +3547,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.8352941176470589,
-          "g": 0.8392156862745098,
-          "b": 0.8392156862745098,
-          "a": 1
+          "alias": "color-neutral-35"
         },
         "Dark": {
-          "r": 0.8352941176470589,
-          "g": 0.8392156862745098,
-          "b": 0.8392156862745098,
-          "a": 1
+          "alias": "color-neutral-70"
         }
       },
       "css": "var(--color-charts-missing-default)",
@@ -3567,7 +3559,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-negative-default",
@@ -3657,16 +3653,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.41568627450980394,
-          "g": 0.796078431372549,
-          "b": 0.4588235294117647,
-          "a": 1
+          "alias": "color-marker-60"
         },
         "Dark": {
-          "r": 0.4627450980392157,
-          "g": 0.8666666666666667,
-          "b": 0.39215686274509803,
-          "a": 1
+          "alias": "color-marker-40"
         }
       },
       "css": "var(--color-charts-primary-default)",
@@ -3675,7 +3665,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-primary-hover",
@@ -3684,16 +3678,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.5294117647058824,
-          "g": 0.8588235294117647,
-          "b": 0.5294117647058824,
-          "a": 1
+          "alias": "color-marker-70"
         },
         "Dark": {
-          "r": 0.6470588235294118,
-          "g": 0.9215686274509803,
-          "b": 0.6,
-          "a": 1
+          "alias": "color-marker-30"
         }
       },
       "css": "var(--color-charts-primary-hover)",
@@ -3702,7 +3690,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-primary-subtle",
@@ -3711,15 +3703,15 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.41568627450980394,
-          "g": 0.796078431372549,
-          "b": 0.4588235294117647,
+          "r": 0.7137254901960784,
+          "g": 0.0392156862745098,
+          "b": 0.8901960784313725,
           "a": 0.1
         },
         "Dark": {
-          "r": 0.41568627450980394,
-          "g": 0.796078431372549,
-          "b": 0.4588235294117647,
+          "r": 0.8784313725490196,
+          "g": 0.4196078431372549,
+          "b": 0.9921568627450981,
           "a": 0.1
         }
       },
@@ -3729,7 +3721,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-secondary-default",
@@ -3738,16 +3734,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.8352941176470589,
-          "g": 0.6078431372549019,
-          "b": 1,
-          "a": 1
+          "alias": "color-neutral-80"
         },
         "Dark": {
-          "r": 0.8352941176470589,
-          "g": 0.6078431372549019,
-          "b": 1,
-          "a": 1
+          "alias": "color-neutral-35"
         }
       },
       "css": "var(--color-charts-secondary-default)",
@@ -3756,7 +3746,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-secondary-hover",
@@ -3765,16 +3759,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.8980392156862745,
-          "g": 0.7019607843137254,
-          "b": 1,
-          "a": 1
+          "alias": "color-neutral-70"
         },
         "Dark": {
-          "r": 0.8980392156862745,
-          "g": 0.7019607843137254,
-          "b": 1,
-          "a": 1
+          "alias": "color-neutral-25"
         }
       },
       "css": "var(--color-charts-secondary-hover)",
@@ -3783,7 +3771,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-secondary-subtle",
@@ -3792,15 +3784,15 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.8352941176470589,
-          "g": 0.6078431372549019,
-          "b": 1,
+          "r": 0.27450980392156865,
+          "g": 0.27450980392156865,
+          "b": 0.2627450980392157,
           "a": 0.1
         },
         "Dark": {
-          "r": 0.8352941176470589,
-          "g": 0.6078431372549019,
-          "b": 1,
+          "r": 0.796078431372549,
+          "g": 0.796078431372549,
+          "b": 0.7725490196078432,
           "a": 0.1
         }
       },
@@ -3810,7 +3802,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-tertiary-default",
@@ -3819,16 +3815,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.9019607843137255,
-          "g": 0.6352941176470588,
-          "b": 0.23529411764705882,
-          "a": 1
+          "alias": "color-neutral-60"
         },
         "Dark": {
-          "r": 0.9019607843137255,
-          "g": 0.6352941176470588,
-          "b": 0.23529411764705882,
-          "a": 1
+          "alias": "color-neutral-60"
         }
       },
       "css": "var(--color-charts-tertiary-default)",
@@ -3837,7 +3827,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-tertiary-hover",
@@ -3846,16 +3840,10 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.9450980392156862,
-          "g": 0.7372549019607844,
-          "b": 0.3411764705882353,
-          "a": 1
+          "alias": "color-neutral-50"
         },
         "Dark": {
-          "r": 0.9450980392156862,
-          "g": 0.7372549019607844,
-          "b": 0.3411764705882353,
-          "a": 1
+          "alias": "color-neutral-50"
         }
       },
       "css": "var(--color-charts-tertiary-hover)",
@@ -3864,7 +3852,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-charts-tertiary-subtle",
@@ -3873,15 +3865,15 @@
       "collection": "Semantic",
       "values": {
         "Light": {
-          "r": 0.9019607843137255,
-          "g": 0.6352941176470588,
-          "b": 0.23529411764705882,
+          "r": 0.5294117647058824,
+          "g": 0.5294117647058824,
+          "b": 0.5058823529411764,
           "a": 0.1
         },
         "Dark": {
-          "r": 0.9019607843137255,
-          "g": 0.6352941176470588,
-          "b": 0.23529411764705882,
+          "r": 0.5294117647058824,
+          "g": 0.5294117647058824,
+          "b": 0.5058823529411764,
           "a": 0.1
         }
       },
@@ -3891,7 +3883,11 @@
         "SHAPE_FILL",
         "TEXT_FILL",
         "STROKE_COLOR"
-      ]
+      ],
+      "provenance": {
+        "kind": "brand-adaptation",
+        "source": "https://weare.frontify.com/document/2906#/design/color"
+      }
     },
     {
       "id": "color-container-disabled-default",
@@ -318580,5 +318576,5 @@
       }
     ]
   },
-  "fingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8"
+  "fingerprint": "81882828b3b2e2206ff25b84b28243871002550627b19c8dce8efa908e30ddb3"
 }

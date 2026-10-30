@@ -102,7 +102,7 @@ The classic plugin can read and modify the file in which it runs. It cannot run 
 
 The source-controlled component identities, public package names, props and source mappings are the basis for a later Code Connect/MCP mapping layer. A future prototype exporter must select a supported composed screen, resolve its instances to real Fondue imports, translate supported properties, report unsupported design constructs, and produce a runnable result. It must not claim that a native component with a similar name proves correct application code.
 
-Reverse code proposals are a separate future workflow. They should operate as reviewable code diffs against a known source release. They are not part of this importer or its update action.
+Reverse code proposals now have a separate development workflow in the **Push changes** tab. Selection-only comparison produces reviewable code diffs against a known imported source release and checks the current target declarations. An authenticated loopback companion creates draft PRs after exact diff review; token proposals require an isolated upstream build and durable repository-owned definitions. This does not advance importer baselines or publish the library. See [push architecture, setup and coverage](push-changes.md).
 
 The proposed live Frontify connection layer is documented in [connected prototypes](connected-prototypes.md). It is future scope and does not change the repository-only definition input for the library importer.
 

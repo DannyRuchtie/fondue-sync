@@ -1,0 +1,395 @@
+{
+  "fileKey": "ZmOzqBnHNixUTV1TqRtBHs",
+  "pageId": "5:20047",
+  "guidelines": "https://weare.frontify.com/document/2906#/design/color",
+  "result": {
+    "mutatedNodeIds": [],
+    "mutatedVariableIds": [
+      "VariableID:4:18",
+      "VariableID:4:19",
+      "VariableID:4:23",
+      "VariableID:4:24",
+      "VariableID:4:25",
+      "VariableID:4:26",
+      "VariableID:4:27",
+      "VariableID:4:28",
+      "VariableID:4:29",
+      "VariableID:4:30",
+      "VariableID:4:31"
+    ],
+    "before": [
+      {
+        "id": "VariableID:4:18",
+        "name": "color/charts/dim/default",
+        "values": {
+          "4:1": {
+            "r": 0.9725490212440491,
+            "g": 0.9725490212440491,
+            "b": 0.9607843160629272,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.9725490212440491,
+            "g": 0.9725490212440491,
+            "b": 0.9607843160629272,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:19",
+        "name": "color/charts/missing/default",
+        "values": {
+          "4:1": {
+            "r": 0.8352941274642944,
+            "g": 0.8392156958580017,
+            "b": 0.8392156958580017,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.8352941274642944,
+            "g": 0.8392156958580017,
+            "b": 0.8392156958580017,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:23",
+        "name": "color/charts/primary/default",
+        "values": {
+          "4:1": {
+            "r": 0.4156862795352936,
+            "g": 0.7960784435272217,
+            "b": 0.4588235318660736,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.4627451002597809,
+            "g": 0.8666666746139526,
+            "b": 0.3921568691730499,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:24",
+        "name": "color/charts/primary/hover",
+        "values": {
+          "4:1": {
+            "r": 0.529411792755127,
+            "g": 0.8588235378265381,
+            "b": 0.529411792755127,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.6470588445663452,
+            "g": 0.9215686321258545,
+            "b": 0.6000000238418579,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:25",
+        "name": "color/charts/primary/subtle",
+        "values": {
+          "4:1": {
+            "r": 0.4156862795352936,
+            "g": 0.7960784435272217,
+            "b": 0.4588235318660736,
+            "a": 0.10000000149011612
+          },
+          "4:2": {
+            "r": 0.4156862795352936,
+            "g": 0.7960784435272217,
+            "b": 0.4588235318660736,
+            "a": 0.10000000149011612
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:26",
+        "name": "color/charts/secondary/default",
+        "values": {
+          "4:1": {
+            "r": 0.8352941274642944,
+            "g": 0.6078431606292725,
+            "b": 1,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.8352941274642944,
+            "g": 0.6078431606292725,
+            "b": 1,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:27",
+        "name": "color/charts/secondary/hover",
+        "values": {
+          "4:1": {
+            "r": 0.8980392217636108,
+            "g": 0.7019608020782471,
+            "b": 1,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.8980392217636108,
+            "g": 0.7019608020782471,
+            "b": 1,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:28",
+        "name": "color/charts/secondary/subtle",
+        "values": {
+          "4:1": {
+            "r": 0.8352941274642944,
+            "g": 0.6078431606292725,
+            "b": 1,
+            "a": 0.10000000149011612
+          },
+          "4:2": {
+            "r": 0.8352941274642944,
+            "g": 0.6078431606292725,
+            "b": 1,
+            "a": 0.10000000149011612
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:29",
+        "name": "color/charts/tertiary/default",
+        "values": {
+          "4:1": {
+            "r": 0.9019607901573181,
+            "g": 0.6352941393852234,
+            "b": 0.23529411852359772,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.9019607901573181,
+            "g": 0.6352941393852234,
+            "b": 0.23529411852359772,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:30",
+        "name": "color/charts/tertiary/hover",
+        "values": {
+          "4:1": {
+            "r": 0.9450980424880981,
+            "g": 0.7372549176216125,
+            "b": 0.34117648005485535,
+            "a": 1
+          },
+          "4:2": {
+            "r": 0.9450980424880981,
+            "g": 0.7372549176216125,
+            "b": 0.34117648005485535,
+            "a": 1
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:31",
+        "name": "color/charts/tertiary/subtle",
+        "values": {
+          "4:1": {
+            "r": 0.9019607901573181,
+            "g": 0.6352941393852234,
+            "b": 0.23529411852359772,
+            "a": 0.10000000149011612
+          },
+          "4:2": {
+            "r": 0.9019607901573181,
+            "g": 0.6352941393852234,
+            "b": 0.23529411852359772,
+            "a": 0.10000000149011612
+          }
+        }
+      }
+    ],
+    "changed": [
+      {
+        "id": "VariableID:4:18",
+        "name": "color/charts/dim/default",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:104"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:122"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:19",
+        "name": "color/charts/missing/default",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:111"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:118"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:23",
+        "name": "color/charts/primary/default",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:96"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:94"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:24",
+        "name": "color/charts/primary/hover",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:97"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:93"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:25",
+        "name": "color/charts/primary/subtle",
+        "values": {
+          "4:1": {
+            "r": 0.7137255072593689,
+            "g": 0.03921568766236305,
+            "b": 0.8901960849761963,
+            "a": 0.10000000149011612
+          },
+          "4:2": {
+            "r": 0.8784313797950745,
+            "g": 0.41960784792900085,
+            "b": 0.9921568632125854,
+            "a": 0.10000000149011612
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:26",
+        "name": "color/charts/secondary/default",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:120"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:111"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:27",
+        "name": "color/charts/secondary/hover",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:118"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:109"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:28",
+        "name": "color/charts/secondary/subtle",
+        "values": {
+          "4:1": {
+            "r": 0.27450981736183167,
+            "g": 0.27450981736183167,
+            "b": 0.26274511218070984,
+            "a": 0.10000000149011612
+          },
+          "4:2": {
+            "r": 0.7960784435272217,
+            "g": 0.7960784435272217,
+            "b": 0.772549033164978,
+            "a": 0.10000000149011612
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:29",
+        "name": "color/charts/tertiary/default",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:116"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:116"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:30",
+        "name": "color/charts/tertiary/hover",
+        "values": {
+          "4:1": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:114"
+          },
+          "4:2": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:4:114"
+          }
+        }
+      },
+      {
+        "id": "VariableID:4:31",
+        "name": "color/charts/tertiary/subtle",
+        "values": {
+          "4:1": {
+            "r": 0.529411792755127,
+            "g": 0.529411792755127,
+            "b": 0.5058823823928833,
+            "a": 0.10000000149011612
+          },
+          "4:2": {
+            "r": 0.529411792755127,
+            "g": 0.529411792755127,
+            "b": 0.5058823823928833,
+            "a": 0.10000000149011612
+          }
+        }
+      }
+    ]
+  },
+  "validation": {
+    "screenshotSection": "10:2050",
+    "testsPassed": 170,
+    "typecheck": "passed",
+    "build": "passed"
+  }
+}

@@ -1,9 +1,10 @@
 {
   "release": "13.11.1",
-  "fingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8",
+  "fingerprint": "81882828b3b2e2206ff25b84b28243871002550627b19c8dce8efa908e30ddb3",
   "counts": {
     "tokens": 444,
-    "releasedTokens": 384,
+    "releasedTokens": 373,
+    "brandAdaptedTokens": 11,
     "sourceDerivedNativeTokens": 60,
     "compoundSourceSymbols": 102,
     "stories": 420,

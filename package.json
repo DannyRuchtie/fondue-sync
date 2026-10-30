@@ -10,6 +10,7 @@
     "test": "tsx --test tests/*.test.ts",
     "verify": "npm run bundle && npm run typecheck && npm test && npm run build",
     "source": "node scripts/prepare-source.mjs",
+    "push:service": "node scripts/push-service.mjs",
     "format": "prettier --write src scripts tests recipes fixtures .github package.json tsconfig.json",
     "format:check": "prettier --check src scripts tests recipes fixtures .github package.json tsconfig.json"
   },

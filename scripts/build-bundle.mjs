@@ -1,4 +1,5 @@
 import { augmentComponentPropertyPolicies } from "../src/component-properties.mjs";
+import { applyChartBrandColors } from "../recipes/chart-colors.mjs";
 import { loadImageAssets, enrichImageReferences } from "./image-assets.mjs";
 import { augmentTypographyBindings } from "../recipes/typography-bindings.mjs";
 import fs from "node:fs";
@@ -249,6 +250,7 @@ export async function build(source = path.join(root, ".cache/release")) {
     read("packages/tokens/dist/themes/themes.module.css"),
   );
   const styles = makeStyles(tokens, composites, raw);
+  applyChartBrandColors(tokens);
   read("packages/tokens/config.json");
   const manifest = JSON.parse(read("packages/tokens/dist/manifest.json"));
   read("packages/tokens/dist/json/utilities.json");
@@ -635,8 +637,12 @@ export async function build(source = path.join(root, ".cache/release")) {
     counts: {
       tokens: tokens.length,
       releasedTokens: tokens.filter((token) => !token.provenance).length,
-      sourceDerivedNativeTokens: tokens.filter((token) => token.provenance)
-        .length,
+      brandAdaptedTokens: tokens.filter(
+        (token) => token.provenance?.kind === "brand-adaptation",
+      ).length,
+      sourceDerivedNativeTokens: tokens.filter(
+        (token) => token.provenance && token.provenance.kind !== "brand-adaptation",
+      ).length,
       compoundSourceSymbols: compounds.length,
       stories: stories.reduce((n, s) => n + s.names.length, 0),
       styles: styles.length,

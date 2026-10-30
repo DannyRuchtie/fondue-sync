@@ -92,7 +92,7 @@ const DEFINITIONS: Array<
     id: "charts",
     name: "Charts",
     usage:
-      "Use the released series colors and their hover/subtle counterparts for data. Missing, dim and negative are explicit data roles.",
+      "Use Marker Purple to highlight the primary series and Base neutrals for supporting data, following the Frontify color guidelines. Hover and subtle roles follow the same palette. Negative remains a semantic data role.",
     preview: "chart",
     matches: (id) => id.startsWith("color-charts-"),
   },

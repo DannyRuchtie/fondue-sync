@@ -59,7 +59,12 @@ test("checked-in released bundle has complete references and traceable source in
   );
   const ids = new Set(b.tokens.map((t: any) => t.id));
   assert.equal(ids.size, b.tokens.length);
-  assert.equal(b.tokens.filter((t: any) => !t.provenance).length, 384);
+  assert.equal(b.tokens.filter((t: any) => !t.provenance).length, 373);
+  assert.equal(
+    b.tokens.filter((t: any) => t.provenance?.kind === "brand-adaptation")
+      .length,
+    11,
+  );
   validateAliases(b.tokens);
   assert.equal(b.icons.length, 420);
   assert.equal(new Set(b.icons.map((i: any) => i.id)).size, b.icons.length);

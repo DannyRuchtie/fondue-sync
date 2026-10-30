@@ -2,9 +2,10 @@ import { bundleProblems } from "./preflight";
 import { SyncEngine } from "./engine";
 import releaseBundle from "../bundles/fondue-13.11.1.json";
 import type { Bundle } from "./schema";
+import { inspectSelection } from "./push-selection";
 declare const __html__: string;
 const bundle = releaseBundle as unknown as Bundle;
-figma.showUI(__html__, { width: 440, height: 620, themeColors: true });
+figma.showUI(__html__, { width: 480, height: 720, themeColors: true });
 let busy = false;
 const post = (type: string, payload: any) =>
   figma.ui.postMessage({ type, ...payload });
@@ -14,10 +15,27 @@ function compact(report: any) {
     actions: report.actions.map(({ definition, ...action }: any) => action),
   };
 }
-figma.ui.onmessage = async (message: { type: string }) => {
-  if (busy) return;
+figma.on("selectionchange", () => post("push-invalidated", {}));
+figma.on("documentchange", () => post("push-invalidated", {}));
+figma.ui.onmessage = async (message: { type: string; requestId?: string }) => {
+  if (busy) {
+    if (message.type === "push-scan")
+      post("push-error", {
+        requestId: message.requestId,
+        message:
+          "Wait for the current operation to finish, then review the selection again.",
+      });
+    return;
+  }
   busy = true;
   try {
+    if (message.type === "push-scan") {
+      post("push-report", {
+        requestId: message.requestId,
+        report: await inspectSelection(figma, bundle),
+      });
+      return;
+    }
     const engine = new SyncEngine(figma, bundle);
     if (message.type === "status")
       post("status", {
@@ -34,6 +52,9 @@ figma.ui.onmessage = async (message: { type: string }) => {
           recipes: bundle.recipes.length,
         },
         gaps: bundle.gaps,
+        tokenChoices: bundle.tokens.filter((token) =>
+          /^var\(--[a-z0-9-]+\)$/.test(token.css),
+        ),
         publication: "Publishing and consumer acceptance are managed in Figma.",
       });
     else if (message.type === "compare" || message.type === "validate") {
@@ -54,7 +75,10 @@ figma.ui.onmessage = async (message: { type: string }) => {
       post("report", { report: compact(report) });
     }
   } catch (error) {
-    post("error", { message: String(error) });
+    post(message.type === "push-scan" ? "push-error" : "error", {
+      requestId: message.requestId,
+      message: String(error),
+    });
   } finally {
     busy = false;
     post("idle", {});

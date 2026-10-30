@@ -1,0 +1,15 @@
+{
+  "environment": "Headless Chromium; simulated Figma messages and mocked PR service. No native Figma execution or live GitHub writes.",
+  "checks": [
+    "Keyboard tab navigation",
+    "Selection changes only",
+    "Service pairing",
+    "Exact diff review gates PR creation",
+    "Only selected change IDs sent",
+    "Reviewed preview fingerprint submitted",
+    "Selection invalidation disables stale preview",
+    "Existing token choice replaces new token dependency",
+    "Reviewed source mappings persist across successive previews"
+  ],
+  "result": "passed"
+}

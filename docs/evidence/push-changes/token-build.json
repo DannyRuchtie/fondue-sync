@@ -1,0 +1,14 @@
+{
+  "result": "passed",
+  "tool": "Style Dictionary 5.5.2 with exact upstream buildStyleDictionary.ts and transforms",
+  "release": "13.11.1",
+  "sourceCommit": "ebcc9b8579a7f862f43a2732f5a5b9c3105e6796",
+  "checks": [
+    "Repository token overlay persists over unchanged Figma-shaped input",
+    "Numeric radius converts 10px to 0.625rem",
+    "Alias retains var(--border-radius-medium)",
+    "Light and Dark colors export separately",
+    "Original Figma-shaped token input remains unchanged"
+  ],
+  "scope": "Synthetic token inputs passed through real upstream transforms. No live Figma fetch and no full production token build."
+}
