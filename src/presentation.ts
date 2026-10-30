@@ -151,9 +151,19 @@ export class Presentation {
   paint(node: any, field: "fills" | "strokes", id: string) {
     const v = this.variables.get(id);
     if (!v) throw Error("Paint not preflighted " + id);
+    // Rebinding the same alias can retain the supplied literal in native Figma.
+    // Seed it with this exact variable resolved in the consumer's explicit mode.
+    const resolved = v.resolveForConsumer(node);
+    if (resolved.resolvedType !== "COLOR")
+      throw Error("Presentation paint did not resolve to COLOR " + id);
+    const color = resolved.value as RGB | RGBA;
     node[field] = [
       this.api.variables.setBoundVariableForPaint(
-        { type: "SOLID", color: { r: 0, g: 0, b: 0 } },
+        {
+          type: "SOLID",
+          color: { r: color.r, g: color.g, b: color.b },
+          opacity: "a" in color ? color.a : 1,
+        },
         "color",
         v,
       ),

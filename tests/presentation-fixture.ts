@@ -31,6 +31,25 @@ export function presentationFixture() {
       resolvedType: token.type,
       variableCollectionId: token.collection,
       valuesByMode: structuredClone(token.values),
+      resolveForConsumer(node: any): any {
+        let mode: string | undefined;
+        for (let owner = node; owner; owner = owner.parent) {
+          if (owner.explicitVariableModes?.[this.variableCollectionId]) {
+            const modeId =
+              owner.explicitVariableModes[this.variableCollectionId];
+            mode = collections
+              .get(this.variableCollectionId)
+              ?.modes.find((m: any) => m.modeId === modeId)?.name;
+            break;
+          }
+        }
+        const value: any =
+          this.valuesByMode[mode ?? "Light"] ??
+          Object.values(this.valuesByMode)[0];
+        if (value?.alias)
+          return variables.get("v:" + value.alias).resolveForConsumer(node);
+        return { resolvedType: this.resolvedType, value };
+      },
     };
     variables.set(v.id, v);
     index.assets["token:" + token.id] = { id: v.id, kind: "token" };

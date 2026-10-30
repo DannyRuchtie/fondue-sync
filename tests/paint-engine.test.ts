@@ -41,7 +41,14 @@ function setup() {
     gaps: [],
     fingerprint: "test",
   } as Bundle);
-  engine.token = async (id: string) => ({ id }) as Variable;
+  engine.token = async (id: string) =>
+    ({
+      id,
+      resolveForConsumer: () => ({
+        resolvedType: "COLOR",
+        value: { r: 0.2, g: 0.3, b: 0.4, a: 0.5 },
+      }),
+    }) as unknown as Variable;
   return { engine, calls };
 }
 test("effect style renderer sends color and all four numeric fields through the native variable API", async () => {
@@ -226,4 +233,6 @@ test("shared typography remains linked and inherits metrics and variables withou
   assert.equal(node.lineHeight.value, 16);
   assert.deepEqual(metricCalls, []);
   assert.equal(node.fills[0].boundVariables.color.id, "color");
+  assert.deepEqual(node.fills[0].color, { r: 0.2, g: 0.3, b: 0.4 });
+  assert.equal(node.fills[0].opacity, 0.5);
 });

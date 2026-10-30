@@ -1482,9 +1482,17 @@
     paint(node, field, id) {
       const v = this.variables.get(id);
       if (!v) throw Error("Paint not preflighted " + id);
+      const resolved = v.resolveForConsumer(node);
+      if (resolved.resolvedType !== "COLOR")
+        throw Error("Presentation paint did not resolve to COLOR " + id);
+      const color = resolved.value;
       node[field] = [
         this.api.variables.setBoundVariableForPaint(
-          { type: "SOLID", color: { r: 0, g: 0, b: 0 } },
+          {
+            type: "SOLID",
+            color: { r: color.r, g: color.g, b: color.b },
+            opacity: "a" in color ? color.a : 1
+          },
           "color",
           v
         )
@@ -3035,7 +3043,7 @@
       }
     }
     async layer(def, parent, existing, owner, path = "") {
-      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H;
+      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H, _I;
       let node = existing;
       const identityPath = path + "/" + def.id;
       if (def.kind === "componentInstance") {
@@ -3315,17 +3323,22 @@
           continue;
         const variable = await this.token(id);
         if (field === "fills" || field === "strokes") {
+          const resolved = variable.resolveForConsumer(node).value;
           node[field] = [
             this.api.variables.setBoundVariableForPaint(
-              { type: "SOLID", color: { r: 0, g: 0, b: 0 } },
+              {
+                type: "SOLID",
+                color: { r: resolved.r, g: resolved.g, b: resolved.b },
+                opacity: (_G = resolved.a) != null ? _G : 1
+              },
               "color",
               variable
             )
           ];
         } else node.setBoundVariable(field, variable);
       }
-      for (const child of (_G = def.children) != null ? _G : []) {
-        const prior = (_H = node.children) == null ? void 0 : _H.find(
+      for (const child of (_H = def.children) != null ? _H : []) {
+        const prior = (_I = node.children) == null ? void 0 : _I.find(
           (n) => read(n, "identity") === child.id
         );
         await this.layer(child, node, prior, owner, identityPath);
@@ -3957,7 +3970,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "dcf46b6f99ef0825793f66745379f52494e4cf23d4c594bf58afacb79ce692ea",
+      rendererRevision: "41adad13e46e96cfa1c7e4dee20ab750749cc7b580fb2fb0840aac6e8f0c0c7e",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -271508,7 +271521,7 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "f1fb3db85a4c70e35b1b7fe20992d49a79d95a1bb182409d4ac590b41602d4c9"
+    fingerprint: "0467fcb845181146b49d8265113674340f04782f1f094f29c0450be07ae91640"
   };
 
   // src/plugin.ts

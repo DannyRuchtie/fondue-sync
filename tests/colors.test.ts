@@ -157,3 +157,29 @@ test("missing source modes stop before creating presentation nodes or duplicate 
   assert.equal(f.stats().nodeCount, before);
   assert.equal(f.index.pages.Colors, undefined);
 });
+
+test("repeat paint assignments retain exact resolved colors and alpha in explicit Light and Dark modes", async () => {
+  const f = presentationFixture();
+  await syncColorsPage(f.api, f.source, f.index, f.save);
+  await syncColorsPage(f.api, f.source, f.index, f.save);
+  for (const [key, id] of Object.entries(f.index.presentationNodes!)) {
+    const node = f.nodes.get(id);
+    for (const paint of [...(node.fills ?? []), ...(node.strokes ?? [])]) {
+      const alias = paint.boundVariables?.color;
+      if (!alias) continue;
+      const expected = f.variables.get(alias.id).resolveForConsumer(node).value;
+      assert.deepEqual(
+        paint.color,
+        { r: expected.r, g: expected.g, b: expected.b },
+        key,
+      );
+      assert.equal(paint.opacity, expected.a ?? 1, key);
+    }
+  }
+  const sample = f.nodes.get(
+    f.index.presentationNodes![
+      "colors/palette/neutral/color-neutral-05/sample"
+    ],
+  );
+  assert.notDeepEqual(sample.fills[0].color, { r: 0, g: 0, b: 0 });
+});

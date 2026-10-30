@@ -1,178 +1,218 @@
 # Fondue Sync
 
-Fondue Sync is a development Figma plugin that imports a **released, repository-derived Fondue library** into an ordinary Figma Design file. It creates editable native variables, styles, icons, components and variant sets. Designers consume the result through Figma's normal published-library workflow.
+Fondue Sync brings the released Fondue design system into Figma as an editable, reusable library. It creates variables, shared styles, icons, components and variants, with usage guidance and example screens that help designers build consistent interfaces.
 
-The definition input is the Fondue repository at a pinned release. The plugin does not read live Figma tokens. It does not change Fondue's existing token-authoring pipeline: generated token outputs committed with the release are the input here.
+The Fondue repository defines the source assets. A library maintainer imports a reviewed release into a dedicated Figma file, publishes it, and designers use that library in their own projects.
 
-> **Development status:** the importer and its source-controlled recipes are an implementation of the library-generation flow. Recipe coverage is distinct from complete visual and behavioral parity with every React component and story. Check each recipe's `status` and `limitations` and the generated [coverage report](docs/coverage.json). Native Figma runtime and publication checks must be recorded separately from local build and test results.
+**Designers:** use the published library; you do not need to install the plugin. **Library maintainers:** install Fondue Sync to generate and update the shared library. **Developers:** maintain the release inputs and the mappings that turn code into native Figma components.
 
-**Current coverage:** 10 catalog entries have supported finite definitions, **42 remain partial**, and two providers are code-only. The generated catalog covers all 39 current visual component families, seven chart families, published RTE entries and additional chart primitives. This is not full-library acceptance.
+[Readable guide in Pages](https://chatgpt.com/space/page_84703405c4548191af39dde3ba597cef) · [Repository](https://github.com/DannyRuchtie/fondue-sync) · [Current library review file](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs)
 
-**Native runtime validation:** repair and token-binding reconciliation are being verified in a user-authorized [clean rebuild](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs) in the Frontify project. See the native evidence record for completed checks. Publishing and cross-file consumer acceptance remain separate checks.
+## From the repository to your design project
 
-## The process
+![From the Fondue repository to design projects](docs/illustrations/repository-to-figma-roadmap.png)
+
+A Fondue release supplies the tokens, icons, component source and available documentation. Fondue Sync packages that release together with reviewed Figma recipes. A recipe describes how a component becomes editable Figma layers, including its layout, variants and token connections.
+
+The plugin populates a dedicated library file. Designers then enable the published library, place linked instances, and compose their own screens. The example pages provide starting layouts based on production Brands, Libraries and Guidelines overviews, using synthetic content.
+
+In the illustration, solid arrows show the current library workflow. Dashed paths show planned prototype export, live API data and proposed changes back to Fondue. Those future paths are not current plugin actions.
+
+The plugin runs when a maintainer opens it. It uses the release packaged in its build; it does not watch the repository or fetch the latest code automatically.
 
 ```mermaid
 flowchart LR
-    A["Released Fondue repository"] --> B["Deterministic bundle builder"]
-    B --> C["Versioned release bundle<br/>Provenance + hashes + recipes"]
-    C --> D["Fondue Sync plugin"]
-    D --> E["Dedicated Figma Design file<br/>Native library assets"]
-    E --> P["Reusable patterns<br/>Nested native instances"]
-    P --> X["Example screens<br/>Editable frames + pattern instances"]
-    E --> U["Type sections with adjacent guides<br/>Purpose + use + properties + sources"]
-    E -->|Maintainer reviews and publishes| F["Published Fondue library"]
-    F -->|Designer enables library| G["Designer-owned Figma file"]
-    G --> H["Native instances + composed screens"]
-    H -. Future phase 2 .-> I["Prototype with real Fondue imports"]
-    I -. Future phase 3 .-> J["Proposed code PR"]
+    R["Released Fondue repository"] --> B["Reviewed plugin bundle"]
+    B --> L["Editable Figma library"]
+    L -->|Review and publish| P["Published library"]
+    P -->|Enable and place instances| D["Your design project"]
 ```
 
-The plugin runs when a person opens it. It does not run in the background, publish the library, or accept updates in designers' files.
+## Install the plugin and create the library
 
-## Install and load the development plugin
+### If you only want to design
 
-Prerequisites: Node.js 20 or newer, npm, and the Figma desktop application with permission to edit the intended library file and run development plugins. Publishing and consuming shared libraries depend on the target workspace's Figma permissions and plan.
+Ask your library maintainer for the published Fondue library, enable it in your Figma file, and start placing components from Assets. You can skip the plugin installation.
+
+### If you maintain the library
+
+You need Figma desktop, permission to edit the library file and run development plugins, and the required ABC Diatype and Cranny font faces. Publishing also requires the appropriate Figma workspace permissions and plan.
+
+For the current development build, get the complete built plugin folder from a maintainer. Keep its files together and select `dist/manifest.json` when importing. If you are building it yourself, see **Technical setup and maintenance** below.
+
+1. Create or open the Figma Design file that will hold the shared library. Use a separate test file for your first import.
+
+2. In Figma desktop, choose **Plugins → Development → Import plugin from manifest**.
+
+3. Select **dist/manifest.json**, then run **Fondue Sync** from the Development menu.
+
+4. Choose **Import Fondue**.
+
+5. Review the reported source release, warnings and coverage. Run **Validate**, then inspect the generated pages visually.
+
+6. Publish the library after review.
+
+The importer creates native editable assets. Missing required fonts stop the operation rather than silently substituting Inter. The current plugin is a development build; coverage varies by component, so review the [coverage report](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/coverage.json) before relying on a particular state.
+
+## Make changes that reach Figma
+
+Make durable library changes in their owning source, then ask a maintainer to prepare and sync a new build. Editing a generated description or main component directly in Figma does not update the repository; it can be reported as a local conflict on the next sync.
+
+| What you want to change | Where the change belongs | How it reaches Figma |
+| --- | --- | --- |
+| Component purpose and when or how to use it | Released Fondue component metadata, where available | The builder reads the metadata and generates descriptions and guides |
+| Component behavior, public properties or states | Fondue component source, with stories and metadata updated alongside it | A maintainer updates the reviewed Figma recipe for the supported representation |
+| Colors, typography and other design tokens | Fondue’s existing token authoring process and committed release outputs | The builder imports the released token values, aliases and modes |
+| Native component structure, variants, spacing or bindings | Reviewed recipes in the Fondue Sync repository | Rebuild the bundle and plugin, then compare and update |
+| Reusable patterns, example layouts and dummy content | Fondue Sync pattern and example recipes | Update the generated references through the plugin |
+| A product screen you are designing | Your own Figma design file | Your composition stays yours; its linked library instances can receive updates |
+
+### Write component guidance with the component
+
+Add or revise guidance when introducing a component, changing its intended use, adding a supported state, or finding that designers need clearer direction. Explain its purpose, when to use it, how to configure it, and any important limitations.
+
+Where released metadata exists, the importer reads **description** for purpose, **instructions** for usage, and related-component references. For example, the component metadata convention is `packages/components/src/components/Button/Button.metadata.json` in Fondue.
+
+The plugin adds the exposed Figma properties, representation limits and source links. It writes a native component description and documentation link, plus a concise guide beside the family. A source link points to the pinned release commit, so designers can see which implementation the imported guidance describes.
+
+If released guidance is missing, the generator uses labeled Fondue Sync editorial guidance. Improve the upstream metadata for guidance that belongs to Fondue itself; use recipe documentation for Figma-specific instructions.
+
+### Keep specifications and native mappings together
+
+The code, stories and metadata describe the released component. The Figma recipe defines the subset represented as native layers and properties. Adding a new React component or prop does not automatically create a faithful Figma equivalent: a maintainer must add or review its recipe and coverage.
+
+For example, changing a Button color token can flow through its existing variable binding. Adding a new Button variant also requires a native representation, property mapping and visual review.
+
+The plugin reads committed token outputs from the selected release. It does not pull live Figma token values, and it does not change the existing upstream token-authoring process.
+
+Fondue’s upstream token builder currently loads the owning Figma variables and commits generated outputs with a release. Changes therefore follow that established ownership and approval process first. Fondue Sync consumes those approved outputs; do not edit its temporary source cache or run the upstream live token builder as part of a normal plugin rebuild.
+
+## Publish and use the library
+
+### Publish as a maintainer
+
+After importing or updating, review the variables, shared text and effect styles, component properties, variants and example layouts. Read any partial coverage notes. Validate the file, then publish using Figma’s normal library workflow, including the Fondue release and relevant limitations in the publication notes.
+
+Syncing the source file and publishing it are separate actions. The plugin does not publish for you.
+
+### Use it in a design project
+
+1. Open your own Figma Design file and enable the published Fondue library.
+
+2. Place native instances from Assets and change their supported properties and variants.
+
+3. Use a reusable pattern or copy an example frame as a starting layout, keeping its nested instances connected.
+
+4. Compose your screen and apply supported text, image and property overrides.
+
+5. When a new library version is published, review and accept the update in your file.
+
+Keep instances connected if you want library updates. Detached components no longer receive them. Your screen’s overall composition remains your own; nested library instances follow compatible updates.
+
+## Update the library to another release
+
+![Update the library and design projects](docs/illustrations/release-update-flow.png)
+
+A source change reaches designers through four steps: **prepare a new plugin build → update and review the library → publish → accept updates in design files**.
+
+1. A repository maintainer pins a coherent Fondue release, reviews the native recipes, and rebuilds the bundle and plugin.
+
+2. The library maintainer loads the new build, opens the existing library file, and runs **Compare**.
+
+3. Review changes, warnings, local conflicts and retained removals before choosing **Update library**.
+
+4. Run **Validate**, inspect the result visually, and publish it.
+
+5. Designers review and accept the published updates in their own files.
+
+Compatible changes update managed assets in place, retaining component and layer identities where supported. The plugin also arranges its generated galleries, documentation and reference examples. It does not regenerate designer-owned product screens.
+
+If Compare reports a locally changed or missing managed asset, resolve that conflict before updating. Removed definitions are retained for an explicit migration. Do not clear the sync records to force a production library through an update.
+
+A renderer change or release-specific documentation links can refresh many entries even when their geometry has not changed. Structural changes and existing overrides still need review; an update is not a guarantee that every screen requires no migration.
+
+## Technical setup and maintenance
+
+### Build the development plugin
+
+Use Node.js 20 or newer and npm in the Fondue Sync repository.
 
 ```sh
 npm ci
 npm run build
 ```
 
-1. Create or open a normal **Figma Design** file dedicated to the Fondue library. Use a new test file for the first import.
-2. In Figma desktop, open **Plugins → Development → Import plugin from manifest**.
-3. Select this repository's `dist/manifest.json`.
-4. Run **Fondue Sync** from the Development menu.
-5. Choose **Import Fondue** and review the resulting source version, coverage, warnings and gaps.
-6. Validate and visually review the generated assets before publishing.
+This packages the checked-in release bundle. Import `dist/manifest.json` in Figma desktop. The bundle is embedded in the plugin, so an import does not require a live Fondue server or Figma token credentials.
 
-The generated [coverage report](docs/coverage.json) is the authoritative count of variables, styles, icons, current public families, native sets, variants and documentation. It distinguishes supported finite design definitions, partial representations, nonvisual code mappings and explicit gaps. Native set counts include split variant matrices and reusable compound parts; they do not equal the number of public React families. Source compound symbols and stories are inventoried separately from native representation. A definition marked supported still needs Figma runtime and visual acceptance; it does not claim browser behavior or every possible child composition.
+### Prepare a release and verify it
 
-The release bundle is embedded into the plugin build. Running the plugin does not need a live Fondue server or Figma token credentials. `npm run build` packages the checked-in bundle; `npm run bundle` regenerates it from the pinned source snapshot. See [architecture](docs/architecture.md) for the bundle inputs and token representation.
+```sh
+npm ci
+node scripts/prepare-source.mjs
+npm run verify
+```
 
-## Maintain and publish the library
+The source preparation step downloads the pinned upstream release and verifies its commit. It can replace the task-owned `.cache/release` directory; do not keep authored work there. Verification regenerates the bundle, checks types, runs tests and builds the plugin.
 
-The maintainer owns the dedicated library file.
+The current baseline is **Fondue 13.11.1**, pinned to commit `ebcc9b8579a7f862f43a2732f5a5b9c3105e6796`. To adopt another release, update the tag and expected commit in `scripts/prepare-source.mjs`, plus `RELEASE`, `COMMIT` and registry provenance in `scripts/build-bundle.mjs`. Prepare the source, review changed components, tokens, recipes and coverage together, then regenerate and verify. Changing the version string alone is insufficient. Do not combine arbitrary package versions or use the adapted playground as the release source.
 
-1. Run **Import Fondue** for the initial generation.
-2. Review token collections, modes and aliases, text/effect styles, native icons, component properties and variant sets.
-3. Run **Validate**. Read the coverage report and recipe limitations; a successful structural validation is not proof of visual parity.
-4. Select a main component or variant to read its native description and documentation links: purpose, intended use, exposed properties, source links and coverage notes. Each component type has its own native **Section**, with real instance previews and one concise family guide. Detailed profile definitions and guides remain on the corresponding **Library masters** page, preserving their native component IDs. The **Colors** page groups semantic roles by use and primitive ramps by hue, with numeric shade order and paired Light/Dark previews. See [native sections](docs/sections.md). Released metadata is reused where available; editorial guidance is labeled.
-5. Review the **Patterns** and **Examples** pages as composition references. Patterns contain connected component instances; example screens are editable frames that compose those patterns. See [patterns and example screens](docs/examples.md).
-6. Make any required recipe corrections in this repository, rebuild, and apply them through the plugin.
-7. Publish using Figma's normal library publishing flow. Include the Fondue release and known limitations in the publication notes.
+### Find the owning source
 
-A generated asset is managed by stable Fondue identities, not just its displayed name. Keep managed definitions in the dedicated source file; compose product screens in consumer files.
+Paths below are relative to the Fondue Sync repository unless labeled upstream.
 
-## Consume the published library
+| Source | Responsibility |
+| --- | --- |
+| Upstream `packages/tokens/dist/` | Committed CSS, themes, JSON and token metadata consumed from the pinned release |
+| Upstream component `*.metadata.json` files | Released purpose, usage and related-component guidance |
+| `recipes/documentation.mjs`, `src/documentation.ts` | Metadata extraction, labeled editorial fallback, source links and concise family guides |
+| `recipes/index.mjs`, `recipes/foundations.mjs`, `recipes/controls.mjs`, `recipes/patterns.mjs` | Reviewed native component definitions, complex parts, charts, rich text and represented properties |
+| `recipes/examples.mjs`, `fixtures/demo.json` | Active product patterns, example screens and fictional content |
+| `recipes/typography-bindings.mjs`, `recipes/paint-bindings.mjs`, `recipes/token-bindings.mjs` | Shared-style and variable mapping rules |
+| `scripts/prepare-source.mjs`, `scripts/build-bundle.mjs` | Pinned source preparation and release-bundle generation |
+| `src/` | Figma synchronization, rendering, metadata and plugin interface |
+| `bundles/`, `docs/coverage.json` | Generated release bundle and coverage report; regenerate rather than editing by hand |
 
-Designers do not need this repository or the development plugin to use a published library.
+Some geometry bindings currently match numeric recipe values to tokens within the spacing, radius or border category. Review these mappings when the token scale changes; the builder does not trace every dependency in arbitrary React or CSS. Equal values do not prove the original source token reference. Values without a matching exported token remain explicitly labelled source-derived native constants.
 
-1. Open your own Figma Design file.
-2. Enable the published Fondue library through Figma's libraries panel.
-3. Drag components from Assets into your file. These are native instances.
-4. Compose layouts, change supported component properties and variants, and apply supported overrides.
-5. Insert a published pattern when you need a reusable composition. Duplicate an example frame as a starting layout; keep nested instances connected to their library definitions.
-6. Choose the appropriate token mode where supported.
-7. When a maintainer publishes a new release, review and accept its library updates in your file.
+### How synchronization works
 
-Do not detach instances if you want them to remain connected to the published library. Figma's consumer update acceptance is a separate action from syncing and publishing the source library file.
+The bundle carries stable definition identities, provenance and hashes. The plugin compares the previous import, the new definitions and the current managed Figma assets. Compatible changes are applied in place; local drift is reported before updating.
 
-## Update to another release
+Tokens and shared styles are resolved before components so layers can reference their actual native IDs. Component descriptions, family guides, galleries and examples are generated from the same packaged definitions.
 
 ```mermaid
 sequenceDiagram
     participant R as Repository maintainer
     participant B as Bundle builder
+    participant M as Library maintainer
     participant P as Fondue Sync
-    participant L as Library maintainer
     participant D as Designer
-    R->>B: Pin coherent released source + reviewed recipes
-    B->>B: Generate bundle, hashes and coverage
-    L->>P: Open source library; Compare
-    P->>P: Compare previous bundle, target bundle and managed assets
-    P-->>L: Changes, local drift, gaps and retained removals
-    L->>P: Update library
-    P->>P: Apply compatible managed changes in place
-    L->>L: Validate, visually review, publish in Figma
-    L-->>D: Published library update
-    D->>D: Review and accept update in own file
+    R->>B: Pin release and review recipes
+    B-->>M: Built plugin and coverage report
+    M->>P: Compare existing library
+    P-->>M: Changes and local conflicts
+    M->>P: Update compatible assets in place
+    M->>M: Validate and review visually
+    M->>D: Publish library update
+    D->>D: Review and accept in design file
 ```
 
-For a release change, update the pinned provenance and reviewed recipes together. Regenerate the bundle, inspect `docs/coverage.json` and the bundle diff, then run `npm run verify`. Do not mix newer component source with an independently chosen SDK, token package or playground installation.
+Run one maintainer sync per file at a time. Local automated checks verify generation and supported sync behavior; native Figma review verifies appearance, actual API behavior and instance preservation. Publication and cross-file consumer acceptance require their own validation.
 
-Use **Compare** before **Update library**. The sync engine compares the last applied state, target definition and current managed state. Any preflight conflict or missing managed asset aborts the whole update before changes are applied. Local drift is reported rather than silently overwritten. Removed definitions are retained for explicit migration; they are not guessed to be safe to delete. Compatible changes preserve managed identities where the engine supports them. Preservation of consumer overrides depends on unchanged layer identities and compatible property changes; it is not a blanket guarantee for arbitrary structural rewrites.
+For implementation details, use the [architecture](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/architecture.md), [verification checklist](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/verification.md), [runtime evidence](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/native-runtime-evidence.md), [example coverage](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/examples.md) and [remaining gaps](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/gaps.md).
 
-See [architecture and update boundaries](docs/architecture.md) and the [verification checklist](docs/verification.md).
+Additional references: [native sections and browsing pages](docs/sections.md), [optical icon sources](docs/optical-icons.md), and [metadata storage measurements](docs/metadata-capacity.json).
 
-## Repository and release inputs
+## Planned extensions
 
-The initial baseline is `@frontify/fondue@13.11.1` from `Frontify/fondue`, tag `@frontify/fondue@13.11.1`, commit:
+The current plugin builds and updates the library. Prototype export, live API data and reverse synchronization are later phases.
 
-```text
-ebcc9b8579a7f862f43a2732f5a5b9c3105e6796
-```
+A future exporter can use the Figma composition and component mappings to recreate a screen with actual released Fondue code components. Mock and live data providers would share a typed contract. The [connected prototype architecture](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/connected-prototypes.md) documents this direction; live API integration remains research only.
 
-The bundle records provenance and content hashes. The relevant current packages are components, tokens, icons, charts and published `rte`. The legacy root component catalog and `/legacyTokens` are excluded. The private, version-zero `rich-text-editor` revamp is excluded. `RouterProvider` and `ThemeProvider` are code/theme integration entries, not fabricated visual components. Public exports are reconciled with metadata so a missing SDK record does not silently remove a component such as Card.
+A future reverse workflow could propose supported library changes as a pull request against Fondue. Maintainers would review and merge them before a later release returns through the normal update flow.
 
-| Path | Purpose |
-| --- | --- |
-| `scripts/` | Release-bundle generation and plugin packaging |
-| `recipes/` | Reviewed native layer recipes, compound parts, authored patterns/examples, documentation and source mappings |
-| `src/` | Bundle schema, native Figma synchronization engine and plugin UI |
-| `bundles/` | Versioned repository-derived release bundle |
-| `docs/coverage.json` | Generated inventory, representation status and gaps |
-| `docs/pattern-coverage.json` | Complex component and chart source evidence, finite states and limitations |
-| `docs/control-coverage.json` | Control recipe evidence and supported property matrices |
-| `docs/foundation-coverage.json` | Typography/layout foundation evidence |
-| `docs/examples.md` | Reusable patterns, editable screen examples and fixture contract |
-| `tests/` | Bundle and synchronization verification |
-| `dist/` | Loadable development plugin artifacts |
+## Ownership and illustration credits
 
-## Build and verification
+Fondue source, tokens and icons remain owned by their upstream authors. Preserve the upstream license and attribution when redistributing a bundle.
 
-```sh
-npm ci
-# Required before regenerating from a clean checkout; downloads the pinned source:
-node scripts/prepare-source.mjs
-npm run bundle
-npm run typecheck
-npm test
-npm run build
-# Or run the generation and checks together:
-npm run verify
-```
-
-`prepare-source.mjs` prepares the task-owned `.cache/release` directory from the pinned upstream tag and verifies its commit. It can replace that cache; do not keep your own work there. It needs network access on a clean checkout. Building the checked-in plugin bundle does not.
-
-`bundle` uses a pinned release source, not the adapted playground. It must not invoke Fondue's live token build: that build loads Figma variables and can clear generated outputs. The importer uses committed CSS, theme, JSON and metadata artifacts instead.
-
-Local verification and runtime verification answer different questions. The tests check deterministic generation, valid references and supported synchronization behavior. The manual [Figma checklist](docs/verification.md) checks actual Plugin API execution, appearance, instance preservation and publication behavior. Record the exact commands and results used for a delivery; do not infer a passing native runtime from a passing TypeScript build.
-
-## Technical scope and limitations
-
-- **Tokens:** native primitive and semantic variables preserve supported aliases and light/dark values. Numeric units are converted from the source units for Figma. Composite typography and shadows use styles where representable; they are not mislabeled as native scalar variables. Value-only definitions and unrepresentable composites are reported.
-- **Components:** source-controlled recipes describe editable native layers, Auto Layout, variants and supported bindings. Compound parts are independently reusable where represented. Native descriptions, documentation links and adjacent family guides explain purpose, use and exposed properties. Consumer Sections use native instance previews; detailed profiles remain on managed Library masters pages. Coverage does not mean every React prop, keyboard interaction, dynamic layout, chart data transformation or editor behavior is reproduced. Read recipe limitations before adopting the library for production design.
-- **Patterns/examples:** authored Brands, Guidelines and Libraries overview compositions follow measured production layouts at desktop and narrow widths, using real nested native instances and synthetic fixtures. Examples include populated and empty library states; [documented responsive limitations](docs/examples.md) remain explicit. Screens are editable frames and do not query Frontify or navigate a running app.
-- **Icons:** 420 public families include all 2,099 released optical drawings as native Size variants (12/16/20/24/32 where available). Slots choose an exact source size when present and report a source-size fallback otherwise; see [optical source coverage](docs/optical-icons.md). Repository SVGs become native editable icon assets. This is independent from whether every component recipe exposes an instance-swap property.
-- **Fonts:** required source fonts are checked before import or update. The released CSS family `Diatype` resolves to the installed Figma family `ABC Diatype`; Cranny remains Cranny. Missing required faces stop the operation. The generator does not substitute Inter.
-- **Sync:** stable identities and the last applied state support comparison and compatible in-place updates. Local drift, removals and incompatible migrations require review. Do not reset the sync ledger to force an update on a production library.
-- **Version status:** the bundled release, synchronized source file, last published library and consumer-file accepted version are separate states. The plugin cannot claim that all four match merely because import completed.
-
-### Future phases
-
-**Phase 1: library generation and updates.** The current plugin imports repository-defined native assets and reports coverage. Finish visual/runtime acceptance for the intended workspace before calling the library production ready.
-
-**Phase 2: composed Figma screen → running Fondue prototype.** Planned mappings will connect stable component identities and supported properties to real `@frontify/fondue` imports through Code Connect/MCP-compatible records. This should support both Claude and OpenAI workflows. Prototype export is not an implemented plugin action. The [connected-prototype architecture](docs/connected-prototypes.md) describes pure Fondue presentation, typed navigation/search/asset capabilities, interchangeable mock/live providers, and a separate Frontify GraphQL adapter. Live authentication and tenant/schema compatibility remain unverified.
-
-**Phase 3: Figma edits → proposed code PR.** A later reviewable proposal flow may translate supported edits into code changes. No automatic reverse sync, source modification, PR creation or merge is implemented by this plugin.
-
-## Upstream ownership
-
-Fondue source, tokens and icons remain owned by their upstream authors. This repository is a separate synchronization implementation. Preserve the upstream license and attribution when redistributing a release bundle; a private repository does not grant additional rights to upstream assets.
-
-## Delivery evidence
-
-See [verification evidence](docs/verification-evidence.md), the [independent review](docs/independent-review.md), [remaining gaps](docs/gaps.md), and [UTF-8 metadata-capacity measurements](docs/metadata-capacity.json). The coverage report separates native source profiles from unresolved source data and runtime acceptance. Run one maintainer sync per file at a time; the engine does not provide a distributed writer lock.
-
-Current test destination: [PD Figma Sync — clean rebuild](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs), accessed through the Frontify account. The initial blank component sets were caused by the native documentation-link limit; the importer now preserves the existing IDs while completing eligible partial imports. For installation, import `dist/manifest.json` in Figma desktop. See [native runtime evidence](docs/native-runtime-evidence.md) for the tested build and remaining boundaries.
+The conceptual illustrations follow Martin’s [concept visuals](https://github.com/mkovacovsky-frontify/concept-visuals) planning principles and the requested perspective line art direction. See the [illustration sources and prompts](https://github.com/DannyRuchtie/fondue-sync/blob/main/docs/illustrations/README.md).

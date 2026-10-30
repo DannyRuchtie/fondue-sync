@@ -972,9 +972,16 @@ export class SyncEngine {
         continue;
       const variable = await this.token(id);
       if (field === "fills" || field === "strokes") {
+        // Figma can retain a supplied fallback on an unchanged binding. Seed the
+        // exact consumer mode, including alpha, so repeat updates stay visible.
+        const resolved = variable.resolveForConsumer(node).value as RGBA;
         node[field] = [
           this.api.variables.setBoundVariableForPaint(
-            { type: "SOLID", color: { r: 0, g: 0, b: 0 } },
+            {
+              type: "SOLID",
+              color: { r: resolved.r, g: resolved.g, b: resolved.b },
+              opacity: resolved.a ?? 1,
+            },
             "color",
             variable,
           ),

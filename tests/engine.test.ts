@@ -518,6 +518,20 @@ function mockApi() {
         v.variableCollectionId = collection.id;
         v.resolvedType = type;
         v.valuesByMode = {};
+        v.resolveForConsumer = (node: any): any => {
+          const c = collections.get(v.variableCollectionId);
+          let mode = c.defaultModeId;
+          for (let owner = node; owner; owner = owner.parent) {
+            if (owner.explicitVariableModes?.[c.id]) {
+              mode = owner.explicitVariableModes[c.id];
+              break;
+            }
+          }
+          const value = v.valuesByMode[mode];
+          return value?.type === "VARIABLE_ALIAS"
+            ? nodes.get(value.id).resolveForConsumer(node)
+            : { resolvedType: v.resolvedType, value };
+        };
         v.setValueForMode = (id: string, value: any) =>
           (v.valuesByMode[id] = value);
         v.codeSyntax = {};
