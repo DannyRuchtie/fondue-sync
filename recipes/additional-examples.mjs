@@ -24,6 +24,7 @@ export function createAdditionalExamples(c) {
     demo,
     sources,
     userAvatar,
+    shared,
   } = c;
   const patterns = [],
     screens = [],
@@ -388,7 +389,15 @@ export function createAdditionalExamples(c) {
       "brand-grid",
       demo.brands.slice(0, 2).map((b, i) => {
         const r = c.brandCard(b, p.mobile ? "mobile" : "desktop");
-        return { ...r, id: "brand-" + i, width: p.mobile ? 342 : 271.8 };
+        return shared(
+          "brand-" + i,
+          "BrandCard",
+          {
+            brand: b.id,
+            viewport: "observed-" + (p.mobile ? "mobile" : "desktop"),
+          },
+          { ...r, width: p.mobile ? 342 : 271.8 },
+        );
       }),
       { layout: p.mobile ? "VERTICAL" : "HORIZONTAL", gap: 16 },
     );
@@ -402,23 +411,40 @@ export function createAdditionalExamples(c) {
         bindings: { fills: S.surface },
       }),
       mainHeight = p.mobile ? p.height - 68 : p.height;
-    if (!p.mobile)
-      root.children.push({
-        ...c.rail(
-          page === "brands"
-            ? "brands"
-            : page === "libraries"
-              ? "libraries"
-              : page === "colors" || page === "fonts"
-                ? "essentials"
-                : "guidelines",
-          p.height,
+    if (!p.mobile) {
+      const railPage =
+        page === "brands"
+          ? "brands"
+          : page === "libraries"
+            ? "libraries"
+            : ["colors", "fonts"].includes(page)
+              ? "essentials"
+              : "guidelines";
+      root.children.push(
+        shared(
+          "rail",
+          "NavigationRail",
+          { page: railPage, height: String(p.height) },
+          c.rail(railPage, p.height),
         ),
-        id: "rail",
-      });
-    const header = baseHeader(page, p),
-      toolbar = baseToolbar(page, p),
-      top = header.height + toolbar.height;
+      );
+    }
+    const viewport = "observed-" + (p.mobile ? "mobile" : "desktop");
+    const headerRoot = baseHeader(page, p),
+      toolbarRoot = baseToolbar(page, p);
+    const header = shared(
+        headerRoot.id,
+        "PageHeader",
+        { page, viewport },
+        headerRoot,
+      ),
+      toolbar = shared(
+        toolbarRoot.id,
+        "SearchToolbar",
+        { page, viewport },
+        toolbarRoot,
+      ),
+      top = headerRoot.height + toolbarRoot.height;
     root.children.push(
       frame(
         "main",
@@ -441,10 +467,15 @@ export function createAdditionalExamples(c) {
     if (p.mobile)
       root.children.push(
         abs(
-          {
-            ...c.bottom(page === "brands" ? "brands" : "libraries"),
-            id: "mobile-bar",
-          },
+          shared(
+            "mobile-bar",
+            "MobileBrandBar",
+            {
+              page: page === "brands" ? "brands" : "libraries",
+              viewport: "observed",
+            },
+            c.bottom(page === "brands" ? "brands" : "libraries"),
+          ),
           0,
           p.height - 68,
         ),
@@ -2187,9 +2218,26 @@ export function createAdditionalExamples(c) {
         p.mobile
           ? [
               use("content", "AgenticHubContent", { viewport }),
-              abs({ ...agenticBar, id: "mobile-bar" }, 0, p.height - 68),
+              abs(
+                shared(
+                  "mobile-bar",
+                  "MobileBrandBar",
+                  { page: "agentic" },
+                  agenticBar,
+                ),
+                0,
+                p.height - 68,
+              ),
             ]
-          : [agenticRail(p), use("content", "AgenticHubContent", { viewport })],
+          : [
+              shared(
+                "rail",
+                "NavigationRail",
+                { page: "agentic", height: String(p.height) },
+                agenticRail(p),
+              ),
+              use("content", "AgenticHubContent", { viewport }),
+            ],
         {
           layout: "HORIZONTAL",
           width: p.width,

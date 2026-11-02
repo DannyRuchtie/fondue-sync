@@ -105,6 +105,29 @@ test("registry validates exact digest, encoded MIME/dimensions and all refs befo
   });
   assert(bundleProblems(invalid).some((p) => p.code === "image-transform"));
 });
+test("offline image digests also cover image slots overridden inside base component instances", () => {
+  const bundle = tiny();
+  const slot = { imageAssetId: "photo", imageScaleMode: "FILL" as const };
+  bundle.examples![0].root = {
+    id: "card-cover",
+    name: "Card cover",
+    kind: "componentInstance",
+    recipeId: "components/Card.BannerImage",
+    instanceOverrides: { image: slot },
+  };
+  delete bundle.imageAssets;
+  const coverage = enrichImageReferences(bundle, [asset]);
+  assert.equal(coverage.references, 1);
+  assert.equal(
+    bundle.examples![0].root.instanceOverrides!.image.imageAssetSha256,
+    asset.sha256,
+  );
+  assert.deepEqual(bundle.imageAssets, [asset]);
+  assert.throws(
+    () => enrichImageReferences(bundle, []),
+    /Missing offline image/,
+  );
+});
 test("offline manifest deterministically embeds bytes once and enriches definition digests", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "fondue-images-"));
   try {

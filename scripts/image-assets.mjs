@@ -111,6 +111,8 @@ export function enrichImageReferences(bundle, imageAssets) {
       references++;
     }
     for (const child of layer.children ?? []) visit(child);
+    for (const override of Object.values(layer.instanceOverrides ?? {}))
+      visit(override);
   };
   for (const recipe of bundle.recipes)
     for (const variant of recipe.variants) visit(variant.root);

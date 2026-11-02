@@ -1,0 +1,268 @@
+{
+  "release": "13.11.1",
+  "families": [
+    {
+      "id": "patterns/ProductionNavigationRail",
+      "name": "ProductionNavigationRail",
+      "reviewed": true,
+      "variants": 10,
+      "controls": 168,
+      "layoutFrames": 74,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Text",
+        "TextInput"
+      ]
+    },
+    {
+      "id": "patterns/ProductionMobileBrandBar",
+      "name": "ProductionMobileBrandBar",
+      "reviewed": true,
+      "variants": 6,
+      "controls": 40,
+      "layoutFrames": 34,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Text"
+      ]
+    },
+    {
+      "id": "patterns/ProductionPageHeader",
+      "name": "ProductionPageHeader",
+      "reviewed": true,
+      "variants": 18,
+      "controls": 39,
+      "layoutFrames": 60,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Heading",
+        "components/Tabs.Trigger"
+      ]
+    },
+    {
+      "id": "patterns/ProductionSearchToolbar",
+      "name": "ProductionSearchToolbar",
+      "reviewed": true,
+      "variants": 20,
+      "controls": 65,
+      "layoutFrames": 46,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "TextInput"
+      ]
+    },
+    {
+      "id": "patterns/ProductionBrandCard",
+      "name": "ProductionBrandCard",
+      "reviewed": true,
+      "variants": 8,
+      "controls": 32,
+      "layoutFrames": 24,
+      "artworkLayers": 0,
+      "dependencies": [
+        "components/Card.ActionButton",
+        "components/Card.BannerImage",
+        "components/Card.ThumbnailImage",
+        "components/Card.Title"
+      ]
+    },
+    {
+      "id": "patterns/ProductionGuidelineCard",
+      "name": "ProductionGuidelineCard",
+      "reviewed": true,
+      "variants": 3,
+      "controls": 12,
+      "layoutFrames": 9,
+      "artworkLayers": 0,
+      "dependencies": [
+        "components/Card.ActionButton",
+        "components/Card.BannerImage",
+        "components/Card.Description",
+        "components/Card.Title"
+      ]
+    },
+    {
+      "id": "patterns/ProductionLibraryCard",
+      "name": "ProductionLibraryCard",
+      "reviewed": true,
+      "variants": 3,
+      "controls": 12,
+      "layoutFrames": 9,
+      "artworkLayers": 0,
+      "dependencies": [
+        "components/Card.BannerImage",
+        "components/Card.Description",
+        "components/Card.ThumbnailIcon",
+        "components/Card.Title"
+      ]
+    },
+    {
+      "id": "patterns/ProductionLibrariesEmptyState",
+      "name": "ProductionLibrariesEmptyState",
+      "reviewed": true,
+      "variants": 4,
+      "controls": 8,
+      "layoutFrames": 24,
+      "artworkLayers": 60,
+      "dependencies": [
+        "Button",
+        "Text"
+      ]
+    },
+    {
+      "id": "patterns/ProductionNotificationsDrawer",
+      "name": "ProductionNotificationsDrawer",
+      "reviewed": true,
+      "variants": 2,
+      "controls": 54,
+      "layoutFrames": 88,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Badge",
+        "Button",
+        "Heading",
+        "Text",
+        "components/Tabs.Trigger"
+      ]
+    },
+    {
+      "id": "patterns/ProductionUserMenu",
+      "name": "ProductionUserMenu",
+      "reviewed": true,
+      "variants": 2,
+      "controls": 76,
+      "layoutFrames": 85,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Heading",
+        "Text",
+        "components/Card.ThumbnailIcon"
+      ]
+    },
+    {
+      "id": "patterns/ProductionAccountSettingsDrawer",
+      "name": "ProductionAccountSettingsDrawer",
+      "reviewed": true,
+      "variants": 2,
+      "controls": 48,
+      "layoutFrames": 34,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Heading",
+        "Switch",
+        "Text",
+        "TextInput",
+        "components/Accordion.borderless",
+        "components/Flyout.Header"
+      ]
+    },
+    {
+      "id": "patterns/ProductionHelpDialog",
+      "name": "ProductionHelpDialog",
+      "reviewed": true,
+      "variants": 2,
+      "controls": 20,
+      "layoutFrames": 16,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Text",
+        "components/Card.ThumbnailIcon",
+        "components/Dialog.Header"
+      ]
+    },
+    {
+      "id": "patterns/ProductionGlobalSearch",
+      "name": "ProductionGlobalSearch",
+      "reviewed": true,
+      "variants": 3,
+      "controls": 7,
+      "layoutFrames": 20,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Heading",
+        "Text",
+        "TextInput"
+      ]
+    },
+    {
+      "id": "patterns/ProductionGuidelinesEmpty",
+      "name": "ProductionGuidelinesEmpty",
+      "reviewed": true,
+      "variants": 2,
+      "controls": 6,
+      "layoutFrames": 18,
+      "artworkLayers": 24,
+      "dependencies": [
+        "Button",
+        "Text"
+      ]
+    },
+    {
+      "id": "patterns/ProductionFontsEmpty",
+      "name": "ProductionFontsEmpty",
+      "reviewed": true,
+      "variants": 1,
+      "controls": 3,
+      "layoutFrames": 6,
+      "artworkLayers": 13,
+      "dependencies": [
+        "Button",
+        "Text"
+      ]
+    },
+    {
+      "id": "patterns/ProductionObservedLibraryCard",
+      "name": "ProductionObservedLibraryCard",
+      "reviewed": true,
+      "variants": 2,
+      "controls": 8,
+      "layoutFrames": 6,
+      "artworkLayers": 0,
+      "dependencies": [
+        "components/Card.BannerImage",
+        "components/Card.Description",
+        "components/Card.ThumbnailIcon",
+        "components/Card.Title"
+      ]
+    },
+    {
+      "id": "patterns/ProductionEssentialsPaletteList",
+      "name": "ProductionEssentialsPaletteList",
+      "reviewed": true,
+      "variants": 4,
+      "controls": 40,
+      "layoutFrames": 52,
+      "artworkLayers": 0,
+      "dependencies": [
+        "Button",
+        "Text",
+        "components/Accordion.borderless",
+        "components/Table.HeaderCell",
+        "components/Table.RowCell"
+      ]
+    },
+    {
+      "id": "patterns/ProductionAgenticHubContent",
+      "name": "ProductionAgenticHubContent",
+      "reviewed": true,
+      "variants": 3,
+      "controls": 69,
+      "layoutFrames": 158,
+      "artworkLayers": 63,
+      "dependencies": [
+        "Button",
+        "Heading",
+        "Text",
+        "components/Card.ThumbnailIcon"
+      ]
+    }
+  ]
+}

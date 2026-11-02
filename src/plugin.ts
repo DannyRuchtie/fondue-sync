@@ -1,9 +1,12 @@
+import { organizeComponentNames } from "./organization";
 import { bundleProblems } from "./preflight";
 import { SyncEngine } from "./engine";
 import releaseBundle from "../bundles/fondue-13.11.1.json";
 import type { Bundle } from "./schema";
 import { inspectSelection } from "./push-selection";
+import { withCheckpoint } from "./checkpoint";
 declare const __html__: string;
+declare const __pluginVersion__: string;
 const bundle = releaseBundle as unknown as Bundle;
 figma.showUI(__html__, { width: 480, height: 720, themeColors: true });
 let busy = false;
@@ -15,8 +18,19 @@ function compact(report: any) {
     actions: report.actions.map(({ definition, ...action }: any) => action),
   };
 }
-figma.on("selectionchange", () => post("push-invalidated", {}));
-figma.on("documentchange", () => post("push-invalidated", {}));
+const invalidatePush = () => post("push-invalidated", {});
+// The active page is already loaded. A documentchange listener would require
+// loading the entire file first when using dynamic-page document access.
+let watchedPage = figma.currentPage;
+watchedPage.on("nodechange", invalidatePush);
+figma.on("currentpagechange", () => {
+  if (!watchedPage.removed) watchedPage.off("nodechange", invalidatePush);
+  watchedPage = figma.currentPage;
+  watchedPage.on("nodechange", invalidatePush);
+  invalidatePush();
+});
+figma.on("selectionchange", invalidatePush);
+figma.on("stylechange", invalidatePush);
 figma.ui.onmessage = async (message: { type: string; requestId?: string }) => {
   if (busy) {
     if (message.type === "push-scan")
@@ -40,6 +54,7 @@ figma.ui.onmessage = async (message: { type: string; requestId?: string }) => {
     if (message.type === "status")
       post("status", {
         release: bundle.release,
+        pluginVersion: __pluginVersion__,
         applied: engine.index.release ?? null,
         appliedFingerprint: engine.index.fingerprint ?? null,
         hasManagedAssets: Object.keys(engine.index.assets).length > 0,
@@ -66,12 +81,37 @@ figma.ui.onmessage = async (message: { type: string; requestId?: string }) => {
         report: compact(report),
         validation: message.type === "validate",
       });
+    } else if (message.type === "organize") {
+      post("progress", {
+        text: "Saving a recovery version before organizing components…",
+      });
+      const report = await withCheckpoint(
+        figma,
+        "update",
+        bundle.release,
+        async (checkpoint) => {
+          post("checkpoint", { checkpoint });
+          return organizeComponentNames(figma, bundle, engine.index);
+        },
+      );
+      post("organization-report", { report });
     } else if (message.type === "import" || message.type === "update") {
       if (message.type === "import" && Object.keys(engine.index.assets).length)
         throw Error(
           "This file already has managed Fondue assets. Choose Compare and Update library.",
         );
-      const report = await engine.sync((text) => post("progress", { text }));
+      post("progress", {
+        text: "Saving a recovery version before making changes…",
+      });
+      const report = await withCheckpoint(
+        figma,
+        message.type,
+        bundle.release,
+        async (checkpoint) => {
+          post("checkpoint", { checkpoint });
+          return engine.sync((text) => post("progress", { text }));
+        },
+      );
       post("report", { report: compact(report) });
     }
   } catch (error) {

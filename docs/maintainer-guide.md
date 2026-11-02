@@ -13,7 +13,7 @@ npm ci
 npm run build
 ```
 
-This packages the checked-in release bundle. Import `dist/manifest.json` in Figma desktop. The bundle is embedded in the plugin, so an import does not require a live Fondue server or Figma token credentials.
+This packages the checked-in release bundle. Import `dist/manifest.json` in Figma desktop. The bundle is embedded in the plugin, so an import does not require a live Fondue server or Figma token credentials. Import/Update do require Figma to confirm a saved recovery version before sync begins; offline or unsaved files may be blocked. Restoring a checkpoint is manual through Figma Version History and must be tested in the intended workspace.
 
 ### Prepare a release and verify it
 
@@ -109,3 +109,13 @@ For example, changing a Button color token can flow through its existing variabl
 The Sync tab reads committed token outputs from the selected release. Push proposals for new or changed tokens introduce reviewed repository-owned definitions alongside the upstream Figma inputs; the local companion must build their generated outputs before creating the draft PR. See [token ownership and setup](push-changes.md).
 
 Fondue’s upstream token builder currently loads the owning Figma variables and commits generated outputs with a release. Changes therefore follow that established ownership and approval process first. Fondue Sync consumes those approved outputs; do not edit its temporary source cache or run the upstream live token builder as part of a normal plugin rebuild.
+
+## Component categories
+
+Edit `src/component-categories.json` to assign a source family to a browsing category. Run `npm run verify` to regenerate and validate the bundled `libraryCategory` and `assetName` fields. Keep recipe `name`, IDs, source references and variant properties unchanged: display paths belong in `assetName`. New unmapped families fall back to Other; the coverage check requires an explicit category for every bundled component family. Gallery section keys remain stable while visible labels include category and family.
+
+In the sibling explorer checkout, run `npm run sync:categories`, then its typecheck and build. The explorer commits a generated copy so it can build independently. After installing the rebuilt plugin, Compare and Update the existing library, inspect category folders with Show subfolders enabled, then publish through Figma. Confirm an existing consumer instance still receives updates before publishing broadly.
+
+### Organizing a library with local edits
+
+Use **Organize components** for the category migration without a full source refresh. It checks the exact managed set IDs and old names before applying any names; missing sets and custom set names stop the operation. Styling, text, variant IDs, instance connections and existing non-name snapshot fields remain intact. Only `assetName`, `libraryCategory`, and the baseline root `name` are patched. Renderer revision, release fingerprint and other source definitions are not advanced. Non-name conflicts continue to require review in Compare. Per-component `organization-before` records retain the prior name and applied baseline; these complement the normal history checkpoint.

@@ -282,8 +282,10 @@ function mockApi() {
           },
         });
         let main = o;
+        n.__mockMain = main;
         n.scaleFactor = 1;
         const overrides: Record<string, any> = {};
+        n.__mockPropertyOverrides = overrides;
         n.getMainComponentAsync = async () => main;
         const ownShared = n.getSharedPluginData,
           ownSharedKeys = n.getSharedPluginDataKeys;
@@ -325,7 +327,15 @@ function mockApi() {
           }
         };
         const clone = (src: any): any => {
-          const child = src.children ? container(src.type) : base(src.type);
+          const child =
+            src.type === "INSTANCE" && src.__mockMain
+              ? src.__mockMain.createInstance()
+              : src.type === "TEXT"
+                ? api.createText()
+                : src.children
+                  ? container(src.type)
+                  : base(src.type);
+          if (child.children) child.children = [];
           for (const key of [
             "name",
             "width",
@@ -335,13 +345,31 @@ function mockApi() {
             "fills",
             "strokes",
             "boundVariables",
-            "characters",
             "componentPropertyReferences",
             "fontName",
             "fontSize",
+            "characters",
+            "visible",
+            "opacity",
+            "layoutMode",
+            "primaryAxisSizingMode",
+            "counterAxisSizingMode",
+            "paddingTop",
+            "paddingRight",
+            "paddingBottom",
+            "paddingLeft",
+            "itemSpacing",
           ])
             child[key] = structuredClone(src[key]);
+          for (const key of src.getSharedPluginDataKeys("fondue_sync"))
+            child.setSharedPluginData(
+              "fondue_sync",
+              key,
+              src.getSharedPluginData("fondue_sync", key),
+            );
           for (const item of src.children ?? []) child.appendChild(clone(item));
+          if (src.__mockPropertyOverrides)
+            child.setProperties(src.__mockPropertyOverrides);
           return child;
         };
         const copyMain = () => {
@@ -356,6 +384,7 @@ function mockApi() {
         };
         n.swapComponent = (next: any) => {
           main = next;
+          n.__mockMain = main;
           copyMain();
         };
         copyMain();
@@ -609,6 +638,37 @@ test("engine creates native modes aliases variants bindings and text properties;
     Object.values(engine.index.assets).map((v) => v.id),
     ids,
   );
+});
+test("category migration renames existing sets and preserves instances, variants and repeat sync", async () => {
+  const { api, nodes } = mockApi();
+  const bundle = fixture();
+  const engine = new SyncEngine(api, bundle);
+  assert.equal((await engine.sync()).complete, true);
+  const ref = engine.index.assets["recipe:components:Test"];
+  const set = nodes.get(ref.id);
+  const ids = set.children.map((child: any) => child.id);
+  const instance = set.children[0].createInstance();
+  const main = await instance.getMainComponentAsync();
+  const next = structuredClone(bundle);
+  next.recipes[0].assetName = "Inputs/Test";
+  next.recipes[0].libraryCategory = "Inputs";
+  const result = await new SyncEngine(api, next).sync();
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.complete, true);
+  assert.equal(nodes.get(ref.id), set);
+  assert.equal(set.name, "Inputs/Test");
+  assert.deepEqual(
+    set.children.map((child: any) => child.id),
+    ids,
+  );
+  assert.equal(await instance.getMainComponentAsync(), main);
+  assert.equal((await new SyncEngine(api, next).sync()).counts.update ?? 0, 0);
+  // Local changes still require review even when a category update is available.
+  set.name = "My custom name";
+  next.recipes[0].assetName = "Other/Test";
+  const conflict = await new SyncEngine(api, next).inspect();
+  assert.equal(conflict.counts.conflict, 1);
+  assert.equal(set.name, "My custom name");
 });
 test("source text update patches the same main and child IDs", async () => {
   const { api, nodes } = mockApi();
@@ -1641,7 +1701,11 @@ test("fallback optical icon scaling changes the glyph, remains idempotent and re
     height: 16,
   });
   const changed = await new SyncEngine(api, exact).sync();
-  assert.deepEqual(changed.errors, []);
+  assert.deepEqual(
+    changed.errors,
+    [],
+    JSON.stringify(changed.actions.filter((a) => a.action === "conflict")),
+  );
   assert.equal(instance.id, id);
   assert.equal((await instance.getMainComponentAsync()).name, "Size=16");
   assert.equal(instance.scaleFactor, 1);
@@ -2422,4 +2486,183 @@ test("variant-specific text and optical icon defaults stay independent while equ
     instance.componentProperties[desktopHelper].value,
     "Manage cookie usage",
   );
+});
+
+test("product composition upgrades owned frames to base instances, retaining mains and preserving local drift", async () => {
+  const { api, nodes } = mockApi();
+  const before = fixture();
+  before.recipes.push({
+    id: "patterns/composition",
+    name: "ProductionComposition",
+    package: "fondue-sync/patterns",
+    source: ["fixture.tsx"],
+    status: "partial",
+    limitations: [],
+    variants: [
+      {
+        id: "default",
+        props: { State: "Default" },
+        root: {
+          id: "pattern",
+          name: "Pattern",
+          kind: "frame",
+          children: [
+            {
+              id: "control",
+              name: "Control",
+              kind: "frame",
+              children: [
+                { id: "old-label", name: "Label", kind: "text", text: "Old" },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  });
+  const initial = new SyncEngine(api, before);
+  assert.equal((await initial.sync()).complete, true);
+  const set = nodes.get(initial.index.assets["recipe:patterns/composition"].id);
+  const setId = set.id,
+    mainId = set.children[0].id;
+  const next = structuredClone(before);
+  const pattern = next.recipes[1];
+  pattern.compositionPolicy = 1;
+  pattern.variants[0].root.children = [
+    {
+      id: "control",
+      name: "Control",
+      kind: "componentInstance",
+      recipeId: "components:Test",
+      variantProps: { State: "Default" },
+      text: "Linked",
+      instanceOverrides: { label: { visible: false } },
+    },
+  ];
+  const changed = await new SyncEngine(api, next).sync();
+  assert.deepEqual(
+    changed.errors,
+    [],
+    JSON.stringify(changed.actions.filter((a) => a.action === "conflict")),
+  );
+  assert.equal(changed.complete, true);
+  assert.equal(set.id, setId);
+  assert.equal(set.children[0].id, mainId);
+  const control = set.children[0].children[0];
+  assert.equal(set.children[0].children.length, 1);
+  assert.equal(control.type, "INSTANCE");
+  assert.equal(
+    (await control.getMainComponentAsync()).id,
+    nodes.get(initial.index.assets["recipe:components:Test"].id).children[0].id,
+  );
+  assert.equal(control.children[0].visible, false);
+  assert.equal(control.children[0].characters, "Linked");
+  const stable = await new SyncEngine(api, next).sync();
+  assert.equal(stable.complete, true);
+  assert.equal(stable.counts.update ?? 0, 0);
+  control.opacity = 0.5;
+  control.overrides = [{ id: control.id, overriddenFields: ["opacity"] }];
+  const edited = structuredClone(next);
+  edited.recipes[1].variants[0].root.children![0].text = "New release";
+  const blocked = await new SyncEngine(api, edited).sync();
+  assert.equal(blocked.counts.conflict, 1);
+  assert.equal(control.opacity, 0.5);
+  assert.equal(set.children[0].children[0].id, control.id);
+});
+
+test("composition containers replace exact retired anatomy after building base controls and preserve foreign children", async () => {
+  for (const foreign of [false, true]) {
+    const { api, nodes } = mockApi();
+    const before = fixture();
+    const recipe: Bundle["recipes"][number] = {
+      id: "patterns/container",
+      name: "ProductionContainer",
+      package: "fondue-sync/patterns",
+      source: ["fixture.tsx"],
+      status: "partial",
+      limitations: [],
+      variants: [
+        {
+          id: "default",
+          props: { State: "Default" },
+          root: {
+            id: "root",
+            name: "Root",
+            kind: "frame",
+            children: [
+              {
+                id: "actions",
+                name: "Actions",
+                kind: "frame",
+                children: [
+                  {
+                    id: "old-icon",
+                    name: "Icon",
+                    kind: "rectangle",
+                    width: 16,
+                    height: 16,
+                  },
+                  {
+                    id: "old-label",
+                    name: "Label",
+                    kind: "text",
+                    text: "Mark all",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    };
+    before.recipes.push(recipe);
+    const initial = new SyncEngine(api, before);
+    assert.equal((await initial.sync()).complete, true);
+    const set = nodes.get(initial.index.assets["recipe:patterns/container"].id);
+    const main = set.children[0],
+      actions = main.children[0],
+      icon = actions.children[0];
+    const identities = [set.id, main.id, actions.id];
+    if (foreign) {
+      const userChild = api.createRectangle();
+      actions.appendChild(userChild);
+      await initial.checkpoint(
+        {
+          id: "recipe:patterns/container",
+          kind: "recipe",
+          definition: JSON.stringify(recipe),
+        },
+        set,
+      );
+    }
+    const next = structuredClone(before);
+    next.recipes[1].compositionPolicy = 1;
+    next.recipes[1].variants[0].root.children![0].children = [
+      {
+        id: "mark-all",
+        name: "Mark all",
+        kind: "componentInstance",
+        componentRole: "button",
+        recipeId: "components:Test",
+        variantProps: { State: "Default" },
+        text: "Mark all",
+      },
+    ];
+    const result = await new SyncEngine(api, next).sync();
+    assert.deepEqual([set.id, main.id, actions.id], identities);
+    if (foreign) {
+      assert.equal(result.counts.conflict, 1);
+      assert.equal(actions.children.length, 3);
+      assert.equal(actions.children[2].type, "RECTANGLE");
+    } else {
+      assert.deepEqual(result.errors, []);
+      assert.equal(result.complete, true);
+      assert.equal(actions.children.length, 1);
+      assert.equal(actions.children[0].type, "INSTANCE");
+      assert.equal(managedData(actions.children[0], "identity"), "mark-all");
+      const repeat = await new SyncEngine(api, next).sync();
+      assert.equal(repeat.complete, true);
+      assert.equal(repeat.counts.update ?? 0, 0);
+    }
+  }
 });

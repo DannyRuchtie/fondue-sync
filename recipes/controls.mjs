@@ -204,7 +204,27 @@ function button(p, id = "button", content = "Button") {
       id,
       p.aspect === "square"
         ? [icon("icon", "icon:check-mark", fg, p.size === "large" ? 24 : 16)]
-        : [text("label", content, p.size, fg, "medium")],
+        : [
+            {
+              ...icon(
+                "left-icon",
+                "icon:plus",
+                fg,
+                p.size === "large" ? 24 : 16,
+              ),
+              visible: false,
+            },
+            text("label", content, p.size, fg, "medium"),
+            {
+              ...icon(
+                "right-icon",
+                "icon:caret-down",
+                fg,
+                p.size === "large" ? 24 : 16,
+              ),
+              visible: false,
+            },
+          ],
       {
         height: h,
         ...(p.aspect === "square"
@@ -933,10 +953,19 @@ add(
           : "color-primary-default";
     const h = { small: 24, medium: 36, large: 48 }[p.size];
     const content = button(props, "content", "Create");
+    // SplitButton.Content rounds only the outside (left) edge.
+    delete content.bindings.cornerRadius;
+    Object.assign(content.bindings, {
+      topLeftRadius: "border-radius-medium",
+      bottomLeftRadius: "border-radius-medium",
+      topRightRadius: "component-constant-radius-0",
+      bottomRightRadius: "component-constant-radius-0",
+    });
     if (bg) content.bindings.fills = bg;
     else delete content.bindings.fills;
     content.children.forEach((child) => {
       if (child.kind === "text") child.bindings.fills = fg;
+      if (child.kind === "instance") child.iconColor = fg;
     });
     return frame(
       "split-button",
@@ -963,7 +992,13 @@ add(
               width: h,
               height: h,
               radius: 4,
-              bindings: bg ? { fills: bg } : {},
+              bindings: {
+                ...(bg ? { fills: bg } : {}),
+                topLeftRadius: "component-constant-radius-0",
+                bottomLeftRadius: "component-constant-radius-0",
+                topRightRadius: "border-radius-medium",
+                bottomRightRadius: "border-radius-medium",
+              },
             },
           ),
           p.state,

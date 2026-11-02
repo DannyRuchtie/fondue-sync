@@ -1173,6 +1173,39 @@ export const screens = [
 ];
 export default patterns;
 
+// Keep newer observed profiles linked to the same library families. Existing
+// variant IDs stay stable; only genuinely different measured profiles are added.
+const comparable = (root) => {
+  const { id, name, x, y, layoutPositioning, ...appearance } = root;
+  return JSON.stringify(appearance);
+};
+const railRecipe = patterns.find((r) => r.name === "ProductionNavigationRail");
+for (const variant of railRecipe.variants)
+  variant.props.height = String(variant.root.height);
+const shared = (id, family, props, root) => {
+  const recipe = patterns.find((r) => r.name === "Production" + family);
+  if (!recipe) throw new Error("Missing shared pattern " + family);
+  for (const key of Object.keys(props))
+    for (const variant of recipe.variants)
+      if (!(key in variant.props)) variant.props[key] = "default";
+  for (const variant of recipe.variants)
+    for (const key of Object.keys(variant.props))
+      if (!(key in props)) props[key] = "default";
+  let variant = recipe.variants.find(
+    (v) => comparable(v.root) === comparable(root),
+  );
+  if (!variant) {
+    const variantId = Object.entries(props)
+      .map(([key, value]) => key + "=" + value)
+      .join(";");
+    if (recipe.variants.some((v) => v.id === variantId))
+      throw new Error("Conflicting shared profile " + family + " " + variantId);
+    variant = { id: variantId, props, root };
+    recipe.variants.push(variant);
+  }
+  return part(id, recipe.id, variant.props);
+};
+
 const additional = createAdditionalExamples({
   frame,
   row,
@@ -1192,7 +1225,674 @@ const additional = createAdditionalExamples({
   rail,
   bottom,
   brandCard,
+  shared,
 });
 export const additionalPatterns = additional.patterns;
 export const additionalScreens = additional.screens;
 export const additionalImageSlots = additional.imageSlots;
+
+// Product patterns compose the released base anatomy. Run this at recipe authoring
+// time, before dependency ordering and hashing, so every sync uses the same links.
+// Layout wrappers and editorial artwork intentionally stay native frames.
+export function normalizeProductionComposition(root, family = "") {
+  const geometry = (node) => {
+    const {
+      children,
+      kind,
+      text,
+      componentName,
+      recipeId,
+      variantProps,
+      imageAssetId,
+      imageAssetSha256,
+      imageScaleMode,
+      imageTransform,
+      imageScalingFactor,
+      iconId,
+      iconColor,
+      ...rest
+    } = node;
+    return rest;
+  };
+  const descendants = (node) => [
+    node,
+    ...(node.children ?? []).flatMap(descendants),
+  ];
+  const labelOf = (node) =>
+    descendants(node).find((n) => n.text !== undefined)?.text;
+  const iconOf = (node) =>
+    descendants(node).find((n) => n.kind === "instance" && n.iconId);
+  const iconOverride = (n) =>
+    n &&
+    Object.fromEntries(
+      Object.entries(n).filter(([key]) =>
+        ["iconId", "iconColor", "width", "height", "opacity"].includes(key),
+      ),
+    );
+  const base = (node, recipeId, props, role, extra = {}) => ({
+    ...geometry(node),
+    kind: "componentInstance",
+    recipeId,
+    variantProps: props,
+    componentRole: role,
+    ...extra,
+  });
+  const control = (
+    node,
+    {
+      label = labelOf(node),
+      glyph = iconOf(node),
+      strong = false,
+      square = false,
+    } = {},
+  ) => ({
+    ...geometry(node),
+    kind: "componentInstance",
+    componentName: "Button",
+    componentRole: square ? "icon-button" : "button",
+    text: label ?? "",
+    variantProps: {
+      variant: "default",
+      emphasis: strong ? "strong" : "weak",
+      rounding: "medium",
+      aspect: "default",
+      size: "medium",
+      state: "default",
+    },
+    height: node.height ?? 36,
+    ...(square
+      ? { width: node.width ?? 36, paddingLeft: 0, paddingRight: 0 }
+      : {}),
+    instanceOverrides: {
+      label: { visible: label !== undefined },
+      "left-icon": glyph
+        ? { ...iconOverride(glyph), visible: true }
+        : { visible: false },
+      "right-icon": (() => {
+        const icons = descendants(node).filter(
+          (n) => n.kind === "instance" && n.iconId,
+        );
+        return icons.length === 2
+          ? { ...iconOverride(icons[1]), visible: true }
+          : { visible: false };
+      })(),
+    },
+  });
+  const textInput = (node) => {
+    const glyphs = descendants(node).filter(
+      (n) => n.kind === "instance" && n.iconId,
+    );
+    const left = glyphs[0],
+      right = glyphs.find((n) => n.iconId === "icon:cross");
+    const unboxed = node.id !== "navigation-search";
+    return {
+      ...geometry(node),
+      kind: "componentInstance",
+      componentName: "TextInput",
+      componentRole: "input",
+      text: labelOf(node) ?? "Search",
+      variantProps: {
+        status: "neutral",
+        mode: "default",
+        content: "value",
+        slots: right ? "both" : "left",
+      },
+      width: node.width ?? 228,
+      height: node.height ?? 36,
+      ...(unboxed ? { strokeWeight: 0, paddingLeft: 0, paddingRight: 0 } : {}),
+      instanceOverrides: {
+        "left-slot": {
+          ...(iconOverride(left) ?? {
+            iconId: "icon:magnifier",
+            width: 16,
+            height: 16,
+          }),
+          visible: true,
+        },
+        ...(right
+          ? { "right-slot": { ...iconOverride(right), visible: true } }
+          : {}),
+        value: {
+          ...(descendants(node).find((n) => n.text !== undefined)?.width
+            ? {
+                width: descendants(node).find((n) => n.text !== undefined)
+                  .width,
+              }
+            : {}),
+        },
+      },
+    };
+  };
+  const tab = (node, active) =>
+    base(
+      node,
+      "components/Tabs.Trigger",
+      {
+        variant: "pill",
+        size: "medium",
+        activeTab: active ? "overview" : "",
+        disabled: "false",
+      },
+      "tab",
+      {
+        text: labelOf(node),
+        height: node.height ?? 28,
+        instanceOverrides: {
+          label: { height: node.height ?? 28 },
+          text: {
+            ...(node.kind === "componentInstance" ? {} : { fontSize: 14 }),
+          },
+        },
+      },
+    );
+  function visit(node, ancestors = [], artwork = false) {
+    const path = [...ancestors, node.id];
+    artwork ||= /illustration|automation-hero|learn-media/.test(node.id);
+    if (artwork)
+      return {
+        ...node,
+        children: node.children?.map((child) => visit(child, path, true)),
+      };
+    if (node.kind === "componentInstance") {
+      if (node.componentRole) return node;
+      if (
+        ["ProductionNavigationRail", "ProductionMobileBrandBar"].includes(
+          family,
+        ) &&
+        ["workspace", "account-name"].includes(node.id)
+      )
+        return control(node, { label: node.text });
+      if (node.id === "unread-label" && path.includes("tabs"))
+        return tab(node, true);
+      if (
+        family.includes("Card") &&
+        ["brand-name", "guideline-name", "library-name", "name"].includes(
+          node.id,
+        )
+      )
+        return base(
+          node,
+          "components/Card.Title",
+          { state: "default" },
+          "card-title",
+          { text: node.text, padding: 0 },
+        );
+      if (
+        family.includes("Card") &&
+        ["page-count", "asset-count", "count"].includes(node.id)
+      )
+        return base(
+          node,
+          "components/Card.Description",
+          { state: "default" },
+          "card-description",
+          { text: node.text, padding: 0 },
+        );
+      if (
+        path.includes("library-tabs") &&
+        ["remote-assets", "shared-folders"].includes(node.id)
+      )
+        return tab(node, false);
+      if (path.includes("tabs") && node.id === "history")
+        return tab(node, false);
+      return node;
+    }
+    if (node.kind === "frame") {
+      if (
+        family === "ProductionNavigationRail" &&
+        node.id === "rail" &&
+        node.children.some(
+          (n) => n.kind === "frame" && n.id === "navigation-search",
+        )
+      ) {
+        return {
+          ...node,
+          children: node.children.flatMap((child) => {
+            if (child.id !== "navigation-search") return [visit(child, path)];
+            const shortcut = child.children.find((n) => n.id === "shortcut");
+            return [
+              textInput(child),
+              ...(shortcut
+                ? [
+                    {
+                      ...shortcut,
+                      id: "navigation-search-shortcut",
+                      name: "Search shortcut",
+                      x: (child.x ?? 0) + (child.width ?? 240) - 32,
+                      y: (child.y ?? 0) + ((child.height ?? 32) - 16) / 2,
+                      layoutPositioning: "ABSOLUTE",
+                    },
+                  ]
+                : []),
+            ];
+          }),
+        };
+      }
+      if (family === "ProductionMobileBrandBar" && node.id === "account")
+        return control(node, { square: true });
+      if (family === "ProductionNotificationsDrawer" && node.id === "count")
+        return {
+          ...geometry(node),
+          kind: "componentInstance",
+          componentName: "Badge",
+          componentRole: "badge",
+          text: labelOf(node),
+          variantProps: {
+            variant: "highlight",
+            emphasis: "strong",
+            size: "small",
+            state: "default",
+          },
+        };
+      if (family === "ProductionNotificationsDrawer" && node.id === "actions") {
+        const mark = node.children.find((n) => n.id === "mark"),
+          label = node.children.find((n) => n.id === "mark-label");
+        if (!label)
+          return {
+            ...node,
+            children: node.children.map((n) => visit(n, path)),
+          };
+        return {
+          ...node,
+          children: [
+            control(
+              { ...label, id: "mark-all", name: "Mark all as read" },
+              { label: label.text, glyph: mark },
+            ),
+            ...node.children
+              .filter((n) => !["mark", "mark-label"].includes(n.id))
+              .map((n) => visit(n, path)),
+          ],
+        };
+      }
+      if (
+        family === "ProductionEssentialsPaletteList" &&
+        node.id === "label-group"
+      ) {
+        const heading = node.children.find((n) => n.id === "name");
+        if (heading?.componentRole === "accordion")
+          return {
+            ...node,
+            children: node.children.map((n) => visit(n, path)),
+          };
+        const caret = node.children.find((n) => n.id === "toggle");
+        const width = Math.max(
+          120,
+          String(heading?.text ?? "").length * 13 + 32,
+        );
+        return {
+          ...node,
+          children: [
+            base(
+              { ...heading, width, height: 28 },
+              "components/Accordion.borderless",
+              {
+                variant: "default",
+                border: "false",
+                padding: "none",
+                value: "",
+                disabled: "false",
+              },
+              "accordion",
+              {
+                text: heading?.text ?? "Palette",
+                instanceOverrides: {
+                  "item/header": { width, height: 28, padding: 0 },
+                  title: { fontSize: 24, fontWeight: 500 },
+                  caret: iconOverride(caret),
+                },
+              },
+            ),
+            ...node.children
+              .filter((n) => !["name", "toggle"].includes(n.id))
+              .map((n) => visit(n, path)),
+          ],
+        };
+      }
+      if (
+        family === "ProductionEssentialsPaletteList" &&
+        /^column-\d+$/.test(node.id)
+      )
+        return base(
+          node,
+          "components/Table.HeaderCell",
+          { sortDirection: "none", state: "idle", align: "left" },
+          "table-header-cell",
+          {
+            text: labelOf(node),
+            instanceOverrides: {
+              "top-border": { visible: false },
+              "bottom-border": { visible: false },
+              indicator: { visible: false },
+              contents: { width: node.width, height: node.height, padding: 0 },
+            },
+          },
+        );
+      if (
+        family === "ProductionEssentialsPaletteList" &&
+        /^(name|rgba|hex)-cell$/.test(node.id) &&
+        node.children.length
+      )
+        return base(
+          node,
+          "components/Table.RowCell",
+          { align: "left", fontSize: "medium" },
+          "table-cell",
+          {
+            text: labelOf(node),
+            instanceOverrides: {
+              content: { width: node.width, height: node.height, padding: 0 },
+              "bottom-border": { visible: false },
+            },
+          },
+        );
+      if (/^tab-(colors|fonts)$/.test(node.id))
+        return tab(node, !!node.bindings?.fills);
+      if (node.id === "add" && family === "ProductionPageHeader")
+        return control(node, { strong: true });
+      const nav =
+        family === "ProductionNavigationRail" &&
+        (/^utility-\d+$|^nav-/.test(node.id) ||
+          (path.includes("agentic-navigation") &&
+            (node.id === "overview" || /^feature-/.test(node.id))));
+      if (nav)
+        return {
+          ...control(node),
+          componentRole: "navigation-item",
+          width: node.width ?? 240,
+          primaryAlign: "MIN",
+        };
+      if (
+        ["navigation-search", "unboxed-search"].includes(node.id) ||
+        (node.id === "search" && family === "ProductionSearchToolbar") ||
+        (node.id === "input" && family === "ProductionGlobalSearch")
+      )
+        return textInput(node);
+      if (node.id === "selected-tab") return tab(node, true);
+      if (
+        /^setting-\d+$/.test(node.id) &&
+        family === "ProductionAccountSettingsDrawer"
+      )
+        return base(
+          node,
+          "components/Accordion.borderless",
+          {
+            variant: "default",
+            border: "false",
+            padding: "none",
+            value: "",
+            disabled: "false",
+          },
+          "accordion",
+          {
+            text: labelOf(node),
+            instanceOverrides: {
+              "item/header": {
+                width: node.width,
+                height: node.height,
+                padding: 0,
+              },
+            },
+          },
+        );
+      if (
+        node.id === "header" &&
+        ["ProductionAccountSettingsDrawer", "ProductionHelpDialog"].includes(
+          family,
+        )
+      ) {
+        const dialog = family === "ProductionHelpDialog";
+        return base(
+          node,
+          `components/${dialog ? "Dialog" : "Flyout"}.Header`,
+          {
+            padding: "none",
+            showCloseButton: "true",
+            showBorder: dialog ? "false" : "true",
+          },
+          "panel-header",
+          {
+            text: labelOf(node),
+            instanceOverrides: {
+              contents: {
+                width:
+                  (node.width ?? 400) -
+                  (node.paddingLeft ?? 24) -
+                  (node.paddingRight ?? 24),
+                height: node.height ?? 60,
+              },
+              close: { width: 20, height: 20 },
+            },
+          },
+        );
+      }
+      if (
+        /^new-action-group$|^create$|^view$|^open$|^admin$|^show-all$|^add-color$|^edit-action$|^logout-action$|^grid-selected$|^list$/.test(
+          node.id,
+        )
+      ) {
+        const isControl = [
+          "new-action-group",
+          "create",
+          "view",
+          "open",
+          "admin",
+          "show-all",
+          "add-color",
+          "edit-action",
+          "logout-action",
+          "grid-selected",
+          "list",
+          "menu",
+          "collapse",
+          "brand-dropdown",
+          "read",
+        ].includes(node.id);
+        if (isControl)
+          return control(node, {
+            strong: ["new-action-group", "create"].includes(node.id),
+            square: [
+              "edit-action",
+              "logout-action",
+              "grid-selected",
+              "list",
+            ].includes(node.id),
+          });
+      }
+      if (node.id === "sort") {
+        if (node.children.some((n) => n.id === "sort-trigger"))
+          return {
+            ...node,
+            children: node.children.map((n) => visit(n, path)),
+          };
+        const extras = node.children.filter((n) =>
+          ["settings", "tile", "list"].includes(n.id),
+        );
+        if (extras.length)
+          return {
+            ...node,
+            children: [
+              control({
+                ...node,
+                id: "sort-trigger",
+                name: "Sort",
+                children: node.children.filter((n) => !extras.includes(n)),
+              }),
+              ...extras.map((n) => visit(n, path)),
+            ],
+          };
+        return control(node);
+      }
+      if (node.id === "more" && family === "ProductionMobileBrandBar")
+        return control(node, { square: true });
+      if (
+        family.includes("Card") &&
+        ["banner", "cover"].includes(node.id) &&
+        node.imageAssetId
+      )
+        return base(
+          node,
+          "components/Card.BannerImage",
+          { size: "large", fit: "cover", padding: "none" },
+          "card-banner",
+          {
+            instanceOverrides: {
+              image: {
+                imageAssetId: node.imageAssetId,
+                imageScaleMode: node.imageScaleMode ?? "FILL",
+                width: node.width,
+                height: node.height,
+              },
+            },
+          },
+        );
+      if (
+        family.includes("Card") &&
+        ["brand-thumbnail", "library-thumb", "library-thumbnail"].includes(
+          node.id,
+        )
+      ) {
+        if (node.imageAssetId)
+          return base(
+            node,
+            "components/Card.ThumbnailImage",
+            {},
+            "card-thumbnail",
+            {
+              instanceOverrides: {
+                image: {
+                  imageAssetId: node.imageAssetId,
+                  imageScaleMode: node.imageScaleMode ?? "FILL",
+                  width: node.width,
+                  height: node.height,
+                },
+              },
+            },
+          );
+        return base(
+          node,
+          "components/Card.ThumbnailIcon",
+          { state: "default" },
+          "card-thumbnail",
+          { instanceOverrides: { icon: iconOverride(iconOf(node)) ?? {} } },
+        );
+      }
+      if (
+        (/^menu-item-/.test(node.id) && family === "ProductionUserMenu") ||
+        (/^help-row-/.test(node.id) && family === "ProductionHelpDialog")
+      ) {
+        // These rich application-specific rows contain copy and a visual tile;
+        // their layout remains open composition, with a real button label.
+        return {
+          ...node,
+          children: node.children.map((child) =>
+            child.id === "copy"
+              ? {
+                  ...child,
+                  children: child.children.map((n, i) =>
+                    i === 0
+                      ? control(n, { label: n.text, glyph: undefined })
+                      : visit(n, [...path, "copy"]),
+                  ),
+                }
+              : visit(child, path),
+          ),
+        };
+      }
+      if (["tile", "icon-tile"].includes(node.id) && iconOf(node))
+        return base(
+          node,
+          "components/Card.ThumbnailIcon",
+          { state: "default" },
+          "icon-tile",
+          { instanceOverrides: { icon: iconOverride(iconOf(node)) } },
+        );
+      return {
+        ...node,
+        children: node.children?.map((child) => visit(child, path)),
+      };
+    }
+    if (node.kind === "instance") {
+      if (family.includes("Card") && node.id === "more")
+        return base(
+          node,
+          "components/Card.ActionButton",
+          { state: "default" },
+          "card-action",
+          { instanceOverrides: { icon: iconOverride(node) } },
+        );
+      if (
+        [
+          "close",
+          "mark",
+          "edit",
+          "delete",
+          "settings",
+          "tile",
+          "list",
+          "menu",
+          "collapse",
+          "brand-dropdown",
+          "read",
+        ].includes(node.id) ||
+        (["ProductionMobileBrandBar", "ProductionNavigationRail"].includes(
+          family,
+        ) &&
+          ["search", "messages", "notifications"].includes(node.id))
+      )
+        return control(node, { label: undefined, glyph: node, square: true });
+    }
+    if (node.kind === "text" && node.fontFamily !== "Cranny") {
+      const size =
+        {
+          11: "xx-small",
+          12: "x-small",
+          13: "small",
+          14: "medium",
+          16: "large",
+          20: "x-large",
+          24: "xx-large",
+        }[node.fontSize] ?? "medium";
+      return {
+        ...geometry(node),
+        kind: "componentInstance",
+        componentName: "Text",
+        componentRole: "text",
+        text: node.text,
+        variantProps: {
+          size,
+          weight: node.fontWeight >= 500 ? "strong" : "default",
+          color: /secondary/.test(node.bindings?.fills ?? "")
+            ? "weak"
+            : "default",
+        },
+      };
+    }
+    return node;
+  }
+  return visit(root);
+}
+for (const recipe of [...patterns, ...additionalPatterns]) {
+  recipe.compositionPolicy = 1;
+  recipe.documentation.usage =
+    "Compose from linked base source components. Controls expose their base text, icon and instance properties; product-specific layout containers and illustrative artwork remain editable composition frames.";
+  if (
+    [
+      "ProductionUserMenu",
+      "ProductionHelpDialog",
+      "ProductionNavigationRail",
+      "ProductionMobileBrandBar",
+    ].includes(recipe.name)
+  )
+    recipe.limitations.push(
+      "Rich rows, workspace/account identity and avatar arrangements remain product-specific layout wrappers around base Button, typography and card parts; the base library has no Avatar or rich navigation-row component.",
+    );
+  if (recipe.name === "ProductionEssentialsPaletteList")
+    recipe.limitations.push(
+      "Palette table/row wrappers and color previews remain content composition; text columns use base Table.HeaderCell and Table.RowCell instances, and palette triggers use base Accordion instances.",
+    );
+  recipe.variants = recipe.variants.map((variant) => ({
+    ...variant,
+    root: normalizeProductionComposition(variant.root, recipe.name),
+  }));
+}

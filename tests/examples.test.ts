@@ -15,7 +15,33 @@ const demo = JSON.parse(
 );
 const walk = (node: any, fn: (n: any) => void) => {
   fn(node);
+  for (const [id, override] of Object.entries(node.instanceOverrides ?? {}))
+    fn({ id, ...(override as any) });
   for (const child of node.children ?? []) walk(child, fn);
+};
+const resolvePattern = (node: any): any => {
+  if (
+    node.kind !== "componentInstance" ||
+    !node.recipeId?.startsWith("patterns/")
+  )
+    return node;
+  const recipe = [...patterns, ...additionalPatterns].find(
+    (r: any) => r.id === node.recipeId,
+  );
+  const variant = recipe?.variants.find((v: any) =>
+    Object.entries(node.variantProps ?? {}).every(
+      ([key, value]) => v.props[key] === value,
+    ),
+  );
+  assert.ok(variant, "Missing linked pattern " + node.recipeId);
+  return variant.root;
+};
+const walkPatterns = (node: any, fn: (n: any) => void) => {
+  const root = resolvePattern(node);
+  fn(root);
+  for (const [id, override] of Object.entries(root.instanceOverrides ?? {}))
+    fn({ id, ...(override as any) });
+  for (const child of root.children ?? []) walkPatterns(child, fn);
 };
 test("production examples cover three observed pages at desktop and mobile widths with explicit empty-state profiles", () => {
   assert.equal(screens.length, 12);
@@ -123,16 +149,22 @@ test("example instance selections resolve real released recipe variants", async 
   const { default: controls } = await import("../recipes/controls.mjs"); // @ts-ignore authored ESM
   const { default: foundations } = await import("../recipes/foundations.mjs"); // @ts-ignore authored ESM
   const { default: complex } = await import("../recipes/patterns.mjs");
+  // @ts-ignore authored ESM
+  const { default: media } = await import("../recipes/media-components.mjs");
   const source = [
     ...base,
     ...controls,
     ...foundations,
     ...complex,
+    ...media,
     ...patterns,
+    ...additionalPatterns,
   ];
   for (const root of [
-    ...screens.map((s: any) => s.root),
-    ...patterns.flatMap((p: any) => p.variants.map((v: any) => v.root)),
+    ...[...screens, ...additionalScreens].map((s: any) => s.root),
+    ...[...patterns, ...additionalPatterns].flatMap((p: any) =>
+      p.variants.map((v: any) => v.root),
+    ),
   ])
     walk(root, (n) => {
       if (n.kind !== "componentInstance") return;
@@ -179,20 +211,29 @@ test("production card and toolbar profiles retain measured geometry rather than 
   for (const v of toolbar.variants) {
     assert.equal(
       v.root.height,
-      v.props.viewport === "mobile"
-        ? v.props.page === "brands"
-          ? 54
-          : 122
+      v.props.viewport.endsWith("mobile")
+        ? ["colors", "fonts"].includes(v.props.page)
+          ? 48
+          : v.props.page === "brands"
+            ? 54
+            : 122
         : 54,
     );
-    let boxedInputs = 0;
+    let linkedInputs = 0;
     walk(v.root, (n: any) => {
-      if (n.componentName === "TextInput") boxedInputs++;
+      if (n.componentName === "TextInput") {
+        linkedInputs++;
+        assert.equal(
+          n.strokeWeight,
+          0,
+          "Unboxed search uses a base input with its border overridden.",
+        );
+      }
     });
     assert.equal(
-      boxedInputs,
-      0,
-      "Observed search is unboxed and must not inherit a default bordered TextInput.",
+      linkedInputs,
+      1,
+      "Observed search must use a canonical TextInput instance.",
     );
   }
   const empty = patterns.find(
@@ -320,7 +361,7 @@ test("actual image slots reference committed media while functional icons, font 
   for (const root of [...patterns, ...additionalPatterns]
     .flatMap((r: any) => r.variants.map((v: any) => v.root))
     .concat([...screens, ...additionalScreens].map((s: any) => s.root)))
-    walk(root, (n: any) => {
+    walkPatterns(root, (n: any) => {
       assert.ok(!n.pendingSourceImage, n.id);
       if (!n.imageAssetId) return;
       count++;
@@ -337,12 +378,14 @@ test("actual image slots reference committed media while functional icons, font 
   );
   const brand = patterns.find((r: any) => r.name === "ProductionBrandCard")
     .variants[0].root.children[0];
+  assert.equal(brand.kind, "componentInstance");
+  assert.equal(brand.recipeId, "components/Card.BannerImage");
+  assert.ok(brand.instanceOverrides.image.imageAssetId);
   assert.equal(
-    brand.children.length,
-    0,
-    "Old geometric banner art is removed only through the explicit native migration",
+    brand.children,
+    undefined,
+    "Image content is an override of the canonical banner anatomy.",
   );
-  assert.ok(brand.imageAssetId);
 });
 
 test("reviewed Essentials navigation, palette columns and result previews preserve measured constraints", () => {
@@ -350,9 +393,11 @@ test("reviewed Essentials navigation, palette columns and result previews preser
     (s: any) =>
       s.id === "examples/production-essentials-colors-collapsed-mobile",
   );
-  const header = colors.root.children
-    .find((n: any) => n.id === "main")
-    .children.find((n: any) => n.id === "page-header");
+  const header = resolvePattern(
+    colors.root.children
+      .find((n: any) => n.id === "main")
+      .children.find((n: any) => n.id === "page-header"),
+  );
   assert.equal(header.height, 96);
   assert.equal(
     header.children.find((n: any) => n.id === "title-action").height,
@@ -375,11 +420,15 @@ test("reviewed Essentials navigation, palette columns and result previews preser
   const table = palette.children[1].children.find(
     (n: any) => n.id === "color-table",
   );
-  for (const row of table.children)
+  for (const row of table.children.filter((n: any) => n.id !== "add-color"))
     assert.deepEqual(
       row.children.map((n: any) => n.width),
       [218, 104, 144, 246],
     );
+  assert.equal(
+    table.children.find((n: any) => n.id === "add-color").componentName,
+    "Button",
+  );
   const search = additionalPatterns
     .find((r: any) => r.name === "ProductionGlobalSearch")
     .variants.find((v: any) => v.props.state === "results").root;
@@ -392,4 +441,66 @@ test("reviewed Essentials navigation, palette columns and result previews preser
     }
   });
   assert.equal(previews, 3);
+});
+
+test("all observed example navigation and shared chrome resolve library instances", () => {
+  let rails = 0,
+    bars = 0;
+  for (const screen of additionalScreens) {
+    for (const child of screen.root.children) {
+      if (["rail", "mobile-bar"].includes(child.id)) {
+        assert.equal(
+          child.kind,
+          "componentInstance",
+          screen.id + "/" + child.id,
+        );
+        const root = resolvePattern(child);
+        assert.equal(root.width, child.id === "rail" ? 257 : 390);
+        assert.equal(root.height, child.id === "rail" ? screen.height : 68);
+        if (child.id === "rail") rails++;
+        else bars++;
+      }
+      if (child.id === "main") {
+        for (const item of child.children.filter((n: any) =>
+          ["page-header", "search-toolbar", "essentials-toolbar"].includes(
+            n.id,
+          ),
+        )) {
+          assert.equal(
+            item.kind,
+            "componentInstance",
+            screen.id + "/" + item.id,
+          );
+          assert.equal(
+            resolvePattern(item).width,
+            screen.width === 390 ? 390 : screen.width - 257,
+          );
+        }
+      }
+    }
+  }
+  assert.equal(rails, 13);
+  assert.equal(bars, 9);
+});
+
+test("navigation search composes base input and preserves its keyboard shortcut", () => {
+  const rail = patterns.find((r: any) => r.name === "ProductionNavigationRail");
+  let checked = 0;
+  for (const variant of rail.variants) {
+    const input = variant.root.children.find(
+      (n: any) => n.id === "navigation-search",
+    );
+    if (!input) continue;
+    assert.equal(input.kind, "componentInstance");
+    assert.equal(input.componentName, "TextInput");
+    const shortcut = variant.root.children.find(
+      (n: any) => n.id === "navigation-search-shortcut",
+    );
+    assert.equal(shortcut.componentName, "Text");
+    assert.equal(shortcut.text, "⌘K");
+    assert.equal(shortcut.layoutPositioning, "ABSOLUTE");
+    assert.equal(shortcut.x, input.x + input.width - 32);
+    checked++;
+  }
+  assert.ok(checked > 0);
 });

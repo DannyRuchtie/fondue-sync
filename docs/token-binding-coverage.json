@@ -4,6 +4,7 @@
     "version": 1,
     "matching": "Exact value in the same spacing/radius/border-width category; explicit semantic bindings preserved.",
     "derivedVariables": [
+      "component-constant-border-width-0",
       "component-constant-radius-0",
       "component-constant-radius-1",
       "component-constant-radius-1-point-6018735362997658",
@@ -30,12 +31,10 @@
       "component-constant-spacing-28",
       "component-constant-spacing-3",
       "component-constant-spacing-34",
-      "component-constant-spacing-36",
       "component-constant-spacing-4-point-805620608899297",
       "component-constant-spacing-48",
       "component-constant-spacing-6",
       "component-constant-spacing-64",
-      "component-constant-spacing-7",
       "component-constant-spacing-7-point-208430913348947",
       "component-constant-spacing-72",
       "component-constant-spacing-76",
@@ -46,19 +45,59 @@
     "constantOrigin": "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
   },
   "counts": {
-    "layers": 13770,
-    "existingBindings": 1326,
-    "addedReleasedBindings": 7779,
-    "addedConstantBindings": 30822,
-    "framePaddingBindings": 24524,
-    "gapBindings": 6122,
-    "radiusBindings": 7156,
-    "borderWidthBindings": 799,
-    "derivedVariables": 38,
+    "layers": 12863,
+    "existingBindings": 1956,
+    "addedReleasedBindings": 6584,
+    "addedConstantBindings": 27604,
+    "framePaddingBindings": 21676,
+    "gapBindings": 5410,
+    "radiusBindings": 6302,
+    "borderWidthBindings": 800,
+    "derivedVariables": 37,
     "exceptions": 0,
-    "notApplicable": 205
+    "notApplicable": 414
   },
   "derivedVariables": [
+    {
+      "id": "component-constant-border-width-0",
+      "value": 0,
+      "css": "0px",
+      "provenance": {
+        "origin": "reviewed-native-recipe-constant",
+        "role": "border-width",
+        "value": 0,
+        "unit": "px",
+        "definitionInputs": "provenance.definitionInputs.recipes",
+        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
+        "sourceFiles": [
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
+        ],
+        "examples": [
+          {
+            "path": "patterns/ProductionSearchToolbar/page=brands;viewport=wide/search-toolbar/unboxed-search",
+            "value": 0,
+            "role": "border-width"
+          },
+          {
+            "path": "patterns/ProductionSearchToolbar/page=brands;viewport=desktop/search-toolbar/unboxed-search",
+            "value": 0,
+            "role": "border-width"
+          },
+          {
+            "path": "patterns/ProductionSearchToolbar/page=brands;viewport=tablet/search-toolbar/unboxed-search",
+            "value": 0,
+            "role": "border-width"
+          }
+        ],
+        "occurrences": 23
+      }
+    },
     {
       "id": "component-constant-radius-0",
       "value": 0,
@@ -605,7 +644,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 5972
+        "occurrences": 5524
       }
     },
     {
@@ -1090,12 +1129,6 @@
           "packages/components/src/components/Button/Button.metadata.json",
           "packages/components/src/components/Button/Button.tsx",
           "packages/components/src/components/Button/styles/button.module.scss",
-          "packages/components/src/components/Card/CardBanner.tsx",
-          "packages/components/src/components/Card/CardContent.tsx",
-          "packages/components/src/components/Card/CardRoot.tsx",
-          "packages/components/src/components/Heading/Heading.tsx",
-          "packages/components/src/components/Link/Link.tsx",
-          "packages/components/src/components/Text/Text.tsx",
           "packages/components/src/components/TextInput/TextInput.metadata.json",
           "packages/components/src/components/TextInput/TextInput.tsx",
           "packages/components/src/components/TextInput/styles/text.module.scss",
@@ -1121,7 +1154,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 97
+        "occurrences": 95
       }
     },
     {
@@ -1690,7 +1723,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 23483
+        "occurrences": 20725
       }
     },
     {
@@ -1784,26 +1817,27 @@
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
         "sourceFiles": [
-          "recipes/examples.mjs"
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
         ],
         "examples": [
           {
-            "path": "example:examples/production-search-blank-desktop/screen/main/page-header/tabs",
+            "path": "patterns/ProductionPageHeader/page=fonts;viewport=observed-desktop/page-header/tabs",
             "value": 128,
             "role": "spacing"
           },
           {
-            "path": "example:examples/production-essentials-colors-collapsed-desktop/screen/main/page-header/tabs",
-            "value": 128,
-            "role": "spacing"
-          },
-          {
-            "path": "example:examples/production-essentials-colors-expanded-desktop/screen/main/page-header/tabs",
+            "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-desktop/page-header/tabs",
             "value": 128,
             "role": "spacing"
           }
         ],
-        "occurrences": 5
+        "occurrences": 2
       }
     },
     {
@@ -1987,8 +2021,7 @@
           "packages/components/src/components/Select/SelectSingle.tsx",
           "packages/components/src/components/Select/components/SelectItem.tsx",
           "packages/components/src/components/Select/styles/select.module.scss",
-          "packages/components/src/components/Text/Text.tsx",
-          "recipes/examples.mjs"
+          "packages/components/src/components/Text/Text.tsx"
         ],
         "examples": [
           {
@@ -2007,7 +2040,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 61
+        "occurrences": 43
       }
     },
     {
@@ -2022,21 +2055,22 @@
         "definitionInputs": "provenance.definitionInputs.recipes",
         "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
         "sourceFiles": [
-          "recipes/examples.mjs"
+          "packages/components/src/components/Button/Button.tsx",
+          "packages/components/src/components/Card/CardBanner.tsx",
+          "packages/components/src/components/Card/CardContent.tsx",
+          "packages/components/src/components/Card/CardRoot.tsx",
+          "packages/components/src/components/Heading/Heading.tsx",
+          "packages/components/src/components/Link/Link.tsx",
+          "packages/components/src/components/Text/Text.tsx"
         ],
         "examples": [
           {
-            "path": "example:examples/production-essentials-colors-collapsed-mobile/screen/main/page-header/tabs",
-            "value": 254,
-            "role": "spacing"
-          },
-          {
-            "path": "example:examples/production-essentials-colors-expanded-mobile/screen/main/page-header/tabs",
+            "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-mobile/page-header/tabs",
             "value": 254,
             "role": "spacing"
           }
         ],
-        "occurrences": 2
+        "occurrences": 1
       }
     },
     {
@@ -2137,41 +2171,6 @@
           }
         ],
         "occurrences": 1
-      }
-    },
-    {
-      "id": "component-constant-spacing-36",
-      "value": 36,
-      "css": "36px",
-      "provenance": {
-        "origin": "reviewed-native-recipe-constant",
-        "role": "spacing",
-        "value": 36,
-        "unit": "px",
-        "definitionInputs": "provenance.definitionInputs.recipes",
-        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
-        "sourceFiles": [
-          "packages/components/src/components/Button/Button.tsx",
-          "packages/components/src/components/Card/CardBanner.tsx",
-          "packages/components/src/components/Card/CardContent.tsx",
-          "packages/components/src/components/Card/CardRoot.tsx",
-          "packages/components/src/components/Heading/Heading.tsx",
-          "packages/components/src/components/Link/Link.tsx",
-          "packages/components/src/components/Text/Text.tsx"
-        ],
-        "examples": [
-          {
-            "path": "patterns/ProductionHelpDialog/viewport=desktop/help-dialog/header",
-            "value": 36,
-            "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionHelpDialog/viewport=mobile/help-dialog/header",
-            "value": 36,
-            "role": "spacing"
-          }
-        ],
-        "occurrences": 2
       }
     },
     {
@@ -2363,46 +2362,6 @@
       }
     },
     {
-      "id": "component-constant-spacing-7",
-      "value": 7,
-      "css": "7px",
-      "provenance": {
-        "origin": "reviewed-native-recipe-constant",
-        "role": "spacing",
-        "value": 7,
-        "unit": "px",
-        "definitionInputs": "provenance.definitionInputs.recipes",
-        "definitionNote": "A source-controlled native recipe literal or computed geometry result. This is not an exported Fondue CSS variable.",
-        "sourceFiles": [
-          "packages/components/src/components/Button/Button.tsx",
-          "packages/components/src/components/Card/CardBanner.tsx",
-          "packages/components/src/components/Card/CardContent.tsx",
-          "packages/components/src/components/Card/CardRoot.tsx",
-          "packages/components/src/components/Heading/Heading.tsx",
-          "packages/components/src/components/Link/Link.tsx",
-          "packages/components/src/components/Text/Text.tsx"
-        ],
-        "examples": [
-          {
-            "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-header/tabs/unread/count",
-            "value": 7,
-            "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-header/tabs/unread/count",
-            "value": 7,
-            "role": "spacing"
-          },
-          {
-            "path": "patterns/ProductionNotificationsDrawer/viewport=mobile/notification-drawer/notification-header/tabs/unread/count",
-            "value": 7,
-            "role": "spacing"
-          }
-        ],
-        "occurrences": 4
-      }
-    },
-    {
       "id": "component-constant-spacing-7-point-208430913348947",
       "value": 7.208430913348947,
       "css": "7.208430913348947px",
@@ -2490,27 +2449,16 @@
           "packages/components/src/components/Card/CardRoot.tsx",
           "packages/components/src/components/Heading/Heading.tsx",
           "packages/components/src/components/Link/Link.tsx",
-          "packages/components/src/components/Text/Text.tsx",
-          "recipes/examples.mjs"
+          "packages/components/src/components/Text/Text.tsx"
         ],
         "examples": [
           {
             "path": "patterns/ProductionPageHeader/page=libraries;viewport=mobile/page-header/tabs-row",
             "value": 76,
             "role": "spacing"
-          },
-          {
-            "path": "example:examples/production-account-settings-mobile/screen/main/page-header/tabs-row",
-            "value": 76,
-            "role": "spacing"
-          },
-          {
-            "path": "example:examples/production-user-menu-mobile/screen/main/page-header/tabs-row",
-            "value": 76,
-            "role": "spacing"
           }
         ],
-        "occurrences": 6
+        "occurrences": 1
       }
     },
     {
@@ -4038,6 +3986,1469 @@
       "field": "radius",
       "value": 10,
       "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/navigation-search",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/brand-navigation/nav-essentials",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/brand-navigation/nav-guidelines",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/brand-navigation/nav-libraries",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/brand-navigation/nav-projects",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines/rail/brand-navigation/nav-newsletters",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries/rail/navigation-search",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries/rail/brand-navigation/nav-essentials",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries/rail/brand-navigation/nav-guidelines",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries/rail/brand-navigation/nav-libraries",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries/rail/brand-navigation/nav-projects",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries/rail/brand-navigation/nav-newsletters",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/navigation-search",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/brand-navigation/nav-essentials",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/brand-navigation/nav-guidelines",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/brand-navigation/nav-libraries",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/brand-navigation/nav-projects",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=empty-libraries/rail/brand-navigation/nav-newsletters",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines;height=997/rail/navigation-search",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines;height=997/rail/brand-navigation/nav-essentials",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines;height=997/rail/brand-navigation/nav-guidelines",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines;height=997/rail/brand-navigation/nav-libraries",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines;height=997/rail/brand-navigation/nav-projects",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=guidelines;height=997/rail/brand-navigation/nav-newsletters",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=essentials;height=997/rail/navigation-search",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=essentials;height=997/rail/brand-navigation/nav-essentials",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=essentials;height=997/rail/brand-navigation/nav-guidelines",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=essentials;height=997/rail/brand-navigation/nav-libraries",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=essentials;height=997/rail/brand-navigation/nav-projects",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=essentials;height=997/rail/brand-navigation/nav-newsletters",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries;height=997/rail/navigation-search",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries;height=997/rail/brand-navigation/nav-essentials",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries;height=997/rail/brand-navigation/nav-guidelines",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries;height=997/rail/brand-navigation/nav-libraries",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries;height=997/rail/brand-navigation/nav-projects",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=libraries;height=997/rail/brand-navigation/nav-newsletters",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=agentic;height=997/rail/agentic-navigation/overview",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNavigationRail/page=agentic;height=768/rail/agentic-navigation/overview",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=brands/bottom-brand-bar/utilities/account-more/account",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=brands/bottom-brand-bar/utilities/account-more/more",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=guidelines/bottom-brand-bar/utilities/account-more/account",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=guidelines/bottom-brand-bar/utilities/account-more/more",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=libraries/bottom-brand-bar/utilities/account-more/account",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=libraries/bottom-brand-bar/utilities/account-more/more",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=empty-libraries/bottom-brand-bar/utilities/account-more/account",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=empty-libraries/bottom-brand-bar/utilities/account-more/more",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=libraries;viewport=observed/bottom-brand-bar/utilities/account-more/account",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=libraries;viewport=observed/bottom-brand-bar/utilities/account-more/more",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=agentic;viewport=default/bottom-brand-bar/utilities/account-more/account",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionMobileBrandBar/page=agentic;viewport=default/bottom-brand-bar/utilities/account-more/more",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=brands;viewport=wide/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=brands;viewport=desktop/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=brands;viewport=tablet/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=brands;viewport=mobile/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=guidelines;viewport=wide/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=guidelines;viewport=desktop/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=guidelines;viewport=tablet/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=guidelines;viewport=mobile/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=wide/page-header/title-action/title-tabs/library-tabs/selected-tab",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=wide/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=desktop/page-header/title-action/title-tabs/library-tabs/selected-tab",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=desktop/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=tablet/page-header/title-action/title-tabs/library-tabs/selected-tab",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=tablet/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=mobile/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=mobile/page-header/tabs-row/library-tabs/selected-tab",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=guidelines;viewport=observed-desktop/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=brands;viewport=observed-desktop/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=fonts;viewport=observed-desktop/page-header/title-action/add",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=fonts;viewport=observed-desktop/page-header/tabs/tab-colors",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=fonts;viewport=observed-desktop/page-header/tabs/tab-fonts",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=observed-desktop/page-header/title-action/title-tabs/library-tabs/selected-tab",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=libraries;viewport=observed-desktop/page-header/title-action/new-action-group",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-desktop/page-header/title-action/add",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-desktop/page-header/tabs/tab-colors",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-desktop/page-header/tabs/tab-fonts",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-mobile/page-header/title-action/add",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-mobile/page-header/tabs/tab-colors",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionPageHeader/page=colors;viewport=observed-mobile/page-header/tabs/tab-fonts",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=wide/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=wide/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=desktop/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=desktop/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=tablet/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=tablet/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=mobile/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=mobile/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=wide/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=wide/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=desktop/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=desktop/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=tablet/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=tablet/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=mobile/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=mobile/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=observed-desktop/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=observed-desktop/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=observed-desktop/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=observed-desktop/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=observed-mobile/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=guidelines;viewport=observed-mobile/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=observed-mobile/search-toolbar/sort-view/view-controls/grid-selected",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionSearchToolbar/page=libraries;viewport=observed-mobile/search-toolbar/sort-view/view-controls/list",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=wide/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=wide/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=desktop/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=desktop/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=mobile/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=mobile/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=wide/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=wide/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=desktop/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=desktop/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=mobile/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=mobile/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=observed-desktop/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-spruce;viewport=observed-desktop/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=observed-desktop/brand-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionBrandCard/brand=brand-orbit;viewport=observed-desktop/brand-card/footer/brand-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionGuidelineCard/viewport=wide/guideline-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionGuidelineCard/viewport=desktop/guideline-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionGuidelineCard/viewport=mobile/guideline-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionLibraryCard/viewport=wide/library-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionLibraryCard/viewport=wide/library-card/footer/library-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionLibraryCard/viewport=desktop/library-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionLibraryCard/viewport=desktop/library-card/footer/library-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionLibraryCard/viewport=mobile/library-card/banner",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionLibraryCard/viewport=mobile/library-card/footer/library-thumbnail",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-header/tabs/unread/count",
+      "field": "radius",
+      "value": 9999,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-list/notification-notification-1/copy/target-actions/view",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-list/notification-notification-1/copy/target-actions/open",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-list/notification-notification-2/copy/target-actions/view",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=desktop/notification-drawer/notification-list/notification-notification-2/copy/target-actions/open",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=mobile/notification-drawer/notification-header/tabs/unread/count",
+      "field": "radius",
+      "value": 9999,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=mobile/notification-drawer/notification-list/notification-notification-1/copy/target-actions/view",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=mobile/notification-drawer/notification-list/notification-notification-1/copy/target-actions/open",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=mobile/notification-drawer/notification-list/notification-notification-2/copy/target-actions/view",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionNotificationsDrawer/viewport=mobile/notification-drawer/notification-list/notification-notification-2/copy/target-actions/open",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/profile/profile-actions/edit-action",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/profile/profile-actions/logout-action",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-0/row-0/menu-item-0-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-0/row-0/menu-item-0-1/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-0/row-1/menu-item-1-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-1/row-0/menu-item-0-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-1/row-0/menu-item-0-1/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-1/row-1/menu-item-1-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-1/row-1/menu-item-1-1/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-1/row-2/menu-item-2-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-1/row-2/menu-item-2-1/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-2/row-0/menu-item-0-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-2/row-0/menu-item-0-1/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=desktop/user-menu/group-rows-2/row-1/menu-item-1-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/profile/profile-actions/edit-action",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/profile/profile-actions/logout-action",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-0/row-0/menu-item-0-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-0/row-1/menu-item-1-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-0/row-2/menu-item-2-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-1/row-0/menu-item-0-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-1/row-1/menu-item-1-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-1/row-2/menu-item-2-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-1/row-3/menu-item-3-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-1/row-4/menu-item-4-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-1/row-5/menu-item-5-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-2/row-0/menu-item-0-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-2/row-1/menu-item-1-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionUserMenu/viewport=mobile/user-menu/group-rows-2/row-2/menu-item-2-0/tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAccountSettingsDrawer/viewport=desktop/account-settings/settings-content/guideline-features/admin",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAccountSettingsDrawer/viewport=mobile/account-settings/settings-content/guideline-features/admin",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionHelpDialog/viewport=desktop/help-dialog/help-rows/help-row-0/icon-tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionHelpDialog/viewport=desktop/help-dialog/help-rows/help-row-1/icon-tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionHelpDialog/viewport=desktop/help-dialog/help-rows/help-row-2/icon-tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionHelpDialog/viewport=mobile/help-dialog/help-rows/help-row-0/icon-tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionHelpDialog/viewport=mobile/help-dialog/help-rows/help-row-1/icon-tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionHelpDialog/viewport=mobile/help-dialog/help-rows/help-row-2/icon-tile",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionGuidelinesEmpty/viewport=desktop/empty-panel/create",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionGuidelinesEmpty/viewport=mobile/empty-panel/create",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionFontsEmpty/viewport=desktop/empty-panel/create",
+      "field": "radius",
+      "value": 4,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionObservedLibraryCard/viewport=desktop/library-card/cover",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionObservedLibraryCard/viewport=mobile/library-card/cover",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-0/feature-1/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-0/feature-2/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-0/feature-3/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-1/feature-4/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-1/feature-5/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-1/feature-6/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-2/feature-7/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-2/feature-8/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-2/feature-9/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=desktop/agentic-content/body/features-section/feature-grid/feature-row-3/feature-10/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-0/feature-1/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-0/feature-2/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-0/feature-3/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-1/feature-4/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-1/feature-5/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-1/feature-6/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-2/feature-7/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-2/feature-8/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-2/feature-9/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=tablet/agentic-content/body/features-section/feature-grid/feature-row-3/feature-10/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-0/feature-1/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-1/feature-2/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-2/feature-3/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-3/feature-4/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-4/feature-5/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-5/feature-6/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-6/feature-7/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-7/feature-8/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-8/feature-9/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "patterns/ProductionAgenticHubContent/viewport=mobile/agentic-content/body/features-section/feature-grid/feature-row-9/feature-10/tile",
+      "field": "radius",
+      "value": 8,
+      "reason": "Not an independent native corner property on componentInstance; its arc/vector/source component already defines the geometry.",
       "classification": "not-applicable"
     }
   ],

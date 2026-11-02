@@ -131,7 +131,14 @@ export async function organizeSections(
     const key = `${target.namespace}/${family}`;
     let group = groups.get(key);
     if (!group) {
-      group = { key, name: family, page: target.page, pairs: [] };
+      group = {
+        key,
+        name: recipe.libraryCategory
+          ? `${recipe.libraryCategory} / ${family}`
+          : family,
+        page: target.page,
+        pairs: [],
+      };
       groups.set(key, group);
     }
     const guide = index.assets["guide:" + recipe.id]

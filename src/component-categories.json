@@ -1,0 +1,39 @@
+{
+  "Buttons": ["Button", "SplitButton", "Link"],
+  "Inputs": [
+    "TextInput",
+    "Textarea",
+    "Checkbox",
+    "RadioList",
+    "Switch",
+    "Select",
+    "Slider",
+    "DatePicker",
+    "ColorPicker",
+    "AssetInput",
+    "EditableText",
+    "Label"
+  ],
+  "Navigation": ["Tabs", "SegmentedControl", "Tree", "Dropdown"],
+  "Feedback": [
+    "Badge",
+    "Tag",
+    "Notice",
+    "LoadingBar",
+    "LoadingCircle",
+    "Tooltip"
+  ],
+  "Content": ["Accordion", "Card", "Table", "OrderableList"],
+  "Overlays": ["Dialog", "Flyout"],
+  "Typography": ["Text", "Heading"],
+  "Layout": [
+    "Divider",
+    "Box",
+    "Section",
+    "Flex",
+    "Grid",
+    "ScrollArea",
+    "ThemeProvider",
+    "RouterProvider"
+  ]
+}

@@ -45,6 +45,19 @@ Use a **new dedicated Figma Design test file**. Do not use the upstream token-au
 
 A preview screenshot is useful for appearance but cannot prove bindings, identity preservation or update correctness. Capture those structural results separately.
 
+## Version-history recovery acceptance
+
+Before production use, test the following in a disposable file using the intended workspace:
+
+1. Wait for the file to finish saving. Run Import/Update and confirm the named **Before Fondue** version appears before sync changes.
+2. Confirm a rejected save or missing version ID prevents sync from starting (covered locally by checkpoint tests; verify applicable native failure conditions).
+3. Interrupt a sync after it has made partial changes. Close the plugin and restore its checkpoint through Figma Version History.
+4. Verify pre-operation nodes, variables, aliases/modes, shared styles, component/child identities, instance overrides and the complete shared-plugin-data ledger are restored consistently. Reopen the plugin and Compare; no stale post-checkpoint ledger may remain.
+5. Retry the operation and check for duplicates and unexpected drift.
+6. Confirm collaborators understand that restoration affects the entire file. Published library versions and consumer files require separate recovery review.
+
+The plugin waits one second before requesting a version and awaits a nonempty version ID before invoking sync. This follows Figma's timing guidance but does not verify checkpoint completeness. Neither local mocks nor a successful version ID prove native restoration or coverage of unsynced edits. Record this acceptance separately; it has not yet been performed.
+
 ## Publication and consumer acceptance
 
 This step needs the intended eligible workspace where the account can publish and consume the library. A successful local development-plugin run in a personal Starter file does not establish these permissions or entitlements, or remote write-to-canvas access. Verify the Frontify workspace independently.

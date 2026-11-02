@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "affectedRecipes": 37,
+  "affectedRecipes": 38,
   "recipes": [
     {
       "id": "components/Grid",
@@ -132,9 +132,73 @@
     {
       "id": "components/Button/controls-005",
       "paths": [
+        "Icon / /button/left-icon",
+        "Icon / /button/right-icon",
         "Icon / /button/icon"
       ],
       "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/button/left-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=disabled",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=disabled"
+          ],
+          "label": "Icon / /button/left-icon",
+          "defaultValue": "icon:plus@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/left-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=disabled"
+          ],
+          "label": "Icon / /button/left-icon / Variant variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=default",
+          "defaultValue": "icon:plus@24"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/right-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=small;state=disabled",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=medium;state=disabled"
+          ],
+          "label": "Icon / /button/right-icon",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/right-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=default",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=hover",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=active",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=focus",
+            "variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=disabled"
+          ],
+          "label": "Icon / /button/right-icon / Variant variant=default;emphasis=strong;rounding=medium;aspect=default;size=large;state=default",
+          "defaultValue": "icon:caret-down@24"
+        },
         {
           "prefix": "Icon",
           "path": "/button/icon",
@@ -171,9 +235,73 @@
     {
       "id": "components/Button/controls-006",
       "paths": [
+        "Icon / /button/left-icon",
+        "Icon / /button/right-icon",
         "Icon / /button/icon"
       ],
       "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/button/left-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=disabled",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=disabled"
+          ],
+          "label": "Icon / /button/left-icon",
+          "defaultValue": "icon:plus@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/left-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=disabled"
+          ],
+          "label": "Icon / /button/left-icon / Variant variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=default",
+          "defaultValue": "icon:plus@24"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/right-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=small;state=disabled",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=medium;state=disabled"
+          ],
+          "label": "Icon / /button/right-icon",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/button/right-icon",
+          "variantIds": [
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=default",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=hover",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=active",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=focus",
+            "variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=disabled"
+          ],
+          "label": "Icon / /button/right-icon / Variant variant=default;emphasis=strong;rounding=full;aspect=default;size=large;state=default",
+          "defaultValue": "icon:caret-down@24"
+        },
         {
           "prefix": "Icon",
           "path": "/button/icon",
@@ -564,6 +692,309 @@
           ],
           "label": "Text / /tag/main-content/label / Variant variant=highlight;emphasis=strong;size=small;state=default;content=hover",
           "defaultValue": "Remove from list"
+        }
+      ]
+    },
+    {
+      "id": "components/SplitButton/controls-001",
+      "paths": [
+        "Icon / /split-button/content/left-icon",
+        "Icon / /split-button/content/right-icon"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/left-icon",
+          "variantIds": [
+            "emphasis=default;size=small;state=default;rotateIcon=false",
+            "emphasis=default;size=small;state=default;rotateIcon=true",
+            "emphasis=default;size=small;state=hover;rotateIcon=false",
+            "emphasis=default;size=small;state=hover;rotateIcon=true",
+            "emphasis=default;size=small;state=active;rotateIcon=false",
+            "emphasis=default;size=small;state=active;rotateIcon=true",
+            "emphasis=default;size=small;state=focus;rotateIcon=false",
+            "emphasis=default;size=small;state=focus;rotateIcon=true",
+            "emphasis=default;size=small;state=disabled;rotateIcon=false",
+            "emphasis=default;size=small;state=disabled;rotateIcon=true",
+            "emphasis=default;size=medium;state=default;rotateIcon=false",
+            "emphasis=default;size=medium;state=default;rotateIcon=true",
+            "emphasis=default;size=medium;state=hover;rotateIcon=false",
+            "emphasis=default;size=medium;state=hover;rotateIcon=true",
+            "emphasis=default;size=medium;state=active;rotateIcon=false",
+            "emphasis=default;size=medium;state=active;rotateIcon=true",
+            "emphasis=default;size=medium;state=focus;rotateIcon=false",
+            "emphasis=default;size=medium;state=focus;rotateIcon=true",
+            "emphasis=default;size=medium;state=disabled;rotateIcon=false",
+            "emphasis=default;size=medium;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/left-icon",
+          "defaultValue": "icon:plus@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/left-icon",
+          "variantIds": [
+            "emphasis=default;size=large;state=default;rotateIcon=false",
+            "emphasis=default;size=large;state=default;rotateIcon=true",
+            "emphasis=default;size=large;state=hover;rotateIcon=false",
+            "emphasis=default;size=large;state=hover;rotateIcon=true",
+            "emphasis=default;size=large;state=active;rotateIcon=false",
+            "emphasis=default;size=large;state=active;rotateIcon=true",
+            "emphasis=default;size=large;state=focus;rotateIcon=false",
+            "emphasis=default;size=large;state=focus;rotateIcon=true",
+            "emphasis=default;size=large;state=disabled;rotateIcon=false",
+            "emphasis=default;size=large;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/left-icon / Variant emphasis=default;size=large;state=default;rotateIcon=false",
+          "defaultValue": "icon:plus@24"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/right-icon",
+          "variantIds": [
+            "emphasis=default;size=small;state=default;rotateIcon=false",
+            "emphasis=default;size=small;state=default;rotateIcon=true",
+            "emphasis=default;size=small;state=hover;rotateIcon=false",
+            "emphasis=default;size=small;state=hover;rotateIcon=true",
+            "emphasis=default;size=small;state=active;rotateIcon=false",
+            "emphasis=default;size=small;state=active;rotateIcon=true",
+            "emphasis=default;size=small;state=focus;rotateIcon=false",
+            "emphasis=default;size=small;state=focus;rotateIcon=true",
+            "emphasis=default;size=small;state=disabled;rotateIcon=false",
+            "emphasis=default;size=small;state=disabled;rotateIcon=true",
+            "emphasis=default;size=medium;state=default;rotateIcon=false",
+            "emphasis=default;size=medium;state=default;rotateIcon=true",
+            "emphasis=default;size=medium;state=hover;rotateIcon=false",
+            "emphasis=default;size=medium;state=hover;rotateIcon=true",
+            "emphasis=default;size=medium;state=active;rotateIcon=false",
+            "emphasis=default;size=medium;state=active;rotateIcon=true",
+            "emphasis=default;size=medium;state=focus;rotateIcon=false",
+            "emphasis=default;size=medium;state=focus;rotateIcon=true",
+            "emphasis=default;size=medium;state=disabled;rotateIcon=false",
+            "emphasis=default;size=medium;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/right-icon",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/right-icon",
+          "variantIds": [
+            "emphasis=default;size=large;state=default;rotateIcon=false",
+            "emphasis=default;size=large;state=default;rotateIcon=true",
+            "emphasis=default;size=large;state=hover;rotateIcon=false",
+            "emphasis=default;size=large;state=hover;rotateIcon=true",
+            "emphasis=default;size=large;state=active;rotateIcon=false",
+            "emphasis=default;size=large;state=active;rotateIcon=true",
+            "emphasis=default;size=large;state=focus;rotateIcon=false",
+            "emphasis=default;size=large;state=focus;rotateIcon=true",
+            "emphasis=default;size=large;state=disabled;rotateIcon=false",
+            "emphasis=default;size=large;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/right-icon / Variant emphasis=default;size=large;state=default;rotateIcon=false",
+          "defaultValue": "icon:caret-down@24"
+        }
+      ]
+    },
+    {
+      "id": "components/SplitButton/controls-002",
+      "paths": [
+        "Icon / /split-button/content/left-icon",
+        "Icon / /split-button/content/right-icon"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/left-icon",
+          "variantIds": [
+            "emphasis=weak;size=small;state=default;rotateIcon=false",
+            "emphasis=weak;size=small;state=default;rotateIcon=true",
+            "emphasis=weak;size=small;state=hover;rotateIcon=false",
+            "emphasis=weak;size=small;state=hover;rotateIcon=true",
+            "emphasis=weak;size=small;state=active;rotateIcon=false",
+            "emphasis=weak;size=small;state=active;rotateIcon=true",
+            "emphasis=weak;size=small;state=focus;rotateIcon=false",
+            "emphasis=weak;size=small;state=focus;rotateIcon=true",
+            "emphasis=weak;size=small;state=disabled;rotateIcon=false",
+            "emphasis=weak;size=small;state=disabled;rotateIcon=true",
+            "emphasis=weak;size=medium;state=default;rotateIcon=false",
+            "emphasis=weak;size=medium;state=default;rotateIcon=true",
+            "emphasis=weak;size=medium;state=hover;rotateIcon=false",
+            "emphasis=weak;size=medium;state=hover;rotateIcon=true",
+            "emphasis=weak;size=medium;state=active;rotateIcon=false",
+            "emphasis=weak;size=medium;state=active;rotateIcon=true",
+            "emphasis=weak;size=medium;state=focus;rotateIcon=false",
+            "emphasis=weak;size=medium;state=focus;rotateIcon=true",
+            "emphasis=weak;size=medium;state=disabled;rotateIcon=false",
+            "emphasis=weak;size=medium;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/left-icon",
+          "defaultValue": "icon:plus@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/left-icon",
+          "variantIds": [
+            "emphasis=weak;size=large;state=default;rotateIcon=false",
+            "emphasis=weak;size=large;state=default;rotateIcon=true",
+            "emphasis=weak;size=large;state=hover;rotateIcon=false",
+            "emphasis=weak;size=large;state=hover;rotateIcon=true",
+            "emphasis=weak;size=large;state=active;rotateIcon=false",
+            "emphasis=weak;size=large;state=active;rotateIcon=true",
+            "emphasis=weak;size=large;state=focus;rotateIcon=false",
+            "emphasis=weak;size=large;state=focus;rotateIcon=true",
+            "emphasis=weak;size=large;state=disabled;rotateIcon=false",
+            "emphasis=weak;size=large;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/left-icon / Variant emphasis=weak;size=large;state=default;rotateIcon=false",
+          "defaultValue": "icon:plus@24"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/right-icon",
+          "variantIds": [
+            "emphasis=weak;size=small;state=default;rotateIcon=false",
+            "emphasis=weak;size=small;state=default;rotateIcon=true",
+            "emphasis=weak;size=small;state=hover;rotateIcon=false",
+            "emphasis=weak;size=small;state=hover;rotateIcon=true",
+            "emphasis=weak;size=small;state=active;rotateIcon=false",
+            "emphasis=weak;size=small;state=active;rotateIcon=true",
+            "emphasis=weak;size=small;state=focus;rotateIcon=false",
+            "emphasis=weak;size=small;state=focus;rotateIcon=true",
+            "emphasis=weak;size=small;state=disabled;rotateIcon=false",
+            "emphasis=weak;size=small;state=disabled;rotateIcon=true",
+            "emphasis=weak;size=medium;state=default;rotateIcon=false",
+            "emphasis=weak;size=medium;state=default;rotateIcon=true",
+            "emphasis=weak;size=medium;state=hover;rotateIcon=false",
+            "emphasis=weak;size=medium;state=hover;rotateIcon=true",
+            "emphasis=weak;size=medium;state=active;rotateIcon=false",
+            "emphasis=weak;size=medium;state=active;rotateIcon=true",
+            "emphasis=weak;size=medium;state=focus;rotateIcon=false",
+            "emphasis=weak;size=medium;state=focus;rotateIcon=true",
+            "emphasis=weak;size=medium;state=disabled;rotateIcon=false",
+            "emphasis=weak;size=medium;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/right-icon",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/right-icon",
+          "variantIds": [
+            "emphasis=weak;size=large;state=default;rotateIcon=false",
+            "emphasis=weak;size=large;state=default;rotateIcon=true",
+            "emphasis=weak;size=large;state=hover;rotateIcon=false",
+            "emphasis=weak;size=large;state=hover;rotateIcon=true",
+            "emphasis=weak;size=large;state=active;rotateIcon=false",
+            "emphasis=weak;size=large;state=active;rotateIcon=true",
+            "emphasis=weak;size=large;state=focus;rotateIcon=false",
+            "emphasis=weak;size=large;state=focus;rotateIcon=true",
+            "emphasis=weak;size=large;state=disabled;rotateIcon=false",
+            "emphasis=weak;size=large;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/right-icon / Variant emphasis=weak;size=large;state=default;rotateIcon=false",
+          "defaultValue": "icon:caret-down@24"
+        }
+      ]
+    },
+    {
+      "id": "components/SplitButton/controls-003",
+      "paths": [
+        "Icon / /split-button/content/left-icon",
+        "Icon / /split-button/content/right-icon"
+      ],
+      "groups": [
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/left-icon",
+          "variantIds": [
+            "emphasis=strong;size=small;state=default;rotateIcon=false",
+            "emphasis=strong;size=small;state=default;rotateIcon=true",
+            "emphasis=strong;size=small;state=hover;rotateIcon=false",
+            "emphasis=strong;size=small;state=hover;rotateIcon=true",
+            "emphasis=strong;size=small;state=active;rotateIcon=false",
+            "emphasis=strong;size=small;state=active;rotateIcon=true",
+            "emphasis=strong;size=small;state=focus;rotateIcon=false",
+            "emphasis=strong;size=small;state=focus;rotateIcon=true",
+            "emphasis=strong;size=small;state=disabled;rotateIcon=false",
+            "emphasis=strong;size=small;state=disabled;rotateIcon=true",
+            "emphasis=strong;size=medium;state=default;rotateIcon=false",
+            "emphasis=strong;size=medium;state=default;rotateIcon=true",
+            "emphasis=strong;size=medium;state=hover;rotateIcon=false",
+            "emphasis=strong;size=medium;state=hover;rotateIcon=true",
+            "emphasis=strong;size=medium;state=active;rotateIcon=false",
+            "emphasis=strong;size=medium;state=active;rotateIcon=true",
+            "emphasis=strong;size=medium;state=focus;rotateIcon=false",
+            "emphasis=strong;size=medium;state=focus;rotateIcon=true",
+            "emphasis=strong;size=medium;state=disabled;rotateIcon=false",
+            "emphasis=strong;size=medium;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/left-icon",
+          "defaultValue": "icon:plus@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/left-icon",
+          "variantIds": [
+            "emphasis=strong;size=large;state=default;rotateIcon=false",
+            "emphasis=strong;size=large;state=default;rotateIcon=true",
+            "emphasis=strong;size=large;state=hover;rotateIcon=false",
+            "emphasis=strong;size=large;state=hover;rotateIcon=true",
+            "emphasis=strong;size=large;state=active;rotateIcon=false",
+            "emphasis=strong;size=large;state=active;rotateIcon=true",
+            "emphasis=strong;size=large;state=focus;rotateIcon=false",
+            "emphasis=strong;size=large;state=focus;rotateIcon=true",
+            "emphasis=strong;size=large;state=disabled;rotateIcon=false",
+            "emphasis=strong;size=large;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/left-icon / Variant emphasis=strong;size=large;state=default;rotateIcon=false",
+          "defaultValue": "icon:plus@24"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/right-icon",
+          "variantIds": [
+            "emphasis=strong;size=small;state=default;rotateIcon=false",
+            "emphasis=strong;size=small;state=default;rotateIcon=true",
+            "emphasis=strong;size=small;state=hover;rotateIcon=false",
+            "emphasis=strong;size=small;state=hover;rotateIcon=true",
+            "emphasis=strong;size=small;state=active;rotateIcon=false",
+            "emphasis=strong;size=small;state=active;rotateIcon=true",
+            "emphasis=strong;size=small;state=focus;rotateIcon=false",
+            "emphasis=strong;size=small;state=focus;rotateIcon=true",
+            "emphasis=strong;size=small;state=disabled;rotateIcon=false",
+            "emphasis=strong;size=small;state=disabled;rotateIcon=true",
+            "emphasis=strong;size=medium;state=default;rotateIcon=false",
+            "emphasis=strong;size=medium;state=default;rotateIcon=true",
+            "emphasis=strong;size=medium;state=hover;rotateIcon=false",
+            "emphasis=strong;size=medium;state=hover;rotateIcon=true",
+            "emphasis=strong;size=medium;state=active;rotateIcon=false",
+            "emphasis=strong;size=medium;state=active;rotateIcon=true",
+            "emphasis=strong;size=medium;state=focus;rotateIcon=false",
+            "emphasis=strong;size=medium;state=focus;rotateIcon=true",
+            "emphasis=strong;size=medium;state=disabled;rotateIcon=false",
+            "emphasis=strong;size=medium;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/right-icon",
+          "defaultValue": "icon:caret-down@16"
+        },
+        {
+          "prefix": "Icon",
+          "path": "/split-button/content/right-icon",
+          "variantIds": [
+            "emphasis=strong;size=large;state=default;rotateIcon=false",
+            "emphasis=strong;size=large;state=default;rotateIcon=true",
+            "emphasis=strong;size=large;state=hover;rotateIcon=false",
+            "emphasis=strong;size=large;state=hover;rotateIcon=true",
+            "emphasis=strong;size=large;state=active;rotateIcon=false",
+            "emphasis=strong;size=large;state=active;rotateIcon=true",
+            "emphasis=strong;size=large;state=focus;rotateIcon=false",
+            "emphasis=strong;size=large;state=focus;rotateIcon=true",
+            "emphasis=strong;size=large;state=disabled;rotateIcon=false",
+            "emphasis=strong;size=large;state=disabled;rotateIcon=true"
+          ],
+          "label": "Icon / /split-button/content/right-icon / Variant emphasis=strong;size=large;state=default;rotateIcon=false",
+          "defaultValue": "icon:caret-down@24"
         }
       ]
     },
@@ -1645,193 +2076,6 @@
           ],
           "label": "Icon / /asset-input-image/content/caret/caret-icon / Variant orientation=horizontal;isOpen=true",
           "defaultValue": "icon:caret-up@16"
-        }
-      ]
-    },
-    {
-      "id": "patterns/ProductionUserMenu",
-      "paths": [
-        "Icon / /user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
-        "Text / /user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
-        "Icon / /user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
-        "Text / /user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
-        "Icon / /user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
-        "Text / /user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
-        "Icon / /user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
-        "Text / /user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper"
-      ],
-      "groups": [
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Icon / /user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
-          "defaultValue": "icon:checkbox@20"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Icon / /user-menu/group-rows-0/row-1/menu-item-1-0/tile/icon / Variant viewport=mobile",
-          "defaultValue": "icon:apps@20"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Text / /user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
-          "defaultValue": "Manage cookie usage"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Text / /user-menu/group-rows-0/row-1/menu-item-1-0/copy/helper / Variant viewport=mobile",
-          "defaultValue": "Connect your apps to Frontify"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Icon / /user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
-          "defaultValue": "icon:report@20"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Icon / /user-menu/group-rows-1/row-1/menu-item-1-0/tile/icon / Variant viewport=mobile",
-          "defaultValue": "icon:check-mark@20"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Text / /user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
-          "defaultValue": "Access your reports"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Text / /user-menu/group-rows-1/row-1/menu-item-1-0/copy/helper / Variant viewport=mobile",
-          "defaultValue": "Approve or decline requests"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Icon / /user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
-          "defaultValue": "icon:people@20"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Icon / /user-menu/group-rows-1/row-2/menu-item-2-0/tile/icon / Variant viewport=mobile",
-          "defaultValue": "icon:report@20"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Text / /user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
-          "defaultValue": "Manage tagged people"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Text / /user-menu/group-rows-1/row-2/menu-item-2-0/copy/helper / Variant viewport=mobile",
-          "defaultValue": "Access your reports"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Icon / /user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
-          "defaultValue": "icon:arrow-expand@20"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Icon / /user-menu/group-rows-2/row-1/menu-item-1-0/tile/icon / Variant viewport=mobile",
-          "defaultValue": "icon:link-box@20"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper",
-          "variantIds": [
-            "viewport=desktop"
-          ],
-          "label": "Text / /user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper",
-          "defaultValue": "Configure your access request"
-        },
-        {
-          "prefix": "Text",
-          "path": "/user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper",
-          "variantIds": [
-            "viewport=mobile"
-          ],
-          "label": "Text / /user-menu/group-rows-2/row-1/menu-item-1-0/copy/helper / Variant viewport=mobile",
-          "defaultValue": "Manage domains and paths"
-        }
-      ]
-    },
-    {
-      "id": "patterns/ProductionEssentialsPaletteList",
-      "paths": [
-        "Icon / /palettes/palette-palette-accent/palette-header/label-group/toggle"
-      ],
-      "groups": [
-        {
-          "prefix": "Icon",
-          "path": "/palettes/palette-palette-accent/palette-header/label-group/toggle",
-          "variantIds": [
-            "viewport=desktop;state=collapsed",
-            "viewport=mobile;state=collapsed"
-          ],
-          "label": "Icon / /palettes/palette-palette-accent/palette-header/label-group/toggle",
-          "defaultValue": "icon:caret-down@12"
-        },
-        {
-          "prefix": "Icon",
-          "path": "/palettes/palette-palette-accent/palette-header/label-group/toggle",
-          "variantIds": [
-            "viewport=desktop;state=expanded",
-            "viewport=mobile;state=expanded"
-          ],
-          "label": "Icon / /palettes/palette-palette-accent/palette-header/label-group/toggle / Variant viewport=desktop;state=expanded",
-          "defaultValue": "icon:caret-up@12"
         }
       ]
     },

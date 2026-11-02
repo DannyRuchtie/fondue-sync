@@ -1,4 +1,12 @@
+import {
+  componentCategory,
+  componentAssetName,
+} from "../src/component-categories.mjs";
 import { augmentComponentPropertyPolicies } from "../src/component-properties.mjs";
+import {
+  auditProductPatternComposition,
+  productPatternCompositionReport,
+} from "../src/composition-audit.mjs";
 import { applyChartBrandColors } from "../recipes/chart-colors.mjs";
 import { loadImageAssets, enrichImageReferences } from "./image-assets.mjs";
 import { augmentTypographyBindings } from "../recipes/typography-bindings.mjs";
@@ -388,6 +396,11 @@ export async function build(source = path.join(root, ".cache/release")) {
     ...examplePatterns,
   ];
   for (const r of recipes) {
+    const category = componentCategory(r);
+    if (category) {
+      r.libraryCategory = category;
+      r.assetName = componentAssetName(r);
+    }
     r.documentation ??= documentation(r, source, COMMIT);
     if (r.package.includes("fondue-sync")) {
       r.documentation.description = [
@@ -542,6 +555,8 @@ export async function build(source = path.join(root, ".cache/release")) {
           "image-migrations.ts",
           "image-migration-approvals.json",
           "component-properties.mjs",
+          "component-categories.mjs",
+          "component-categories.json",
         ]
           .map((f) => fs.readFileSync(path.join(root, "src", f), "utf8"))
           .join("\n"),
@@ -619,6 +634,23 @@ export async function build(source = path.join(root, ".cache/release")) {
   const typographyBindingCoverage = augmentTypographyBindings(bundle);
   for (const recipe of bundle.recipes) normalizeRecipeDocumentation(recipe);
   const componentPropertyCoverage = augmentComponentPropertyPolicies(bundle);
+  const compositionIssues = auditProductPatternComposition(bundle.recipes);
+  if (compositionIssues.length)
+    throw new Error(
+      "Product-pattern composition audit failed:\n" +
+        compositionIssues.map((issue) => issue.message).join("\n"),
+    );
+  fs.writeFileSync(
+    path.join(root, "docs/product-pattern-composition.json"),
+    JSON.stringify(
+      {
+        release: RELEASE,
+        families: productPatternCompositionReport(bundle.recipes),
+      },
+      null,
+      2,
+    ) + "\n",
+  );
   fs.writeFileSync(
     path.join(root, "docs/component-property-coverage.json"),
     JSON.stringify(componentPropertyCoverage, null, 2) + "\n",
@@ -641,7 +673,8 @@ export async function build(source = path.join(root, ".cache/release")) {
         (token) => token.provenance?.kind === "brand-adaptation",
       ).length,
       sourceDerivedNativeTokens: tokens.filter(
-        (token) => token.provenance && token.provenance.kind !== "brand-adaptation",
+        (token) =>
+          token.provenance && token.provenance.kind !== "brand-adaptation",
       ).length,
       compoundSourceSymbols: compounds.length,
       stories: stories.reduce((n, s) => n + s.names.length, 0),

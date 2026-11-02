@@ -162,20 +162,43 @@
       </button>
     </div>
     <span class="pill" id="release">Loading release…</span>
+    <div id="updates" class="card" hidden>
+      <strong>Version updates</strong>
+      <div id="update-status" role="status" aria-live="polite"></div>
+      <button type="button" id="check-updates">Check again</button>
+    </div>
     <section id="sync-panel" role="tabpanel" aria-labelledby="sync-tab">
       <div class="card">
         <strong>Library file</strong>
         <p id="status" class="muted">
           Open a dedicated Fondue library Design file.
         </p>
+        <p class="muted">
+          Components are grouped by category and family, such as Buttons /
+          Button. Enable Show subfolders in Assets to browse these folders.
+        </p>
         <div id="counts"></div>
       </div>
       <button class="primary" data-action="import">Import Fondue</button>
+      <div class="row">
+        <button data-action="organize">Organize components</button>
+      </div>
+      <p class="muted">
+        Organize applies category folders to existing components and preserves
+        styling, content and other library edits.
+      </p>
       <div class="row">
         <button data-action="compare">Compare</button
         ><button data-action="update">Update library</button
         ><button data-action="validate">Validate</button>
       </div>
+      <p class="muted">
+        Import and Update first save a recovery version. If interrupted, close
+        the plugin and restore the matching “Before Fondue” version in Figma’s
+        Version History. Restoring affects the whole file, including later edits
+        by collaborators.
+      </p>
+      <p id="checkpoint" role="status" class="muted"></p>
       <p id="progress" aria-live="polite" class="muted"></p>
       <div id="log" aria-live="polite"></div>
       <details>
@@ -265,6 +288,143 @@
       </div>
       <p id="push-result" role="status"></p>
     </section>
+    <script>"use strict";
+(() => {
+  var __defProp = Object.defineProperty;
+  var __defProps = Object.defineProperties;
+  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+  var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __propIsEnum = Object.prototype.propertyIsEnumerable;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __spreadValues = (a, b) => {
+    for (var prop in b || (b = {}))
+      if (__hasOwnProp.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    if (__getOwnPropSymbols)
+      for (var prop of __getOwnPropSymbols(b)) {
+        if (__propIsEnum.call(b, prop))
+          __defNormalProp(a, prop, b[prop]);
+      }
+    return a;
+  };
+  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+
+  // src/updates.ts
+  function stableVersion(value) {
+    if (typeof value !== "string") return null;
+    const match = /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:\+[\w.-]+)?$/.exec(value);
+    if (!match) return null;
+    const parts = match.slice(1, 4).map(Number);
+    return parts.every(Number.isSafeInteger) ? parts : null;
+  }
+  function isNewer(latest, current) {
+    const a = stableVersion(latest);
+    const b = stableVersion(current);
+    if (!a || !b) return false;
+    for (let i = 0; i < 3; i++) {
+      if (a[i] !== b[i]) return a[i] > b[i];
+    }
+    return false;
+  }
+  async function checkUpdates(pluginVersion, fondueVersion, request = fetch) {
+    const targets = [
+      {
+        name: "Fondue Sync",
+        current: pluginVersion,
+        endpoint: "https://api.github.com/repos/DannyRuchtie/fondue-sync/releases/latest",
+        url: "https://github.com/DannyRuchtie/fondue-sync/releases/latest",
+        version: (data) => data.draft === false && data.prerelease === false ? data.tag_name : null
+      },
+      {
+        name: "Fondue",
+        current: fondueVersion,
+        endpoint: "https://registry.npmjs.org/@frontify%2Ffondue/latest",
+        url: "https://github.com/Frontify/fondue/releases",
+        version: (data) => data.name === "@frontify/fondue" ? data.version : null
+      }
+    ];
+    return Promise.all(
+      targets.map(async (target) => {
+        const result = {
+          name: target.name,
+          current: target.current,
+          state: "unavailable",
+          url: target.url
+        };
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 5e3);
+        try {
+          const response = await request(target.endpoint, {
+            signal: controller.signal,
+            credentials: "omit",
+            cache: "no-store"
+          });
+          if (!response.ok) return result;
+          const latest = target.version(await response.json());
+          if (!stableVersion(latest) || !stableVersion(target.current))
+            return result;
+          return __spreadProps(__spreadValues({}, result), {
+            latest,
+            state: isNewer(latest, target.current) ? "available" : "current"
+          });
+        } catch (e) {
+          return result;
+        } finally {
+          clearTimeout(timer);
+        }
+      })
+    );
+  }
+
+  // src/update-ui.ts
+  var container = document.getElementById("updates");
+  var status = document.getElementById("update-status");
+  var retry = document.getElementById("check-updates");
+  var versions;
+  var started = false;
+  async function check() {
+    if (!versions || retry.disabled) return;
+    retry.disabled = true;
+    status.textContent = "Checking for newer versions\u2026";
+    try {
+      const results = await checkUpdates(versions.plugin, versions.fondue);
+      status.replaceChildren();
+      for (const result of results) {
+        const line = document.createElement("p");
+        if (result.state === "available") {
+          line.textContent = `${result.name} ${result.latest} is available (installed: ${result.current}). `;
+          const link = document.createElement("a");
+          link.href = result.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = result.name === "Fondue Sync" ? "Get plugin update" : "View Fondue release";
+          line.appendChild(link);
+          const instruction = document.createElement("span");
+          instruction.textContent = result.name === "Fondue Sync" ? " Install the new plugin build, then Compare before updating the library." : " A maintainer must package this release before it can be synced.";
+          line.appendChild(instruction);
+        } else {
+          line.textContent = result.state === "current" ? `${result.name} ${result.current}: no newer stable release found.` : `${result.name} ${result.current}: update check unavailable. You can keep working.`;
+        }
+        status.appendChild(line);
+      }
+    } finally {
+      retry.disabled = false;
+    }
+  }
+  retry.addEventListener("click", () => void check());
+  window.addEventListener("message", (event) => {
+    var _a;
+    if (event.source !== parent) return;
+    const message = (_a = event.data) == null ? void 0 : _a.pluginMessage;
+    if ((message == null ? void 0 : message.type) !== "status" || started) return;
+    started = true;
+    versions = { plugin: message.pluginVersion, fondue: message.release };
+    container.hidden = false;
+    void check();
+  });
+})();
+</script>
     <script>
       const send = (type) =>
         parent.postMessage({ pluginMessage: { type } }, "*");
@@ -306,10 +466,28 @@
             `${m.counts.tokens} variables · ${m.counts.styles} styles · ${m.counts.icons} icons · ${m.counts.recipes} component sets`;
           el("gaps").textContent = JSON.stringify(m.gaps, null, 2);
         }
+        if (m.type === "checkpoint") {
+          el("checkpoint").textContent =
+            "Recovery version saved: " +
+            m.checkpoint.title +
+            " (" +
+            m.checkpoint.id +
+            ").";
+        }
         if (m.type === "progress") el("progress").textContent = m.text;
         if (m.type === "error") {
           el("progress").textContent = "Action stopped";
           el("log").textContent = m.message;
+        }
+        if (m.type === "organization-report") {
+          const r = m.report;
+          el("progress").textContent =
+            r.conflicts.length || r.errors.length
+              ? "Organization stopped; review the items below."
+              : `Component categories applied: ${r.renamed} renamed, ${r.alreadyOrganized} already organized. Enable Show subfolders in Assets.`;
+          el("log").textContent = JSON.stringify(r, null, 2);
+          el("status").textContent =
+            "Category organization only; Compare checks remaining source updates separately.";
         }
         if (m.type === "report") {
           const r = m.report;

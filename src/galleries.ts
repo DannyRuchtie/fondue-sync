@@ -29,6 +29,7 @@ export type GalleryPreview = {
 export type GalleryGroup = {
   key: string;
   family: string;
+  category?: string;
   consumerPage: string;
   masterPage: string;
   sectionId: string | null;
@@ -87,6 +88,7 @@ export async function planCuratedGalleries(
       group = {
         key,
         family,
+        category: recipe.libraryCategory,
         consumerPage: target.page,
         masterPage: "Library masters - " + target.page,
         sectionId: index.sections?.[key] ?? null,
@@ -194,6 +196,7 @@ export async function planCuratedGalleries(
   const result = [...groups.values()].sort(
     (a, b) =>
       a.consumerPage.localeCompare(b.consumerPage, "en") ||
+      (a.category ?? "").localeCompare(b.category ?? "", "en") ||
       a.family.localeCompare(b.family, "en"),
   );
   for (const group of result) {
@@ -413,7 +416,9 @@ export async function syncCuratedGalleries(
     } else if (section.parent?.id !== consumer.id)
       consumer.appendChild(section as SectionNode);
     const nativeSection = section as SectionNode;
-    nativeSection.name = group.family;
+    nativeSection.name = group.category
+      ? `${group.category} / ${group.family}`
+      : group.family;
     ctx.paint(nativeSection, "fills", "color-surface-default");
     ctx.mutated.add(nativeSection.id);
     known.add(nativeSection.id);

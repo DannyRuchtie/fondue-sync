@@ -27,7 +27,15 @@ test("all frame padding and gap, independent radii and visible border widths hav
               `${recipe.id}/${n.id}: ${field}`,
             );
         if (n.kind === "frame" || n.kind === "rectangle")
-          assert.ok(tokens.has(n.bindings.cornerRadius));
+          assert.ok(
+            tokens.has(n.bindings.cornerRadius) ||
+              [
+                "topLeftRadius",
+                "topRightRadius",
+                "bottomLeftRadius",
+                "bottomRightRadius",
+              ].every((field) => tokens.has(n.bindings[field])),
+          );
         if (
           n.stroke ||
           n.bindings?.strokes ||

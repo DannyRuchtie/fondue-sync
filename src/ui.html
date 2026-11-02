@@ -162,20 +162,43 @@
       </button>
     </div>
     <span class="pill" id="release">Loading release…</span>
+    <div id="updates" class="card" hidden>
+      <strong>Version updates</strong>
+      <div id="update-status" role="status" aria-live="polite"></div>
+      <button type="button" id="check-updates">Check again</button>
+    </div>
     <section id="sync-panel" role="tabpanel" aria-labelledby="sync-tab">
       <div class="card">
         <strong>Library file</strong>
         <p id="status" class="muted">
           Open a dedicated Fondue library Design file.
         </p>
+        <p class="muted">
+          Components are grouped by category and family, such as Buttons /
+          Button. Enable Show subfolders in Assets to browse these folders.
+        </p>
         <div id="counts"></div>
       </div>
       <button class="primary" data-action="import">Import Fondue</button>
+      <div class="row">
+        <button data-action="organize">Organize components</button>
+      </div>
+      <p class="muted">
+        Organize applies category folders to existing components and preserves
+        styling, content and other library edits.
+      </p>
       <div class="row">
         <button data-action="compare">Compare</button
         ><button data-action="update">Update library</button
         ><button data-action="validate">Validate</button>
       </div>
+      <p class="muted">
+        Import and Update first save a recovery version. If interrupted, close
+        the plugin and restore the matching “Before Fondue” version in Figma’s
+        Version History. Restoring affects the whole file, including later edits
+        by collaborators.
+      </p>
+      <p id="checkpoint" role="status" class="muted"></p>
       <p id="progress" aria-live="polite" class="muted"></p>
       <div id="log" aria-live="polite"></div>
       <details>
@@ -265,6 +288,7 @@
       </div>
       <p id="push-result" role="status"></p>
     </section>
+    <!-- UPDATE_SCRIPT -->
     <script>
       const send = (type) =>
         parent.postMessage({ pluginMessage: { type } }, "*");
@@ -306,10 +330,28 @@
             `${m.counts.tokens} variables · ${m.counts.styles} styles · ${m.counts.icons} icons · ${m.counts.recipes} component sets`;
           el("gaps").textContent = JSON.stringify(m.gaps, null, 2);
         }
+        if (m.type === "checkpoint") {
+          el("checkpoint").textContent =
+            "Recovery version saved: " +
+            m.checkpoint.title +
+            " (" +
+            m.checkpoint.id +
+            ").";
+        }
         if (m.type === "progress") el("progress").textContent = m.text;
         if (m.type === "error") {
           el("progress").textContent = "Action stopped";
           el("log").textContent = m.message;
+        }
+        if (m.type === "organization-report") {
+          const r = m.report;
+          el("progress").textContent =
+            r.conflicts.length || r.errors.length
+              ? "Organization stopped; review the items below."
+              : `Component categories applied: ${r.renamed} renamed, ${r.alreadyOrganized} already organized. Enable Show subfolders in Assets.`;
+          el("log").textContent = JSON.stringify(r, null, 2);
+          el("status").textContent =
+            "Category organization only; Compare checks remaining source updates separately.";
         }
         if (m.type === "report") {
           const r = m.report;

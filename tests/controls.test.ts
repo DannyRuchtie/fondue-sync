@@ -53,6 +53,33 @@ test("Button reviewed source profiles and Checkbox all three values are represen
     .flatMap((r: any) => r.variants);
   assert.equal(c.length, 120);
 });
+test("SplitButton keeps only the outer corners rounded through bundle generation", () => {
+  for (const source of [recipes, bundle.recipes]) {
+    const variants = source
+      .filter((r: any) => r.id.startsWith("components/SplitButton/"))
+      .flatMap((r: any) => r.variants);
+    assert.equal(variants.length, 90);
+    for (const { root } of variants) {
+      for (const [id, outer, inner] of [
+        ["content", "Left", "Right"],
+        ["action", "Right", "Left"],
+      ]) {
+        const part = root.children.find((n: any) => n.id === id);
+        assert.equal(part.bindings.cornerRadius, undefined);
+        for (const edge of ["top", "bottom"]) {
+          assert.equal(
+            part.bindings[`${edge}${outer}Radius`],
+            "border-radius-medium",
+          );
+          assert.equal(
+            part.bindings[`${edge}${inner}Radius`],
+            "component-constant-radius-0",
+          );
+        }
+      }
+    }
+  }
+});
 test("upstream absent tokens remain explicit coverage gaps instead of dangling bindings", () => {
   const partial = recipes.filter((r: any) => r.status === "partial");
   assert.ok(partial.length > 0);

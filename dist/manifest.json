@@ -10,8 +10,10 @@
   "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": [
-      "none"
+      "https://api.github.com",
+      "https://registry.npmjs.org"
     ],
+    "reasoning": "Check published Fondue Sync and Fondue versions on launch.",
     "devAllowedDomains": [
       "http://localhost:3848"
     ]

@@ -1,0 +1,1797 @@
+{
+  "checkedAt": "2026-11-02",
+  "fileKey": "ZmOzqBnHNixUTV1TqRtBHs",
+  "page": {
+    "id": "54:3628",
+    "name": "Source components / Product patterns"
+  },
+  "scope": "Every variant of every product-pattern family; excludes descendants inside existing instances",
+  "families": [
+    {
+      "id": "29:936",
+      "name": "ProductionBrandCard",
+      "variants": 8,
+      "frames": [
+        {
+          "name": "banner",
+          "count": 8,
+          "sample": "29:942",
+          "children": ""
+        },
+        {
+          "name": "footer",
+          "count": 8,
+          "sample": "29:947",
+          "children": "brand-thumbnail,title-menu"
+        },
+        {
+          "name": "brand-thumbnail",
+          "count": 8,
+          "sample": "29:948",
+          "children": ""
+        },
+        {
+          "name": "title-menu",
+          "count": 8,
+          "sample": "29:951",
+          "children": "brand-name,more"
+        }
+      ],
+      "links": {
+        "Heading/color-default": 8,
+        "Icon / dots-vertical": 8
+      },
+      "rawText": 0
+    },
+    {
+      "id": "30:501",
+      "name": "ProductionGuidelineCard",
+      "variants": 3,
+      "frames": [
+        {
+          "name": "banner",
+          "count": 3,
+          "sample": "30:504",
+          "children": ""
+        },
+        {
+          "name": "footer",
+          "count": 3,
+          "sample": "30:509",
+          "children": "copy,more"
+        },
+        {
+          "name": "copy",
+          "count": 3,
+          "sample": "30:510",
+          "children": "guideline-name,page-count"
+        }
+      ],
+      "links": {
+        "Heading/color-default": 3,
+        "Text/color-weak": 3,
+        "Icon / dots-vertical": 3
+      },
+      "rawText": 0
+    },
+    {
+      "id": "30:596",
+      "name": "ProductionLibrariesEmptyState",
+      "variants": 4,
+      "frames": [
+        {
+          "name": "original-library-illustration",
+          "count": 4,
+          "sample": "30:600",
+          "children": "pale-tile-0,pale-tile-1,pale-tile-2,pale-tile-3,video-card,logo-card"
+        },
+        {
+          "name": "video-card",
+          "count": 4,
+          "sample": "30:605",
+          "children": "kind-label,artwork,text-line-one,text-line-two"
+        },
+        {
+          "name": "artwork",
+          "count": 8,
+          "sample": "30:608",
+          "children": ""
+        },
+        {
+          "name": "logo-card",
+          "count": 4,
+          "sample": "30:611",
+          "children": "kind-label,artwork,text-line-one,text-line-two"
+        }
+      ],
+      "links": {
+        "Text/color-weak": 8,
+        "Button/variant=default, emphasis=strong, rounding=medium": 4
+      },
+      "rawText": 12
+    },
+    {
+      "id": "30:547",
+      "name": "ProductionLibraryCard",
+      "variants": 3,
+      "frames": [
+        {
+          "name": "banner",
+          "count": 3,
+          "sample": "30:550",
+          "children": ""
+        },
+        {
+          "name": "footer",
+          "count": 3,
+          "sample": "30:555",
+          "children": "library-thumbnail,copy"
+        },
+        {
+          "name": "library-thumbnail",
+          "count": 3,
+          "sample": "30:556",
+          "children": "library-icon"
+        },
+        {
+          "name": "copy",
+          "count": 3,
+          "sample": "30:560",
+          "children": "library-name,asset-count"
+        }
+      ],
+      "links": {
+        "Icon / image-stack": 3,
+        "Heading/color-default": 3,
+        "Text/color-weak": 3
+      },
+      "rawText": 0
+    },
+    {
+      "id": "29:465",
+      "name": "ProductionMobileBrandBar",
+      "variants": 6,
+      "frames": [
+        {
+          "name": "workspace",
+          "count": 6,
+          "sample": "29:469",
+          "children": "menu,workspace-copy"
+        },
+        {
+          "name": "workspace-copy",
+          "count": 6,
+          "sample": "29:473",
+          "children": "workspace,workspace-caption"
+        },
+        {
+          "name": "utilities",
+          "count": 6,
+          "sample": "29:478",
+          "children": "messages,notifications,account-more"
+        },
+        {
+          "name": "account-more",
+          "count": 6,
+          "sample": "39:566",
+          "children": "account,more"
+        },
+        {
+          "name": "account",
+          "count": 6,
+          "sample": "29:485",
+          "children": "person"
+        },
+        {
+          "name": "more",
+          "count": 6,
+          "sample": "29:489",
+          "children": "more"
+        },
+        {
+          "name": "brand-thumb",
+          "count": 4,
+          "sample": "29:494",
+          "children": ""
+        }
+      ],
+      "links": {
+        "Icon / lines": 2,
+        "Heading/color-default": 6,
+        "Text/color-weak": 2,
+        "Icon / speech-bubble-dots": 6,
+        "Icon / bell": 6,
+        "Icon / person-anonymous": 6,
+        "Icon / dots-vertical": 6,
+        "Icon / caret-down": 4,
+        "Icon / magnifier": 4
+      },
+      "rawText": 0
+    },
+    {
+      "id": "29:113",
+      "name": "ProductionNavigationRail",
+      "variants": 10,
+      "frames": [
+        {
+          "name": "brand-switcher",
+          "count": 10,
+          "sample": "29:117",
+          "children": "menu,workspace-copy,collapse"
+        },
+        {
+          "name": "workspace-copy",
+          "count": 10,
+          "sample": "29:121",
+          "children": "workspace,caption"
+        },
+        {
+          "name": "utility-navigation",
+          "count": 10,
+          "sample": "29:129",
+          "children": "utility-0,utility-1,utility-2,utility-3,utility-4,utility-5"
+        },
+        {
+          "name": "utility-0",
+          "count": 10,
+          "sample": "29:130",
+          "children": "utility-icon,utility-label"
+        },
+        {
+          "name": "utility-1",
+          "count": 10,
+          "sample": "29:136",
+          "children": "utility-icon,utility-label"
+        },
+        {
+          "name": "utility-2",
+          "count": 10,
+          "sample": "29:142",
+          "children": "utility-icon,utility-label"
+        },
+        {
+          "name": "utility-3",
+          "count": 10,
+          "sample": "29:148",
+          "children": "utility-icon,utility-label"
+        },
+        {
+          "name": "utility-4",
+          "count": 10,
+          "sample": "29:154",
+          "children": "utility-icon,utility-label"
+        },
+        {
+          "name": "utility-5",
+          "count": 10,
+          "sample": "29:160",
+          "children": "utility-icon,utility-label"
+        },
+        {
+          "name": "account",
+          "count": 10,
+          "sample": "29:166",
+          "children": "account-avatar,account-name,notifications"
+        },
+        {
+          "name": "account-avatar",
+          "count": 10,
+          "sample": "29:167",
+          "children": "person"
+        },
+        {
+          "name": "brand-thumb",
+          "count": 6,
+          "sample": "29:177",
+          "children": ""
+        },
+        {
+          "name": "navigation-search",
+          "count": 6,
+          "sample": "29:186",
+          "children": "search-icon,search-label,shortcut"
+        },
+        {
+          "name": "brand-navigation",
+          "count": 6,
+          "sample": "29:194",
+          "children": "nav-essentials,nav-guidelines,nav-libraries,nav-projects,nav-newsletters"
+        },
+        {
+          "name": "nav-essentials",
+          "count": 6,
+          "sample": "29:195",
+          "children": "nav-icon,nav-label"
+        },
+        {
+          "name": "nav-guidelines",
+          "count": 6,
+          "sample": "29:201",
+          "children": "nav-icon,nav-label"
+        },
+        {
+          "name": "nav-libraries",
+          "count": 6,
+          "sample": "29:207",
+          "children": "nav-icon,nav-label"
+        },
+        {
+          "name": "nav-projects",
+          "count": 6,
+          "sample": "29:213",
+          "children": "nav-icon,nav-label"
+        },
+        {
+          "name": "nav-newsletters",
+          "count": 6,
+          "sample": "29:219",
+          "children": "nav-icon,nav-label"
+        },
+        {
+          "name": "agentic-navigation",
+          "count": 2,
+          "sample": "147:2305",
+          "children": "explore,overview,divider,features-label,feature-1,feature-2,feature-3,feature-4,feature-5,feature-6,feature-7,feature-8,feature-9,feature-10"
+        },
+        {
+          "name": "overview",
+          "count": 2,
+          "sample": "147:2307",
+          "children": "icon,label"
+        },
+        {
+          "name": "feature-1",
+          "count": 2,
+          "sample": "147:2312",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-2",
+          "count": 2,
+          "sample": "147:2315",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-3",
+          "count": 2,
+          "sample": "147:2318",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-4",
+          "count": 2,
+          "sample": "147:2321",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-5",
+          "count": 2,
+          "sample": "147:2324",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-6",
+          "count": 2,
+          "sample": "147:2327",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-7",
+          "count": 2,
+          "sample": "147:2330",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-8",
+          "count": 2,
+          "sample": "147:2333",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-9",
+          "count": 2,
+          "sample": "147:2336",
+          "children": "glyph,label"
+        },
+        {
+          "name": "feature-10",
+          "count": 2,
+          "sample": "147:2339",
+          "children": "glyph,label"
+        }
+      ],
+      "links": {
+        "Icon / lines": 4,
+        "Heading/color-default": 12,
+        "Text/color-weak": 96,
+        "Icon / sidebar-left-hide": 10,
+        "Icon / sparks": 12,
+        "Icon / clock-list": 10,
+        "Icon / market": 10,
+        "Icon / people": 10,
+        "Icon / chart-line": 10,
+        "Icon / question-mark-circle": 10,
+        "Icon / person-anonymous": 10,
+        "Text/color-default": 42,
+        "Icon / bell": 10,
+        "Icon / caret-down": 6,
+        "Icon / magnifier": 8,
+        "Icon / color-fan": 6,
+        "Icon / document-list": 10,
+        "Icon / image-stack": 6,
+        "Icon / folder": 6,
+        "Icon / paperplane": 6,
+        "Icon / link": 2,
+        "Icon / speech-bubble-dots": 2,
+        "Icon / workflow-shapes": 2,
+        "Icon / language": 2,
+        "Icon / suitcase-tag": 2,
+        "Icon / layers": 2,
+        "Icon / document-code": 2
+      },
+      "rawText": 0
+    },
+    {
+      "id": "29:578",
+      "name": "ProductionPageHeader",
+      "variants": 18,
+      "frames": [
+        {
+          "name": "title-action",
+          "count": 18,
+          "sample": "29:590",
+          "children": "title-tabs,new-action-group"
+        },
+        {
+          "name": "title-tabs",
+          "count": 15,
+          "sample": "29:591",
+          "children": "title"
+        },
+        {
+          "name": "new-action-group",
+          "count": 15,
+          "sample": "32:1386",
+          "children": "new-action-icon,new-action"
+        },
+        {
+          "name": "library-tabs",
+          "count": 5,
+          "sample": "29:643",
+          "children": "selected-tab,remote-assets,shared-folders"
+        },
+        {
+          "name": "selected-tab",
+          "count": 5,
+          "sample": "29:644",
+          "children": "overview-label"
+        },
+        {
+          "name": "tabs-row",
+          "count": 1,
+          "sample": "29:689",
+          "children": "library-tabs"
+        },
+        {
+          "name": "add",
+          "count": 3,
+          "sample": "147:2625",
+          "children": "add-plus,add-label"
+        },
+        {
+          "name": "tabs",
+          "count": 3,
+          "sample": "147:2629",
+          "children": "tab-colors,tab-fonts"
+        },
+        {
+          "name": "tab-colors",
+          "count": 3,
+          "sample": "147:2630",
+          "children": "label"
+        },
+        {
+          "name": "tab-fonts",
+          "count": 3,
+          "sample": "147:2632",
+          "children": "label"
+        }
+      ],
+      "links": {
+        "Heading/color-default": 33,
+        "Icon / plus": 18,
+        "Button/variant=default, emphasis=strong, rounding=medium": 18,
+        "Text/color-default": 6
+      },
+      "rawText": 0
+    },
+    {
+      "id": "29:699",
+      "name": "ProductionSearchToolbar",
+      "variants": 20,
+      "frames": [
+        {
+          "name": "unboxed-search",
+          "count": 17,
+          "sample": "29:711",
+          "children": "search-icon,search-label"
+        },
+        {
+          "name": "sort-view",
+          "count": 12,
+          "sample": "29:741",
+          "children": "sort,view-controls"
+        },
+        {
+          "name": "sort",
+          "count": 15,
+          "sample": "29:742",
+          "children": "sort-icon,sort-label,sort-caret"
+        },
+        {
+          "name": "view-controls",
+          "count": 12,
+          "sample": "29:751",
+          "children": "grid-selected,list"
+        },
+        {
+          "name": "grid-selected",
+          "count": 12,
+          "sample": "29:752",
+          "children": "grid"
+        },
+        {
+          "name": "list",
+          "count": 12,
+          "sample": "29:756",
+          "children": "list"
+        },
+        {
+          "name": "search",
+          "count": 3,
+          "sample": "147:2741",
+          "children": "search-icon,label"
+        }
+      ],
+      "links": {
+        "Icon / magnifier": 20,
+        "Text/color-weak": 20,
+        "Icon / caret-up-down": 12,
+        "Text/color-default": 15,
+        "Icon / caret-down": 15,
+        "Icon / grid-regular": 14,
+        "Icon / list-bullet": 14,
+        "Icon / cog": 2
+      },
+      "rawText": 0
+    },
+    {
+      "id": "118:2544",
+      "name": "ProductionNotificationsDrawer",
+      "variants": 2,
+      "frames": [
+        {
+          "name": "notification-header",
+          "count": 2,
+          "sample": "118:2546",
+          "children": "tabs,actions"
+        },
+        {
+          "name": "tabs",
+          "count": 2,
+          "sample": "118:2547",
+          "children": "unread,history"
+        },
+        {
+          "name": "unread",
+          "count": 2,
+          "sample": "118:2548",
+          "children": "unread-label,count"
+        },
+        {
+          "name": "count",
+          "count": 2,
+          "sample": "118:2551",
+          "children": "value"
+        },
+        {
+          "name": "actions",
+          "count": 2,
+          "sample": "118:2555",
+          "children": "mark,mark-label,close"
+        },
+        {
+          "name": "notification-list",
+          "count": 2,
+          "sample": "118:2564",
+          "children": "notification-notification-1,notification-notification-2,notification-notification-3,notification-notification-4,notification-notification-5,notification-notification-6,notification-notification-7,notification-notification-8,notification-notification-9"
+        },
+        {
+          "name": "notification-notification-1",
+          "count": 2,
+          "sample": "118:2565",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "avatar",
+          "count": 18,
+          "sample": "118:2566",
+          "children": "initials"
+        },
+        {
+          "name": "copy",
+          "count": 18,
+          "sample": "118:2569",
+          "children": "actor-time,event,target-actions"
+        },
+        {
+          "name": "actor-time",
+          "count": 18,
+          "sample": "118:2570",
+          "children": "actor,Unread indicator,time"
+        },
+        {
+          "name": "target-actions",
+          "count": 4,
+          "sample": "118:2577",
+          "children": "view,open"
+        },
+        {
+          "name": "view",
+          "count": 4,
+          "sample": "118:2578",
+          "children": "external,label"
+        },
+        {
+          "name": "open",
+          "count": 4,
+          "sample": "118:2584",
+          "children": "external,label"
+        },
+        {
+          "name": "notification-notification-2",
+          "count": 2,
+          "sample": "118:2593",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "notification-notification-3",
+          "count": 2,
+          "sample": "118:2621",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "notification-notification-4",
+          "count": 2,
+          "sample": "118:2636",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "notification-notification-5",
+          "count": 2,
+          "sample": "118:2651",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "notification-notification-6",
+          "count": 2,
+          "sample": "118:2666",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "notification-notification-7",
+          "count": 2,
+          "sample": "118:2681",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "notification-notification-8",
+          "count": 2,
+          "sample": "118:2696",
+          "children": "avatar,copy,read"
+        },
+        {
+          "name": "notification-notification-9",
+          "count": 2,
+          "sample": "118:2711",
+          "children": "avatar,copy,read"
+        }
+      ],
+      "links": {
+        "Text/color-default": 32,
+        "Icon / check-mark": 20,
+        "Icon / cross": 2,
+        "Heading/color-default": 18,
+        "Text/color-weak": 18,
+        "Icon / arrow-out-external": 8
+      },
+      "rawText": 20
+    },
+    {
+      "id": "118:2907",
+      "name": "ProductionUserMenu",
+      "variants": 2,
+      "frames": [
+        {
+          "name": "profile",
+          "count": 2,
+          "sample": "118:2909",
+          "children": "identity,profile-actions"
+        },
+        {
+          "name": "identity",
+          "count": 2,
+          "sample": "118:2910",
+          "children": "avatar,identity-copy"
+        },
+        {
+          "name": "avatar",
+          "count": 2,
+          "sample": "118:2911",
+          "children": "person"
+        },
+        {
+          "name": "identity-copy",
+          "count": 2,
+          "sample": "118:2915",
+          "children": "name,email"
+        },
+        {
+          "name": "profile-actions",
+          "count": 2,
+          "sample": "118:2920",
+          "children": "edit-action,logout-action"
+        },
+        {
+          "name": "edit-action",
+          "count": 2,
+          "sample": "118:2921",
+          "children": "edit"
+        },
+        {
+          "name": "logout-action",
+          "count": 2,
+          "sample": "118:2925",
+          "children": "logout"
+        },
+        {
+          "name": "group-rows-0",
+          "count": 2,
+          "sample": "118:2931",
+          "children": "row-0,row-1"
+        },
+        {
+          "name": "row-0",
+          "count": 6,
+          "sample": "118:2932",
+          "children": "menu-item-0-0,menu-item-0-1"
+        },
+        {
+          "name": "menu-item-0-0",
+          "count": 6,
+          "sample": "118:2933",
+          "children": "tile,copy"
+        },
+        {
+          "name": "tile",
+          "count": 24,
+          "sample": "118:2934",
+          "children": "icon"
+        },
+        {
+          "name": "copy",
+          "count": 24,
+          "sample": "118:2938",
+          "children": "name,helper"
+        },
+        {
+          "name": "menu-item-0-1",
+          "count": 3,
+          "sample": "118:2942",
+          "children": "tile,copy"
+        },
+        {
+          "name": "row-1",
+          "count": 6,
+          "sample": "118:2951",
+          "children": "menu-item-1-0"
+        },
+        {
+          "name": "menu-item-1-0",
+          "count": 6,
+          "sample": "118:2952",
+          "children": "tile,copy"
+        },
+        {
+          "name": "group-rows-1",
+          "count": 2,
+          "sample": "118:2963",
+          "children": "row-0,row-1,row-2"
+        },
+        {
+          "name": "menu-item-1-1",
+          "count": 1,
+          "sample": "118:2993",
+          "children": "tile,copy"
+        },
+        {
+          "name": "row-2",
+          "count": 4,
+          "sample": "118:3002",
+          "children": "menu-item-2-0,menu-item-2-1"
+        },
+        {
+          "name": "menu-item-2-0",
+          "count": 4,
+          "sample": "118:3003",
+          "children": "tile,copy"
+        },
+        {
+          "name": "menu-item-2-1",
+          "count": 1,
+          "sample": "118:3012",
+          "children": "tile,copy"
+        },
+        {
+          "name": "group-rows-2",
+          "count": 2,
+          "sample": "118:3023",
+          "children": "row-0,row-1"
+        },
+        {
+          "name": "row-3",
+          "count": 1,
+          "sample": "118:3145",
+          "children": "menu-item-3-0"
+        },
+        {
+          "name": "menu-item-3-0",
+          "count": 1,
+          "sample": "118:3146",
+          "children": "tile,copy"
+        },
+        {
+          "name": "row-4",
+          "count": 1,
+          "sample": "118:3155",
+          "children": "menu-item-4-0"
+        },
+        {
+          "name": "menu-item-4-0",
+          "count": 1,
+          "sample": "118:3156",
+          "children": "tile,copy"
+        },
+        {
+          "name": "row-5",
+          "count": 1,
+          "sample": "118:3165",
+          "children": "menu-item-5-0"
+        },
+        {
+          "name": "menu-item-5-0",
+          "count": 1,
+          "sample": "118:3166",
+          "children": "tile,copy"
+        }
+      ],
+      "links": {
+        "Icon / person-anonymous": 2,
+        "Heading/color-default": 26,
+        "Text/color-weak": 8,
+        "Icon / pen": 2,
+        "Icon / arrow-out-logout": 2,
+        "Icon / speech-bubble-stack": 2,
+        "Icon / apps": 2,
+        "Icon / checkbox": 2,
+        "Icon / bell": 2,
+        "Icon / check-mark": 2,
+        "Icon / report": 2,
+        "Icon / table": 2,
+        "Icon / people": 2,
+        "Icon / chart-bars": 2,
+        "Icon / cog": 2,
+        "Icon / link-box": 2,
+        "Icon / arrow-expand": 2
+      },
+      "rawText": 24
+    },
+    {
+      "id": "118:3211",
+      "name": "ProductionAccountSettingsDrawer",
+      "variants": 2,
+      "frames": [
+        {
+          "name": "header",
+          "count": 2,
+          "sample": "118:3213",
+          "children": "label,close,edge-separator"
+        },
+        {
+          "name": "settings-content",
+          "count": 2,
+          "sample": "118:3220",
+          "children": "basics,basics-box,ai-heading,guidelines-label,guideline-features,libraries-label,library-features,setting-0,setting-1,setting-2,setting-3,setting-4,setting-5,setting-6,setting-7"
+        },
+        {
+          "name": "basics-box",
+          "count": 2,
+          "sample": "118:3223",
+          "children": "name-label,workspace-name,divider,favicon"
+        },
+        {
+          "name": "favicon",
+          "count": 2,
+          "sample": "118:3229",
+          "children": "favicon-preview,label,caret"
+        },
+        {
+          "name": "favicon-preview",
+          "count": 2,
+          "sample": "118:3230",
+          "children": ""
+        },
+        {
+          "name": "label",
+          "count": 10,
+          "sample": "118:3231",
+          "children": "favicon,requirements"
+        },
+        {
+          "name": "ai-heading",
+          "count": 2,
+          "sample": "118:3239",
+          "children": "label"
+        },
+        {
+          "name": "guideline-features",
+          "count": 2,
+          "sample": "118:3244",
+          "children": "assistant,divider,translation,availability,admin"
+        },
+        {
+          "name": "assistant",
+          "count": 2,
+          "sample": "118:3245",
+          "children": "label,helper,learn"
+        },
+        {
+          "name": "translation",
+          "count": 2,
+          "sample": "118:3254",
+          "children": "label,helper,learn"
+        },
+        {
+          "name": "admin",
+          "count": 2,
+          "sample": "118:3263",
+          "children": "label"
+        },
+        {
+          "name": "library-features",
+          "count": 2,
+          "sample": "118:3268",
+          "children": "brand-assistant,image-search"
+        },
+        {
+          "name": "brand-assistant",
+          "count": 2,
+          "sample": "118:3269",
+          "children": "label,helper,learn"
+        },
+        {
+          "name": "image-search",
+          "count": 2,
+          "sample": "118:3277",
+          "children": "label,helper,learn"
+        },
+        {
+          "name": "setting-0",
+          "count": 2,
+          "sample": "118:3285",
+          "children": "label,caret"
+        },
+        {
+          "name": "setting-1",
+          "count": 2,
+          "sample": "118:3291",
+          "children": "label,caret"
+        },
+        {
+          "name": "setting-2",
+          "count": 2,
+          "sample": "118:3297",
+          "children": "label,caret"
+        },
+        {
+          "name": "setting-3",
+          "count": 2,
+          "sample": "118:3303",
+          "children": "label,caret"
+        },
+        {
+          "name": "setting-4",
+          "count": 2,
+          "sample": "118:3309",
+          "children": "label,caret"
+        },
+        {
+          "name": "setting-5",
+          "count": 2,
+          "sample": "118:3315",
+          "children": "label,caret"
+        },
+        {
+          "name": "setting-6",
+          "count": 2,
+          "sample": "118:3321",
+          "children": "label,caret"
+        },
+        {
+          "name": "setting-7",
+          "count": 2,
+          "sample": "118:3327",
+          "children": "label,caret"
+        }
+      ],
+      "links": {
+        "Heading/color-default": 14,
+        "Icon / cross": 2,
+        "Text/color-weak": 4,
+        "TextInput/status=neutral": 2,
+        "Text/color-default": 24,
+        "Icon / caret-down": 18,
+        "Switch/Source states": 8
+      },
+      "rawText": 18
+    },
+    {
+      "id": "118:3454",
+      "name": "ProductionHelpDialog",
+      "variants": 2,
+      "frames": [
+        {
+          "name": "header",
+          "count": 2,
+          "sample": "118:3456",
+          "children": "label,close,edge-separator"
+        },
+        {
+          "name": "help-rows",
+          "count": 2,
+          "sample": "118:3463",
+          "children": "help-row-0,help-row-1,help-row-2"
+        },
+        {
+          "name": "help-row-0",
+          "count": 2,
+          "sample": "118:3464",
+          "children": "icon-tile,copy"
+        },
+        {
+          "name": "icon-tile",
+          "count": 6,
+          "sample": "118:3465",
+          "children": "glyph"
+        },
+        {
+          "name": "copy",
+          "count": 6,
+          "sample": "118:3469",
+          "children": "label,description"
+        },
+        {
+          "name": "help-row-1",
+          "count": 2,
+          "sample": "118:3473",
+          "children": "icon-tile,copy,external"
+        },
+        {
+          "name": "help-row-2",
+          "count": 2,
+          "sample": "118:3485",
+          "children": "icon-tile,copy,external"
+        }
+      ],
+      "links": {
+        "Heading/color-default": 8,
+        "Icon / cross": 2,
+        "Icon / speech-bubble-stack": 2,
+        "Icon / question-mark-circle": 2,
+        "Icon / arrow-out-external": 4,
+        "Icon / sparks": 2
+      },
+      "rawText": 6
+    },
+    {
+      "id": "118:3539",
+      "name": "ProductionGlobalSearch",
+      "variants": 3,
+      "frames": [
+        {
+          "name": "input",
+          "count": 3,
+          "sample": "118:3542",
+          "children": "magnifier,query"
+        },
+        {
+          "name": "results",
+          "count": 1,
+          "sample": "118:3563",
+          "children": "result-heading,asset-search-1,asset-search-2,asset-search-3"
+        },
+        {
+          "name": "result-heading",
+          "count": 1,
+          "sample": "118:3564",
+          "children": "assets,show-all"
+        },
+        {
+          "name": "show-all",
+          "count": 1,
+          "sample": "118:3567",
+          "children": "label,arrow"
+        },
+        {
+          "name": "asset-search-1",
+          "count": 1,
+          "sample": "118:3573",
+          "children": "preview,result-copy"
+        },
+        {
+          "name": "preview",
+          "count": 3,
+          "sample": "118:3574",
+          "children": ""
+        },
+        {
+          "name": "result-copy",
+          "count": 3,
+          "sample": "118:3575",
+          "children": "title,metadata,context"
+        },
+        {
+          "name": "title",
+          "count": 3,
+          "sample": "118:3576",
+          "children": "segment-0,match-1,segment-2"
+        },
+        {
+          "name": "match-1",
+          "count": 3,
+          "sample": "118:3579",
+          "children": "text"
+        },
+        {
+          "name": "asset-search-2",
+          "count": 1,
+          "sample": "118:3587",
+          "children": "preview,result-copy"
+        },
+        {
+          "name": "asset-search-3",
+          "count": 1,
+          "sample": "118:3601",
+          "children": "preview,result-copy"
+        }
+      ],
+      "links": {
+        "Icon / magnifier": 3,
+        "Text/color-weak": 5,
+        "Text/color-default": 2,
+        "Icon / cross": 1,
+        "Heading/color-default": 10,
+        "Icon / arrow-right": 1
+      },
+      "rawText": 3
+    },
+    {
+      "id": "119:827",
+      "name": "ProductionGuidelinesEmpty",
+      "variants": 2,
+      "frames": [
+        {
+          "name": "empty-illustration",
+          "count": 2,
+          "sample": "119:829",
+          "children": "gallery-card,text-card"
+        },
+        {
+          "name": "gallery-card",
+          "count": 2,
+          "sample": "119:830",
+          "children": "kind,gallery-images"
+        },
+        {
+          "name": "gallery-images",
+          "count": 2,
+          "sample": "119:832",
+          "children": "main-photo,small-photos"
+        },
+        {
+          "name": "main-photo",
+          "count": 2,
+          "sample": "119:833",
+          "children": ""
+        },
+        {
+          "name": "small-photos",
+          "count": 2,
+          "sample": "119:834",
+          "children": "small-photo-1,small-photo-2"
+        },
+        {
+          "name": "small-photo-1",
+          "count": 2,
+          "sample": "119:835",
+          "children": ""
+        },
+        {
+          "name": "small-photo-2",
+          "count": 2,
+          "sample": "119:836",
+          "children": ""
+        },
+        {
+          "name": "text-card",
+          "count": 2,
+          "sample": "119:837",
+          "children": "type,line-1,line-2"
+        },
+        {
+          "name": "create",
+          "count": 2,
+          "sample": "119:843",
+          "children": "create-plus,create-label"
+        }
+      ],
+      "links": {
+        "Icon / plus": 2,
+        "Button/variant=default, emphasis=strong, rounding=medium": 2
+      },
+      "rawText": 10
+    },
+    {
+      "id": "119:872",
+      "name": "ProductionFontsEmpty",
+      "variants": 1,
+      "frames": [
+        {
+          "name": "empty-illustration",
+          "count": 1,
+          "sample": "119:873",
+          "children": "font-styles,font-card"
+        },
+        {
+          "name": "font-styles",
+          "count": 1,
+          "sample": "119:874",
+          "children": "type,font-swatches,text-line,text-line-2"
+        },
+        {
+          "name": "font-swatches",
+          "count": 1,
+          "sample": "119:876",
+          "children": "sample-1,sample-2,sample-3"
+        },
+        {
+          "name": "font-card",
+          "count": 1,
+          "sample": "119:882",
+          "children": "type,sample"
+        },
+        {
+          "name": "sample",
+          "count": 1,
+          "sample": "119:884",
+          "children": "letterform"
+        },
+        {
+          "name": "create",
+          "count": 1,
+          "sample": "119:888",
+          "children": "create-plus,create-label"
+        }
+      ],
+      "links": {
+        "Icon / plus": 1,
+        "Button/variant=default, emphasis=strong, rounding=medium": 1
+      },
+      "rawText": 6
+    },
+    {
+      "id": "119:896",
+      "name": "ProductionObservedLibraryCard",
+      "variants": 2,
+      "frames": [
+        {
+          "name": "cover",
+          "count": 2,
+          "sample": "119:898",
+          "children": ""
+        },
+        {
+          "name": "footer",
+          "count": 2,
+          "sample": "119:899",
+          "children": "library-thumb,copy"
+        },
+        {
+          "name": "library-thumb",
+          "count": 2,
+          "sample": "119:900",
+          "children": "icon"
+        },
+        {
+          "name": "copy",
+          "count": 2,
+          "sample": "119:904",
+          "children": "name,count"
+        }
+      ],
+      "links": {
+        "Icon / image-stack": 2,
+        "Heading/color-default": 2,
+        "Text/color-weak": 2
+      },
+      "rawText": 0
+    },
+    {
+      "id": "119:921",
+      "name": "ProductionEssentialsPaletteList",
+      "variants": 4,
+      "frames": [
+        {
+          "name": "palette-palette-core",
+          "count": 4,
+          "sample": "119:925",
+          "children": "palette-header,swatches"
+        },
+        {
+          "name": "palette-header",
+          "count": 8,
+          "sample": "119:926",
+          "children": "label-group"
+        },
+        {
+          "name": "label-group",
+          "count": 8,
+          "sample": "119:927",
+          "children": "name,toggle,count"
+        },
+        {
+          "name": "swatches",
+          "count": 6,
+          "sample": "119:935",
+          "children": "swatch-0,swatch-1,swatch-2,swatch-3,swatch-4"
+        },
+        {
+          "name": "palette-palette-accent",
+          "count": 4,
+          "sample": "119:941",
+          "children": "palette-header,swatches"
+        },
+        {
+          "name": "actions",
+          "count": 2,
+          "sample": "119:983",
+          "children": "edit,delete"
+        },
+        {
+          "name": "color-table",
+          "count": 2,
+          "sample": "119:990",
+          "children": "columns,color-0,color-1,color-2,add-color"
+        },
+        {
+          "name": "columns",
+          "count": 2,
+          "sample": "119:991",
+          "children": "column-0,column-1,column-2,column-3"
+        },
+        {
+          "name": "column-0",
+          "count": 2,
+          "sample": "119:992",
+          "children": "label"
+        },
+        {
+          "name": "column-1",
+          "count": 2,
+          "sample": "119:995",
+          "children": "label"
+        },
+        {
+          "name": "column-2",
+          "count": 2,
+          "sample": "119:998",
+          "children": "label"
+        },
+        {
+          "name": "column-3",
+          "count": 2,
+          "sample": "119:1001",
+          "children": "label"
+        },
+        {
+          "name": "color-0",
+          "count": 2,
+          "sample": "119:1004",
+          "children": "preview-cell,name-cell,rgba-cell,hex-cell"
+        },
+        {
+          "name": "preview-cell",
+          "count": 8,
+          "sample": "119:1005",
+          "children": "preview"
+        },
+        {
+          "name": "name-cell",
+          "count": 8,
+          "sample": "119:1007",
+          "children": "name"
+        },
+        {
+          "name": "rgba-cell",
+          "count": 8,
+          "sample": "119:1010",
+          "children": "rgba"
+        },
+        {
+          "name": "hex-cell",
+          "count": 8,
+          "sample": "119:1013",
+          "children": "hex"
+        },
+        {
+          "name": "color-1",
+          "count": 2,
+          "sample": "119:1016",
+          "children": "preview-cell,name-cell,rgba-cell,hex-cell"
+        },
+        {
+          "name": "color-2",
+          "count": 2,
+          "sample": "119:1028",
+          "children": "preview-cell,name-cell,rgba-cell,hex-cell"
+        },
+        {
+          "name": "add-color",
+          "count": 2,
+          "sample": "119:1040",
+          "children": "preview-cell,name-cell,rgba-cell,hex-cell"
+        },
+        {
+          "name": "tile",
+          "count": 2,
+          "sample": "119:1042",
+          "children": "plus"
+        }
+      ],
+      "links": {
+        "Heading/color-default": 14,
+        "Icon / caret-down": 6,
+        "Text/color-weak": 18,
+        "Icon / caret-up": 2,
+        "Icon / pen": 2,
+        "Icon / trash-bin": 2,
+        "Text/color-default": 12,
+        "Icon / plus": 2
+      },
+      "rawText": 0
+    },
+    {
+      "id": "119:1178",
+      "name": "ProductionAgenticHubContent",
+      "variants": 3,
+      "frames": [
+        {
+          "name": "agentic-heading",
+          "count": 3,
+          "sample": "119:1181",
+          "children": "title,intro"
+        },
+        {
+          "name": "body",
+          "count": 3,
+          "sample": "119:1185",
+          "children": "hero,features-section,learn-heading,learn-media"
+        },
+        {
+          "name": "hero",
+          "count": 3,
+          "sample": "119:1186",
+          "children": "automation-hero,automation-copy"
+        },
+        {
+          "name": "automation-hero",
+          "count": 3,
+          "sample": "119:1187",
+          "children": "asset-card-outline,automation-path,generate-path,photo-card-1,photo-card-2,photo-card-3,photo-card-4,automation-pill,generate-controls"
+        },
+        {
+          "name": "asset-card-outline",
+          "count": 3,
+          "sample": "119:1188",
+          "children": ""
+        },
+        {
+          "name": "automation-path",
+          "count": 3,
+          "sample": "119:1189",
+          "children": ""
+        },
+        {
+          "name": "generate-path",
+          "count": 3,
+          "sample": "119:1190",
+          "children": ""
+        },
+        {
+          "name": "photo-card-1",
+          "count": 3,
+          "sample": "119:1191",
+          "children": ""
+        },
+        {
+          "name": "photo-card-2",
+          "count": 3,
+          "sample": "119:1192",
+          "children": ""
+        },
+        {
+          "name": "photo-card-3",
+          "count": 3,
+          "sample": "119:1193",
+          "children": ""
+        },
+        {
+          "name": "photo-card-4",
+          "count": 3,
+          "sample": "119:1194",
+          "children": ""
+        },
+        {
+          "name": "automation-pill",
+          "count": 3,
+          "sample": "119:1195",
+          "children": "lightning,label"
+        },
+        {
+          "name": "generate-controls",
+          "count": 3,
+          "sample": "119:1200",
+          "children": "generate,property-0,property-1,property-2"
+        },
+        {
+          "name": "generate",
+          "count": 3,
+          "sample": "119:1201",
+          "children": "spark,label"
+        },
+        {
+          "name": "property-0",
+          "count": 3,
+          "sample": "119:1206",
+          "children": "label"
+        },
+        {
+          "name": "property-1",
+          "count": 3,
+          "sample": "119:1208",
+          "children": "label"
+        },
+        {
+          "name": "property-2",
+          "count": 3,
+          "sample": "119:1210",
+          "children": "label"
+        },
+        {
+          "name": "automation-copy",
+          "count": 3,
+          "sample": "119:1212",
+          "children": "title,description,learn"
+        },
+        {
+          "name": "features-section",
+          "count": 3,
+          "sample": "119:1217",
+          "children": "features,feature-grid"
+        },
+        {
+          "name": "feature-grid",
+          "count": 3,
+          "sample": "119:1219",
+          "children": "feature-row-0,feature-row-1,feature-row-2,feature-row-3"
+        },
+        {
+          "name": "feature-row-0",
+          "count": 3,
+          "sample": "119:1220",
+          "children": "feature-1,feature-2,feature-3"
+        },
+        {
+          "name": "feature-1",
+          "count": 3,
+          "sample": "119:1221",
+          "children": "tile,copy"
+        },
+        {
+          "name": "tile",
+          "count": 30,
+          "sample": "119:1222",
+          "children": "glyph"
+        },
+        {
+          "name": "copy",
+          "count": 30,
+          "sample": "119:1226",
+          "children": "name,description"
+        },
+        {
+          "name": "feature-2",
+          "count": 3,
+          "sample": "119:1230",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-3",
+          "count": 3,
+          "sample": "119:1239",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-row-1",
+          "count": 3,
+          "sample": "119:1248",
+          "children": "feature-4,feature-5,feature-6"
+        },
+        {
+          "name": "feature-4",
+          "count": 3,
+          "sample": "119:1249",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-5",
+          "count": 3,
+          "sample": "119:1258",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-6",
+          "count": 3,
+          "sample": "119:1267",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-row-2",
+          "count": 3,
+          "sample": "119:1276",
+          "children": "feature-7,feature-8,feature-9"
+        },
+        {
+          "name": "feature-7",
+          "count": 3,
+          "sample": "119:1277",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-8",
+          "count": 3,
+          "sample": "119:1286",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-9",
+          "count": 3,
+          "sample": "119:1295",
+          "children": "tile,copy"
+        },
+        {
+          "name": "feature-row-3",
+          "count": 3,
+          "sample": "119:1304",
+          "children": "feature-10"
+        },
+        {
+          "name": "feature-10",
+          "count": 3,
+          "sample": "119:1305",
+          "children": "tile,copy"
+        },
+        {
+          "name": "learn-media",
+          "count": 3,
+          "sample": "119:1315",
+          "children": "learn-learn-intro,learn-learn-workflow"
+        },
+        {
+          "name": "learn-learn-intro",
+          "count": 3,
+          "sample": "119:1316",
+          "children": "image,title"
+        },
+        {
+          "name": "image",
+          "count": 6,
+          "sample": "119:1317",
+          "children": ""
+        },
+        {
+          "name": "learn-learn-workflow",
+          "count": 3,
+          "sample": "119:1320",
+          "children": "image,title"
+        },
+        {
+          "name": "title-section",
+          "count": 1,
+          "sample": "119:1468",
+          "children": "title"
+        },
+        {
+          "name": "intro-section",
+          "count": 1,
+          "sample": "119:1471",
+          "children": "intro"
+        },
+        {
+          "name": "feature-row-4",
+          "count": 1,
+          "sample": "119:1552",
+          "children": "feature-5"
+        },
+        {
+          "name": "feature-row-5",
+          "count": 1,
+          "sample": "119:1562",
+          "children": "feature-6"
+        },
+        {
+          "name": "feature-row-6",
+          "count": 1,
+          "sample": "119:1572",
+          "children": "feature-7"
+        },
+        {
+          "name": "feature-row-7",
+          "count": 1,
+          "sample": "119:1582",
+          "children": "feature-8"
+        },
+        {
+          "name": "feature-row-8",
+          "count": 1,
+          "sample": "119:1592",
+          "children": "feature-9"
+        },
+        {
+          "name": "feature-row-9",
+          "count": 1,
+          "sample": "119:1602",
+          "children": "feature-10"
+        }
+      ],
+      "links": {
+        "Icon / lightning": 3,
+        "Icon / sparks": 6,
+        "Button/variant=default, emphasis=strong, rounding=medium": 3,
+        "Icon / link": 3,
+        "Heading/color-default": 36,
+        "Icon / speech-bubble-dots": 3,
+        "Icon / workflow-shapes": 3,
+        "Icon / language": 3,
+        "Icon / magnifier": 3,
+        "Icon / suitcase-tag": 3,
+        "Icon / document-list": 3,
+        "Icon / layers": 3,
+        "Icon / document-code": 3
+      },
+      "rawText": 63
+    }
+  ],
+  "conclusion": "Examples reference canonical pattern main components, but patterns recreate numerous controls and cards as frames. Existing links predominantly use typography and icons; these do not establish full-control composition.",
+  "limitations": "Frame inventory includes legitimate layout and illustrative shapes; semantic classification requires recipe-level review. This is pre-fix evidence, not proof of next-sync behavior."
+}

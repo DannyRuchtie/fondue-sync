@@ -57,13 +57,22 @@ export function decide(
       reason:
         "Managed asset was removed. Restore it or use an explicit migration; no duplicate is created.",
     };
-  if (actual !== baseline.snapshot)
+  if (actual !== baseline.snapshot) {
+    let fields: string[];
+    try {
+      fields = changedPaths(JSON.parse(baseline.snapshot), JSON.parse(actual));
+    } catch {
+      fields = ["snapshot"];
+    }
     return {
       ...entry,
       action: "conflict",
+      changes: fields,
       reason:
-        "Managed Figma asset differs from last applied state. Local changes preserved.",
+        "Managed Figma asset differs from last applied state. Local changes preserved. Changed fields: " +
+        fields.slice(0, 4).join(", "),
     };
+  }
   let changes: string[] = [];
   if (entry.definition !== baseline.definition) {
     try {

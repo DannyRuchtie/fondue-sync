@@ -14,7 +14,11 @@ import {
   type RecordEntry,
 } from "./plan";
 import { snapshot, normalizeSavedSnapshot } from "./snapshot";
-import { bundleProblems, migrationProblems } from "./preflight";
+import {
+  bundleProblems,
+  migrationProblems,
+  compositionRemovedChildren,
+} from "./preflight";
 import { read, write } from "./metadata";
 import { inspectPartialRecipe, partialRecipeProblems } from "./recovery";
 import { organizeSections } from "./sections";
@@ -70,6 +74,8 @@ export class SyncEngine {
   iconMains = new Map<string, Promise<any>>();
   componentPropertyLabels = new Map<string, Map<string, string>>();
   appliedPropertyDefaults = new Set<string>();
+  compositionReplacements = new Set<string>();
+  compositionRemovals = new Map<string, Set<string>>();
   lastSavedIndex: string | undefined;
   shardPayloads = new Map<number, string>();
   shardFor(id: string) {
@@ -782,6 +788,24 @@ export class SyncEngine {
     const imageHash = def.imageAssetId
       ? this.imageHash(def.imageAssetId, def.imageAssetSha256)
       : undefined;
+    if (
+      existing &&
+      ["FRAME", "TEXT", "RECTANGLE", "ELLIPSE"].includes(existing.type) &&
+      def.kind === "componentInstance"
+    ) {
+      if (!this.compositionReplacements.has(existing.id))
+        throw Error(
+          "Unapproved native composition replacement: " + existing.id,
+        );
+      // Build the linked replacement completely before removing its exact owned predecessor.
+      // A failure leaves the baseline in conflict for review, never silently adopts drift.
+      const index = parent.children.indexOf(existing);
+      const replacement = await this.layer(def, parent, undefined, owner, path);
+      parent.insertChild(index, replacement);
+      existing.remove();
+      this.compositionReplacements.delete(existing.id);
+      return replacement;
+    }
     const creatingLayer = !existing;
     let node = existing;
     const identityPath = path + "/" + def.id;
@@ -866,6 +890,79 @@ export class SyncEngine {
             "No stable text property " + key + " on " + choice.recipe.name,
           );
         node.setProperties({ [property]: value });
+      }
+      const previousDefinition = existing ? read(node, "layer-definition") : "";
+      const previousOverrides = previousDefinition
+        ? (JSON.parse(previousDefinition).instanceOverrides ?? {})
+        : {};
+      const overridePaths = new Set([
+        ...Object.keys(previousOverrides),
+        ...Object.keys(def.instanceOverrides ?? {}),
+      ]);
+      const anatomy: { path: string; source: Layer; native: any }[] = [];
+      const collectAnatomy = (source: Layer, native: any, parent = "") => {
+        const path = parent + "/" + source.id;
+        anatomy.push({ path, source, native });
+        for (const child of source.children ?? []) {
+          const actual = native.children?.find(
+            (candidate: any) => read(candidate, "identity") === child.id,
+          );
+          if (actual) collectAnatomy(child, actual, path);
+        }
+      };
+      collectAnatomy(choice.variant.root, node);
+      for (const key of overridePaths) {
+        const matches =
+          key === "__root__"
+            ? [anatomy[0]]
+            : anatomy.filter(
+                (item) => item.path === key || item.path.endsWith("/" + key),
+              );
+        if (matches.length !== 1)
+          throw Error(
+            "No unique native anatomy override " +
+              key +
+              " on " +
+              choice.recipe.name,
+          );
+        const { source, native } = matches[0];
+        const override = def.instanceOverrides?.[key] ?? {};
+        if (
+          [
+            "id",
+            "kind",
+            "name",
+            "children",
+            "componentName",
+            "recipeId",
+            "variantProps",
+            "instanceOverrides",
+          ].some((field) => field in override)
+        )
+          throw Error(
+            "Instance override cannot change source structure: " + key,
+          );
+        const identity = read(native, "identity");
+        const name = native.name;
+        // Merge with the actual source anatomy so removed overrides restore canonical defaults.
+        await this.layer(
+          {
+            ...source,
+            ...(source.kind === "text" &&
+            override.text === undefined &&
+            (previousOverrides[key]?.text === undefined ||
+              def.text !== undefined ||
+              Object.keys(def.textOverrides ?? {}).length)
+              ? { text: native.characters }
+              : {}),
+            ...override,
+            id: identity || source.id,
+            name,
+            children: [],
+          },
+          native.parent,
+          native,
+        );
       }
       write(
         node,
@@ -1062,7 +1159,11 @@ export class SyncEngine {
           "INSTANCE_SWAP",
           (await this.iconMain(def)).id,
         ),
-        visible: ensure("Show / " + identityPath, "BOOLEAN", true),
+        visible: ensure(
+          "Show / " + identityPath,
+          "BOOLEAN",
+          def.visible ?? true,
+        ),
       };
     }
     if (def.effectStyle) {
@@ -1096,6 +1197,29 @@ export class SyncEngine {
       ] as const)
         if (def[key] !== undefined) node[key] = def[key];
       node.clipsContent = def.clipContent ?? false;
+    }
+    if (def.kind === "componentInstance") {
+      if (def.layout !== undefined) node.layoutMode = def.layout;
+      for (const [field, target] of Object.entries({
+        gap: "itemSpacing",
+        primaryAlign: "primaryAxisAlignItems",
+        counterAlign: "counterAxisAlignItems",
+        paddingLeft: "paddingLeft",
+        paddingRight: "paddingRight",
+        paddingTop: "paddingTop",
+        paddingBottom: "paddingBottom",
+        clipContent: "clipsContent",
+        radius: "cornerRadius",
+      })) {
+        const value = (def as any)[field];
+        if (value !== undefined) node[target] = value;
+      }
+      if (def.padding !== undefined)
+        node.paddingTop =
+          node.paddingRight =
+          node.paddingBottom =
+          node.paddingLeft =
+            def.padding;
     }
     if (
       def.kind !== "svg" &&
@@ -1197,6 +1321,23 @@ export class SyncEngine {
         (n: any) => read(n, "identity") === child.id,
       );
       await this.layer(child, node, prior, owner, identityPath);
+    }
+    const removals = this.compositionRemovals.get(node.id);
+    if (removals) {
+      // Replacement controls are fully constructed before exact reviewed predecessor IDs retire.
+      for (const id of removals) {
+        const predecessor = node.children.find((child: any) => child.id === id);
+        if (!predecessor)
+          throw Error("Composition predecessor disappeared: " + id);
+        predecessor.remove();
+      }
+      for (const [index, child] of (def.children ?? []).entries()) {
+        const current = node.children.find(
+          (item: any) => read(item, "identity") === child.id,
+        );
+        if (current) node.insertChild(index, current);
+      }
+      this.compositionRemovals.delete(node.id);
     }
     write(node, "layer-definition", canonical(def));
     // Never guess deletion of formerly managed children. A structural removal is a migration.
@@ -1363,7 +1504,7 @@ export class SyncEngine {
     );
     await this.recoverPendingRecipe(set, recipe);
     set.clipsContent = false;
-    set.name = recipe.name;
+    set.name = recipe.assetName ?? recipe.name;
     set.description =
       recipe.documentation?.description ??
       `Fondue ${this.bundle.release}. ${recipe.package}: ${recipe.name}. ${recipe.status}. ${recipe.limitations.join(" ")}\nSources: ${recipe.source.join(", ")}`;
@@ -1437,6 +1578,88 @@ export class SyncEngine {
     if (!problems.length)
       validateImageMigrationOwnership(asset, previous, next);
     if (problems.length) throw Error(problems.map((p) => p.message).join(" "));
+    if (next.compositionPolicy === 1 && next.package.includes("fondue-sync")) {
+      const validateOwned = (native: any, source: Layer, root = false) => {
+        const types: Record<string, string> = {
+          frame: "FRAME",
+          text: "TEXT",
+          rectangle: "RECTANGLE",
+          ellipse: "ELLIPSE",
+          instance: "INSTANCE",
+          componentInstance: "INSTANCE",
+          svg: "FRAME",
+        };
+        if (
+          !native ||
+          read(native, "identity") !== source.id ||
+          native.type !== (root ? "COMPONENT" : types[source.kind])
+        )
+          throw Error(
+            "Composition predecessor identity/type differs: " + source.id,
+          );
+        if (["instance", "componentInstance", "svg"].includes(source.kind))
+          return;
+        const children = source.children ?? [];
+        if ((native.children?.length ?? 0) !== children.length)
+          throw Error(
+            "Foreign or missing child inside composition predecessor: " +
+              source.id,
+          );
+        for (const child of children) {
+          const matches = native.children.filter(
+            (n: any) => read(n, "identity") === child.id,
+          );
+          if (matches.length !== 1)
+            throw Error("Ambiguous composition predecessor child: " + child.id);
+          validateOwned(matches[0], child);
+        }
+      };
+      const visit = (native: any, old: Layer, target: Layer, root = false) => {
+        if (
+          !root &&
+          ["frame", "text", "rectangle", "ellipse", "instance"].includes(
+            old.kind,
+          ) &&
+          target.kind === "componentInstance"
+        ) {
+          validateOwned(native, old);
+          this.compositionReplacements.add(native.id);
+          return;
+        }
+        const retired = compositionRemovedChildren(old, target);
+        if (retired.length) {
+          validateOwned(native, old, root);
+          const ids = new Set<string>();
+          for (const child of retired) {
+            const matches =
+              native.children?.filter(
+                (node: any) => read(node, "identity") === child.id,
+              ) ?? [];
+            if (matches.length !== 1)
+              throw Error("Ambiguous retired composition child: " + child.id);
+            validateOwned(matches[0], child);
+            ids.add(matches[0].id);
+          }
+          this.compositionRemovals.set(native.id, ids);
+        }
+        for (const child of old.children ?? []) {
+          const nextChild = target.children?.find((n) => n.id === child.id);
+          if (!nextChild) continue;
+          const matches =
+            native.children?.filter(
+              (n: any) => read(n, "identity") === child.id,
+            ) ?? [];
+          if (matches.length === 1) visit(matches[0], child, nextChild);
+        }
+      };
+      for (const oldVariant of previous.variants ?? []) {
+        const target = next.variants.find((v) => v.id === oldVariant.id);
+        const native = asset.children.find(
+          (n: any) => read(n, "variant") === oldVariant.id,
+        );
+        if (target && native) visit(native, oldVariant.root, target.root, true);
+      }
+    }
   }
   async checkpoint(entry: Entry, asset: any) {
     // Persist the allocated identity before awaiting its snapshot or writing a multi-entry baseline.

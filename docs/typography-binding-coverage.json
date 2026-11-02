@@ -2,12 +2,12 @@
   "release": "13.11.1",
   "policy": "Exact effective font family, size, weight, line height, letter spacing and case. CSS font stacks remain unchanged; native family aliases resolve only through confirmed font availability.",
   "counts": {
-    "textLayers": 2679,
-    "releasedStyleMatches": 2560,
+    "textLayers": 2558,
+    "releasedStyleMatches": 2454,
     "existingExactStyles": 2013,
-    "derivedStyles": 14,
+    "derivedStyles": 13,
     "derivedVariables": 7,
-    "layerBindings": 13387
+    "layerBindings": 12782
   },
   "derivedStyles": [
     {
@@ -173,27 +173,6 @@
       "source": [
         "packages/components/src/components/Tooltip/Tooltip.tsx",
         "packages/components/src/components/Tooltip/styles/tooltip.module.scss"
-      ]
-    },
-    {
-      "id": "source-text-diatype-12-400-16-0-original-underline",
-      "metrics": {
-        "fontFamily": "Diatype",
-        "fontSize": 12,
-        "fontWeight": 400,
-        "lineHeight": 16,
-        "letterSpacing": 0,
-        "textCase": "ORIGINAL",
-        "textDecoration": "UNDERLINE"
-      },
-      "source": [
-        "packages/components/src/components/Text/Text.tsx",
-        "packages/components/src/components/Heading/Heading.tsx",
-        "packages/components/src/components/Button/Button.tsx",
-        "packages/components/src/components/Link/Link.tsx",
-        "packages/components/src/components/Card/CardRoot.tsx",
-        "packages/components/src/components/Card/CardBanner.tsx",
-        "packages/components/src/components/Card/CardContent.tsx"
       ]
     },
     {

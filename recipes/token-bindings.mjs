@@ -138,8 +138,19 @@ export function augmentTokenBindings(bundle) {
     }
     // Ellipses, vectors, icon instances and composed instances have no independent
     // cornerRadius property. Circle/arc and source-component geometry is retained.
-    if (node.kind === "frame" || node.kind === "rectangle")
-      bind(node, "cornerRadius", "radius", node.radius ?? 0, here);
+    if (node.kind === "frame" || node.kind === "rectangle") {
+      const corners = [
+        "topLeftRadius",
+        "topRightRadius",
+        "bottomLeftRadius",
+        "bottomRightRadius",
+      ];
+      // A uniform binding would overwrite explicit asymmetric corner bindings.
+      if (corners.some((field) => node.bindings?.[field])) {
+        for (const field of corners)
+          bind(node, field, "radius", node.radius ?? 0, here);
+      } else bind(node, "cornerRadius", "radius", node.radius ?? 0, here);
+    }
     if (
       node.radius !== undefined &&
       !["frame", "rectangle"].includes(node.kind)

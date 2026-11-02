@@ -22,6 +22,27 @@ Ask a maintainer for the built plugin folder and the required ABC Diatype and Cr
 
 Keep component instances connected to receive future library updates.
 
+Components are organized as **category / source family / profile**, for example **Buttons / Button / …**, **Inputs / TextInput / …**, and **Content / Accordion / pill**. Enable **Show subfolders** in Figma's Assets display settings to browse the hierarchy. Categories are Buttons, Inputs, Navigation, Feedback, Content, Overlays, Typography, and Layout. Charts, rich text, icons and product patterns keep their own domains.
+
+Categories come from `src/component-categories.json` and are generated into the library bundle. For an existing library with local edits, choose **Organize components** to apply only the category names. It preserves current content and styling and changes only the name fields in the saved baseline; other drift remains visible in Compare. A locally renamed or missing main component stops organization for review. The action saves a recovery version and per-component name/baseline backups.
+
+Import/Update also renames the existing component sets in place; recipe IDs, variant properties and instance connections stay intact. Local edits still appear as conflicts for review. Publish the updated library to make the organization available in consuming files. The plugin cannot change a designer's Show subfolders preference.
+
+
+Product patterns compose the canonical base components in **Source components / Components**. Examples then use those pattern instances. Sync resolves the component references in dependency order; it does not create separate copies of the base controls for each pattern. Layout containers, illustrations and application-specific rich compositions can remain frames around those instances.
+
+The bundled recipes are checked during the build for recreated controls and missing base-component references. An update migrates eligible managed controls to linked instances while retaining the pattern main components. Local edits remain conflicts for review rather than being overwritten. The generated [composition report](docs/product-pattern-composition.json) lists the reviewed pattern families and their dependencies.
+
+Before every Import or Update, the plugin waits briefly and asks Figma to save a named **Before Fondue import/update** version. It proceeds only after Figma returns a version ID. If this fails, the operation stops before sync changes are made.
+
+If an operation is interrupted, close the plugin, open **Show Version History** from the file name menu, select the matching **Before Fondue** version and choose **Restore This Version**. This restores the whole file, including changes collaborators made after that checkpoint; coordinate restoration with them. Reopen the plugin and Compare before retrying. Restoration does not automatically reverse published library versions or consumer updates.
+
+This is a manual recovery point, not automatic rollback. Figma warns that very recent changes may be absent from a saved version; wait for the file to finish saving before starting. Access and retention depend on the file’s permissions and plan. Native restoration of variables, shared styles, managed metadata and instance connections must still be verified in a test file.
+
+On launch, the plugin checks for a newer stable Fondue Sync release on GitHub and a newer published Fondue package on npm. The version notice links to available releases; **Check again** retries a failed check. Version checks time out after five seconds and do not block other actions. Import/Update separately require Figma to confirm the recovery version, so offline operation may be blocked. They send no document content or credentials. An unavailable check is not confirmation that you have the latest version.
+
+These notices do not install updates or change the library automatically. Install a newer plugin build to update Fondue Sync. A newer upstream Fondue release must first be packaged and reviewed by a maintainer. Plugin update notices require a public GitHub release tagged with the matching package version, such as `v0.1.2`.
+
 ## Part 2: Update the library and push PRs
 
 ### Get an updated library

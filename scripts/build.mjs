@@ -1,16 +1,32 @@
 import { build } from "esbuild";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 await mkdir("dist", { recursive: true });
-const ui = (await readFile("src/ui.html", "utf8")).replace(
-  "<!-- PUSH_SCRIPT -->",
-  `<script>${await readFile("src/push-ui.js", "utf8")}</script>`,
-);
+const { version } = JSON.parse(await readFile("package.json", "utf8"));
+const updateScript = await build({
+  entryPoints: ["src/update-ui.ts"],
+  bundle: true,
+  write: false,
+  format: "iife",
+  target: "es2017",
+});
+const ui = (await readFile("src/ui.html", "utf8"))
+  .replace(
+    "<!-- UPDATE_SCRIPT -->",
+    `<script>${updateScript.outputFiles[0].text}</script>`,
+  )
+  .replace(
+    "<!-- PUSH_SCRIPT -->",
+    `<script>${await readFile("src/push-ui.js", "utf8")}</script>`,
+  );
 await build({
   entryPoints: ["src/plugin.ts"],
   bundle: true,
   outfile: "dist/code.js",
   target: "es2017",
-  define: { __html__: JSON.stringify(ui) },
+  define: {
+    __html__: JSON.stringify(ui),
+    __pluginVersion__: JSON.stringify(version),
+  },
 });
 await writeFile("dist/ui.html", ui);
 await writeFile(
@@ -25,7 +41,11 @@ await writeFile(
       editorType: ["figma"],
       documentAccess: "dynamic-page",
       networkAccess: {
-        allowedDomains: ["none"],
+        allowedDomains: [
+          "https://api.github.com",
+          "https://registry.npmjs.org",
+        ],
+        reasoning: "Check published Fondue Sync and Fondue versions on launch.",
         devAllowedDomains: ["http://localhost:3848"],
       },
     },

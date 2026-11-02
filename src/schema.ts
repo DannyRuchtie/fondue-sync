@@ -47,6 +47,9 @@ export type Layer = {
   paintRole?: string;
   iconId?: string;
   componentName?: string;
+  componentRole?: string;
+  /** Overrides target unique, existing source anatomy; they never insert or detach children. */
+  instanceOverrides?: Record<string, Partial<Layer>>;
   recipeId?: string;
   variantProps?: Record<string, string>;
   textOverrides?: Record<string, string>;
@@ -99,6 +102,11 @@ export type Layer = {
   children?: Layer[];
 };
 export type Recipe = {
+  /** Generated browsing metadata; source name and stable recipe ID stay unchanged. */
+  libraryCategory?: string;
+  assetName?: string;
+  /** Authorizes owned primitive-to-base-instance composition upgrades beneath stable mains. */
+  compositionPolicy?: 1;
   componentPropertyPolicy?: 2;
   id: string;
   name: string;

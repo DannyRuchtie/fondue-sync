@@ -2,6 +2,50 @@ import { validatedImageBytes } from "./images";
 import type { Bundle, Layer, Recipe } from "./schema";
 import { canonical } from "./plan";
 export type MigrationProblem = { code: string; message: string };
+/** Container recomposition may retire old anatomy only when a newly composed base control replaces it. */
+export function compositionRemovedChildren(
+  previous: Layer,
+  next: Layer,
+): Layer[] {
+  if (previous.kind !== "frame" || next.kind !== "frame") return [];
+  const introducedControl = (next.children ?? []).some((child) => {
+    const canonicalReference = child.recipeId
+      ? /^components[/:]/.test(child.recipeId)
+      : Boolean(
+          child.componentName && !/^Production/.test(child.componentName),
+        );
+    if (
+      child.kind !== "componentInstance" ||
+      !child.componentRole ||
+      child.componentRole === "text" ||
+      !canonicalReference
+    )
+      return false;
+    const prior = (previous.children ?? []).find(
+      (item) => item.id === child.id,
+    );
+    if (!prior || prior.kind !== "componentInstance") return true;
+    const changedReference =
+      (prior.recipeId || prior.componentName) &&
+      canonical([prior.recipeId, prior.componentName]) !==
+        canonical([child.recipeId, child.componentName]);
+    return Boolean(
+      changedReference || prior.componentRole !== child.componentRole,
+    );
+  });
+  if (!introducedControl) return [];
+  return (previous.children ?? []).filter(
+    (child) =>
+      [
+        "instance",
+        "componentInstance",
+        "text",
+        "rectangle",
+        "ellipse",
+      ].includes(child.kind) &&
+      !(next.children ?? []).some((current) => current.id === child.id),
+  );
+}
 /** Pure, read-only migration checks. Run for EVERY planned update before making any canvas mutation. */
 export function migrationProblems(
   kind: string,
@@ -63,7 +107,40 @@ export function migrationProblems(
     }
     const oldLayers = collect(oldVariant.root),
       layers = collect(target.root);
+    const compositionRoots =
+      next.compositionPolicy === 1 &&
+      typeof next.package === "string" &&
+      next.package.includes("fondue-sync")
+        ? [...oldLayers]
+            .filter(
+              ([key, prior]) =>
+                key !== "/" + oldVariant.root.id &&
+                ["frame", "text", "rectangle", "ellipse", "instance"].includes(
+                  prior.kind,
+                ) &&
+                layers.get(key)?.kind === "componentInstance",
+            )
+            .map(([key]) => key)
+        : [];
+    if (
+      next.compositionPolicy === 1 &&
+      typeof next.package === "string" &&
+      next.package.includes("fondue-sync")
+    ) {
+      for (const [path, prior] of oldLayers) {
+        const current = layers.get(path);
+        if (!current) continue;
+        for (const child of compositionRemovedChildren(prior, current))
+          compositionRoots.push(path + "/" + child.id);
+      }
+    }
     for (const [key, prior] of oldLayers) {
+      if (
+        compositionRoots.some(
+          (root) => key === root || key.startsWith(root + "/"),
+        )
+      )
+        continue;
       const layer = layers.get(key);
       if (!layer) {
         problem(
@@ -334,6 +411,52 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
             ([key, value]) => v.props[key] === value,
           ),
         );
+      if (choices.length && node.instanceOverrides) {
+        const anatomy: { path: string; source: Layer }[] = [];
+        const walk = (source: Layer, parent = "") => {
+          const path = parent + "/" + source.id;
+          anatomy.push({ path, source });
+          for (const child of source.children ?? []) walk(child, path);
+        };
+        walk(choices[0].variant.root);
+        for (const [key, override] of Object.entries(node.instanceOverrides)) {
+          const matches =
+            key === "__root__"
+              ? [anatomy[0]]
+              : anatomy.filter(
+                  ({ path }) => path === key || path.endsWith("/" + key),
+                );
+          if (matches.length !== 1) {
+            problem(
+              "instance-override-path",
+              `Override must target one existing anatomy path: ${context}/${node.id}/${key}`,
+            );
+            continue;
+          }
+          if (
+            [
+              "id",
+              "kind",
+              "name",
+              "children",
+              "componentName",
+              "recipeId",
+              "variantProps",
+              "instanceOverrides",
+            ].some((field) => field in override)
+          ) {
+            problem(
+              "instance-override-structure",
+              `Instance overrides cannot change source structure: ${context}/${node.id}/${key}`,
+            );
+            continue;
+          }
+          layer(
+            { ...matches[0].source, ...override, children: [] },
+            context + "/" + node.id + "/override",
+          );
+        }
+      }
       if (!choices.length)
         problem(
           "missing-component-instance",

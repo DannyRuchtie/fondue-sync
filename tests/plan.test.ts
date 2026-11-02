@@ -46,3 +46,17 @@ test("canonical object ordering is deterministic", () =>
     canonical({ b: 2, a: { z: 3, c: 1 } }),
     canonical({ a: { c: 1, z: 3 }, b: 2 }),
   ));
+test("conflicts report changed fields without hiding local changes", () => {
+  const result = decide(
+    entry,
+    {
+      nodeId: "1",
+      definition: "next",
+      snapshot: canonical({ name: "Button", description: "Original" }),
+    },
+    canonical({ name: "Button", description: "Edited" }),
+  );
+  assert.equal(result.action, "conflict");
+  assert.deepEqual(result.changes, ["description"]);
+  assert.match(result.reason!, /description/);
+});
