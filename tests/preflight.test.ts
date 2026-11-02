@@ -284,6 +284,12 @@ test("example structural removals and optical SVG changes require explicit migra
     "icon-optics",
   );
 });
+test("explicit layer sizing uses native sizing enums before allocation", () => {
+  const b = structuredClone(releaseBundle) as unknown as Bundle;
+  (b.recipes[0].variants[0].root as any).layoutSizingHorizontal = "AUTO";
+  assert.ok(bundleProblems(b).some((p) => p.code === "layer-sizing"));
+});
+
 test("effect and SVG bindings validate referenced native variable roles before mutation", () => {
   const b = structuredClone(releaseBundle) as unknown as Bundle;
   const color = b.tokens.find((t) => t.type === "COLOR")!.id;

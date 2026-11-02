@@ -60,10 +60,10 @@ test("exact confirmed ABC Diatype alias resolves released family/style without a
     family: "ABC Diatype",
     style: "Medium",
   });
-  assert.deepEqual(calls, ["Diatype:Medium", "ABC Diatype:Medium"]);
+  assert.deepEqual(calls, ["ABC Diatype:Medium"]);
   assert.deepEqual(engine.warnings, []);
 });
-test("available requested source font wins before alias discovery and Cranny loads exactly", async () => {
+test("available requested source font wins over its alias and Cranny loads exactly", async () => {
   const { api } = apiFonts([
     { family: "Diatype", style: "Regular" },
     { family: "ABC Diatype", style: "Regular" },
@@ -90,7 +90,7 @@ test("missing exact source style blocks explicitly even when Inter or a similar 
     engine.fontFor("Diatype", "Bold"),
     /Required Fondue source font is unavailable: Diatype Bold/,
   );
-  assert.deepEqual(calls, ["Diatype:Bold"]);
+  assert.deepEqual(calls, []);
   assert.equal(engine.warnings.length, 0);
 });
 test("missing required source fonts are preflighted before any collection node or metadata allocation", async () => {

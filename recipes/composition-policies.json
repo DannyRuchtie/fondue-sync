@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "description": "Maintainer recommendations, separate from generated implementation and live Figma state. New source families default to Needs review.",
+  "families": {
+    "components:SegmentedControl": {
+      "mode": "repeated",
+      "requiredRecipes": ["components/SegmentedControl.Root"],
+      "regions": ["Segments"],
+      "reason": "Linked items inside a slot; group selection needs a coordinated action."
+    },
+    "components:Table": {
+      "mode": "structured",
+      "requiredRecipes": [
+        "components/Table.Root",
+        "components/Table.EditableRow",
+        "components/Table.ContentCell"
+      ],
+      "regions": ["Rows", "Cells", "Cell content"],
+      "reason": "Linked rows/cells plus coordinated column insertion and widths."
+    },
+    "components:Flyout": {
+      "mode": "content",
+      "requiredRecipes": [
+        "components/Flyout.Surface",
+        "components/Flyout.Body",
+        "components/Flyout.Footer"
+      ],
+      "regions": ["Surface content", "Body", "Footer actions"],
+      "reason": "Surface is editable; standard body and footer compositions still need slot mappings."
+    },
+    "components:Dialog": {
+      "mode": "content",
+      "regions": ["Body", "Footer actions"],
+      "reason": "Keep the shell and dismissal controls fixed; allow arbitrary forms and actions."
+    },
+    "components:Card": {
+      "mode": "content",
+      "regions": ["Body", "Footer", "Banner content"],
+      "reason": "Keep framing and defined media/icon parts linked; make content regions flexible."
+    },
+    "components:Tabs": {
+      "mode": "repeated",
+      "regions": ["Triggers", "Panel content"],
+      "reason": "Variable trigger count plus associated content. Pairing and active state need validation."
+    },
+    "components:Accordion": {
+      "mode": "repeated",
+      "regions": ["Items", "Item content"],
+      "reason": "Repeated linked sections with arbitrary expanded content."
+    },
+    "components:Dropdown": {
+      "mode": "repeated",
+      "regions": ["Items", "Groups"],
+      "reason": "Repeat linked items; preserve menu keyboard behavior in code."
+    },
+    "components:Select": {
+      "mode": "repeated",
+      "regions": ["Items", "Groups"],
+      "reason": "Options and groups vary; keep the trigger and selected-value rendering fixed."
+    },
+    "components:RadioList": {
+      "mode": "repeated",
+      "regions": ["Options"],
+      "reason": "Linked option items with exactly one selected item in the design."
+    },
+    "components:Tree": {
+      "mode": "structured",
+      "regions": ["Rows", "Nested children"],
+      "reason": "Hierarchy and indentation need a tree-specific composition contract."
+    },
+    "components:OrderableList": {
+      "mode": "repeated",
+      "regions": ["Items"],
+      "reason": "Linked rows can repeat; runtime drag/drop remains in code."
+    },
+    "components:Notice": {
+      "mode": "content",
+      "regions": ["Body", "Actions"],
+      "reason": "Message and action content can vary inside stable status styling."
+    },
+    "components:Tooltip": {
+      "mode": "content",
+      "regions": ["Content"],
+      "reason": "Support rich tooltip content while preserving the shell; check interactive-content guidance separately."
+    },
+    "components:Section": {
+      "mode": "layout",
+      "regions": ["Children"],
+      "reason": "Container styling/layout stays linked while consumer content changes."
+    },
+    "components:ScrollArea": {
+      "mode": "layout",
+      "regions": ["Children"],
+      "reason": "Container styling/layout stays linked while consumer content changes."
+    },
+    "components:Box": {
+      "mode": "layout",
+      "regions": ["Children"],
+      "reason": "Container styling/layout stays linked while consumer content changes."
+    },
+    "components:Flex": {
+      "mode": "layout",
+      "regions": ["Children"],
+      "reason": "Container styling/layout stays linked while consumer content changes."
+    },
+    "components:Grid": {
+      "mode": "structured",
+      "regions": ["Cells"],
+      "reason": "Arbitrary cells need grid track and span rules; do not treat grid as a plain list."
+    },
+    "components:SplitButton": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Fixed primary/secondary anatomy; variable menu items belong to Dropdown composition."
+    },
+    "components:AssetInput": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice."
+    },
+    "components:ColorPicker": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice."
+    },
+    "components:DatePicker": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice."
+    },
+    "components:EditableText": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice."
+    },
+    "components:Slider": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice."
+    },
+    "components:Badge": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Button": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Checkbox": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Divider": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Heading": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Label": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Link": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:LoadingBar": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:LoadingCircle": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Switch": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Tag": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Text": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:TextInput": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:Textarea": {
+      "mode": "fixed",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy."
+    },
+    "components:RouterProvider": {
+      "mode": "code-only",
+      "regions": [],
+      "reason": "Runtime context provider; no editable canvas region is required."
+    },
+    "components:ThemeProvider": {
+      "mode": "code-only",
+      "regions": [],
+      "reason": "Runtime context provider; no editable canvas region is required."
+    },
+    "charts:AreaStackChart": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:BarChart": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:ChartHeading": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:LineChart": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:LinearGauge": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:PieChart": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:Treemap": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:Legend": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "charts:Tooltip": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately."
+    },
+    "rte:RichTextEditor": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Review native representation separately from editor document/runtime behavior."
+    },
+    "rte:ToolbarButton": {
+      "mode": "data-driven",
+      "regions": [],
+      "reason": "Review native representation separately from editor document/runtime behavior."
+    },
+    "rte:Toolbar": {
+      "mode": "content",
+      "regions": ["Actions"],
+      "reason": "Review native representation separately from editor document/runtime behavior."
+    },
+    "rte:FloatingModalWrapper": {
+      "mode": "content",
+      "regions": ["Content"],
+      "reason": "Review native representation separately from editor document/runtime behavior."
+    }
+  }
+}

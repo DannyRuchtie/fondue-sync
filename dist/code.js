@@ -793,6 +793,12 @@
     }
     const layer = (node, context) => {
       var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j, _k, _l, _m, _n, _o, _p;
+      for (const field of [
+        "layoutSizingHorizontal",
+        "layoutSizingVertical"
+      ])
+        if (node[field] !== void 0 && !["FIXED", "HUG", "FILL"].includes(node[field]))
+          problem("layer-sizing", `Invalid ${field}: ${context}/${node.id}`);
       if (node.imageAssetId) {
         const asset = imageAssets.get(node.imageAssetId);
         if (!asset)
@@ -996,19 +1002,19 @@
           `Missing effect style ${node.effectStyle}: ${context}/${node.id}`
         );
       if (node.contentSlot) {
-        const slot = node.contentSlot;
-        if (node.kind !== "frame" || !((_n = slot.id) == null ? void 0 : _n.trim()) || !((_o = slot.name) == null ? void 0 : _o.trim()))
+        const slot2 = node.contentSlot;
+        if (node.kind !== "frame" || !((_n = slot2.id) == null ? void 0 : _n.trim()) || !((_o = slot2.name) == null ? void 0 : _o.trim()))
           problem(
             "content-slot",
             `Content slot requires a frame and stable identity/name: ${context}/${node.id}`
           );
-        for (const value2 of [slot.minChildren, slot.maxChildren])
+        for (const value2 of [slot2.minChildren, slot2.maxChildren])
           if (value2 !== void 0 && (!Number.isInteger(value2) || value2 < 0))
             problem(
               "slot-limits",
               `Slot limits must be nonnegative integers: ${context}/${node.id}`
             );
-        if (slot.minChildren !== void 0 && slot.maxChildren !== void 0 && slot.minChildren > slot.maxChildren)
+        if (slot2.minChildren !== void 0 && slot2.maxChildren !== void 0 && slot2.minChildren > slot2.maxChildren)
           problem(
             "slot-limits",
             `Slot minimum exceeds maximum: ${context}/${node.id}`
@@ -1133,8 +1139,8 @@
       throw Error(
         "Content slot property collides with another property: " + spec.name
       );
-    let slot = contentContainer(node, definition);
-    if (slot === node) {
+    let slot2 = contentContainer(node, definition);
+    if (slot2 === node) {
       if (node.children.length)
         throw Error(
           "Existing content requires explicit slot migration; overrides must be preserved"
@@ -1144,17 +1150,17 @@
         component = component.parent;
       if (!component || typeof component.createSlot !== "function")
         throw Error("This Figma version does not support native slots");
-      slot = component.createSlot();
-      node.appendChild(slot);
-      write(slot, "identity", slotIdentity(definition));
+      slot2 = component.createSlot();
+      node.appendChild(slot2);
+      write(slot2, "identity", slotIdentity(definition));
     }
-    if (slot.type !== "SLOT")
+    if (slot2.type !== "SLOT")
       throw Error("Managed content region is not a native slot");
-    const generatedKey = slot.componentPropertyReferences.slotContentId;
+    const generatedKey = slot2.componentPropertyReferences.slotContentId;
     if (!key) {
       key = owner.editComponentProperty(generatedKey, { name: spec.name });
     } else if (generatedKey !== key) {
-      slot.componentPropertyReferences = { slotContentId: key };
+      slot2.componentPropertyReferences = { slotContentId: key };
       owner.deleteComponentProperty(generatedKey);
     }
     owner.editComponentProperty(key, {
@@ -1166,19 +1172,19 @@
         maxChildren: (_c = spec.maxChildren) != null ? _c : null
       }
     });
-    slot.name = spec.name;
-    slot.layoutMode = (_d = definition.layout) != null ? _d : "VERTICAL";
-    slot.primaryAxisSizingMode = "AUTO";
-    slot.counterAxisSizingMode = "AUTO";
-    slot.itemSpacing = (_e = definition.gap) != null ? _e : 0;
-    slot.primaryAxisAlignItems = (_g = (_f = definition.primaryAlign) != null ? _f : definition.primaryAxisAlignItems) != null ? _g : "MIN";
+    slot2.name = spec.name;
+    slot2.layoutMode = (_d = definition.layout) != null ? _d : "VERTICAL";
+    slot2.primaryAxisSizingMode = "AUTO";
+    slot2.counterAxisSizingMode = "AUTO";
+    slot2.itemSpacing = (_e = definition.gap) != null ? _e : 0;
+    slot2.primaryAxisAlignItems = (_g = (_f = definition.primaryAlign) != null ? _f : definition.primaryAxisAlignItems) != null ? _g : "MIN";
     const cross = (_i = (_h = definition.counterAlign) != null ? _h : definition.counterAxisAlignItems) != null ? _i : "CENTER";
-    slot.counterAxisAlignItems = cross === "BASELINE" && slot.layoutMode === "VERTICAL" ? "MIN" : cross;
-    slot.fills = [];
-    slot.clipsContent = false;
-    slot.layoutSizingHorizontal = definition.width !== void 0 ? "FILL" : "HUG";
-    slot.layoutSizingVertical = "HUG";
-    return slot;
+    slot2.counterAxisAlignItems = cross === "BASELINE" && slot2.layoutMode === "VERTICAL" ? "MIN" : cross;
+    slot2.fills = [];
+    slot2.clipsContent = false;
+    slot2.layoutSizingHorizontal = definition.width !== void 0 ? "FILL" : "HUG";
+    slot2.layoutSizingVertical = "HUG";
+    return slot2;
   }
 
   // src/image-migration-approvals.json
@@ -2423,13 +2429,13 @@
         this.bind(node, field, padding);
       this.bind(node, "itemSpacing", gap);
     }
-    wrap(node, width2, gap = "spacing-large") {
+    wrap(node, width3, gap = "spacing-large") {
       this.auto(node, "HORIZONTAL", "component-constant-spacing-0", gap);
       node.layoutWrap = "WRAP";
       this.bind(node, "counterAxisSpacing", gap);
       node.counterAxisAlignContent = "AUTO";
       node.primaryAxisSizingMode = "FIXED";
-      node.resizeWithoutConstraints(width2, Math.max(1, node.height));
+      node.resizeWithoutConstraints(width3, Math.max(1, node.height));
       node.primaryAxisSizingMode = "FIXED";
       node.counterAxisSizingMode = "AUTO";
     }
@@ -2453,7 +2459,7 @@
       }
       return node;
     }
-    async text(key, parent, content, styleId, color = "color-primary-default", width2 = 400) {
+    async text(key, parent, content, styleId, color = "color-primary-default", width3 = 400) {
       const style = await this.style(styleId);
       const node = await this.node(key, "TEXT", parent);
       node.name = "";
@@ -2466,7 +2472,7 @@
         write(node, "presentation-text", content);
       }
       node.textAutoResize = "HEIGHT";
-      node.resize(width2, Math.max(1, node.height));
+      node.resize(width3, Math.max(1, node.height));
       this.paint(node, "fills", color);
       return node;
     }
@@ -2500,10 +2506,10 @@
       node.y = y;
       this.mutated.add(node.id);
     }
-    size(node, width2, height2) {
+    size(node, width3, height2) {
       if ("resizeWithoutConstraints" in node)
-        node.resizeWithoutConstraints(width2, height2);
-      else if ("resize" in node) node.resize(width2, height2);
+        node.resizeWithoutConstraints(width3, height2);
+      else if ("resize" in node) node.resize(width3, height2);
       this.mutated.add(node.id);
     }
   };
@@ -3043,7 +3049,7 @@
     ]);
     const notes = page.children.filter((n) => !existing.has(n.id));
     const y = notes.length ? Math.max(...notes.map((n) => n.y + n.height)) + ctx.number("spacing-xx-large") : 0;
-    const width2 = 1120, pad = ctx.number("spacing-x-large"), contentWidth = width2 - 2 * pad;
+    const width3 = 1120, pad = ctx.number("spacing-x-large"), contentWidth = width3 - 2 * pad;
     const document = await ctx.frame("colors/document", page);
     ctx.auto(
       document,
@@ -3128,18 +3134,18 @@
       );
       const mode = modePairs.find((p) => p.tokenId === token.id);
       const collection = collections.get(mode.collectionId);
-      for (const label of ["Light", "Dark"]) {
-        const panel = await ctx.frame(key + "/" + label, pair, "", "surface");
+      for (const label2 of ["Light", "Dark"]) {
+        const panel = await ctx.frame(key + "/" + label2, pair, "", "surface");
         ctx.auto(panel, "VERTICAL", "spacing-small", "spacing-x-small");
         panel.setExplicitVariableModeForCollection(
           collection,
-          label === "Light" ? mode.light : mode.dark
+          label2 === "Light" ? mode.light : mode.dark
         );
         const foreground = token.id.includes("-on-");
         await ctx.text(
-          key + "/" + label + "/name",
+          key + "/" + label2 + "/name",
           panel,
-          label,
+          label2,
           "text-body-x-small-strong",
           foreground ? token.id : "color-secondary-default",
           120
@@ -3149,7 +3155,7 @@
           if (foreground && ctx.variables.has(backgroundId))
             ctx.paint(panel, "fills", backgroundId);
           await ctx.text(
-            key + "/" + label + "/sample",
+            key + "/" + label2 + "/sample",
             panel,
             "Sample text",
             "text-body-medium-strong",
@@ -3158,7 +3164,7 @@
           );
         } else {
           const sample = await ctx.node(
-            key + "/" + label + "/sample",
+            key + "/" + label2 + "/sample",
             "RECTANGLE",
             panel
           );
@@ -3940,10 +3946,12 @@
     async resolve(id, kind) {
       return kind === "token" ? this.api.variables.getVariableByIdAsync(id) : kind === "style" ? this.api.getStyleByIdAsync(id) : this.api.getNodeByIdAsync(id);
     }
-    async inspect() {
+    async inspect(progress) {
       var _a, _b, _c;
       const actions = [];
       for (const { entry } of this.entries()) {
+        if (actions.length % 25 === 0)
+          progress == null ? void 0 : progress("Comparing managed assets: " + entry.id);
         const ref = this.index.assets[entry.id];
         const asset = ref ? await this.resolve(ref.id, ref.kind) : null;
         let baseline;
@@ -4067,9 +4075,9 @@
       const names = name === "Semantic" ? ["Light", "Dark"] : ["Value"];
       if (collection.modes.length === 1 && (collection.modes[0].name === "Mode 1" || ((_b = this.index.pendingCollections) == null ? void 0 : _b.includes(name))))
         collection.renameMode(collection.defaultModeId, names[0]);
-      for (const label of names)
-        if (!collection.modes.some((m) => m.name === label))
-          collection.addMode(label);
+      for (const label2 of names)
+        if (!collection.modes.some((m) => m.name === label2))
+          collection.addMode(label2);
       this.index.pendingCollections = ((_c = this.index.pendingCollections) != null ? _c : []).filter((n) => n !== name);
       this.save();
       return collection;
@@ -4139,40 +4147,40 @@
       return pending;
     }
     async loadFont(family, style) {
-      var _a, _b;
+      var _a;
       const normalized = style.replace("SemiBold", "Semi Bold");
       const requested = { family, style: normalized };
-      try {
-        await this.api.loadFontAsync(requested);
-        this.warnings = this.warnings.filter(
-          (warning) => !warning.startsWith(`Font ${family} ${style} unavailable;`)
-        );
-        return requested;
-      } catch (e) {
-        const knownAlias = family === "Diatype" ? "ABC Diatype" : void 0;
-        if (knownAlias && typeof this.api.listAvailableFontsAsync === "function") {
-          try {
-            (_a = this.availableFonts) != null ? _a : this.availableFonts = this.api.listAvailableFontsAsync();
-            const available = await this.availableFonts;
-            const aliasFont = (_b = available.find(
-              ({ fontName }) => fontName.family === knownAlias && fontName.style === normalized
-            )) == null ? void 0 : _b.fontName;
-            if (aliasFont) {
-              await this.api.loadFontAsync(aliasFont);
-              this.warnings = this.warnings.filter(
-                (warning) => !warning.startsWith(`Font ${family} ${style} unavailable;`)
-              );
-              return aliasFont;
-            }
-          } catch (e2) {
-          }
+      const knownAlias = family === "Diatype" ? "ABC Diatype" : void 0;
+      let candidates = [requested];
+      if (knownAlias && typeof this.api.listAvailableFontsAsync === "function") {
+        try {
+          (_a = this.availableFonts) != null ? _a : this.availableFonts = this.api.listAvailableFontsAsync();
+          const available = await this.availableFonts;
+          candidates = [family, knownAlias].flatMap((candidate) => {
+            var _a2;
+            const exact = (_a2 = available.find(
+              ({ fontName }) => fontName.family === candidate && fontName.style === normalized
+            )) == null ? void 0 : _a2.fontName;
+            return exact ? [exact] : [];
+          });
+        } catch (e) {
         }
-        throw Error(
-          `Required Fondue source font is unavailable: ${family} ${normalized}.` + (knownAlias ? ` Confirmed installed alias ${knownAlias} ${normalized} is also unavailable.` : "") + " Install the required source font before importing or updating the library. No substitute font is applied."
-        );
       }
+      for (const candidate of candidates) {
+        try {
+          await this.api.loadFontAsync(candidate);
+          this.warnings = this.warnings.filter(
+            (warning) => !warning.startsWith(`Font ${family} ${style} unavailable;`)
+          );
+          return candidate;
+        } catch (e) {
+        }
+      }
+      throw Error(
+        `Required Fondue source font is unavailable: ${family} ${normalized}.` + (knownAlias ? ` Confirmed installed alias ${knownAlias} ${normalized} is also unavailable.` : "") + " Install the required source font before importing or updating the library. No substitute font is applied."
+      );
     }
-    async preflightFonts() {
+    async preflightFonts(progress) {
       var _a, _b;
       const requirements = /* @__PURE__ */ new Map();
       const add = (family, style) => requirements.set(family + ":" + style, { family, style });
@@ -4201,6 +4209,7 @@
       const errors = [];
       for (const font of requirements.values())
         try {
+          progress == null ? void 0 : progress("Checking source font: " + font.family + " " + font.style);
           await this.fontFor(font.family, font.style);
         } catch (error) {
           errors.push(String(error));
@@ -4714,7 +4723,7 @@
         if (!def.textStyle && (def.textDecoration || (previous == null ? void 0 : previous.textDecoration)))
           node.textDecoration = (_z = def.textDecoration) != null ? _z : "NONE";
         if (owner) {
-          const label = this.propertyLabel(
+          const label2 = this.propertyLabel(
             owner,
             "Text",
             identityPath,
@@ -4722,11 +4731,11 @@
           );
           const definitions = owner.componentPropertyDefinitions;
           let key = Object.keys(definitions).find(
-            (k) => k.split("#")[0] === label
+            (k) => k.split("#")[0] === label2
           );
           if (!key)
-            key = owner.addComponentProperty(label, "TEXT", node.characters);
-          if (!key) throw Error("Could not create native text property " + label);
+            key = owner.addComponentProperty(label2, "TEXT", node.characters);
+          if (!key) throw Error("Could not create native text property " + label2);
           const propertyIdentity = owner.id + ":" + key;
           if (!this.appliedPropertyDefaults.has(propertyIdentity)) {
             if (((_B = owner.componentPropertyDefinitions[key]) == null ? void 0 : _B.defaultValue) !== node.characters)
@@ -4909,6 +4918,10 @@
         this.compositionRemovals.delete(node.id);
       }
       write(node, "layer-definition", canonical(def));
+      if (def.layoutSizingHorizontal)
+        node.layoutSizingHorizontal = def.layoutSizingHorizontal;
+      if (def.layoutSizingVertical)
+        node.layoutSizingVertical = def.layoutSizingVertical;
       return node;
     }
     /** Adopt only an exact saved failed-import prefix. This migration never uses display names. */
@@ -5077,10 +5090,10 @@ Sources: ${recipe.source.join(", ")}`;
         component.x = 0;
         component.y = 0;
       }
-      const cellWidth = Math.max(...set.children.map((n) => n.width)) + 32;
+      const cellWidth2 = Math.max(...set.children.map((n) => n.width)) + 32;
       const cellHeight = Math.max(...set.children.map((n) => n.height)) + 40;
       set.children.forEach((n, i) => {
-        n.x = i % 4 * cellWidth;
+        n.x = i % 4 * cellWidth2;
         n.y = Math.floor(i / 4) * cellHeight;
       });
       set.resize(
@@ -5252,8 +5265,8 @@ Sources: ${recipe.source.join(", ")}`;
     async sync(progress) {
       var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
       this.appliedPropertyDefaults.clear();
-      const fontErrors = await this.preflightFonts();
-      const plan = await this.inspect();
+      const fontErrors = await this.preflightFonts(progress);
+      const plan = await this.inspect(progress);
       if (fontErrors.length) {
         plan.errors.push(...fontErrors);
         plan.complete = false;
@@ -5570,7 +5583,7 @@ Sources: ${recipe.source.join(", ")}`;
       );
       this.index.warnings = [...this.warnings];
       this.save();
-      const result = await this.inspect();
+      const result = await this.inspect(progress);
       result.errors = errors;
       result.warnings = [...this.warnings];
       result.complete = result.complete && errors.length === 0;
@@ -5645,7 +5658,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "ebbec61ab4a32523b47b2db5f282201a9dcf9133e7a6d0643bbc764be394d179",
+      rendererRevision: "12abe7fba86a8d5dfa33ff1befbc9740db36baf8db40fc5b6b4d0d84c2ce210c",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -5669,12 +5682,12 @@ Sources: ${recipe.source.join(", ")}`;
           "fixtures/media/manifest.json": "411200aa362d5eb49e73b3b1fef44e6d3701eb69507abe3be80e0f0f0a696587",
           "fixtures/media/README.md": "803289fbdf74742101f57845d9008b5869c255949b435a8b86537671ed246167"
         },
-        builder: "03144d05c7d44b149505f5523537f00ff03ed762de983f329da1b19b80eb6fa8",
+        builder: "0a1a7bef6d7c3edaf74191cfcf1d2dae901c179397f15c4fb75eacdfb93b1bbe",
         imageBuilder: "76395d8a0e433749873a02ea8633a6ef9f8a8dfc2b9bd70c445ba5528230b733",
         recipes: {
           "recipes/index.mjs": "1d39e16d9a457fb4ac1126f485a26b3aa904cd05dbed3888d9f22840060389cb",
           "recipes/foundations.mjs": "97827709af9c255dbe363a99e1e6a7194644dd0c3e3b430d7de5690bd37d9e5d",
-          "recipes/controls.mjs": "9f578d832009f4462d844e603ec6cd672ccd07f4b1cb64b42eca3af12d333a59",
+          "recipes/controls.mjs": "1982576f3bb75755ea20d90b43b1af3e4d546e65b653f065cf85495fad3877ea",
           "recipes/patterns.mjs": "97a44996a5ca4a4f8056b48c93fa0ba8346bd6ec4d3d8090da444620baf0c22d",
           "recipes/examples.mjs": "f19c76d41c32b8abe0df539eba2f1498cd32e64864b74788e3a7f73e96677884",
           "recipes/documentation.mjs": "60a2270252d98e9e57c38261c17b48676391e25a2dd049a4b8e88b22b8a2bc89",
@@ -12668,7 +12681,7 @@ Sources: ${recipe.source.join(", ")}`;
               role: "radius"
             }
           ],
-          occurrences: 5524
+          occurrences: 5559
         }
       },
       {
@@ -13038,7 +13051,7 @@ Sources: ${recipe.source.join(", ")}`;
               role: "radius"
             }
           ],
-          occurrences: 99
+          occurrences: 123
         }
       },
       {
@@ -13859,7 +13872,7 @@ Sources: ${recipe.source.join(", ")}`;
               role: "spacing"
             }
           ],
-          occurrences: 20725
+          occurrences: 20944
         }
       },
       {
@@ -13904,7 +13917,7 @@ Sources: ${recipe.source.join(", ")}`;
               role: "spacing"
             }
           ],
-          occurrences: 192
+          occurrences: 200
         }
       },
       {
@@ -140296,7 +140309,8 @@ Sources: ${recipe.source.join(", ")}`;
         ],
         status: "supported",
         limitations: [
-          "Hug-width controls can resize natively; item count is arbitrary through duplication.",
+          "Fixed two-item specimen.",
+          "Use the additive SegmentedControl/Root and /Item components for variable item count through native slots.",
           "Responsive label clamp is represented at the 16px maximum."
         ],
         variants: [
@@ -143960,7 +143974,7 @@ Sources: ${recipe.source.join(", ")}`;
               uri: "https://fondue.frontify.com/"
             }
           ],
-          description: 'A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: first, second\n\ndisabled: false, true\n\niconOnly: false, true\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nHug-width controls can resize natively; item count is arbitrary through duplication.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json'
+          description: 'A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: first, second\n\ndisabled: false, true\n\niconOnly: false, true\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nFixed two-item specimen.\n\nUse the additive SegmentedControl/Root and /Item components for variable item count through native slots.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json'
         }
       },
       {
@@ -143975,7 +143989,8 @@ Sources: ${recipe.source.join(", ")}`;
         ],
         status: "supported",
         limitations: [
-          "Hug-width controls can resize natively; item count is arbitrary through duplication.",
+          "Fixed two-item specimen.",
+          "Use the additive SegmentedControl/Root and /Item components for variable item count through native slots.",
           "Responsive label clamp is represented at the 16px maximum."
         ],
         variants: [
@@ -146067,7 +146082,7 @@ Sources: ${recipe.source.join(", ")}`;
               uri: "https://fondue.frontify.com/"
             }
           ],
-          description: 'A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: second\n\ndisabled: false, true\n\niconOnly: true, false\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nHug-width controls can resize natively; item count is arbitrary through duplication.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json'
+          description: 'A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: second\n\ndisabled: false, true\n\niconOnly: true, false\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nFixed two-item specimen.\n\nUse the additive SegmentedControl/Root and /Item components for variable item count through native slots.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json'
         }
       },
       {
@@ -257414,6 +257429,3269 @@ Sources: ${recipe.source.join(", ")}`;
         componentPropertyPolicy: 2
       },
       {
+        id: "components/SegmentedControl.Item",
+        name: "SegmentedControl/Item",
+        package: "@frontify/fondue/components",
+        source: [
+          "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+          "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
+          "packages/components/src/components/SegmentedControl/styles/segmentedControl.module.scss",
+          "packages/components/src/utilities/focusStyle.module.scss"
+        ],
+        status: "partial",
+        limitations: [
+          "Item selected/disabled/iconOnly/state are set on each nested item.",
+          "Figma does not reproduce React group state or keyboard behavior.",
+          "First/last rounding and adjacent separator behavior require context review; the selected outline follows the existing source-state specimen."
+        ],
+        variants: [
+          {
+            id: "selected=false;disabled=false;iconOnly=false;state=default",
+            props: {
+              selected: "false",
+              disabled: "false",
+              iconOnly: "false",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  textStyle: "text-body-medium-default",
+                  bindings: {
+                    fills: "color-container-secondary-on-secondary-container",
+                    fontSize: "text-body-medium-default-font-size",
+                    fontWeight: "text-body-medium-default-font-weight",
+                    lineHeight: "text-body-medium-default-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-default-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=false;iconOnly=false;state=hover",
+            props: {
+              selected: "false",
+              disabled: "false",
+              iconOnly: "false",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  textStyle: "text-body-medium-default",
+                  bindings: {
+                    fills: "color-container-secondary-on-secondary-container",
+                    fontSize: "text-body-medium-default-font-size",
+                    fontWeight: "text-body-medium-default-font-weight",
+                    lineHeight: "text-body-medium-default-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-default-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-hover",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=false;iconOnly=false;state=focus",
+            props: {
+              selected: "false",
+              disabled: "false",
+              iconOnly: "false",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  textStyle: "text-body-medium-default",
+                  bindings: {
+                    fills: "color-container-secondary-on-secondary-container",
+                    fontSize: "text-body-medium-default-font-size",
+                    fontWeight: "text-body-medium-default-font-weight",
+                    lineHeight: "text-body-medium-default-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-default-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          },
+          {
+            id: "selected=false;disabled=false;iconOnly=true;state=default",
+            props: {
+              selected: "false",
+              disabled: "false",
+              iconOnly: "true",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-secondary-on-secondary-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=false;iconOnly=true;state=hover",
+            props: {
+              selected: "false",
+              disabled: "false",
+              iconOnly: "true",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-secondary-on-secondary-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-hover",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=false;iconOnly=true;state=focus",
+            props: {
+              selected: "false",
+              disabled: "false",
+              iconOnly: "true",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-secondary-on-secondary-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          },
+          {
+            id: "selected=false;disabled=true;iconOnly=false;state=default",
+            props: {
+              selected: "false",
+              disabled: "true",
+              iconOnly: "false",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  textStyle: "text-body-medium-default",
+                  bindings: {
+                    fills: "color-container-disabled-on-disabled-container",
+                    fontSize: "text-body-medium-default-font-size",
+                    fontWeight: "text-body-medium-default-font-weight",
+                    lineHeight: "text-body-medium-default-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-default-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=true;iconOnly=false;state=hover",
+            props: {
+              selected: "false",
+              disabled: "true",
+              iconOnly: "false",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  textStyle: "text-body-medium-default",
+                  bindings: {
+                    fills: "color-container-disabled-on-disabled-container",
+                    fontSize: "text-body-medium-default-font-size",
+                    fontWeight: "text-body-medium-default-font-weight",
+                    lineHeight: "text-body-medium-default-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-default-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=true;iconOnly=false;state=focus",
+            props: {
+              selected: "false",
+              disabled: "true",
+              iconOnly: "false",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  textStyle: "text-body-medium-default",
+                  bindings: {
+                    fills: "color-container-disabled-on-disabled-container",
+                    fontSize: "text-body-medium-default-font-size",
+                    fontWeight: "text-body-medium-default-font-weight",
+                    lineHeight: "text-body-medium-default-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-default-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          },
+          {
+            id: "selected=false;disabled=true;iconOnly=true;state=default",
+            props: {
+              selected: "false",
+              disabled: "true",
+              iconOnly: "true",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-disabled-on-disabled-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=true;iconOnly=true;state=hover",
+            props: {
+              selected: "false",
+              disabled: "true",
+              iconOnly: "true",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-disabled-on-disabled-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              }
+            }
+          },
+          {
+            id: "selected=false;disabled=true;iconOnly=true;state=focus",
+            props: {
+              selected: "false",
+              disabled: "true",
+              iconOnly: "true",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-disabled-on-disabled-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          },
+          {
+            id: "selected=true;disabled=false;iconOnly=false;state=default",
+            props: {
+              selected: "true",
+              disabled: "false",
+              iconOnly: "false",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textStyle: "text-body-medium-strong",
+                  bindings: {
+                    fills: "color-primary-default",
+                    fontSize: "text-body-medium-strong-font-size",
+                    fontWeight: "text-body-medium-strong-font-weight",
+                    lineHeight: "text-body-medium-strong-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-strong-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-default",
+                strokes: "color-line-strong",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=false;iconOnly=false;state=hover",
+            props: {
+              selected: "true",
+              disabled: "false",
+              iconOnly: "false",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textStyle: "text-body-medium-strong",
+                  bindings: {
+                    fills: "color-primary-default",
+                    fontSize: "text-body-medium-strong-font-size",
+                    fontWeight: "text-body-medium-strong-font-weight",
+                    lineHeight: "text-body-medium-strong-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-strong-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-default",
+                strokes: "color-line-strong",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=false;iconOnly=false;state=focus",
+            props: {
+              selected: "true",
+              disabled: "false",
+              iconOnly: "false",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textStyle: "text-body-medium-strong",
+                  bindings: {
+                    fills: "color-primary-default",
+                    fontSize: "text-body-medium-strong-font-size",
+                    fontWeight: "text-body-medium-strong-font-weight",
+                    lineHeight: "text-body-medium-strong-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-strong-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-default",
+                strokes: "color-line-strong",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          },
+          {
+            id: "selected=true;disabled=false;iconOnly=true;state=default",
+            props: {
+              selected: "true",
+              disabled: "false",
+              iconOnly: "true",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-primary-default"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-default",
+                strokes: "color-line-strong",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=false;iconOnly=true;state=hover",
+            props: {
+              selected: "true",
+              disabled: "false",
+              iconOnly: "true",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-primary-default"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-default",
+                strokes: "color-line-strong",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=false;iconOnly=true;state=focus",
+            props: {
+              selected: "true",
+              disabled: "false",
+              iconOnly: "true",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-primary-default"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                fills: "color-surface-default",
+                strokes: "color-line-strong",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          },
+          {
+            id: "selected=true;disabled=true;iconOnly=false;state=default",
+            props: {
+              selected: "true",
+              disabled: "true",
+              iconOnly: "false",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textStyle: "text-body-medium-strong",
+                  bindings: {
+                    fills: "color-container-disabled-on-disabled-container",
+                    fontSize: "text-body-medium-strong-font-size",
+                    fontWeight: "text-body-medium-strong-font-weight",
+                    lineHeight: "text-body-medium-strong-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-strong-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                fills: "color-container-disabled-default",
+                strokes: "color-line-mid",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=true;iconOnly=false;state=hover",
+            props: {
+              selected: "true",
+              disabled: "true",
+              iconOnly: "false",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textStyle: "text-body-medium-strong",
+                  bindings: {
+                    fills: "color-container-disabled-on-disabled-container",
+                    fontSize: "text-body-medium-strong-font-size",
+                    fontWeight: "text-body-medium-strong-font-weight",
+                    lineHeight: "text-body-medium-strong-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-strong-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                fills: "color-container-disabled-default",
+                strokes: "color-line-mid",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=true;iconOnly=false;state=focus",
+            props: {
+              selected: "true",
+              disabled: "true",
+              iconOnly: "false",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "label",
+                  kind: "text",
+                  name: "label",
+                  text: "Segment",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textStyle: "text-body-medium-strong",
+                  bindings: {
+                    fills: "color-container-disabled-on-disabled-container",
+                    fontSize: "text-body-medium-strong-font-size",
+                    fontWeight: "text-body-medium-strong-font-weight",
+                    lineHeight: "text-body-medium-strong-line-height",
+                    fontFamily: "native-font-family-diatype",
+                    letterSpacing: "text-body-medium-strong-letter-spacing"
+                  },
+                  fontFamily: "Diatype",
+                  letterSpacing: 0,
+                  textCase: "ORIGINAL",
+                  lineHeight: 18
+                }
+              ],
+              width: 100,
+              height: 34,
+              paddingLeft: 16,
+              paddingRight: 16,
+              radius: 3,
+              bindings: {
+                fills: "color-container-disabled-default",
+                strokes: "color-line-mid",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "spacing-medium",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "spacing-medium",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          },
+          {
+            id: "selected=true;disabled=true;iconOnly=true;state=default",
+            props: {
+              selected: "true",
+              disabled: "true",
+              iconOnly: "true",
+              state: "default"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-disabled-on-disabled-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                fills: "color-container-disabled-default",
+                strokes: "color-line-mid",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=true;iconOnly=true;state=hover",
+            props: {
+              selected: "true",
+              disabled: "true",
+              iconOnly: "true",
+              state: "hover"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-disabled-on-disabled-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                fills: "color-container-disabled-default",
+                strokes: "color-line-mid",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              }
+            }
+          },
+          {
+            id: "selected=true;disabled=true;iconOnly=true;state=focus",
+            props: {
+              selected: "true",
+              disabled: "true",
+              iconOnly: "true",
+              state: "focus"
+            },
+            root: {
+              id: "item",
+              kind: "frame",
+              name: "Segment",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 0,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "icon",
+                  kind: "instance",
+                  name: "icon",
+                  iconId: "icon:list-bullet",
+                  width: 16,
+                  height: 16,
+                  iconColor: "color-container-disabled-on-disabled-container"
+                }
+              ],
+              width: 34,
+              height: 34,
+              paddingLeft: 0,
+              paddingRight: 0,
+              radius: 3,
+              bindings: {
+                fills: "color-container-disabled-default",
+                strokes: "color-line-mid",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-3",
+                strokeWeight: "border-width-default"
+              },
+              effectStyle: "source-focus-outline"
+            }
+          }
+        ],
+        libraryCategory: "Navigation",
+        assetName: "Navigation/SegmentedControl/Item",
+        documentation: {
+          purpose: "A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.",
+          usage: 'Compose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.',
+          properties: "selected: false, true\ndisabled: false, true\niconOnly: false, true\nstate: default, hover, focus",
+          related: [
+            "Tabs",
+            "RadioList",
+            "Select"
+          ],
+          origin: "released-metadata",
+          metadataSource: "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+          links: [
+            {
+              uri: "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+            },
+            {
+              uri: "https://fondue.frontify.com/"
+            }
+          ],
+          description: 'A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: false, true\n\ndisabled: false, true\n\niconOnly: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nItem selected/disabled/iconOnly/state are set on each nested item.\n\nFigma does not reproduce React group state or keyboard behavior.\n\nFirst/last rounding and adjacent separator behavior require context review; the selected outline follows the existing source-state specimen.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json'
+        }
+      },
+      {
+        id: "components/SegmentedControl.Root",
+        name: "SegmentedControl/Root",
+        package: "@frontify/fondue/components",
+        source: [
+          "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+          "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
+          "packages/components/src/components/SegmentedControl/styles/segmentedControl.module.scss",
+          "packages/components/src/utilities/focusStyle.module.scss"
+        ],
+        status: "partial",
+        limitations: [
+          "Native Segments slot contains linked Item instances.",
+          "Count is content, not a variant axis.",
+          "Set selection and disabled/iconOnly state on the nested items.",
+          "The pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance.",
+          "Focus management, responsive label clamping and indicator motion remain runtime."
+        ],
+        variants: [
+          {
+            id: "hugWidth=true",
+            props: {
+              hugWidth: "true"
+            },
+            root: {
+              id: "segmented-control",
+              kind: "frame",
+              name: "segmented-control",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 1,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "item-0",
+                  kind: "componentInstance",
+                  name: "item-0",
+                  recipeId: "components/SegmentedControl.Item",
+                  variantProps: {
+                    selected: "true",
+                    disabled: "false",
+                    iconOnly: "false",
+                    state: "default"
+                  }
+                },
+                {
+                  id: "item-1",
+                  kind: "componentInstance",
+                  name: "item-1",
+                  recipeId: "components/SegmentedControl.Item",
+                  variantProps: {
+                    selected: "false",
+                    disabled: "false",
+                    iconOnly: "false",
+                    state: "default"
+                  }
+                }
+              ],
+              height: 36,
+              radius: 4,
+              bindings: {
+                fills: "color-surface-dim",
+                strokes: "color-line-mid",
+                cornerRadius: "border-radius-medium",
+                paddingTop: "component-constant-spacing-1",
+                paddingRight: "component-constant-spacing-1",
+                paddingBottom: "component-constant-spacing-1",
+                paddingLeft: "component-constant-spacing-1",
+                itemSpacing: "component-constant-spacing-0",
+                strokeWeight: "border-width-default"
+              },
+              contentSlot: {
+                id: "items",
+                name: "Segments",
+                minChildren: 2,
+                maxChildren: 10,
+                description: "Add linked SegmentedControl Item instances. Set exactly one item to selected. Match disabled and iconOnly settings across the group."
+              }
+            }
+          },
+          {
+            id: "hugWidth=false",
+            props: {
+              hugWidth: "false"
+            },
+            root: {
+              id: "segmented-control",
+              kind: "frame",
+              name: "segmented-control",
+              layout: "HORIZONTAL",
+              gap: 0,
+              padding: 1,
+              primaryAlign: "CENTER",
+              counterAlign: "CENTER",
+              children: [
+                {
+                  id: "item-0",
+                  kind: "componentInstance",
+                  name: "item-0",
+                  recipeId: "components/SegmentedControl.Item",
+                  variantProps: {
+                    selected: "true",
+                    disabled: "false",
+                    iconOnly: "false",
+                    state: "default"
+                  },
+                  layoutSizingHorizontal: "FILL"
+                },
+                {
+                  id: "item-1",
+                  kind: "componentInstance",
+                  name: "item-1",
+                  recipeId: "components/SegmentedControl.Item",
+                  variantProps: {
+                    selected: "false",
+                    disabled: "false",
+                    iconOnly: "false",
+                    state: "default"
+                  },
+                  layoutSizingHorizontal: "FILL"
+                }
+              ],
+              height: 36,
+              radius: 4,
+              bindings: {
+                fills: "color-surface-dim",
+                strokes: "color-line-mid",
+                cornerRadius: "border-radius-medium",
+                paddingTop: "component-constant-spacing-1",
+                paddingRight: "component-constant-spacing-1",
+                paddingBottom: "component-constant-spacing-1",
+                paddingLeft: "component-constant-spacing-1",
+                itemSpacing: "component-constant-spacing-0",
+                strokeWeight: "border-width-default"
+              },
+              contentSlot: {
+                id: "items",
+                name: "Segments",
+                minChildren: 2,
+                maxChildren: 10,
+                description: "Add linked SegmentedControl Item instances. Set exactly one item to selected. Match disabled and iconOnly settings across the group."
+              },
+              width: 202
+            }
+          }
+        ],
+        libraryCategory: "Navigation",
+        assetName: "Navigation/SegmentedControl/Root",
+        documentation: {
+          purpose: "A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.",
+          usage: 'Compose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.',
+          properties: "hugWidth: true, false",
+          related: [
+            "Tabs",
+            "RadioList",
+            "Select"
+          ],
+          origin: "released-metadata",
+          metadataSource: "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+          links: [
+            {
+              uri: "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+            },
+            {
+              uri: "https://fondue.frontify.com/"
+            }
+          ],
+          description: 'A compact control for selecting one of 2\u20135 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role="radiogroup", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nhugWidth: true, false\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nNative Segments slot contains linked Item instances.\n\nCount is content, not a variant axis.\n\nSet selection and disabled/iconOnly state on the nested items.\n\nThe pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance.\n\nFocus management, responsive label clamping and indicator motion remain runtime.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json'
+        }
+      },
+      {
+        id: "components/Table.ContentCell",
+        name: "Table/ContentCell",
+        package: "@frontify/fondue/components",
+        source: [
+          "packages/components/src/components/Table/Table.tsx",
+          "packages/components/src/components/Table/styles/table.module.scss"
+        ],
+        status: "partial",
+        limitations: [
+          "Additive editable counterpart of Table.RowCell.",
+          "Width and fontSize are contextual.",
+          "A cell can contain arbitrary designer content through its Content slot.",
+          "Column spans, sticky positioning, sort interactions and browser table semantics remain runtime."
+        ],
+        variants: [
+          {
+            id: "align=left;fontSize=small",
+            props: {
+              align: "left",
+              fontSize: "small"
+            },
+            root: {
+              id: "cell",
+              kind: "frame",
+              name: "cell",
+              layout: "VERTICAL",
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              gap: 0,
+              padding: 0,
+              children: [
+                {
+                  id: "content",
+                  kind: "frame",
+                  name: "content",
+                  layout: "HORIZONTAL",
+                  primaryAlign: "MIN",
+                  counterAlign: "CENTER",
+                  gap: 0,
+                  padding: 0,
+                  children: [
+                    {
+                      id: "value",
+                      kind: "text",
+                      name: "value",
+                      text: "Cell content",
+                      fontSize: 12,
+                      fontWeight: 400,
+                      textStyle: "text-body-x-small-default",
+                      bindings: {
+                        fills: "color-primary-default",
+                        fontSize: "text-body-x-small-default-font-size",
+                        fontFamily: "native-font-family-diatype",
+                        fontWeight: "text-body-x-small-default-font-weight",
+                        letterSpacing: "text-body-x-small-default-letter-spacing",
+                        lineHeight: "text-body-x-small-default-line-height"
+                      },
+                      fontFamily: "Diatype",
+                      letterSpacing: 0,
+                      textCase: "ORIGINAL",
+                      lineHeight: 16
+                    }
+                  ],
+                  width: 160,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  contentSlot: {
+                    id: "content",
+                    name: "Content",
+                    description: "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                  },
+                  bindings: {
+                    paddingTop: "spacing-x-small",
+                    paddingRight: "spacing-x-small",
+                    paddingBottom: "spacing-x-small",
+                    paddingLeft: "spacing-x-small",
+                    itemSpacing: "component-constant-spacing-0",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                },
+                {
+                  id: "bottom-border",
+                  kind: "rectangle",
+                  name: "bottom-border",
+                  width: 160,
+                  height: 1,
+                  radius: 0,
+                  bindings: {
+                    fills: "color-line-subtle",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                }
+              ],
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              }
+            }
+          },
+          {
+            id: "align=left;fontSize=medium",
+            props: {
+              align: "left",
+              fontSize: "medium"
+            },
+            root: {
+              id: "cell",
+              kind: "frame",
+              name: "cell",
+              layout: "VERTICAL",
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              gap: 0,
+              padding: 0,
+              children: [
+                {
+                  id: "content",
+                  kind: "frame",
+                  name: "content",
+                  layout: "HORIZONTAL",
+                  primaryAlign: "MIN",
+                  counterAlign: "CENTER",
+                  gap: 0,
+                  padding: 0,
+                  children: [
+                    {
+                      id: "value",
+                      kind: "text",
+                      name: "value",
+                      text: "Cell content",
+                      fontSize: 13,
+                      fontWeight: 400,
+                      textStyle: "text-body-small-default",
+                      bindings: {
+                        fills: "color-primary-default",
+                        fontSize: "text-body-small-default-font-size",
+                        fontFamily: "native-font-family-diatype",
+                        fontWeight: "text-body-small-default-font-weight",
+                        letterSpacing: "text-body-small-default-letter-spacing",
+                        lineHeight: "text-body-small-default-line-height"
+                      },
+                      fontFamily: "Diatype",
+                      letterSpacing: 0,
+                      textCase: "ORIGINAL",
+                      lineHeight: 16
+                    }
+                  ],
+                  width: 160,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  contentSlot: {
+                    id: "content",
+                    name: "Content",
+                    description: "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                  },
+                  bindings: {
+                    paddingTop: "spacing-x-small",
+                    paddingRight: "spacing-x-small",
+                    paddingBottom: "spacing-x-small",
+                    paddingLeft: "spacing-x-small",
+                    itemSpacing: "component-constant-spacing-0",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                },
+                {
+                  id: "bottom-border",
+                  kind: "rectangle",
+                  name: "bottom-border",
+                  width: 160,
+                  height: 1,
+                  radius: 0,
+                  bindings: {
+                    fills: "color-line-subtle",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                }
+              ],
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              }
+            }
+          },
+          {
+            id: "align=center;fontSize=small",
+            props: {
+              align: "center",
+              fontSize: "small"
+            },
+            root: {
+              id: "cell",
+              kind: "frame",
+              name: "cell",
+              layout: "VERTICAL",
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              gap: 0,
+              padding: 0,
+              children: [
+                {
+                  id: "content",
+                  kind: "frame",
+                  name: "content",
+                  layout: "HORIZONTAL",
+                  primaryAlign: "CENTER",
+                  counterAlign: "CENTER",
+                  gap: 0,
+                  padding: 0,
+                  children: [
+                    {
+                      id: "value",
+                      kind: "text",
+                      name: "value",
+                      text: "Cell content",
+                      fontSize: 12,
+                      fontWeight: 400,
+                      textStyle: "text-body-x-small-default",
+                      bindings: {
+                        fills: "color-primary-default",
+                        fontSize: "text-body-x-small-default-font-size",
+                        fontFamily: "native-font-family-diatype",
+                        fontWeight: "text-body-x-small-default-font-weight",
+                        letterSpacing: "text-body-x-small-default-letter-spacing",
+                        lineHeight: "text-body-x-small-default-line-height"
+                      },
+                      fontFamily: "Diatype",
+                      letterSpacing: 0,
+                      textCase: "ORIGINAL",
+                      lineHeight: 16
+                    }
+                  ],
+                  width: 160,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  contentSlot: {
+                    id: "content",
+                    name: "Content",
+                    description: "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                  },
+                  bindings: {
+                    paddingTop: "spacing-x-small",
+                    paddingRight: "spacing-x-small",
+                    paddingBottom: "spacing-x-small",
+                    paddingLeft: "spacing-x-small",
+                    itemSpacing: "component-constant-spacing-0",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                },
+                {
+                  id: "bottom-border",
+                  kind: "rectangle",
+                  name: "bottom-border",
+                  width: 160,
+                  height: 1,
+                  radius: 0,
+                  bindings: {
+                    fills: "color-line-subtle",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                }
+              ],
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              }
+            }
+          },
+          {
+            id: "align=center;fontSize=medium",
+            props: {
+              align: "center",
+              fontSize: "medium"
+            },
+            root: {
+              id: "cell",
+              kind: "frame",
+              name: "cell",
+              layout: "VERTICAL",
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              gap: 0,
+              padding: 0,
+              children: [
+                {
+                  id: "content",
+                  kind: "frame",
+                  name: "content",
+                  layout: "HORIZONTAL",
+                  primaryAlign: "CENTER",
+                  counterAlign: "CENTER",
+                  gap: 0,
+                  padding: 0,
+                  children: [
+                    {
+                      id: "value",
+                      kind: "text",
+                      name: "value",
+                      text: "Cell content",
+                      fontSize: 13,
+                      fontWeight: 400,
+                      textStyle: "text-body-small-default",
+                      bindings: {
+                        fills: "color-primary-default",
+                        fontSize: "text-body-small-default-font-size",
+                        fontFamily: "native-font-family-diatype",
+                        fontWeight: "text-body-small-default-font-weight",
+                        letterSpacing: "text-body-small-default-letter-spacing",
+                        lineHeight: "text-body-small-default-line-height"
+                      },
+                      fontFamily: "Diatype",
+                      letterSpacing: 0,
+                      textCase: "ORIGINAL",
+                      lineHeight: 16
+                    }
+                  ],
+                  width: 160,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  contentSlot: {
+                    id: "content",
+                    name: "Content",
+                    description: "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                  },
+                  bindings: {
+                    paddingTop: "spacing-x-small",
+                    paddingRight: "spacing-x-small",
+                    paddingBottom: "spacing-x-small",
+                    paddingLeft: "spacing-x-small",
+                    itemSpacing: "component-constant-spacing-0",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                },
+                {
+                  id: "bottom-border",
+                  kind: "rectangle",
+                  name: "bottom-border",
+                  width: 160,
+                  height: 1,
+                  radius: 0,
+                  bindings: {
+                    fills: "color-line-subtle",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                }
+              ],
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              }
+            }
+          },
+          {
+            id: "align=right;fontSize=small",
+            props: {
+              align: "right",
+              fontSize: "small"
+            },
+            root: {
+              id: "cell",
+              kind: "frame",
+              name: "cell",
+              layout: "VERTICAL",
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              gap: 0,
+              padding: 0,
+              children: [
+                {
+                  id: "content",
+                  kind: "frame",
+                  name: "content",
+                  layout: "HORIZONTAL",
+                  primaryAlign: "MAX",
+                  counterAlign: "CENTER",
+                  gap: 0,
+                  padding: 0,
+                  children: [
+                    {
+                      id: "value",
+                      kind: "text",
+                      name: "value",
+                      text: "Cell content",
+                      fontSize: 12,
+                      fontWeight: 400,
+                      textStyle: "text-body-x-small-default",
+                      bindings: {
+                        fills: "color-primary-default",
+                        fontSize: "text-body-x-small-default-font-size",
+                        fontFamily: "native-font-family-diatype",
+                        fontWeight: "text-body-x-small-default-font-weight",
+                        letterSpacing: "text-body-x-small-default-letter-spacing",
+                        lineHeight: "text-body-x-small-default-line-height"
+                      },
+                      fontFamily: "Diatype",
+                      letterSpacing: 0,
+                      textCase: "ORIGINAL",
+                      lineHeight: 16
+                    }
+                  ],
+                  width: 160,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  contentSlot: {
+                    id: "content",
+                    name: "Content",
+                    description: "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                  },
+                  bindings: {
+                    paddingTop: "spacing-x-small",
+                    paddingRight: "spacing-x-small",
+                    paddingBottom: "spacing-x-small",
+                    paddingLeft: "spacing-x-small",
+                    itemSpacing: "component-constant-spacing-0",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                },
+                {
+                  id: "bottom-border",
+                  kind: "rectangle",
+                  name: "bottom-border",
+                  width: 160,
+                  height: 1,
+                  radius: 0,
+                  bindings: {
+                    fills: "color-line-subtle",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                }
+              ],
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              }
+            }
+          },
+          {
+            id: "align=right;fontSize=medium",
+            props: {
+              align: "right",
+              fontSize: "medium"
+            },
+            root: {
+              id: "cell",
+              kind: "frame",
+              name: "cell",
+              layout: "VERTICAL",
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              gap: 0,
+              padding: 0,
+              children: [
+                {
+                  id: "content",
+                  kind: "frame",
+                  name: "content",
+                  layout: "HORIZONTAL",
+                  primaryAlign: "MAX",
+                  counterAlign: "CENTER",
+                  gap: 0,
+                  padding: 0,
+                  children: [
+                    {
+                      id: "value",
+                      kind: "text",
+                      name: "value",
+                      text: "Cell content",
+                      fontSize: 13,
+                      fontWeight: 400,
+                      textStyle: "text-body-small-default",
+                      bindings: {
+                        fills: "color-primary-default",
+                        fontSize: "text-body-small-default-font-size",
+                        fontFamily: "native-font-family-diatype",
+                        fontWeight: "text-body-small-default-font-weight",
+                        letterSpacing: "text-body-small-default-letter-spacing",
+                        lineHeight: "text-body-small-default-line-height"
+                      },
+                      fontFamily: "Diatype",
+                      letterSpacing: 0,
+                      textCase: "ORIGINAL",
+                      lineHeight: 16
+                    }
+                  ],
+                  width: 160,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  contentSlot: {
+                    id: "content",
+                    name: "Content",
+                    description: "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                  },
+                  bindings: {
+                    paddingTop: "spacing-x-small",
+                    paddingRight: "spacing-x-small",
+                    paddingBottom: "spacing-x-small",
+                    paddingLeft: "spacing-x-small",
+                    itemSpacing: "component-constant-spacing-0",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                },
+                {
+                  id: "bottom-border",
+                  kind: "rectangle",
+                  name: "bottom-border",
+                  width: 160,
+                  height: 1,
+                  radius: 0,
+                  bindings: {
+                    fills: "color-line-subtle",
+                    cornerRadius: "component-constant-radius-0"
+                  }
+                }
+              ],
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              }
+            }
+          }
+        ],
+        libraryCategory: "Content",
+        assetName: "Content/Table/ContentCell",
+        documentation: {
+          purpose: "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.",
+          usage: "Compose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.",
+          properties: "align: left, center, right\nfontSize: small, medium",
+          related: [
+            "OrderableList"
+          ],
+          origin: "released-metadata",
+          metadataSource: "packages/components/src/components/Table/Table.metadata.json",
+          links: [
+            {
+              uri: "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+            },
+            {
+              uri: "https://fondue.frontify.com/"
+            }
+          ],
+          description: "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.\n\nCompose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.\n\nExposed variant properties:\n\nalign: left, center, right\n\nfontSize: small, medium\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nAdditive editable counterpart of Table.RowCell.\n\nWidth and fontSize are contextual.\n\nA cell can contain arbitrary designer content through its Content slot.\n\nColumn spans, sticky positioning, sort interactions and browser table semantics remain runtime.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+        }
+      },
+      {
+        id: "components/Table.EditableRow",
+        name: "Table/EditableRow",
+        package: "@frontify/fondue/components",
+        source: [
+          "packages/components/src/components/Table/Table.tsx",
+          "packages/components/src/components/Table/styles/table.module.scss"
+        ],
+        status: "partial",
+        limitations: [
+          "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
+          "Use the composition actions to add columns to all rows or copy a selected cell width across its column.",
+          "Native slot editing remains available; uneven rows are reported before bulk changes."
+        ],
+        variants: [
+          {
+            id: "section=header;selected=false;disabled=false;fontSize=small",
+            props: {
+              section: "header",
+              selected: "false",
+              disabled: "false",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=header;selected=false;disabled=false;fontSize=medium",
+            props: {
+              section: "header",
+              selected: "false",
+              disabled: "false",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=header;selected=false;disabled=true;fontSize=small",
+            props: {
+              section: "header",
+              selected: "false",
+              disabled: "true",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=header;selected=false;disabled=true;fontSize=medium",
+            props: {
+              section: "header",
+              selected: "false",
+              disabled: "true",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=header;selected=true;disabled=false;fontSize=small",
+            props: {
+              section: "header",
+              selected: "true",
+              disabled: "false",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=header;selected=true;disabled=false;fontSize=medium",
+            props: {
+              section: "header",
+              selected: "true",
+              disabled: "false",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=header;selected=true;disabled=true;fontSize=small",
+            props: {
+              section: "header",
+              selected: "true",
+              disabled: "true",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=header;selected=true;disabled=true;fontSize=medium",
+            props: {
+              section: "header",
+              selected: "true",
+              disabled: "true",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.HeaderCell",
+                  variantProps: {
+                    sortDirection: "none",
+                    state: "idle",
+                    align: "left"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=false;disabled=false;fontSize=small",
+            props: {
+              section: "body",
+              selected: "false",
+              disabled: "false",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=false;disabled=false;fontSize=medium",
+            props: {
+              section: "body",
+              selected: "false",
+              disabled: "false",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=false;disabled=true;fontSize=small",
+            props: {
+              section: "body",
+              selected: "false",
+              disabled: "true",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=false;disabled=true;fontSize=medium",
+            props: {
+              section: "body",
+              selected: "false",
+              disabled: "true",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=true;disabled=false;fontSize=small",
+            props: {
+              section: "body",
+              selected: "true",
+              disabled: "false",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=true;disabled=false;fontSize=medium",
+            props: {
+              section: "body",
+              selected: "true",
+              disabled: "false",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 1,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=true;disabled=true;fontSize=small",
+            props: {
+              section: "body",
+              selected: "true",
+              disabled: "true",
+              fontSize: "small"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "small"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            id: "section=body;selected=true;disabled=true;fontSize=medium",
+            props: {
+              section: "body",
+              selected: "true",
+              disabled: "true",
+              fontSize: "medium"
+            },
+            root: {
+              id: "row",
+              kind: "frame",
+              name: "Row",
+              layout: "HORIZONTAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              opacity: 0.6,
+              bindings: {
+                fills: "color-container-highlight-default",
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              },
+              contentSlot: {
+                id: "cells",
+                name: "Cells",
+                minChildren: 1,
+                description: "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+              },
+              children: [
+                {
+                  id: "cell-0",
+                  kind: "componentInstance",
+                  name: "cell-0",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-1",
+                  kind: "componentInstance",
+                  name: "cell-1",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                },
+                {
+                  id: "cell-2",
+                  kind: "componentInstance",
+                  name: "cell-2",
+                  recipeId: "components/Table.ContentCell",
+                  variantProps: {
+                    align: "left",
+                    fontSize: "medium"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        libraryCategory: "Content",
+        assetName: "Content/Table/EditableRow",
+        documentation: {
+          purpose: "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.",
+          usage: "Compose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.",
+          properties: "section: header, body\nselected: false, true\ndisabled: false, true\nfontSize: small, medium",
+          related: [
+            "OrderableList"
+          ],
+          origin: "released-metadata",
+          metadataSource: "packages/components/src/components/Table/Table.metadata.json",
+          links: [
+            {
+              uri: "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+            },
+            {
+              uri: "https://fondue.frontify.com/"
+            }
+          ],
+          description: "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.\n\nCompose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.\n\nExposed variant properties:\n\nsection: header, body\n\nselected: false, true\n\ndisabled: false, true\n\nfontSize: small, medium\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nCells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.\n\nUse the composition actions to add columns to all rows or copy a selected cell width across its column.\n\nNative slot editing remains available; uneven rows are reported before bulk changes.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+        }
+      },
+      {
+        id: "components/Table.Root",
+        name: "Table/Root",
+        package: "@frontify/fondue/components",
+        source: [
+          "packages/components/src/components/Table/Table.tsx",
+          "packages/components/src/components/Table/styles/table.module.scss"
+        ],
+        status: "partial",
+        limitations: [
+          "composition is a Figma-only setting.",
+          "Header/body rows and cells stay linked; their content belongs to the instance.",
+          "Table column operations require a rectangular row structure.",
+          "Root font context, sticky columns, spans, sorting and accessibility semantics are not simulated."
+        ],
+        variants: [
+          {
+            id: "composition=editable",
+            props: {
+              composition: "editable"
+            },
+            root: {
+              id: "table",
+              kind: "frame",
+              name: "Table",
+              layout: "VERTICAL",
+              width: 480,
+              gap: 0,
+              primaryAlign: "MIN",
+              counterAlign: "MIN",
+              contentSlot: {
+                id: "rows",
+                name: "Rows",
+                minChildren: 1,
+                description: "Add linked EditableRow instances. Use the table actions to coordinate columns across all rows."
+              },
+              children: [
+                {
+                  id: "row-0",
+                  kind: "componentInstance",
+                  name: "row-0",
+                  recipeId: "components/Table.EditableRow",
+                  variantProps: {
+                    section: "header",
+                    selected: "false",
+                    disabled: "false",
+                    fontSize: "medium"
+                  },
+                  layoutSizingHorizontal: "FILL"
+                },
+                {
+                  id: "row-1",
+                  kind: "componentInstance",
+                  name: "row-1",
+                  recipeId: "components/Table.EditableRow",
+                  variantProps: {
+                    section: "body",
+                    selected: "false",
+                    disabled: "false",
+                    fontSize: "medium"
+                  },
+                  layoutSizingHorizontal: "FILL"
+                },
+                {
+                  id: "row-2",
+                  kind: "componentInstance",
+                  name: "row-2",
+                  recipeId: "components/Table.EditableRow",
+                  variantProps: {
+                    section: "body",
+                    selected: "false",
+                    disabled: "false",
+                    fontSize: "medium"
+                  },
+                  layoutSizingHorizontal: "FILL"
+                },
+                {
+                  id: "row-3",
+                  kind: "componentInstance",
+                  name: "row-3",
+                  recipeId: "components/Table.EditableRow",
+                  variantProps: {
+                    section: "body",
+                    selected: "false",
+                    disabled: "false",
+                    fontSize: "medium"
+                  },
+                  layoutSizingHorizontal: "FILL"
+                }
+              ],
+              bindings: {
+                paddingTop: "component-constant-spacing-0",
+                paddingRight: "component-constant-spacing-0",
+                paddingBottom: "component-constant-spacing-0",
+                paddingLeft: "component-constant-spacing-0",
+                itemSpacing: "component-constant-spacing-0",
+                cornerRadius: "component-constant-radius-0"
+              }
+            }
+          }
+        ],
+        libraryCategory: "Content",
+        assetName: "Content/Table/Root",
+        documentation: {
+          purpose: "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.",
+          usage: "Compose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.",
+          properties: "composition: editable",
+          related: [
+            "OrderableList"
+          ],
+          origin: "released-metadata",
+          metadataSource: "packages/components/src/components/Table/Table.metadata.json",
+          links: [
+            {
+              uri: "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+            },
+            {
+              uri: "https://fondue.frontify.com/"
+            }
+          ],
+          description: "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.\n\nCompose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.\n\nExposed variant properties:\n\ncomposition: editable\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. composition is a Figma-only setting.\n\nHeader/body rows and cells stay linked; their content belongs to the instance.\n\nTable column operations require a rectangular row structure.\n\nRoot font context, sticky columns, spans, sorting and accessibility semantics are not simulated.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+        }
+      },
+      {
         id: "patterns/ProductionNavigationRail",
         name: "ProductionNavigationRail",
         package: "fondue-sync/patterns",
@@ -311242,9 +314520,11 @@ Sources: ${recipe.source.join(", ")}`;
         recipeId: "components/SegmentedControl/controls-001",
         recipeIds: [
           "components/SegmentedControl/controls-001",
-          "components/SegmentedControl/controls-002"
+          "components/SegmentedControl/controls-002",
+          "components/SegmentedControl.Item",
+          "components/SegmentedControl.Root"
         ],
-        status: "supported"
+        status: "partial"
       },
       {
         id: "components:Select",
@@ -311312,7 +314592,10 @@ Sources: ${recipe.source.join(", ")}`;
           "components/Table",
           "components/Table.Row",
           "components/Table.HeaderCell",
-          "components/Table.RowCell"
+          "components/Table.RowCell",
+          "components/Table.ContentCell",
+          "components/Table.EditableRow",
+          "components/Table.Root"
         ],
         status: "partial"
       },
@@ -313419,6 +316702,23 @@ Sources: ${recipe.source.join(", ")}`;
         ]
       },
       {
+        id: "components:SegmentedControl",
+        status: "partial",
+        limitations: [
+          "Fixed two-item specimen.",
+          "Use the additive SegmentedControl/Root and /Item components for variable item count through native slots.",
+          "Responsive label clamp is represented at the 16px maximum.",
+          "Item selected/disabled/iconOnly/state are set on each nested item.",
+          "Figma does not reproduce React group state or keyboard behavior.",
+          "First/last rounding and adjacent separator behavior require context review; the selected outline follows the existing source-state specimen.",
+          "Native Segments slot contains linked Item instances.",
+          "Count is content, not a variant axis.",
+          "Set selection and disabled/iconOnly state on the nested items.",
+          "The pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance.",
+          "Focus management, responsive label clamping and indicator motion remain runtime."
+        ]
+      },
+      {
         id: "components:Select",
         status: "partial",
         limitations: [
@@ -313441,7 +316741,18 @@ Sources: ${recipe.source.join(", ")}`;
           "none represents undefined sortDirection.",
           "Loading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.",
           "Sortable trigger semantics need onSortChange in React.",
-          "colSpan, widths, truncation and gutter are contextual layout constraints."
+          "colSpan, widths, truncation and gutter are contextual layout constraints.",
+          "Additive editable counterpart of Table.RowCell.",
+          "Width and fontSize are contextual.",
+          "A cell can contain arbitrary designer content through its Content slot.",
+          "Column spans, sticky positioning, sort interactions and browser table semantics remain runtime.",
+          "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
+          "Use the composition actions to add columns to all rows or copy a selected cell width across its column.",
+          "Native slot editing remains available; uneven rows are reported before bulk changes.",
+          "composition is a Figma-only setting.",
+          "Header/body rows and cells stay linked; their content belongs to the instance.",
+          "Table column operations require a rectangular row structure.",
+          "Root font context, sticky columns, spans, sorting and accessibility semantics are not simulated."
         ]
       },
       {
@@ -314051,14 +317362,14 @@ Sources: ${recipe.source.join(", ")}`;
         constantOrigin: "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
       },
       counts: {
-        layers: 12881,
-        existingBindings: 2019,
-        addedReleasedBindings: 6584,
-        addedConstantBindings: 27604,
-        framePaddingBindings: 21676,
-        gapBindings: 5410,
-        radiusBindings: 6302,
-        borderWidthBindings: 800,
+        layers: 13028,
+        existingBindings: 2021,
+        addedReleasedBindings: 6646,
+        addedConstantBindings: 27890,
+        framePaddingBindings: 21896,
+        gapBindings: 5465,
+        radiusBindings: 6361,
+        borderWidthBindings: 814,
         derivedVariables: 37,
         exceptions: 0,
         notApplicable: 414
@@ -314650,7 +317961,7 @@ Sources: ${recipe.source.join(", ")}`;
                 role: "radius"
               }
             ],
-            occurrences: 5524
+            occurrences: 5559
           }
         },
         {
@@ -314956,7 +318267,7 @@ Sources: ${recipe.source.join(", ")}`;
                 role: "radius"
               }
             ],
-            occurrences: 99
+            occurrences: 123
           }
         },
         {
@@ -315729,7 +319040,7 @@ Sources: ${recipe.source.join(", ")}`;
                 role: "spacing"
               }
             ],
-            occurrences: 20725
+            occurrences: 20944
           }
         },
         {
@@ -315766,7 +319077,7 @@ Sources: ${recipe.source.join(", ")}`;
                 role: "spacing"
               }
             ],
-            occurrences: 192
+            occurrences: 200
           }
         },
         {
@@ -319469,7 +322780,7 @@ Sources: ${recipe.source.join(", ")}`;
       counts: {
         literalPaintsBound: 2,
         svgPaintRules: 38,
-        shadowLayersStyled: 192,
+        shadowLayersStyled: 200,
         effectFieldsBound: 40,
         derivedEffectVariables: 15,
         derivedEffectStyles: 4
@@ -320291,12 +323602,12 @@ Sources: ${recipe.source.join(", ")}`;
       release: "13.11.1",
       policy: "Exact effective font family, size, weight, line height, letter spacing and case. CSS font stacks remain unchanged; native family aliases resolve only through confirmed font availability.",
       counts: {
-        textLayers: 2567,
-        releasedStyleMatches: 2463,
-        existingExactStyles: 2022,
+        textLayers: 2585,
+        releasedStyleMatches: 2481,
+        existingExactStyles: 2040,
         derivedStyles: 13,
         derivedVariables: 7,
-        layerBindings: 12827
+        layerBindings: 12917
       },
       derivedStyles: [
         {
@@ -320831,7 +324142,948 @@ Sources: ${recipe.source.join(", ")}`;
         }
       ]
     },
-    fingerprint: "f105ca43d46e70c108951149d77dd780e0d57ddd632bb61027deac1b56183b67"
+    composition: [
+      {
+        key: "charts:AreaStackChart",
+        name: "AreaStackChart",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/AreaStackChart"
+        ]
+      },
+      {
+        key: "charts:BarChart",
+        name: "BarChart",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/BarChart"
+        ]
+      },
+      {
+        key: "charts:ChartHeading",
+        name: "ChartHeading",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/ChartHeading"
+        ]
+      },
+      {
+        key: "charts:Legend",
+        name: "Legend",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/Legend"
+        ]
+      },
+      {
+        key: "charts:LinearGauge",
+        name: "LinearGauge",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/LinearGauge"
+        ]
+      },
+      {
+        key: "charts:LineChart",
+        name: "LineChart",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/LineChart"
+        ]
+      },
+      {
+        key: "charts:PieChart",
+        name: "PieChart",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/PieChart"
+        ]
+      },
+      {
+        key: "charts:Tooltip",
+        name: "Tooltip",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/Tooltip"
+        ]
+      },
+      {
+        key: "charts:Treemap",
+        name: "Treemap",
+        package: "charts",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+        slots: [],
+        recipeIds: [
+          "charts/Treemap"
+        ]
+      },
+      {
+        key: "components:Accordion",
+        name: "Accordion",
+        package: "components",
+        mode: "repeated",
+        state: "Needs slots",
+        regions: [
+          "Items",
+          "Item content"
+        ],
+        reason: "Repeated linked sections with arbitrary expanded content.",
+        slots: [],
+        recipeIds: [
+          "components/Accordion",
+          "components/Accordion.borderless",
+          "components/Accordion.pill",
+          "components/Accordion.Content",
+          "components/Accordion.sticky"
+        ]
+      },
+      {
+        key: "components:AssetInput",
+        name: "AssetInput",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+        slots: [],
+        recipeIds: [
+          "components/AssetInput",
+          "components/AssetInput.Placeholder",
+          "components/AssetInput/image-preview"
+        ]
+      },
+      {
+        key: "components:Badge",
+        name: "Badge",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Badge/controls-001",
+          "components/Badge/controls-002"
+        ]
+      },
+      {
+        key: "components:Box",
+        name: "Box",
+        package: "components",
+        mode: "layout",
+        state: "Needs slots",
+        regions: [
+          "Children"
+        ],
+        reason: "Container styling/layout stays linked while consumer content changes.",
+        slots: [],
+        recipeIds: [
+          "components/Box"
+        ]
+      },
+      {
+        key: "components:Button",
+        name: "Button",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Button/controls-001",
+          "components/Button/controls-003",
+          "components/Button/controls-005",
+          "components/Button/controls-006",
+          "components/Button/controls-007",
+          "components/Button/controls-009",
+          "components/Button/controls-011",
+          "components/Button/controls-013",
+          "components/Button/controls-015",
+          "components/Button/controls-017",
+          "components/Button/controls-019",
+          "components/Button/controls-021",
+          "components/Button/controls-023",
+          "components/Button/controls-025",
+          "components/Button/controls-027",
+          "components/Button/controls-029"
+        ]
+      },
+      {
+        key: "components:Card",
+        name: "Card",
+        package: "components",
+        mode: "content",
+        state: "Needs slots",
+        regions: [
+          "Body",
+          "Footer",
+          "Banner content"
+        ],
+        reason: "Keep framing and defined media/icon parts linked; make content regions flexible.",
+        slots: [],
+        recipeIds: [
+          "components/Card",
+          "components/Card.Banner",
+          "components/Card.BannerIcon",
+          "components/Card.ThumbnailIcon",
+          "components/Card.Title",
+          "components/Card.Description",
+          "components/Card.ActionButton",
+          "components/Card.BannerImage",
+          "components/Card.ThumbnailImage"
+        ]
+      },
+      {
+        key: "components:Checkbox",
+        name: "Checkbox",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Checkbox/controls-001",
+          "components/Checkbox/controls-002",
+          "components/Checkbox/controls-003",
+          "components/Checkbox/controls-004"
+        ]
+      },
+      {
+        key: "components:ColorPicker",
+        name: "ColorPicker",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+        slots: [],
+        recipeIds: [
+          "components/ColorPicker",
+          "components/ColorPicker.Values",
+          "components/ColorPicker.Input"
+        ]
+      },
+      {
+        key: "components:DatePicker",
+        name: "DatePicker",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+        slots: [],
+        recipeIds: [
+          "components/DatePicker",
+          "components/DatePicker.Range",
+          "components/DatePicker.Input",
+          "components/DatePicker.Day"
+        ]
+      },
+      {
+        key: "components:Dialog",
+        name: "Dialog",
+        package: "components",
+        mode: "content",
+        state: "Needs slots",
+        regions: [
+          "Body",
+          "Footer actions"
+        ],
+        reason: "Keep the shell and dismissal controls fixed; allow arbitrary forms and actions.",
+        slots: [],
+        recipeIds: [
+          "components/Dialog",
+          "components/Dialog.Header",
+          "components/Dialog.Body",
+          "components/Dialog.Footer"
+        ]
+      },
+      {
+        key: "components:Divider",
+        name: "Divider",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Divider/horizontal-solid",
+          "components/Divider/horizontal-dashed",
+          "components/Divider/horizontal-noline",
+          "components/Divider/vertical-solid",
+          "components/Divider/vertical-dashed",
+          "components/Divider/vertical-noline"
+        ]
+      },
+      {
+        key: "components:Dropdown",
+        name: "Dropdown",
+        package: "components",
+        mode: "repeated",
+        state: "Needs slots",
+        regions: [
+          "Items",
+          "Groups"
+        ],
+        reason: "Repeat linked items; preserve menu keyboard behavior in code.",
+        slots: [],
+        recipeIds: [
+          "components/Dropdown",
+          "components/Dropdown.Item",
+          "components/Dropdown.SubTrigger"
+        ]
+      },
+      {
+        key: "components:EditableText",
+        name: "EditableText",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+        slots: [],
+        recipeIds: [
+          "components/EditableText"
+        ]
+      },
+      {
+        key: "components:Flex",
+        name: "Flex",
+        package: "components",
+        mode: "layout",
+        state: "Needs slots",
+        regions: [
+          "Children"
+        ],
+        reason: "Container styling/layout stays linked while consumer content changes.",
+        slots: [],
+        recipeIds: [
+          "components/Flex/row",
+          "components/Flex/row-reverse",
+          "components/Flex/column",
+          "components/Flex/column-reverse"
+        ]
+      },
+      {
+        key: "components:Flyout",
+        name: "Flyout",
+        package: "components",
+        mode: "content",
+        state: "Partly available",
+        regions: [
+          "Surface content",
+          "Body",
+          "Footer actions"
+        ],
+        reason: "Surface is editable; standard body and footer compositions still need slot mappings.",
+        slots: [
+          {
+            recipeId: "components/Flyout.Surface",
+            component: "Flyout/Surface",
+            path: "/flyout",
+            name: "Content"
+          }
+        ],
+        recipeIds: [
+          "components/Flyout.Header",
+          "components/Flyout.Body",
+          "components/Flyout.Footer",
+          "components/Flyout",
+          "components/Flyout.Surface"
+        ]
+      },
+      {
+        key: "components:Grid",
+        name: "Grid",
+        package: "components",
+        mode: "structured",
+        state: "Needs slots",
+        regions: [
+          "Cells"
+        ],
+        reason: "Arbitrary cells need grid track and span rules; do not treat grid as a plain list.",
+        slots: [],
+        recipeIds: [
+          "components/Grid"
+        ]
+      },
+      {
+        key: "components:Heading",
+        name: "Heading",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Heading/color-default",
+          "components/Heading/color-weak",
+          "components/Heading/color-disabled",
+          "components/Heading/color-negative",
+          "components/Heading/color-positive",
+          "components/Heading/color-warning",
+          "components/Heading/color-interactive",
+          "components/Heading/color-x-weak"
+        ]
+      },
+      {
+        key: "components:Label",
+        name: "Label",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Label/default",
+          "components/Label/strong"
+        ]
+      },
+      {
+        key: "components:Link",
+        name: "Link",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Link/controls-001",
+          "components/Link/controls-002",
+          "components/Link/controls-003",
+          "components/Link/controls-004",
+          "components/Link/controls-005",
+          "components/Link/controls-006",
+          "components/Link/controls-007",
+          "components/Link/controls-008",
+          "components/Link/controls-009",
+          "components/Link/controls-013",
+          "components/Link/controls-021",
+          "components/Link/controls-029",
+          "components/Link/controls-030",
+          "components/Link/controls-038",
+          "components/Link/controls-046",
+          "components/Link/on-container-001",
+          "components/Link/on-container-002",
+          "components/Link/on-container-003",
+          "components/Link/on-container-004",
+          "components/Link/on-container-005",
+          "components/Link/on-container-006",
+          "components/Link/on-container-007",
+          "components/Link/on-container-008",
+          "components/Link/on-container-009",
+          "components/Link/on-container-013",
+          "components/Link/on-container-021",
+          "components/Link/on-container-029",
+          "components/Link/on-container-030",
+          "components/Link/on-container-038",
+          "components/Link/on-container-046"
+        ]
+      },
+      {
+        key: "components:LoadingBar",
+        name: "LoadingBar",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/LoadingBar/default-square",
+          "components/LoadingBar/default-rounded",
+          "components/LoadingBar/positive-square",
+          "components/LoadingBar/positive-rounded",
+          "components/LoadingBar/negative-square",
+          "components/LoadingBar/negative-rounded"
+        ]
+      },
+      {
+        key: "components:LoadingCircle",
+        name: "LoadingCircle",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/LoadingCircle/progress",
+          "components/LoadingCircle/success",
+          "components/LoadingCircle/danger"
+        ]
+      },
+      {
+        key: "components:Notice",
+        name: "Notice",
+        package: "components",
+        mode: "content",
+        state: "Needs slots",
+        regions: [
+          "Body",
+          "Actions"
+        ],
+        reason: "Message and action content can vary inside stable status styling.",
+        slots: [],
+        recipeIds: [
+          "components/Notice/controls-001",
+          "components/Notice/controls-002"
+        ]
+      },
+      {
+        key: "components:OrderableList",
+        name: "OrderableList",
+        package: "components",
+        mode: "repeated",
+        state: "Needs slots",
+        regions: [
+          "Items"
+        ],
+        reason: "Linked rows can repeat; runtime drag/drop remains in code.",
+        slots: [],
+        recipeIds: [
+          "components/OrderableList",
+          "components/OrderableList.Item"
+        ]
+      },
+      {
+        key: "components:RadioList",
+        name: "RadioList",
+        package: "components",
+        mode: "repeated",
+        state: "Needs slots",
+        regions: [
+          "Options"
+        ],
+        reason: "Linked option items with exactly one selected item in the design.",
+        slots: [],
+        recipeIds: [
+          "components/RadioList/controls-001",
+          "components/RadioList/controls-002"
+        ]
+      },
+      {
+        key: "components:RouterProvider",
+        name: "RouterProvider",
+        package: "components",
+        mode: "code-only",
+        state: "No slot planned",
+        regions: [],
+        reason: "Runtime context provider; no editable canvas region is required.",
+        slots: [],
+        recipeIds: []
+      },
+      {
+        key: "components:ScrollArea",
+        name: "ScrollArea",
+        package: "components",
+        mode: "layout",
+        state: "Needs slots",
+        regions: [
+          "Children"
+        ],
+        reason: "Container styling/layout stays linked while consumer content changes.",
+        slots: [],
+        recipeIds: [
+          "components/ScrollArea/auto",
+          "components/ScrollArea/stable",
+          "components/ScrollArea/stable-horizontal",
+          "components/ScrollArea/stable-vertical"
+        ]
+      },
+      {
+        key: "components:Section",
+        name: "Section",
+        package: "components",
+        mode: "layout",
+        state: "Needs slots",
+        regions: [
+          "Children"
+        ],
+        reason: "Container styling/layout stays linked while consumer content changes.",
+        slots: [],
+        recipeIds: [
+          "components/Section"
+        ]
+      },
+      {
+        key: "components:SegmentedControl",
+        name: "SegmentedControl",
+        package: "components",
+        mode: "repeated",
+        state: "Available",
+        regions: [
+          "Segments"
+        ],
+        reason: "Linked items inside a slot; group selection needs a coordinated action.",
+        slots: [
+          {
+            recipeId: "components/SegmentedControl.Root",
+            component: "SegmentedControl/Root",
+            path: "/segmented-control",
+            name: "Segments"
+          }
+        ],
+        recipeIds: [
+          "components/SegmentedControl/controls-001",
+          "components/SegmentedControl/controls-002",
+          "components/SegmentedControl.Item",
+          "components/SegmentedControl.Root"
+        ]
+      },
+      {
+        key: "components:Select",
+        name: "Select",
+        package: "components",
+        mode: "repeated",
+        state: "Needs slots",
+        regions: [
+          "Items",
+          "Groups"
+        ],
+        reason: "Options and groups vary; keep the trigger and selected-value rendering fixed.",
+        slots: [],
+        recipeIds: [
+          "components/Select",
+          "components/Select.Multiple",
+          "components/Select.Combobox",
+          "components/Select.Item",
+          "components/Select.Group"
+        ]
+      },
+      {
+        key: "components:Slider",
+        name: "Slider",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+        slots: [],
+        recipeIds: [
+          "components/Slider/controls-001",
+          "components/Slider/controls-002"
+        ]
+      },
+      {
+        key: "components:SplitButton",
+        name: "SplitButton",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Fixed primary/secondary anatomy; variable menu items belong to Dropdown composition.",
+        slots: [],
+        recipeIds: [
+          "components/SplitButton/controls-001",
+          "components/SplitButton/controls-002",
+          "components/SplitButton/controls-003"
+        ]
+      },
+      {
+        key: "components:Switch",
+        name: "Switch",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Switch/controls-001"
+        ]
+      },
+      {
+        key: "components:Table",
+        name: "Table",
+        package: "components",
+        mode: "structured",
+        state: "Available",
+        regions: [
+          "Rows",
+          "Cells",
+          "Cell content"
+        ],
+        reason: "Linked rows/cells plus coordinated column insertion and widths.",
+        slots: [
+          {
+            recipeId: "components/Table.ContentCell",
+            component: "Table/ContentCell",
+            path: "/cell/content",
+            name: "Content"
+          },
+          {
+            recipeId: "components/Table.EditableRow",
+            component: "Table/EditableRow",
+            path: "/row",
+            name: "Cells"
+          },
+          {
+            recipeId: "components/Table.Root",
+            component: "Table/Root",
+            path: "/table",
+            name: "Rows"
+          }
+        ],
+        recipeIds: [
+          "components/Table",
+          "components/Table.Row",
+          "components/Table.HeaderCell",
+          "components/Table.RowCell",
+          "components/Table.ContentCell",
+          "components/Table.EditableRow",
+          "components/Table.Root"
+        ]
+      },
+      {
+        key: "components:Tabs",
+        name: "Tabs",
+        package: "components",
+        mode: "repeated",
+        state: "Needs slots",
+        regions: [
+          "Triggers",
+          "Panel content"
+        ],
+        reason: "Variable trigger count plus associated content. Pairing and active state need validation.",
+        slots: [],
+        recipeIds: [
+          "components/Tabs",
+          "components/Tabs.Trigger",
+          "components/Tabs.Content"
+        ]
+      },
+      {
+        key: "components:Tag",
+        name: "Tag",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Tag/controls-001",
+          "components/Tag/controls-002"
+        ]
+      },
+      {
+        key: "components:Text",
+        name: "Text",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Text/color-default",
+          "components/Text/color-weak",
+          "components/Text/color-disabled",
+          "components/Text/color-negative",
+          "components/Text/color-positive",
+          "components/Text/color-warning",
+          "components/Text/color-interactive",
+          "components/Text/boxColor-neutral",
+          "components/Text/boxColor-selected",
+          "components/Text/boxColor-disabled",
+          "components/Text/boxColor-positive",
+          "components/Text/boxColor-negative",
+          "components/Text/boxColor-warning"
+        ]
+      },
+      {
+        key: "components:Textarea",
+        name: "Textarea",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/Textarea/controls-001",
+          "components/Textarea/controls-002",
+          "components/Textarea/controls-003",
+          "components/Textarea/controls-004",
+          "components/Textarea/controls-005",
+          "components/Textarea/controls-006",
+          "components/Textarea/controls-007",
+          "components/Textarea/controls-008",
+          "components/Textarea/controls-009",
+          "components/Textarea/controls-010",
+          "components/Textarea/controls-011"
+        ]
+      },
+      {
+        key: "components:TextInput",
+        name: "TextInput",
+        package: "components",
+        mode: "fixed",
+        state: "No slot planned",
+        regions: [],
+        reason: "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+        slots: [],
+        recipeIds: [
+          "components/TextInput/controls-001",
+          "components/TextInput/controls-002",
+          "components/TextInput/controls-003",
+          "components/TextInput/controls-004",
+          "components/TextInput/controls-005",
+          "components/TextInput/controls-006"
+        ]
+      },
+      {
+        key: "components:ThemeProvider",
+        name: "ThemeProvider",
+        package: "components",
+        mode: "code-only",
+        state: "No slot planned",
+        regions: [],
+        reason: "Runtime context provider; no editable canvas region is required.",
+        slots: [],
+        recipeIds: []
+      },
+      {
+        key: "components:Tooltip",
+        name: "Tooltip",
+        package: "components",
+        mode: "content",
+        state: "Needs slots",
+        regions: [
+          "Content"
+        ],
+        reason: "Support rich tooltip content while preserving the shell; check interactive-content guidance separately.",
+        slots: [],
+        recipeIds: [
+          "components/Tooltip"
+        ]
+      },
+      {
+        key: "components:Tree",
+        name: "Tree",
+        package: "components",
+        mode: "structured",
+        state: "Needs slots",
+        regions: [
+          "Rows",
+          "Nested children"
+        ],
+        reason: "Hierarchy and indentation need a tree-specific composition contract.",
+        slots: [],
+        recipeIds: [
+          "components/Tree",
+          "components/Tree.Item",
+          "components/Tree.Folder"
+        ]
+      },
+      {
+        key: "rte:FloatingModalWrapper",
+        name: "FloatingModalWrapper",
+        package: "rte",
+        mode: "content",
+        state: "Needs slots",
+        regions: [
+          "Content"
+        ],
+        reason: "Review native representation separately from editor document/runtime behavior.",
+        slots: [],
+        recipeIds: [
+          "rte/FloatingModalWrapper"
+        ]
+      },
+      {
+        key: "rte:RichTextEditor",
+        name: "RichTextEditor",
+        package: "rte",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Review native representation separately from editor document/runtime behavior.",
+        slots: [],
+        recipeIds: [
+          "rte/RichTextEditor"
+        ]
+      },
+      {
+        key: "rte:Toolbar",
+        name: "Toolbar",
+        package: "rte",
+        mode: "content",
+        state: "Needs slots",
+        regions: [
+          "Actions"
+        ],
+        reason: "Review native representation separately from editor document/runtime behavior.",
+        slots: [],
+        recipeIds: [
+          "rte/Toolbar"
+        ]
+      },
+      {
+        key: "rte:ToolbarButton",
+        name: "ToolbarButton",
+        package: "rte",
+        mode: "data-driven",
+        state: "No slot planned",
+        regions: [],
+        reason: "Review native representation separately from editor document/runtime behavior.",
+        slots: [],
+        recipeIds: [
+          "rte/ToolbarButton"
+        ]
+      }
+    ],
+    fingerprint: "d40add046bfba3dd4fc2a0f0e40e17d8f98fd975771f6fea212b2833777b4029"
   };
 
   // src/push-selection.ts
@@ -321395,9 +325647,303 @@ Sources: ${recipe.source.join(", ")}`;
     return operation({ id: saved.id, title });
   }
 
+  // src/composer.ts
+  var IDs = {
+    segments: "components/SegmentedControl.Root",
+    item: "components/SegmentedControl.Item",
+    table: "components/Table.Root",
+    row: "components/Table.EditableRow",
+    cell: "components/Table.ContentCell",
+    header: "components/Table.HeaderCell"
+  };
+  async function sourceId(instance) {
+    var _a, _b, _c;
+    if ((instance == null ? void 0 : instance.type) !== "INSTANCE") return null;
+    const main = await instance.getMainComponentAsync();
+    const owner = ((_a = main == null ? void 0 : main.parent) == null ? void 0 : _a.type) === "COMPONENT_SET" ? main.parent : main;
+    if (!owner) return null;
+    try {
+      return (_c = (_b = JSON.parse(read(owner, "mapping")).id) == null ? void 0 : _b.replace(/^recipe:/, "")) != null ? _c : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  async function ancestor(node, id) {
+    for (let current = node; current && current.type !== "PAGE"; current = current.parent)
+      if (await sourceId(current) === id) return current;
+    throw Error(
+      [IDs.segments, IDs.item].includes(id) ? id === IDs.item ? "Select a segment inside the control first." : "Select a segmented control or an item inside it." : "Select a table or a cell inside it."
+    );
+  }
+  function slot(node) {
+    var _a;
+    const result = (_a = node.children) == null ? void 0 : _a.filter((child) => child.type === "SLOT");
+    if ((result == null ? void 0 : result.length) !== 1)
+      throw Error(
+        "Expected one native content slot. Choose an editable composition."
+      );
+    return result[0];
+  }
+  function oneSelection(api) {
+    if (api.currentPage.selection.length !== 1)
+      throw Error("Select one component or cell first.");
+    return api.currentPage.selection[0];
+  }
+  async function loadFonts(api, node) {
+    const texts = node.findAllWithCriteria({ types: ["TEXT"] });
+    for (const text of texts)
+      for (const segment of text.getStyledTextSegments(["fontName"]))
+        await api.loadFontAsync(segment.fontName);
+  }
+  async function label(api, node, value2) {
+    var _a;
+    await loadFonts(api, node);
+    const property = Object.entries((_a = node.componentProperties) != null ? _a : {}).find(
+      ([, prop]) => prop.type === "TEXT"
+    );
+    if (property) node.setProperties({ [property[0]]: value2 });
+    else {
+      const text = node.findAllWithCriteria({ types: ["TEXT"] })[0];
+      if (text) text.characters = value2;
+    }
+  }
+  function width2(node, next) {
+    const vertical = node.layoutSizingVertical;
+    node.resize(next, node.height);
+    if (vertical === "HUG") node.layoutSizingVertical = "HUG";
+  }
+  async function cellWidth(cell, next) {
+    const main = await cell.getMainComponentAsync();
+    const sourceWidth = main.width;
+    const visit = (node, root = false) => {
+      var _a;
+      if (node.type === "SLOT" || !root && node.type === "INSTANCE") return;
+      if (root || ["FRAME", "RECTANGLE"].includes(node.type) && Math.abs(node.width - sourceWidth) < 0.5)
+        width2(node, next);
+      for (const child of (_a = node.children) != null ? _a : []) visit(child);
+    };
+    visit(cell, true);
+  }
+  async function readTable(api) {
+    const selected = oneSelection(api);
+    const root = await ancestor(selected, IDs.table);
+    const rows = [...slot(root).children];
+    if (!rows.length) throw Error("Add an EditableRow to the Rows slot first.");
+    const cells = [];
+    for (const row of rows) {
+      if (await sourceId(row) !== IDs.row)
+        throw Error(
+          "The Rows slot contains a non-row component. Preserve it and use native editing or move it outside the table."
+        );
+      const parts = [...slot(row).children];
+      if (!parts.length) throw Error("Each row needs at least one cell.");
+      for (const part of parts)
+        if (![IDs.cell, IDs.header].includes(await sourceId(part)))
+          throw Error(
+            "A Cells slot contains an unrecognized cell. Native content inside a ContentCell is supported."
+          );
+      cells.push(parts);
+    }
+    if (cells.some((row) => row.length !== cells[0].length))
+      throw Error(
+        "Rows have different cell counts. Restore a rectangular table before adding rows or columns."
+      );
+    return { root, rows, cells, selected };
+  }
+  function aligned(cells) {
+    if (cells.some(
+      (row) => row.some((cell, i) => Math.abs(cell.width - cells[0][i].width) > 0.5)
+    ))
+      throw Error(
+        "Column widths differ. Select the intended cell width and use Match column width first."
+      );
+  }
+  async function layoutTable(root, rows, cells) {
+    const total = cells[0].reduce((n, cell) => n + cell.width, 0);
+    width2(root, total);
+    for (const row of rows) {
+      width2(row, total);
+      row.layoutSizingHorizontal = "FILL";
+    }
+  }
+  async function compose(api, assets, action, amount = 5) {
+    var _a;
+    const changed = [];
+    const created = [];
+    if (action === "insert-segments" || action === "insert-table") {
+      if (action === "insert-segments" && (!Number.isInteger(amount) || amount < 2 || amount > 10))
+        throw Error("Choose between two and ten segments.");
+      const id = action === "insert-table" ? IDs.table : IDs.segments;
+      const set = assets["recipe:" + id] ? await api.getNodeByIdAsync(assets["recipe:" + id].id) : null;
+      if (!set || set.type !== "COMPONENT_SET")
+        throw Error(
+          "Update this library first to install the editable composition components."
+        );
+      const main = set.children.find(
+        (main2) => action === "insert-table" || main2.name.includes("hugWidth=true")
+      );
+      await loadFonts(api, main);
+      const right = Math.max(
+        0,
+        ...api.currentPage.children.map((n) => n.x + n.width)
+      );
+      const instance = main.createInstance();
+      api.currentPage.appendChild(instance);
+      instance.x = right + 160;
+      instance.y = 0;
+      created.push(instance.id);
+      api.currentPage.selection = [instance];
+      if (action === "insert-segments")
+        for (let i = 2; i < amount; i++) {
+          const added = await appendSegment(api, instance);
+          created.push(added.id);
+        }
+      api.viewport.scrollAndZoomIntoView([instance]);
+      return {
+        createdNodeIds: created,
+        mutatedNodeIds: [],
+        message: action === "insert-table" ? "Inserted a linked table with three columns and three body rows." : "Inserted a linked control with " + amount + " segments."
+      };
+    }
+    if (action === "add-segment" || action === "select-segment") {
+      const selected = oneSelection(api);
+      const root = await ancestor(selected, IDs.segments);
+      if (action === "add-segment")
+        created.push((await appendSegment(api, root)).id);
+      else {
+        const item = await ancestor(selected, IDs.item);
+        for (const child of slot(root).children) {
+          if (await sourceId(child) !== IDs.item)
+            throw Error("Segments contains an unrecognized item.");
+        }
+        for (const child of slot(root).children) {
+          child.setProperties({ selected: String(child.id === item.id) });
+          changed.push(child.id);
+        }
+      }
+      changed.push(root.id);
+      return {
+        createdNodeIds: created,
+        mutatedNodeIds: changed,
+        message: action === "add-segment" ? "Added a linked segment." : "Selected one segment and cleared the others."
+      };
+    }
+    const table = await readTable(api);
+    if (action === "match-column-width") {
+      const column = (_a = table.cells.find(
+        (row) => row.some(
+          (cell) => cell === table.selected || cell.findAll(() => true).some((n) => n === table.selected)
+        )
+      )) == null ? void 0 : _a.findIndex(
+        (cell) => cell === table.selected || cell.findAll(() => true).some((n) => n === table.selected)
+      );
+      if (column === void 0 || column < 0)
+        throw Error(
+          "Select a cell or a layer inside the column whose width you want to use."
+        );
+      const selectedCell = table.cells.flat().find(
+        (cell) => cell === table.selected || cell.findAll(() => true).some((n) => n === table.selected)
+      );
+      const next = selectedCell.width;
+      if (!Number.isFinite(next) || next < 32)
+        throw Error("Column width must be at least 32px.");
+      for (const row of table.cells) {
+        await cellWidth(row[column], next);
+        changed.push(row[column].id);
+      }
+      await layoutTable(table.root, table.rows, table.cells);
+    } else if (action === "add-column") {
+      aligned(table.cells);
+      const additions = [];
+      try {
+        for (const row of table.cells) {
+          const main = await row[row.length - 1].getMainComponentAsync();
+          await loadFonts(api, main);
+          const cell = main.createInstance();
+          additions.push(cell);
+          created.push(cell.id);
+          await label(api, cell, "Column " + (row.length + 1));
+          await cellWidth(cell, row[row.length - 1].width);
+        }
+      } catch (error) {
+        for (const cell of additions) cell.remove();
+        throw error;
+      }
+      additions.forEach((cell, i) => {
+        slot(table.rows[i]).appendChild(cell);
+        table.cells[i].push(cell);
+      });
+      await layoutTable(table.root, table.rows, table.cells);
+    } else if (action === "add-row") {
+      aligned(table.cells);
+      const template = table.rows.find(
+        (row2) => {
+          var _a2;
+          return ((_a2 = row2.componentProperties.section) == null ? void 0 : _a2.value) === "body";
+        }
+      );
+      if (!template) throw Error("Add a body EditableRow before using Add row.");
+      const main = await template.getMainComponentAsync();
+      await loadFonts(api, main);
+      const row = main.createInstance();
+      created.push(row.id);
+      try {
+        const region = slot(row);
+        for (const cell of [...region.children]) cell.remove();
+        const templateCells = table.cells[table.rows.indexOf(template)];
+        for (const source of templateCells) {
+          const cellMain = await source.getMainComponentAsync();
+          await loadFonts(api, cellMain);
+          const cell = cellMain.createInstance();
+          region.appendChild(cell);
+          await cellWidth(cell, source.width);
+          created.push(cell.id);
+        }
+      } catch (error) {
+        row.remove();
+        throw error;
+      }
+      slot(table.root).appendChild(row);
+      table.rows.push(row);
+      table.cells.push([...slot(row).children]);
+      await layoutTable(table.root, table.rows, table.cells);
+    } else throw Error("Unknown composition action.");
+    changed.push(table.root.id, ...table.rows.map((row) => row.id));
+    return {
+      createdNodeIds: created,
+      mutatedNodeIds: [...new Set(changed)],
+      message: action === "add-column" ? "Added a column to every row." : action === "add-row" ? "Added a linked body row." : "Matched the selected column width across all rows."
+    };
+  }
+  async function appendSegment(api, root) {
+    var _a, _b;
+    const region = slot(root);
+    for (const child of region.children)
+      if (await sourceId(child) !== IDs.item)
+        throw Error("Segments contains a non-segment component.");
+    if (region.children.length >= 10)
+      throw Error("The pinned component supports up to ten segments.");
+    const source = (_a = region.children[0]) != null ? _a : slot(await root.getMainComponentAsync()).children[0];
+    if (!source) throw Error("No segment template is available.");
+    const main = await source.getMainComponentAsync();
+    await loadFonts(api, main);
+    const item = main.createInstance();
+    item.setProperties({
+      selected: String(region.children.length === 0),
+      disabled: source.componentProperties.disabled.value,
+      iconOnly: source.componentProperties.iconOnly.value,
+      state: "default"
+    });
+    await label(api, item, "Segment " + (region.children.length + 1));
+    region.appendChild(item);
+    if (((_b = root.componentProperties.hugWidth) == null ? void 0 : _b.value) === "false")
+      item.layoutSizingHorizontal = "FILL";
+    return item;
+  }
+
   // src/plugin.ts
   var bundle = fondue_13_11_1_default;
-  figma.showUI('<!doctype html>\n<html>\n  <head>\n    <meta charset="utf-8" />\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n      body {\n        margin: 0;\n        padding: 24px;\n        font:\n          13px/1.5 Inter,\n          system-ui,\n          sans-serif;\n        background: var(--figma-color-bg, #fff);\n        color: var(--figma-color-text, #202020);\n      }\n      h1 {\n        font-size: 24px;\n        letter-spacing: -0.7px;\n        margin: 0;\n      }\n      p {\n        margin: 8px 0 16px;\n      }\n      .muted {\n        color: var(--figma-color-text-secondary, #666);\n      }\n      .pill {\n        display: inline-block;\n        border: 1px solid #bbb;\n        padding: 3px 8px;\n        border-radius: 20px;\n        font-size: 11px;\n      }\n      .card {\n        padding: 14px;\n        border: 1px solid var(--figma-color-border, #ddd);\n        border-radius: 8px;\n        margin: 16px 0;\n      }\n      button {\n        font: inherit;\n        border: 1px solid #aaa;\n        border-radius: 5px;\n        background: var(--figma-color-bg-secondary, #eee);\n        color: inherit;\n        padding: 9px 13px;\n        cursor: pointer;\n      }\n      button.primary {\n        background: #191919;\n        color: white;\n        border-color: #191919;\n        width: 100%;\n      }\n      button:disabled {\n        opacity: 0.45;\n        cursor: wait;\n      }\n      .row {\n        display: flex;\n        gap: 8px;\n        margin-top: 10px;\n      }\n      .row button {\n        flex: 1;\n      }\n      pre {\n        font:\n          11px/1.6 ui-monospace,\n          monospace;\n        white-space: pre-wrap;\n        overflow-wrap: anywhere;\n        max-height: 240px;\n        overflow: auto;\n      }\n      summary {\n        cursor: pointer;\n      }\n      #log {\n        font-size: 12px;\n      }\n      [hidden] {\n        display: none !important;\n      }\n      .tabs {\n        display: flex;\n        gap: 8px;\n        margin: 16px 0;\n      }\n      [role="tab"][aria-selected="true"] {\n        border-color: var(--figma-color-border-selected, #555);\n        font-weight: 600;\n      }\n      :focus-visible {\n        outline: 2px solid var(--figma-color-border-selected, #526dff);\n        outline-offset: 3px;\n      }\n      #push-panel label {\n        display: block;\n        margin: 12px 0 5px;\n      }\n      input:not([type="checkbox"]),\n      textarea,\n      select {\n        width: 100%;\n        box-sizing: border-box;\n        font: inherit;\n        padding: 8px;\n        color: inherit;\n        background: var(--figma-color-bg, white);\n        border: 1px solid var(--figma-color-border, #aaa);\n        border-radius: 4px;\n      }\n      fieldset {\n        margin: 16px 0;\n        border: 1px solid var(--figma-color-border, #aaa);\n      }\n      #push-panel h2 {\n        font-size: 15px;\n      }\n      #push-panel pre {\n        max-height: 320px;\n      }\n      #push-create {\n        margin-top: 16px;\n      }\n      .push-change {\n        padding: 8px 0;\n        overflow-wrap: anywhere;\n      }\n      a {\n        color: inherit;\n      }\n    </style>\n  </head>\n  <body>\n    <h1>Fondue Sync</h1>\n    <p class="muted">A released Fondue library, native in Figma.</p>\n    <div class="tabs" role="tablist" aria-label="Fondue actions">\n      <button\n        type="button"\n        role="tab"\n        id="sync-tab"\n        aria-controls="sync-panel"\n        aria-selected="true"\n        tabindex="0"\n      >\n        Sync\n      </button>\n      <button\n        type="button"\n        role="tab"\n        id="push-tab"\n        aria-controls="push-panel"\n        aria-selected="false"\n        tabindex="-1"\n      >\n        Push changes\n      </button>\n    </div>\n    <span class="pill" id="release">Loading release\u2026</span>\n    <div id="updates" class="card" hidden>\n      <strong>Version updates</strong>\n      <div id="update-status" role="status" aria-live="polite"></div>\n      <button type="button" id="check-updates">Check again</button>\n    </div>\n    <section id="sync-panel" role="tabpanel" aria-labelledby="sync-tab">\n      <div class="card">\n        <strong>Library file</strong>\n        <p id="status" class="muted">\n          Open a dedicated Fondue library Design file.\n        </p>\n        <p class="muted">\n          Components are grouped by category and family, such as Buttons /\n          Button. Enable Show subfolders in Assets to browse these folders.\n        </p>\n        <div id="counts"></div>\n      </div>\n      <button class="primary" data-action="import">Import Fondue</button>\n      <div class="row">\n        <button data-action="organize">Organize components</button>\n      </div>\n      <p class="muted">\n        Organize applies category folders to existing components and preserves\n        styling, content and other library edits.\n      </p>\n      <div class="row">\n        <button data-action="compare">Compare</button\n        ><button data-action="update">Update library</button\n        ><button data-action="validate">Validate</button>\n      </div>\n      <p class="muted">\n        Import and Update first save a recovery version. If interrupted, close\n        the plugin and restore the matching \u201CBefore Fondue\u201D version in Figma\u2019s\n        Version History. Restoring affects the whole file, including later edits\n        by collaborators.\n      </p>\n      <p id="checkpoint" role="status" class="muted"></p>\n      <p id="progress" aria-live="polite" class="muted"></p>\n      <div id="log" aria-live="polite"></div>\n      <details>\n        <summary>Coverage and limitations</summary>\n        <pre id="gaps"></pre>\n      </details>\n      <p class="muted">\n        Publish this file through Figma\u2019s library publishing flow. Designers\n        enable the published library in their own files and accept updates\n        there.\n      </p>\n      <details>\n        <summary>Future: connected prototypes</summary>\n        <p>\n          Screen \u2192 real Fondue code and Frontify data is a later phase. This\n          plugin currently builds and updates library assets.\n        </p>\n      </details>\n    </section>\n    <section id="push-panel" role="tabpanel" aria-labelledby="push-tab" hidden>\n      <p>\n        Select a Fondue component or instance on the canvas to propose changes\n        to its source.\n      </p>\n      <button type="button" id="push-scan">Review selected object</button>\n      <p id="push-progress" role="status" aria-live="polite"></p>\n      <div id="push-selection"></div>\n      <div id="push-issues" role="alert"></div>\n      <fieldset id="push-changes" hidden>\n        <legend>Changes to include</legend>\n        <div id="push-change-list"></div>\n      </fieldset>\n      <div id="push-tokens"></div>\n      <p id="push-scope" class="muted" hidden>\n        Instance changes propose an update to the shared Fondue component.\n        Shared tokens can affect other components.\n      </p>\n      <label for="push-title">PR title</label>\n      <input\n        id="push-title"\n        value="fix(components): update selected component styles"\n        maxlength="160"\n      />\n      <label for="push-description">Reason for this change</label>\n      <textarea\n        id="push-description"\n        rows="3"\n        placeholder="Describe the intended improvement"\n      ></textarea>\n      <details>\n        <summary>Connect PR service</summary>\n        <p class="muted">\n          Start the local Fondue PR service, then enter the pairing secret\n          printed in its terminal. GitHub credentials stay in the service.\n        </p>\n        <label for="push-secret">Pairing secret</label>\n        <input\n          id="push-secret"\n          type="password"\n          autocomplete="off"\n          spellcheck="false"\n        />\n        <button type="button" id="push-connect">Connect</button>\n        <p id="push-connection" role="status">Service: http://localhost:3848</p>\n      </details>\n      <div class="row">\n        <button type="button" id="push-preview" disabled>\n          Preview PR diff\n        </button>\n      </div>\n      <div id="push-review" hidden>\n        <h2>Review source changes</h2>\n        <p id="push-base" class="muted"></p>\n        <pre\n          id="push-diff"\n          tabindex="0"\n          aria-label="Proposed source diff"\n        ></pre>\n        <div id="push-checks"></div>\n        <label\n          ><input type="checkbox" id="push-ack" /> I reviewed the diff and its\n          shared component/token impact.</label\n        >\n        <button type="button" id="push-create" class="primary" disabled>\n          Create draft PR\n        </button>\n      </div>\n      <p id="push-result" role="status"></p>\n    </section>\n    <script>"use strict";\n(() => {\n  var __defProp = Object.defineProperty;\n  var __defProps = Object.defineProperties;\n  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;\n  var __getOwnPropSymbols = Object.getOwnPropertySymbols;\n  var __hasOwnProp = Object.prototype.hasOwnProperty;\n  var __propIsEnum = Object.prototype.propertyIsEnumerable;\n  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;\n  var __spreadValues = (a, b) => {\n    for (var prop in b || (b = {}))\n      if (__hasOwnProp.call(b, prop))\n        __defNormalProp(a, prop, b[prop]);\n    if (__getOwnPropSymbols)\n      for (var prop of __getOwnPropSymbols(b)) {\n        if (__propIsEnum.call(b, prop))\n          __defNormalProp(a, prop, b[prop]);\n      }\n    return a;\n  };\n  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));\n\n  // src/updates.ts\n  function stableVersion(value) {\n    if (typeof value !== "string") return null;\n    const match = /^v?(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:\\+[\\w.-]+)?$/.exec(value);\n    if (!match) return null;\n    const parts = match.slice(1, 4).map(Number);\n    return parts.every(Number.isSafeInteger) ? parts : null;\n  }\n  function isNewer(latest, current) {\n    const a = stableVersion(latest);\n    const b = stableVersion(current);\n    if (!a || !b) return false;\n    for (let i = 0; i < 3; i++) {\n      if (a[i] !== b[i]) return a[i] > b[i];\n    }\n    return false;\n  }\n  async function checkUpdates(pluginVersion, fondueVersion, request = fetch) {\n    const targets = [\n      {\n        name: "Fondue Sync",\n        current: pluginVersion,\n        endpoint: "https://api.github.com/repos/DannyRuchtie/fondue-sync/releases/latest",\n        url: "https://github.com/DannyRuchtie/fondue-sync/releases/latest",\n        version: (data) => data.draft === false && data.prerelease === false ? data.tag_name : null\n      },\n      {\n        name: "Fondue",\n        current: fondueVersion,\n        endpoint: "https://registry.npmjs.org/@frontify%2Ffondue/latest",\n        url: "https://github.com/Frontify/fondue/releases",\n        version: (data) => data.name === "@frontify/fondue" ? data.version : null\n      }\n    ];\n    return Promise.all(\n      targets.map(async (target) => {\n        const result = {\n          name: target.name,\n          current: target.current,\n          state: "unavailable",\n          url: target.url\n        };\n        const controller = new AbortController();\n        const timer = setTimeout(() => controller.abort(), 5e3);\n        try {\n          const response = await request(target.endpoint, {\n            signal: controller.signal,\n            credentials: "omit",\n            cache: "no-store"\n          });\n          if (!response.ok) return result;\n          const latest = target.version(await response.json());\n          if (!stableVersion(latest) || !stableVersion(target.current))\n            return result;\n          return __spreadProps(__spreadValues({}, result), {\n            latest,\n            state: isNewer(latest, target.current) ? "available" : "current"\n          });\n        } catch (e) {\n          return result;\n        } finally {\n          clearTimeout(timer);\n        }\n      })\n    );\n  }\n\n  // src/update-ui.ts\n  var container = document.getElementById("updates");\n  var status = document.getElementById("update-status");\n  var retry = document.getElementById("check-updates");\n  var versions;\n  var started = false;\n  async function check() {\n    if (!versions || retry.disabled) return;\n    retry.disabled = true;\n    status.textContent = "Checking for newer versions\\u2026";\n    try {\n      const results = await checkUpdates(versions.plugin, versions.fondue);\n      status.replaceChildren();\n      for (const result of results) {\n        const line = document.createElement("p");\n        if (result.state === "available") {\n          line.textContent = `${result.name} ${result.latest} is available (installed: ${result.current}). `;\n          const link = document.createElement("a");\n          link.href = result.url;\n          link.target = "_blank";\n          link.rel = "noopener noreferrer";\n          link.textContent = result.name === "Fondue Sync" ? "Get plugin update" : "View Fondue release";\n          line.appendChild(link);\n          const instruction = document.createElement("span");\n          instruction.textContent = result.name === "Fondue Sync" ? " Install the new plugin build, then Compare before updating the library." : " A maintainer must package this release before it can be synced.";\n          line.appendChild(instruction);\n        } else {\n          line.textContent = result.state === "current" ? `${result.name} ${result.current}: no newer stable release found.` : `${result.name} ${result.current}: update check unavailable. You can keep working.`;\n        }\n        status.appendChild(line);\n      }\n    } finally {\n      retry.disabled = false;\n    }\n  }\n  retry.addEventListener("click", () => void check());\n  window.addEventListener("message", (event) => {\n    var _a;\n    if (event.source !== parent) return;\n    const message = (_a = event.data) == null ? void 0 : _a.pluginMessage;\n    if ((message == null ? void 0 : message.type) !== "status" || started) return;\n    started = true;\n    versions = { plugin: message.pluginVersion, fondue: message.release };\n    container.hidden = false;\n    void check();\n  });\n})();\n<\/script>\n    <script>\n      const send = (type) =>\n        parent.postMessage({ pluginMessage: { type } }, "*");\n      const el = (id) => document.getElementById(id);\n      function buttons(disabled) {\n        document\n          .querySelectorAll("#sync-panel button")\n          .forEach((b) => (b.disabled = disabled));\n      }\n      document.querySelectorAll("[data-action]").forEach(\n        (button) =>\n          (button.onclick = () => {\n            buttons(true);\n            el("progress").textContent = "Working\u2026";\n            send(button.dataset.action);\n          }),\n      );\n      onmessage = (event) => {\n        const m = event.data.pluginMessage;\n        if (!m) return;\n        if (m.type === "idle") {\n          buttons(false);\n          return;\n        }\n        if (m.type === "status") {\n          if (m.lastErrors?.length)\n            el("log").textContent =\n              "Previous update errors:\\n" + m.lastErrors.join("\\n");\n          el("release").textContent =\n            "Fondue " + m.release + " \xB7 " + m.fingerprint.slice(0, 8);\n          el("status").textContent = m.applied\n            ? (m.appliedFingerprint === m.fingerprint\n                ? "Managed bundle synchronized: "\n                : "Changes available; last managed sync: ") + m.applied\n            : m.hasManagedAssets\n              ? "Import started. Compare and Update library to resume."\n              : "Ready to import into this file.";\n          el("counts").textContent =\n            `${m.counts.tokens} variables \xB7 ${m.counts.styles} styles \xB7 ${m.counts.icons} icons \xB7 ${m.counts.recipes} component sets`;\n          el("gaps").textContent = JSON.stringify(m.gaps, null, 2);\n        }\n        if (m.type === "checkpoint") {\n          el("checkpoint").textContent =\n            "Recovery version saved: " +\n            m.checkpoint.title +\n            " (" +\n            m.checkpoint.id +\n            ").";\n        }\n        if (m.type === "progress") el("progress").textContent = m.text;\n        if (m.type === "error") {\n          el("progress").textContent = "Action stopped";\n          el("log").textContent = m.message;\n        }\n        if (m.type === "organization-report") {\n          const r = m.report;\n          el("progress").textContent =\n            r.conflicts.length || r.errors.length\n              ? "Organization stopped; review the items below."\n              : `Component categories applied: ${r.renamed} renamed, ${r.alreadyOrganized} already organized. Enable Show subfolders in Assets.`;\n          el("log").textContent = JSON.stringify(r, null, 2);\n          el("status").textContent =\n            "Category organization only; Compare checks remaining source updates separately.";\n        }\n        if (m.type === "report") {\n          const r = m.report;\n          el("progress").textContent = r.complete\n            ? "Managed assets match the bundled recipes. Review coverage before publishing."\n            : "Review required before publishing.";\n          el("log").replaceChildren();\n          const pre = document.createElement("pre");\n          pre.textContent = JSON.stringify(\n            {\n              counts: r.counts,\n              errors: r.errors,\n              warnings: r.warnings,\n              changes: r.actions.filter((a) => a.action !== "unchanged"),\n            },\n            null,\n            2,\n          );\n          el("log").appendChild(pre);\n          for (const action of r.actions.filter(\n            (a) => a.action === "conflict" || a.action === "missing",\n          )) {\n            const item = document.createElement("p");\n            item.textContent = action.id + ": " + action.reason;\n            el("log").appendChild(item);\n          }\n          if (r.complete)\n            el("status").textContent =\n              "Synchronized source: " +\n              r.release +\n              " \xB7 publication status is managed by Figma.";\n        }\n      };\n      send("status");\n    <\/script>\n    <script>(() => {\n  const byId = (id) => document.getElementById(id);\n  const endpoint = "http://localhost:3848";\n  let report = null,\n    preview = null,\n    paired = false,\n    working = false,\n    generation = 0;\n  let tokenCatalog = [];\n  let sourceChoices = {};\n  const pending = new Map();\n  let sequence = 0;\n  const text = (id, value) => {\n    byId(id).textContent = value;\n  };\n  const selectedIds = () =>\n    [...document.querySelectorAll("[data-change-id]:checked")].map(\n      (el) => el.dataset.changeId,\n    );\n  const names = () =>\n    Object.fromEntries(\n      [...document.querySelectorAll("[data-token-id]")].map((el) => [\n        el.dataset.tokenId,\n        el.value.trim(),\n      ]),\n    );\n  const mappingChoices = () => ({\n    ...sourceChoices,\n    ...Object.fromEntries(\n      [...document.querySelectorAll("[data-mapping-id]")]\n        .filter((el) => el.value)\n        .map((el) => [el.dataset.mappingId, el.value]),\n    ),\n  });\n  function controls() {\n    byId("push-scan").disabled = working;\n    byId("push-connect").disabled = working;\n    byId("push-preview").disabled =\n      working || !paired || !report || !selectedIds().length;\n    byId("push-create").disabled =\n      working ||\n      !preview ||\n      (preview.blockers ?? []).length > 0 ||\n      !byId("push-ack").checked;\n  }\n  function invalidate(message) {\n    generation++;\n    preview = null;\n    byId("push-review").hidden = true;\n    byId("push-ack").checked = false;\n    text("push-result", "");\n    if (message) text("push-progress", message);\n    controls();\n  }\n  function ask(type) {\n    return new Promise((resolve, reject) => {\n      const requestId = "push-" + ++sequence;\n      const timeout = setTimeout(() => {\n        pending.delete(requestId);\n        reject(Error("Selection scan timed out. Try again."));\n      }, 60000);\n      pending.set(requestId, { resolve, reject, timeout });\n      parent.postMessage({ pluginMessage: { type, requestId } }, "*");\n    });\n  }\n  async function service(path, body) {\n    const response = await fetch(endpoint + path, {\n      method: body === undefined ? "GET" : "POST",\n      headers: {\n        Authorization: "Bearer " + byId("push-secret").value.trim(),\n        ...(body === undefined ? {} : { "Content-Type": "application/json" }),\n      },\n      ...(body === undefined ? {} : { body: JSON.stringify(body) }),\n    });\n    const result = await response.json();\n    if (!response.ok)\n      throw Error(\n        result.error ?? result.message ?? "PR service rejected the request.",\n      );\n    return result;\n  }\n  async function run(action) {\n    working = true;\n    controls();\n    try {\n      await action();\n    } catch (error) {\n      text("push-progress", error.message);\n    } finally {\n      working = false;\n      controls();\n    }\n  }\n  function listItem(parent, value) {\n    const p = document.createElement("p");\n    p.textContent = value;\n    parent.append(p);\n    return p;\n  }\n  function renderReport(next) {\n    report = next;\n    sourceChoices = {};\n    invalidate();\n    const components = next.components ?? [];\n    text(\n      "push-selection",\n      components.length\n        ? [...new Set(components.map((c) => c.componentName))].join(", ")\n        : "No mapped Fondue component selected.",\n    );\n    const issues = byId("push-issues");\n    issues.replaceChildren();\n    for (const issue of next.issues ?? []) listItem(issues, issue.message);\n    for (const warning of next.warnings ?? []) listItem(issues, warning);\n    const changes = byId("push-change-list");\n    changes.replaceChildren();\n    for (const change of next.changes ?? []) {\n      const label = document.createElement("label");\n      label.className = "push-change";\n      const input = document.createElement("input");\n      input.type = "checkbox";\n      input.checked = true;\n      input.dataset.changeId = change.id;\n      input.addEventListener("change", () => invalidate());\n      label.append(\n        input,\n        document.createTextNode(\n          " " + change.componentName + " \xB7 " + change.property,\n        ),\n      );\n      const detail = document.createElement("pre");\n      detail.textContent =\n        JSON.stringify(change.before) + " \u2192 " + JSON.stringify(change.after);\n      label.append(detail);\n      changes.append(label);\n    }\n    byId("push-changes").hidden = !(next.changes ?? []).length;\n    byId("push-scope").hidden = !components.length;\n    const tokens = byId("push-tokens");\n    tokens.replaceChildren();\n    for (const token of (next.tokens ?? []).filter((t) => !t.existing)) {\n      const label = document.createElement("label");\n      label.textContent =\n        "Token for " +\n        (token.name || token.provenance?.role || "changed value");\n      const choice = document.createElement("select");\n      choice.dataset.tokenChoiceId = token.id;\n      const newOption = document.createElement("option");\n      newOption.value = "";\n      newOption.textContent = "Create a new token";\n      choice.append(newOption);\n      for (const existing of tokenCatalog.filter(\n        (t) => t.type === token.type,\n      )) {\n        const option = document.createElement("option");\n        option.value = existing.id;\n        option.textContent = existing.id;\n        choice.append(option);\n      }\n      const input = document.createElement("input");\n      input.dataset.tokenId = token.id;\n      input.setAttribute("aria-label", "New CSS token name");\n      const role = token.provenance?.role;\n      const property =\n        next.changes.find((change) => change.tokenIds?.includes(token.id))\n          ?.property ?? "";\n      const prefix =\n        token.type === "COLOR"\n          ? "color"\n          : role === "radius"\n            ? "border-radius"\n            : role === "typography"\n              ? "typography-" +\n                ({ lineHeight: "line-height", letterSpacing: "letter-spacing" }[\n                  property\n                ] || "font-size")\n              : role || "size";\n      input.value = (token.name || prefix + "-custom")\n        .replace(/\\//g, "-")\n        .replace(/[^a-z0-9-]/g, "-")\n        .replace(/-+/g, "-")\n        .replace(/^-|-$/g, "");\n      choice.addEventListener("change", () => {\n        input.hidden = !!choice.value;\n        invalidate();\n      });\n      input.addEventListener("input", () => invalidate());\n      label.append(choice, input);\n      tokens.append(label);\n    }\n    text(\n      "push-progress",\n      next.changes?.length\n        ? next.changes.length + " changes found in the selection."\n        : "No changed properties found in the selection.",\n    );\n    controls();\n  }\n  function renderPreview(result) {\n    preview = result;\n    byId("push-review").hidden = false;\n    text(\n      "push-base",\n      "Target: Frontify/fondue \xB7 base " + (result.baseSha ?? "").slice(0, 12),\n    );\n    text(\n      "push-diff",\n      result.diff || "No source diff available yet. Resolve the items below.",\n    );\n    const checks = byId("push-checks");\n    checks.replaceChildren();\n    for (const blocker of result.blockers ?? []) {\n      listItem(checks, typeof blocker === "string" ? blocker : blocker.message);\n      if (blocker.candidates?.length && blocker.changeId) {\n        const label = document.createElement("label");\n        label.textContent = "Source declaration to change";\n        const select = document.createElement("select");\n        select.dataset.mappingId = blocker.changeId;\n        const empty = document.createElement("option");\n        empty.value = "";\n        empty.textContent = "Choose the matching source declaration";\n        select.append(empty);\n        for (const candidate of blocker.candidates) {\n          const option = document.createElement("option");\n          option.value = candidate.id ?? candidate.candidateId ?? "";\n          option.textContent =\n            candidate.path +\n            " \xB7 " +\n            candidate.selector +\n            " \xB7 " +\n            candidate.property +\n            ": " +\n            candidate.expectedValue;\n          select.append(option);\n        }\n        // Keep choices visible for the next preview while disabling creation.\n        select.addEventListener("change", () => {\n          if (select.value) sourceChoices[blocker.changeId] = select.value;\n          else delete sourceChoices[blocker.changeId];\n          generation++;\n          preview = null;\n          byId("push-ack").checked = false;\n          controls();\n        });\n        label.append(select);\n        checks.append(label);\n      }\n    }\n    for (const warning of result.warnings ?? []) listItem(checks, warning);\n    for (const check of result.checks ?? [])\n      listItem(\n        checks,\n        typeof check === "string"\n          ? check + ": pending"\n          : (check.name ?? check.id) + ": " + check.status,\n      );\n    listItem(\n      checks,\n      "Browser accessibility and visual review must pass before merge. Creating a draft PR does not certify those checks.",\n    );\n    controls();\n  }\n  byId("push-scan").onclick = () =>\n    run(async () => {\n      text("push-progress", "Reading the selected object\u2026");\n      renderReport(await ask("push-scan"));\n    });\n  byId("push-connect").onclick = () =>\n    run(async () => {\n      const status = await service("/status");\n      paired = true;\n      text(\n        "push-connection",\n        "Connected \xB7 " + (status.repository ?? "Frontify/fondue"),\n      );\n      text(\n        "push-progress",\n        "PR service connected. Review your selection to continue.",\n      );\n    });\n  byId("push-secret").addEventListener("input", () => {\n    paired = false;\n    invalidate();\n  });\n  for (const id of ["push-title", "push-description"])\n    byId(id).addEventListener("input", () => invalidate());\n  byId("push-ack").onchange = controls;\n  byId("push-preview").onclick = () =>\n    run(async () => {\n      const selectedChangeIds = selectedIds(),\n        tokenNames = names(),\n        choices = mappingChoices();\n      text(\n        "push-progress",\n        "Checking the selection and preparing the source diff\u2026",\n      );\n      const current = await ask("push-scan");\n      if (JSON.stringify(current) !== JSON.stringify(report)) {\n        renderReport(current);\n        throw Error(\n          "The selection changed. Review the refreshed changes and preview again.",\n        );\n      }\n      const revision = generation;\n      const replacements = new Map(\n        [...document.querySelectorAll("[data-token-choice-id]")]\n          .filter((el) => el.value)\n          .map((el) => [el.dataset.tokenChoiceId, el.value]),\n      );\n      const outgoing = {\n        ...current,\n        changes: current.changes.map((change) => {\n          const chosen =\n            change.tokenIds?.length === 1 &&\n            replacements.get(change.tokenIds[0]);\n          return chosen\n            ? { ...change, after: { tokenId: chosen }, tokenIds: [chosen] }\n            : change;\n        }),\n        tokens: [\n          ...current.tokens.filter((token) => !replacements.has(token.id)),\n          ...tokenCatalog\n            .filter((token) => [...replacements.values()].includes(token.id))\n            .map((token) => ({ ...token, existing: true })),\n        ],\n      };\n      const result = await service("/preview", {\n        report: outgoing,\n        selectedChangeIds,\n        title: byId("push-title").value.trim(),\n        description: byId("push-description").value.trim(),\n        tokenNames,\n        mappingChoices: choices,\n      });\n      if (revision !== generation)\n        throw Error(\n          "The selection or proposal changed while preparing the diff. Preview again.",\n        );\n      renderPreview(result);\n      text(\n        "push-progress",\n        result.blockers?.length\n          ? "Resolve the source mapping or token issues, then preview again."\n          : "Source diff ready for review.",\n      );\n    });\n  byId("push-create").onclick = () =>\n    run(async () => {\n      const reviewed = preview,\n        revision = generation;\n      if (!reviewed || !byId("push-ack").checked)\n        throw Error("Review the source diff first.");\n      const current = await ask("push-scan");\n      if (\n        revision !== generation ||\n        JSON.stringify(current) !== JSON.stringify(report)\n      ) {\n        renderReport(current);\n        throw Error(\n          "The selection changed. Preview the updated diff before creating a PR.",\n        );\n      }\n      text("push-progress", "Creating the reviewed draft PR\u2026");\n      const result = await service("/pull-request", {\n        previewId: reviewed.previewId,\n        fingerprint: reviewed.fingerprint,\n      });\n      const url = result.url ?? result.pullRequest?.html_url ?? result.html_url;\n      const target = byId("push-result");\n      target.replaceChildren();\n      if (\n        url &&\n        /^https:\\/\\/github\\.com\\/Frontify\\/fondue\\/pull\\/\\d+$/i.test(url)\n      ) {\n        const link = document.createElement("a");\n        link.href = url;\n        link.target = "_blank";\n        link.rel = "noopener noreferrer";\n        link.textContent = "Open draft PR";\n        target.append(link);\n      } else\n        target.textContent =\n          "Draft PR created. Check the PR service for its link.";\n      preview = null;\n      text(\n        "push-progress",\n        "Draft PR created. Your sync baseline is preserved.",\n      );\n    });\n  window.addEventListener("message", (event) => {\n    if (event.source !== parent) return;\n    const message = event.data?.pluginMessage;\n    if (!message) return;\n    if (message.type === "status") tokenCatalog = message.tokenChoices ?? [];\n    if (message.type === "push-invalidated") {\n      report = null;\n      invalidate(\n        "Selection or document changed. Review the selected object again.",\n      );\n    }\n    if (message.type === "push-report" || message.type === "push-error") {\n      const request = pending.get(message.requestId);\n      if (!request) return;\n      clearTimeout(request.timeout);\n      pending.delete(message.requestId);\n      if (message.type === "push-error") request.reject(Error(message.message));\n      else request.resolve(message.report);\n    }\n  });\n  const tabs = [byId("sync-tab"), byId("push-tab")];\n  function activate(tab) {\n    for (const item of tabs) {\n      const active = item === tab;\n      item.setAttribute("aria-selected", String(active));\n      item.tabIndex = active ? 0 : -1;\n      byId(item.getAttribute("aria-controls")).hidden = !active;\n    }\n  }\n  for (const tab of tabs) {\n    tab.onclick = () => activate(tab);\n    tab.onkeydown = (event) => {\n      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))\n        return;\n      event.preventDefault();\n      const target =\n        event.key === "Home"\n          ? tabs[0]\n          : event.key === "End"\n            ? tabs[1]\n            : tabs[1 - tabs.indexOf(tab)];\n      activate(target);\n      target.focus();\n    };\n  }\n  controls();\n})();\n<\/script>\n  </body>\n</html>\n', { width: 480, height: 720, themeColors: true });
+  figma.showUI('<!doctype html>\n<html>\n  <head>\n    <meta charset="utf-8" />\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n      body {\n        margin: 0;\n        padding: 24px;\n        font:\n          13px/1.5 Inter,\n          system-ui,\n          sans-serif;\n        background: var(--figma-color-bg, #fff);\n        color: var(--figma-color-text, #202020);\n      }\n      h1 {\n        font-size: 24px;\n        letter-spacing: -0.7px;\n        margin: 0;\n      }\n      p {\n        margin: 8px 0 16px;\n      }\n      .muted {\n        color: var(--figma-color-text-secondary, #666);\n      }\n      .pill {\n        display: inline-block;\n        border: 1px solid #bbb;\n        padding: 3px 8px;\n        border-radius: 20px;\n        font-size: 11px;\n      }\n      .card {\n        padding: 14px;\n        border: 1px solid var(--figma-color-border, #ddd);\n        border-radius: 8px;\n        margin: 16px 0;\n      }\n      button {\n        font: inherit;\n        border: 1px solid #aaa;\n        border-radius: 5px;\n        background: var(--figma-color-bg-secondary, #eee);\n        color: inherit;\n        padding: 9px 13px;\n        cursor: pointer;\n      }\n      button.primary {\n        background: #191919;\n        color: white;\n        border-color: #191919;\n        width: 100%;\n      }\n      button:disabled {\n        opacity: 0.45;\n        cursor: wait;\n      }\n      .row {\n        display: flex;\n        gap: 8px;\n        margin-top: 10px;\n      }\n      .row button {\n        flex: 1;\n      }\n      pre {\n        font:\n          11px/1.6 ui-monospace,\n          monospace;\n        white-space: pre-wrap;\n        overflow-wrap: anywhere;\n        max-height: 240px;\n        overflow: auto;\n      }\n      summary {\n        cursor: pointer;\n      }\n      #log {\n        font-size: 12px;\n      }\n      [hidden] {\n        display: none !important;\n      }\n      .tabs {\n        display: flex;\n        gap: 8px;\n        margin: 16px 0;\n      }\n      [role="tab"][aria-selected="true"] {\n        border-color: var(--figma-color-border-selected, #555);\n        font-weight: 600;\n      }\n      :focus-visible {\n        outline: 2px solid var(--figma-color-border-selected, #526dff);\n        outline-offset: 3px;\n      }\n      #push-panel label {\n        display: block;\n        margin: 12px 0 5px;\n      }\n      input:not([type="checkbox"]),\n      textarea,\n      select {\n        width: 100%;\n        box-sizing: border-box;\n        font: inherit;\n        padding: 8px;\n        color: inherit;\n        background: var(--figma-color-bg, white);\n        border: 1px solid var(--figma-color-border, #aaa);\n        border-radius: 4px;\n      }\n      fieldset {\n        margin: 16px 0;\n        border: 1px solid var(--figma-color-border, #aaa);\n      }\n      #push-panel h2 {\n        font-size: 15px;\n      }\n      #push-panel pre {\n        max-height: 320px;\n      }\n      #push-create {\n        margin-top: 16px;\n      }\n      .push-change {\n        padding: 8px 0;\n        overflow-wrap: anywhere;\n      }\n      a {\n        color: inherit;\n      }\n    </style>\n  </head>\n  <body>\n    <h1>Fondue Sync</h1>\n    <p class="muted">A released Fondue library, native in Figma.</p>\n    <div class="tabs" role="tablist" aria-label="Fondue actions">\n      <button\n        type="button"\n        role="tab"\n        id="sync-tab"\n        aria-controls="sync-panel"\n        aria-selected="true"\n        tabindex="0"\n      >\n        Sync\n      </button>\n      <button\n        type="button"\n        role="tab"\n        id="push-tab"\n        aria-controls="push-panel"\n        aria-selected="false"\n        tabindex="-1"\n      >\n        Push changes\n      </button>\n    </div>\n    <span class="pill" id="release">Loading release\u2026</span>\n    <div id="updates" class="card" hidden>\n      <strong>Version updates</strong>\n      <div id="update-status" role="status" aria-live="polite"></div>\n      <button type="button" id="check-updates">Check again</button>\n    </div>\n    <section id="sync-panel" role="tabpanel" aria-labelledby="sync-tab">\n      <div class="card">\n        <strong>Library file</strong>\n        <p id="status" class="muted">\n          Open a dedicated Fondue library Design file.\n        </p>\n        <p class="muted">\n          Components are grouped by category and family, such as Buttons /\n          Button. Enable Show subfolders in Assets to browse these folders.\n        </p>\n        <div id="counts"></div>\n      </div>\n      <button class="primary" data-action="import">Import Fondue</button>\n      <div class="row">\n        <button data-action="organize">Organize components</button>\n      </div>\n      <p class="muted">\n        Organize applies category folders to existing components and preserves\n        styling, content and other library edits.\n      </p>\n      <div class="row">\n        <button data-action="compare">Compare</button\n        ><button data-action="update">Update library</button\n        ><button data-action="validate">Validate</button>\n      </div>\n      <p class="muted">\n        Import and Update first save a recovery version. If interrupted, close\n        the plugin and restore the matching \u201CBefore Fondue\u201D version in Figma\u2019s\n        Version History. Restoring affects the whole file, including later edits\n        by collaborators.\n      </p>\n      <p id="checkpoint" role="status" class="muted"></p>\n      <p id="progress" aria-live="polite" class="muted"></p>\n      <div id="log" aria-live="polite"></div>\n      <details>\n        <summary>Compose with slots</summary>\n        <p>\n          Select a control, row or cell on the canvas. These actions edit its\n          contents.\n        </p>\n        <label\n          >Segments\n          <input\n            id="segment-count"\n            type="number"\n            min="2"\n            max="10"\n            value="5"\n            style="width: 64px"\n        /></label>\n        <div class="row">\n          <button data-action="compose-insert-segments">Insert control</button>\n          <button data-action="compose-add-segment">Add segment</button>\n          <button data-action="compose-select-segment">Select segment</button>\n        </div>\n        <div class="row">\n          <button data-action="compose-insert-table">Insert table</button>\n          <button data-action="compose-add-row">Add row</button>\n          <button data-action="compose-add-column">Add column</button>\n        </div>\n        <button data-action="compose-match-column-width">\n          Match column width\n        </button>\n        <p class="muted">\n          Resize a cell, then use Match column width to apply that width to its\n          column. Insert actions require the editable components to be installed\n          in this library.\n        </p>\n        <p id="composition-result" role="status" aria-live="polite"></p>\n      </details>\n      <details>\n        <summary>Component composition overview</summary>\n        <p class="muted">\n          Generator coverage and candidate content regions. This is separate\n          from the file\'s sync and publication state.\n        </p>\n        <label\n          >Find component <input id="composition-search" type="search"\n        /></label>\n        <p>\n          <a\n            href="https://github.com/DannyRuchtie/fondue-sync/blob/main/recipes/composition-policies.json"\n            target="_blank"\n            rel="noopener noreferrer"\n            >Maintain composition policies</a\n          >\n        </p>\n        <div style="overflow: auto">\n          <table>\n            <thead>\n              <tr>\n                <th>Component</th>\n                <th>Regions</th>\n                <th>Status</th>\n              </tr>\n            </thead>\n            <tbody id="composition-rows"></tbody>\n          </table>\n        </div>\n      </details>\n      <details>\n        <summary>Coverage and limitations</summary>\n        <pre id="gaps"></pre>\n      </details>\n      <p class="muted">\n        Publish this file through Figma\u2019s library publishing flow. Designers\n        enable the published library in their own files and accept updates\n        there.\n      </p>\n      <details>\n        <summary>Future: connected prototypes</summary>\n        <p>\n          Screen \u2192 real Fondue code and Frontify data is a later phase. This\n          plugin currently builds and updates library assets.\n        </p>\n      </details>\n    </section>\n    <section id="push-panel" role="tabpanel" aria-labelledby="push-tab" hidden>\n      <p>\n        Select a Fondue component or instance on the canvas to propose changes\n        to its source.\n      </p>\n      <button type="button" id="push-scan">Review selected object</button>\n      <p id="push-progress" role="status" aria-live="polite"></p>\n      <div id="push-selection"></div>\n      <div id="push-issues" role="alert"></div>\n      <fieldset id="push-changes" hidden>\n        <legend>Changes to include</legend>\n        <div id="push-change-list"></div>\n      </fieldset>\n      <div id="push-tokens"></div>\n      <p id="push-scope" class="muted" hidden>\n        Instance changes propose an update to the shared Fondue component.\n        Shared tokens can affect other components.\n      </p>\n      <label for="push-title">PR title</label>\n      <input\n        id="push-title"\n        value="fix(components): update selected component styles"\n        maxlength="160"\n      />\n      <label for="push-description">Reason for this change</label>\n      <textarea\n        id="push-description"\n        rows="3"\n        placeholder="Describe the intended improvement"\n      ></textarea>\n      <details>\n        <summary>Connect PR service</summary>\n        <p class="muted">\n          Start the local Fondue PR service, then enter the pairing secret\n          printed in its terminal. GitHub credentials stay in the service.\n        </p>\n        <label for="push-secret">Pairing secret</label>\n        <input\n          id="push-secret"\n          type="password"\n          autocomplete="off"\n          spellcheck="false"\n        />\n        <button type="button" id="push-connect">Connect</button>\n        <p id="push-connection" role="status">Service: http://localhost:3848</p>\n      </details>\n      <div class="row">\n        <button type="button" id="push-preview" disabled>\n          Preview PR diff\n        </button>\n      </div>\n      <div id="push-review" hidden>\n        <h2>Review source changes</h2>\n        <p id="push-base" class="muted"></p>\n        <pre\n          id="push-diff"\n          tabindex="0"\n          aria-label="Proposed source diff"\n        ></pre>\n        <div id="push-checks"></div>\n        <label\n          ><input type="checkbox" id="push-ack" /> I reviewed the diff and its\n          shared component/token impact.</label\n        >\n        <button type="button" id="push-create" class="primary" disabled>\n          Create draft PR\n        </button>\n      </div>\n      <p id="push-result" role="status"></p>\n    </section>\n    <script>"use strict";\n(() => {\n  var __defProp = Object.defineProperty;\n  var __defProps = Object.defineProperties;\n  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;\n  var __getOwnPropSymbols = Object.getOwnPropertySymbols;\n  var __hasOwnProp = Object.prototype.hasOwnProperty;\n  var __propIsEnum = Object.prototype.propertyIsEnumerable;\n  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;\n  var __spreadValues = (a, b) => {\n    for (var prop in b || (b = {}))\n      if (__hasOwnProp.call(b, prop))\n        __defNormalProp(a, prop, b[prop]);\n    if (__getOwnPropSymbols)\n      for (var prop of __getOwnPropSymbols(b)) {\n        if (__propIsEnum.call(b, prop))\n          __defNormalProp(a, prop, b[prop]);\n      }\n    return a;\n  };\n  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));\n\n  // src/updates.ts\n  function stableVersion(value) {\n    if (typeof value !== "string") return null;\n    const match = /^v?(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:\\+[\\w.-]+)?$/.exec(value);\n    if (!match) return null;\n    const parts = match.slice(1, 4).map(Number);\n    return parts.every(Number.isSafeInteger) ? parts : null;\n  }\n  function isNewer(latest, current) {\n    const a = stableVersion(latest);\n    const b = stableVersion(current);\n    if (!a || !b) return false;\n    for (let i = 0; i < 3; i++) {\n      if (a[i] !== b[i]) return a[i] > b[i];\n    }\n    return false;\n  }\n  async function checkUpdates(pluginVersion, fondueVersion, request = fetch) {\n    const targets = [\n      {\n        name: "Fondue Sync",\n        current: pluginVersion,\n        endpoint: "https://api.github.com/repos/DannyRuchtie/fondue-sync/releases/latest",\n        url: "https://github.com/DannyRuchtie/fondue-sync/releases/latest",\n        version: (data) => data.draft === false && data.prerelease === false ? data.tag_name : null\n      },\n      {\n        name: "Fondue",\n        current: fondueVersion,\n        endpoint: "https://registry.npmjs.org/@frontify%2Ffondue/latest",\n        url: "https://github.com/Frontify/fondue/releases",\n        version: (data) => data.name === "@frontify/fondue" ? data.version : null\n      }\n    ];\n    return Promise.all(\n      targets.map(async (target) => {\n        const result = {\n          name: target.name,\n          current: target.current,\n          state: "unavailable",\n          url: target.url\n        };\n        const controller = new AbortController();\n        const timer = setTimeout(() => controller.abort(), 5e3);\n        try {\n          const response = await request(target.endpoint, {\n            signal: controller.signal,\n            credentials: "omit",\n            cache: "no-store"\n          });\n          if (!response.ok) return result;\n          const latest = target.version(await response.json());\n          if (!stableVersion(latest) || !stableVersion(target.current))\n            return result;\n          return __spreadProps(__spreadValues({}, result), {\n            latest,\n            state: isNewer(latest, target.current) ? "available" : "current"\n          });\n        } catch (e) {\n          return result;\n        } finally {\n          clearTimeout(timer);\n        }\n      })\n    );\n  }\n\n  // src/update-ui.ts\n  var container = document.getElementById("updates");\n  var status = document.getElementById("update-status");\n  var retry = document.getElementById("check-updates");\n  var versions;\n  var started = false;\n  async function check() {\n    if (!versions || retry.disabled) return;\n    retry.disabled = true;\n    status.textContent = "Checking for newer versions\\u2026";\n    try {\n      const results = await checkUpdates(versions.plugin, versions.fondue);\n      status.replaceChildren();\n      for (const result of results) {\n        const line = document.createElement("p");\n        if (result.state === "available") {\n          line.textContent = `${result.name} ${result.latest} is available (installed: ${result.current}). `;\n          const link = document.createElement("a");\n          link.href = result.url;\n          link.target = "_blank";\n          link.rel = "noopener noreferrer";\n          link.textContent = result.name === "Fondue Sync" ? "Get plugin update" : "View Fondue release";\n          line.appendChild(link);\n          const instruction = document.createElement("span");\n          instruction.textContent = result.name === "Fondue Sync" ? " Install the new plugin build, then Compare before updating the library." : " A maintainer must package this release before it can be synced.";\n          line.appendChild(instruction);\n        } else {\n          line.textContent = result.state === "current" ? `${result.name} ${result.current}: no newer stable release found.` : `${result.name} ${result.current}: update check unavailable. You can keep working.`;\n        }\n        status.appendChild(line);\n      }\n    } finally {\n      retry.disabled = false;\n    }\n  }\n  retry.addEventListener("click", () => void check());\n  window.addEventListener("message", (event) => {\n    var _a;\n    if (event.source !== parent) return;\n    const message = (_a = event.data) == null ? void 0 : _a.pluginMessage;\n    if ((message == null ? void 0 : message.type) !== "status" || started) return;\n    started = true;\n    versions = { plugin: message.pluginVersion, fondue: message.release };\n    container.hidden = false;\n    void check();\n  });\n})();\n<\/script>\n    <script>\n      const send = (type, extra = {}) =>\n        parent.postMessage({ pluginMessage: { type, ...extra } }, "*");\n      const el = (id) => document.getElementById(id);\n      let compositionRows = [];\n      function showComposition() {\n        const query = el("composition-search").value.toLowerCase();\n        el("composition-rows").replaceChildren();\n        for (const row of compositionRows.filter((row) =>\n          (row.name + " " + row.state + " " + row.regions.join(" "))\n            .toLowerCase()\n            .includes(query),\n        )) {\n          const tr = document.createElement("tr");\n          tr.title = row.reason;\n          for (const text of [\n            row.package + " / " + row.name,\n            row.regions.join(", ") || "\u2014",\n            row.state,\n          ]) {\n            const td = document.createElement("td");\n            td.textContent = text;\n            td.style.padding = "6px";\n            td.style.verticalAlign = "top";\n            tr.appendChild(td);\n          }\n          el("composition-rows").appendChild(tr);\n        }\n      }\n      el("composition-search").oninput = showComposition;\n      function buttons(disabled) {\n        document\n          .querySelectorAll("#sync-panel button")\n          .forEach((b) => (b.disabled = disabled));\n      }\n      document.querySelectorAll("[data-action]").forEach(\n        (button) =>\n          (button.onclick = () => {\n            buttons(true);\n            el("progress").textContent = "Working\u2026";\n            send(button.dataset.action, {\n              amount: Number(el("segment-count").value),\n            });\n          }),\n      );\n      onmessage = (event) => {\n        const m = event.data.pluginMessage;\n        if (!m) return;\n        if (m.type === "idle") {\n          buttons(false);\n          return;\n        }\n        if (m.type === "status") {\n          compositionRows = m.composition ?? [];\n          showComposition();\n          if (m.lastErrors?.length)\n            el("log").textContent =\n              "Previous update errors:\\n" + m.lastErrors.join("\\n");\n          el("release").textContent =\n            "Fondue " + m.release + " \xB7 " + m.fingerprint.slice(0, 8);\n          el("status").textContent = m.applied\n            ? (m.appliedFingerprint === m.fingerprint\n                ? "Managed bundle synchronized: "\n                : "Changes available; last managed sync: ") + m.applied\n            : m.hasManagedAssets\n              ? "Import started. Compare and Update library to resume."\n              : "Ready to import into this file.";\n          el("counts").textContent =\n            `${m.counts.tokens} variables \xB7 ${m.counts.styles} styles \xB7 ${m.counts.icons} icons \xB7 ${m.counts.recipes} component sets`;\n          el("gaps").textContent = JSON.stringify(m.gaps, null, 2);\n        }\n        if (m.type === "checkpoint") {\n          el("checkpoint").textContent =\n            "Recovery version saved: " +\n            m.checkpoint.title +\n            " (" +\n            m.checkpoint.id +\n            ").";\n        }\n        if (m.type === "progress") el("progress").textContent = m.text;\n        if (m.type === "composition-result") {\n          el("composition-result").textContent = m.message;\n          el("progress").textContent = "Composition updated";\n        }\n        if (m.type === "error") {\n          el("progress").textContent = "Action stopped";\n          el("log").textContent = m.message;\n        }\n        if (m.type === "organization-report") {\n          const r = m.report;\n          el("progress").textContent =\n            r.conflicts.length || r.errors.length\n              ? "Organization stopped; review the items below."\n              : `Component categories applied: ${r.renamed} renamed, ${r.alreadyOrganized} already organized. Enable Show subfolders in Assets.`;\n          el("log").textContent = JSON.stringify(r, null, 2);\n          el("status").textContent =\n            "Category organization only; Compare checks remaining source updates separately.";\n        }\n        if (m.type === "report") {\n          const r = m.report;\n          el("progress").textContent = r.complete\n            ? "Managed assets match the bundled recipes. Review coverage before publishing."\n            : "Review required before publishing.";\n          el("log").replaceChildren();\n          const pre = document.createElement("pre");\n          pre.textContent = JSON.stringify(\n            {\n              counts: r.counts,\n              errors: r.errors,\n              warnings: r.warnings,\n              changes: r.actions.filter((a) => a.action !== "unchanged"),\n            },\n            null,\n            2,\n          );\n          el("log").appendChild(pre);\n          for (const action of r.actions.filter(\n            (a) => a.action === "conflict" || a.action === "missing",\n          )) {\n            const item = document.createElement("p");\n            item.textContent = action.id + ": " + action.reason;\n            el("log").appendChild(item);\n          }\n          if (r.complete)\n            el("status").textContent =\n              "Synchronized source: " +\n              r.release +\n              " \xB7 publication status is managed by Figma.";\n        }\n      };\n      send("status");\n    <\/script>\n    <script>(() => {\n  const byId = (id) => document.getElementById(id);\n  const endpoint = "http://localhost:3848";\n  let report = null,\n    preview = null,\n    paired = false,\n    working = false,\n    generation = 0;\n  let tokenCatalog = [];\n  let sourceChoices = {};\n  const pending = new Map();\n  let sequence = 0;\n  const text = (id, value) => {\n    byId(id).textContent = value;\n  };\n  const selectedIds = () =>\n    [...document.querySelectorAll("[data-change-id]:checked")].map(\n      (el) => el.dataset.changeId,\n    );\n  const names = () =>\n    Object.fromEntries(\n      [...document.querySelectorAll("[data-token-id]")].map((el) => [\n        el.dataset.tokenId,\n        el.value.trim(),\n      ]),\n    );\n  const mappingChoices = () => ({\n    ...sourceChoices,\n    ...Object.fromEntries(\n      [...document.querySelectorAll("[data-mapping-id]")]\n        .filter((el) => el.value)\n        .map((el) => [el.dataset.mappingId, el.value]),\n    ),\n  });\n  function controls() {\n    byId("push-scan").disabled = working;\n    byId("push-connect").disabled = working;\n    byId("push-preview").disabled =\n      working || !paired || !report || !selectedIds().length;\n    byId("push-create").disabled =\n      working ||\n      !preview ||\n      (preview.blockers ?? []).length > 0 ||\n      !byId("push-ack").checked;\n  }\n  function invalidate(message) {\n    generation++;\n    preview = null;\n    byId("push-review").hidden = true;\n    byId("push-ack").checked = false;\n    text("push-result", "");\n    if (message) text("push-progress", message);\n    controls();\n  }\n  function ask(type) {\n    return new Promise((resolve, reject) => {\n      const requestId = "push-" + ++sequence;\n      const timeout = setTimeout(() => {\n        pending.delete(requestId);\n        reject(Error("Selection scan timed out. Try again."));\n      }, 60000);\n      pending.set(requestId, { resolve, reject, timeout });\n      parent.postMessage({ pluginMessage: { type, requestId } }, "*");\n    });\n  }\n  async function service(path, body) {\n    const response = await fetch(endpoint + path, {\n      method: body === undefined ? "GET" : "POST",\n      headers: {\n        Authorization: "Bearer " + byId("push-secret").value.trim(),\n        ...(body === undefined ? {} : { "Content-Type": "application/json" }),\n      },\n      ...(body === undefined ? {} : { body: JSON.stringify(body) }),\n    });\n    const result = await response.json();\n    if (!response.ok)\n      throw Error(\n        result.error ?? result.message ?? "PR service rejected the request.",\n      );\n    return result;\n  }\n  async function run(action) {\n    working = true;\n    controls();\n    try {\n      await action();\n    } catch (error) {\n      text("push-progress", error.message);\n    } finally {\n      working = false;\n      controls();\n    }\n  }\n  function listItem(parent, value) {\n    const p = document.createElement("p");\n    p.textContent = value;\n    parent.append(p);\n    return p;\n  }\n  function renderReport(next) {\n    report = next;\n    sourceChoices = {};\n    invalidate();\n    const components = next.components ?? [];\n    text(\n      "push-selection",\n      components.length\n        ? [...new Set(components.map((c) => c.componentName))].join(", ")\n        : "No mapped Fondue component selected.",\n    );\n    const issues = byId("push-issues");\n    issues.replaceChildren();\n    for (const issue of next.issues ?? []) listItem(issues, issue.message);\n    for (const warning of next.warnings ?? []) listItem(issues, warning);\n    const changes = byId("push-change-list");\n    changes.replaceChildren();\n    for (const change of next.changes ?? []) {\n      const label = document.createElement("label");\n      label.className = "push-change";\n      const input = document.createElement("input");\n      input.type = "checkbox";\n      input.checked = true;\n      input.dataset.changeId = change.id;\n      input.addEventListener("change", () => invalidate());\n      label.append(\n        input,\n        document.createTextNode(\n          " " + change.componentName + " \xB7 " + change.property,\n        ),\n      );\n      const detail = document.createElement("pre");\n      detail.textContent =\n        JSON.stringify(change.before) + " \u2192 " + JSON.stringify(change.after);\n      label.append(detail);\n      changes.append(label);\n    }\n    byId("push-changes").hidden = !(next.changes ?? []).length;\n    byId("push-scope").hidden = !components.length;\n    const tokens = byId("push-tokens");\n    tokens.replaceChildren();\n    for (const token of (next.tokens ?? []).filter((t) => !t.existing)) {\n      const label = document.createElement("label");\n      label.textContent =\n        "Token for " +\n        (token.name || token.provenance?.role || "changed value");\n      const choice = document.createElement("select");\n      choice.dataset.tokenChoiceId = token.id;\n      const newOption = document.createElement("option");\n      newOption.value = "";\n      newOption.textContent = "Create a new token";\n      choice.append(newOption);\n      for (const existing of tokenCatalog.filter(\n        (t) => t.type === token.type,\n      )) {\n        const option = document.createElement("option");\n        option.value = existing.id;\n        option.textContent = existing.id;\n        choice.append(option);\n      }\n      const input = document.createElement("input");\n      input.dataset.tokenId = token.id;\n      input.setAttribute("aria-label", "New CSS token name");\n      const role = token.provenance?.role;\n      const property =\n        next.changes.find((change) => change.tokenIds?.includes(token.id))\n          ?.property ?? "";\n      const prefix =\n        token.type === "COLOR"\n          ? "color"\n          : role === "radius"\n            ? "border-radius"\n            : role === "typography"\n              ? "typography-" +\n                ({ lineHeight: "line-height", letterSpacing: "letter-spacing" }[\n                  property\n                ] || "font-size")\n              : role || "size";\n      input.value = (token.name || prefix + "-custom")\n        .replace(/\\//g, "-")\n        .replace(/[^a-z0-9-]/g, "-")\n        .replace(/-+/g, "-")\n        .replace(/^-|-$/g, "");\n      choice.addEventListener("change", () => {\n        input.hidden = !!choice.value;\n        invalidate();\n      });\n      input.addEventListener("input", () => invalidate());\n      label.append(choice, input);\n      tokens.append(label);\n    }\n    text(\n      "push-progress",\n      next.changes?.length\n        ? next.changes.length + " changes found in the selection."\n        : "No changed properties found in the selection.",\n    );\n    controls();\n  }\n  function renderPreview(result) {\n    preview = result;\n    byId("push-review").hidden = false;\n    text(\n      "push-base",\n      "Target: Frontify/fondue \xB7 base " + (result.baseSha ?? "").slice(0, 12),\n    );\n    text(\n      "push-diff",\n      result.diff || "No source diff available yet. Resolve the items below.",\n    );\n    const checks = byId("push-checks");\n    checks.replaceChildren();\n    for (const blocker of result.blockers ?? []) {\n      listItem(checks, typeof blocker === "string" ? blocker : blocker.message);\n      if (blocker.candidates?.length && blocker.changeId) {\n        const label = document.createElement("label");\n        label.textContent = "Source declaration to change";\n        const select = document.createElement("select");\n        select.dataset.mappingId = blocker.changeId;\n        const empty = document.createElement("option");\n        empty.value = "";\n        empty.textContent = "Choose the matching source declaration";\n        select.append(empty);\n        for (const candidate of blocker.candidates) {\n          const option = document.createElement("option");\n          option.value = candidate.id ?? candidate.candidateId ?? "";\n          option.textContent =\n            candidate.path +\n            " \xB7 " +\n            candidate.selector +\n            " \xB7 " +\n            candidate.property +\n            ": " +\n            candidate.expectedValue;\n          select.append(option);\n        }\n        // Keep choices visible for the next preview while disabling creation.\n        select.addEventListener("change", () => {\n          if (select.value) sourceChoices[blocker.changeId] = select.value;\n          else delete sourceChoices[blocker.changeId];\n          generation++;\n          preview = null;\n          byId("push-ack").checked = false;\n          controls();\n        });\n        label.append(select);\n        checks.append(label);\n      }\n    }\n    for (const warning of result.warnings ?? []) listItem(checks, warning);\n    for (const check of result.checks ?? [])\n      listItem(\n        checks,\n        typeof check === "string"\n          ? check + ": pending"\n          : (check.name ?? check.id) + ": " + check.status,\n      );\n    listItem(\n      checks,\n      "Browser accessibility and visual review must pass before merge. Creating a draft PR does not certify those checks.",\n    );\n    controls();\n  }\n  byId("push-scan").onclick = () =>\n    run(async () => {\n      text("push-progress", "Reading the selected object\u2026");\n      renderReport(await ask("push-scan"));\n    });\n  byId("push-connect").onclick = () =>\n    run(async () => {\n      const status = await service("/status");\n      paired = true;\n      text(\n        "push-connection",\n        "Connected \xB7 " + (status.repository ?? "Frontify/fondue"),\n      );\n      text(\n        "push-progress",\n        "PR service connected. Review your selection to continue.",\n      );\n    });\n  byId("push-secret").addEventListener("input", () => {\n    paired = false;\n    invalidate();\n  });\n  for (const id of ["push-title", "push-description"])\n    byId(id).addEventListener("input", () => invalidate());\n  byId("push-ack").onchange = controls;\n  byId("push-preview").onclick = () =>\n    run(async () => {\n      const selectedChangeIds = selectedIds(),\n        tokenNames = names(),\n        choices = mappingChoices();\n      text(\n        "push-progress",\n        "Checking the selection and preparing the source diff\u2026",\n      );\n      const current = await ask("push-scan");\n      if (JSON.stringify(current) !== JSON.stringify(report)) {\n        renderReport(current);\n        throw Error(\n          "The selection changed. Review the refreshed changes and preview again.",\n        );\n      }\n      const revision = generation;\n      const replacements = new Map(\n        [...document.querySelectorAll("[data-token-choice-id]")]\n          .filter((el) => el.value)\n          .map((el) => [el.dataset.tokenChoiceId, el.value]),\n      );\n      const outgoing = {\n        ...current,\n        changes: current.changes.map((change) => {\n          const chosen =\n            change.tokenIds?.length === 1 &&\n            replacements.get(change.tokenIds[0]);\n          return chosen\n            ? { ...change, after: { tokenId: chosen }, tokenIds: [chosen] }\n            : change;\n        }),\n        tokens: [\n          ...current.tokens.filter((token) => !replacements.has(token.id)),\n          ...tokenCatalog\n            .filter((token) => [...replacements.values()].includes(token.id))\n            .map((token) => ({ ...token, existing: true })),\n        ],\n      };\n      const result = await service("/preview", {\n        report: outgoing,\n        selectedChangeIds,\n        title: byId("push-title").value.trim(),\n        description: byId("push-description").value.trim(),\n        tokenNames,\n        mappingChoices: choices,\n      });\n      if (revision !== generation)\n        throw Error(\n          "The selection or proposal changed while preparing the diff. Preview again.",\n        );\n      renderPreview(result);\n      text(\n        "push-progress",\n        result.blockers?.length\n          ? "Resolve the source mapping or token issues, then preview again."\n          : "Source diff ready for review.",\n      );\n    });\n  byId("push-create").onclick = () =>\n    run(async () => {\n      const reviewed = preview,\n        revision = generation;\n      if (!reviewed || !byId("push-ack").checked)\n        throw Error("Review the source diff first.");\n      const current = await ask("push-scan");\n      if (\n        revision !== generation ||\n        JSON.stringify(current) !== JSON.stringify(report)\n      ) {\n        renderReport(current);\n        throw Error(\n          "The selection changed. Preview the updated diff before creating a PR.",\n        );\n      }\n      text("push-progress", "Creating the reviewed draft PR\u2026");\n      const result = await service("/pull-request", {\n        previewId: reviewed.previewId,\n        fingerprint: reviewed.fingerprint,\n      });\n      const url = result.url ?? result.pullRequest?.html_url ?? result.html_url;\n      const target = byId("push-result");\n      target.replaceChildren();\n      if (\n        url &&\n        /^https:\\/\\/github\\.com\\/Frontify\\/fondue\\/pull\\/\\d+$/i.test(url)\n      ) {\n        const link = document.createElement("a");\n        link.href = url;\n        link.target = "_blank";\n        link.rel = "noopener noreferrer";\n        link.textContent = "Open draft PR";\n        target.append(link);\n      } else\n        target.textContent =\n          "Draft PR created. Check the PR service for its link.";\n      preview = null;\n      text(\n        "push-progress",\n        "Draft PR created. Your sync baseline is preserved.",\n      );\n    });\n  window.addEventListener("message", (event) => {\n    if (event.source !== parent) return;\n    const message = event.data?.pluginMessage;\n    if (!message) return;\n    if (message.type === "status") tokenCatalog = message.tokenChoices ?? [];\n    if (message.type === "push-invalidated") {\n      report = null;\n      invalidate(\n        "Selection or document changed. Review the selected object again.",\n      );\n    }\n    if (message.type === "push-report" || message.type === "push-error") {\n      const request = pending.get(message.requestId);\n      if (!request) return;\n      clearTimeout(request.timeout);\n      pending.delete(message.requestId);\n      if (message.type === "push-error") request.reject(Error(message.message));\n      else request.resolve(message.report);\n    }\n  });\n  const tabs = [byId("sync-tab"), byId("push-tab")];\n  function activate(tab) {\n    for (const item of tabs) {\n      const active = item === tab;\n      item.setAttribute("aria-selected", String(active));\n      item.tabIndex = active ? 0 : -1;\n      byId(item.getAttribute("aria-controls")).hidden = !active;\n    }\n  }\n  for (const tab of tabs) {\n    tab.onclick = () => activate(tab);\n    tab.onkeydown = (event) => {\n      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))\n        return;\n      event.preventDefault();\n      const target =\n        event.key === "Home"\n          ? tabs[0]\n          : event.key === "End"\n            ? tabs[1]\n            : tabs[1 - tabs.indexOf(tab)];\n      activate(target);\n      target.focus();\n    };\n  }\n  controls();\n})();\n<\/script>\n  </body>\n</html>\n', { width: 480, height: 720, themeColors: true });
   var busy = false;
   var post = (type, payload) => figma.ui.postMessage(__spreadValues({ type }, payload));
   function compact(report) {
@@ -321420,7 +325966,7 @@ Sources: ${recipe.source.join(", ")}`;
   figma.on("selectionchange", invalidatePush);
   figma.on("stylechange", invalidatePush);
   figma.ui.onmessage = async (message) => {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     if (busy) {
       if (message.type === "push-scan")
         post("push-error", {
@@ -321439,6 +325985,18 @@ Sources: ${recipe.source.join(", ")}`;
         return;
       }
       const engine = new SyncEngine(figma, bundle);
+      if (message.type.startsWith("compose-")) {
+        post(
+          "composition-result",
+          await compose(
+            figma,
+            engine.index.assets,
+            message.type.slice(8),
+            message.amount
+          )
+        );
+        return;
+      }
       if (message.type === "status")
         post("status", {
           release: bundle.release,
@@ -321455,13 +326013,14 @@ Sources: ${recipe.source.join(", ")}`;
             recipes: bundle.recipes.length
           },
           gaps: bundle.gaps,
+          composition: (_d = bundle.composition) != null ? _d : [],
           tokenChoices: bundle.tokens.filter(
             (token) => /^var\(--[a-z0-9-]+\)$/.test(token.css)
           ),
           publication: "Publishing and consumer acceptance are managed in Figma."
         });
       else if (message.type === "compare" || message.type === "validate") {
-        const report = await engine.inspect();
+        const report = await engine.inspect((text) => post("progress", { text }));
         const problems = bundleProblems(bundle);
         report.errors.push(...problems.map((p) => p.message));
         report.complete = report.complete && !problems.length;

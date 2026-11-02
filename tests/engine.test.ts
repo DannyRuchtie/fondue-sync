@@ -93,7 +93,7 @@ function fixture(): Bundle {
     gaps: [],
   };
 }
-function mockApi() {
+function mockApi(simulateVariants = false) {
   let seq = 0;
   const nodes = new Map<string, any>(),
     collections = new Map<string, any>(),
@@ -314,7 +314,19 @@ function mockApi() {
                   {},
               ).map(([key, def]: any) => [
                 key,
-                { type: def.type, value: overrides[key] ?? def.defaultValue },
+                {
+                  type: def.type,
+                  value:
+                    overrides[key] ??
+                    (def.type === "VARIANT"
+                      ? Object.fromEntries(
+                          main.name
+                            .split(",")
+                            .map((part: string) => part.trim().split("=")),
+                        )[key]
+                      : undefined) ??
+                    def.defaultValue,
+                },
               ]),
             );
           },
@@ -400,6 +412,19 @@ function mockApi() {
       };
     }
     o.children = [];
+    o.findAll = (predicate: (node: any) => boolean) => {
+      const result: any[] = [];
+      const visit = (node: any) => {
+        for (const child of node.children ?? []) {
+          if (predicate(child)) result.push(child);
+          visit(child);
+        }
+      };
+      visit(o);
+      return result;
+    };
+    o.findAllWithCriteria = ({ types }: any) =>
+      o.findAll((node: any) => types.includes(node.type));
     o.appendChild = (n: any) => {
       if (n.parent) {
         const idx = n.parent.children.indexOf(n);
@@ -421,6 +446,7 @@ function mockApi() {
   const api: any = {
     root,
     currentPage: page,
+    viewport: { scrollAndZoomIntoView: () => {} },
     setCurrentPageAsync: async (next: any) => {
       if (!next || next.type !== "PAGE")
         throw Error("Native current page must be PAGE");
@@ -474,6 +500,7 @@ function mockApi() {
           characters = value;
         },
       });
+      n.getStyledTextSegments = () => [{ fontName: n.fontName }];
       n.setTextStyleIdAsync = async (id: string) => {
         n.textStyleId = id;
         if (id) {
@@ -527,6 +554,16 @@ function mockApi() {
               if (index < 1 || !part.slice(index + 1).trim())
                 throw Error("Native invalid or empty variant value: " + name);
             }
+          if (simulateVariants) {
+            const inferred: any = {};
+            for (const name of names)
+              for (const part of name.split(",")) {
+                const [key, value] = part.trim().split("=");
+                if (key && value)
+                  inferred[key] ??= { type: "VARIANT", defaultValue: value };
+              }
+            return { ...inferred, ...definitions };
+          }
           return definitions;
         },
       });
@@ -556,7 +593,7 @@ function mockApi() {
         options = {},
       ) => {
         const key = name + "#" + ++seq;
-        n.componentPropertyDefinitions[key] = {
+        definitions[key] = {
           type,
           defaultValue: value,
           ...options,
@@ -2816,4 +2853,108 @@ test("an interrupted native-slot import resumes the same slot identity", async (
   assert.equal(resumed.complete, true, resumed.errors.join("\n"));
   assert.equal(set.children[0].children[0].id, slotId);
   assert.equal(set.children[0].children[0].children[0].characters, "Original");
+});
+
+import { compose } from "../src/composer";
+async function compositionFixture() {
+  const bundle = structuredClone(releaseBundle) as unknown as Bundle;
+  const ids = new Set([
+    "components/SegmentedControl.Root",
+    "components/SegmentedControl.Item",
+    "components/Table.Root",
+    "components/Table.EditableRow",
+    "components/Table.ContentCell",
+    "components/Table.HeaderCell",
+  ]);
+  bundle.recipes = bundle.recipes.filter((recipe) => ids.has(recipe.id));
+  const iconIds = new Set<string>();
+  const walk = (node: any) => {
+    if (node.iconId) iconIds.add(node.iconId);
+    for (const child of node.children ?? []) walk(child);
+  };
+  bundle.recipes.forEach((recipe) =>
+    recipe.variants.forEach((variant) => walk(variant.root)),
+  );
+  bundle.icons = bundle.icons.filter((icon) => iconIds.has(icon.id));
+  bundle.examples = [];
+  bundle.inventory = [];
+  bundle.gaps = [];
+  const mock = mockApi(true);
+  const engine = new SyncEngine(mock.api, bundle);
+  const report = await engine.sync();
+  assert.equal(report.complete, true, report.errors.join("\n"));
+  return { ...mock, engine };
+}
+test("composition actions insert five linked segments and enforce one selected item", async () => {
+  const { api, engine } = await compositionFixture();
+  const result = await compose(api, engine.index.assets, "insert-segments", 5);
+  const root: any = api.currentPage.selection[0];
+  const items = root.children[0].children;
+  assert.equal(items.length, 5);
+  assert.equal(result.createdNodeIds.length, 4);
+  assert.equal(
+    items.filter(
+      (item: any) => item.componentProperties.selected.value === "true",
+    ).length,
+    1,
+  );
+  api.currentPage.selection = [items[3]];
+  await compose(api, engine.index.assets, "select-segment");
+  assert.equal(
+    items.filter(
+      (item: any) => item.componentProperties.selected.value === "true",
+    ).length,
+    1,
+  );
+  assert.equal(items[3].componentProperties.selected.value, "true");
+  assert.equal((await engine.inspect()).counts.conflict ?? 0, 0);
+});
+test("table actions add a column to every row, align widths and preserve existing cells and content", async () => {
+  const { api, engine, nodes } = await compositionFixture();
+  await compose(api, engine.index.assets, "insert-table");
+  const root: any = api.currentPage.selection[0];
+  const rows = root.children[0].children;
+  const oldIds = rows.map((row: any) =>
+    row.children[0].children.map((cell: any) => cell.id),
+  );
+  const text = rows[1].children[0].children[0].findAllWithCriteria({
+    types: ["TEXT"],
+  })[0];
+  text.characters = "Keep this customer content";
+  await compose(api, engine.index.assets, "add-column");
+  assert.ok(rows.every((row: any) => row.children[0].children.length === 4));
+  assert.deepEqual(
+    rows.map((row: any) =>
+      row.children[0].children.slice(0, 3).map((cell: any) => cell.id),
+    ),
+    oldIds,
+  );
+  assert.equal(text.characters, "Keep this customer content");
+  const selected = rows[1].children[0].children[1];
+  selected.resize(216, selected.height);
+  const count = nodes.size;
+  await assert.rejects(
+    compose(api, engine.index.assets, "add-column"),
+    /widths differ/,
+  );
+  assert.equal(nodes.size, count);
+  api.currentPage.selection = [selected];
+  await compose(api, engine.index.assets, "match-column-width");
+  assert.ok(
+    rows.every((row: any) => row.children[0].children[1].width === 216),
+  );
+  api.currentPage.selection = [root];
+  await compose(api, engine.index.assets, "add-row");
+  assert.equal(rows.length, 5);
+  assert.equal(rows[4].children[0].children.length, 4);
+  assert.equal(rows[4].children[0].children[1].width, 216);
+  rows[2].children[0].children[0].remove();
+  const uneven = nodes.size;
+  await assert.rejects(
+    compose(api, engine.index.assets, "add-column"),
+    /different cell counts/,
+  );
+  assert.equal(nodes.size, uneven);
+  assert.equal(text.characters, "Keep this customer content");
+  assert.equal((await engine.inspect()).counts.conflict ?? 0, 0);
 });

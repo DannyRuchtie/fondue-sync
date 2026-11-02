@@ -171,9 +171,11 @@ export class SyncEngine {
         ? this.api.getStyleByIdAsync(id)
         : this.api.getNodeByIdAsync(id);
   }
-  async inspect(): Promise<Report> {
+  async inspect(progress?: (message: string) => void): Promise<Report> {
     const actions: Action[] = [];
     for (const { entry } of this.entries()) {
+      if (actions.length % 25 === 0)
+        progress?.("Comparing managed assets: " + entry.id);
       const ref = this.index.assets[entry.id];
       const asset = ref ? await this.resolve(ref.id, ref.kind) : null;
       let baseline: RecordEntry | undefined;
@@ -415,51 +417,49 @@ export class SyncEngine {
   async loadFont(family: string, style: string): Promise<FontName> {
     const normalized = style.replace("SemiBold", "Semi Bold");
     const requested = { family, style: normalized };
-    try {
-      await this.api.loadFontAsync(requested);
-      this.warnings = this.warnings.filter(
-        (warning) =>
-          !warning.startsWith(`Font ${family} ${style} unavailable;`),
-      );
-      return requested;
-    } catch {
-      // The released CSS family is Diatype; installed ABC font metadata exposes
-      // that same product as ABC Diatype. Resolve only this reviewed exact alias,
-      // and only when Figma confirms the requested style is actually available.
-      const knownAlias = family === "Diatype" ? "ABC Diatype" : undefined;
-      if (
-        knownAlias &&
-        typeof this.api.listAvailableFontsAsync === "function"
-      ) {
-        try {
-          this.availableFonts ??= this.api.listAvailableFontsAsync();
-          const available = await this.availableFonts;
-          const aliasFont = available.find(
+    // Resolve the reviewed installed alias before asking Figma to load a missing
+    // family. Native Figma can leave that missing-family request pending.
+    const knownAlias = family === "Diatype" ? "ABC Diatype" : undefined;
+    let candidates: FontName[] = [requested];
+    if (knownAlias && typeof this.api.listAvailableFontsAsync === "function") {
+      try {
+        this.availableFonts ??= this.api.listAvailableFontsAsync();
+        const available = await this.availableFonts;
+        candidates = [family, knownAlias].flatMap((candidate) => {
+          const exact = available.find(
             ({ fontName }) =>
-              fontName.family === knownAlias && fontName.style === normalized,
+              fontName.family === candidate && fontName.style === normalized,
           )?.fontName;
-          if (aliasFont) {
-            await this.api.loadFontAsync(aliasFont);
-            this.warnings = this.warnings.filter(
-              (warning) =>
-                !warning.startsWith(`Font ${family} ${style} unavailable;`),
-            );
-            return aliasFont;
-          }
-        } catch {
-          // A failed lookup must not substitute an unrelated installed font.
-        }
+          return exact ? [exact] : [];
+        });
+      } catch {
+        // If discovery itself fails, try the requested source family exactly.
       }
-      throw Error(
-        `Required Fondue source font is unavailable: ${family} ${normalized}.` +
-          (knownAlias
-            ? ` Confirmed installed alias ${knownAlias} ${normalized} is also unavailable.`
-            : "") +
-          " Install the required source font before importing or updating the library. No substitute font is applied.",
-      );
     }
+    for (const candidate of candidates) {
+      try {
+        await this.api.loadFontAsync(candidate);
+        this.warnings = this.warnings.filter(
+          (warning) =>
+            !warning.startsWith(`Font ${family} ${style} unavailable;`),
+        );
+        return candidate;
+      } catch {
+        // Only the confirmed exact product alias is eligible as another candidate.
+      }
+    }
+    throw Error(
+      `Required Fondue source font is unavailable: ${family} ${normalized}.` +
+        (knownAlias
+          ? ` Confirmed installed alias ${knownAlias} ${normalized} is also unavailable.`
+          : "") +
+        " Install the required source font before importing or updating the library. No substitute font is applied.",
+    );
   }
-  async preflightFonts(): Promise<string[]> {
+
+  async preflightFonts(
+    progress?: (message: string) => void,
+  ): Promise<string[]> {
     const requirements = new Map<string, FontName>();
     const add = (family: string, style: string) =>
       requirements.set(family + ":" + style, { family, style });
@@ -490,6 +490,7 @@ export class SyncEngine {
     const errors: string[] = [];
     for (const font of requirements.values())
       try {
+        progress?.("Checking source font: " + font.family + " " + font.style);
         await this.fontFor(font.family, font.style);
       } catch (error) {
         errors.push(String(error));
@@ -1354,6 +1355,10 @@ export class SyncEngine {
       this.compositionRemovals.delete(node.id);
     }
     write(node, "layer-definition", canonical(def));
+    if (def.layoutSizingHorizontal)
+      node.layoutSizingHorizontal = def.layoutSizingHorizontal;
+    if (def.layoutSizingVertical)
+      node.layoutSizingVertical = def.layoutSizingVertical;
     // Never guess deletion of formerly managed children. A structural removal is a migration.
     return node;
   }
@@ -1763,8 +1768,8 @@ export class SyncEngine {
   }
   async sync(progress?: (message: string) => void): Promise<Report> {
     this.appliedPropertyDefaults.clear();
-    const fontErrors = await this.preflightFonts();
-    const plan = await this.inspect();
+    const fontErrors = await this.preflightFonts(progress);
+    const plan = await this.inspect(progress);
     if (fontErrors.length) {
       plan.errors.push(...fontErrors);
       plan.complete = false;
@@ -2119,7 +2124,7 @@ export class SyncEngine {
     );
     this.index.warnings = [...this.warnings];
     this.save();
-    const result = await this.inspect();
+    const result = await this.inspect(progress);
     result.errors = errors;
     result.warnings = [...this.warnings];
     result.complete = result.complete && errors.length === 0;

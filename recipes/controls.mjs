@@ -918,7 +918,7 @@ add(
       },
     ),
   [
-    "Hug-width controls can resize natively; item count is arbitrary through duplication. Responsive label clamp is represented at the 16px maximum.",
+    "Fixed two-item specimen. Use the additive SegmentedControl/Root and /Item components for variable item count through native slots. Responsive label clamp is represented at the 16px maximum.",
   ],
 );
 add(

@@ -12,7 +12,7 @@
       "integrity": "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
     },
     "sourceLockSha256": "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-    "rendererRevision": "ebbec61ab4a32523b47b2db5f282201a9dcf9133e7a6d0643bbc764be394d179",
+    "rendererRevision": "12abe7fba86a8d5dfa33ff1befbc9740db36baf8db40fc5b6b4d0d84c2ce210c",
     "rootRemPx": 16,
     "packageVersions": {
       "@frontify/fondue-components": "36.0.0",
@@ -36,12 +36,12 @@
         "fixtures/media/manifest.json": "411200aa362d5eb49e73b3b1fef44e6d3701eb69507abe3be80e0f0f0a696587",
         "fixtures/media/README.md": "803289fbdf74742101f57845d9008b5869c255949b435a8b86537671ed246167"
       },
-      "builder": "03144d05c7d44b149505f5523537f00ff03ed762de983f329da1b19b80eb6fa8",
+      "builder": "0a1a7bef6d7c3edaf74191cfcf1d2dae901c179397f15c4fb75eacdfb93b1bbe",
       "imageBuilder": "76395d8a0e433749873a02ea8633a6ef9f8a8dfc2b9bd70c445ba5528230b733",
       "recipes": {
         "recipes/index.mjs": "1d39e16d9a457fb4ac1126f485a26b3aa904cd05dbed3888d9f22840060389cb",
         "recipes/foundations.mjs": "97827709af9c255dbe363a99e1e6a7194644dd0c3e3b430d7de5690bd37d9e5d",
-        "recipes/controls.mjs": "9f578d832009f4462d844e603ec6cd672ccd07f4b1cb64b42eca3af12d333a59",
+        "recipes/controls.mjs": "1982576f3bb75755ea20d90b43b1af3e4d546e65b653f065cf85495fad3877ea",
         "recipes/patterns.mjs": "97a44996a5ca4a4f8056b48c93fa0ba8346bd6ec4d3d8090da444620baf0c22d",
         "recipes/examples.mjs": "f19c76d41c32b8abe0df539eba2f1498cd32e64864b74788e3a7f73e96677884",
         "recipes/documentation.mjs": "60a2270252d98e9e57c38261c17b48676391e25a2dd049a4b8e88b22b8a2bc89",
@@ -7035,7 +7035,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 5524
+        "occurrences": 5559
       }
     },
     {
@@ -7405,7 +7405,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 99
+        "occurrences": 123
       }
     },
     {
@@ -8226,7 +8226,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 20725
+        "occurrences": 20944
       }
     },
     {
@@ -8271,7 +8271,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 192
+        "occurrences": 200
       }
     },
     {
@@ -134663,7 +134663,8 @@
       ],
       "status": "supported",
       "limitations": [
-        "Hug-width controls can resize natively; item count is arbitrary through duplication.",
+        "Fixed two-item specimen.",
+        "Use the additive SegmentedControl/Root and /Item components for variable item count through native slots.",
         "Responsive label clamp is represented at the 16px maximum."
       ],
       "variants": [
@@ -138327,7 +138328,7 @@
             "uri": "https://fondue.frontify.com/"
           }
         ],
-        "description": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: first, second\n\ndisabled: false, true\n\niconOnly: false, true\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nHug-width controls can resize natively; item count is arbitrary through duplication.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+        "description": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: first, second\n\ndisabled: false, true\n\niconOnly: false, true\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nFixed two-item specimen.\n\nUse the additive SegmentedControl/Root and /Item components for variable item count through native slots.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
       }
     },
     {
@@ -138342,7 +138343,8 @@
       ],
       "status": "supported",
       "limitations": [
-        "Hug-width controls can resize natively; item count is arbitrary through duplication.",
+        "Fixed two-item specimen.",
+        "Use the additive SegmentedControl/Root and /Item components for variable item count through native slots.",
         "Responsive label clamp is represented at the 16px maximum."
       ],
       "variants": [
@@ -140434,7 +140436,7 @@
             "uri": "https://fondue.frontify.com/"
           }
         ],
-        "description": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: second\n\ndisabled: false, true\n\niconOnly: true, false\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nHug-width controls can resize natively; item count is arbitrary through duplication.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+        "description": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: second\n\ndisabled: false, true\n\niconOnly: true, false\n\nhugWidth: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: supported.\n\nFixed two-item specimen.\n\nUse the additive SegmentedControl/Root and /Item components for variable item count through native slots.\n\nResponsive label clamp is represented at the 16px maximum.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
       }
     },
     {
@@ -251781,6 +251783,3269 @@
       "componentPropertyPolicy": 2
     },
     {
+      "id": "components/SegmentedControl.Item",
+      "name": "SegmentedControl/Item",
+      "package": "@frontify/fondue/components",
+      "source": [
+        "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+        "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
+        "packages/components/src/components/SegmentedControl/styles/segmentedControl.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "status": "partial",
+      "limitations": [
+        "Item selected/disabled/iconOnly/state are set on each nested item.",
+        "Figma does not reproduce React group state or keyboard behavior.",
+        "First/last rounding and adjacent separator behavior require context review; the selected outline follows the existing source-state specimen."
+      ],
+      "variants": [
+        {
+          "id": "selected=false;disabled=false;iconOnly=false;state=default",
+          "props": {
+            "selected": "false",
+            "disabled": "false",
+            "iconOnly": "false",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-container-secondary-on-secondary-container",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "lineHeight": "text-body-medium-default-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-default-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=false;iconOnly=false;state=hover",
+          "props": {
+            "selected": "false",
+            "disabled": "false",
+            "iconOnly": "false",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-container-secondary-on-secondary-container",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "lineHeight": "text-body-medium-default-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-default-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-hover",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=false;iconOnly=false;state=focus",
+          "props": {
+            "selected": "false",
+            "disabled": "false",
+            "iconOnly": "false",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-container-secondary-on-secondary-container",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "lineHeight": "text-body-medium-default-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-default-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        },
+        {
+          "id": "selected=false;disabled=false;iconOnly=true;state=default",
+          "props": {
+            "selected": "false",
+            "disabled": "false",
+            "iconOnly": "true",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-secondary-on-secondary-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=false;iconOnly=true;state=hover",
+          "props": {
+            "selected": "false",
+            "disabled": "false",
+            "iconOnly": "true",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-secondary-on-secondary-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-hover",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=false;iconOnly=true;state=focus",
+          "props": {
+            "selected": "false",
+            "disabled": "false",
+            "iconOnly": "true",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-secondary-on-secondary-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        },
+        {
+          "id": "selected=false;disabled=true;iconOnly=false;state=default",
+          "props": {
+            "selected": "false",
+            "disabled": "true",
+            "iconOnly": "false",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-container-disabled-on-disabled-container",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "lineHeight": "text-body-medium-default-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-default-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=true;iconOnly=false;state=hover",
+          "props": {
+            "selected": "false",
+            "disabled": "true",
+            "iconOnly": "false",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-container-disabled-on-disabled-container",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "lineHeight": "text-body-medium-default-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-default-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=true;iconOnly=false;state=focus",
+          "props": {
+            "selected": "false",
+            "disabled": "true",
+            "iconOnly": "false",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-container-disabled-on-disabled-container",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "lineHeight": "text-body-medium-default-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-default-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        },
+        {
+          "id": "selected=false;disabled=true;iconOnly=true;state=default",
+          "props": {
+            "selected": "false",
+            "disabled": "true",
+            "iconOnly": "true",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-disabled-on-disabled-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=true;iconOnly=true;state=hover",
+          "props": {
+            "selected": "false",
+            "disabled": "true",
+            "iconOnly": "true",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-disabled-on-disabled-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            }
+          }
+        },
+        {
+          "id": "selected=false;disabled=true;iconOnly=true;state=focus",
+          "props": {
+            "selected": "false",
+            "disabled": "true",
+            "iconOnly": "true",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-disabled-on-disabled-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        },
+        {
+          "id": "selected=true;disabled=false;iconOnly=false;state=default",
+          "props": {
+            "selected": "true",
+            "disabled": "false",
+            "iconOnly": "false",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 500,
+                "textStyle": "text-body-medium-strong",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-strong-font-size",
+                  "fontWeight": "text-body-medium-strong-font-weight",
+                  "lineHeight": "text-body-medium-strong-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-strong-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-strong",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=false;iconOnly=false;state=hover",
+          "props": {
+            "selected": "true",
+            "disabled": "false",
+            "iconOnly": "false",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 500,
+                "textStyle": "text-body-medium-strong",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-strong-font-size",
+                  "fontWeight": "text-body-medium-strong-font-weight",
+                  "lineHeight": "text-body-medium-strong-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-strong-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-strong",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=false;iconOnly=false;state=focus",
+          "props": {
+            "selected": "true",
+            "disabled": "false",
+            "iconOnly": "false",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 500,
+                "textStyle": "text-body-medium-strong",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-strong-font-size",
+                  "fontWeight": "text-body-medium-strong-font-weight",
+                  "lineHeight": "text-body-medium-strong-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-strong-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-strong",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        },
+        {
+          "id": "selected=true;disabled=false;iconOnly=true;state=default",
+          "props": {
+            "selected": "true",
+            "disabled": "false",
+            "iconOnly": "true",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-primary-default"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-strong",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=false;iconOnly=true;state=hover",
+          "props": {
+            "selected": "true",
+            "disabled": "false",
+            "iconOnly": "true",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-primary-default"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-strong",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=false;iconOnly=true;state=focus",
+          "props": {
+            "selected": "true",
+            "disabled": "false",
+            "iconOnly": "true",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-primary-default"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-strong",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        },
+        {
+          "id": "selected=true;disabled=true;iconOnly=false;state=default",
+          "props": {
+            "selected": "true",
+            "disabled": "true",
+            "iconOnly": "false",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 500,
+                "textStyle": "text-body-medium-strong",
+                "bindings": {
+                  "fills": "color-container-disabled-on-disabled-container",
+                  "fontSize": "text-body-medium-strong-font-size",
+                  "fontWeight": "text-body-medium-strong-font-weight",
+                  "lineHeight": "text-body-medium-strong-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-strong-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-container-disabled-default",
+              "strokes": "color-line-mid",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=true;iconOnly=false;state=hover",
+          "props": {
+            "selected": "true",
+            "disabled": "true",
+            "iconOnly": "false",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 500,
+                "textStyle": "text-body-medium-strong",
+                "bindings": {
+                  "fills": "color-container-disabled-on-disabled-container",
+                  "fontSize": "text-body-medium-strong-font-size",
+                  "fontWeight": "text-body-medium-strong-font-weight",
+                  "lineHeight": "text-body-medium-strong-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-strong-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-container-disabled-default",
+              "strokes": "color-line-mid",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=true;iconOnly=false;state=focus",
+          "props": {
+            "selected": "true",
+            "disabled": "true",
+            "iconOnly": "false",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "label",
+                "kind": "text",
+                "name": "label",
+                "text": "Segment",
+                "fontSize": 14,
+                "fontWeight": 500,
+                "textStyle": "text-body-medium-strong",
+                "bindings": {
+                  "fills": "color-container-disabled-on-disabled-container",
+                  "fontSize": "text-body-medium-strong-font-size",
+                  "fontWeight": "text-body-medium-strong-font-weight",
+                  "lineHeight": "text-body-medium-strong-line-height",
+                  "fontFamily": "native-font-family-diatype",
+                  "letterSpacing": "text-body-medium-strong-letter-spacing"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "width": 100,
+            "height": 34,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-container-disabled-default",
+              "strokes": "color-line-mid",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        },
+        {
+          "id": "selected=true;disabled=true;iconOnly=true;state=default",
+          "props": {
+            "selected": "true",
+            "disabled": "true",
+            "iconOnly": "true",
+            "state": "default"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-disabled-on-disabled-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-container-disabled-default",
+              "strokes": "color-line-mid",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=true;iconOnly=true;state=hover",
+          "props": {
+            "selected": "true",
+            "disabled": "true",
+            "iconOnly": "true",
+            "state": "hover"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-disabled-on-disabled-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-container-disabled-default",
+              "strokes": "color-line-mid",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            }
+          }
+        },
+        {
+          "id": "selected=true;disabled=true;iconOnly=true;state=focus",
+          "props": {
+            "selected": "true",
+            "disabled": "true",
+            "iconOnly": "true",
+            "state": "focus"
+          },
+          "root": {
+            "id": "item",
+            "kind": "frame",
+            "name": "Segment",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 0,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "icon",
+                "kind": "instance",
+                "name": "icon",
+                "iconId": "icon:list-bullet",
+                "width": 16,
+                "height": 16,
+                "iconColor": "color-container-disabled-on-disabled-container"
+              }
+            ],
+            "width": 34,
+            "height": 34,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "radius": 3,
+            "bindings": {
+              "fills": "color-container-disabled-default",
+              "strokes": "color-line-mid",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-3",
+              "strokeWeight": "border-width-default"
+            },
+            "effectStyle": "source-focus-outline"
+          }
+        }
+      ],
+      "libraryCategory": "Navigation",
+      "assetName": "Navigation/SegmentedControl/Item",
+      "documentation": {
+        "purpose": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.",
+        "usage": "Compose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.",
+        "properties": "selected: false, true\ndisabled: false, true\niconOnly: false, true\nstate: default, hover, focus",
+        "related": [
+          "Tabs",
+          "RadioList",
+          "Select"
+        ],
+        "origin": "released-metadata",
+        "metadataSource": "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+        "links": [
+          {
+            "uri": "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+          },
+          {
+            "uri": "https://fondue.frontify.com/"
+          }
+        ],
+        "description": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nselected: false, true\n\ndisabled: false, true\n\niconOnly: false, true\n\nstate: default, hover, focus\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nItem selected/disabled/iconOnly/state are set on each nested item.\n\nFigma does not reproduce React group state or keyboard behavior.\n\nFirst/last rounding and adjacent separator behavior require context review; the selected outline follows the existing source-state specimen.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+      }
+    },
+    {
+      "id": "components/SegmentedControl.Root",
+      "name": "SegmentedControl/Root",
+      "package": "@frontify/fondue/components",
+      "source": [
+        "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+        "packages/components/src/components/SegmentedControl/SegmentedControl.tsx",
+        "packages/components/src/components/SegmentedControl/styles/segmentedControl.module.scss",
+        "packages/components/src/utilities/focusStyle.module.scss"
+      ],
+      "status": "partial",
+      "limitations": [
+        "Native Segments slot contains linked Item instances.",
+        "Count is content, not a variant axis.",
+        "Set selection and disabled/iconOnly state on the nested items.",
+        "The pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance.",
+        "Focus management, responsive label clamping and indicator motion remain runtime."
+      ],
+      "variants": [
+        {
+          "id": "hugWidth=true",
+          "props": {
+            "hugWidth": "true"
+          },
+          "root": {
+            "id": "segmented-control",
+            "kind": "frame",
+            "name": "segmented-control",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 1,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "item-0",
+                "kind": "componentInstance",
+                "name": "item-0",
+                "recipeId": "components/SegmentedControl.Item",
+                "variantProps": {
+                  "selected": "true",
+                  "disabled": "false",
+                  "iconOnly": "false",
+                  "state": "default"
+                }
+              },
+              {
+                "id": "item-1",
+                "kind": "componentInstance",
+                "name": "item-1",
+                "recipeId": "components/SegmentedControl.Item",
+                "variantProps": {
+                  "selected": "false",
+                  "disabled": "false",
+                  "iconOnly": "false",
+                  "state": "default"
+                }
+              }
+            ],
+            "height": 36,
+            "radius": 4,
+            "bindings": {
+              "fills": "color-surface-dim",
+              "strokes": "color-line-mid",
+              "cornerRadius": "border-radius-medium",
+              "paddingTop": "component-constant-spacing-1",
+              "paddingRight": "component-constant-spacing-1",
+              "paddingBottom": "component-constant-spacing-1",
+              "paddingLeft": "component-constant-spacing-1",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "contentSlot": {
+              "id": "items",
+              "name": "Segments",
+              "minChildren": 2,
+              "maxChildren": 10,
+              "description": "Add linked SegmentedControl Item instances. Set exactly one item to selected. Match disabled and iconOnly settings across the group."
+            }
+          }
+        },
+        {
+          "id": "hugWidth=false",
+          "props": {
+            "hugWidth": "false"
+          },
+          "root": {
+            "id": "segmented-control",
+            "kind": "frame",
+            "name": "segmented-control",
+            "layout": "HORIZONTAL",
+            "gap": 0,
+            "padding": 1,
+            "primaryAlign": "CENTER",
+            "counterAlign": "CENTER",
+            "children": [
+              {
+                "id": "item-0",
+                "kind": "componentInstance",
+                "name": "item-0",
+                "recipeId": "components/SegmentedControl.Item",
+                "variantProps": {
+                  "selected": "true",
+                  "disabled": "false",
+                  "iconOnly": "false",
+                  "state": "default"
+                },
+                "layoutSizingHorizontal": "FILL"
+              },
+              {
+                "id": "item-1",
+                "kind": "componentInstance",
+                "name": "item-1",
+                "recipeId": "components/SegmentedControl.Item",
+                "variantProps": {
+                  "selected": "false",
+                  "disabled": "false",
+                  "iconOnly": "false",
+                  "state": "default"
+                },
+                "layoutSizingHorizontal": "FILL"
+              }
+            ],
+            "height": 36,
+            "radius": 4,
+            "bindings": {
+              "fills": "color-surface-dim",
+              "strokes": "color-line-mid",
+              "cornerRadius": "border-radius-medium",
+              "paddingTop": "component-constant-spacing-1",
+              "paddingRight": "component-constant-spacing-1",
+              "paddingBottom": "component-constant-spacing-1",
+              "paddingLeft": "component-constant-spacing-1",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "contentSlot": {
+              "id": "items",
+              "name": "Segments",
+              "minChildren": 2,
+              "maxChildren": 10,
+              "description": "Add linked SegmentedControl Item instances. Set exactly one item to selected. Match disabled and iconOnly settings across the group."
+            },
+            "width": 202
+          }
+        }
+      ],
+      "libraryCategory": "Navigation",
+      "assetName": "Navigation/SegmentedControl/Root",
+      "documentation": {
+        "purpose": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.",
+        "usage": "Compose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.",
+        "properties": "hugWidth: true, false",
+        "related": [
+          "Tabs",
+          "RadioList",
+          "Select"
+        ],
+        "origin": "released-metadata",
+        "metadataSource": "packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json",
+        "links": [
+          {
+            "uri": "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+          },
+          {
+            "uri": "https://fondue.frontify.com/"
+          }
+        ],
+        "description": "A compact control for selecting one of 2–5 mutually exclusive options.\n\nUse it for view mode switches, layout changes, filter selections, or input choices where all options should remain visible and directly selectable.\n\nCompose as SegmentedControl.Root > SegmentedControl.Item.\n\nEach item requires a unique value prop.\n\nUse defaultValue for uncontrolled usage or value + onValueChange for controlled.\n\nUse hugWidth=false to stretch to container width.\n\nThe root renders a role=\"radiogroup\", which a Label htmlFor cannot name, so give it an accessible name with aria-label or with aria-labelledby pointing at the Label, and associate hint or validation text with aria-describedby.\n\nUse Tabs when switching also changes the visible content panel below.\n\nUse RadioList or Select for longer option sets.\n\nExposed variant properties:\n\nhugWidth: true, false\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nNative Segments slot contains linked Item instances.\n\nCount is content, not a variant axis.\n\nSet selection and disabled/iconOnly state on the nested items.\n\nThe pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance.\n\nFocus management, responsive label clamping and indicator motion remain runtime.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/SegmentedControl/SegmentedControl.metadata.json"
+      }
+    },
+    {
+      "id": "components/Table.ContentCell",
+      "name": "Table/ContentCell",
+      "package": "@frontify/fondue/components",
+      "source": [
+        "packages/components/src/components/Table/Table.tsx",
+        "packages/components/src/components/Table/styles/table.module.scss"
+      ],
+      "status": "partial",
+      "limitations": [
+        "Additive editable counterpart of Table.RowCell.",
+        "Width and fontSize are contextual.",
+        "A cell can contain arbitrary designer content through its Content slot.",
+        "Column spans, sticky positioning, sort interactions and browser table semantics remain runtime."
+      ],
+      "variants": [
+        {
+          "id": "align=left;fontSize=small",
+          "props": {
+            "align": "left",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "cell",
+            "kind": "frame",
+            "name": "cell",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 0,
+            "children": [
+              {
+                "id": "content",
+                "kind": "frame",
+                "name": "content",
+                "layout": "HORIZONTAL",
+                "primaryAlign": "MIN",
+                "counterAlign": "CENTER",
+                "gap": 0,
+                "padding": 0,
+                "children": [
+                  {
+                    "id": "value",
+                    "kind": "text",
+                    "name": "value",
+                    "text": "Cell content",
+                    "fontSize": 12,
+                    "fontWeight": 400,
+                    "textStyle": "text-body-x-small-default",
+                    "bindings": {
+                      "fills": "color-primary-default",
+                      "fontSize": "text-body-x-small-default-font-size",
+                      "fontFamily": "native-font-family-diatype",
+                      "fontWeight": "text-body-x-small-default-font-weight",
+                      "letterSpacing": "text-body-x-small-default-letter-spacing",
+                      "lineHeight": "text-body-x-small-default-line-height"
+                    },
+                    "fontFamily": "Diatype",
+                    "letterSpacing": 0,
+                    "textCase": "ORIGINAL",
+                    "lineHeight": 16
+                  }
+                ],
+                "width": 160,
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 8,
+                "paddingRight": 8,
+                "contentSlot": {
+                  "id": "content",
+                  "name": "Content",
+                  "description": "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                },
+                "bindings": {
+                  "paddingTop": "spacing-x-small",
+                  "paddingRight": "spacing-x-small",
+                  "paddingBottom": "spacing-x-small",
+                  "paddingLeft": "spacing-x-small",
+                  "itemSpacing": "component-constant-spacing-0",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              },
+              {
+                "id": "bottom-border",
+                "kind": "rectangle",
+                "name": "bottom-border",
+                "width": 160,
+                "height": 1,
+                "radius": 0,
+                "bindings": {
+                  "fills": "color-line-subtle",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              }
+            ],
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            }
+          }
+        },
+        {
+          "id": "align=left;fontSize=medium",
+          "props": {
+            "align": "left",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "cell",
+            "kind": "frame",
+            "name": "cell",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 0,
+            "children": [
+              {
+                "id": "content",
+                "kind": "frame",
+                "name": "content",
+                "layout": "HORIZONTAL",
+                "primaryAlign": "MIN",
+                "counterAlign": "CENTER",
+                "gap": 0,
+                "padding": 0,
+                "children": [
+                  {
+                    "id": "value",
+                    "kind": "text",
+                    "name": "value",
+                    "text": "Cell content",
+                    "fontSize": 13,
+                    "fontWeight": 400,
+                    "textStyle": "text-body-small-default",
+                    "bindings": {
+                      "fills": "color-primary-default",
+                      "fontSize": "text-body-small-default-font-size",
+                      "fontFamily": "native-font-family-diatype",
+                      "fontWeight": "text-body-small-default-font-weight",
+                      "letterSpacing": "text-body-small-default-letter-spacing",
+                      "lineHeight": "text-body-small-default-line-height"
+                    },
+                    "fontFamily": "Diatype",
+                    "letterSpacing": 0,
+                    "textCase": "ORIGINAL",
+                    "lineHeight": 16
+                  }
+                ],
+                "width": 160,
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 8,
+                "paddingRight": 8,
+                "contentSlot": {
+                  "id": "content",
+                  "name": "Content",
+                  "description": "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                },
+                "bindings": {
+                  "paddingTop": "spacing-x-small",
+                  "paddingRight": "spacing-x-small",
+                  "paddingBottom": "spacing-x-small",
+                  "paddingLeft": "spacing-x-small",
+                  "itemSpacing": "component-constant-spacing-0",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              },
+              {
+                "id": "bottom-border",
+                "kind": "rectangle",
+                "name": "bottom-border",
+                "width": 160,
+                "height": 1,
+                "radius": 0,
+                "bindings": {
+                  "fills": "color-line-subtle",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              }
+            ],
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            }
+          }
+        },
+        {
+          "id": "align=center;fontSize=small",
+          "props": {
+            "align": "center",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "cell",
+            "kind": "frame",
+            "name": "cell",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 0,
+            "children": [
+              {
+                "id": "content",
+                "kind": "frame",
+                "name": "content",
+                "layout": "HORIZONTAL",
+                "primaryAlign": "CENTER",
+                "counterAlign": "CENTER",
+                "gap": 0,
+                "padding": 0,
+                "children": [
+                  {
+                    "id": "value",
+                    "kind": "text",
+                    "name": "value",
+                    "text": "Cell content",
+                    "fontSize": 12,
+                    "fontWeight": 400,
+                    "textStyle": "text-body-x-small-default",
+                    "bindings": {
+                      "fills": "color-primary-default",
+                      "fontSize": "text-body-x-small-default-font-size",
+                      "fontFamily": "native-font-family-diatype",
+                      "fontWeight": "text-body-x-small-default-font-weight",
+                      "letterSpacing": "text-body-x-small-default-letter-spacing",
+                      "lineHeight": "text-body-x-small-default-line-height"
+                    },
+                    "fontFamily": "Diatype",
+                    "letterSpacing": 0,
+                    "textCase": "ORIGINAL",
+                    "lineHeight": 16
+                  }
+                ],
+                "width": 160,
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 8,
+                "paddingRight": 8,
+                "contentSlot": {
+                  "id": "content",
+                  "name": "Content",
+                  "description": "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                },
+                "bindings": {
+                  "paddingTop": "spacing-x-small",
+                  "paddingRight": "spacing-x-small",
+                  "paddingBottom": "spacing-x-small",
+                  "paddingLeft": "spacing-x-small",
+                  "itemSpacing": "component-constant-spacing-0",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              },
+              {
+                "id": "bottom-border",
+                "kind": "rectangle",
+                "name": "bottom-border",
+                "width": 160,
+                "height": 1,
+                "radius": 0,
+                "bindings": {
+                  "fills": "color-line-subtle",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              }
+            ],
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            }
+          }
+        },
+        {
+          "id": "align=center;fontSize=medium",
+          "props": {
+            "align": "center",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "cell",
+            "kind": "frame",
+            "name": "cell",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 0,
+            "children": [
+              {
+                "id": "content",
+                "kind": "frame",
+                "name": "content",
+                "layout": "HORIZONTAL",
+                "primaryAlign": "CENTER",
+                "counterAlign": "CENTER",
+                "gap": 0,
+                "padding": 0,
+                "children": [
+                  {
+                    "id": "value",
+                    "kind": "text",
+                    "name": "value",
+                    "text": "Cell content",
+                    "fontSize": 13,
+                    "fontWeight": 400,
+                    "textStyle": "text-body-small-default",
+                    "bindings": {
+                      "fills": "color-primary-default",
+                      "fontSize": "text-body-small-default-font-size",
+                      "fontFamily": "native-font-family-diatype",
+                      "fontWeight": "text-body-small-default-font-weight",
+                      "letterSpacing": "text-body-small-default-letter-spacing",
+                      "lineHeight": "text-body-small-default-line-height"
+                    },
+                    "fontFamily": "Diatype",
+                    "letterSpacing": 0,
+                    "textCase": "ORIGINAL",
+                    "lineHeight": 16
+                  }
+                ],
+                "width": 160,
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 8,
+                "paddingRight": 8,
+                "contentSlot": {
+                  "id": "content",
+                  "name": "Content",
+                  "description": "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                },
+                "bindings": {
+                  "paddingTop": "spacing-x-small",
+                  "paddingRight": "spacing-x-small",
+                  "paddingBottom": "spacing-x-small",
+                  "paddingLeft": "spacing-x-small",
+                  "itemSpacing": "component-constant-spacing-0",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              },
+              {
+                "id": "bottom-border",
+                "kind": "rectangle",
+                "name": "bottom-border",
+                "width": 160,
+                "height": 1,
+                "radius": 0,
+                "bindings": {
+                  "fills": "color-line-subtle",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              }
+            ],
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            }
+          }
+        },
+        {
+          "id": "align=right;fontSize=small",
+          "props": {
+            "align": "right",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "cell",
+            "kind": "frame",
+            "name": "cell",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 0,
+            "children": [
+              {
+                "id": "content",
+                "kind": "frame",
+                "name": "content",
+                "layout": "HORIZONTAL",
+                "primaryAlign": "MAX",
+                "counterAlign": "CENTER",
+                "gap": 0,
+                "padding": 0,
+                "children": [
+                  {
+                    "id": "value",
+                    "kind": "text",
+                    "name": "value",
+                    "text": "Cell content",
+                    "fontSize": 12,
+                    "fontWeight": 400,
+                    "textStyle": "text-body-x-small-default",
+                    "bindings": {
+                      "fills": "color-primary-default",
+                      "fontSize": "text-body-x-small-default-font-size",
+                      "fontFamily": "native-font-family-diatype",
+                      "fontWeight": "text-body-x-small-default-font-weight",
+                      "letterSpacing": "text-body-x-small-default-letter-spacing",
+                      "lineHeight": "text-body-x-small-default-line-height"
+                    },
+                    "fontFamily": "Diatype",
+                    "letterSpacing": 0,
+                    "textCase": "ORIGINAL",
+                    "lineHeight": 16
+                  }
+                ],
+                "width": 160,
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 8,
+                "paddingRight": 8,
+                "contentSlot": {
+                  "id": "content",
+                  "name": "Content",
+                  "description": "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                },
+                "bindings": {
+                  "paddingTop": "spacing-x-small",
+                  "paddingRight": "spacing-x-small",
+                  "paddingBottom": "spacing-x-small",
+                  "paddingLeft": "spacing-x-small",
+                  "itemSpacing": "component-constant-spacing-0",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              },
+              {
+                "id": "bottom-border",
+                "kind": "rectangle",
+                "name": "bottom-border",
+                "width": 160,
+                "height": 1,
+                "radius": 0,
+                "bindings": {
+                  "fills": "color-line-subtle",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              }
+            ],
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            }
+          }
+        },
+        {
+          "id": "align=right;fontSize=medium",
+          "props": {
+            "align": "right",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "cell",
+            "kind": "frame",
+            "name": "cell",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 0,
+            "children": [
+              {
+                "id": "content",
+                "kind": "frame",
+                "name": "content",
+                "layout": "HORIZONTAL",
+                "primaryAlign": "MAX",
+                "counterAlign": "CENTER",
+                "gap": 0,
+                "padding": 0,
+                "children": [
+                  {
+                    "id": "value",
+                    "kind": "text",
+                    "name": "value",
+                    "text": "Cell content",
+                    "fontSize": 13,
+                    "fontWeight": 400,
+                    "textStyle": "text-body-small-default",
+                    "bindings": {
+                      "fills": "color-primary-default",
+                      "fontSize": "text-body-small-default-font-size",
+                      "fontFamily": "native-font-family-diatype",
+                      "fontWeight": "text-body-small-default-font-weight",
+                      "letterSpacing": "text-body-small-default-letter-spacing",
+                      "lineHeight": "text-body-small-default-line-height"
+                    },
+                    "fontFamily": "Diatype",
+                    "letterSpacing": 0,
+                    "textCase": "ORIGINAL",
+                    "lineHeight": 16
+                  }
+                ],
+                "width": 160,
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 8,
+                "paddingRight": 8,
+                "contentSlot": {
+                  "id": "content",
+                  "name": "Content",
+                  "description": "Edit cell content or insert linked components. The cell padding and bottom border remain library-owned."
+                },
+                "bindings": {
+                  "paddingTop": "spacing-x-small",
+                  "paddingRight": "spacing-x-small",
+                  "paddingBottom": "spacing-x-small",
+                  "paddingLeft": "spacing-x-small",
+                  "itemSpacing": "component-constant-spacing-0",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              },
+              {
+                "id": "bottom-border",
+                "kind": "rectangle",
+                "name": "bottom-border",
+                "width": 160,
+                "height": 1,
+                "radius": 0,
+                "bindings": {
+                  "fills": "color-line-subtle",
+                  "cornerRadius": "component-constant-radius-0"
+                }
+              }
+            ],
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            }
+          }
+        }
+      ],
+      "libraryCategory": "Content",
+      "assetName": "Content/Table/ContentCell",
+      "documentation": {
+        "purpose": "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.",
+        "usage": "Compose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.",
+        "properties": "align: left, center, right\nfontSize: small, medium",
+        "related": [
+          "OrderableList"
+        ],
+        "origin": "released-metadata",
+        "metadataSource": "packages/components/src/components/Table/Table.metadata.json",
+        "links": [
+          {
+            "uri": "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+          },
+          {
+            "uri": "https://fondue.frontify.com/"
+          }
+        ],
+        "description": "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.\n\nCompose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.\n\nExposed variant properties:\n\nalign: left, center, right\n\nfontSize: small, medium\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nAdditive editable counterpart of Table.RowCell.\n\nWidth and fontSize are contextual.\n\nA cell can contain arbitrary designer content through its Content slot.\n\nColumn spans, sticky positioning, sort interactions and browser table semantics remain runtime.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+      }
+    },
+    {
+      "id": "components/Table.EditableRow",
+      "name": "Table/EditableRow",
+      "package": "@frontify/fondue/components",
+      "source": [
+        "packages/components/src/components/Table/Table.tsx",
+        "packages/components/src/components/Table/styles/table.module.scss"
+      ],
+      "status": "partial",
+      "limitations": [
+        "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
+        "Use the composition actions to add columns to all rows or copy a selected cell width across its column.",
+        "Native slot editing remains available; uneven rows are reported before bulk changes."
+      ],
+      "variants": [
+        {
+          "id": "section=header;selected=false;disabled=false;fontSize=small",
+          "props": {
+            "section": "header",
+            "selected": "false",
+            "disabled": "false",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=header;selected=false;disabled=false;fontSize=medium",
+          "props": {
+            "section": "header",
+            "selected": "false",
+            "disabled": "false",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=header;selected=false;disabled=true;fontSize=small",
+          "props": {
+            "section": "header",
+            "selected": "false",
+            "disabled": "true",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=header;selected=false;disabled=true;fontSize=medium",
+          "props": {
+            "section": "header",
+            "selected": "false",
+            "disabled": "true",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=header;selected=true;disabled=false;fontSize=small",
+          "props": {
+            "section": "header",
+            "selected": "true",
+            "disabled": "false",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=header;selected=true;disabled=false;fontSize=medium",
+          "props": {
+            "section": "header",
+            "selected": "true",
+            "disabled": "false",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=header;selected=true;disabled=true;fontSize=small",
+          "props": {
+            "section": "header",
+            "selected": "true",
+            "disabled": "true",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=header;selected=true;disabled=true;fontSize=medium",
+          "props": {
+            "section": "header",
+            "selected": "true",
+            "disabled": "true",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.HeaderCell",
+                "variantProps": {
+                  "sortDirection": "none",
+                  "state": "idle",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=false;disabled=false;fontSize=small",
+          "props": {
+            "section": "body",
+            "selected": "false",
+            "disabled": "false",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=false;disabled=false;fontSize=medium",
+          "props": {
+            "section": "body",
+            "selected": "false",
+            "disabled": "false",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=false;disabled=true;fontSize=small",
+          "props": {
+            "section": "body",
+            "selected": "false",
+            "disabled": "true",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=false;disabled=true;fontSize=medium",
+          "props": {
+            "section": "body",
+            "selected": "false",
+            "disabled": "true",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=true;disabled=false;fontSize=small",
+          "props": {
+            "section": "body",
+            "selected": "true",
+            "disabled": "false",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=true;disabled=false;fontSize=medium",
+          "props": {
+            "section": "body",
+            "selected": "true",
+            "disabled": "false",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 1,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=true;disabled=true;fontSize=small",
+          "props": {
+            "section": "body",
+            "selected": "true",
+            "disabled": "true",
+            "fontSize": "small"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "small"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "section=body;selected=true;disabled=true;fontSize=medium",
+          "props": {
+            "section": "body",
+            "selected": "true",
+            "disabled": "true",
+            "fontSize": "medium"
+          },
+          "root": {
+            "id": "row",
+            "kind": "frame",
+            "name": "Row",
+            "layout": "HORIZONTAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "opacity": 0.6,
+            "bindings": {
+              "fills": "color-container-highlight-default",
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            },
+            "contentSlot": {
+              "id": "cells",
+              "name": "Cells",
+              "minChildren": 1,
+              "description": "Add linked cells. Use Add column to update every row together, and Match column width to keep column widths aligned."
+            },
+            "children": [
+              {
+                "id": "cell-0",
+                "kind": "componentInstance",
+                "name": "cell-0",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-1",
+                "kind": "componentInstance",
+                "name": "cell-1",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              },
+              {
+                "id": "cell-2",
+                "kind": "componentInstance",
+                "name": "cell-2",
+                "recipeId": "components/Table.ContentCell",
+                "variantProps": {
+                  "align": "left",
+                  "fontSize": "medium"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "libraryCategory": "Content",
+      "assetName": "Content/Table/EditableRow",
+      "documentation": {
+        "purpose": "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.",
+        "usage": "Compose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.",
+        "properties": "section: header, body\nselected: false, true\ndisabled: false, true\nfontSize: small, medium",
+        "related": [
+          "OrderableList"
+        ],
+        "origin": "released-metadata",
+        "metadataSource": "packages/components/src/components/Table/Table.metadata.json",
+        "links": [
+          {
+            "uri": "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+          },
+          {
+            "uri": "https://fondue.frontify.com/"
+          }
+        ],
+        "description": "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.\n\nCompose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.\n\nExposed variant properties:\n\nsection: header, body\n\nselected: false, true\n\ndisabled: false, true\n\nfontSize: small, medium\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nCells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.\n\nUse the composition actions to add columns to all rows or copy a selected cell width across its column.\n\nNative slot editing remains available; uneven rows are reported before bulk changes.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+      }
+    },
+    {
+      "id": "components/Table.Root",
+      "name": "Table/Root",
+      "package": "@frontify/fondue/components",
+      "source": [
+        "packages/components/src/components/Table/Table.tsx",
+        "packages/components/src/components/Table/styles/table.module.scss"
+      ],
+      "status": "partial",
+      "limitations": [
+        "composition is a Figma-only setting.",
+        "Header/body rows and cells stay linked; their content belongs to the instance.",
+        "Table column operations require a rectangular row structure.",
+        "Root font context, sticky columns, spans, sorting and accessibility semantics are not simulated."
+      ],
+      "variants": [
+        {
+          "id": "composition=editable",
+          "props": {
+            "composition": "editable"
+          },
+          "root": {
+            "id": "table",
+            "kind": "frame",
+            "name": "Table",
+            "layout": "VERTICAL",
+            "width": 480,
+            "gap": 0,
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "contentSlot": {
+              "id": "rows",
+              "name": "Rows",
+              "minChildren": 1,
+              "description": "Add linked EditableRow instances. Use the table actions to coordinate columns across all rows."
+            },
+            "children": [
+              {
+                "id": "row-0",
+                "kind": "componentInstance",
+                "name": "row-0",
+                "recipeId": "components/Table.EditableRow",
+                "variantProps": {
+                  "section": "header",
+                  "selected": "false",
+                  "disabled": "false",
+                  "fontSize": "medium"
+                },
+                "layoutSizingHorizontal": "FILL"
+              },
+              {
+                "id": "row-1",
+                "kind": "componentInstance",
+                "name": "row-1",
+                "recipeId": "components/Table.EditableRow",
+                "variantProps": {
+                  "section": "body",
+                  "selected": "false",
+                  "disabled": "false",
+                  "fontSize": "medium"
+                },
+                "layoutSizingHorizontal": "FILL"
+              },
+              {
+                "id": "row-2",
+                "kind": "componentInstance",
+                "name": "row-2",
+                "recipeId": "components/Table.EditableRow",
+                "variantProps": {
+                  "section": "body",
+                  "selected": "false",
+                  "disabled": "false",
+                  "fontSize": "medium"
+                },
+                "layoutSizingHorizontal": "FILL"
+              },
+              {
+                "id": "row-3",
+                "kind": "componentInstance",
+                "name": "row-3",
+                "recipeId": "components/Table.EditableRow",
+                "variantProps": {
+                  "section": "body",
+                  "selected": "false",
+                  "disabled": "false",
+                  "fontSize": "medium"
+                },
+                "layoutSizingHorizontal": "FILL"
+              }
+            ],
+            "bindings": {
+              "paddingTop": "component-constant-spacing-0",
+              "paddingRight": "component-constant-spacing-0",
+              "paddingBottom": "component-constant-spacing-0",
+              "paddingLeft": "component-constant-spacing-0",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0"
+            }
+          }
+        }
+      ],
+      "libraryCategory": "Content",
+      "assetName": "Content/Table/Root",
+      "documentation": {
+        "purpose": "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.",
+        "usage": "Compose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.",
+        "properties": "composition: editable",
+        "related": [
+          "OrderableList"
+        ],
+        "origin": "released-metadata",
+        "metadataSource": "packages/components/src/components/Table/Table.metadata.json",
+        "links": [
+          {
+            "uri": "https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+          },
+          {
+            "uri": "https://fondue.frontify.com/"
+          }
+        ],
+        "description": "A structured data table for displaying rows and columns of information.\n\nUse when presenting tabular data that users need to scan, compare, or sort.\n\nCompose as Table.Root > Table.Header + Table.Body.\n\nInside Table.Header use Table.HeaderCell for column headers.\n\nInside Table.Body use Table.Row > Table.RowCell for data rows.\n\nUse Table.Caption for an accessible table title.\n\nUse OrderableList instead when rows need to be reordered by the user.\n\nExposed variant properties:\n\ncomposition: editable\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial. composition is a Figma-only setting.\n\nHeader/body rows and cells stay linked; their content belongs to the instance.\n\nTable column operations require a rectangular row structure.\n\nRoot font context, sticky columns, spans, sorting and accessibility semantics are not simulated.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Table/Table.tsx"
+      }
+    },
+    {
       "id": "patterns/ProductionNavigationRail",
       "name": "ProductionNavigationRail",
       "package": "fondue-sync/patterns",
@@ -305609,9 +308874,11 @@
       "recipeId": "components/SegmentedControl/controls-001",
       "recipeIds": [
         "components/SegmentedControl/controls-001",
-        "components/SegmentedControl/controls-002"
+        "components/SegmentedControl/controls-002",
+        "components/SegmentedControl.Item",
+        "components/SegmentedControl.Root"
       ],
-      "status": "supported"
+      "status": "partial"
     },
     {
       "id": "components:Select",
@@ -305679,7 +308946,10 @@
         "components/Table",
         "components/Table.Row",
         "components/Table.HeaderCell",
-        "components/Table.RowCell"
+        "components/Table.RowCell",
+        "components/Table.ContentCell",
+        "components/Table.EditableRow",
+        "components/Table.Root"
       ],
       "status": "partial"
     },
@@ -307786,6 +311056,23 @@
       ]
     },
     {
+      "id": "components:SegmentedControl",
+      "status": "partial",
+      "limitations": [
+        "Fixed two-item specimen.",
+        "Use the additive SegmentedControl/Root and /Item components for variable item count through native slots.",
+        "Responsive label clamp is represented at the 16px maximum.",
+        "Item selected/disabled/iconOnly/state are set on each nested item.",
+        "Figma does not reproduce React group state or keyboard behavior.",
+        "First/last rounding and adjacent separator behavior require context review; the selected outline follows the existing source-state specimen.",
+        "Native Segments slot contains linked Item instances.",
+        "Count is content, not a variant axis.",
+        "Set selection and disabled/iconOnly state on the nested items.",
+        "The pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance.",
+        "Focus management, responsive label clamping and indicator motion remain runtime."
+      ]
+    },
+    {
       "id": "components:Select",
       "status": "partial",
       "limitations": [
@@ -307808,7 +311095,18 @@
         "none represents undefined sortDirection.",
         "Loading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.",
         "Sortable trigger semantics need onSortChange in React.",
-        "colSpan, widths, truncation and gutter are contextual layout constraints."
+        "colSpan, widths, truncation and gutter are contextual layout constraints.",
+        "Additive editable counterpart of Table.RowCell.",
+        "Width and fontSize are contextual.",
+        "A cell can contain arbitrary designer content through its Content slot.",
+        "Column spans, sticky positioning, sort interactions and browser table semantics remain runtime.",
+        "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
+        "Use the composition actions to add columns to all rows or copy a selected cell width across its column.",
+        "Native slot editing remains available; uneven rows are reported before bulk changes.",
+        "composition is a Figma-only setting.",
+        "Header/body rows and cells stay linked; their content belongs to the instance.",
+        "Table column operations require a rectangular row structure.",
+        "Root font context, sticky columns, spans, sorting and accessibility semantics are not simulated."
       ]
     },
     {
@@ -308418,14 +311716,14 @@
       "constantOrigin": "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
     },
     "counts": {
-      "layers": 12881,
-      "existingBindings": 2019,
-      "addedReleasedBindings": 6584,
-      "addedConstantBindings": 27604,
-      "framePaddingBindings": 21676,
-      "gapBindings": 5410,
-      "radiusBindings": 6302,
-      "borderWidthBindings": 800,
+      "layers": 13028,
+      "existingBindings": 2021,
+      "addedReleasedBindings": 6646,
+      "addedConstantBindings": 27890,
+      "framePaddingBindings": 21896,
+      "gapBindings": 5465,
+      "radiusBindings": 6361,
+      "borderWidthBindings": 814,
       "derivedVariables": 37,
       "exceptions": 0,
       "notApplicable": 414
@@ -309017,7 +312315,7 @@
               "role": "radius"
             }
           ],
-          "occurrences": 5524
+          "occurrences": 5559
         }
       },
       {
@@ -309323,7 +312621,7 @@
               "role": "radius"
             }
           ],
-          "occurrences": 99
+          "occurrences": 123
         }
       },
       {
@@ -310096,7 +313394,7 @@
               "role": "spacing"
             }
           ],
-          "occurrences": 20725
+          "occurrences": 20944
         }
       },
       {
@@ -310133,7 +313431,7 @@
               "role": "spacing"
             }
           ],
-          "occurrences": 192
+          "occurrences": 200
         }
       },
       {
@@ -313836,7 +317134,7 @@
     "counts": {
       "literalPaintsBound": 2,
       "svgPaintRules": 38,
-      "shadowLayersStyled": 192,
+      "shadowLayersStyled": 200,
       "effectFieldsBound": 40,
       "derivedEffectVariables": 15,
       "derivedEffectStyles": 4
@@ -314658,12 +317956,12 @@
     "release": "13.11.1",
     "policy": "Exact effective font family, size, weight, line height, letter spacing and case. CSS font stacks remain unchanged; native family aliases resolve only through confirmed font availability.",
     "counts": {
-      "textLayers": 2567,
-      "releasedStyleMatches": 2463,
-      "existingExactStyles": 2022,
+      "textLayers": 2585,
+      "releasedStyleMatches": 2481,
+      "existingExactStyles": 2040,
       "derivedStyles": 13,
       "derivedVariables": 7,
-      "layerBindings": 12827
+      "layerBindings": 12917
     },
     "derivedStyles": [
       {
@@ -315198,5 +318496,946 @@
       }
     ]
   },
-  "fingerprint": "f105ca43d46e70c108951149d77dd780e0d57ddd632bb61027deac1b56183b67"
+  "composition": [
+    {
+      "key": "charts:AreaStackChart",
+      "name": "AreaStackChart",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/AreaStackChart"
+      ]
+    },
+    {
+      "key": "charts:BarChart",
+      "name": "BarChart",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/BarChart"
+      ]
+    },
+    {
+      "key": "charts:ChartHeading",
+      "name": "ChartHeading",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/ChartHeading"
+      ]
+    },
+    {
+      "key": "charts:Legend",
+      "name": "Legend",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/Legend"
+      ]
+    },
+    {
+      "key": "charts:LinearGauge",
+      "name": "LinearGauge",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/LinearGauge"
+      ]
+    },
+    {
+      "key": "charts:LineChart",
+      "name": "LineChart",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/LineChart"
+      ]
+    },
+    {
+      "key": "charts:PieChart",
+      "name": "PieChart",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/PieChart"
+      ]
+    },
+    {
+      "key": "charts:Tooltip",
+      "name": "Tooltip",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/Tooltip"
+      ]
+    },
+    {
+      "key": "charts:Treemap",
+      "name": "Treemap",
+      "package": "charts",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+      "slots": [],
+      "recipeIds": [
+        "charts/Treemap"
+      ]
+    },
+    {
+      "key": "components:Accordion",
+      "name": "Accordion",
+      "package": "components",
+      "mode": "repeated",
+      "state": "Needs slots",
+      "regions": [
+        "Items",
+        "Item content"
+      ],
+      "reason": "Repeated linked sections with arbitrary expanded content.",
+      "slots": [],
+      "recipeIds": [
+        "components/Accordion",
+        "components/Accordion.borderless",
+        "components/Accordion.pill",
+        "components/Accordion.Content",
+        "components/Accordion.sticky"
+      ]
+    },
+    {
+      "key": "components:AssetInput",
+      "name": "AssetInput",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+      "slots": [],
+      "recipeIds": [
+        "components/AssetInput",
+        "components/AssetInput.Placeholder",
+        "components/AssetInput/image-preview"
+      ]
+    },
+    {
+      "key": "components:Badge",
+      "name": "Badge",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Badge/controls-001",
+        "components/Badge/controls-002"
+      ]
+    },
+    {
+      "key": "components:Box",
+      "name": "Box",
+      "package": "components",
+      "mode": "layout",
+      "state": "Needs slots",
+      "regions": [
+        "Children"
+      ],
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "slots": [],
+      "recipeIds": [
+        "components/Box"
+      ]
+    },
+    {
+      "key": "components:Button",
+      "name": "Button",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Button/controls-001",
+        "components/Button/controls-003",
+        "components/Button/controls-005",
+        "components/Button/controls-006",
+        "components/Button/controls-007",
+        "components/Button/controls-009",
+        "components/Button/controls-011",
+        "components/Button/controls-013",
+        "components/Button/controls-015",
+        "components/Button/controls-017",
+        "components/Button/controls-019",
+        "components/Button/controls-021",
+        "components/Button/controls-023",
+        "components/Button/controls-025",
+        "components/Button/controls-027",
+        "components/Button/controls-029"
+      ]
+    },
+    {
+      "key": "components:Card",
+      "name": "Card",
+      "package": "components",
+      "mode": "content",
+      "state": "Needs slots",
+      "regions": [
+        "Body",
+        "Footer",
+        "Banner content"
+      ],
+      "reason": "Keep framing and defined media/icon parts linked; make content regions flexible.",
+      "slots": [],
+      "recipeIds": [
+        "components/Card",
+        "components/Card.Banner",
+        "components/Card.BannerIcon",
+        "components/Card.ThumbnailIcon",
+        "components/Card.Title",
+        "components/Card.Description",
+        "components/Card.ActionButton",
+        "components/Card.BannerImage",
+        "components/Card.ThumbnailImage"
+      ]
+    },
+    {
+      "key": "components:Checkbox",
+      "name": "Checkbox",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Checkbox/controls-001",
+        "components/Checkbox/controls-002",
+        "components/Checkbox/controls-003",
+        "components/Checkbox/controls-004"
+      ]
+    },
+    {
+      "key": "components:ColorPicker",
+      "name": "ColorPicker",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+      "slots": [],
+      "recipeIds": [
+        "components/ColorPicker",
+        "components/ColorPicker.Values",
+        "components/ColorPicker.Input"
+      ]
+    },
+    {
+      "key": "components:DatePicker",
+      "name": "DatePicker",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+      "slots": [],
+      "recipeIds": [
+        "components/DatePicker",
+        "components/DatePicker.Range",
+        "components/DatePicker.Input",
+        "components/DatePicker.Day"
+      ]
+    },
+    {
+      "key": "components:Dialog",
+      "name": "Dialog",
+      "package": "components",
+      "mode": "content",
+      "state": "Needs slots",
+      "regions": [
+        "Body",
+        "Footer actions"
+      ],
+      "reason": "Keep the shell and dismissal controls fixed; allow arbitrary forms and actions.",
+      "slots": [],
+      "recipeIds": [
+        "components/Dialog",
+        "components/Dialog.Header",
+        "components/Dialog.Body",
+        "components/Dialog.Footer"
+      ]
+    },
+    {
+      "key": "components:Divider",
+      "name": "Divider",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Divider/horizontal-solid",
+        "components/Divider/horizontal-dashed",
+        "components/Divider/horizontal-noline",
+        "components/Divider/vertical-solid",
+        "components/Divider/vertical-dashed",
+        "components/Divider/vertical-noline"
+      ]
+    },
+    {
+      "key": "components:Dropdown",
+      "name": "Dropdown",
+      "package": "components",
+      "mode": "repeated",
+      "state": "Needs slots",
+      "regions": [
+        "Items",
+        "Groups"
+      ],
+      "reason": "Repeat linked items; preserve menu keyboard behavior in code.",
+      "slots": [],
+      "recipeIds": [
+        "components/Dropdown",
+        "components/Dropdown.Item",
+        "components/Dropdown.SubTrigger"
+      ]
+    },
+    {
+      "key": "components:EditableText",
+      "name": "EditableText",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+      "slots": [],
+      "recipeIds": [
+        "components/EditableText"
+      ]
+    },
+    {
+      "key": "components:Flex",
+      "name": "Flex",
+      "package": "components",
+      "mode": "layout",
+      "state": "Needs slots",
+      "regions": [
+        "Children"
+      ],
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "slots": [],
+      "recipeIds": [
+        "components/Flex/row",
+        "components/Flex/row-reverse",
+        "components/Flex/column",
+        "components/Flex/column-reverse"
+      ]
+    },
+    {
+      "key": "components:Flyout",
+      "name": "Flyout",
+      "package": "components",
+      "mode": "content",
+      "state": "Partly available",
+      "regions": [
+        "Surface content",
+        "Body",
+        "Footer actions"
+      ],
+      "reason": "Surface is editable; standard body and footer compositions still need slot mappings.",
+      "slots": [
+        {
+          "recipeId": "components/Flyout.Surface",
+          "component": "Flyout/Surface",
+          "path": "/flyout",
+          "name": "Content"
+        }
+      ],
+      "recipeIds": [
+        "components/Flyout.Header",
+        "components/Flyout.Body",
+        "components/Flyout.Footer",
+        "components/Flyout",
+        "components/Flyout.Surface"
+      ]
+    },
+    {
+      "key": "components:Grid",
+      "name": "Grid",
+      "package": "components",
+      "mode": "structured",
+      "state": "Needs slots",
+      "regions": [
+        "Cells"
+      ],
+      "reason": "Arbitrary cells need grid track and span rules; do not treat grid as a plain list.",
+      "slots": [],
+      "recipeIds": [
+        "components/Grid"
+      ]
+    },
+    {
+      "key": "components:Heading",
+      "name": "Heading",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Heading/color-default",
+        "components/Heading/color-weak",
+        "components/Heading/color-disabled",
+        "components/Heading/color-negative",
+        "components/Heading/color-positive",
+        "components/Heading/color-warning",
+        "components/Heading/color-interactive",
+        "components/Heading/color-x-weak"
+      ]
+    },
+    {
+      "key": "components:Label",
+      "name": "Label",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Label/default",
+        "components/Label/strong"
+      ]
+    },
+    {
+      "key": "components:Link",
+      "name": "Link",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Link/controls-001",
+        "components/Link/controls-002",
+        "components/Link/controls-003",
+        "components/Link/controls-004",
+        "components/Link/controls-005",
+        "components/Link/controls-006",
+        "components/Link/controls-007",
+        "components/Link/controls-008",
+        "components/Link/controls-009",
+        "components/Link/controls-013",
+        "components/Link/controls-021",
+        "components/Link/controls-029",
+        "components/Link/controls-030",
+        "components/Link/controls-038",
+        "components/Link/controls-046",
+        "components/Link/on-container-001",
+        "components/Link/on-container-002",
+        "components/Link/on-container-003",
+        "components/Link/on-container-004",
+        "components/Link/on-container-005",
+        "components/Link/on-container-006",
+        "components/Link/on-container-007",
+        "components/Link/on-container-008",
+        "components/Link/on-container-009",
+        "components/Link/on-container-013",
+        "components/Link/on-container-021",
+        "components/Link/on-container-029",
+        "components/Link/on-container-030",
+        "components/Link/on-container-038",
+        "components/Link/on-container-046"
+      ]
+    },
+    {
+      "key": "components:LoadingBar",
+      "name": "LoadingBar",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/LoadingBar/default-square",
+        "components/LoadingBar/default-rounded",
+        "components/LoadingBar/positive-square",
+        "components/LoadingBar/positive-rounded",
+        "components/LoadingBar/negative-square",
+        "components/LoadingBar/negative-rounded"
+      ]
+    },
+    {
+      "key": "components:LoadingCircle",
+      "name": "LoadingCircle",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/LoadingCircle/progress",
+        "components/LoadingCircle/success",
+        "components/LoadingCircle/danger"
+      ]
+    },
+    {
+      "key": "components:Notice",
+      "name": "Notice",
+      "package": "components",
+      "mode": "content",
+      "state": "Needs slots",
+      "regions": [
+        "Body",
+        "Actions"
+      ],
+      "reason": "Message and action content can vary inside stable status styling.",
+      "slots": [],
+      "recipeIds": [
+        "components/Notice/controls-001",
+        "components/Notice/controls-002"
+      ]
+    },
+    {
+      "key": "components:OrderableList",
+      "name": "OrderableList",
+      "package": "components",
+      "mode": "repeated",
+      "state": "Needs slots",
+      "regions": [
+        "Items"
+      ],
+      "reason": "Linked rows can repeat; runtime drag/drop remains in code.",
+      "slots": [],
+      "recipeIds": [
+        "components/OrderableList",
+        "components/OrderableList.Item"
+      ]
+    },
+    {
+      "key": "components:RadioList",
+      "name": "RadioList",
+      "package": "components",
+      "mode": "repeated",
+      "state": "Needs slots",
+      "regions": [
+        "Options"
+      ],
+      "reason": "Linked option items with exactly one selected item in the design.",
+      "slots": [],
+      "recipeIds": [
+        "components/RadioList/controls-001",
+        "components/RadioList/controls-002"
+      ]
+    },
+    {
+      "key": "components:RouterProvider",
+      "name": "RouterProvider",
+      "package": "components",
+      "mode": "code-only",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Runtime context provider; no editable canvas region is required.",
+      "slots": [],
+      "recipeIds": []
+    },
+    {
+      "key": "components:ScrollArea",
+      "name": "ScrollArea",
+      "package": "components",
+      "mode": "layout",
+      "state": "Needs slots",
+      "regions": [
+        "Children"
+      ],
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "slots": [],
+      "recipeIds": [
+        "components/ScrollArea/auto",
+        "components/ScrollArea/stable",
+        "components/ScrollArea/stable-horizontal",
+        "components/ScrollArea/stable-vertical"
+      ]
+    },
+    {
+      "key": "components:Section",
+      "name": "Section",
+      "package": "components",
+      "mode": "layout",
+      "state": "Needs slots",
+      "regions": [
+        "Children"
+      ],
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "slots": [],
+      "recipeIds": [
+        "components/Section"
+      ]
+    },
+    {
+      "key": "components:SegmentedControl",
+      "name": "SegmentedControl",
+      "package": "components",
+      "mode": "repeated",
+      "state": "Available",
+      "regions": [
+        "Segments"
+      ],
+      "reason": "Linked items inside a slot; group selection needs a coordinated action.",
+      "slots": [
+        {
+          "recipeId": "components/SegmentedControl.Root",
+          "component": "SegmentedControl/Root",
+          "path": "/segmented-control",
+          "name": "Segments"
+        }
+      ],
+      "recipeIds": [
+        "components/SegmentedControl/controls-001",
+        "components/SegmentedControl/controls-002",
+        "components/SegmentedControl.Item",
+        "components/SegmentedControl.Root"
+      ]
+    },
+    {
+      "key": "components:Select",
+      "name": "Select",
+      "package": "components",
+      "mode": "repeated",
+      "state": "Needs slots",
+      "regions": [
+        "Items",
+        "Groups"
+      ],
+      "reason": "Options and groups vary; keep the trigger and selected-value rendering fixed.",
+      "slots": [],
+      "recipeIds": [
+        "components/Select",
+        "components/Select.Multiple",
+        "components/Select.Combobox",
+        "components/Select.Item",
+        "components/Select.Group"
+      ]
+    },
+    {
+      "key": "components:Slider",
+      "name": "Slider",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+      "slots": [],
+      "recipeIds": [
+        "components/Slider/controls-001",
+        "components/Slider/controls-002"
+      ]
+    },
+    {
+      "key": "components:SplitButton",
+      "name": "SplitButton",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Fixed primary/secondary anatomy; variable menu items belong to Dropdown composition.",
+      "slots": [],
+      "recipeIds": [
+        "components/SplitButton/controls-001",
+        "components/SplitButton/controls-002",
+        "components/SplitButton/controls-003"
+      ]
+    },
+    {
+      "key": "components:Switch",
+      "name": "Switch",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Switch/controls-001"
+      ]
+    },
+    {
+      "key": "components:Table",
+      "name": "Table",
+      "package": "components",
+      "mode": "structured",
+      "state": "Available",
+      "regions": [
+        "Rows",
+        "Cells",
+        "Cell content"
+      ],
+      "reason": "Linked rows/cells plus coordinated column insertion and widths.",
+      "slots": [
+        {
+          "recipeId": "components/Table.ContentCell",
+          "component": "Table/ContentCell",
+          "path": "/cell/content",
+          "name": "Content"
+        },
+        {
+          "recipeId": "components/Table.EditableRow",
+          "component": "Table/EditableRow",
+          "path": "/row",
+          "name": "Cells"
+        },
+        {
+          "recipeId": "components/Table.Root",
+          "component": "Table/Root",
+          "path": "/table",
+          "name": "Rows"
+        }
+      ],
+      "recipeIds": [
+        "components/Table",
+        "components/Table.Row",
+        "components/Table.HeaderCell",
+        "components/Table.RowCell",
+        "components/Table.ContentCell",
+        "components/Table.EditableRow",
+        "components/Table.Root"
+      ]
+    },
+    {
+      "key": "components:Tabs",
+      "name": "Tabs",
+      "package": "components",
+      "mode": "repeated",
+      "state": "Needs slots",
+      "regions": [
+        "Triggers",
+        "Panel content"
+      ],
+      "reason": "Variable trigger count plus associated content. Pairing and active state need validation.",
+      "slots": [],
+      "recipeIds": [
+        "components/Tabs",
+        "components/Tabs.Trigger",
+        "components/Tabs.Content"
+      ]
+    },
+    {
+      "key": "components:Tag",
+      "name": "Tag",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Tag/controls-001",
+        "components/Tag/controls-002"
+      ]
+    },
+    {
+      "key": "components:Text",
+      "name": "Text",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Text/color-default",
+        "components/Text/color-weak",
+        "components/Text/color-disabled",
+        "components/Text/color-negative",
+        "components/Text/color-positive",
+        "components/Text/color-warning",
+        "components/Text/color-interactive",
+        "components/Text/boxColor-neutral",
+        "components/Text/boxColor-selected",
+        "components/Text/boxColor-disabled",
+        "components/Text/boxColor-positive",
+        "components/Text/boxColor-negative",
+        "components/Text/boxColor-warning"
+      ]
+    },
+    {
+      "key": "components:Textarea",
+      "name": "Textarea",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/Textarea/controls-001",
+        "components/Textarea/controls-002",
+        "components/Textarea/controls-003",
+        "components/Textarea/controls-004",
+        "components/Textarea/controls-005",
+        "components/Textarea/controls-006",
+        "components/Textarea/controls-007",
+        "components/Textarea/controls-008",
+        "components/Textarea/controls-009",
+        "components/Textarea/controls-010",
+        "components/Textarea/controls-011"
+      ]
+    },
+    {
+      "key": "components:TextInput",
+      "name": "TextInput",
+      "package": "components",
+      "mode": "fixed",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+      "slots": [],
+      "recipeIds": [
+        "components/TextInput/controls-001",
+        "components/TextInput/controls-002",
+        "components/TextInput/controls-003",
+        "components/TextInput/controls-004",
+        "components/TextInput/controls-005",
+        "components/TextInput/controls-006"
+      ]
+    },
+    {
+      "key": "components:ThemeProvider",
+      "name": "ThemeProvider",
+      "package": "components",
+      "mode": "code-only",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Runtime context provider; no editable canvas region is required.",
+      "slots": [],
+      "recipeIds": []
+    },
+    {
+      "key": "components:Tooltip",
+      "name": "Tooltip",
+      "package": "components",
+      "mode": "content",
+      "state": "Needs slots",
+      "regions": [
+        "Content"
+      ],
+      "reason": "Support rich tooltip content while preserving the shell; check interactive-content guidance separately.",
+      "slots": [],
+      "recipeIds": [
+        "components/Tooltip"
+      ]
+    },
+    {
+      "key": "components:Tree",
+      "name": "Tree",
+      "package": "components",
+      "mode": "structured",
+      "state": "Needs slots",
+      "regions": [
+        "Rows",
+        "Nested children"
+      ],
+      "reason": "Hierarchy and indentation need a tree-specific composition contract.",
+      "slots": [],
+      "recipeIds": [
+        "components/Tree",
+        "components/Tree.Item",
+        "components/Tree.Folder"
+      ]
+    },
+    {
+      "key": "rte:FloatingModalWrapper",
+      "name": "FloatingModalWrapper",
+      "package": "rte",
+      "mode": "content",
+      "state": "Needs slots",
+      "regions": [
+        "Content"
+      ],
+      "reason": "Review native representation separately from editor document/runtime behavior.",
+      "slots": [],
+      "recipeIds": [
+        "rte/FloatingModalWrapper"
+      ]
+    },
+    {
+      "key": "rte:RichTextEditor",
+      "name": "RichTextEditor",
+      "package": "rte",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Review native representation separately from editor document/runtime behavior.",
+      "slots": [],
+      "recipeIds": [
+        "rte/RichTextEditor"
+      ]
+    },
+    {
+      "key": "rte:Toolbar",
+      "name": "Toolbar",
+      "package": "rte",
+      "mode": "content",
+      "state": "Needs slots",
+      "regions": [
+        "Actions"
+      ],
+      "reason": "Review native representation separately from editor document/runtime behavior.",
+      "slots": [],
+      "recipeIds": [
+        "rte/Toolbar"
+      ]
+    },
+    {
+      "key": "rte:ToolbarButton",
+      "name": "ToolbarButton",
+      "package": "rte",
+      "mode": "data-driven",
+      "state": "No slot planned",
+      "regions": [],
+      "reason": "Review native representation separately from editor document/runtime behavior.",
+      "slots": [],
+      "recipeIds": [
+        "rte/ToolbarButton"
+      ]
+    }
+  ],
+  "fingerprint": "d40add046bfba3dd4fc2a0f0e40e17d8f98fd975771f6fea212b2833777b4029"
 }

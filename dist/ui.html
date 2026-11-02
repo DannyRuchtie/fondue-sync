@@ -202,6 +202,72 @@
       <p id="progress" aria-live="polite" class="muted"></p>
       <div id="log" aria-live="polite"></div>
       <details>
+        <summary>Compose with slots</summary>
+        <p>
+          Select a control, row or cell on the canvas. These actions edit its
+          contents.
+        </p>
+        <label
+          >Segments
+          <input
+            id="segment-count"
+            type="number"
+            min="2"
+            max="10"
+            value="5"
+            style="width: 64px"
+        /></label>
+        <div class="row">
+          <button data-action="compose-insert-segments">Insert control</button>
+          <button data-action="compose-add-segment">Add segment</button>
+          <button data-action="compose-select-segment">Select segment</button>
+        </div>
+        <div class="row">
+          <button data-action="compose-insert-table">Insert table</button>
+          <button data-action="compose-add-row">Add row</button>
+          <button data-action="compose-add-column">Add column</button>
+        </div>
+        <button data-action="compose-match-column-width">
+          Match column width
+        </button>
+        <p class="muted">
+          Resize a cell, then use Match column width to apply that width to its
+          column. Insert actions require the editable components to be installed
+          in this library.
+        </p>
+        <p id="composition-result" role="status" aria-live="polite"></p>
+      </details>
+      <details>
+        <summary>Component composition overview</summary>
+        <p class="muted">
+          Generator coverage and candidate content regions. This is separate
+          from the file's sync and publication state.
+        </p>
+        <label
+          >Find component <input id="composition-search" type="search"
+        /></label>
+        <p>
+          <a
+            href="https://github.com/DannyRuchtie/fondue-sync/blob/main/recipes/composition-policies.json"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Maintain composition policies</a
+          >
+        </p>
+        <div style="overflow: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Regions</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="composition-rows"></tbody>
+          </table>
+        </div>
+      </details>
+      <details>
         <summary>Coverage and limitations</summary>
         <pre id="gaps"></pre>
       </details>
@@ -426,9 +492,35 @@
 })();
 </script>
     <script>
-      const send = (type) =>
-        parent.postMessage({ pluginMessage: { type } }, "*");
+      const send = (type, extra = {}) =>
+        parent.postMessage({ pluginMessage: { type, ...extra } }, "*");
       const el = (id) => document.getElementById(id);
+      let compositionRows = [];
+      function showComposition() {
+        const query = el("composition-search").value.toLowerCase();
+        el("composition-rows").replaceChildren();
+        for (const row of compositionRows.filter((row) =>
+          (row.name + " " + row.state + " " + row.regions.join(" "))
+            .toLowerCase()
+            .includes(query),
+        )) {
+          const tr = document.createElement("tr");
+          tr.title = row.reason;
+          for (const text of [
+            row.package + " / " + row.name,
+            row.regions.join(", ") || "—",
+            row.state,
+          ]) {
+            const td = document.createElement("td");
+            td.textContent = text;
+            td.style.padding = "6px";
+            td.style.verticalAlign = "top";
+            tr.appendChild(td);
+          }
+          el("composition-rows").appendChild(tr);
+        }
+      }
+      el("composition-search").oninput = showComposition;
       function buttons(disabled) {
         document
           .querySelectorAll("#sync-panel button")
@@ -439,7 +531,9 @@
           (button.onclick = () => {
             buttons(true);
             el("progress").textContent = "Working…";
-            send(button.dataset.action);
+            send(button.dataset.action, {
+              amount: Number(el("segment-count").value),
+            });
           }),
       );
       onmessage = (event) => {
@@ -450,6 +544,8 @@
           return;
         }
         if (m.type === "status") {
+          compositionRows = m.composition ?? [];
+          showComposition();
           if (m.lastErrors?.length)
             el("log").textContent =
               "Previous update errors:\n" + m.lastErrors.join("\n");
@@ -475,6 +571,10 @@
             ").";
         }
         if (m.type === "progress") el("progress").textContent = m.text;
+        if (m.type === "composition-result") {
+          el("composition-result").textContent = m.message;
+          el("progress").textContent = "Composition updated";
+        }
         if (m.type === "error") {
           el("progress").textContent = "Action stopped";
           el("log").textContent = m.message;

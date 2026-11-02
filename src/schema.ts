@@ -90,6 +90,8 @@ export type Layer = {
   arcData?: { startingAngle: number; endingAngle: number; innerRadius: number };
   width?: number;
   height?: number;
+  layoutSizingHorizontal?: "FIXED" | "HUG" | "FILL";
+  layoutSizingVertical?: "FIXED" | "HUG" | "FILL";
   layout?: "HORIZONTAL" | "VERTICAL";
   gap?: number;
   padding?: number;
@@ -158,6 +160,22 @@ export type Bundle = {
   }[];
   fixtures?: Record<string, any>;
   inventory: any[];
+  composition?: {
+    key: string;
+    name: string;
+    package: string;
+    mode: string;
+    state: string;
+    regions: string[];
+    reason: string;
+    slots: {
+      recipeId: string;
+      component: string;
+      path: string;
+      name: string;
+    }[];
+    recipeIds: string[];
+  }[];
   gaps: any[];
   fingerprint: string;
 };

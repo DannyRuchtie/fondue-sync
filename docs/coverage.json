@@ -1,6 +1,6 @@
 {
   "release": "13.11.1",
-  "fingerprint": "f105ca43d46e70c108951149d77dd780e0d57ddd632bb61027deac1b56183b67",
+  "fingerprint": "d40add046bfba3dd4fc2a0f0e40e17d8f98fd975771f6fea212b2833777b4029",
   "counts": {
     "tokens": 443,
     "releasedTokens": 373,
@@ -14,17 +14,17 @@
     "icons": 420,
     "opticalIconAssets": 2099,
     "inventory": 54,
-    "recipes": 218,
-    "variants": 2107,
+    "recipes": 223,
+    "variants": 2156,
     "examples": 34,
     "imageAssets": 6,
     "imageReferences": 92,
     "imageEncodedBytes": 2060971,
     "productPatterns": 18,
-    "documentedSets": 218,
-    "metadataDocumentedSets": 178,
-    "supported": 10,
-    "partial": 42,
+    "documentedSets": 223,
+    "metadataDocumentedSets": 183,
+    "supported": 9,
+    "partial": 43,
     "unsupported": 0,
     "codeOnly": 2
   },
@@ -465,9 +465,11 @@
       "recipeId": "components/SegmentedControl/controls-001",
       "recipeIds": [
         "components/SegmentedControl/controls-001",
-        "components/SegmentedControl/controls-002"
+        "components/SegmentedControl/controls-002",
+        "components/SegmentedControl.Item",
+        "components/SegmentedControl.Root"
       ],
-      "status": "supported"
+      "status": "partial"
     },
     {
       "id": "components:Select",
@@ -535,7 +537,10 @@
         "components/Table",
         "components/Table.Row",
         "components/Table.HeaderCell",
-        "components/Table.RowCell"
+        "components/Table.RowCell",
+        "components/Table.ContentCell",
+        "components/Table.EditableRow",
+        "components/Table.Root"
       ],
       "status": "partial"
     },
@@ -2025,6 +2030,23 @@
       ]
     },
     {
+      "id": "components:SegmentedControl",
+      "status": "partial",
+      "limitations": [
+        "Fixed two-item specimen.",
+        "Use the additive SegmentedControl/Root and /Item components for variable item count through native slots.",
+        "Responsive label clamp is represented at the 16px maximum.",
+        "Item selected/disabled/iconOnly/state are set on each nested item.",
+        "Figma does not reproduce React group state or keyboard behavior.",
+        "First/last rounding and adjacent separator behavior require context review; the selected outline follows the existing source-state specimen.",
+        "Native Segments slot contains linked Item instances.",
+        "Count is content, not a variant axis.",
+        "Set selection and disabled/iconOnly state on the nested items.",
+        "The pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance.",
+        "Focus management, responsive label clamping and indicator motion remain runtime."
+      ]
+    },
+    {
       "id": "components:Select",
       "status": "partial",
       "limitations": [
@@ -2047,7 +2069,18 @@
         "none represents undefined sortDirection.",
         "Loading uses a static native circular-arrow specimen; actual LoadingCircle animation is runtime.",
         "Sortable trigger semantics need onSortChange in React.",
-        "colSpan, widths, truncation and gutter are contextual layout constraints."
+        "colSpan, widths, truncation and gutter are contextual layout constraints.",
+        "Additive editable counterpart of Table.RowCell.",
+        "Width and fontSize are contextual.",
+        "A cell can contain arbitrary designer content through its Content slot.",
+        "Column spans, sticky positioning, sort interactions and browser table semantics remain runtime.",
+        "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
+        "Use the composition actions to add columns to all rows or copy a selected cell width across its column.",
+        "Native slot editing remains available; uneven rows are reported before bulk changes.",
+        "composition is a Figma-only setting.",
+        "Header/body rows and cells stay linked; their content belongs to the instance.",
+        "Table column operations require a rectangular row structure.",
+        "Root font context, sticky columns, spans, sorting and accessibility semantics are not simulated."
       ]
     },
     {

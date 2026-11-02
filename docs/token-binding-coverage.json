@@ -45,14 +45,14 @@
     "constantOrigin": "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
   },
   "counts": {
-    "layers": 12881,
-    "existingBindings": 2019,
-    "addedReleasedBindings": 6584,
-    "addedConstantBindings": 27604,
-    "framePaddingBindings": 21676,
-    "gapBindings": 5410,
-    "radiusBindings": 6302,
-    "borderWidthBindings": 800,
+    "layers": 13028,
+    "existingBindings": 2021,
+    "addedReleasedBindings": 6646,
+    "addedConstantBindings": 27890,
+    "framePaddingBindings": 21896,
+    "gapBindings": 5465,
+    "radiusBindings": 6361,
+    "borderWidthBindings": 814,
     "derivedVariables": 37,
     "exceptions": 0,
     "notApplicable": 414
@@ -644,7 +644,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 5524
+        "occurrences": 5559
       }
     },
     {
@@ -950,7 +950,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 99
+        "occurrences": 123
       }
     },
     {
@@ -1723,7 +1723,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 20725
+        "occurrences": 20944
       }
     },
     {
@@ -1760,7 +1760,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 192
+        "occurrences": 200
       }
     },
     {

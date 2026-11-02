@@ -1,27 +1,27 @@
 {
   "release": "13.11.1",
-  "bundleFingerprint": "f105ca43d46e70c108951149d77dd780e0d57ddd632bb61027deac1b56183b67",
+  "bundleFingerprint": "d40add046bfba3dd4fc2a0f0e40e17d8f98fd975771f6fea212b2833777b4029",
   "nativeLimitBytes": 100000,
   "measurement": "UTF-8 bytes of namespace + key + value per setSharedPluginData call; enforced by native API model.",
-  "assets": 1383,
+  "assets": 1393,
   "nativeOpticalIconVariants": 2099,
-  "sceneAndMetadataObjects": 58630,
+  "sceneAndMetadataObjects": 59703,
   "logicalRecords": {
-    "rootIndexBytes": 313461,
-    "assembledIndexBytes": 401677,
-    "maxIndexShardBytes": 6377,
+    "rootIndexBytes": 316003,
+    "assembledIndexBytes": 404901,
+    "maxIndexShardBytes": 6504,
     "largestAppliedBytes": 608405,
     "maxLogicalRecordBytes": 608405
   },
   "import": {
-    "writes": 164670,
-    "totalBytes": 820703123,
+    "writes": 167773,
+    "totalBytes": 832388175,
     "maxWriteBytes": 24055,
     "maxWriteKey": "fondue_sync:layer-definition",
     "maxValueBytes": 24000,
     "rootMaxWriteBytes": 24046,
-    "rootWrites": 70244,
-    "rootTotalBytes": 745452372
+    "rootWrites": 71216,
+    "rootTotalBytes": 755977802
   },
   "repeat": {
     "writes": 0,

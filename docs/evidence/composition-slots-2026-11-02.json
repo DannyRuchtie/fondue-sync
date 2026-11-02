@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-02",
+  "fileKey": "ZmOzqBnHNixUTV1TqRtBHs",
+  "method": "Figma desktop through computer use",
+  "generator": {
+    "newRecipeIds": [
+      "components/SegmentedControl.Item",
+      "components/SegmentedControl.Root",
+      "components/Table.ContentCell",
+      "components/Table.EditableRow",
+      "components/Table.Root"
+    ],
+    "newVariants": 49,
+    "componentSets": 223,
+    "sourceFamiliesInOverview": 54,
+    "overview": { "available": 2, "partlyAvailable": 1, "needsSlots": 18, "noSlotPlanned": 33 }
+  },
+  "native": {
+    "pluginLoaded": true,
+    "checkpointConfirmed": {
+      "title": "Before Fondue update · 2026-11-02T13:14:59.134Z",
+      "id": "2417262161780541804"
+    },
+    "lastObservedStage": "Checking source font: Diatype Regular",
+    "unsyncedChangesNoticeVisible": true,
+    "waitingPluginClosed": true,
+    "libraryMutationsStarted": false,
+    "updateCompleted": false,
+    "publicationPerformed": false
+  },
+  "remainingAcceptance": [
+    "Complete font preflight and the normal library update in Figma desktop",
+    "Visually check five segments and both hug/fill sizing modes",
+    "Check nested table slots, row/column actions and arbitrary cell content in native Figma",
+    "Verify consumer slot overrides through source-default and variant updates",
+    "Review and publish the library, then test an update in a consuming file"
+  ]
+}

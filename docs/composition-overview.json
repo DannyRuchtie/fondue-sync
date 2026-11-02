@@ -1,0 +1,941 @@
+[
+  {
+    "key": "charts:AreaStackChart",
+    "name": "AreaStackChart",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/AreaStackChart"
+    ]
+  },
+  {
+    "key": "charts:BarChart",
+    "name": "BarChart",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/BarChart"
+    ]
+  },
+  {
+    "key": "charts:ChartHeading",
+    "name": "ChartHeading",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/ChartHeading"
+    ]
+  },
+  {
+    "key": "charts:Legend",
+    "name": "Legend",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/Legend"
+    ]
+  },
+  {
+    "key": "charts:LinearGauge",
+    "name": "LinearGauge",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/LinearGauge"
+    ]
+  },
+  {
+    "key": "charts:LineChart",
+    "name": "LineChart",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/LineChart"
+    ]
+  },
+  {
+    "key": "charts:PieChart",
+    "name": "PieChart",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/PieChart"
+    ]
+  },
+  {
+    "key": "charts:Tooltip",
+    "name": "Tooltip",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/Tooltip"
+    ]
+  },
+  {
+    "key": "charts:Treemap",
+    "name": "Treemap",
+    "package": "charts",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Chart data and generated marks are not arbitrary slot content; review accessory content separately.",
+    "slots": [],
+    "recipeIds": [
+      "charts/Treemap"
+    ]
+  },
+  {
+    "key": "components:Accordion",
+    "name": "Accordion",
+    "package": "components",
+    "mode": "repeated",
+    "state": "Needs slots",
+    "regions": [
+      "Items",
+      "Item content"
+    ],
+    "reason": "Repeated linked sections with arbitrary expanded content.",
+    "slots": [],
+    "recipeIds": [
+      "components/Accordion",
+      "components/Accordion.borderless",
+      "components/Accordion.pill",
+      "components/Accordion.Content",
+      "components/Accordion.sticky"
+    ]
+  },
+  {
+    "key": "components:AssetInput",
+    "name": "AssetInput",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+    "slots": [],
+    "recipeIds": [
+      "components/AssetInput",
+      "components/AssetInput.Placeholder",
+      "components/AssetInput/image-preview"
+    ]
+  },
+  {
+    "key": "components:Badge",
+    "name": "Badge",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Badge/controls-001",
+      "components/Badge/controls-002"
+    ]
+  },
+  {
+    "key": "components:Box",
+    "name": "Box",
+    "package": "components",
+    "mode": "layout",
+    "state": "Needs slots",
+    "regions": [
+      "Children"
+    ],
+    "reason": "Container styling/layout stays linked while consumer content changes.",
+    "slots": [],
+    "recipeIds": [
+      "components/Box"
+    ]
+  },
+  {
+    "key": "components:Button",
+    "name": "Button",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Button/controls-001",
+      "components/Button/controls-003",
+      "components/Button/controls-005",
+      "components/Button/controls-006",
+      "components/Button/controls-007",
+      "components/Button/controls-009",
+      "components/Button/controls-011",
+      "components/Button/controls-013",
+      "components/Button/controls-015",
+      "components/Button/controls-017",
+      "components/Button/controls-019",
+      "components/Button/controls-021",
+      "components/Button/controls-023",
+      "components/Button/controls-025",
+      "components/Button/controls-027",
+      "components/Button/controls-029"
+    ]
+  },
+  {
+    "key": "components:Card",
+    "name": "Card",
+    "package": "components",
+    "mode": "content",
+    "state": "Needs slots",
+    "regions": [
+      "Body",
+      "Footer",
+      "Banner content"
+    ],
+    "reason": "Keep framing and defined media/icon parts linked; make content regions flexible.",
+    "slots": [],
+    "recipeIds": [
+      "components/Card",
+      "components/Card.Banner",
+      "components/Card.BannerIcon",
+      "components/Card.ThumbnailIcon",
+      "components/Card.Title",
+      "components/Card.Description",
+      "components/Card.ActionButton",
+      "components/Card.BannerImage",
+      "components/Card.ThumbnailImage"
+    ]
+  },
+  {
+    "key": "components:Checkbox",
+    "name": "Checkbox",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Checkbox/controls-001",
+      "components/Checkbox/controls-002",
+      "components/Checkbox/controls-003",
+      "components/Checkbox/controls-004"
+    ]
+  },
+  {
+    "key": "components:ColorPicker",
+    "name": "ColorPicker",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+    "slots": [],
+    "recipeIds": [
+      "components/ColorPicker",
+      "components/ColorPicker.Values",
+      "components/ColorPicker.Input"
+    ]
+  },
+  {
+    "key": "components:DatePicker",
+    "name": "DatePicker",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+    "slots": [],
+    "recipeIds": [
+      "components/DatePicker",
+      "components/DatePicker.Range",
+      "components/DatePicker.Input",
+      "components/DatePicker.Day"
+    ]
+  },
+  {
+    "key": "components:Dialog",
+    "name": "Dialog",
+    "package": "components",
+    "mode": "content",
+    "state": "Needs slots",
+    "regions": [
+      "Body",
+      "Footer actions"
+    ],
+    "reason": "Keep the shell and dismissal controls fixed; allow arbitrary forms and actions.",
+    "slots": [],
+    "recipeIds": [
+      "components/Dialog",
+      "components/Dialog.Header",
+      "components/Dialog.Body",
+      "components/Dialog.Footer"
+    ]
+  },
+  {
+    "key": "components:Divider",
+    "name": "Divider",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Divider/horizontal-solid",
+      "components/Divider/horizontal-dashed",
+      "components/Divider/horizontal-noline",
+      "components/Divider/vertical-solid",
+      "components/Divider/vertical-dashed",
+      "components/Divider/vertical-noline"
+    ]
+  },
+  {
+    "key": "components:Dropdown",
+    "name": "Dropdown",
+    "package": "components",
+    "mode": "repeated",
+    "state": "Needs slots",
+    "regions": [
+      "Items",
+      "Groups"
+    ],
+    "reason": "Repeat linked items; preserve menu keyboard behavior in code.",
+    "slots": [],
+    "recipeIds": [
+      "components/Dropdown",
+      "components/Dropdown.Item",
+      "components/Dropdown.SubTrigger"
+    ]
+  },
+  {
+    "key": "components:EditableText",
+    "name": "EditableText",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+    "slots": [],
+    "recipeIds": [
+      "components/EditableText"
+    ]
+  },
+  {
+    "key": "components:Flex",
+    "name": "Flex",
+    "package": "components",
+    "mode": "layout",
+    "state": "Needs slots",
+    "regions": [
+      "Children"
+    ],
+    "reason": "Container styling/layout stays linked while consumer content changes.",
+    "slots": [],
+    "recipeIds": [
+      "components/Flex/row",
+      "components/Flex/row-reverse",
+      "components/Flex/column",
+      "components/Flex/column-reverse"
+    ]
+  },
+  {
+    "key": "components:Flyout",
+    "name": "Flyout",
+    "package": "components",
+    "mode": "content",
+    "state": "Partly available",
+    "regions": [
+      "Surface content",
+      "Body",
+      "Footer actions"
+    ],
+    "reason": "Surface is editable; standard body and footer compositions still need slot mappings.",
+    "slots": [
+      {
+        "recipeId": "components/Flyout.Surface",
+        "component": "Flyout/Surface",
+        "path": "/flyout",
+        "name": "Content"
+      }
+    ],
+    "recipeIds": [
+      "components/Flyout.Header",
+      "components/Flyout.Body",
+      "components/Flyout.Footer",
+      "components/Flyout",
+      "components/Flyout.Surface"
+    ]
+  },
+  {
+    "key": "components:Grid",
+    "name": "Grid",
+    "package": "components",
+    "mode": "structured",
+    "state": "Needs slots",
+    "regions": [
+      "Cells"
+    ],
+    "reason": "Arbitrary cells need grid track and span rules; do not treat grid as a plain list.",
+    "slots": [],
+    "recipeIds": [
+      "components/Grid"
+    ]
+  },
+  {
+    "key": "components:Heading",
+    "name": "Heading",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Heading/color-default",
+      "components/Heading/color-weak",
+      "components/Heading/color-disabled",
+      "components/Heading/color-negative",
+      "components/Heading/color-positive",
+      "components/Heading/color-warning",
+      "components/Heading/color-interactive",
+      "components/Heading/color-x-weak"
+    ]
+  },
+  {
+    "key": "components:Label",
+    "name": "Label",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Label/default",
+      "components/Label/strong"
+    ]
+  },
+  {
+    "key": "components:Link",
+    "name": "Link",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Link/controls-001",
+      "components/Link/controls-002",
+      "components/Link/controls-003",
+      "components/Link/controls-004",
+      "components/Link/controls-005",
+      "components/Link/controls-006",
+      "components/Link/controls-007",
+      "components/Link/controls-008",
+      "components/Link/controls-009",
+      "components/Link/controls-013",
+      "components/Link/controls-021",
+      "components/Link/controls-029",
+      "components/Link/controls-030",
+      "components/Link/controls-038",
+      "components/Link/controls-046",
+      "components/Link/on-container-001",
+      "components/Link/on-container-002",
+      "components/Link/on-container-003",
+      "components/Link/on-container-004",
+      "components/Link/on-container-005",
+      "components/Link/on-container-006",
+      "components/Link/on-container-007",
+      "components/Link/on-container-008",
+      "components/Link/on-container-009",
+      "components/Link/on-container-013",
+      "components/Link/on-container-021",
+      "components/Link/on-container-029",
+      "components/Link/on-container-030",
+      "components/Link/on-container-038",
+      "components/Link/on-container-046"
+    ]
+  },
+  {
+    "key": "components:LoadingBar",
+    "name": "LoadingBar",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/LoadingBar/default-square",
+      "components/LoadingBar/default-rounded",
+      "components/LoadingBar/positive-square",
+      "components/LoadingBar/positive-rounded",
+      "components/LoadingBar/negative-square",
+      "components/LoadingBar/negative-rounded"
+    ]
+  },
+  {
+    "key": "components:LoadingCircle",
+    "name": "LoadingCircle",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/LoadingCircle/progress",
+      "components/LoadingCircle/success",
+      "components/LoadingCircle/danger"
+    ]
+  },
+  {
+    "key": "components:Notice",
+    "name": "Notice",
+    "package": "components",
+    "mode": "content",
+    "state": "Needs slots",
+    "regions": [
+      "Body",
+      "Actions"
+    ],
+    "reason": "Message and action content can vary inside stable status styling.",
+    "slots": [],
+    "recipeIds": [
+      "components/Notice/controls-001",
+      "components/Notice/controls-002"
+    ]
+  },
+  {
+    "key": "components:OrderableList",
+    "name": "OrderableList",
+    "package": "components",
+    "mode": "repeated",
+    "state": "Needs slots",
+    "regions": [
+      "Items"
+    ],
+    "reason": "Linked rows can repeat; runtime drag/drop remains in code.",
+    "slots": [],
+    "recipeIds": [
+      "components/OrderableList",
+      "components/OrderableList.Item"
+    ]
+  },
+  {
+    "key": "components:RadioList",
+    "name": "RadioList",
+    "package": "components",
+    "mode": "repeated",
+    "state": "Needs slots",
+    "regions": [
+      "Options"
+    ],
+    "reason": "Linked option items with exactly one selected item in the design.",
+    "slots": [],
+    "recipeIds": [
+      "components/RadioList/controls-001",
+      "components/RadioList/controls-002"
+    ]
+  },
+  {
+    "key": "components:RouterProvider",
+    "name": "RouterProvider",
+    "package": "components",
+    "mode": "code-only",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Runtime context provider; no editable canvas region is required.",
+    "slots": [],
+    "recipeIds": []
+  },
+  {
+    "key": "components:ScrollArea",
+    "name": "ScrollArea",
+    "package": "components",
+    "mode": "layout",
+    "state": "Needs slots",
+    "regions": [
+      "Children"
+    ],
+    "reason": "Container styling/layout stays linked while consumer content changes.",
+    "slots": [],
+    "recipeIds": [
+      "components/ScrollArea/auto",
+      "components/ScrollArea/stable",
+      "components/ScrollArea/stable-horizontal",
+      "components/ScrollArea/stable-vertical"
+    ]
+  },
+  {
+    "key": "components:Section",
+    "name": "Section",
+    "package": "components",
+    "mode": "layout",
+    "state": "Needs slots",
+    "regions": [
+      "Children"
+    ],
+    "reason": "Container styling/layout stays linked while consumer content changes.",
+    "slots": [],
+    "recipeIds": [
+      "components/Section"
+    ]
+  },
+  {
+    "key": "components:SegmentedControl",
+    "name": "SegmentedControl",
+    "package": "components",
+    "mode": "repeated",
+    "state": "Available",
+    "regions": [
+      "Segments"
+    ],
+    "reason": "Linked items inside a slot; group selection needs a coordinated action.",
+    "slots": [
+      {
+        "recipeId": "components/SegmentedControl.Root",
+        "component": "SegmentedControl/Root",
+        "path": "/segmented-control",
+        "name": "Segments"
+      }
+    ],
+    "recipeIds": [
+      "components/SegmentedControl/controls-001",
+      "components/SegmentedControl/controls-002",
+      "components/SegmentedControl.Item",
+      "components/SegmentedControl.Root"
+    ]
+  },
+  {
+    "key": "components:Select",
+    "name": "Select",
+    "package": "components",
+    "mode": "repeated",
+    "state": "Needs slots",
+    "regions": [
+      "Items",
+      "Groups"
+    ],
+    "reason": "Options and groups vary; keep the trigger and selected-value rendering fixed.",
+    "slots": [],
+    "recipeIds": [
+      "components/Select",
+      "components/Select.Multiple",
+      "components/Select.Combobox",
+      "components/Select.Item",
+      "components/Select.Group"
+    ]
+  },
+  {
+    "key": "components:Slider",
+    "name": "Slider",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Source-defined control anatomy or data-driven display; editable properties are the first choice.",
+    "slots": [],
+    "recipeIds": [
+      "components/Slider/controls-001",
+      "components/Slider/controls-002"
+    ]
+  },
+  {
+    "key": "components:SplitButton",
+    "name": "SplitButton",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Fixed primary/secondary anatomy; variable menu items belong to Dropdown composition.",
+    "slots": [],
+    "recipeIds": [
+      "components/SplitButton/controls-001",
+      "components/SplitButton/controls-002",
+      "components/SplitButton/controls-003"
+    ]
+  },
+  {
+    "key": "components:Switch",
+    "name": "Switch",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Switch/controls-001"
+    ]
+  },
+  {
+    "key": "components:Table",
+    "name": "Table",
+    "package": "components",
+    "mode": "structured",
+    "state": "Available",
+    "regions": [
+      "Rows",
+      "Cells",
+      "Cell content"
+    ],
+    "reason": "Linked rows/cells plus coordinated column insertion and widths.",
+    "slots": [
+      {
+        "recipeId": "components/Table.ContentCell",
+        "component": "Table/ContentCell",
+        "path": "/cell/content",
+        "name": "Content"
+      },
+      {
+        "recipeId": "components/Table.EditableRow",
+        "component": "Table/EditableRow",
+        "path": "/row",
+        "name": "Cells"
+      },
+      {
+        "recipeId": "components/Table.Root",
+        "component": "Table/Root",
+        "path": "/table",
+        "name": "Rows"
+      }
+    ],
+    "recipeIds": [
+      "components/Table",
+      "components/Table.Row",
+      "components/Table.HeaderCell",
+      "components/Table.RowCell",
+      "components/Table.ContentCell",
+      "components/Table.EditableRow",
+      "components/Table.Root"
+    ]
+  },
+  {
+    "key": "components:Tabs",
+    "name": "Tabs",
+    "package": "components",
+    "mode": "repeated",
+    "state": "Needs slots",
+    "regions": [
+      "Triggers",
+      "Panel content"
+    ],
+    "reason": "Variable trigger count plus associated content. Pairing and active state need validation.",
+    "slots": [],
+    "recipeIds": [
+      "components/Tabs",
+      "components/Tabs.Trigger",
+      "components/Tabs.Content"
+    ]
+  },
+  {
+    "key": "components:Tag",
+    "name": "Tag",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Tag/controls-001",
+      "components/Tag/controls-002"
+    ]
+  },
+  {
+    "key": "components:Text",
+    "name": "Text",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Text/color-default",
+      "components/Text/color-weak",
+      "components/Text/color-disabled",
+      "components/Text/color-negative",
+      "components/Text/color-positive",
+      "components/Text/color-warning",
+      "components/Text/color-interactive",
+      "components/Text/boxColor-neutral",
+      "components/Text/boxColor-selected",
+      "components/Text/boxColor-disabled",
+      "components/Text/boxColor-positive",
+      "components/Text/boxColor-negative",
+      "components/Text/boxColor-warning"
+    ]
+  },
+  {
+    "key": "components:Textarea",
+    "name": "Textarea",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/Textarea/controls-001",
+      "components/Textarea/controls-002",
+      "components/Textarea/controls-003",
+      "components/Textarea/controls-004",
+      "components/Textarea/controls-005",
+      "components/Textarea/controls-006",
+      "components/Textarea/controls-007",
+      "components/Textarea/controls-008",
+      "components/Textarea/controls-009",
+      "components/Textarea/controls-010",
+      "components/Textarea/controls-011"
+    ]
+  },
+  {
+    "key": "components:TextInput",
+    "name": "TextInput",
+    "package": "components",
+    "mode": "fixed",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Use text, boolean, variant and instance-swap properties for the defined anatomy.",
+    "slots": [],
+    "recipeIds": [
+      "components/TextInput/controls-001",
+      "components/TextInput/controls-002",
+      "components/TextInput/controls-003",
+      "components/TextInput/controls-004",
+      "components/TextInput/controls-005",
+      "components/TextInput/controls-006"
+    ]
+  },
+  {
+    "key": "components:ThemeProvider",
+    "name": "ThemeProvider",
+    "package": "components",
+    "mode": "code-only",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Runtime context provider; no editable canvas region is required.",
+    "slots": [],
+    "recipeIds": []
+  },
+  {
+    "key": "components:Tooltip",
+    "name": "Tooltip",
+    "package": "components",
+    "mode": "content",
+    "state": "Needs slots",
+    "regions": [
+      "Content"
+    ],
+    "reason": "Support rich tooltip content while preserving the shell; check interactive-content guidance separately.",
+    "slots": [],
+    "recipeIds": [
+      "components/Tooltip"
+    ]
+  },
+  {
+    "key": "components:Tree",
+    "name": "Tree",
+    "package": "components",
+    "mode": "structured",
+    "state": "Needs slots",
+    "regions": [
+      "Rows",
+      "Nested children"
+    ],
+    "reason": "Hierarchy and indentation need a tree-specific composition contract.",
+    "slots": [],
+    "recipeIds": [
+      "components/Tree",
+      "components/Tree.Item",
+      "components/Tree.Folder"
+    ]
+  },
+  {
+    "key": "rte:FloatingModalWrapper",
+    "name": "FloatingModalWrapper",
+    "package": "rte",
+    "mode": "content",
+    "state": "Needs slots",
+    "regions": [
+      "Content"
+    ],
+    "reason": "Review native representation separately from editor document/runtime behavior.",
+    "slots": [],
+    "recipeIds": [
+      "rte/FloatingModalWrapper"
+    ]
+  },
+  {
+    "key": "rte:RichTextEditor",
+    "name": "RichTextEditor",
+    "package": "rte",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Review native representation separately from editor document/runtime behavior.",
+    "slots": [],
+    "recipeIds": [
+      "rte/RichTextEditor"
+    ]
+  },
+  {
+    "key": "rte:Toolbar",
+    "name": "Toolbar",
+    "package": "rte",
+    "mode": "content",
+    "state": "Needs slots",
+    "regions": [
+      "Actions"
+    ],
+    "reason": "Review native representation separately from editor document/runtime behavior.",
+    "slots": [],
+    "recipeIds": [
+      "rte/Toolbar"
+    ]
+  },
+  {
+    "key": "rte:ToolbarButton",
+    "name": "ToolbarButton",
+    "package": "rte",
+    "mode": "data-driven",
+    "state": "No slot planned",
+    "regions": [],
+    "reason": "Review native representation separately from editor document/runtime behavior.",
+    "slots": [],
+    "recipeIds": [
+      "rte/ToolbarButton"
+    ]
+  }
+]

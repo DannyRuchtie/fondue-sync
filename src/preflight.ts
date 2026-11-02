@@ -290,6 +290,15 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
       }
   }
   const layer = (node: Layer, context: string) => {
+    for (const field of [
+      "layoutSizingHorizontal",
+      "layoutSizingVertical",
+    ] as const)
+      if (
+        node[field] !== undefined &&
+        !["FIXED", "HUG", "FILL"].includes(node[field]!)
+      )
+        problem("layer-sizing", `Invalid ${field}: ${context}/${node.id}`);
     if (node.imageAssetId) {
       const asset = imageAssets.get(node.imageAssetId);
       if (!asset)

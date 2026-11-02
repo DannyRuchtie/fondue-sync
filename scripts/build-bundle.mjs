@@ -11,6 +11,10 @@ import { applyChartBrandColors } from "../recipes/chart-colors.mjs";
 import { loadImageAssets, enrichImageReferences } from "./image-assets.mjs";
 import { augmentTypographyBindings } from "../recipes/typography-bindings.mjs";
 import fs from "node:fs";
+import {
+  compositionOverview,
+  compositionMarkdown,
+} from "../src/composition-overview.mjs";
 import { augmentTokenBindings } from "../recipes/token-bindings.mjs";
 import { augmentPaintBindings } from "../recipes/paint-bindings.mjs";
 import path from "node:path";
@@ -387,12 +391,15 @@ export async function build(source = path.join(root, ".cache/release")) {
   const mediaRecipes = fs.existsSync(mediaFile)
     ? (await import(mediaFile)).default
     : [];
+  const { default: composableRecipes } =
+    await import("../recipes/composable.mjs");
   const recipes = [
     ...baseRecipes.filter(
       (r) => !families.has(normalize(r.package) + ":" + r.name.split("/")[0]),
     ),
     ...overrides,
     ...mediaRecipes,
+    ...composableRecipes,
     ...examplePatterns,
   ];
   for (const r of recipes) {
@@ -657,6 +664,15 @@ export async function build(source = path.join(root, ".cache/release")) {
     JSON.stringify(componentPropertyCoverage, null, 2) + "\n",
   );
   bundle.provenance.consumerPresentation = 1;
+  bundle.composition = compositionOverview(bundle);
+  fs.writeFileSync(
+    path.join(root, "docs/composition-overview.json"),
+    JSON.stringify(bundle.composition, null, 2) + "\n",
+  );
+  fs.writeFileSync(
+    path.join(root, "docs/composition-overview.md"),
+    compositionMarkdown(bundle.composition),
+  );
   bundle.fingerprint = sha(JSON.stringify(bundle));
   fs.mkdirSync(path.join(root, "bundles"), { recursive: true });
   fs.mkdirSync(path.join(root, "docs"), { recursive: true });
