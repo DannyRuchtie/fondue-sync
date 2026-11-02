@@ -114,7 +114,7 @@ Fondue’s upstream token builder currently loads the owning Figma variables and
 
 Edit `src/component-categories.json` to assign a source family to a browsing category. Run `npm run verify` to regenerate and validate the bundled `libraryCategory` and `assetName` fields. Keep recipe `name`, IDs, source references and variant properties unchanged: display paths belong in `assetName`. New unmapped families fall back to Other; the coverage check requires an explicit category for every bundled component family. Gallery section keys remain stable while visible labels include category and family.
 
-In the sibling explorer checkout, run `npm run sync:categories`, then its typecheck and build. The explorer commits a generated copy so it can build independently. After installing the rebuilt plugin, Compare and Update the existing library, inspect category folders with Show subfolders enabled, then publish through Figma. Confirm an existing consumer instance still receives updates before publishing broadly.
+After installing the rebuilt plugin, Compare and Update the existing library, inspect category folders with Show subfolders enabled, then publish through Figma. Confirm an existing consumer instance still receives updates before publishing broadly.
 
 ### Organizing a library with local edits
 

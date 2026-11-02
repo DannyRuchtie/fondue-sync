@@ -32,7 +32,7 @@ test("categories follow source families and leave non-component domains intact",
   }
 });
 
-test("every bundled component family is categorized and explorer uses the same taxonomy", () => {
+test("every bundled component family is categorized with unique taxonomy entries", () => {
   const bundle = JSON.parse(
     fs.readFileSync(
       new URL("../bundles/fondue-13.11.1.json", import.meta.url),
@@ -54,11 +54,4 @@ test("every bundled component family is categorized and explorer uses the same t
   );
   const families = Object.values(taxonomy).flat();
   assert.equal(new Set(families).size, families.length);
-  const explorer = new URL(
-    "../../explorer/src/component-categories.json",
-    import.meta.url,
-  );
-  // The plugin can also be checked out independently of the explorer.
-  if (fs.existsSync(explorer))
-    assert.deepEqual(JSON.parse(fs.readFileSync(explorer, "utf8")), taxonomy);
 });
