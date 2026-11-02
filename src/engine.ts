@@ -1,4 +1,5 @@
 import { componentPropertyGroups } from "./component-properties.mjs";
+import { contentContainer, ensureContentSlot } from "./slots";
 import {
   applyApprovedImageMigration,
   imageMigrationProblems,
@@ -753,6 +754,7 @@ export class SyncEngine {
           mainComponent: key,
         };
       }
+      if (definition.contentSlot) return;
       for (const child of definition.children ?? []) {
         const existing = node.children?.find(
           (item: any) => read(item, "identity") === child.id,
@@ -1316,11 +1318,23 @@ export class SyncEngine {
         ];
       } else node.setBoundVariable(field, variable);
     }
+    const childrenParent = await ensureContentSlot(this.api, node, def, owner);
+    if (def.contentSlot && def.bindings?.itemSpacing)
+      childrenParent.setBoundVariable(
+        "itemSpacing",
+        await this.token(def.bindings.itemSpacing),
+      );
     for (const child of def.children ?? []) {
-      const prior = node.children?.find(
+      const prior = childrenParent.children?.find(
         (n: any) => read(n, "identity") === child.id,
       );
-      await this.layer(child, node, prior, owner, identityPath);
+      await this.layer(
+        child,
+        childrenParent,
+        prior,
+        def.contentSlot ? undefined : owner,
+        identityPath,
+      );
     }
     const removals = this.compositionRemovals.get(node.id);
     if (removals) {
@@ -1448,12 +1462,13 @@ export class SyncEngine {
       )
         return;
       const children = def.children ?? [];
-      if ((node.children?.length ?? 0) > children.length)
+      const nativeChildren = contentContainer(node, def).children ?? [];
+      if (nativeChildren.length > children.length)
         throw Error(
           "Unexpected extra native children in pending import: " + node.id,
         );
-      for (let i = 0; i < (node.children?.length ?? 0); i++) {
-        const child = node.children[i],
+      for (let i = 0; i < nativeChildren.length; i++) {
+        const child = nativeChildren[i],
           source = children[i];
         if (!source) throw Error("Pending source slot missing: " + child.id);
         await visit(child, source);

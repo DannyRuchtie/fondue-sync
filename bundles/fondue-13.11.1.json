@@ -12,7 +12,7 @@
       "integrity": "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
     },
     "sourceLockSha256": "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-    "rendererRevision": "95a29f02f7db5f3c15d14f4b82d626173d6a615096f437400bc0365b885f1b09",
+    "rendererRevision": "ebbec61ab4a32523b47b2db5f282201a9dcf9133e7a6d0643bbc764be394d179",
     "rootRemPx": 16,
     "packageVersions": {
       "@frontify/fondue-components": "36.0.0",
@@ -36,13 +36,13 @@
         "fixtures/media/manifest.json": "411200aa362d5eb49e73b3b1fef44e6d3701eb69507abe3be80e0f0f0a696587",
         "fixtures/media/README.md": "803289fbdf74742101f57845d9008b5869c255949b435a8b86537671ed246167"
       },
-      "builder": "b2b34a9b53df8344ef2785ea0c73f61e7d38f903ed1cdac0c97e460cd26e819a",
+      "builder": "03144d05c7d44b149505f5523537f00ff03ed762de983f329da1b19b80eb6fa8",
       "imageBuilder": "76395d8a0e433749873a02ea8633a6ef9f8a8dfc2b9bd70c445ba5528230b733",
       "recipes": {
         "recipes/index.mjs": "1d39e16d9a457fb4ac1126f485a26b3aa904cd05dbed3888d9f22840060389cb",
         "recipes/foundations.mjs": "97827709af9c255dbe363a99e1e6a7194644dd0c3e3b430d7de5690bd37d9e5d",
         "recipes/controls.mjs": "9f578d832009f4462d844e603ec6cd672ccd07f4b1cb64b42eca3af12d333a59",
-        "recipes/patterns.mjs": "1283ab2c1da7cfc4c5a41dfc57eb94e5fdfe862146cd05690236c00718098f4e",
+        "recipes/patterns.mjs": "97a44996a5ca4a4f8056b48c93fa0ba8346bd6ec4d3d8090da444620baf0c22d",
         "recipes/examples.mjs": "f19c76d41c32b8abe0df539eba2f1498cd32e64864b74788e3a7f73e96677884",
         "recipes/documentation.mjs": "60a2270252d98e9e57c38261c17b48676391e25a2dd049a4b8e88b22b8a2bc89",
         "recipes/token-bindings.mjs": "969008d160281f57c8f0e47c9121686c669816d3e238c8c21c0d04ec03308e77",
@@ -189182,14 +189182,557 @@
       "limitations": [
         "The 16px child padding is arbitrary editable content, not a claimed Root padding value.",
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
-        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "contentMode is a Figma-only composition setting.",
+        "Existing instances remain in sample mode to preserve text overrides; choose slot to opt into editable content."
       ],
       "variants": [
+        {
+          "id": "shadow=none;rounded=none;contentMode=slot",
+          "props": {
+            "shadow": "none",
+            "rounded": "none",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 0,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "effects": [],
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            }
+          }
+        },
+        {
+          "id": "shadow=none;rounded=medium;contentMode=slot",
+          "props": {
+            "shadow": "none",
+            "rounded": "medium",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 4,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "cornerRadius": "border-radius-medium",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "effects": [],
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            }
+          }
+        },
+        {
+          "id": "shadow=none;rounded=large;contentMode=slot",
+          "props": {
+            "shadow": "none",
+            "rounded": "large",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 8,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "cornerRadius": "border-radius-large",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "effects": [],
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            }
+          }
+        },
+        {
+          "id": "shadow=medium;rounded=none;contentMode=slot",
+          "props": {
+            "shadow": "medium",
+            "rounded": "none",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 0,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            },
+            "effectStyle": "source-shadow-md"
+          }
+        },
+        {
+          "id": "shadow=medium;rounded=medium;contentMode=slot",
+          "props": {
+            "shadow": "medium",
+            "rounded": "medium",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 4,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "cornerRadius": "border-radius-medium",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            },
+            "effectStyle": "source-shadow-md"
+          }
+        },
+        {
+          "id": "shadow=medium;rounded=large;contentMode=slot",
+          "props": {
+            "shadow": "medium",
+            "rounded": "large",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 8,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "cornerRadius": "border-radius-large",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            },
+            "effectStyle": "source-shadow-md"
+          }
+        },
+        {
+          "id": "shadow=large;rounded=none;contentMode=slot",
+          "props": {
+            "shadow": "large",
+            "rounded": "none",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 0,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "cornerRadius": "component-constant-radius-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            },
+            "effectStyle": "source-shadow-lg"
+          }
+        },
+        {
+          "id": "shadow=large;rounded=medium;contentMode=slot",
+          "props": {
+            "shadow": "large",
+            "rounded": "medium",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 4,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "cornerRadius": "border-radius-medium",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            },
+            "effectStyle": "source-shadow-lg"
+          }
+        },
+        {
+          "id": "shadow=large;rounded=large;contentMode=slot",
+          "props": {
+            "shadow": "large",
+            "rounded": "large",
+            "contentMode": "slot"
+          },
+          "root": {
+            "id": "flyout",
+            "kind": "frame",
+            "name": "flyout",
+            "layout": "VERTICAL",
+            "primaryAlign": "MIN",
+            "counterAlign": "MIN",
+            "gap": 0,
+            "padding": 16,
+            "children": [
+              {
+                "id": "content",
+                "kind": "text",
+                "name": "content",
+                "text": "Flyout content",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "textStyle": "text-body-medium-default",
+                "bindings": {
+                  "fills": "color-primary-default",
+                  "fontSize": "text-body-medium-default-font-size",
+                  "fontFamily": "native-font-family-diatype",
+                  "fontWeight": "text-body-medium-default-font-weight",
+                  "letterSpacing": "text-body-medium-default-letter-spacing",
+                  "lineHeight": "text-body-medium-default-line-height"
+                },
+                "fontFamily": "Diatype",
+                "letterSpacing": 0,
+                "textCase": "ORIGINAL",
+                "lineHeight": 18
+              }
+            ],
+            "radius": 8,
+            "bindings": {
+              "fills": "color-surface-default",
+              "strokes": "color-line-subtle",
+              "cornerRadius": "border-radius-large",
+              "paddingTop": "spacing-medium",
+              "paddingRight": "spacing-medium",
+              "paddingBottom": "spacing-medium",
+              "paddingLeft": "spacing-medium",
+              "itemSpacing": "component-constant-spacing-0",
+              "strokeWeight": "border-width-default"
+            },
+            "width": 320,
+            "contentSlot": {
+              "id": "content",
+              "name": "Content",
+              "description": "Add, remove and arrange content here. The surrounding Surface retains its library styling."
+            },
+            "effectStyle": "source-shadow-lg"
+          }
+        },
         {
           "id": "shadow=none;rounded=none",
           "props": {
             "shadow": "none",
-            "rounded": "none"
+            "rounded": "none",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189243,7 +189786,8 @@
           "id": "shadow=none;rounded=medium",
           "props": {
             "shadow": "none",
-            "rounded": "medium"
+            "rounded": "medium",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189297,7 +189841,8 @@
           "id": "shadow=none;rounded=large",
           "props": {
             "shadow": "none",
-            "rounded": "large"
+            "rounded": "large",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189351,7 +189896,8 @@
           "id": "shadow=medium;rounded=none",
           "props": {
             "shadow": "medium",
-            "rounded": "none"
+            "rounded": "none",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189405,7 +189951,8 @@
           "id": "shadow=medium;rounded=medium",
           "props": {
             "shadow": "medium",
-            "rounded": "medium"
+            "rounded": "medium",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189459,7 +190006,8 @@
           "id": "shadow=medium;rounded=large",
           "props": {
             "shadow": "medium",
-            "rounded": "large"
+            "rounded": "large",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189513,7 +190061,8 @@
           "id": "shadow=large;rounded=none",
           "props": {
             "shadow": "large",
-            "rounded": "none"
+            "rounded": "none",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189567,7 +190116,8 @@
           "id": "shadow=large;rounded=medium",
           "props": {
             "shadow": "large",
-            "rounded": "medium"
+            "rounded": "medium",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189621,7 +190171,8 @@
           "id": "shadow=large;rounded=large",
           "props": {
             "shadow": "large",
-            "rounded": "large"
+            "rounded": "large",
+            "contentMode": "sample"
           },
           "root": {
             "id": "flyout",
@@ -189677,7 +190228,7 @@
       "documentation": {
         "purpose": "An anchored popover panel that opens next to a trigger element without blocking page interaction.\n\nUse for contextual detail panels, pickers (color, date), and forms that don't require full-screen focus.",
         "usage": "Compose as Flyout.Root > Flyout.Trigger + Flyout.Content.\n\nInside Flyout.Content use Flyout.Header, Flyout.Body, and Flyout.Footer for standard layout.\n\nUse Flyout.Body with scrollable prop for long content.\n\nUse showCloseButton on Flyout.Header to add a close button.\n\nUse Dialog instead when the action requires full-screen focus or blocks all background interaction.",
-        "properties": "shadow: none, medium, large\nrounded: none, medium, large",
+        "properties": "shadow: none, medium, large\nrounded: none, medium, large\ncontentMode: slot, sample",
         "related": [
           "Dialog",
           "Dropdown",
@@ -189693,7 +190244,7 @@
             "uri": "https://fondue.frontify.com/"
           }
         ],
-        "description": "An anchored popover panel that opens next to a trigger element without blocking page interaction.\n\nUse for contextual detail panels, pickers (color, date), and forms that don't require full-screen focus.\n\nCompose as Flyout.Root > Flyout.Trigger + Flyout.Content.\n\nInside Flyout.Content use Flyout.Header, Flyout.Body, and Flyout.Footer for standard layout.\n\nUse Flyout.Body with scrollable prop for long content.\n\nUse showCloseButton on Flyout.Header to add a close button.\n\nUse Dialog instead when the action requires full-screen focus or blocks all background interaction.\n\nExposed variant properties:\n\nshadow: none, medium, large\n\nrounded: none, medium, large\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nThe 16px child padding is arbitrary editable content, not a claimed Root padding value.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Flyout/Flyout.tsx"
+        "description": "An anchored popover panel that opens next to a trigger element without blocking page interaction.\n\nUse for contextual detail panels, pickers (color, date), and forms that don't require full-screen focus.\n\nCompose as Flyout.Root > Flyout.Trigger + Flyout.Content.\n\nInside Flyout.Content use Flyout.Header, Flyout.Body, and Flyout.Footer for standard layout.\n\nUse Flyout.Body with scrollable prop for long content.\n\nUse showCloseButton on Flyout.Header to add a close button.\n\nUse Dialog instead when the action requires full-screen focus or blocks all background interaction.\n\nExposed variant properties:\n\nshadow: none, medium, large\n\nrounded: none, medium, large\n\ncontentMode: slot, sample\n\nText properties edit the exposed content.\n\nIcon properties swap the native icon; Show properties control its visibility.\n\nCoverage: partial.\n\nThe 16px child padding is arbitrary editable content, not a claimed Root padding value.\n\nNative static definitions do not implement browser event handlers, focus management or accessibility semantics.\n\nSource styling and finite states are encoded here; visual parity still requires Figma runtime review. contentMode is a Figma-only composition setting.\n\nExisting instances remain in sample mode to preserve text overrides; choose slot to opt into editable content.\n\nSource: https://github.com/Frontify/fondue/tree/ebcc9b8579a7f862f43a2732f5a5b9c3105e6796/packages/components/src/components/Flyout/Flyout.tsx"
       }
     },
     {
@@ -307152,7 +307703,9 @@
         "showBorder is derived design visibility; Flyout source always paints the Footer divider.",
         "Content-only specimen. side/align/triggerOffset, viewport collision and mobile modal adaptation need screen-context placement.",
         "shadow none/medium are supplied in separate Surface set.",
-        "The 16px child padding is arbitrary editable content, not a claimed Root padding value."
+        "The 16px child padding is arbitrary editable content, not a claimed Root padding value.",
+        "contentMode is a Figma-only composition setting.",
+        "Existing instances remain in sample mode to preserve text overrides; choose slot to opt into editable content."
       ]
     },
     {
@@ -307865,8 +308418,8 @@
       "constantOrigin": "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
     },
     "counts": {
-      "layers": 12863,
-      "existingBindings": 1956,
+      "layers": 12881,
+      "existingBindings": 2019,
       "addedReleasedBindings": 6584,
       "addedConstantBindings": 27604,
       "framePaddingBindings": 21676,
@@ -313283,7 +313836,7 @@
     "counts": {
       "literalPaintsBound": 2,
       "svgPaintRules": 38,
-      "shadowLayersStyled": 186,
+      "shadowLayersStyled": 192,
       "effectFieldsBound": 40,
       "derivedEffectVariables": 15,
       "derivedEffectStyles": 4
@@ -314105,12 +314658,12 @@
     "release": "13.11.1",
     "policy": "Exact effective font family, size, weight, line height, letter spacing and case. CSS font stacks remain unchanged; native family aliases resolve only through confirmed font availability.",
     "counts": {
-      "textLayers": 2558,
-      "releasedStyleMatches": 2454,
-      "existingExactStyles": 2013,
+      "textLayers": 2567,
+      "releasedStyleMatches": 2463,
+      "existingExactStyles": 2022,
       "derivedStyles": 13,
       "derivedVariables": 7,
-      "layerBindings": 12782
+      "layerBindings": 12827
     },
     "derivedStyles": [
       {
@@ -314645,5 +315198,5 @@
       }
     ]
   },
-  "fingerprint": "a6d54099d42f8b7940b6974c2e8ffe849828cb5d088543c3ec1e0cbd842ac654"
+  "fingerprint": "f105ca43d46e70c108951149d77dd780e0d57ddd632bb61027deac1b56183b67"
 }

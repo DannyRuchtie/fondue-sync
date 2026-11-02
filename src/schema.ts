@@ -30,6 +30,14 @@ export type Layer = {
     | "instance"
     | "componentInstance";
   name: string;
+  /** Native editable content region; children are library defaults, not instance content. */
+  contentSlot?: {
+    id: string;
+    name: string;
+    description?: string;
+    minChildren?: number;
+    maxChildren?: number;
+  };
   text?: string;
   imageAssetId?: string;
   imageAssetSha256?: string;

@@ -1,0 +1,112 @@
+{
+  "date": "2026-11-02",
+  "fileKey": "ZmOzqBnHNixUTV1TqRtBHs",
+  "recoveryVersion": "Before Surface content slots",
+  "scope": "Targeted Surface slot migration; no publication",
+  "migration": {
+    "createdNodeIds": [
+      "190:2080",
+      "190:2081",
+      "190:2082",
+      "190:2084",
+      "190:2085",
+      "190:2086",
+      "190:2087",
+      "190:2088",
+      "190:2089",
+      "190:2090",
+      "190:2091",
+      "190:2092",
+      "190:2093",
+      "190:2094",
+      "190:2095",
+      "190:2096",
+      "190:2097",
+      "190:2098",
+      "190:2099",
+      "190:2100",
+      "190:2101",
+      "190:2102",
+      "190:2103",
+      "190:2104",
+      "190:2105",
+      "190:2106",
+      "190:2107"
+    ],
+    "mutatedNodeIds": [
+      "5:16989",
+      "5:16988",
+      "5:16990",
+      "5:16991",
+      "5:16992",
+      "5:16993",
+      "5:16994",
+      "5:16995",
+      "5:16996",
+      "5:16997"
+    ],
+    "setId": "5:16989",
+    "variants": 18,
+    "slotVariants": 9,
+    "baselineMatches": true
+  },
+  "repeat": {
+    "createdNodeIds": [],
+    "mutatedNodeIds": [],
+    "alreadyCurrent": true,
+    "setId": "5:16989"
+  },
+  "final": {
+    "setId": "5:16989",
+    "baselineMatches": true,
+    "definitionMatches": true,
+    "variants": 18,
+    "slotVariants": 9,
+    "slotProperties": [
+      {
+        "key": "Content#190:1",
+        "settings": {
+          "stretchChildOnInsert": true,
+          "displayEmptyByDefault": true,
+          "minChildren": null,
+          "maxChildren": null,
+          "allowPreferredValuesOnly": false
+        }
+      }
+    ],
+    "originalMainIdsPreserved": true
+  },
+  "linkedComponentTest": {
+    "createdNodeIds": [
+      "194:2080",
+      "I194:2080;190:2082",
+      "I194:2080;190:2082;194:2086",
+      "I194:2080;190:2082;194:2087",
+      "I194:2080;190:2082;194:2087;5:10841"
+    ],
+    "removedNodeIds": [
+      "194:2080",
+      "I194:2080;190:2098",
+      "I194:2080;190:2098;194:2086",
+      "I194:2080;190:2098;194:2087",
+      "I194:2080;190:2098;194:2087;5:10841"
+    ],
+    "linkedButtonPreserved": true,
+    "beforeMainId": "5:10836",
+    "afterMainId": "5:10836"
+  },
+  "variantContentTest": {
+    "preserved": true,
+    "contents": [
+      "Custom surface content",
+      "Second content block"
+    ],
+    "temporaryInstancesRemoved": true
+  },
+  "galleryInstanceId": "54:2032",
+  "remainingAcceptance": [
+    "Full rebuilt desktop plugin Import/Update with customized slot instances",
+    "Published library update in a consumer file",
+    "Version-history restoration"
+  ]
+}

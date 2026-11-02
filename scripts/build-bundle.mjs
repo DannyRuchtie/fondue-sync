@@ -546,6 +546,7 @@ export async function build(source = path.join(root, ".cache/release")) {
           "metadata.ts",
           "recovery.ts",
           "schema.ts",
+          "slots.ts",
           "sections.ts",
           "presentation.ts",
           "colors.ts",

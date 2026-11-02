@@ -23,7 +23,8 @@ export function componentPropertyGroups(recipe, iconDefault) {
         add("Text", "TEXT", path, node.text ?? "", variant.id);
       if (node.kind === "instance")
         add("Icon", "INSTANCE_SWAP", path, iconDefault(node), variant.id);
-      for (const child of node.children ?? []) walk(child, path);
+      if (!node.contentSlot)
+        for (const child of node.children ?? []) walk(child, path);
     };
     walk(variant.root);
   }

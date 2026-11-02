@@ -1,6 +1,6 @@
 {
   "release": "13.11.1",
-  "fingerprint": "a6d54099d42f8b7940b6974c2e8ffe849828cb5d088543c3ec1e0cbd842ac654",
+  "fingerprint": "f105ca43d46e70c108951149d77dd780e0d57ddd632bb61027deac1b56183b67",
   "counts": {
     "tokens": 443,
     "releasedTokens": 373,
@@ -15,7 +15,7 @@
     "opticalIconAssets": 2099,
     "inventory": 54,
     "recipes": 218,
-    "variants": 2098,
+    "variants": 2107,
     "examples": 34,
     "imageAssets": 6,
     "imageReferences": 92,
@@ -1942,7 +1942,9 @@
         "showBorder is derived design visibility; Flyout source always paints the Footer divider.",
         "Content-only specimen. side/align/triggerOffset, viewport collision and mobile modal adaptation need screen-context placement.",
         "shadow none/medium are supplied in separate Surface set.",
-        "The 16px child padding is arbitrary editable content, not a claimed Root padding value."
+        "The 16px child padding is arbitrary editable content, not a claimed Root padding value.",
+        "contentMode is a Figma-only composition setting.",
+        "Existing instances remain in sample mode to preserve text overrides; choose slot to opt into editable content."
       ]
     },
     {

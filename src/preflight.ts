@@ -149,6 +149,25 @@ export function migrationProblems(
         );
         continue;
       }
+      if (
+        prior.contentSlot &&
+        (!layer.contentSlot ||
+          layer.contentSlot.id !== prior.contentSlot.id ||
+          layer.contentSlot.name !== prior.contentSlot.name)
+      )
+        problem(
+          "slot-migration",
+          `Content slot removal or identity change requires explicit migration: ${oldVariant.id}${key}`,
+        );
+      if (
+        !prior.contentSlot &&
+        layer.contentSlot &&
+        (prior.children?.length ?? 0) > 0
+      )
+        problem(
+          "slot-adoption",
+          `Existing content requires explicit slot migration to preserve overrides: ${oldVariant.id}${key}`,
+        );
       if (layer.kind !== prior.kind)
         problem(
           "layer-type",
@@ -501,6 +520,29 @@ export function bundleProblems(bundle: Bundle): MigrationProblem[] {
         "missing-effect-style",
         `Missing effect style ${node.effectStyle}: ${context}/${node.id}`,
       );
+    if (node.contentSlot) {
+      const slot = node.contentSlot;
+      if (node.kind !== "frame" || !slot.id?.trim() || !slot.name?.trim())
+        problem(
+          "content-slot",
+          `Content slot requires a frame and stable identity/name: ${context}/${node.id}`,
+        );
+      for (const value of [slot.minChildren, slot.maxChildren])
+        if (value !== undefined && (!Number.isInteger(value) || value < 0))
+          problem(
+            "slot-limits",
+            `Slot limits must be nonnegative integers: ${context}/${node.id}`,
+          );
+      if (
+        slot.minChildren !== undefined &&
+        slot.maxChildren !== undefined &&
+        slot.minChildren > slot.maxChildren
+      )
+        problem(
+          "slot-limits",
+          `Slot minimum exceeds maximum: ${context}/${node.id}`,
+        );
+    }
     const children = node.children ?? [];
     if (new Set(children.map((c) => c.id)).size !== children.length)
       problem(

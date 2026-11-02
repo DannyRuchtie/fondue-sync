@@ -45,8 +45,8 @@
     "constantOrigin": "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
   },
   "counts": {
-    "layers": 12863,
-    "existingBindings": 1956,
+    "layers": 12881,
+    "existingBindings": 2019,
     "addedReleasedBindings": 6584,
     "addedConstantBindings": 27604,
     "framePaddingBindings": 21676,

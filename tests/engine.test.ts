@@ -271,7 +271,15 @@ function mockApi() {
   }
   function container(type: string) {
     const o = base(type);
-    if (type === "COMPONENT")
+    if (type === "COMPONENT") {
+      o.createSlot = () => {
+        const owner = o.parent?.type === "COMPONENT_SET" ? o.parent : o;
+        const slot = container("SLOT");
+        const key = owner.addComponentProperty("Slot", "SLOT", "");
+        slot.componentPropertyReferences = { slotContentId: key };
+        o.appendChild(slot);
+        return slot;
+      };
       o.createInstance = () => {
         const n = container("INSTANCE");
         Object.defineProperty(n, "mainComponent", {
@@ -390,6 +398,7 @@ function mockApi() {
         copyMain();
         return n;
       };
+    }
     o.children = [];
     o.appendChild = (n: any) => {
       if (n.parent) {
@@ -523,11 +532,35 @@ function mockApi() {
       });
       n.editComponentProperty = (key: string, props: any) => {
         Object.assign(n.componentPropertyDefinitions[key], props);
+        if (props.name && props.name !== key.split("#")[0]) {
+          const renamed = props.name + "#" + key.split("#")[1];
+          definitions[renamed] = definitions[key];
+          delete definitions[key];
+          for (const node of nodes.values())
+            for (const [field, value] of Object.entries(
+              node.componentPropertyReferences ?? {},
+            ))
+              if (value === key)
+                node.componentPropertyReferences[field] = renamed;
+          return renamed;
+        }
         return key;
       };
-      n.addComponentProperty = (name: string, type: string, value: any) => {
+      n.deleteComponentProperty = (key: string) => {
+        delete definitions[key];
+      };
+      n.addComponentProperty = (
+        name: string,
+        type: string,
+        value: any,
+        options = {},
+      ) => {
         const key = name + "#" + ++seq;
-        n.componentPropertyDefinitions[key] = { type, defaultValue: value };
+        n.componentPropertyDefinitions[key] = {
+          type,
+          defaultValue: value,
+          ...options,
+        };
         return key;
       };
       parent.appendChild(n);
@@ -2665,4 +2698,122 @@ test("composition containers replace exact retired anatomy after building base c
       assert.equal(repeat.counts.update ?? 0, 0);
     }
   }
+});
+
+test("native content slots keep one property across variants, retain instance content and update main defaults in place", async () => {
+  const bundle = fixture();
+  for (const variant of bundle.recipes[0].variants)
+    variant.root.contentSlot = { id: "content", name: "Content" };
+  const { api } = mockApi();
+  const engine = new SyncEngine(api, bundle);
+  const first = await engine.sync();
+  assert.equal(first.complete, true, first.errors.join("\n"));
+  const set: any = await api.getNodeByIdAsync(
+    engine.index.assets["recipe:components:Test"].id,
+  );
+  const slots = set.children.map((main: any) => main.children[0]);
+  assert.ok(slots.every((slot: any) => slot.type === "SLOT"));
+  const keys = Object.entries(set.componentPropertyDefinitions).filter(
+    ([, property]: any) => property.type === "SLOT",
+  );
+  assert.equal(keys.length, 1);
+  assert.equal(keys[0][0].split("#")[0], "Content");
+  assert.ok(
+    slots.every(
+      (slot: any) =>
+        slot.componentPropertyReferences.slotContentId === keys[0][0],
+    ),
+  );
+  assert.ok(
+    slots.every(
+      (slot: any) => !slot.children[0].componentPropertyReferences?.characters,
+    ),
+  );
+  assert.ok(
+    Object.values(set.componentPropertyDefinitions).every(
+      (property: any) => property.type !== "TEXT",
+    ),
+  );
+  const ids = slots.map((slot: any) => [slot.id, slot.children[0].id]);
+  const instance = set.children[0].createInstance();
+  const custom = api.createFrame();
+  custom.name = "Designer-owned content";
+  instance.children[0].appendChild(custom);
+  const nativeContents = instance.children[0].children.map(
+    (child: any) => child.id,
+  );
+  bundle.recipes[0].variants[0].root.children![0].text =
+    "Updated library default";
+  bundle.recipes[0].variants[0].root.padding = 24;
+  bundle.fingerprint = "slot-update";
+  const updated = await engine.sync();
+  assert.equal(updated.complete, true, updated.errors.join("\n"));
+  assert.deepEqual(
+    set.children.map((main: any) => [
+      main.children[0].id,
+      main.children[0].children[0].id,
+    ]),
+    ids,
+  );
+  assert.equal(slots[0].children[0].characters, "Updated library default");
+  assert.deepEqual(
+    instance.children[0].children.map((child: any) => child.id),
+    nativeContents,
+  );
+  const repeat = await engine.inspect();
+  assert.equal(repeat.counts.update ?? 0, 0);
+  assert.equal(repeat.counts.conflict ?? 0, 0);
+});
+
+test("slot migration blocks implicit adoption, removal and identity changes", () => {
+  const previous = fixture().recipes[0];
+  const next = structuredClone(previous);
+  next.variants[0].root.contentSlot = { id: "content", name: "Content" };
+  assert.ok(
+    migrationProblems("recipe", previous, next).some(
+      (problem) => problem.code === "slot-adoption",
+    ),
+  );
+  const slotted = structuredClone(next);
+  next.variants[0].root.contentSlot!.id = "replacement";
+  assert.ok(
+    migrationProblems("recipe", slotted, next).some(
+      (problem) => problem.code === "slot-migration",
+    ),
+  );
+  delete next.variants[0].root.contentSlot;
+  assert.ok(
+    migrationProblems("recipe", slotted, next).some(
+      (problem) => problem.code === "slot-migration",
+    ),
+  );
+});
+
+test("an interrupted native-slot import resumes the same slot identity", async () => {
+  const bundle = fixture();
+  for (const variant of bundle.recipes[0].variants)
+    variant.root.contentSlot = { id: "content", name: "Content" };
+  const { api } = mockApi();
+  const makeText = api.createText;
+  let fail = true;
+  api.createText = () => {
+    if (fail) {
+      fail = false;
+      throw Error("Interrupted slot default creation");
+    }
+    return makeText();
+  };
+  const engine = new SyncEngine(api, bundle);
+  const first = await engine.sync();
+  assert.equal(first.complete, false);
+  const set: any = await api.getNodeByIdAsync(
+    engine.index.assets["recipe:components:Test"].id,
+  );
+  const slotId = set.children[0].children[0].id;
+  assert.equal(set.children[0].children[0].type, "SLOT");
+  const reopened = new SyncEngine(api, bundle);
+  const resumed = await reopened.sync();
+  assert.equal(resumed.complete, true, resumed.errors.join("\n"));
+  assert.equal(set.children[0].children[0].id, slotId);
+  assert.equal(set.children[0].children[0].children[0].characters, "Original");
 });

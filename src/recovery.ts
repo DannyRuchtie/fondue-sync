@@ -9,6 +9,7 @@ export type PartialLayer = {
   nodeId: string;
   identity: string | null;
   type: string;
+  contentSlots?: string[];
   children: PartialLayer[];
 };
 export type PartialVariant = {
@@ -31,7 +32,22 @@ export function inspectPartialRecipe(asset: any): PartialRecipe {
     nodeId: node.id,
     identity: read(node, "identity") || null,
     type: node.type,
-    children: node.type === "INSTANCE" ? [] : (node.children ?? []).map(layer),
+    contentSlots: (node.children ?? [])
+      .filter(
+        (child: any) =>
+          ["SLOT", "FRAME"].includes(child.type) &&
+          read(child, "identity").startsWith("$slot:"),
+      )
+      .map((child: any) => read(child, "identity")),
+    children:
+      node.type === "INSTANCE"
+        ? []
+        : (node.children ?? []).flatMap((child: any) =>
+            ["SLOT", "FRAME"].includes(child.type) &&
+            read(child, "identity").startsWith("$slot:")
+              ? (child.children ?? []).map(layer)
+              : [layer(child)],
+          ),
   });
   return {
     nodeId: asset.id,
@@ -86,6 +102,13 @@ export function partialRecipeProblems(
       problems.push("Unowned or incompletely tagged child at " + path);
     if (!compatible(native.type, definition.kind, root))
       problems.push("Native layer type differs at " + path);
+    if (
+      native.contentSlots?.length &&
+      (native.contentSlots.length !== 1 ||
+        !definition.contentSlot ||
+        native.contentSlots[0] !== "$slot:" + definition.contentSlot.id)
+    )
+      problems.push("Unexpected content slot identity at " + path);
     if (
       definition.kind === "svg" ||
       definition.kind === "instance" ||

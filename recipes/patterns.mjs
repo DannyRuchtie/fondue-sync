@@ -853,7 +853,7 @@ add(
     ],
   },
 );
-add(
+const surfaceRecipe = add(
   "Flyout.Surface",
   props(
     {
@@ -881,6 +881,7 @@ add(
     covered: [
       "Content.shadow none/medium/large literal SCSS values",
       "Content.rounded all values",
+      "Native Content slot for arbitrary instance content",
     ],
     limitations: [
       "The 16px child padding is arbitrary editable content, not a claimed Root padding value.",
@@ -2991,6 +2992,36 @@ addChart(
     ],
   },
 );
+
+// Content slot variants are additive: retain old main/child IDs and text overrides.
+// contentMode is a Figma composition setting, not a React prop.
+const sampleSurfaceVariants = surfaceRecipe.variants;
+surfaceRecipe.variants = [
+  ...sampleSurfaceVariants.map((variant) => ({
+    ...variant,
+    id: variant.id + ";contentMode=slot",
+    props: { ...variant.props, contentMode: "slot" },
+    root: {
+      ...variant.root,
+      contentSlot: {
+        id: "content",
+        name: "Content",
+        description:
+          "Add, remove and arrange content here. The surrounding Surface retains its library styling.",
+      },
+    },
+  })),
+  ...sampleSurfaceVariants.map((variant) => ({
+    ...variant,
+    props: { ...variant.props, contentMode: "sample" },
+  })),
+];
+surfaceRecipe.limitations.push(
+  "contentMode is a Figma-only composition setting. Existing instances remain in sample mode to preserve text overrides; choose slot to opt into editable content.",
+);
+
+evidence.find((entry) => entry.id === surfaceRecipe.id).variantCount =
+  surfaceRecipe.variants.length;
 
 export const patternCoverage = {
   release: "13.11.1",

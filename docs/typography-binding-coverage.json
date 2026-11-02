@@ -2,12 +2,12 @@
   "release": "13.11.1",
   "policy": "Exact effective font family, size, weight, line height, letter spacing and case. CSS font stacks remain unchanged; native family aliases resolve only through confirmed font availability.",
   "counts": {
-    "textLayers": 2558,
-    "releasedStyleMatches": 2454,
-    "existingExactStyles": 2013,
+    "textLayers": 2567,
+    "releasedStyleMatches": 2463,
+    "existingExactStyles": 2022,
     "derivedStyles": 13,
     "derivedVariables": 7,
-    "layerBindings": 12782
+    "layerBindings": 12827
   },
   "derivedStyles": [
     {

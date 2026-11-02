@@ -115,3 +115,35 @@ test("complex recipe source pointers, native icons, bindings and bounded matrice
       }
   }
 });
+
+test("Surface offers native slots while retaining every original sample variant identity", () => {
+  const surface = recipe("Flyout.Surface");
+  const samples = surface.variants.filter(
+    (variant: any) => variant.props.contentMode === "sample",
+  );
+  const slots = surface.variants.filter(
+    (variant: any) => variant.props.contentMode === "slot",
+  );
+  assert.equal(samples.length, 9);
+  assert.equal(slots.length, 9);
+  for (const variant of samples) {
+    assert.equal(
+      variant.id,
+      `shadow=${variant.props.shadow};rounded=${variant.props.rounded}`,
+    );
+    assert.equal(variant.root.contentSlot, undefined);
+    const slotted = slots.find(
+      (candidate: any) =>
+        candidate.props.shadow === variant.props.shadow &&
+        candidate.props.rounded === variant.props.rounded,
+    );
+    assert.deepEqual(slotted.root.contentSlot, {
+      id: "content",
+      name: "Content",
+      description:
+        "Add, remove and arrange content here. The surrounding Surface retains its library styling.",
+    });
+    assert.equal(slotted.root.padding, variant.root.padding);
+    assert.deepEqual(slotted.root.bindings, variant.root.bindings);
+  }
+});

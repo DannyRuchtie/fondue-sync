@@ -22,6 +22,8 @@ Ask a maintainer for the built plugin folder and the required ABC Diatype and Cr
 
 Keep component instances connected to receive future library updates.
 
+**Surface content:** `Overlays / Flyout / Surface` supports a native **Content** slot. Choose `contentMode = slot`, select the Content region and add, duplicate, remove or arrange layers and linked components there. Shadow and corner-radius properties remain on the surrounding Surface. Original variants remain as `contentMode = sample` to preserve existing instances and text overrides; switching to slot mode is an explicit opt-in. See [native content slots](docs/content-slots.md) for ownership and maintenance.
+
 Components are organized as **category / source family / profile**, for example **Buttons / Button / …**, **Inputs / TextInput / …**, and **Content / Accordion / pill**. Enable **Show subfolders** in Figma's Assets display settings to browse the hierarchy. Categories are Buttons, Inputs, Navigation, Feedback, Content, Overlays, Typography, and Layout. Charts, rich text, icons and product patterns keep their own domains.
 
 Categories come from `src/component-categories.json` and are generated into the library bundle. For an existing library with local edits, choose **Organize components** to apply only the category names. It preserves current content and styling and changes only the name fields in the saved baseline; other drift remains visible in Compare. A locally renamed or missing main component stops organization for review. The action saves a recovery version and per-component name/baseline backups.
