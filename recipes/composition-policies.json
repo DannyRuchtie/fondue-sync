@@ -6,107 +6,483 @@
       "mode": "repeated",
       "requiredRecipes": ["components/SegmentedControl.Root"],
       "regions": ["Segments"],
-      "reason": "Linked items inside a slot; group selection needs a coordinated action."
+      "reason": "Linked items inside a slot; group selection needs a coordinated action.",
+      "entryRecipeId": "components/SegmentedControl.Root",
+      "entryProps": {
+        "hugWidth": "true"
+      },
+      "requiredSlots": [
+        {
+          "recipeId": "components/SegmentedControl.Root",
+          "names": ["Segments"]
+        }
+      ]
     },
     "components:Table": {
       "mode": "structured",
       "requiredRecipes": [
         "components/Table.Root",
         "components/Table.EditableRow",
-        "components/Table.ContentCell"
+        "components/Table.ContentCell",
+        "components/Table.ContentHeaderCell"
       ],
       "regions": ["Rows", "Cells", "Cell content"],
-      "reason": "Linked rows/cells plus coordinated column insertion and widths."
+      "reason": "Linked rows/cells plus coordinated column insertion and widths.",
+      "entryRecipeId": "components/Table.Root",
+      "entryProps": {
+        "composition": "custom-header"
+      },
+      "requiredSlots": [
+        {
+          "recipeId": "components/Table.Root",
+          "names": ["Rows"]
+        },
+        {
+          "recipeId": "components/Table.EditableRow",
+          "names": ["Cells"]
+        },
+        {
+          "recipeId": "components/Table.ContentCell",
+          "names": ["Content"]
+        },
+        {
+          "recipeId": "components/Table.ContentHeaderCell",
+          "names": ["Header content"]
+        }
+      ]
     },
     "components:Flyout": {
       "mode": "content",
       "requiredRecipes": [
         "components/Flyout.Surface",
-        "components/Flyout.Body",
-        "components/Flyout.Footer"
+        "components/Flyout.Editable",
+        "components/Flyout.EditableBody",
+        "components/Flyout.EditableFooter"
       ],
       "regions": ["Surface content", "Body", "Footer actions"],
-      "reason": "Surface is editable; standard body and footer compositions still need slot mappings."
+      "reason": "Generic Surface content plus structured Body and Actions slots; header and dismissal controls stay shared.",
+      "entryRecipeId": "components/Flyout.Editable",
+      "entryProps": {
+        "padding": "comfortable",
+        "rounded": "medium"
+      },
+      "requiredSlots": [
+        {
+          "recipeId": "components/Flyout.Surface",
+          "names": ["Content"],
+          "when": {
+            "contentMode": "slot"
+          }
+        },
+        {
+          "recipeId": "components/Flyout.Editable",
+          "names": ["Body", "Actions"]
+        },
+        {
+          "recipeId": "components/Flyout.EditableBody",
+          "names": ["Body"]
+        },
+        {
+          "recipeId": "components/Flyout.EditableFooter",
+          "names": ["Actions"]
+        }
+      ]
     },
     "components:Dialog": {
       "mode": "content",
       "regions": ["Body", "Footer actions"],
-      "reason": "Keep the shell and dismissal controls fixed; allow arbitrary forms and actions."
+      "reason": "Keep the shell and dismissal controls fixed; allow arbitrary forms and actions.",
+      "entryRecipeId": "components/Dialog.Editable",
+      "entryProps": {
+        "padding": "comfortable",
+        "rounded": "true",
+        "sideContent": "false"
+      },
+      "requiredRecipes": [
+        "components/Dialog.Editable",
+        "components/Dialog.EditableBody",
+        "components/Dialog.EditableFooter"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Dialog.Editable",
+          "names": ["Body", "Actions", "Side content"]
+        },
+        {
+          "recipeId": "components/Dialog.EditableBody",
+          "names": ["Body"]
+        },
+        {
+          "recipeId": "components/Dialog.EditableFooter",
+          "names": ["Actions"]
+        }
+      ]
     },
     "components:Card": {
       "mode": "content",
       "regions": ["Body", "Footer", "Banner content"],
-      "reason": "Keep framing and defined media/icon parts linked; make content regions flexible."
+      "reason": "Keep framing and defined media/icon parts linked; make content regions flexible.",
+      "entryRecipeId": "components/Card.Editable",
+      "entryProps": {},
+      "requiredRecipes": ["components/Card.Editable"],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Card.Editable",
+          "names": ["Banner content", "Content", "Actions"]
+        }
+      ]
     },
     "components:Tabs": {
       "mode": "repeated",
       "regions": ["Triggers", "Panel content"],
-      "reason": "Variable trigger count plus associated content. Pairing and active state need validation."
+      "reason": "Variable trigger count plus associated content. Pairing and active state need validation.",
+      "entryRecipeId": "components/Tabs.Editable",
+      "entryProps": {
+        "activeTab": "overview"
+      },
+      "requiredRecipes": [
+        "components/Tabs.Editable",
+        "components/Tabs.EditableContent"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Tabs.Editable",
+          "names": ["Triggers", "Panels"]
+        },
+        {
+          "recipeId": "components/Tabs.EditableContent",
+          "names": ["Content"]
+        }
+      ]
     },
     "components:Accordion": {
       "mode": "repeated",
       "regions": ["Items", "Item content"],
-      "reason": "Repeated linked sections with arbitrary expanded content."
+      "reason": "Repeated linked sections with arbitrary expanded content.",
+      "entryRecipeId": "components/Accordion.Editable",
+      "entryProps": {
+        "value": "details"
+      },
+      "requiredRecipes": [
+        "components/Accordion.Editable",
+        "components/Accordion.EditableItem",
+        "components/Accordion.borderless.Editable",
+        "components/Accordion.borderless.EditableItem",
+        "components/Accordion.pill.Editable",
+        "components/Accordion.pill.EditableItem",
+        "components/Accordion.sticky.Editable",
+        "components/Accordion.sticky.EditableItem"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Accordion.Editable",
+          "names": ["Items"]
+        },
+        {
+          "recipeId": "components/Accordion.EditableItem",
+          "names": ["Content"]
+        },
+        {
+          "recipeId": "components/Accordion.borderless.Editable",
+          "names": ["Items"]
+        },
+        {
+          "recipeId": "components/Accordion.borderless.EditableItem",
+          "names": ["Content"]
+        },
+        {
+          "recipeId": "components/Accordion.pill.Editable",
+          "names": ["Items"]
+        },
+        {
+          "recipeId": "components/Accordion.pill.EditableItem",
+          "names": ["Content"]
+        },
+        {
+          "recipeId": "components/Accordion.sticky.Editable",
+          "names": ["Items"]
+        },
+        {
+          "recipeId": "components/Accordion.sticky.EditableItem",
+          "names": ["Content"]
+        }
+      ]
     },
     "components:Dropdown": {
       "mode": "repeated",
       "regions": ["Items", "Groups"],
-      "reason": "Repeat linked items; preserve menu keyboard behavior in code."
+      "reason": "Repeat linked items; preserve menu keyboard behavior in code.",
+      "entryRecipeId": "components/Dropdown.Editable",
+      "entryProps": {
+        "open": "true"
+      },
+      "requiredRecipes": [
+        "components/Dropdown.Editable",
+        "components/Dropdown.EditableGroup",
+        "components/Dropdown.EditableSubmenu"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Dropdown.Editable",
+          "names": ["Items"]
+        },
+        {
+          "recipeId": "components/Dropdown.EditableGroup",
+          "names": ["Items"]
+        },
+        {
+          "recipeId": "components/Dropdown.EditableSubmenu",
+          "names": ["Submenu items"]
+        }
+      ]
     },
     "components:Select": {
       "mode": "repeated",
       "regions": ["Items", "Groups"],
-      "reason": "Options and groups vary; keep the trigger and selected-value rendering fixed."
+      "reason": "Options and groups vary; keep the trigger and selected-value rendering fixed.",
+      "entryRecipeId": "components/Select.Editable",
+      "entryProps": {},
+      "requiredRecipes": [
+        "components/Select.Editable",
+        "components/Select.Multiple.Editable",
+        "components/Select.Combobox.Editable",
+        "components/Select.EditableGroup"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Select.Editable",
+          "names": ["Options"]
+        },
+        {
+          "recipeId": "components/Select.Multiple.Editable",
+          "names": ["Options", "Selected values"]
+        },
+        {
+          "recipeId": "components/Select.Combobox.Editable",
+          "names": ["Options"]
+        },
+        {
+          "recipeId": "components/Select.EditableGroup",
+          "names": ["Options"]
+        }
+      ]
     },
     "components:RadioList": {
       "mode": "repeated",
       "regions": ["Options"],
-      "reason": "Linked option items with exactly one selected item in the design."
+      "reason": "Linked option items with exactly one selected item in the design.",
+      "entryRecipeId": "components/RadioList.Editable",
+      "entryProps": {
+        "state": "default"
+      },
+      "requiredRecipes": ["components/RadioList.Editable"],
+      "requiredSlots": [
+        {
+          "recipeId": "components/RadioList.Editable",
+          "names": ["Options"]
+        }
+      ]
     },
     "components:Tree": {
       "mode": "structured",
       "regions": ["Rows", "Nested children"],
-      "reason": "Hierarchy and indentation need a tree-specific composition contract."
+      "reason": "Hierarchy and indentation need a tree-specific composition contract.",
+      "entryRecipeId": "components/Tree.Editable",
+      "entryProps": {
+        "isExpanded": "true"
+      },
+      "requiredRecipes": [
+        "components/Tree.Editable",
+        "components/Tree.EditableNode"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Tree.Editable",
+          "names": ["Nodes"]
+        },
+        {
+          "recipeId": "components/Tree.EditableNode",
+          "names": ["Content", "Actions", "Children"]
+        }
+      ]
     },
     "components:OrderableList": {
       "mode": "repeated",
       "regions": ["Items"],
-      "reason": "Linked rows can repeat; runtime drag/drop remains in code."
+      "reason": "Linked rows can repeat; runtime drag/drop remains in code.",
+      "entryRecipeId": "components/OrderableList.Editable",
+      "entryProps": {},
+      "requiredRecipes": [
+        "components/OrderableList.Editable",
+        "components/OrderableList.EditableItem"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/OrderableList.Editable",
+          "names": ["Items"]
+        },
+        {
+          "recipeId": "components/OrderableList.EditableItem",
+          "names": ["Content", "Actions"]
+        }
+      ]
     },
     "components:Notice": {
       "mode": "content",
       "regions": ["Body", "Actions"],
-      "reason": "Message and action content can vary inside stable status styling."
+      "reason": "Message and action content can vary inside stable status styling.",
+      "entryRecipeId": "components/Notice/controls-001.Editable",
+      "entryProps": {},
+      "requiredRecipes": [
+        "components/Notice/controls-001.Editable",
+        "components/Notice/controls-002.Editable"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Notice/controls-001.Editable",
+          "names": ["Message content", "Action"]
+        },
+        {
+          "recipeId": "components/Notice/controls-002.Editable",
+          "names": ["Message content", "Action"]
+        }
+      ]
     },
     "components:Tooltip": {
       "mode": "content",
       "regions": ["Content"],
-      "reason": "Support rich tooltip content while preserving the shell; check interactive-content guidance separately."
+      "reason": "Support rich tooltip content while preserving the shell; check interactive-content guidance separately.",
+      "entryRecipeId": "components/Tooltip.Editable",
+      "entryProps": {},
+      "requiredRecipes": ["components/Tooltip.Editable"],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Tooltip.Editable",
+          "names": ["Content"]
+        }
+      ]
     },
     "components:Section": {
       "mode": "layout",
       "regions": ["Children"],
-      "reason": "Container styling/layout stays linked while consumer content changes."
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "entryRecipeId": "components/Section.Editable",
+      "entryProps": {
+        "display": "block"
+      },
+      "requiredRecipes": ["components/Section.Editable"],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Section.Editable",
+          "names": ["Content"]
+        }
+      ]
     },
     "components:ScrollArea": {
       "mode": "layout",
       "regions": ["Children"],
-      "reason": "Container styling/layout stays linked while consumer content changes."
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "entryRecipeId": "components/ScrollArea/auto.Editable",
+      "entryProps": {},
+      "requiredRecipes": [
+        "components/ScrollArea/auto.Editable",
+        "components/ScrollArea/stable.Editable",
+        "components/ScrollArea/stable-horizontal.Editable",
+        "components/ScrollArea/stable-vertical.Editable"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/ScrollArea/auto.Editable",
+          "names": ["Content"]
+        },
+        {
+          "recipeId": "components/ScrollArea/stable.Editable",
+          "names": ["Content"]
+        },
+        {
+          "recipeId": "components/ScrollArea/stable-horizontal.Editable",
+          "names": ["Content"]
+        },
+        {
+          "recipeId": "components/ScrollArea/stable-vertical.Editable",
+          "names": ["Content"]
+        }
+      ]
     },
     "components:Box": {
       "mode": "layout",
       "regions": ["Children"],
-      "reason": "Container styling/layout stays linked while consumer content changes."
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "entryRecipeId": "components/Box.Editable",
+      "entryProps": {
+        "display": "block"
+      },
+      "requiredRecipes": ["components/Box.Editable"],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Box.Editable",
+          "names": ["Content"]
+        }
+      ]
     },
     "components:Flex": {
       "mode": "layout",
       "regions": ["Children"],
-      "reason": "Container styling/layout stays linked while consumer content changes."
+      "reason": "Container styling/layout stays linked while consumer content changes.",
+      "entryRecipeId": "components/Flex/row.Editable",
+      "entryProps": {},
+      "requiredRecipes": [
+        "components/Flex/row.Editable",
+        "components/Flex/row-reverse.Editable",
+        "components/Flex/column.Editable",
+        "components/Flex/column-reverse.Editable"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Flex/row.Editable",
+          "names": ["Children"]
+        },
+        {
+          "recipeId": "components/Flex/row-reverse.Editable",
+          "names": ["Children"]
+        },
+        {
+          "recipeId": "components/Flex/column.Editable",
+          "names": ["Children"]
+        },
+        {
+          "recipeId": "components/Flex/column-reverse.Editable",
+          "names": ["Children"]
+        }
+      ]
     },
     "components:Grid": {
       "mode": "structured",
       "regions": ["Cells"],
-      "reason": "Arbitrary cells need grid track and span rules; do not treat grid as a plain list."
+      "reason": "Arbitrary cells need grid track and span rules; do not treat grid as a plain list.",
+      "entryRecipeId": "components/Grid.Editable",
+      "entryProps": {
+        "columns": "3"
+      },
+      "requiredRecipes": [
+        "components/Grid.Editable",
+        "components/Grid.EditableRow",
+        "components/Grid.EditableCell"
+      ],
+      "requiredSlots": [
+        {
+          "recipeId": "components/Grid.Editable",
+          "names": ["Rows"]
+        },
+        {
+          "recipeId": "components/Grid.EditableRow",
+          "names": ["Cells"]
+        },
+        {
+          "recipeId": "components/Grid.EditableCell",
+          "names": ["Content"]
+        }
+      ]
     },
     "components:SplitButton": {
       "mode": "fixed",
@@ -276,12 +652,34 @@
     "rte:Toolbar": {
       "mode": "content",
       "regions": ["Actions"],
-      "reason": "Review native representation separately from editor document/runtime behavior."
+      "reason": "Review native representation separately from editor document/runtime behavior.",
+      "entryRecipeId": "rte/Toolbar.Editable",
+      "entryProps": {},
+      "requiredRecipes": ["rte/Toolbar.Editable", "rte/Toolbar.EditableGroup"],
+      "requiredSlots": [
+        {
+          "recipeId": "rte/Toolbar.Editable",
+          "names": ["Groups"]
+        },
+        {
+          "recipeId": "rte/Toolbar.EditableGroup",
+          "names": ["Actions"]
+        }
+      ]
     },
     "rte:FloatingModalWrapper": {
       "mode": "content",
       "regions": ["Content"],
-      "reason": "Review native representation separately from editor document/runtime behavior."
+      "reason": "Review native representation separately from editor document/runtime behavior.",
+      "entryRecipeId": "rte/FloatingModalWrapper.Editable",
+      "entryProps": {},
+      "requiredRecipes": ["rte/FloatingModalWrapper.Editable"],
+      "requiredSlots": [
+        {
+          "recipeId": "rte/FloatingModalWrapper.Editable",
+          "names": ["Content"]
+        }
+      ]
     }
   }
 }

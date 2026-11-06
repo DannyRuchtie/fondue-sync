@@ -1,6 +1,6 @@
 {
   "release": "13.11.1",
-  "fingerprint": "d40add046bfba3dd4fc2a0f0e40e17d8f98fd975771f6fea212b2833777b4029",
+  "fingerprint": "c1f39c15d58770d2b8554cd042e6006d9f691305e821c04c983a33cc149e638e",
   "counts": {
     "tokens": 443,
     "releasedTokens": 373,
@@ -14,17 +14,17 @@
     "icons": 420,
     "opticalIconAssets": 2099,
     "inventory": 54,
-    "recipes": 223,
-    "variants": 2156,
+    "recipes": 276,
+    "variants": 2802,
     "examples": 34,
     "imageAssets": 6,
     "imageReferences": 92,
     "imageEncodedBytes": 2060971,
     "productPatterns": 18,
-    "documentedSets": 223,
-    "metadataDocumentedSets": 183,
-    "supported": 9,
-    "partial": 43,
+    "documentedSets": 276,
+    "metadataDocumentedSets": 231,
+    "supported": 7,
+    "partial": 45,
     "unsupported": 0,
     "codeOnly": 2
   },
@@ -41,7 +41,15 @@
         "components/Accordion.borderless",
         "components/Accordion.pill",
         "components/Accordion.Content",
-        "components/Accordion.sticky"
+        "components/Accordion.sticky",
+        "components/Accordion.EditableItem",
+        "components/Accordion.Editable",
+        "components/Accordion.borderless.EditableItem",
+        "components/Accordion.borderless.Editable",
+        "components/Accordion.pill.EditableItem",
+        "components/Accordion.pill.Editable",
+        "components/Accordion.sticky.EditableItem",
+        "components/Accordion.sticky.Editable"
       ],
       "status": "partial"
     },
@@ -80,7 +88,8 @@
       "source": "packages/components/src/components/Box",
       "recipeId": "components/Box",
       "recipeIds": [
-        "components/Box"
+        "components/Box",
+        "components/Box.Editable"
       ],
       "status": "partial"
     },
@@ -127,7 +136,8 @@
         "components/Card.Description",
         "components/Card.ActionButton",
         "components/Card.BannerImage",
-        "components/Card.ThumbnailImage"
+        "components/Card.ThumbnailImage",
+        "components/Card.Editable"
       ],
       "status": "partial"
     },
@@ -171,7 +181,10 @@
         "components/Dialog",
         "components/Dialog.Header",
         "components/Dialog.Body",
-        "components/Dialog.Footer"
+        "components/Dialog.Footer",
+        "components/Dialog.EditableBody",
+        "components/Dialog.EditableFooter",
+        "components/Dialog.Editable"
       ],
       "status": "partial"
     },
@@ -202,7 +215,10 @@
       "recipeIds": [
         "components/Dropdown",
         "components/Dropdown.Item",
-        "components/Dropdown.SubTrigger"
+        "components/Dropdown.SubTrigger",
+        "components/Dropdown.EditableGroup",
+        "components/Dropdown.EditableSubmenu",
+        "components/Dropdown.Editable"
       ],
       "status": "partial"
     },
@@ -244,7 +260,11 @@
         "components/Flex/row",
         "components/Flex/row-reverse",
         "components/Flex/column",
-        "components/Flex/column-reverse"
+        "components/Flex/column-reverse",
+        "components/Flex/row.Editable",
+        "components/Flex/row-reverse.Editable",
+        "components/Flex/column.Editable",
+        "components/Flex/column-reverse.Editable"
       ],
       "status": "partial"
     },
@@ -260,7 +280,10 @@
         "components/Flyout.Body",
         "components/Flyout.Footer",
         "components/Flyout",
-        "components/Flyout.Surface"
+        "components/Flyout.Surface",
+        "components/Flyout.EditableBody",
+        "components/Flyout.EditableFooter",
+        "components/Flyout.Editable"
       ],
       "status": "partial"
     },
@@ -272,7 +295,10 @@
       "source": "packages/components/src/components/Grid",
       "recipeId": "components/Grid",
       "recipeIds": [
-        "components/Grid"
+        "components/Grid",
+        "components/Grid.EditableCell",
+        "components/Grid.EditableRow",
+        "components/Grid.Editable"
       ],
       "status": "partial"
     },
@@ -389,9 +415,11 @@
       "recipeId": "components/Notice/controls-001",
       "recipeIds": [
         "components/Notice/controls-001",
-        "components/Notice/controls-002"
+        "components/Notice/controls-002",
+        "components/Notice/controls-001.Editable",
+        "components/Notice/controls-002.Editable"
       ],
-      "status": "supported"
+      "status": "partial"
     },
     {
       "id": "components:OrderableList",
@@ -402,7 +430,9 @@
       "recipeId": "components/OrderableList",
       "recipeIds": [
         "components/OrderableList",
-        "components/OrderableList.Item"
+        "components/OrderableList.Item",
+        "components/OrderableList.EditableItem",
+        "components/OrderableList.Editable"
       ],
       "status": "partial"
     },
@@ -415,9 +445,11 @@
       "recipeId": "components/RadioList/controls-001",
       "recipeIds": [
         "components/RadioList/controls-001",
-        "components/RadioList/controls-002"
+        "components/RadioList/controls-002",
+        "components/RadioList.EditableOption",
+        "components/RadioList.Editable"
       ],
-      "status": "supported"
+      "status": "partial"
     },
     {
       "id": "components:RouterProvider",
@@ -440,7 +472,11 @@
         "components/ScrollArea/auto",
         "components/ScrollArea/stable",
         "components/ScrollArea/stable-horizontal",
-        "components/ScrollArea/stable-vertical"
+        "components/ScrollArea/stable-vertical",
+        "components/ScrollArea/auto.Editable",
+        "components/ScrollArea/stable.Editable",
+        "components/ScrollArea/stable-horizontal.Editable",
+        "components/ScrollArea/stable-vertical.Editable"
       ],
       "status": "partial"
     },
@@ -452,7 +488,8 @@
       "source": "packages/components/src/components/Section",
       "recipeId": "components/Section",
       "recipeIds": [
-        "components/Section"
+        "components/Section",
+        "components/Section.Editable"
       ],
       "status": "partial"
     },
@@ -483,7 +520,12 @@
         "components/Select.Multiple",
         "components/Select.Combobox",
         "components/Select.Item",
-        "components/Select.Group"
+        "components/Select.Group",
+        "components/Select.EditableGroup",
+        "components/Select.SelectedValue",
+        "components/Select.Editable",
+        "components/Select.Multiple.Editable",
+        "components/Select.Combobox.Editable"
       ],
       "status": "partial"
     },
@@ -539,6 +581,7 @@
         "components/Table.HeaderCell",
         "components/Table.RowCell",
         "components/Table.ContentCell",
+        "components/Table.ContentHeaderCell",
         "components/Table.EditableRow",
         "components/Table.Root"
       ],
@@ -567,7 +610,10 @@
       "recipeIds": [
         "components/Tabs",
         "components/Tabs.Trigger",
-        "components/Tabs.Content"
+        "components/Tabs.Content",
+        "components/Tabs.EditableTrigger",
+        "components/Tabs.EditableContent",
+        "components/Tabs.Editable"
       ],
       "status": "partial"
     },
@@ -644,7 +690,9 @@
       "recipeIds": [
         "components/Tree",
         "components/Tree.Item",
-        "components/Tree.Folder"
+        "components/Tree.Folder",
+        "components/Tree.EditableNode",
+        "components/Tree.Editable"
       ],
       "status": "partial"
     },
@@ -666,7 +714,8 @@
       "source": "packages/components/src/components/Tooltip",
       "recipeId": "components/Tooltip",
       "recipeIds": [
-        "components/Tooltip"
+        "components/Tooltip",
+        "components/Tooltip.Editable"
       ],
       "status": "partial"
     },
@@ -806,7 +855,10 @@
       ],
       "recipeId": "rte/Toolbar",
       "recipeIds": [
-        "rte/Toolbar"
+        "rte/Toolbar",
+        "rte/Toolbar.BlockAction",
+        "rte/Toolbar.EditableGroup",
+        "rte/Toolbar.Editable"
       ],
       "status": "partial"
     },
@@ -821,7 +873,8 @@
       ],
       "recipeId": "rte/FloatingModalWrapper",
       "recipeIds": [
-        "rte/FloatingModalWrapper"
+        "rte/FloatingModalWrapper",
+        "rte/FloatingModalWrapper.Editable"
       ],
       "status": "partial"
     },
@@ -1793,7 +1846,10 @@
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "Content children are an editable text sample.",
-        "Native static header visual is represented; CSS position:sticky and data-stuck shadow depend on a scrolling viewport."
+        "Native static header visual is represented; CSS position:sticky and data-stuck shadow depend on a scrolling viewport.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "The expanded region exists in every state, preserving its identity while collapsed.",
+        "Toggle value on the nested item; runtime accordion behavior is not simulated."
       ]
     },
     {
@@ -1831,7 +1887,11 @@
       "limitations": [
         "No invented surface, border, radius or padding; source is unstyled layout wrapper.",
         "Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset.",
-        "Inline formatting contexts are approximate."
+        "Inline formatting contexts are approximate.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Editable linked layout container.",
+        "Native token-bound frames remain appropriate when no shared component shell is needed.",
+        "Responsive CSS and browser scrolling remain runtime."
       ]
     },
     {
@@ -1868,7 +1928,8 @@
         "Native variants are static; source image loading, alternative-text accessibility, DOM sizing and browser events still require application/runtime verification.",
         "The public Card.ThumbnailImage is 40×40px with object-fit:contain and the medium radius.",
         "Its Card grid placement and 12px margins are supplied by the containing Card composition, not baked into the standalone image part.",
-        "src and alt are open application content; the single native default uses one reviewed portrait fixture and does not invent an image-source enum."
+        "src and alt are open application content; the single native default uses one reviewed portrait fixture and does not invent an image-source enum.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides."
       ]
     },
     {
@@ -1891,7 +1952,11 @@
         "SideContent and underlay are not included in this content-only set.",
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
-        "Scrollable regions and arbitrary children are consumer content."
+        "Scrollable regions and arbitrary children are consumer content.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Body and actions are independent native slots.",
+        "Header and dismissal controls remain library-owned.",
+        "Anchoring, scrolling, focus and interaction remain runtime."
       ]
     },
     {
@@ -1902,7 +1967,10 @@
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "state is CSS interaction state; arbitrary Item children/asChild content remain editable composition.",
-        "SubContent uses the shared content layout; portal and RTL placement are runtime behavior."
+        "SubContent uses the shared content layout; portal and RTL placement are runtime behavior.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Submenu content is present in all states; change the sub-trigger state to open.",
+        "Positioning/collision handling remain runtime."
       ]
     },
     {
@@ -1933,7 +2001,11 @@
       "status": "partial",
       "limitations": [
         "Direction and explicit alignment/justification permutations exposed.",
-        "CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants."
+        "CSS stretch, space-around/space-evenly and wrapping/reverse-wrap require native layout parity; arbitrary responsive gap/dimensions are edited with native controls, not finite variants.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Editable linked layout container.",
+        "Native token-bound frames remain appropriate when no shared component shell is needed.",
+        "Responsive CSS and browser scrolling remain runtime."
       ]
     },
     {
@@ -1949,7 +2021,11 @@
         "shadow none/medium are supplied in separate Surface set.",
         "The 16px child padding is arbitrary editable content, not a claimed Root padding value.",
         "contentMode is a Figma-only composition setting.",
-        "Existing instances remain in sample mode to preserve text overrides; choose slot to opt into editable content."
+        "Existing instances remain in sample mode to preserve text overrides; choose slot to opt into editable content.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Body and actions are independent native slots.",
+        "Header and dismissal controls remain library-owned.",
+        "Anchoring, scrolling, focus and interaction remain runtime."
       ]
     },
     {
@@ -1957,7 +2033,13 @@
       "status": "partial",
       "limitations": [
         "Native Auto Layout specimen covers 1–4 columns; source accepts arbitrary CSS track strings, rows, auto flow/dense packing, alignment and responsive gaps.",
-        "CSS grid algorithm cannot be represented by fixed nested rows."
+        "CSS grid algorithm cannot be represented by fixed nested rows.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Row-major native layout for one to four columns.",
+        "Use Add grid cell to append content without rebuilding existing cells.",
+        "Linked rows/cells provide editable row-major composition.",
+        "Columns are a Figma composition setting; use Reflow grid after changing them.",
+        "CSS track strings, spanning and dense/column packing remain runtime."
       ]
     },
     {
@@ -1997,13 +2079,35 @@
       ]
     },
     {
+      "id": "components:Notice",
+      "status": "partial",
+      "limitations": [
+        "Message/action text and leading/dismiss icon visibility are native properties.",
+        "Arbitrary custom React action content is composed with the other native control assets.",
+        "Forced-colors media rendering remains in CSS.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides."
+      ]
+    },
+    {
       "id": "components:OrderableList",
       "status": "partial",
       "limitations": [
         "Order array is a sample; drag/drop events and keyboard announcements remain React behavior.",
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
-        "Hover, dropping, dragging shadows and arbitrary ItemAction combinations are not all enumerated."
+        "Hover, dropping, dragging shadows and arbitrary ItemAction combinations are not all enumerated.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides."
+      ]
+    },
+    {
+      "id": "components:RadioList",
+      "status": "partial",
+      "limitations": [
+        "List item labels are editable; additional options are created by duplicating native option structure.",
+        "Source 6px indicator with 6px outline is represented by concentric native ellipses.",
+        "Single-option source geometry.",
+        "Set exactly one option selected; group direction belongs to the collection.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides."
       ]
     },
     {
@@ -2017,7 +2121,11 @@
       "id": "components:ScrollArea",
       "status": "partial",
       "limitations": [
-        "Source padding/gutter and 10px scrollbar/2px inset/6px thumb metrics represented. showShadow inner-shadow, horizontal scrollbar/corner, hover/scroll/type visibility and browser overflow behavior remain uncovered."
+        "Source padding/gutter and 10px scrollbar/2px inset/6px thumb metrics represented. showShadow inner-shadow, horizontal scrollbar/corner, hover/scroll/type visibility and browser overflow behavior remain uncovered.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Editable linked layout container.",
+        "Native token-bound frames remain appropriate when no shared component shell is needed.",
+        "Responsive CSS and browser scrolling remain runtime."
       ]
     },
     {
@@ -2026,7 +2134,11 @@
       "limitations": [
         "No invented surface, border, radius or padding; source is unstyled layout wrapper.",
         "Shared LayoutComponentProps accept arbitrary responsive dimensions, positioning, overflow, margins and CSS strings; native layout controls expose a subset.",
-        "Inline formatting contexts are approximate."
+        "Inline formatting contexts are approximate.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Editable linked layout container.",
+        "Native token-bound frames remain appropriate when no shared component shell is needed.",
+        "Responsive CSS and browser scrolling remain runtime."
       ]
     },
     {
@@ -2055,7 +2167,11 @@
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "state is derived from list selection; public Item props are value/label/children.",
-        "Item text is editable composition; groupId and callback semantics remain runtime."
+        "Item text is editable composition; groupId and callback semantics remain runtime.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "The trigger remains a linked visual contract.",
+        "Menu options and multiple selected-value badges are designer content.",
+        "Update their selection consistently; filtering and value synchronization remain runtime."
       ]
     },
     {
@@ -2074,6 +2190,7 @@
         "Width and fontSize are contextual.",
         "A cell can contain arbitrary designer content through its Content slot.",
         "Column spans, sticky positioning, sort interactions and browser table semantics remain runtime.",
+        "Additive header with native editable content; sort indicator and borders remain library-owned.",
         "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
         "Use the composition actions to add columns to all rows or copy a selected cell width across its column.",
         "Native slot editing remains available; uneven rows are reported before bulk changes.",
@@ -2103,7 +2220,11 @@
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "variant/size/activeTab belong to Root; this reusable set exposes inherited context for composition.",
-        "padding is inherited from Root; arbitrary content and withDivider flex overflow are contextual."
+        "padding is inherited from Root; arbitrary content and withDivider flex overflow are contextual.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Triggers and panels are paired by position.",
+        "Add/select actions validate equal counts before changing them.",
+        "Direct native editing remains available; keyboard and runtime tab behavior remain in code."
       ]
     },
     {
@@ -2137,7 +2258,11 @@
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
         "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
         "Rename sample uses editable text; confirmation and automatic focus remain runtime.",
-        "Selection cascade is represented visually; actual descendants derive state in React."
+        "Selection cascade is represented visually; actual descendants derive state in React.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides.",
+        "Nest linked nodes in Children to preserve structural hierarchy and 16px indentation.",
+        "The child region exists while collapsed.",
+        "Selection, rename, drag/drop and asynchronous loading remain runtime."
       ]
     },
     {
@@ -2154,7 +2279,8 @@
         "Content-only set; Root delay/open state and viewport collision do not affect intrinsic appearance.",
         "Arrow drop-shadow outline and maxWidth/custom children wrapping need native visual QA.",
         "Native static definitions do not implement browser event handlers, focus management or accessibility semantics.",
-        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review."
+        "Source styling and finite states are encoded here; visual parity still requires Figma runtime review.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides."
       ]
     },
     {
@@ -2250,7 +2376,8 @@
         "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
         "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
         "Positions are a design property; adaptive grouping, editor selection and positioning are runtime behavior.",
-        "Nested native icon instances support library swapping; state-dependent icon color inheritance still requires visual review and explicit child paint binding."
+        "Nested native icon instances support library swapping; state-dependent icon color inheritance still requires visual review and explicit child paint binding.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides."
       ]
     },
     {
@@ -2260,7 +2387,8 @@
         "Static editable design representation; runtime behavior and browser accessibility semantics remain in React.",
         "Not every public prop, compound export or story permutation is represented; see variant properties for exact supported states.",
         "Source wrapper accepts arbitrary padding/minWidth; these are two sample configurations.",
-        "Shadow, overflow and placement remain uncovered."
+        "Shadow, overflow and placement remain uncovered.",
+        "Additive native-slot composition; the original specimen retains its identities and overrides."
       ]
     },
     {

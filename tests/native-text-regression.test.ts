@@ -131,3 +131,35 @@ test("missing required source fonts are preflighted before any collection node o
   assert.equal(mutations(), 0);
   assert.equal(Object.keys(engine.index.assets).length, 0);
 });
+
+test("a stalled native font service stops the update before any canvas or metadata mutations", async () => {
+  for (const stage of ["discovery", "loading"]) {
+    const { api, mutations } = apiFonts([
+      { family: "ABC Diatype", style: "Regular" },
+    ]);
+    if (stage === "discovery")
+      api.listAvailableFontsAsync = () => new Promise(() => {});
+    else api.loadFontAsync = () => new Promise(() => {});
+    const engine = new SyncEngine(api, {
+      ...empty,
+      styles: [
+        {
+          id: "body",
+          type: "TEXT",
+          name: "Body",
+          fontFamily: "Diatype",
+          fontStyle: "Regular",
+          fontSize: 14,
+          lineHeight: 18,
+          letterSpacing: 0,
+        },
+      ],
+    });
+    engine.fontTimeoutMs = 5;
+    const result = await engine.sync();
+    assert.equal(result.complete, false);
+    assert.match(result.errors.join("\n"), /font service did not respond/);
+    assert.equal(mutations(), 0);
+    assert.deepEqual(result.actions, []);
+  }
+});

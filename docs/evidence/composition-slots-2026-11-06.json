@@ -1,0 +1,157 @@
+{
+  "date": "2026-11-06",
+  "fileKey": "ZmOzqBnHNixUTV1TqRtBHs",
+  "generator": {
+    "release": "13.11.1",
+    "fingerprint": "c1f39c15d58770d2b8554cd042e6006d9f691305e821c04c983a33cc149e638e",
+    "requiredFamilies": 21,
+    "sourceFamilies": 54,
+    "componentSets": 276,
+    "variants": 2802,
+    "newRecipeIds": [
+      "components/Table.ContentHeaderCell",
+      "components/Flyout.EditableBody",
+      "components/Flyout.EditableFooter",
+      "components/Flyout.Editable",
+      "components/Dialog.EditableBody",
+      "components/Dialog.EditableFooter",
+      "components/Dialog.Editable",
+      "components/Accordion.EditableItem",
+      "components/Accordion.Editable",
+      "components/Accordion.borderless.EditableItem",
+      "components/Accordion.borderless.Editable",
+      "components/Accordion.pill.EditableItem",
+      "components/Accordion.pill.Editable",
+      "components/Accordion.sticky.EditableItem",
+      "components/Accordion.sticky.Editable",
+      "components/Dropdown.EditableGroup",
+      "components/Dropdown.EditableSubmenu",
+      "components/Dropdown.Editable",
+      "components/Select.EditableGroup",
+      "components/Select.SelectedValue",
+      "components/Select.Editable",
+      "components/Select.Multiple.Editable",
+      "components/Select.Combobox.Editable",
+      "components/RadioList.EditableOption",
+      "components/RadioList.Editable",
+      "components/OrderableList.EditableItem",
+      "components/OrderableList.Editable",
+      "components/Tabs.EditableTrigger",
+      "components/Tabs.EditableContent",
+      "components/Tabs.Editable",
+      "components/Card.Editable",
+      "components/Notice/controls-001.Editable",
+      "components/Notice/controls-002.Editable",
+      "components/Tooltip.Editable",
+      "rte/Toolbar.BlockAction",
+      "rte/Toolbar.EditableGroup",
+      "rte/Toolbar.Editable",
+      "rte/FloatingModalWrapper.Editable",
+      "components/Box.Editable",
+      "components/Section.Editable",
+      "components/Flex/row.Editable",
+      "components/Flex/row-reverse.Editable",
+      "components/Flex/column.Editable",
+      "components/Flex/column-reverse.Editable",
+      "components/ScrollArea/auto.Editable",
+      "components/ScrollArea/stable.Editable",
+      "components/ScrollArea/stable-horizontal.Editable",
+      "components/ScrollArea/stable-vertical.Editable",
+      "components/Grid.EditableCell",
+      "components/Grid.EditableRow",
+      "components/Grid.Editable",
+      "components/Tree.EditableNode",
+      "components/Tree.Editable"
+    ],
+    "availableFamilies": [
+      "components:Accordion",
+      "components:Box",
+      "components:Card",
+      "components:Dialog",
+      "components:Dropdown",
+      "components:Flex",
+      "components:Flyout",
+      "components:Grid",
+      "components:Notice",
+      "components:OrderableList",
+      "components:RadioList",
+      "components:ScrollArea",
+      "components:Section",
+      "components:SegmentedControl",
+      "components:Select",
+      "components:Table",
+      "components:Tabs",
+      "components:Tooltip",
+      "components:Tree",
+      "rte:FloatingModalWrapper",
+      "rte:Toolbar"
+    ]
+  },
+  "localVerification": {
+    "command": "npm run verify",
+    "tests": 285,
+    "passed": 285,
+    "failed": 0,
+    "checks": [
+      "Required native slot names exist in every relevant variant",
+      "Linked insertion for all 21 families",
+      "Segment selection and table columns preserve existing instances and content",
+      "Radio selection, tab/panel pairing, tree hierarchy and grid reflow",
+      "Additive installation preserves customized foundations, old component snapshots/baselines and the global marker",
+      "Flyout, SegmentedControl and Table installation priority",
+      "Idempotent installation and interrupted-slot recovery without replacing IDs",
+      "Missing foundations, renamed slots and edited partials stop safely",
+      "Font service timeout stops before preflight mutations"
+    ]
+  },
+  "native": {
+    "methods": [
+      "Figma desktop through computer use",
+      "Read-only Figma connector inventory"
+    ],
+    "checkpoint": {
+      "title": "Before Fondue update · 2026-11-06T13:14:48.216Z",
+      "id": "2418737612941861688"
+    },
+    "fontPreflightPassed": true,
+    "fullUpdate": {
+      "complete": false,
+      "libraryMutationsStarted": false,
+      "counts": {
+        "update": 1088,
+        "conflict": 294,
+        "create": 117,
+        "retained": 6
+      },
+      "errors": [
+        "Update stopped: resolve local drift or missing managed assets before applying this release."
+      ],
+      "localChangesPreserved": true
+    },
+    "additiveInstallation": {
+      "started": false,
+      "complete": false,
+      "blocker": "Native plugin window remained stale; controls did not respond and coordinate actions returned noWindowsAvailable after reconnecting computer use."
+    },
+    "readOnlyInventory": {
+      "release": "13.11.1",
+      "fingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8",
+      "managedAssets": 1388,
+      "existingSlotRecipe": {
+        "id": "components/Flyout.Surface",
+        "nodeId": "5:16989"
+      },
+      "newEditableRecipeCount": 0
+    },
+    "newFamilyVisualAcceptance": false,
+    "publicationPerformed": false
+  },
+  "remainingAcceptance": [
+    "Run Install missing editable components in the rebuilt plugin",
+    "Inspect and edit Flyout, five-segment controls and nested table slots first",
+    "Review remaining families with long, empty and hidden content",
+    "Verify recursive Tree slots in native Figma",
+    "Verify source/default and variant updates preserve custom slots and nested component links",
+    "Review publication and accept an update in a consuming file"
+  ]
+}

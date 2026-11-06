@@ -24,7 +24,7 @@ Keep component instances connected to receive future library updates.
 
 **Surface content:** `Overlays / Flyout / Surface` supports a native **Content** slot. Choose `contentMode = slot`, select the Content region and add, duplicate, remove or arrange layers and linked components there. Shadow and corner-radius properties remain on the surrounding Surface. Original variants remain as `contentMode = sample` to preserve existing instances and text overrides; switching to slot mode is an explicit opt-in. See [native content slots](docs/content-slots.md) for ownership and maintenance.
 
-**Segmented controls and tables:** the generator includes editable Root/Item and Root/Row/Cell compositions with native slots. After updating the library, use **Sync → Compose with slots** to insert a five-segment control, add segments, coordinate selection, or add table rows/columns and match a column's width. **Component composition overview** shows coverage and candidates across every source family; maintain the versioned [composition policies](recipes/composition-policies.json). See the [workflow and current validation limits](docs/content-slots.md).
+**Editable compositions:** all 21 required families have native slot definitions, starting with Flyout body/actions, SegmentedControl items and Table rows/cells/header content. Use **Sync → Compose with slots → Install missing editable components** to add missing mains while preserving existing foundations, components and unrelated local drift. Then select a family and insert its linked editable component. Explicit helpers coordinate segment/radio selection, table columns, tab pairs, tree hierarchy and grid reflow. **Component composition overview** checks coverage across every source family; maintain the versioned [composition policies](recipes/composition-policies.json). See the [implementation checklist](docs/slot-implementation-checklist.md) and [workflow and validation limits](docs/content-slots.md).
 
 Components are organized as **category / source family / profile**, for example **Buttons / Button / …**, **Inputs / TextInput / …**, and **Content / Accordion / pill**. Enable **Show subfolders** in Figma's Assets display settings to browse the hierarchy. Categories are Buttons, Inputs, Navigation, Feedback, Content, Overlays, Typography, and Layout. Charts, rich text, icons and product patterns keep their own domains.
 
@@ -81,6 +81,7 @@ The push workflow is a development feature. Some changes need additional mapping
 
 ## For maintainers and developers
 
+- [Designer composition requirements: slots, repeated items and the full component table](docs/designer-composition-requirements.md)
 - [Build and maintain the plugin](docs/maintainer-guide.md)
 - [Set up the PR connection and token builds](docs/push-changes.md)
 - [Verification checklist](docs/verification.md)

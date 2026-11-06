@@ -1,4 +1,15 @@
 import { read } from "./metadata";
+import {
+  ancestor,
+  sourceId,
+  slot,
+  oneSelection,
+  loadFonts,
+  label,
+  width,
+} from "./composition-nodes";
+import { composeStructure } from "./composition-structures";
+import policies from "../recipes/composition-policies.json";
 
 type Node = any;
 const IDs = {
@@ -8,70 +19,8 @@ const IDs = {
   row: "components/Table.EditableRow",
   cell: "components/Table.ContentCell",
   header: "components/Table.HeaderCell",
+  contentHeader: "components/Table.ContentHeaderCell",
 };
-async function sourceId(instance: Node): Promise<string | null> {
-  if (instance?.type !== "INSTANCE") return null;
-  const main = await instance.getMainComponentAsync();
-  const owner = main?.parent?.type === "COMPONENT_SET" ? main.parent : main;
-  if (!owner) return null;
-  try {
-    return (
-      JSON.parse(read(owner, "mapping")).id?.replace(/^recipe:/, "") ?? null
-    );
-  } catch {
-    return null;
-  }
-}
-async function ancestor(node: Node, id: string): Promise<Node> {
-  for (
-    let current = node;
-    current && current.type !== "PAGE";
-    current = current.parent
-  )
-    if ((await sourceId(current)) === id) return current;
-  throw Error(
-    [IDs.segments, IDs.item].includes(id)
-      ? id === IDs.item
-        ? "Select a segment inside the control first."
-        : "Select a segmented control or an item inside it."
-      : "Select a table or a cell inside it.",
-  );
-}
-function slot(node: Node): Node {
-  const result = node.children?.filter((child: Node) => child.type === "SLOT");
-  if (result?.length !== 1)
-    throw Error(
-      "Expected one native content slot. Choose an editable composition.",
-    );
-  return result[0];
-}
-function oneSelection(api: PluginAPI): Node {
-  if (api.currentPage.selection.length !== 1)
-    throw Error("Select one component or cell first.");
-  return api.currentPage.selection[0];
-}
-async function loadFonts(api: PluginAPI, node: Node) {
-  const texts = node.findAllWithCriteria({ types: ["TEXT"] });
-  for (const text of texts)
-    for (const segment of text.getStyledTextSegments(["fontName"]))
-      await api.loadFontAsync(segment.fontName);
-}
-async function label(api: PluginAPI, node: Node, value: string) {
-  await loadFonts(api, node);
-  const property = Object.entries(node.componentProperties ?? {}).find(
-    ([, prop]: any) => prop.type === "TEXT",
-  );
-  if (property) node.setProperties({ [property[0]]: value });
-  else {
-    const text = node.findAllWithCriteria({ types: ["TEXT"] })[0];
-    if (text) text.characters = value;
-  }
-}
-function width(node: Node, next: number) {
-  const vertical = node.layoutSizingVertical;
-  node.resize(next, node.height);
-  if (vertical === "HUG") node.layoutSizingVertical = "HUG";
-}
 async function cellWidth(cell: Node, next: number) {
   const main = await cell.getMainComponentAsync();
   const sourceWidth = main.width;
@@ -101,7 +50,11 @@ async function readTable(api: PluginAPI) {
     const parts = [...slot(row).children];
     if (!parts.length) throw Error("Each row needs at least one cell.");
     for (const part of parts)
-      if (![IDs.cell, IDs.header].includes((await sourceId(part))!))
+      if (
+        ![IDs.cell, IDs.header, IDs.contentHeader].includes(
+          (await sourceId(part))!,
+        )
+      )
         throw Error(
           "A Cells slot contains an unrecognized cell. Native content inside a ContentCell is supported.",
         );
@@ -137,27 +90,71 @@ export async function compose(
   assets: Record<string, { id: string }>,
   action: string,
   amount = 5,
+  recipeId?: string,
 ) {
+  const structured = await composeStructure(api, action);
+  if (structured) return structured;
   const changed: string[] = [];
   const created: string[] = [];
-  if (action === "insert-segments" || action === "insert-table") {
+  if (
+    action === "insert-segments" ||
+    action === "insert-table" ||
+    action === "insert-family"
+  ) {
     if (
-      action === "insert-segments" &&
+      (action === "insert-segments" ||
+        (action === "insert-family" && recipeId === IDs.segments)) &&
       (!Number.isInteger(amount) || amount < 2 || amount > 10)
     )
       throw Error("Choose between two and ten segments.");
-    const id = action === "insert-table" ? IDs.table : IDs.segments;
+    const family = Object.values(policies.families).find(
+      (policy: any) => policy.entryRecipeId === recipeId,
+    ) as any;
+    if (action === "insert-family" && !family)
+      throw Error(
+        "Choose an editable component from the composition checklist.",
+      );
+    const id =
+      action === "insert-family"
+        ? recipeId!
+        : action === "insert-table"
+          ? IDs.table
+          : IDs.segments;
     const set = assets["recipe:" + id]
       ? await api.getNodeByIdAsync(assets["recipe:" + id].id)
       : null;
     if (!set || set.type !== "COMPONENT_SET")
       throw Error(
-        "Update this library first to install the editable composition components.",
+        "Choose Install missing editable components in Compose with slots first.",
       );
-    const main = set.children.find(
-      (main: Node) =>
-        action === "insert-table" || main.name.includes("hugWidth=true"),
-    ) as ComponentNode;
+    const preferred =
+      action === "insert-family"
+        ? set.children.find((node: Node) => {
+            let props;
+            try {
+              props = JSON.parse(read(node, "variant-props"));
+            } catch {
+              return false;
+            }
+            return Object.entries(family.entryProps ?? {}).every(
+              ([key, value]) => props[key] === value,
+            );
+          })
+        : undefined;
+    const main =
+      preferred ||
+      (action === "insert-table" &&
+        set.children.find((main: Node) =>
+          main.name.includes("composition=custom-header"),
+        )) ||
+      (set.children.find(
+        (main: Node) =>
+          action === "insert-table" || main.name.includes("hugWidth=true"),
+      ) as ComponentNode);
+    if (!main || main.type !== "COMPONENT")
+      throw Error(
+        "Composition main is missing. Choose Install missing editable components first.",
+      );
     await loadFonts(api, main);
     const right = Math.max(
       0,
@@ -169,7 +166,7 @@ export async function compose(
     instance.y = 0;
     created.push(instance.id);
     api.currentPage.selection = [instance];
-    if (action === "insert-segments")
+    if (id === IDs.segments)
       for (let i = 2; i < amount; i++) {
         const added = await appendSegment(api, instance);
         created.push(added.id);
@@ -179,9 +176,11 @@ export async function compose(
       createdNodeIds: created,
       mutatedNodeIds: [],
       message:
-        action === "insert-table"
-          ? "Inserted a linked table with three columns and three body rows."
-          : "Inserted a linked control with " + amount + " segments.",
+        action === "insert-family"
+          ? "Inserted a linked editable composition. Use its named slots to change content."
+          : action === "insert-table"
+            ? "Inserted a linked table with three columns and three body rows."
+            : "Inserted a linked control with " + amount + " segments.",
     };
   }
   if (action === "add-segment" || action === "select-segment") {

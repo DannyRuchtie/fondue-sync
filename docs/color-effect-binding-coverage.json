@@ -2,9 +2,9 @@
   "release": "13.11.1",
   "policy": "Exact released semantic roles or exact source literals; no nearest-value substitution. Fixture artwork, picker gradients and arbitrary data colors remain explicit content exceptions.",
   "counts": {
-    "literalPaintsBound": 2,
+    "literalPaintsBound": 4,
     "svgPaintRules": 38,
-    "shadowLayersStyled": 200,
+    "shadowLayersStyled": 260,
     "effectFieldsBound": 40,
     "derivedEffectVariables": 15,
     "derivedEffectStyles": 4
@@ -812,6 +812,46 @@
     },
     {
       "path": "components/Tooltip/padding=spacious;side=left/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=compact;side=top/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=compact;side=right/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=compact;side=bottom/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=compact;side=left/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=spacious;side=top/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=spacious;side=right/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=spacious;side=bottom/tooltip/arrow",
+      "role": "uniform-source-color",
+      "tokenId": "color-primary-default"
+    },
+    {
+      "path": "components/Tooltip.Editable/padding=spacious;side=left/tooltip/arrow",
       "role": "uniform-source-color",
       "tokenId": "color-primary-default"
     }

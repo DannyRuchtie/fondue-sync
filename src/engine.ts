@@ -1,5 +1,6 @@
 import { componentPropertyGroups } from "./component-properties.mjs";
 import { contentContainer, ensureContentSlot } from "./slots";
+import { installCompositions } from "./install-compositions";
 import {
   applyApprovedImageMigration,
   imageMigrationProblems,
@@ -53,6 +54,7 @@ type Index = {
     }[];
   }[];
 };
+class FontServiceError extends Error {}
 export type Report = {
   release: string;
   fingerprint: string;
@@ -63,6 +65,31 @@ export type Report = {
   complete: boolean;
 };
 export class SyncEngine {
+  async installCompositions(progress?: (message: string) => void) {
+    return installCompositions(this, progress);
+  }
+  fontTimeoutMs = 15000;
+  async fontRequest<T>(request: Promise<T>): Promise<T> {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      return await Promise.race([
+        request,
+        new Promise<never>((_, reject) => {
+          timer = setTimeout(
+            () =>
+              reject(
+                new FontServiceError(
+                  "Figma's font service did not respond. Check the font service and reconnect, then retry Update library.",
+                ),
+              ),
+            this.fontTimeoutMs,
+          );
+        }),
+      ]);
+    } finally {
+      if (timer !== undefined) clearTimeout(timer);
+    }
+  }
   api: PluginAPI;
   bundle: Bundle;
   index: Index;
@@ -423,7 +450,9 @@ export class SyncEngine {
     let candidates: FontName[] = [requested];
     if (knownAlias && typeof this.api.listAvailableFontsAsync === "function") {
       try {
-        this.availableFonts ??= this.api.listAvailableFontsAsync();
+        this.availableFonts ??= this.fontRequest(
+          this.api.listAvailableFontsAsync(),
+        );
         const available = await this.availableFonts;
         candidates = [family, knownAlias].flatMap((candidate) => {
           const exact = available.find(
@@ -432,19 +461,21 @@ export class SyncEngine {
           )?.fontName;
           return exact ? [exact] : [];
         });
-      } catch {
+      } catch (error) {
+        if (error instanceof FontServiceError) throw error;
         // If discovery itself fails, try the requested source family exactly.
       }
     }
     for (const candidate of candidates) {
       try {
-        await this.api.loadFontAsync(candidate);
+        await this.fontRequest(this.api.loadFontAsync(candidate));
         this.warnings = this.warnings.filter(
           (warning) =>
             !warning.startsWith(`Font ${family} ${style} unavailable;`),
         );
         return candidate;
-      } catch {
+      } catch (error) {
+        if (error instanceof FontServiceError) throw error;
         // Only the confirmed exact product alias is eligible as another candidate.
       }
     }
@@ -494,6 +525,7 @@ export class SyncEngine {
         await this.fontFor(font.family, font.style);
       } catch (error) {
         errors.push(String(error));
+        if (error instanceof FontServiceError) return errors;
       }
     return errors;
   }
@@ -1769,12 +1801,18 @@ export class SyncEngine {
   async sync(progress?: (message: string) => void): Promise<Report> {
     this.appliedPropertyDefaults.clear();
     const fontErrors = await this.preflightFonts(progress);
-    const plan = await this.inspect(progress);
     if (fontErrors.length) {
-      plan.errors.push(...fontErrors);
-      plan.complete = false;
-      return plan;
+      return {
+        release: this.bundle.release,
+        fingerprint: this.bundle.fingerprint,
+        actions: [],
+        warnings: [...this.warnings],
+        errors: fontErrors,
+        counts: {},
+        complete: false,
+      };
     }
+    const plan = await this.inspect(progress);
     const errors: string[] = [];
     const invalid = bundleProblems(this.bundle);
     if (invalid.length) {

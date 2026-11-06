@@ -45,17 +45,17 @@
     "constantOrigin": "Reviewed source-controlled native recipe definitions, not additional exported upstream CSS variables."
   },
   "counts": {
-    "layers": 13028,
-    "existingBindings": 2021,
-    "addedReleasedBindings": 6646,
-    "addedConstantBindings": 27890,
-    "framePaddingBindings": 21896,
-    "gapBindings": 5465,
-    "radiusBindings": 6361,
-    "borderWidthBindings": 814,
+    "layers": 16757,
+    "existingBindings": 2312,
+    "addedReleasedBindings": 9257,
+    "addedConstantBindings": 35450,
+    "framePaddingBindings": 28600,
+    "gapBindings": 7135,
+    "radiusBindings": 7969,
+    "borderWidthBindings": 1003,
     "derivedVariables": 37,
     "exceptions": 0,
-    "notApplicable": 414
+    "notApplicable": 430
   },
   "derivedVariables": [
     {
@@ -644,7 +644,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 5559
+        "occurrences": 7102
       }
     },
     {
@@ -766,7 +766,7 @@
             "role": "radius"
           }
         ],
-        "occurrences": 48
+        "occurrences": 88
       }
     },
     {
@@ -1723,7 +1723,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 20944
+        "occurrences": 26709
       }
     },
     {
@@ -1802,7 +1802,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 41
+        "occurrences": 81
       }
     },
     {
@@ -1988,7 +1988,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 324
+        "occurrences": 492
       }
     },
     {
@@ -2040,7 +2040,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 43
+        "occurrences": 45
       }
     },
     {
@@ -2318,7 +2318,7 @@
             "role": "spacing"
           }
         ],
-        "occurrences": 293
+        "occurrences": 295
       }
     },
     {
@@ -3985,6 +3985,118 @@
       "path": "components/Slider/controls-002/value=100;range=range;state=disabled/slider/thumb-1",
       "field": "radius",
       "value": 10,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=default/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=default/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=hover/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=hover/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=disabled/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=disabled/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=focus/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=default;selected=true;state=focus/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=default/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=default/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=hover/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=hover/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=disabled/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=disabled/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=focus/option/radio/indicator-ring",
+      "field": "radius",
+      "value": 9,
+      "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
+      "classification": "not-applicable"
+    },
+    {
+      "path": "components/RadioList.EditableOption/emphasis=highlight;selected=true;state=focus/option/radio/indicator-center",
+      "field": "radius",
+      "value": 3,
       "reason": "Not an independent native corner property on ellipse; its arc/vector/source component already defines the geometry.",
       "classification": "not-applicable"
     },

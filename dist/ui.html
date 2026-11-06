@@ -203,6 +203,21 @@
       <div id="log" aria-live="polite"></div>
       <details>
         <summary>Compose with slots</summary>
+        <button data-action="install-compositions">
+          Install missing editable components
+        </button>
+        <p class="muted">
+          Adds editable components using existing library variables, styles and
+          linked parts. Existing components and their local changes are reused.
+          A recovery version is saved first.
+        </p>
+        <label
+          >Editable component
+          <select id="composition-entry"></select
+        ></label>
+        <button data-action="compose-insert-family">
+          Insert editable component
+        </button>
         <p>
           Select a control, row or cell on the canvas. These actions edit its
           contents.
@@ -230,6 +245,28 @@
         <button data-action="compose-match-column-width">
           Match column width
         </button>
+        <div class="row">
+          <button data-action="compose-add-radio">Add radio option</button
+          ><button data-action="compose-select-radio">
+            Select radio option
+          </button>
+        </div>
+        <div class="row">
+          <button data-action="compose-add-tab-pair">Add tab pair</button
+          ><button data-action="compose-select-tab-pair">
+            Select tab pair
+          </button>
+        </div>
+        <div class="row">
+          <button data-action="compose-add-tree-child">Add tree child</button
+          ><button data-action="compose-add-tree-sibling">
+            Add tree sibling
+          </button>
+        </div>
+        <div class="row">
+          <button data-action="compose-add-grid-cell">Add grid cell</button
+          ><button data-action="compose-reflow-grid">Reflow grid</button>
+        </div>
         <p class="muted">
           Resize a cell, then use Match column width to apply that width to its
           column. Insert actions require the editable components to be installed
@@ -533,6 +570,7 @@
             el("progress").textContent = "Working…";
             send(button.dataset.action, {
               amount: Number(el("segment-count").value),
+              recipeId: el("composition-entry").value,
             });
           }),
       );
@@ -545,6 +583,15 @@
         }
         if (m.type === "status") {
           compositionRows = m.composition ?? [];
+          el("composition-entry").replaceChildren();
+          for (const row of compositionRows.filter(
+            (row) => row.entryRecipeId,
+          )) {
+            const option = document.createElement("option");
+            option.value = row.entryRecipeId;
+            option.textContent = row.package + " / " + row.name;
+            el("composition-entry").appendChild(option);
+          }
           showComposition();
           if (m.lastErrors?.length)
             el("log").textContent =
@@ -574,6 +621,19 @@
         if (m.type === "composition-result") {
           el("composition-result").textContent = m.message;
           el("progress").textContent = "Composition updated";
+        }
+        if (m.type === "composition-install-report") {
+          el("composition-result").textContent = m.report.complete
+            ? "Editable components installed. Native and published-consumer checks still need review."
+            : m.report.errors.join("\n");
+          el("progress").textContent =
+            "Composition installation: " +
+            m.report.createdRecipeIds.length +
+            " created, " +
+            m.report.resumedRecipeIds.length +
+            " resumed, " +
+            m.report.reusedRecipeIds.length +
+            " reused.";
         }
         if (m.type === "error") {
           el("progress").textContent = "Action stopped";

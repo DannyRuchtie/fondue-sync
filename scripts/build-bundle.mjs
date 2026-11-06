@@ -393,6 +393,14 @@ export async function build(source = path.join(root, ".cache/release")) {
     : [];
   const { default: composableRecipes } =
     await import("../recipes/composable.mjs");
+  const slotRecipes = [];
+  for (const module of [
+    "slot-panels",
+    "slot-collections",
+    "slot-content",
+    "slot-layouts",
+  ])
+    slotRecipes.push(...(await import(`../recipes/${module}.mjs`)).default);
   const recipes = [
     ...baseRecipes.filter(
       (r) => !families.has(normalize(r.package) + ":" + r.name.split("/")[0]),
@@ -400,6 +408,7 @@ export async function build(source = path.join(root, ".cache/release")) {
     ...overrides,
     ...mediaRecipes,
     ...composableRecipes,
+    ...slotRecipes,
     ...examplePatterns,
   ];
   for (const r of recipes) {
@@ -554,6 +563,7 @@ export async function build(source = path.join(root, ".cache/release")) {
           "recovery.ts",
           "schema.ts",
           "slots.ts",
+          "install-compositions.ts",
           "sections.ts",
           "presentation.ts",
           "colors.ts",
@@ -593,6 +603,12 @@ export async function build(source = path.join(root, ".cache/release")) {
             "token-bindings",
             "paint-bindings",
             "typography-bindings",
+            "composition-helpers",
+            "composable",
+            "slot-panels",
+            "slot-collections",
+            "slot-content",
+            "slot-layouts",
           ]
             .concat(
               fs.existsSync(additionalFile) ? ["additional-examples"] : [],

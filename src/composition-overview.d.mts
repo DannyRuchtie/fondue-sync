@@ -8,6 +8,12 @@ export function compositionOverview(
       regions: string[];
       reason: string;
       requiredRecipes?: string[];
+      requiredSlots?: {
+        recipeId: string;
+        names: string[];
+        when?: Record<string, string>;
+      }[];
+      entryRecipeId?: string;
     }
   >,
 ): NonNullable<Bundle["composition"]>;

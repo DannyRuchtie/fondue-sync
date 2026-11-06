@@ -2856,7 +2856,11 @@ test("an interrupted native-slot import resumes the same slot identity", async (
 });
 
 import { compose } from "../src/composer";
-async function compositionFixture() {
+import { slot as compositionSlot } from "../src/composition-nodes";
+async function compositionFixture(
+  allFamilies = false,
+  installInitially = true,
+) {
   const bundle = structuredClone(releaseBundle) as unknown as Bundle;
   const ids = new Set([
     "components/SegmentedControl.Root",
@@ -2865,7 +2869,25 @@ async function compositionFixture() {
     "components/Table.EditableRow",
     "components/Table.ContentCell",
     "components/Table.HeaderCell",
+    "components/Table.ContentHeaderCell",
   ]);
+  if (allFamilies)
+    for (const family of bundle.composition ?? [])
+      if (family.entryRecipeId) {
+        ids.add(family.entryRecipeId);
+        for (const slot of family.slots) ids.add(slot.recipeId);
+      }
+  const dependencies = (node: any) => {
+    if (node.recipeId) ids.add(node.recipeId);
+    for (const child of node.children ?? []) dependencies(child);
+  };
+  let count = -1;
+  while (count !== ids.size) {
+    count = ids.size;
+    for (const recipe of bundle.recipes)
+      if (ids.has(recipe.id))
+        for (const variant of recipe.variants) dependencies(variant.root);
+  }
   bundle.recipes = bundle.recipes.filter((recipe) => ids.has(recipe.id));
   const iconIds = new Set<string>();
   const walk = (node: any) => {
@@ -2880,11 +2902,159 @@ async function compositionFixture() {
   bundle.inventory = [];
   bundle.gaps = [];
   const mock = mockApi(true);
-  const engine = new SyncEngine(mock.api, bundle);
+  const previousBundle = structuredClone(bundle);
+  if (!installInitially)
+    previousBundle.recipes = previousBundle.recipes.filter(
+      (r) =>
+        !r.id.includes("Editable") &&
+        ![
+          "components/SegmentedControl.Item",
+          "components/SegmentedControl.Root",
+          "components/Table.ContentCell",
+          "components/Table.ContentHeaderCell",
+          "components/Table.Root",
+          "components/Select.SelectedValue",
+          "rte/Toolbar.BlockAction",
+        ].includes(r.id),
+    );
+  const engine = new SyncEngine(mock.api, previousBundle);
   const report = await engine.sync();
   assert.equal(report.complete, true, report.errors.join("\n"));
+  engine.bundle = bundle;
   return { ...mock, engine };
 }
+test("additive composition installation preserves customized foundations, mains and global release metadata", async () => {
+  const { api, engine, metadataStats } = await compositionFixture(true, false);
+  engine.index.fingerprint = "previous-reviewed-file";
+  engine.save();
+  const oldRefs = structuredClone(engine.index.assets);
+  const oldRelease = engine.index.release;
+  const color = engine.bundle.tokens.find((token) => token.type === "COLOR")!;
+  const token: any = await engine.resolve(
+    oldRefs["token:" + color.id].id,
+    "token",
+  );
+  token.description = "Designer-owned local token description";
+  token.setValueForMode(Object.keys(token.valuesByMode)[0], {
+    r: 0.27,
+    g: 0.41,
+    b: 0.65,
+    a: 1,
+  });
+  const mainRef = Object.values(oldRefs).find((ref) => ref.kind === "recipe")!;
+  const main: any = await engine.resolve(mainRef.id, "recipe");
+  main.description = "Keep this local component documentation";
+  const before = new Map<string, { snapshot: string; applied: string }>();
+  for (const [id, ref] of Object.entries(oldRefs)) {
+    const asset = await engine.resolve(ref.id, ref.kind);
+    before.set(id, {
+      snapshot: await snapshot(asset),
+      applied: readMetadata(asset, "applied"),
+    });
+  }
+  const installed = await engine.installCompositions();
+  assert.equal(installed.complete, true, installed.errors.join("\n"));
+  assert.ok(installed.createdRecipeIds.length > 40);
+  const priority = [
+    "components/Flyout.Editable",
+    "components/SegmentedControl.Root",
+    "components/Table.Root",
+    "components/Accordion.Editable",
+  ].map((id) => installed.createdRecipeIds.indexOf(id));
+  assert.ok(priority.every((index) => index >= 0));
+  assert.deepEqual(
+    priority,
+    [...priority].sort((a, b) => a - b),
+  );
+  assert.equal(engine.index.fingerprint, "previous-reviewed-file");
+  assert.equal(engine.index.release, oldRelease);
+  for (const [id, ref] of Object.entries(oldRefs)) {
+    assert.deepEqual(engine.index.assets[id], ref, id);
+    const asset = await engine.resolve(ref.id, ref.kind);
+    assert.equal(await snapshot(asset), before.get(id)!.snapshot, id);
+    assert.equal(readMetadata(asset, "applied"), before.get(id)!.applied, id);
+  }
+  const writes = metadataStats.writes;
+  const repeated = await engine.installCompositions();
+  assert.equal(repeated.complete, true, repeated.errors.join("\n"));
+  assert.equal(repeated.createdRecipeIds.length, 0);
+  assert.equal(repeated.resumedRecipeIds.length, 0);
+  assert.equal(metadataStats.writes, writes);
+  for (const family of engine.bundle.composition!.filter(
+    (row) => row.entryRecipeId,
+  )) {
+    await compose(
+      api,
+      engine.index.assets,
+      "insert-family",
+      5,
+      family.entryRecipeId,
+    );
+    assert.equal(api.currentPage.selection[0].type, "INSTANCE", family.key);
+  }
+});
+test("additive installation resumes a saved partial slot in place and blocks edited partials", async () => {
+  const { api, engine } = await compositionFixture(true, false);
+  const layer = engine.layer.bind(engine);
+  let interrupted = false;
+  engine.layer = async (...args: Parameters<typeof engine.layer>) => {
+    const result = await layer(...args);
+    if (args[0].contentSlot && !interrupted) {
+      interrupted = true;
+      throw Error("Interrupted native slot construction");
+    }
+    return result;
+  };
+  const first = await engine.installCompositions();
+  assert.equal(first.complete, false);
+  assert.match(first.errors.join("\n"), /Interrupted native slot construction/);
+  const partialId = first.createdNodeIds.at(-1)!;
+  const partial: any = await api.getNodeByIdAsync(partialId);
+  const partialNodes = partial.findAll(() => true).map((n: any) => n.id);
+  partial.description += " local edit";
+  const blocked = await engine.installCompositions();
+  assert.equal(blocked.complete, false);
+  assert.match(
+    blocked.errors.join("\n"),
+    /partial installation has local edits/,
+  );
+  const saved = JSON.parse(readMetadata(partial, "applied"));
+  partial.description = JSON.parse(saved.snapshot).description;
+  const resumed = await engine.installCompositions();
+  assert.equal(resumed.complete, true, resumed.errors.join("\n"));
+  assert.ok(resumed.resumedRecipeIds.length === 1);
+  for (const id of partialNodes) assert.ok(await api.getNodeByIdAsync(id), id);
+  assert.equal(
+    engine.index.assets["recipe:" + resumed.resumedRecipeIds[0]].id,
+    partialId,
+  );
+});
+test("additive installation stops before allocation if a required native foundation is missing", async () => {
+  const { api, engine, nodes, metadataStats } = await compositionFixture(
+    true,
+    false,
+  );
+  const firstStyle = engine.bundle.styles[0];
+  const styleRef = engine.index.assets["style:" + firstStyle.id];
+  delete engine.index.assets["style:" + firstStyle.id];
+  const count = nodes.size,
+    writes = metadataStats.writes;
+  const report = await engine.installCompositions();
+  assert.equal(report.complete, false);
+  assert.match(report.errors.join("\n"), /Import the required style first/);
+  assert.equal(nodes.size, count);
+  assert.equal(metadataStats.writes, writes);
+  engine.index.assets["style:" + firstStyle.id] = styleRef;
+  const surface: any = await api.getNodeByIdAsync(
+    engine.index.assets["recipe:components/Flyout.Surface"].id,
+  );
+  surface.findAll((n: any) => n.type === "SLOT")[0].name = "Renamed content";
+  const renamed = await engine.installCompositions();
+  assert.equal(renamed.complete, false);
+  assert.match(renamed.errors.join("\n"), /renamed a native slot/);
+  assert.equal(nodes.size, count);
+  assert.equal(metadataStats.writes, writes);
+});
 test("composition actions insert five linked segments and enforce one selected item", async () => {
   const { api, engine } = await compositionFixture();
   const result = await compose(api, engine.index.assets, "insert-segments", 5);
@@ -2956,5 +3126,108 @@ test("table actions add a column to every row, align widths and preserve existin
   );
   assert.equal(nodes.size, uneven);
   assert.equal(text.characters, "Keep this customer content");
+  assert.equal((await engine.inspect()).counts.conflict ?? 0, 0);
+});
+
+test("every required family inserts a linked editable composition; structured edits preserve consumer content", async () => {
+  const { api, engine, nodes } = await compositionFixture(true);
+  const inserted = new Map<string, any>();
+  for (const family of engine.bundle.composition!.filter(
+    (row) => row.entryRecipeId,
+  )) {
+    await compose(
+      api,
+      engine.index.assets,
+      "insert-family",
+      5,
+      family.entryRecipeId,
+    );
+    const instance: any = api.currentPage.selection[0];
+    assert.equal(instance.type, "INSTANCE", family.key);
+    inserted.set(family.key, instance);
+  }
+  assert.equal(inserted.size, 21);
+  const flyout = inserted.get("components:Flyout");
+  assert.equal(compositionSlot(flyout, "Body").type, "SLOT");
+  assert.equal(compositionSlot(flyout, "Actions").children.length, 2);
+  const table = inserted.get("components:Table");
+  const header = compositionSlot(
+    compositionSlot(table, "Rows").children[0],
+    "Cells",
+  ).children[0];
+  assert.equal(compositionSlot(header, "Header content").type, "SLOT");
+
+  const radio = inserted.get("components:RadioList");
+  api.currentPage.selection = [radio];
+  await compose(api, engine.index.assets, "add-radio");
+  const options = compositionSlot(radio, "Options").children;
+  assert.equal(options.length, 4);
+  api.currentPage.selection = [options[3]];
+  await compose(api, engine.index.assets, "select-radio");
+  assert.equal(
+    options.filter((n: any) => n.componentProperties.selected.value === "true")
+      .length,
+    1,
+  );
+
+  const tabs = inserted.get("components:Tabs");
+  api.currentPage.selection = [tabs];
+  await compose(api, engine.index.assets, "add-tab-pair");
+  const triggers = compositionSlot(tabs, "Triggers").children,
+    panels = compositionSlot(tabs, "Panels").children;
+  assert.equal(triggers.length, 3);
+  assert.equal(panels.length, 3);
+  api.currentPage.selection = [triggers[2]];
+  await compose(api, engine.index.assets, "select-tab-pair");
+  assert.deepEqual(
+    panels.map((n: any) => n.visible),
+    [false, false, true],
+  );
+  panels[1].remove();
+  const unequal = nodes.size;
+  await assert.rejects(
+    compose(api, engine.index.assets, "add-tab-pair"),
+    /one linked panel per trigger/,
+  );
+  assert.equal(nodes.size, unequal);
+
+  const tree = inserted.get("components:Tree"),
+    parent = compositionSlot(tree, "Nodes").children[0];
+  api.currentPage.selection = [parent];
+  await compose(api, engine.index.assets, "add-tree-child");
+  const child = compositionSlot(parent, "Children").children[0];
+  assert.equal(child.type, "INSTANCE");
+  api.currentPage.selection = [child];
+  await compose(api, engine.index.assets, "add-tree-sibling");
+  assert.equal(compositionSlot(parent, "Children").children.length, 2);
+  assert.equal(parent.componentProperties.isExpanded.value, "true");
+
+  const grid = inserted.get("components:Grid");
+  api.currentPage.selection = [grid];
+  const gridRows = () => compositionSlot(grid, "Rows").children;
+  const gridCells = () =>
+    gridRows().flatMap((row: any) => [
+      ...compositionSlot(row, "Cells").children,
+    ]);
+  const originalIds = gridCells().map((cell: any) => cell.id);
+  const customText = gridCells()[0].findAllWithCriteria({ types: ["TEXT"] })[0];
+  customText.characters = "Keep custom grid content";
+  await compose(api, engine.index.assets, "add-grid-cell");
+  assert.equal(gridCells().length, 7);
+  grid.setProperties({ columns: "2" });
+  await compose(api, engine.index.assets, "reflow-grid");
+  assert.equal(gridRows().length, 4);
+  assert.deepEqual(
+    gridCells()
+      .slice(0, 6)
+      .map((cell: any) => cell.id),
+    originalIds,
+  );
+  assert.equal(customText.characters, "Keep custom grid content");
+  grid.setProperties({ columns: "4" });
+  await compose(api, engine.index.assets, "reflow-grid");
+  assert.equal(gridRows().length, 2);
+  assert.equal(gridCells().length, 7);
+  assert.equal(customText.characters, "Keep custom grid content");
   assert.equal((await engine.inspect()).counts.conflict ?? 0, 0);
 });

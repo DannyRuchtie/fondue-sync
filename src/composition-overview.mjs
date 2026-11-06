@@ -52,13 +52,34 @@ export function compositionOverview(
             });
       const available = [...slots.values()];
       const covered = new Set(available.map((slot) => slot.recipeId));
+      const contractsSatisfied = (policy?.requiredSlots ?? []).every(
+        (contract) => {
+          const recipe = matches.find((r) => r.id === contract.recipeId);
+          const variants =
+            recipe?.variants.filter((variant) =>
+              Object.entries(contract.when ?? {}).every(
+                ([key, value]) => variant.props[key] === value,
+              ),
+            ) ?? [];
+          return (
+            variants.length &&
+            variants.every((variant) => {
+              const names = new Set(
+                walk(variant.root).map((slot) => slot.name),
+              );
+              return contract.names.every((name) => names.has(name));
+            })
+          );
+        },
+      );
       const state = !sourcePresent
         ? "Not in source"
         : !policy
           ? "Needs review"
           : available.length
             ? policy.requiredRecipes?.length &&
-              policy.requiredRecipes.every((id) => covered.has(id))
+              policy.requiredRecipes.every((id) => covered.has(id)) &&
+              contractsSatisfied
               ? "Available"
               : "Partly available"
             : ["fixed", "code-only", "data-driven"].includes(policy.mode)
@@ -76,6 +97,9 @@ export function compositionOverview(
           "New or unclassified source family: review its anatomy and content ownership.",
         slots: available,
         recipeIds: matches.map((r) => r.id),
+        ...(policy?.entryRecipeId
+          ? { entryRecipeId: policy.entryRecipeId }
+          : {}),
       };
     })
     .sort(
@@ -84,6 +108,7 @@ export function compositionOverview(
     );
 }
 export function compositionMarkdown(rows) {
+  const required = rows.filter((row) => row.entryRecipeId);
   return (
     "# Component composition overview\n\nGenerated from the pinned source inventory, authored recipes and `recipes/composition-policies.json`. Rebuild to discover new source families. Recommendations are not approval or live Figma verification.\n\n| Component | Approach | Candidate regions | Generator status |\n|---|---|---|---|\n" +
     rows
@@ -92,6 +117,6 @@ export function compositionMarkdown(rows) {
           `| ${r.package} / ${r.name} | ${r.mode} | ${r.regions.join(", ") || "—"} | ${r.state} |`,
       )
       .join("\n") +
-    "\n\nSurface, SegmentedControl and Table include native slots. Table columns require coordinated edits; the plugin composition actions assist with those. Existing sample components retain their identities. Other candidate regions remain a backlog, not an implemented capability.\n"
+    `\n\n${required.filter((row) => row.state === "Available").length} of ${required.length} required composition families have their configured slot contracts in every supported state. “Available” describes generator coverage; native verification and published-consumer acceptance are separate. Use Sync → Compose with slots to insert an editable family. Table, radio, tab, tree and grid actions assist with coordinated edits. Existing sample components retain their identities. See [designer requirements](designer-composition-requirements.md) and the [implementation checklist](slot-implementation-checklist.md).\n`
   );
 }

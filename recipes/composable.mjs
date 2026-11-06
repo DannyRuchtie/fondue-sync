@@ -119,6 +119,37 @@ const contentCell = recipe("Table.ContentCell", cellSource.source, cells, [
   "Additive editable counterpart of Table.RowCell. Width and fontSize are contextual. A cell can contain arbitrary designer content through its Content slot.",
   "Column spans, sticky positioning, sort interactions and browser table semantics remain runtime.",
 ]);
+const headerSource = base("Table.HeaderCell");
+const headerCell = recipe(
+  "Table.ContentHeaderCell",
+  headerSource.source,
+  headerSource.variants.map((v) => {
+    const copy = clone(v);
+    const contents = copy.root.children.find((n) => n.id === "contents");
+    const label = contents.children.find((n) => n.id === "label");
+    contents.children = [
+      {
+        id: "header-content",
+        name: "Header content",
+        kind: "frame",
+        layout: "HORIZONTAL",
+        layoutSizingHorizontal: "FILL",
+        contentSlot: {
+          id: "content",
+          name: "Header content",
+          description:
+            "Add a label, filter or linked header controls. Sort indicator and cell borders stay shared.",
+        },
+        children: [label],
+      },
+      ...contents.children.filter((n) => n.id !== "label"),
+    ];
+    return copy;
+  }),
+  [
+    "Additive header with native editable content; sort indicator and borders remain library-owned.",
+  ],
+);
 const rows = [];
 for (const section of ["header", "body"])
   for (const selected of [false, true])
@@ -162,10 +193,29 @@ for (const section of ["header", "body"])
           ),
         );
       }
-const row = recipe("Table.EditableRow", base("Table.Row").source, rows, [
-  "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
-  "Use the composition actions to add columns to all rows or copy a selected cell width across its column. Native slot editing remains available; uneven rows are reported before bulk changes.",
-]);
+const richHeaderRows = rows
+  .filter((v) => v.props.section === "header")
+  .map((v) => {
+    const copy = clone(v);
+    copy.id += ";headerContent=custom";
+    copy.props.headerContent = "custom";
+    copy.root.children.forEach((cell) => {
+      cell.recipeId = headerCell.id;
+    });
+    return copy;
+  });
+rows.forEach((v) => {
+  v.props.headerContent = "label";
+});
+const row = recipe(
+  "Table.EditableRow",
+  base("Table.Row").source,
+  [...rows, ...richHeaderRows],
+  [
+    "Cells are linked components inside a native Cells slot. section is Figma composition context; selected/disabled/fontSize follow Table source context.",
+    "Use the composition actions to add columns to all rows or copy a selected cell width across its column. Native slot editing remains available; uneven rows are reported before bulk changes.",
+  ],
+);
 const tableRoot = recipe(
   "Table.Root",
   base("Table").source,
@@ -209,4 +259,9 @@ const tableRoot = recipe(
     "Table column operations require a rectangular row structure. Root font context, sticky columns, spans, sorting and accessibility semantics are not simulated.",
   ],
 );
-export default [item, root, contentCell, row, tableRoot];
+const richTable = clone(tableRoot.variants[0]);
+richTable.id = "composition=custom-header";
+richTable.props.composition = "custom-header";
+richTable.root.children[0].variantProps.headerContent = "custom";
+tableRoot.variants.push(richTable);
+export default [item, root, contentCell, headerCell, row, tableRoot];

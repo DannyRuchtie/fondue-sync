@@ -8,7 +8,21 @@ The initial text is default example content. It can be replaced in an instance. 
 
 Existing Surface variants retain their original main/child IDs and text property, exposed as **contentMode = sample**. Nine additive slot variants cover the same shadow/corner combinations. Changing from sample to slot is an explicit choice; copy any existing custom text before switching. An isolated Figma experiment lost its text override when an existing default was reparented into a slot, so the implementation deliberately avoids that automatic conversion.
 
-`contentMode` is a Figma composition property, not a Fondue React prop. The generator also includes additive editable SegmentedControl and Table compositions. Dialogs and other candidate families remain planned.
+`contentMode` is a Figma composition property, not a Fondue React prop. The generator includes editable compositions for all 21 required families in the [implementation checklist](slot-implementation-checklist.md). Original specimens remain intact; editable entries are additive.
+
+### Installing and inserting editable components
+
+Open **Sync → Compose with slots → Install missing editable components**. This saves a recovery version, checks existing dependencies and fonts, and installs missing editable mains and their required linked parts. It reuses existing foundations and components without replacing their content or accepting local drift. An interrupted installation can resume its saved, unedited partial components in place.
+
+This action leaves the whole-file release fingerprint unchanged. It does not resolve unrelated update conflicts, populate every gallery, or publish the library. Missing native foundations, incompatible existing anatomy and edits to a partial installation stop the action with an explanation.
+
+Choose a family under **Editable component**, then **Insert editable component**. Designers can use native slot editing to insert, remove and reorder layers and linked components. The picker inserts from this library file; published Assets are the normal consuming-file insertion route.
+
+### Flyouts and dialogs
+
+Use the editable Flyout for **Body** and **Actions** regions while preserving the header, close control and surrounding shell. Editable Body and Footer parts are also available independently. Surface retains its separate **Content** slot. Dialog adds an optional **Side content** region; enable its `sideContent` property before editing that region.
+
+Replace the default body with the actual fields, lists or linked components needed for the design. The nested components retain their own properties and library links.
 
 ### Segmented controls
 
@@ -20,7 +34,7 @@ Original two-item specimens keep their existing IDs. The editable Root and Item 
 
 ### Tables
 
-Choose **Insert table** for a linked table with three columns, one header and three body rows. The composition has three boundaries: `Table/Root` → **Rows**, `Table/EditableRow` → **Cells**, and `Table/ContentCell` → **Content**. Header cells reuse the existing linked `Table/HeaderCell` and its text/sort properties.
+Choose **Insert table** for a linked table with three columns, one header and three body rows. The composition has three boundaries: `Table/Root` → **Rows**, `Table/EditableRow` → **Cells**, and `Table/ContentCell` → **Content**. The default custom-header composition uses linked `Table/ContentHeaderCell` parts with **Header content** slots and a library-owned sort indicator. The original text-header composition remains available.
 
 - Select the table, a row or a cell and choose **Add column** to append one linked cell to every row. Existing cells and their content stay in place.
 - Choose **Add row** to append a body row with the current column count and widths.
@@ -31,13 +45,27 @@ Column actions require equal cell counts and aligned widths. They stop with an e
 
 Insertion currently resolves the library file's managed assets. Editing an existing composition uses its linked source identities. Published-library consumer use and native nested-slot behavior still need acceptance checks before publication.
 
+### Lists, navigation and layout
+
+- Accordion exposes **Items** and per-item **Content**; closed items retain their hidden content region.
+- Dropdown and Select expose repeatable **Items / Options**, grouped options and submenu items. Multiple Select also exposes **Selected values** using linked value parts.
+- RadioList exposes linked **Options**. **Add radio option** and **Select radio option** coordinate a single selected option.
+- OrderableList exposes **Items**, with per-item **Content** and **Actions**, while retaining the drag handle.
+- Tabs exposes **Triggers** and **Panels**, with per-panel **Content**. **Add tab pair** creates both linked parts; **Select tab pair** shows the matching panel. Unequal pairs stop before changes.
+- Tree exposes **Nodes** and per-node **Content**, **Actions** and **Children**. **Add tree child / sibling** preserves the hierarchy and expands a parent when adding a child. Native recursive insertion still requires acceptance testing.
+- Grid exposes **Rows**, **Cells** and cell **Content**. Choose one to four columns and use **Reflow grid**; it moves existing cells without resetting their content. **Add grid cell** appends a linked cell. This is a row-major Figma adaptation, not arbitrary CSS grid tracks or spans.
+- Box, Section and ScrollArea expose **Content**; Flex exposes **Children**. ScrollArea keeps its fixed viewport and clipping.
+- Card exposes **Banner content**, **Content** and **Actions**. Notice exposes **Message content** and a single **Action**. Tooltip and the rich-text FloatingModalWrapper expose **Content**. The rich-text Toolbar exposes **Groups** and per-group **Actions**.
+
+Selection and structural helpers perform explicit design edits. They do not simulate keyboard interaction, application state, editor behavior or live data.
+
 ## Composition overview and maintenance
 
 **Sync → Component composition overview** is a searchable view of the bundled source inventory, authored recipe slots and [composition policies](../recipes/composition-policies.json). The generated [overview](composition-overview.md) covers all source families. “Available” means required slot recipes exist in the generator; it does not mean the open file is synchronized or the library published.
 
-Maintain recommendations and required recipe IDs in `recipes/composition-policies.json`; maintain implementation in the recipes. Run `npm run bundle` after changes. A new source family appears as **Needs review** when the inventory is rebuilt against that source release. Missing recipes show **Needs slots** or **Partly available**, rather than disappearing. Policy entries for planned or removed source components remain visible as **Not in source**. The current UI is read-only and links to the versioned policy file; an in-plugin policy editor and a live per-family Figma reconciliation are not implemented.
+Maintain recommendations, required recipe IDs, slot names and preferred insertion properties in `recipes/composition-policies.json`; maintain implementation in the recipes. Coverage checks every relevant variant, including hidden regions. Run `npm run bundle` after changes. A new source family appears as **Needs review** when the inventory is rebuilt against that source release. Missing recipes show **Needs slots** or **Partly available**, rather than disappearing. Policy entries for planned or removed source components remain visible as **Not in source**. The current overview UI is read-only and links to the versioned policy file; an in-plugin policy editor and a live per-family Figma reconciliation are not implemented.
 
-Next candidates are Dialog body/footer, Card content, Tabs triggers/panels, Accordion items/content, Dropdown/Select items/groups, RadioList options and OrderableList items. Tree and Grid need structural rules in addition to slots. Primitives use text, boolean, variant and swap properties where those already express their anatomy; chart marks and editor documents are data-driven.
+All 21 required families now have generator definitions. Primitives continue to use text, boolean, variant and swap properties where those express their anatomy; chart marks and editor documents are data-driven. The three conditional chart helpers remain a product decision rather than automatically receiving arbitrary-content slots.
 
 ## Repository contract
 
@@ -59,7 +87,7 @@ Sync renders library mains and their defaults. It never calls `resetSlot()` or r
 
 Slot creation uses `ComponentNode.createSlot()`. Variant slots share one property on the owning component set. Slot removal, identity/name changes, and adding a slot around existing content require explicit migration. A failed first import can resume a tagged partial slot without replacing its identity.
 
-## Verification on 2 November 2026
+## Historical native verification on 2 November 2026
 
 - Local engine tests cover shared properties across variants, default updates, preservation of customized instance contents, repeat inspection and interrupted-import recovery.
 - The live review file received a targeted Surface migration using the shared slot helper, after saving **Before Surface content slots** in Version History and confirming the saved Surface baseline matched.
@@ -72,4 +100,10 @@ These native checks do not substitute for a full Import/Update run with the rebu
 
 The SegmentedControl/Table additions pass local engine tests for five linked items, coordinated selection, adding a column to every row, copying widths, adding rows, preserving existing content, stopping on uneven tables, and leaving library mains unchanged. The rebuilt desktop plugin loaded with 223 component sets. Figma confirmed a recovery version, but native font preflight remained pending at Diatype Regular, including after resolving the reviewed installed alias before loading. The waiting plugin was closed before library mutations. Native SegmentedControl/Table layout and nested-slot acceptance remain open; no full update or publication was completed.
 
-The latest confirmed recovery version is **Before Fondue update · 2026-11-02T13:14:59.134Z**, ID `2417262161780541804`. Source-font checks and asset comparisons now report progress. The loader checks Figma's available families before loading the reviewed ABC Diatype alias; it never substitutes an unrelated font. See [desktop evidence](evidence/composition-slots-2026-11-02.json).
+That attempt's confirmed recovery version was **Before Fondue update · 2026-11-02T13:14:59.134Z**, ID `2417262161780541804`. Source-font checks and asset comparisons report progress. The loader checks Figma's available families before loading the reviewed ABC Diatype alias; it never substitutes an unrelated font. See [desktop evidence](evidence/composition-slots-2026-11-02.json). Current implementation and acceptance status are tracked in the [checklist](slot-implementation-checklist.md).
+
+## Current implementation status on 6 November 2026
+
+The repository implements all 21 required families, including the structured editing helpers and the additive installer. Local checks cover insertion of every family, state coverage for required slot names, preservation of consumer content during coordinated edits, and safe installation/retry behavior.
+
+The desktop font check now passes. The full update stopped before mutations on 294 existing drift conflicts. Computer use could not launch the new additive installer from the stale plugin window. A read-only connector check confirmed that only the previously installed Surface slots are present. Native acceptance and publication of the new families remain pending; see the [checklist](slot-implementation-checklist.md) and [current evidence](evidence/composition-slots-2026-11-06.json).

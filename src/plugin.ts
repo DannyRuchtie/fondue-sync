@@ -36,6 +36,7 @@ figma.ui.onmessage = async (message: {
   type: string;
   requestId?: string;
   amount?: number;
+  recipeId?: string;
 }) => {
   if (busy) {
     if (message.type === "push-scan")
@@ -56,6 +57,21 @@ figma.ui.onmessage = async (message: {
       return;
     }
     const engine = new SyncEngine(figma, bundle);
+    if (message.type === "install-compositions") {
+      const report = await withCheckpoint(
+        figma,
+        "update",
+        bundle.release,
+        async (checkpoint) => {
+          post("checkpoint", { checkpoint });
+          return engine.installCompositions((text) =>
+            post("progress", { text }),
+          );
+        },
+      );
+      post("composition-install-report", { report });
+      return;
+    }
     if (message.type.startsWith("compose-")) {
       post(
         "composition-result",
@@ -64,6 +80,7 @@ figma.ui.onmessage = async (message: {
           engine.index.assets,
           message.type.slice(8),
           message.amount,
+          message.recipeId,
         ),
       );
       return;

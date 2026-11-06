@@ -175,6 +175,7 @@ export type Bundle = {
       name: string;
     }[];
     recipeIds: string[];
+    entryRecipeId?: string;
   }[];
   gaps: any[];
   fingerprint: string;

@@ -82,7 +82,11 @@ export async function ensureContentSlot(
     cross === "BASELINE" && slot.layoutMode === "VERTICAL" ? "MIN" : cross;
   slot.fills = [];
   slot.clipsContent = false;
-  slot.layoutSizingHorizontal = definition.width !== undefined ? "FILL" : "HUG";
+  slot.layoutSizingHorizontal =
+    definition.width !== undefined ||
+    definition.layoutSizingHorizontal === "FILL"
+      ? "FILL"
+      : "HUG";
   slot.layoutSizingVertical = "HUG";
   return slot;
 }
