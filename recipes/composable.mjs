@@ -104,8 +104,16 @@ const root = recipe("SegmentedControl.Root", segmentSource, roots, [
   "The pinned runtime active-indicator CSS covers up to ten segments; slot layer limits are guidance. Focus management, responsive label clamping and indicator motion remain runtime.",
 ]);
 const cellSource = base("Table.RowCell");
+function responsiveCell(root) {
+  const cellWidth = root.children.find((n) => n.kind === "frame").width;
+  root.width = cellWidth;
+  for (const child of root.children)
+    if (child.width === cellWidth) child.layoutSizingHorizontal = "FILL";
+  return root;
+}
 const cells = cellSource.variants.map((v) => {
   const copy = clone(v);
+  responsiveCell(copy.root);
   const content = copy.root.children.find((n) => n.id === "content");
   content.contentSlot = {
     id: "content",
@@ -125,6 +133,7 @@ const headerCell = recipe(
   headerSource.source,
   headerSource.variants.map((v) => {
     const copy = clone(v);
+    responsiveCell(copy.root);
     const contents = copy.root.children.find((n) => n.id === "contents");
     const label = contents.children.find((n) => n.id === "label");
     contents.children = [

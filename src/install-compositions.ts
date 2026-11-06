@@ -48,6 +48,7 @@ export async function installCompositions(
       .sort(([a], [b]) => rank(a) - rank(b))
       .flatMap(([, policy]: [string, any]) => policy.requiredRecipes ?? []),
   );
+  const compositionIds = new Set(ids);
   const dependencies = (root: Layer) => {
     if (root.recipeId) ids.add(root.recipeId);
     for (const child of root.children ?? []) dependencies(child);
@@ -171,7 +172,15 @@ export async function installCompositions(
                   " / " +
                   variant.id,
               );
-            validateSlots(main, variant.root);
+            // Reused canonical parts are opaque linked dependencies. Their local
+            // anatomy can differ and is never rendered or adopted by this action.
+            if (compositionIds.has(recipe.id)) {
+              try {
+                validateSlots(main, variant.root);
+              } catch (error) {
+                throw Error(recipe.id + ": " + String(error));
+              }
+            }
           }
           report.reusedRecipeIds.push(recipe.id);
         }

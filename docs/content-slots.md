@@ -41,7 +41,7 @@ Choose **Insert table** for a linked table with three columns, one header and th
 - Resize a cell, select it or a layer inside it, and choose **Match column width** to apply that width across its column and resize the table.
 - Place arbitrary text or linked components inside a body cell's Content slot using Figma's native editing.
 
-Column actions require equal cell counts and aligned widths. They stop with an explanation when the table is uneven or contains unknown row/cell components. Native editing remains available for manual repair. Width matching is an explicit action; it is not a live spreadsheet or shared-width variable system. Spans, sticky columns, sorting, selection interactions and accessibility semantics are runtime concerns. Existing Table specimens remain intact.
+Column actions require equal cell counts and aligned widths. They stop with an explanation when the table is uneven or contains unknown row/cell components. Editable body/header cells use Fill for their library-owned content frames and borders, so those parts follow the resized column. Native editing remains available for manual repair. Width matching is an explicit action; it is not a live spreadsheet or shared-width variable system. Spans, sticky columns, sorting, selection interactions and accessibility semantics are runtime concerns. Existing Table specimens remain intact.
 
 Insertion currently resolves the library file's managed assets. Editing an existing composition uses its linked source identities. Published-library consumer use and native nested-slot behavior still need acceptance checks before publication.
 
@@ -52,7 +52,7 @@ Insertion currently resolves the library file's managed assets. Editing an exist
 - RadioList exposes linked **Options**. **Add radio option** and **Select radio option** coordinate a single selected option.
 - OrderableList exposes **Items**, with per-item **Content** and **Actions**, while retaining the drag handle.
 - Tabs exposes **Triggers** and **Panels**, with per-panel **Content**. **Add tab pair** creates both linked parts; **Select tab pair** shows the matching panel. Unequal pairs stop before changes.
-- Tree exposes **Nodes** and per-node **Content**, **Actions** and **Children**. **Add tree child / sibling** preserves the hierarchy and expands a parent when adding a child. Native recursive insertion still requires acceptance testing.
+- Tree exposes **Nodes** and per-node **Content**, **Actions** and **Children**. **Add tree child / sibling** preserves the hierarchy and expands a parent when adding a child. Native checks cover three linked levels, including insertion into a collapsed node.
 - Grid exposes **Rows**, **Cells** and cell **Content**. Choose one to four columns and use **Reflow grid**; it moves existing cells without resetting their content. **Add grid cell** appends a linked cell. This is a row-major Figma adaptation, not arbitrary CSS grid tracks or spans.
 - Box, Section and ScrollArea expose **Content**; Flex exposes **Children**. ScrollArea keeps its fixed viewport and clipping.
 - Card exposes **Banner content**, **Content** and **Actions**. Notice exposes **Message content** and a single **Action**. Tooltip and the rich-text FloatingModalWrapper expose **Content**. The rich-text Toolbar exposes **Groups** and per-group **Actions**.
@@ -106,4 +106,8 @@ That attempt's confirmed recovery version was **Before Fondue update · 2026-11-
 
 The repository implements all 21 required families, including the structured editing helpers and the additive installer. Local checks cover insertion of every family, state coverage for required slot names, preservation of consumer content during coordinated edits, and safe installation/retry behavior.
 
-The desktop font check now passes. The full update stopped before mutations on 294 existing drift conflicts. Computer use could not launch the new additive installer from the stale plugin window. A read-only connector check confirmed that only the previously installed Surface slots are present. Native acceptance and publication of the new families remain pending; see the [checklist](slot-implementation-checklist.md) and [current evidence](evidence/composition-slots-2026-11-06.json).
+All 21 required families are now installed in the live library. The targeted runs added 58 sets and preserved the existing whole-file marker and unrelated drift. A native audit checked the required slots across 635 matching source variants; linked default examples for every family are available in **Library / Examples**. The native core checks include custom content surviving the responsive table-cell main update.
+
+The installer reuses canonical components without requiring their private anatomy to match the latest recipe. Editing helpers temporarily include invisible instance children so closed regions and paired panels remain discoverable, then restore the caller's setting. Grid reflow tracks content order and resolves fresh slot children after mutations rather than relying on old descendant handles.
+
+Open [core workflows](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs?node-id=222-7153) or [all other editable families](https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs?node-id=228-7338). Normal full-file updating still requires review of the 294 unrelated local conflicts. Publication and published-consumer acceptance remain pending; see the [checklist](slot-implementation-checklist.md) and [current evidence](evidence/composition-slots-2026-11-06.json).

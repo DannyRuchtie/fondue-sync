@@ -2323,6 +2323,7 @@
         return (_a = policy.requiredRecipes) != null ? _a : [];
       })
     );
+    const compositionIds = new Set(ids2);
     const dependencies = (root) => {
       var _a;
       if (root.recipeId) ids2.add(root.recipeId);
@@ -2414,7 +2415,13 @@
                 throw Error(
                   "Existing component needs a guarded update before installation: " + recipe.id + " / " + variant.id
                 );
-              validateSlots(main, variant.root);
+              if (compositionIds.has(recipe.id)) {
+                try {
+                  validateSlots(main, variant.root);
+                } catch (error) {
+                  throw Error(recipe.id + ": " + String(error));
+                }
+              }
             }
             report.reusedRecipeIds.push(recipe.id);
           }
@@ -6648,7 +6655,7 @@ Sources: ${recipe.source.join(", ")}`;
         integrity: "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
       },
       sourceLockSha256: "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-      rendererRevision: "64cb53c2ac20beddfcd708c41a6fb7cbd849bd20a5f0c8eda4acb1781953bc9b",
+      rendererRevision: "8d4d15ff9cd588d1741560bc967f12a3bcdecc0e8c79ca653ccacffad4bbe4b5",
       rootRemPx: 16,
       packageVersions: {
         "@frontify/fondue-components": "36.0.0",
@@ -6685,7 +6692,7 @@ Sources: ${recipe.source.join(", ")}`;
           "recipes/paint-bindings.mjs": "66e1181a58fb1fa6dfc66c96a026a01db13479c954499eadd362bba55116840a",
           "recipes/typography-bindings.mjs": "847aae15110242a60974ffc935a563f5342d18e442f57760da58dc61e72ff916",
           "recipes/composition-helpers.mjs": "78849346ee1937501e7f030e48b29d8e68a1e9059cf5822928fa9cabd3864209",
-          "recipes/composable.mjs": "4f9ec41e473c0f53041bc7a1598cfe2d3555a78bcfdf7479636b3fb9ae159a5c",
+          "recipes/composable.mjs": "688038108ff76cac8b1df5f847befb78efe3177c79c98318cf8d4e3902cda19e",
           "recipes/slot-panels.mjs": "f519b361167b9385bef75098b1b59bfe28d45259488d478dd8de9913da92ef2e",
           "recipes/slot-collections.mjs": "2c736955c5c457ee19573243e840563500b6f49e7c4ac07236bbc9ee1481f7ae",
           "recipes/slot-content.mjs": "ea77d79906a13e84af2a765590b59c80ddf7fef45564d18c7ac3b5e590b39e5c",
@@ -259928,6 +259935,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 8,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   contentSlot: {
                     id: "content",
                     name: "Content",
@@ -259952,9 +259960,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260018,6 +260028,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 8,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   contentSlot: {
                     id: "content",
                     name: "Content",
@@ -260042,9 +260053,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260108,6 +260121,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 8,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   contentSlot: {
                     id: "content",
                     name: "Content",
@@ -260132,9 +260146,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260198,6 +260214,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 8,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   contentSlot: {
                     id: "content",
                     name: "Content",
@@ -260222,9 +260239,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260288,6 +260307,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 8,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   contentSlot: {
                     id: "content",
                     name: "Content",
@@ -260312,9 +260332,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260378,6 +260400,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 8,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   contentSlot: {
                     id: "content",
                     name: "Content",
@@ -260402,9 +260425,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260478,7 +260503,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -260548,6 +260574,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -260567,9 +260594,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260607,7 +260636,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -260677,6 +260707,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -260696,9 +260727,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260736,7 +260769,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -260806,6 +260840,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -260825,9 +260860,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260865,7 +260902,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -260935,6 +260973,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -260954,9 +260993,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -260994,7 +261035,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261064,6 +261106,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261083,9 +261126,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -261123,7 +261168,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261193,6 +261239,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261212,9 +261259,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -261252,7 +261301,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261322,6 +261372,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261341,9 +261392,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -261381,7 +261434,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261451,6 +261505,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261470,9 +261525,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -261510,7 +261567,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261580,6 +261638,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261599,9 +261658,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -261639,7 +261700,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261709,6 +261771,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261728,9 +261791,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -261768,7 +261833,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261838,6 +261904,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261857,9 +261924,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -261897,7 +261966,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -261967,6 +262037,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -261986,9 +262057,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -262026,7 +262099,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -262096,6 +262170,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -262115,9 +262190,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -262155,7 +262232,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -262225,6 +262303,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -262244,9 +262323,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -262284,7 +262365,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -262354,6 +262436,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -262373,9 +262456,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -262413,7 +262498,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -262483,6 +262569,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -262502,9 +262589,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -262542,7 +262631,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -262612,6 +262702,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -262631,9 +262722,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -262671,7 +262764,8 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 },
                 {
                   id: "contents",
@@ -262741,6 +262835,7 @@ Sources: ${recipe.source.join(", ")}`;
                   paddingBottom: 12,
                   paddingLeft: 8,
                   paddingRight: 8,
+                  layoutSizingHorizontal: "FILL",
                   bindings: {
                     paddingTop: "spacing-small",
                     paddingRight: "spacing-x-small",
@@ -262760,9 +262855,11 @@ Sources: ${recipe.source.join(", ")}`;
                   bindings: {
                     fills: "color-line-subtle",
                     cornerRadius: "component-constant-radius-0"
-                  }
+                  },
+                  layoutSizingHorizontal: "FILL"
                 }
               ],
+              width: 160,
               bindings: {
                 paddingTop: "component-constant-spacing-0",
                 paddingRight: "component-constant-spacing-0",
@@ -407085,7 +407182,7 @@ Sources: ${recipe.source.join(", ")}`;
         ]
       }
     ],
-    fingerprint: "c1f39c15d58770d2b8554cd042e6006d9f691305e821c04c983a33cc149e638e"
+    fingerprint: "3740f345e4e7019d8de33b499133c05cd3b0afd43b6eac40342b79cbda64c9d6"
   };
 
   // src/push-selection.ts
@@ -407916,7 +408013,8 @@ Sources: ${recipe.source.join(", ")}`;
         while (rows.length < needed2) {
           const row = await freshInstance(api, rowTemplate);
           prepared.push(row);
-          for (const cell of [...slot(row, "Cells").children]) cell.remove();
+          while (slot(row, "Cells").children.length)
+            slot(row, "Cells").children[0].remove();
           rows.push(row);
           created.push(row.id);
         }
@@ -407925,23 +408023,45 @@ Sources: ${recipe.source.join(", ")}`;
         throw error;
       }
       const needed = Math.max(1, Math.ceil(cells.length / columns));
-      cells.forEach((cell, i) => {
-        slot(rows[Math.floor(i / columns)], "Cells").appendChild(cell);
-        width2(cell, cellWidth2);
-        mutated.push(cell.id);
-      });
-      rows.forEach((row, i) => {
-        if (i < needed) {
-          region.appendChild(row);
-          width2(row, root.width);
-          mutated.push(row.id);
-        } else {
-          if (slot(row, "Cells").children.length)
-            throw Error("An extra row still has content; it was preserved.");
-          removed.push(row.id);
-          row.remove();
+      const liveRows = () => [...slot(root, "Rows").children];
+      for (const row of prepared.filter((part) => !cells.includes(part)))
+        slot(root, "Rows").appendChild(row);
+      const addedCell = prepared.find((part) => cells.includes(part));
+      if (addedCell) slot(liveRows().at(-1), "Cells").appendChild(addedCell);
+      let token = 0;
+      const model = liveRows().map(
+        (row) => slot(row, "Cells").children.map(() => token++)
+      );
+      const liveCell = (r, c) => slot(liveRows()[r], "Cells").children[c];
+      for (let i = 0; i < token; i++) {
+        const destinationRow = Math.floor(i / columns), destinationColumn = i % columns;
+        const sourceRow = model.findIndex((row) => row.includes(i));
+        const sourceColumn = model[sourceRow].indexOf(i);
+        width2(liveCell(sourceRow, sourceColumn), cellWidth2);
+        if (sourceRow !== destinationRow || sourceColumn !== destinationColumn) {
+          const cell = liveCell(sourceRow, sourceColumn);
+          slot(liveRows()[destinationRow], "Cells").insertChild(
+            destinationColumn,
+            cell
+          );
+          model[sourceRow].splice(sourceColumn, 1);
+          model[destinationRow].splice(destinationColumn, 0, i);
         }
-      });
+      }
+      for (let i = 0; i < needed; i++) width2(liveRows()[i], root.width);
+      for (let i = liveRows().length - 1; i >= needed; i--) {
+        const row = liveRows()[i];
+        if (slot(row, "Cells").children.length)
+          throw Error("An extra row still has content; it was preserved.");
+        removed.push(row.id);
+        row.remove();
+      }
+      mutated.push(
+        ...liveRows().flatMap((row) => [
+          row.id,
+          ...slot(row, "Cells").children.map((cell) => cell.id)
+        ])
+      );
       mutated.push(root.id);
       message = action === "add-grid-cell" ? "Added a linked grid cell and packed rows using the chosen column count." : "Reflowed the existing linked cells without replacing their content.";
     }
@@ -407969,7 +408089,7 @@ Sources: ${recipe.source.join(", ")}`;
     const visit = (node, root = false) => {
       var _a;
       if (node.type === "SLOT" || !root && node.type === "INSTANCE") return;
-      if (root || ["FRAME", "RECTANGLE"].includes(node.type) && Math.abs(node.width - sourceWidth) < 0.5)
+      if (root || ["FRAME", "RECTANGLE"].includes(node.type) && node.layoutSizingHorizontal !== "FILL" && Math.abs(node.width - sourceWidth) < 0.5)
         width2(node, next);
       for (const child of (_a = node.children) != null ? _a : []) visit(child);
     };
@@ -408020,6 +408140,15 @@ Sources: ${recipe.source.join(", ")}`;
     }
   }
   async function compose(api, assets, action, amount = 5, recipeId) {
+    const skipHidden = api.skipInvisibleInstanceChildren;
+    api.skipInvisibleInstanceChildren = false;
+    try {
+      return await composeWithSlotContent(api, assets, action, amount, recipeId);
+    } finally {
+      api.skipInvisibleInstanceChildren = skipHidden;
+    }
+  }
+  async function composeWithSlotContent(api, assets, action, amount = 5, recipeId) {
     var _a;
     const structured = await composeStructure(api, action);
     if (structured) return structured;

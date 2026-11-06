@@ -29,6 +29,7 @@ async function cellWidth(cell: Node, next: number) {
     if (
       root ||
       (["FRAME", "RECTANGLE"].includes(node.type) &&
+        node.layoutSizingHorizontal !== "FILL" &&
         Math.abs(node.width - sourceWidth) < 0.5)
     )
       width(node, next);
@@ -86,6 +87,21 @@ async function layoutTable(root: Node, rows: Node[], cells: Node[][]) {
 }
 /** Explicit composition edits affect only selected consumer content, never library mains. */
 export async function compose(
+  api: PluginAPI,
+  assets: Record<string, { id: string }>,
+  action: string,
+  amount = 5,
+  recipeId?: string,
+) {
+  const skipHidden = api.skipInvisibleInstanceChildren;
+  api.skipInvisibleInstanceChildren = false;
+  try {
+    return await composeWithSlotContent(api, assets, action, amount, recipeId);
+  } finally {
+    api.skipInvisibleInstanceChildren = skipHidden;
+  }
+}
+async function composeWithSlotContent(
   api: PluginAPI,
   assets: Record<string, { id: string }>,
   action: string,

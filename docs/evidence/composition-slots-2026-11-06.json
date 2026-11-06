@@ -3,7 +3,7 @@
   "fileKey": "ZmOzqBnHNixUTV1TqRtBHs",
   "generator": {
     "release": "13.11.1",
-    "fingerprint": "c1f39c15d58770d2b8554cd042e6006d9f691305e821c04c983a33cc149e638e",
+    "fingerprint": "3740f345e4e7019d8de33b499133c05cd3b0afd43b6eac40342b79cbda64c9d6",
     "requiredFamilies": 21,
     "sourceFamilies": 54,
     "componentSets": 276,
@@ -101,7 +101,11 @@
       "Flyout, SegmentedControl and Table installation priority",
       "Idempotent installation and interrupted-slot recovery without replacing IDs",
       "Missing foundations, renamed slots and edited partials stop safely",
-      "Font service timeout stops before preflight mutations"
+      "Font service timeout stops before preflight mutations",
+      "Customized canonical Button anatomy is reused without being rebuilt",
+      "Hidden panel/child traversal restores the caller visibility setting",
+      "Grid edits avoid reappending unchanged slot children and resolve moved content by position",
+      "Responsive table cell frames and borders retain Fill sizing"
     ]
   },
   "native": {
@@ -110,8 +114,9 @@
       "Read-only Figma connector inventory"
     ],
     "checkpoint": {
-      "title": "Before Fondue update · 2026-11-06T13:14:48.216Z",
-      "id": "2418737612941861688"
+      "title": "Before Fondue update · 2026-11-06T13:56:06.810Z",
+      "id": "2418747786667592236",
+      "note": "Confirmed by the desktop plugin before its unchanged preflight failed; reused by the connector repair. The connector does not support saveVersionHistoryAsync."
     },
     "fontPreflightPassed": true,
     "fullUpdate": {
@@ -129,9 +134,133 @@
       "localChangesPreserved": true
     },
     "additiveInstallation": {
-      "started": false,
-      "complete": false,
-      "blocker": "Native plugin window remained stale; controls did not respond and coordinate actions returned noWindowsAvailable after reconnecting computer use."
+      "started": true,
+      "complete": true,
+      "method": "Shared generator and installer compiled for family-sized Figma connector calls; same source recipes and native metadata ledger",
+      "families": 21,
+      "createdComponentSets": 58,
+      "createdRecipeIds": [
+        "components/Flyout.Editable",
+        "components/Flyout.EditableBody",
+        "components/Flyout.EditableFooter",
+        "components/SegmentedControl.Item",
+        "components/SegmentedControl.Root",
+        "components/Table.ContentCell",
+        "components/Table.ContentHeaderCell",
+        "components/Table.EditableRow",
+        "components/Table.Root",
+        "components/Dialog.Editable",
+        "components/Dialog.EditableBody",
+        "components/Dialog.EditableFooter",
+        "components/Card.Editable",
+        "components/Tabs.EditableTrigger",
+        "components/Tabs.EditableContent",
+        "components/Tabs.Editable",
+        "components/Accordion.EditableItem",
+        "components/Accordion.Editable",
+        "components/Accordion.borderless.EditableItem",
+        "components/Accordion.borderless.Editable",
+        "components/Accordion.pill.EditableItem",
+        "components/Accordion.pill.Editable",
+        "components/Accordion.sticky.EditableItem",
+        "components/Accordion.sticky.Editable",
+        "components/Dropdown.EditableGroup",
+        "components/Dropdown.EditableSubmenu",
+        "components/Dropdown.Editable",
+        "components/Select.EditableGroup",
+        "components/Select.Editable",
+        "components/Select.SelectedValue",
+        "components/Select.Multiple.Editable",
+        "components/Select.Combobox.Editable",
+        "components/RadioList.EditableOption",
+        "components/RadioList.Editable",
+        "components/Tree.EditableNode",
+        "components/Tree.Editable",
+        "components/OrderableList.EditableItem",
+        "components/OrderableList.Editable",
+        "components/Notice/controls-001.Editable",
+        "components/Notice/controls-002.Editable",
+        "components/Tooltip.Editable",
+        "components/Section.Editable",
+        "components/ScrollArea/auto.Editable",
+        "components/ScrollArea/stable.Editable",
+        "components/ScrollArea/stable-horizontal.Editable",
+        "components/ScrollArea/stable-vertical.Editable",
+        "components/Box.Editable",
+        "components/Flex/row.Editable",
+        "components/Flex/row-reverse.Editable",
+        "components/Flex/column.Editable",
+        "components/Flex/column-reverse.Editable",
+        "components/Grid.EditableCell",
+        "components/Grid.EditableRow",
+        "components/Grid.Editable",
+        "rte/Toolbar.BlockAction",
+        "rte/Toolbar.EditableGroup",
+        "rte/Toolbar.Editable",
+        "rte/FloatingModalWrapper.Editable"
+      ],
+      "createdSetNodeIds": [
+        "219:2081",
+        "219:2397",
+        "219:2423",
+        "220:2171",
+        "220:2244",
+        "220:2257",
+        "220:2288",
+        "220:2469",
+        "220:3070",
+        "221:2867",
+        "221:3348",
+        "221:3374",
+        "221:3450",
+        "221:3535",
+        "221:3592",
+        "221:3608",
+        "221:3913",
+        "221:4058",
+        "221:4491",
+        "221:4636",
+        "221:5037",
+        "221:5182",
+        "221:5583",
+        "221:5728",
+        "221:6129",
+        "221:6161",
+        "221:6204",
+        "221:6275",
+        "221:6292",
+        "221:6521",
+        "221:6582",
+        "221:6883",
+        "221:7112",
+        "221:7177",
+        "221:7386",
+        "221:7915",
+        "221:8240",
+        "221:8361",
+        "221:8644",
+        "221:9035",
+        "221:9426",
+        "221:9475",
+        "221:9488",
+        "221:9549",
+        "221:9610",
+        "221:9671",
+        "221:9732",
+        "221:9745",
+        "221:9866",
+        "221:9987",
+        "221:10108",
+        "221:10229",
+        "221:10233",
+        "221:10272",
+        "221:10365",
+        "221:10371",
+        "221:10387",
+        "221:10442"
+      ],
+      "errors": [],
+      "globalFingerprintUnchanged": true
     },
     "readOnlyInventory": {
       "release": "13.11.1",
@@ -143,15 +272,1234 @@
       },
       "newEditableRecipeCount": 0
     },
-    "newFamilyVisualAcceptance": false,
-    "publicationPerformed": false
+    "newFamilyVisualAcceptance": {
+      "linkedDefaultExamples": 21,
+      "coreWorkflowsPassed": true,
+      "additionalGalleryReviewed": true,
+      "longAndEmptyContentAcrossAllStates": "pending",
+      "publishedConsumerAcceptance": "pending"
+    },
+    "publicationPerformed": false,
+    "initialAttempt": {
+      "checkpoint": {
+        "title": "Before Fondue update · 2026-11-06T13:14:48.216Z",
+        "id": "2418737612941861688"
+      },
+      "additiveInstallation": {
+        "started": false,
+        "complete": false,
+        "blocker": "Native plugin window remained stale; controls did not respond and coordinate actions returned noWindowsAvailable after reconnecting computer use."
+      },
+      "readOnlyInventory": {
+        "release": "13.11.1",
+        "fingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8",
+        "managedAssets": 1388,
+        "existingSlotRecipe": {
+          "id": "components/Flyout.Surface",
+          "nodeId": "5:16989"
+        },
+        "newEditableRecipeCount": 0
+      }
+    },
+    "currentInventory": {
+      "managedAssets": 1446,
+      "componentSets": 276,
+      "globalFingerprint": "697ddabeece5b587d0cab154c8dc75b822cb0d04243089fbaf092eb0b29ca1a8"
+    },
+    "slotAudit": {
+      "families": 21,
+      "matchingVariants": 635,
+      "errors": [],
+      "reports": [
+        {
+          "family": "components:SegmentedControl",
+          "sets": [
+            {
+              "id": "components/SegmentedControl.Root",
+              "nodeId": "220:2244",
+              "variants": 2
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/SegmentedControl.Root",
+              "variants": 2,
+              "slots": [
+                "Segments"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Table",
+          "sets": [
+            {
+              "id": "components/Table.Root",
+              "nodeId": "220:3070",
+              "variants": 2
+            },
+            {
+              "id": "components/Table.EditableRow",
+              "nodeId": "220:2469",
+              "variants": 24
+            },
+            {
+              "id": "components/Table.ContentCell",
+              "nodeId": "220:2257",
+              "variants": 6
+            },
+            {
+              "id": "components/Table.ContentHeaderCell",
+              "nodeId": "220:2288",
+              "variants": 18
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Table.Root",
+              "variants": 2,
+              "slots": [
+                "Rows"
+              ]
+            },
+            {
+              "recipeId": "components/Table.EditableRow",
+              "variants": 24,
+              "slots": [
+                "Cells"
+              ]
+            },
+            {
+              "recipeId": "components/Table.ContentCell",
+              "variants": 6,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/Table.ContentHeaderCell",
+              "variants": 18,
+              "slots": [
+                "Header content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Flyout",
+          "sets": [
+            {
+              "id": "components/Flyout.Surface",
+              "nodeId": "5:16989",
+              "variants": 18
+            },
+            {
+              "id": "components/Flyout.Editable",
+              "nodeId": "219:2081",
+              "variants": 15
+            },
+            {
+              "id": "components/Flyout.EditableBody",
+              "nodeId": "219:2397",
+              "variants": 5
+            },
+            {
+              "id": "components/Flyout.EditableFooter",
+              "nodeId": "219:2423",
+              "variants": 5
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Flyout.Surface",
+              "variants": 9,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/Flyout.Editable",
+              "variants": 15,
+              "slots": [
+                "Body",
+                "Actions"
+              ]
+            },
+            {
+              "recipeId": "components/Flyout.EditableBody",
+              "variants": 5,
+              "slots": [
+                "Body"
+              ]
+            },
+            {
+              "recipeId": "components/Flyout.EditableFooter",
+              "variants": 5,
+              "slots": [
+                "Actions"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Dialog",
+          "sets": [
+            {
+              "id": "components/Dialog.Editable",
+              "nodeId": "221:2867",
+              "variants": 20
+            },
+            {
+              "id": "components/Dialog.EditableBody",
+              "nodeId": "221:3348",
+              "variants": 5
+            },
+            {
+              "id": "components/Dialog.EditableFooter",
+              "nodeId": "221:3374",
+              "variants": 10
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Dialog.Editable",
+              "variants": 20,
+              "slots": [
+                "Body",
+                "Actions",
+                "Side content"
+              ]
+            },
+            {
+              "recipeId": "components/Dialog.EditableBody",
+              "variants": 5,
+              "slots": [
+                "Body"
+              ]
+            },
+            {
+              "recipeId": "components/Dialog.EditableFooter",
+              "variants": 10,
+              "slots": [
+                "Actions"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Card",
+          "sets": [
+            {
+              "id": "components/Card.Editable",
+              "nodeId": "221:3450",
+              "variants": 6
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Card.Editable",
+              "variants": 6,
+              "slots": [
+                "Banner content",
+                "Content",
+                "Actions"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Tabs",
+          "sets": [
+            {
+              "id": "components/Tabs.Editable",
+              "nodeId": "221:3608",
+              "variants": 16
+            },
+            {
+              "id": "components/Tabs.EditableContent",
+              "nodeId": "221:3592",
+              "variants": 5
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Tabs.Editable",
+              "variants": 16,
+              "slots": [
+                "Triggers",
+                "Panels"
+              ]
+            },
+            {
+              "recipeId": "components/Tabs.EditableContent",
+              "variants": 5,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Accordion",
+          "sets": [
+            {
+              "id": "components/Accordion.Editable",
+              "nodeId": "221:4058",
+              "variants": 16
+            },
+            {
+              "id": "components/Accordion.EditableItem",
+              "nodeId": "221:3913",
+              "variants": 16
+            },
+            {
+              "id": "components/Accordion.borderless.Editable",
+              "nodeId": "221:4636",
+              "variants": 16
+            },
+            {
+              "id": "components/Accordion.borderless.EditableItem",
+              "nodeId": "221:4491",
+              "variants": 16
+            },
+            {
+              "id": "components/Accordion.pill.Editable",
+              "nodeId": "221:5182",
+              "variants": 16
+            },
+            {
+              "id": "components/Accordion.pill.EditableItem",
+              "nodeId": "221:5037",
+              "variants": 16
+            },
+            {
+              "id": "components/Accordion.sticky.Editable",
+              "nodeId": "221:5728",
+              "variants": 16
+            },
+            {
+              "id": "components/Accordion.sticky.EditableItem",
+              "nodeId": "221:5583",
+              "variants": 16
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Accordion.Editable",
+              "variants": 16,
+              "slots": [
+                "Items"
+              ]
+            },
+            {
+              "recipeId": "components/Accordion.EditableItem",
+              "variants": 16,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/Accordion.borderless.Editable",
+              "variants": 16,
+              "slots": [
+                "Items"
+              ]
+            },
+            {
+              "recipeId": "components/Accordion.borderless.EditableItem",
+              "variants": 16,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/Accordion.pill.Editable",
+              "variants": 16,
+              "slots": [
+                "Items"
+              ]
+            },
+            {
+              "recipeId": "components/Accordion.pill.EditableItem",
+              "variants": 16,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/Accordion.sticky.Editable",
+              "variants": 16,
+              "slots": [
+                "Items"
+              ]
+            },
+            {
+              "recipeId": "components/Accordion.sticky.EditableItem",
+              "variants": 16,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Dropdown",
+          "sets": [
+            {
+              "id": "components/Dropdown.Editable",
+              "nodeId": "221:6204",
+              "variants": 2
+            },
+            {
+              "id": "components/Dropdown.EditableGroup",
+              "nodeId": "221:6129",
+              "variants": 2
+            },
+            {
+              "id": "components/Dropdown.EditableSubmenu",
+              "nodeId": "221:6161",
+              "variants": 3
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Dropdown.Editable",
+              "variants": 2,
+              "slots": [
+                "Items"
+              ]
+            },
+            {
+              "recipeId": "components/Dropdown.EditableGroup",
+              "variants": 2,
+              "slots": [
+                "Items"
+              ]
+            },
+            {
+              "recipeId": "components/Dropdown.EditableSubmenu",
+              "variants": 3,
+              "slots": [
+                "Submenu items"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Select",
+          "sets": [
+            {
+              "id": "components/Select.Editable",
+              "nodeId": "221:6292",
+              "variants": 12
+            },
+            {
+              "id": "components/Select.Multiple.Editable",
+              "nodeId": "221:6582",
+              "variants": 12
+            },
+            {
+              "id": "components/Select.Combobox.Editable",
+              "nodeId": "221:6883",
+              "variants": 12
+            },
+            {
+              "id": "components/Select.EditableGroup",
+              "nodeId": "221:6275",
+              "variants": 2
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Select.Editable",
+              "variants": 12,
+              "slots": [
+                "Options"
+              ]
+            },
+            {
+              "recipeId": "components/Select.Multiple.Editable",
+              "variants": 12,
+              "slots": [
+                "Options",
+                "Selected values"
+              ]
+            },
+            {
+              "recipeId": "components/Select.Combobox.Editable",
+              "variants": 12,
+              "slots": [
+                "Options"
+              ]
+            },
+            {
+              "recipeId": "components/Select.EditableGroup",
+              "variants": 2,
+              "slots": [
+                "Options"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:RadioList",
+          "sets": [
+            {
+              "id": "components/RadioList.Editable",
+              "nodeId": "221:7177",
+              "variants": 16
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/RadioList.Editable",
+              "variants": 16,
+              "slots": [
+                "Options"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Tree",
+          "sets": [
+            {
+              "id": "components/Tree.Editable",
+              "nodeId": "221:7915",
+              "variants": 8
+            },
+            {
+              "id": "components/Tree.EditableNode",
+              "nodeId": "221:7386",
+              "variants": 24
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Tree.Editable",
+              "variants": 8,
+              "slots": [
+                "Nodes"
+              ]
+            },
+            {
+              "recipeId": "components/Tree.EditableNode",
+              "variants": 24,
+              "slots": [
+                "Content",
+                "Actions",
+                "Children"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:OrderableList",
+          "sets": [
+            {
+              "id": "components/OrderableList.Editable",
+              "nodeId": "221:8361",
+              "variants": 6
+            },
+            {
+              "id": "components/OrderableList.EditableItem",
+              "nodeId": "221:8240",
+              "variants": 8
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/OrderableList.Editable",
+              "variants": 6,
+              "slots": [
+                "Items"
+              ]
+            },
+            {
+              "recipeId": "components/OrderableList.EditableItem",
+              "variants": 8,
+              "slots": [
+                "Content",
+                "Actions"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Notice",
+          "sets": [
+            {
+              "id": "components/Notice/controls-001.Editable",
+              "nodeId": "221:8644",
+              "variants": 30
+            },
+            {
+              "id": "components/Notice/controls-002.Editable",
+              "nodeId": "221:9035",
+              "variants": 30
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Notice/controls-001.Editable",
+              "variants": 30,
+              "slots": [
+                "Message content",
+                "Action"
+              ]
+            },
+            {
+              "recipeId": "components/Notice/controls-002.Editable",
+              "variants": 30,
+              "slots": [
+                "Message content",
+                "Action"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Tooltip",
+          "sets": [
+            {
+              "id": "components/Tooltip.Editable",
+              "nodeId": "221:9426",
+              "variants": 8
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Tooltip.Editable",
+              "variants": 8,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Section",
+          "sets": [
+            {
+              "id": "components/Section.Editable",
+              "nodeId": "221:9475",
+              "variants": 4
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Section.Editable",
+              "variants": 4,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:ScrollArea",
+          "sets": [
+            {
+              "id": "components/ScrollArea/auto.Editable",
+              "nodeId": "221:9488",
+              "variants": 10
+            },
+            {
+              "id": "components/ScrollArea/stable.Editable",
+              "nodeId": "221:9549",
+              "variants": 10
+            },
+            {
+              "id": "components/ScrollArea/stable-horizontal.Editable",
+              "nodeId": "221:9610",
+              "variants": 10
+            },
+            {
+              "id": "components/ScrollArea/stable-vertical.Editable",
+              "nodeId": "221:9671",
+              "variants": 10
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/ScrollArea/auto.Editable",
+              "variants": 10,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/ScrollArea/stable.Editable",
+              "variants": 10,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/ScrollArea/stable-horizontal.Editable",
+              "variants": 10,
+              "slots": [
+                "Content"
+              ]
+            },
+            {
+              "recipeId": "components/ScrollArea/stable-vertical.Editable",
+              "variants": 10,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Box",
+          "sets": [
+            {
+              "id": "components/Box.Editable",
+              "nodeId": "221:9732",
+              "variants": 4
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Box.Editable",
+              "variants": 4,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Flex",
+          "sets": [
+            {
+              "id": "components/Flex/row.Editable",
+              "nodeId": "221:9745",
+              "variants": 30
+            },
+            {
+              "id": "components/Flex/row-reverse.Editable",
+              "nodeId": "221:9866",
+              "variants": 30
+            },
+            {
+              "id": "components/Flex/column.Editable",
+              "nodeId": "221:9987",
+              "variants": 30
+            },
+            {
+              "id": "components/Flex/column-reverse.Editable",
+              "nodeId": "221:10108",
+              "variants": 30
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Flex/row.Editable",
+              "variants": 30,
+              "slots": [
+                "Children"
+              ]
+            },
+            {
+              "recipeId": "components/Flex/row-reverse.Editable",
+              "variants": 30,
+              "slots": [
+                "Children"
+              ]
+            },
+            {
+              "recipeId": "components/Flex/column.Editable",
+              "variants": 30,
+              "slots": [
+                "Children"
+              ]
+            },
+            {
+              "recipeId": "components/Flex/column-reverse.Editable",
+              "variants": 30,
+              "slots": [
+                "Children"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "components:Grid",
+          "sets": [
+            {
+              "id": "components/Grid.Editable",
+              "nodeId": "221:10272",
+              "variants": 4
+            },
+            {
+              "id": "components/Grid.EditableRow",
+              "nodeId": "221:10233",
+              "variants": 4
+            },
+            {
+              "id": "components/Grid.EditableCell",
+              "nodeId": "221:10229",
+              "variants": 1
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "components/Grid.Editable",
+              "variants": 4,
+              "slots": [
+                "Rows"
+              ]
+            },
+            {
+              "recipeId": "components/Grid.EditableRow",
+              "variants": 4,
+              "slots": [
+                "Cells"
+              ]
+            },
+            {
+              "recipeId": "components/Grid.EditableCell",
+              "variants": 1,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "rte:Toolbar",
+          "sets": [
+            {
+              "id": "rte/Toolbar.Editable",
+              "nodeId": "221:10387",
+              "variants": 3
+            },
+            {
+              "id": "rte/Toolbar.EditableGroup",
+              "nodeId": "221:10371",
+              "variants": 2
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "rte/Toolbar.Editable",
+              "variants": 3,
+              "slots": [
+                "Groups"
+              ]
+            },
+            {
+              "recipeId": "rte/Toolbar.EditableGroup",
+              "variants": 2,
+              "slots": [
+                "Actions"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "rte:FloatingModalWrapper",
+          "sets": [
+            {
+              "id": "rte/FloatingModalWrapper.Editable",
+              "nodeId": "221:10442",
+              "variants": 2
+            }
+          ],
+          "checked": [
+            {
+              "recipeId": "rte/FloatingModalWrapper.Editable",
+              "variants": 2,
+              "slots": [
+                "Content"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reviewFrames": {
+      "core": {
+        "id": "222:7153",
+        "url": "https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs?node-id=222-7153"
+      },
+      "additional": {
+        "id": "228:7338",
+        "url": "https://www.figma.com/design/ZmOzqBnHNixUTV1TqRtBHs?node-id=228-7338"
+      }
+    },
+    "editingChecks": {
+      "core": {
+        "rows": 5,
+        "columns": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "widths": [
+          [
+            160,
+            216,
+            160,
+            160
+          ],
+          [
+            160,
+            216,
+            160,
+            160
+          ],
+          [
+            160,
+            216,
+            160,
+            160
+          ],
+          [
+            160,
+            216,
+            160,
+            160
+          ],
+          [
+            160,
+            216,
+            160,
+            160
+          ]
+        ],
+        "innerStructureStretches": true,
+        "customCellText": "Custom cell content",
+        "segments": 5,
+        "selectedSegments": 1
+      },
+      "radio": {
+        "options": 4,
+        "selected": 1
+      },
+      "tabs": {
+        "triggers": 3,
+        "panels": 3,
+        "visiblePanels": 1,
+        "skipSettingRestored": true
+      },
+      "tree": {
+        "children": 2,
+        "grandchildren": 1,
+        "source": "components/Tree.EditableNode"
+      },
+      "grid": {
+        "columns": "4",
+        "rows": 2,
+        "cells": 8,
+        "perRow": [
+          4,
+          4
+        ],
+        "customTextPreserved": true,
+        "cellWidths": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "temporaryNodes": []
+      }
+    },
+    "tableLayoutRepair": {
+      "exactBaselinesMatched": true,
+      "migrationProblems": [],
+      "reports": [
+        {
+          "recipeId": "components/Table.ContentCell",
+          "nodeId": "220:2257",
+          "preservedIds": true,
+          "newNodeCount": 0,
+          "mutatedNodeIds": [
+            "220:2257",
+            "220:2256",
+            "220:2263",
+            "220:2264",
+            "220:2265",
+            "220:2266",
+            "220:2258",
+            "220:2267",
+            "220:2268",
+            "220:2269",
+            "220:2270",
+            "220:2259",
+            "220:2271",
+            "220:2272",
+            "220:2273",
+            "220:2274",
+            "220:2260",
+            "220:2275",
+            "220:2276",
+            "220:2277",
+            "220:2278",
+            "220:2261",
+            "220:2279",
+            "220:2280",
+            "220:2281",
+            "220:2282",
+            "220:2262",
+            "220:2283",
+            "220:2284",
+            "220:2285",
+            "220:2286"
+          ]
+        },
+        {
+          "recipeId": "components/Table.ContentHeaderCell",
+          "nodeId": "220:2288",
+          "preservedIds": true,
+          "newNodeCount": 0,
+          "mutatedNodeIds": [
+            "220:2288",
+            "220:2287",
+            "220:2306",
+            "220:2307",
+            "220:2308",
+            "220:2309",
+            "220:2310",
+            "220:2311",
+            "I220:2311;5:412",
+            "I220:2311;5:413",
+            "220:2314",
+            "220:2289",
+            "220:2315",
+            "220:2316",
+            "220:2317",
+            "220:2318",
+            "220:2319",
+            "220:2320",
+            "I220:2320;5:412",
+            "I220:2320;5:413",
+            "220:2323",
+            "220:2290",
+            "220:2324",
+            "220:2325",
+            "220:2326",
+            "220:2327",
+            "220:2328",
+            "220:2329",
+            "I220:2329;5:412",
+            "I220:2329;5:413",
+            "220:2332",
+            "220:2291",
+            "220:2333",
+            "220:2334",
+            "220:2335",
+            "220:2336",
+            "220:2337",
+            "220:2338",
+            "I220:2338;5:927",
+            "I220:2338;5:928",
+            "220:2341",
+            "220:2292",
+            "220:2342",
+            "220:2343",
+            "220:2344",
+            "220:2345",
+            "220:2346",
+            "220:2347",
+            "I220:2347;5:927",
+            "I220:2347;5:928",
+            "220:2350",
+            "220:2293",
+            "220:2351",
+            "220:2352",
+            "220:2353",
+            "220:2354",
+            "220:2355",
+            "220:2356",
+            "I220:2356;5:927",
+            "I220:2356;5:928",
+            "220:2359",
+            "220:2294",
+            "220:2360",
+            "220:2361",
+            "220:2362",
+            "220:2363",
+            "220:2364",
+            "220:2365",
+            "I220:2365;5:1071",
+            "I220:2365;5:1072",
+            "220:2368",
+            "220:2295",
+            "220:2369",
+            "220:2370",
+            "220:2371",
+            "220:2372",
+            "220:2373",
+            "220:2374",
+            "I220:2374;5:1071",
+            "I220:2374;5:1072",
+            "220:2377",
+            "220:2296",
+            "220:2378",
+            "220:2379",
+            "220:2380",
+            "220:2381",
+            "220:2382",
+            "220:2383",
+            "I220:2383;5:1071",
+            "I220:2383;5:1072",
+            "220:2386",
+            "220:2297",
+            "220:2387",
+            "220:2388",
+            "220:2389",
+            "220:2390",
+            "220:2391",
+            "220:2392",
+            "I220:2392;5:927",
+            "I220:2392;5:928",
+            "220:2395",
+            "220:2298",
+            "220:2396",
+            "220:2397",
+            "220:2398",
+            "220:2399",
+            "220:2400",
+            "220:2401",
+            "I220:2401;5:927",
+            "I220:2401;5:928",
+            "220:2404",
+            "220:2299",
+            "220:2405",
+            "220:2406",
+            "220:2407",
+            "220:2408",
+            "220:2409",
+            "220:2410",
+            "I220:2410;5:927",
+            "I220:2410;5:928",
+            "220:2413",
+            "220:2300",
+            "220:2414",
+            "220:2415",
+            "220:2416",
+            "220:2417",
+            "220:2418",
+            "220:2419",
+            "I220:2419;5:534",
+            "I220:2419;5:535",
+            "220:2422",
+            "220:2301",
+            "220:2423",
+            "220:2424",
+            "220:2425",
+            "220:2426",
+            "220:2427",
+            "220:2428",
+            "I220:2428;5:534",
+            "I220:2428;5:535",
+            "220:2431",
+            "220:2302",
+            "220:2432",
+            "220:2433",
+            "220:2434",
+            "220:2435",
+            "220:2436",
+            "220:2437",
+            "I220:2437;5:534",
+            "I220:2437;5:535",
+            "220:2440",
+            "220:2303",
+            "220:2441",
+            "220:2442",
+            "220:2443",
+            "220:2444",
+            "220:2445",
+            "220:2446",
+            "I220:2446;5:927",
+            "I220:2446;5:928",
+            "220:2449",
+            "220:2304",
+            "220:2450",
+            "220:2451",
+            "220:2452",
+            "220:2453",
+            "220:2454",
+            "220:2455",
+            "I220:2455;5:927",
+            "I220:2455;5:928",
+            "220:2458",
+            "220:2305",
+            "220:2459",
+            "220:2460",
+            "220:2461",
+            "220:2462",
+            "220:2463",
+            "220:2464",
+            "I220:2464;5:927",
+            "I220:2464;5:928",
+            "220:2467"
+          ]
+        }
+      ],
+      "globalFingerprintUnchanged": true
+    },
+    "repeatInstallation": {
+      "families": [
+        "Flyout",
+        "Table"
+      ],
+      "created": 0,
+      "resumed": 0,
+      "errors": [],
+      "reports": [
+        {
+          "createdRecipeIds": [],
+          "resumedRecipeIds": [],
+          "reusedRecipeIds": [
+            "components/TextInput/controls-001",
+            "components/Button/controls-001",
+            "components/Flyout.Editable",
+            "components/Flyout.EditableBody",
+            "components/Flyout.EditableFooter"
+          ],
+          "createdNodeIds": [],
+          "errors": [],
+          "complete": true,
+          "globalFingerprintUnchanged": true
+        },
+        {
+          "createdRecipeIds": [],
+          "resumedRecipeIds": [],
+          "reusedRecipeIds": [
+            "components/Table.HeaderCell",
+            "components/Table.ContentCell",
+            "components/Table.ContentHeaderCell",
+            "components/Table.EditableRow",
+            "components/Table.Root"
+          ],
+          "createdNodeIds": [],
+          "errors": [],
+          "complete": true,
+          "globalFingerprintUnchanged": true
+        }
+      ]
+    },
+    "resolvedIssues": [
+      "Installer required matching internal layers on opaque canonical dependencies",
+      "Cell inner frames and borders did not inherit a resized column width",
+      "Invisible tab panels and collapsed Tree slot regions were skipped",
+      "Grid mutations reused stale descendant references after native slot materialization"
+    ]
   },
   "remainingAcceptance": [
-    "Run Install missing editable components in the rebuilt plugin",
-    "Inspect and edit Flyout, five-segment controls and nested table slots first",
-    "Review remaining families with long, empty and hidden content",
-    "Verify recursive Tree slots in native Figma",
-    "Verify source/default and variant updates preserve custom slots and nested component links",
-    "Review publication and accept an update in a consuming file"
+    "Complete long/empty content acceptance across component states in consuming files",
+    "Review publication and accept an update in a consuming file",
+    "Confirm published source/default updates preserve custom content, order and nested links"
   ]
 }

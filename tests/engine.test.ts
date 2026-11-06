@@ -374,6 +374,8 @@ function mockApi(simulateVariants = false) {
             "layoutMode",
             "primaryAxisSizingMode",
             "counterAxisSizingMode",
+            "layoutSizingHorizontal",
+            "layoutSizingVertical",
             "paddingTop",
             "paddingRight",
             "paddingBottom",
@@ -2944,6 +2946,18 @@ test("additive composition installation preserves customized foundations, mains 
   const mainRef = Object.values(oldRefs).find((ref) => ref.kind === "recipe")!;
   const main: any = await engine.resolve(mainRef.id, "recipe");
   main.description = "Keep this local component documentation";
+  const button: any = await engine.resolve(
+    oldRefs["recipe:components/Button/controls-001"].id,
+    "recipe",
+  );
+  const legacyIcon = button.findAll(
+    (node: any) => readMetadata(node, "identity") === "left-icon",
+  )[0];
+  assert.ok(
+    legacyIcon,
+    "canonical linked dependency has a source icon to customize",
+  );
+  legacyIcon.remove();
   const before = new Map<string, { snapshot: string; applied: string }>();
   for (const [id, ref] of Object.entries(oldRefs)) {
     const asset = await engine.resolve(ref.id, ref.kind);
@@ -3113,6 +3127,18 @@ test("table actions add a column to every row, align widths and preserve existin
   assert.ok(
     rows.every((row: any) => row.children[0].children[1].width === 216),
   );
+  for (const row of rows)
+    for (const part of row.children[0].children[1].children)
+      if (
+        ["content", "contents", "top-border", "bottom-border"].includes(
+          part.name,
+        )
+      )
+        assert.equal(
+          part.layoutSizingHorizontal,
+          "FILL",
+          "cell structure must keep stretching with its column",
+        );
   api.currentPage.selection = [root];
   await compose(api, engine.index.assets, "add-row");
   assert.equal(rows.length, 5);
@@ -3171,8 +3197,22 @@ test("every required family inserts a linked editable composition; structured ed
   );
 
   const tabs = inserted.get("components:Tabs");
+  const hiddenPanels = compositionSlot(tabs, "Panels");
+  let panelChildren = hiddenPanels.children;
+  Object.defineProperty(hiddenPanels, "children", {
+    get: () =>
+      api.skipInvisibleInstanceChildren
+        ? panelChildren.filter((n: any) => n.visible)
+        : panelChildren,
+    set: (value: any[]) => {
+      panelChildren = value;
+    },
+  });
+  api.skipInvisibleInstanceChildren = true;
   api.currentPage.selection = [tabs];
   await compose(api, engine.index.assets, "add-tab-pair");
+  assert.equal(api.skipInvisibleInstanceChildren, true);
+  api.skipInvisibleInstanceChildren = false;
   const triggers = compositionSlot(tabs, "Triggers").children,
     panels = compositionSlot(tabs, "Panels").children;
   assert.equal(triggers.length, 3);
@@ -3185,11 +3225,14 @@ test("every required family inserts a linked editable composition; structured ed
   );
   panels[1].remove();
   const unequal = nodes.size;
+  api.skipInvisibleInstanceChildren = true;
   await assert.rejects(
     compose(api, engine.index.assets, "add-tab-pair"),
     /one linked panel per trigger/,
   );
   assert.equal(nodes.size, unequal);
+  assert.equal(api.skipInvisibleInstanceChildren, true);
+  api.skipInvisibleInstanceChildren = false;
 
   const tree = inserted.get("components:Tree"),
     parent = compositionSlot(tree, "Nodes").children[0];
@@ -3209,6 +3252,20 @@ test("every required family inserts a linked editable composition; structured ed
     gridRows().flatMap((row: any) => [
       ...compositionSlot(row, "Cells").children,
     ]);
+  for (const region of [
+    compositionSlot(grid, "Rows"),
+    ...gridRows().map((row: any) => compositionSlot(row, "Cells")),
+  ]) {
+    const append = region.appendChild.bind(region);
+    region.appendChild = (node: any) => {
+      assert.notEqual(
+        node.parent,
+        region,
+        "avoid materializing unchanged native slot children by reappending them",
+      );
+      append(node);
+    };
+  }
   const originalIds = gridCells().map((cell: any) => cell.id);
   const customText = gridCells()[0].findAllWithCriteria({ types: ["TEXT"] })[0];
   customText.characters = "Keep custom grid content";

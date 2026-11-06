@@ -12,7 +12,7 @@
       "integrity": "sha512-e9LsLZWjyIErA1d/WathFYo8qKqLJlOxP6U7nB2I/ef6JX5gsuXQr7un+0XNNczmlUBZ8y2bH/H65zpXcy67PA=="
     },
     "sourceLockSha256": "2156fd30bdadeb6737e18474feb4abddb51ed256b50fcda2827d5ab30352da38",
-    "rendererRevision": "64cb53c2ac20beddfcd708c41a6fb7cbd849bd20a5f0c8eda4acb1781953bc9b",
+    "rendererRevision": "8d4d15ff9cd588d1741560bc967f12a3bcdecc0e8c79ca653ccacffad4bbe4b5",
     "rootRemPx": 16,
     "packageVersions": {
       "@frontify/fondue-components": "36.0.0",
@@ -49,7 +49,7 @@
         "recipes/paint-bindings.mjs": "66e1181a58fb1fa6dfc66c96a026a01db13479c954499eadd362bba55116840a",
         "recipes/typography-bindings.mjs": "847aae15110242a60974ffc935a563f5342d18e442f57760da58dc61e72ff916",
         "recipes/composition-helpers.mjs": "78849346ee1937501e7f030e48b29d8e68a1e9059cf5822928fa9cabd3864209",
-        "recipes/composable.mjs": "4f9ec41e473c0f53041bc7a1598cfe2d3555a78bcfdf7479636b3fb9ae159a5c",
+        "recipes/composable.mjs": "688038108ff76cac8b1df5f847befb78efe3177c79c98318cf8d4e3902cda19e",
         "recipes/slot-panels.mjs": "f519b361167b9385bef75098b1b59bfe28d45259488d478dd8de9913da92ef2e",
         "recipes/slot-collections.mjs": "2c736955c5c457ee19573243e840563500b6f49e7c4ac07236bbc9ee1481f7ae",
         "recipes/slot-content.mjs": "ea77d79906a13e84af2a765590b59c80ddf7fef45564d18c7ac3b5e590b39e5c",
@@ -253292,6 +253292,7 @@
                 "paddingBottom": 8,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "contentSlot": {
                   "id": "content",
                   "name": "Content",
@@ -253316,9 +253317,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -253382,6 +253385,7 @@
                 "paddingBottom": 8,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "contentSlot": {
                   "id": "content",
                   "name": "Content",
@@ -253406,9 +253410,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -253472,6 +253478,7 @@
                 "paddingBottom": 8,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "contentSlot": {
                   "id": "content",
                   "name": "Content",
@@ -253496,9 +253503,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -253562,6 +253571,7 @@
                 "paddingBottom": 8,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "contentSlot": {
                   "id": "content",
                   "name": "Content",
@@ -253586,9 +253596,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -253652,6 +253664,7 @@
                 "paddingBottom": 8,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "contentSlot": {
                   "id": "content",
                   "name": "Content",
@@ -253676,9 +253689,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -253742,6 +253757,7 @@
                 "paddingBottom": 8,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "contentSlot": {
                   "id": "content",
                   "name": "Content",
@@ -253766,9 +253782,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -253842,7 +253860,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -253912,6 +253931,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -253931,9 +253951,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -253971,7 +253993,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254041,6 +254064,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254060,9 +254084,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -254100,7 +254126,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254170,6 +254197,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254189,9 +254217,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -254229,7 +254259,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254299,6 +254330,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254318,9 +254350,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -254358,7 +254392,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254428,6 +254463,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254447,9 +254483,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -254487,7 +254525,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254557,6 +254596,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254576,9 +254616,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -254616,7 +254658,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254686,6 +254729,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254705,9 +254749,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -254745,7 +254791,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254815,6 +254862,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254834,9 +254882,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -254874,7 +254924,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -254944,6 +254995,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -254963,9 +255015,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255003,7 +255057,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255073,6 +255128,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255092,9 +255148,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255132,7 +255190,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255202,6 +255261,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255221,9 +255281,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255261,7 +255323,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255331,6 +255394,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255350,9 +255414,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255390,7 +255456,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255460,6 +255527,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255479,9 +255547,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255519,7 +255589,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255589,6 +255660,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255608,9 +255680,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255648,7 +255722,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255718,6 +255793,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255737,9 +255813,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255777,7 +255855,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255847,6 +255926,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255866,9 +255946,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -255906,7 +255988,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -255976,6 +256059,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -255995,9 +256079,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -256035,7 +256121,8 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               },
               {
                 "id": "contents",
@@ -256105,6 +256192,7 @@
                 "paddingBottom": 12,
                 "paddingLeft": 8,
                 "paddingRight": 8,
+                "layoutSizingHorizontal": "FILL",
                 "bindings": {
                   "paddingTop": "spacing-small",
                   "paddingRight": "spacing-x-small",
@@ -256124,9 +256212,11 @@
                 "bindings": {
                   "fills": "color-line-subtle",
                   "cornerRadius": "component-constant-radius-0"
-                }
+                },
+                "layoutSizingHorizontal": "FILL"
               }
             ],
+            "width": 160,
             "bindings": {
               "paddingTop": "component-constant-spacing-0",
               "paddingRight": "component-constant-spacing-0",
@@ -400449,5 +400539,5 @@
       ]
     }
   ],
-  "fingerprint": "c1f39c15d58770d2b8554cd042e6006d9f691305e821c04c983a33cc149e638e"
+  "fingerprint": "3740f345e4e7019d8de33b499133c05cd3b0afd43b6eac40342b79cbda64c9d6"
 }

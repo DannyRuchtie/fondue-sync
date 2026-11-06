@@ -200,7 +200,8 @@ export async function composeStructure(api: PluginAPI, action: string) {
       while (rows.length < needed) {
         const row = await freshInstance(api, rowTemplate);
         prepared.push(row);
-        for (const cell of [...slot(row, "Cells").children]) cell.remove();
+        while (slot(row, "Cells").children.length)
+          slot(row, "Cells").children[0].remove();
         rows.push(row);
         created.push(row.id);
       }
@@ -208,25 +209,51 @@ export async function composeStructure(api: PluginAPI, action: string) {
       for (const item of prepared) item.remove();
       throw error;
     }
-    // Move the existing instances themselves; never reset their Content slots.
+    // Instance-slot edits can materialize defaults and rebase descendant IDs.
+    // Resolve each source/destination again by position after every mutation.
+    // The model tracks ordering only; content is always moved, never rebuilt.
     const needed = Math.max(1, Math.ceil(cells.length / columns));
-    cells.forEach((cell, i) => {
-      slot(rows[Math.floor(i / columns)], "Cells").appendChild(cell);
-      width(cell, cellWidth);
-      mutated.push(cell.id);
-    });
-    rows.forEach((row, i) => {
-      if (i < needed) {
-        region.appendChild(row);
-        width(row, root.width);
-        mutated.push(row.id);
-      } else {
-        if (slot(row, "Cells").children.length)
-          throw Error("An extra row still has content; it was preserved.");
-        removed.push(row.id);
-        row.remove();
+    const liveRows = () => [...slot(root, "Rows").children] as Node[];
+    for (const row of prepared.filter((part) => !cells.includes(part)))
+      slot(root, "Rows").appendChild(row);
+    const addedCell = prepared.find((part) => cells.includes(part));
+    if (addedCell) slot(liveRows().at(-1), "Cells").appendChild(addedCell);
+    let token = 0;
+    const model = liveRows().map((row) =>
+      slot(row, "Cells").children.map(() => token++),
+    );
+    const liveCell = (r: number, c: number) =>
+      slot(liveRows()[r], "Cells").children[c];
+    for (let i = 0; i < token; i++) {
+      const destinationRow = Math.floor(i / columns),
+        destinationColumn = i % columns;
+      const sourceRow = model.findIndex((row) => row.includes(i));
+      const sourceColumn = model[sourceRow].indexOf(i);
+      width(liveCell(sourceRow, sourceColumn), cellWidth);
+      if (sourceRow !== destinationRow || sourceColumn !== destinationColumn) {
+        const cell = liveCell(sourceRow, sourceColumn);
+        slot(liveRows()[destinationRow], "Cells").insertChild(
+          destinationColumn,
+          cell,
+        );
+        model[sourceRow].splice(sourceColumn, 1);
+        model[destinationRow].splice(destinationColumn, 0, i);
       }
-    });
+    }
+    for (let i = 0; i < needed; i++) width(liveRows()[i], root.width);
+    for (let i = liveRows().length - 1; i >= needed; i--) {
+      const row = liveRows()[i];
+      if (slot(row, "Cells").children.length)
+        throw Error("An extra row still has content; it was preserved.");
+      removed.push(row.id);
+      row.remove();
+    }
+    mutated.push(
+      ...liveRows().flatMap((row) => [
+        row.id,
+        ...slot(row, "Cells").children.map((cell: Node) => cell.id),
+      ]),
+    );
     mutated.push(root.id);
     message =
       action === "add-grid-cell"
